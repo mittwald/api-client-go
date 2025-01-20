@@ -55,7 +55,6 @@ func (a *authenticatedClient) refreshTokenIfNecessary() error {
 		}
 
 		a.apiToken = newToken
-		a.a
 		a.apiTokenExpiration = &newExpiration
 	}
 
