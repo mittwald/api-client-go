@@ -59,7 +59,16 @@ func WithAccessTokenAndRefresh(token, refreshToken string, expiration time.Time)
 			return resp.Token, resp.ExpiresAt, nil
 		}
 
-		return httpclient.NewAuthenticatedClientWithRefresh(inner, apiTokenHeader, token, expiration, refreshFunc), nil
+		return httpclient.NewAuthenticatedClientWithRefresh(inner, token, apiTokenHeader, expiration, refreshFunc), nil
+	}
+}
+
+// WithAccessTokenAndRefreshFunc supports automatically refreshing API tokens.
+//
+// Clients with this option will refresh API tokens automatically when they expire.
+func WithAccessTokenAndRefreshFunc(token string, expiration time.Time, refreshFunc httpclient.RefreshFunc) ClientOption {
+	return func(ctx context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
+		return httpclient.NewAuthenticatedClientWithRefresh(inner, token, apiTokenHeader, expiration, refreshFunc), nil
 	}
 }
 
@@ -95,6 +104,9 @@ func WithUsernamePassword(email, password string) ClientOption {
 // This is a special mechanism for one-click-authenticating users that are
 // redirected to an mStudio extension [1].
 //
+// Clients authenticated with this method will refresh their API tokens
+// automatically.
+//
 // [1]: https://developer.mittwald.de/docs/v2/contribution/overview/concepts/authentication/
 func WithAccessTokenRetrievalKey(userID uuid.UUID, accessTokenRetrievalKey string) ClientOption {
 	return func(ctx context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
@@ -115,20 +127,32 @@ func WithAccessTokenRetrievalKey(userID uuid.UUID, accessTokenRetrievalKey strin
 }
 
 // WithExtensionSecret authenticates an mStudio extension (i.e. not a user).
+//
+// Clients authenticated with this method will refresh their API tokens
+// automatically.
 func WithExtensionSecret(extensionInstanceID uuid.UUID, extensionSecret string) ClientOption {
 	return func(ctx context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
-		req := marketplace.AuthenticateInstanceRequest{
-			ExtensionInstanceID: extensionInstanceID,
-			Body: marketplace.AuthenticateInstanceRequestBody{
-				ExtensionInstanceSecret: extensionSecret,
-			},
+		refreshFunc := func() (string, time.Time, error) {
+			req := marketplace.AuthenticateInstanceRequest{
+				ExtensionInstanceID: extensionInstanceID,
+				Body: marketplace.AuthenticateInstanceRequestBody{
+					ExtensionInstanceSecret: extensionSecret,
+				},
+			}
+
+			resp, _, err := generatedv2.NewClient(inner).Marketplace().AuthenticateInstance(ctx, req)
+			if err != nil {
+				return "", time.Time{}, fmt.Errorf("error while authenticating extension instance: %w", err)
+			}
+
+			return resp.PublicToken, resp.Expiry, nil
 		}
 
-		resp, _, err := generatedv2.NewClient(inner).Marketplace().AuthenticateInstance(ctx, req)
+		token, expiration, err := refreshFunc()
 		if err != nil {
-			return nil, fmt.Errorf("error while authenticating extension instance: %w", err)
+			return nil, err
 		}
 
-		return WithAccessToken(resp.PublicToken)(ctx, inner)
+		return WithAccessTokenAndRefreshFunc(token, expiration, refreshFunc)(ctx, inner)
 	}
 }
