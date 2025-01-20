@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	generatedv2 "github.com/mittwald/api-client-go/mittwaldv2/generated/clients"
-	"github.com/mittwald/api-client-go/mittwaldv2/httpclient"
+	"github.com/mittwald/api-client-go/pkg/httpclient"
 )
 
 var defaultOpts = [...]ClientOption{

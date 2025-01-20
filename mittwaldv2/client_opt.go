@@ -2,7 +2,7 @@ package mittwaldv2
 
 import (
 	"context"
-	"github.com/mittwald/api-client-go/mittwaldv2/httpclient"
+	"github.com/mittwald/api-client-go/pkg/httpclient"
 )
 
 type ClientOption func(ctx context.Context, runner httpclient.RequestRunner) (httpclient.RequestRunner, error)

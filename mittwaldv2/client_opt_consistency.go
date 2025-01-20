@@ -2,7 +2,7 @@ package mittwaldv2
 
 import (
 	"context"
-	"github.com/mittwald/api-client-go/mittwaldv2/httpclient"
+	"github.com/mittwald/api-client-go/pkg/httpclient"
 )
 
 // WithEventualConsistency enables client-side support for the eventual-consistency

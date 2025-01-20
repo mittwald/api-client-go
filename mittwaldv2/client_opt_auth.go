@@ -7,7 +7,7 @@ import (
 	generatedv2 "github.com/mittwald/api-client-go/mittwaldv2/generated/clients"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/marketplace"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/user"
-	"github.com/mittwald/api-client-go/mittwaldv2/httpclient"
+	"github.com/mittwald/api-client-go/pkg/httpclient"
 	"os"
 )
 
