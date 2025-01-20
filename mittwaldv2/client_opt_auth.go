@@ -9,28 +9,57 @@ import (
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/user"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
 	"os"
+	"time"
 )
 
 const apiTokenEnvVar = "MITTWALD_API_TOKEN"
+const apiTokenHeader = "X-Access-Token"
 
 // WithAccessToken adds a static access token to all executed requests.
 // The access token needs to be obtained ahead-of-time.
 func WithAccessToken(token string) ClientOption {
 	return func(_ context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
-		return httpclient.NewAuthenticatedClient(inner, token), nil
+		return httpclient.NewAuthenticatedClient(inner, apiTokenHeader, token), nil
 	}
 }
 
 // WithAccessTokenFromEnv is a convenience wrapper around WithAccessToken that
 // automatically retrieves the API token from the process environment variables.
 func WithAccessTokenFromEnv() ClientOption {
-	return func(_ context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
+	return func(ctx context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
 		token, ok := os.LookupEnv(apiTokenEnvVar)
 		if !ok {
 			return nil, fmt.Errorf("environment variable '%s' must be set", apiTokenEnvVar)
 		}
 
-		return httpclient.NewAuthenticatedClient(inner, token), nil
+		return WithAccessToken(token)(ctx, inner)
+	}
+}
+
+// WithAccessTokenAndRefresh supports automatically refreshing API tokens.
+//
+// Clients with this option will refresh API tokens automatically when they expire.
+func WithAccessTokenAndRefresh(token, refreshToken string, expiration time.Time) ClientOption {
+	return func(ctx context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
+		refreshToken := refreshToken
+		refreshFunc := func() (string, time.Time, error) {
+			req := user.RefreshSessionRequest{
+				Body: user.RefreshSessionRequestBody{
+					RefreshToken: refreshToken,
+				},
+			}
+
+			resp, _, err := generatedv2.NewClient(inner).User().RefreshSession(ctx, req)
+			if err != nil {
+				return "", time.Time{}, err
+			}
+
+			refreshToken = resp.RefreshToken
+
+			return resp.Token, resp.ExpiresAt, nil
+		}
+
+		return httpclient.NewAuthenticatedClientWithRefresh(inner, apiTokenHeader, token, expiration, refreshFunc), nil
 	}
 }
 
@@ -81,7 +110,7 @@ func WithAccessTokenRetrievalKey(userID uuid.UUID, accessTokenRetrievalKey strin
 			return nil, fmt.Errorf("error while authenticating user '%s': %w", userID, err)
 		}
 
-		return WithAccessToken(resp.Token)(ctx, inner)
+		return WithAccessTokenAndRefresh(resp.Token, resp.RefreshToken, resp.ExpiresAt)(ctx, inner)
 	}
 }
 
