@@ -5,6 +5,7 @@ package cronjobv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -69,18 +70,18 @@ import (
 type Cronjob struct {
 	Active            bool               `json:"active"`
 	AppId             uuid.UUID          `json:"appId"`
-	CreatedAt         string             `json:"createdAt"`
+	CreatedAt         time.Time          `json:"createdAt"`
 	Description       string             `json:"description"`
 	Destination       CronjobDestination `json:"destination"`
 	Email             *string            `json:"email,omitempty"`
 	Id                uuid.UUID          `json:"id"`
 	Interval          string             `json:"interval"`
 	LatestExecution   *CronjobExecution  `json:"latestExecution,omitempty"`
-	NextExecutionTime *string            `json:"nextExecutionTime,omitempty"`
+	NextExecutionTime *time.Time         `json:"nextExecutionTime,omitempty"`
 	ProjectId         *uuid.UUID         `json:"projectId,omitempty"`
 	ShortId           string             `json:"shortId"`
 	Timeout           float64            `json:"timeout"`
-	UpdatedAt         string             `json:"updatedAt"`
+	UpdatedAt         time.Time          `json:"updatedAt"`
 }
 
 func (o *Cronjob) Validate() error {

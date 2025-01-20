@@ -14,7 +14,7 @@ import (
 var _ = Describe("AuthenticateInstanceResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"expiry\":\"string\",\"publicToken\":\"string\"}")
+			exampleJSON := []byte("{\"expiry\":\"2006-01-02T15:04:05Z\",\"publicToken\":\"string\"}")
 
 			sut := marketplace.AuthenticateInstanceResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

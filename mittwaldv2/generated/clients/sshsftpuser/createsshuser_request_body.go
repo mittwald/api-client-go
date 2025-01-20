@@ -2,6 +2,7 @@ package sshsftpuser
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/sshuserv1"
 )
@@ -26,7 +27,7 @@ import (
 type CreateSSHUserRequestBody struct {
 	Authentication sshuserv1.Authentication `json:"authentication"`
 	Description    string                   `json:"description"`
-	ExpiresAt      *string                  `json:"expiresAt,omitempty"`
+	ExpiresAt      *time.Time               `json:"expiresAt,omitempty"`
 }
 
 func (o *CreateSSHUserRequestBody) Validate() error {

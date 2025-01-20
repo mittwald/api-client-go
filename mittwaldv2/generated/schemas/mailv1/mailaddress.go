@@ -6,6 +6,7 @@ package mailv1
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -127,7 +128,7 @@ type MailAddress struct {
 	Mailbox           *MailAddressMailbox      `json:"mailbox,omitempty"`
 	ProjectId         string                   `json:"projectId"`
 	ReceivingDisabled bool                     `json:"receivingDisabled"`
-	UpdatedAt         string                   `json:"updatedAt"`
+	UpdatedAt         time.Time                `json:"updatedAt"`
 }
 
 func (o *MailAddress) Validate() error {

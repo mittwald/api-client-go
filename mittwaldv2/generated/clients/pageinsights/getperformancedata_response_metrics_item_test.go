@@ -14,7 +14,7 @@ import (
 var _ = Describe("GetPerformanceDataResponseMetricsItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"createdAt\":\"string\",\"name\":\"string\",\"score\":3.14,\"value\":3.14}")
+			exampleJSON := []byte("{\"createdAt\":\"2006-01-02T15:04:05Z\",\"name\":\"string\",\"score\":3.14,\"value\":3.14}")
 
 			sut := pageinsights.GetPerformanceDataResponseMetricsItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

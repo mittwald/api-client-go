@@ -14,7 +14,7 @@ import (
 var _ = Describe("GlobalConfigTemplate", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"data\":\"string\",\"name\":\"string\",\"updatedAt\":\"string\"}")
+			exampleJSON := []byte("{\"data\":\"string\",\"name\":\"string\",\"updatedAt\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := varnishv1.GlobalConfigTemplate{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

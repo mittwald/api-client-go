@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateProjectBackupRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"description\":\"I'm a ProjectBackup\",\"expirationTime\":\"string\"}")
+			exampleJSON := []byte("{\"description\":\"I'm a ProjectBackup\",\"expirationTime\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := backup.CreateProjectBackupRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

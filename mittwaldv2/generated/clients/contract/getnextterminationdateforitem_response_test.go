@@ -14,7 +14,7 @@ import (
 var _ = Describe("GetNextTerminationDateForItemResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"contractItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"nextTerminationDate\":\"string\"}")
+			exampleJSON := []byte("{\"contractItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"nextTerminationDate\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := contract.GetNextTerminationDateForItemResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

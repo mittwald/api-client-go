@@ -14,7 +14,7 @@ import (
 var _ = Describe("Server", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"clusterName\":\"string\",\"createdAt\":\"string\",\"customerId\":\"673c107f-75e1-451c-8eaa-5bf101bd2b2c\",\"description\":\"My first Server!\",\"disabledReason\":\"suspended\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"imageRefId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"isReady\":true,\"machineType\":{\"cpu\":\"2\",\"memory\":\"4Gi\",\"name\":\"shared.large\"},\"readiness\":\"creating\",\"shortId\":\"s-4e7tz3\",\"statisticsBaseDomain\":\"pe-prod.staging.mcloud.services\",\"status\":\"pending\",\"storage\":\"50Gi\"}")
+			exampleJSON := []byte("{\"clusterName\":\"string\",\"createdAt\":\"2006-01-02T15:04:05Z\",\"customerId\":\"673c107f-75e1-451c-8eaa-5bf101bd2b2c\",\"description\":\"My first Server!\",\"disabledReason\":\"suspended\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"imageRefId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"isReady\":true,\"machineType\":{\"cpu\":\"2\",\"memory\":\"4Gi\",\"name\":\"shared.large\"},\"readiness\":\"creating\",\"shortId\":\"s-4e7tz3\",\"statisticsBaseDomain\":\"pe-prod.staging.mcloud.services\",\"status\":\"pending\",\"storage\":\"50Gi\"}")
 
 			sut := projectv1.Server{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

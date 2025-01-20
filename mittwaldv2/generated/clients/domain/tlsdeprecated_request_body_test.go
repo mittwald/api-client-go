@@ -14,7 +14,7 @@ import (
 var _ = Describe("TLSDeprecatedRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal into AlternativeTlsAcme", func() {
-			exampleJSON := []byte("{\"acme\":true,\"isCreated\":true,\"requestDeadline\":\"string\"}")
+			exampleJSON := []byte("{\"acme\":true,\"isCreated\":true,\"requestDeadline\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := domain.TLSDeprecatedRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

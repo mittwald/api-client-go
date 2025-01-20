@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/marketplacev1"
@@ -22,7 +23,7 @@ type DryRunWebhookRequest struct {
 	ContextID           *string
 	Scopes              []string
 	InstanceDisabled    *bool
-	CreatedAt           *string
+	CreatedAt           *time.Time
 	Secret              *string
 }
 
@@ -55,7 +56,7 @@ func (r *DryRunWebhookRequest) query() url.Values {
 		q.Set("instanceDisabled", strconv.FormatBool(*r.InstanceDisabled))
 	}
 	if r.CreatedAt != nil {
-		q.Set("createdAt", *r.CreatedAt)
+		q.Set("createdAt", r.CreatedAt.Format(time.RFC3339))
 	}
 	if r.Secret != nil {
 		q.Set("secret", *r.Secret)

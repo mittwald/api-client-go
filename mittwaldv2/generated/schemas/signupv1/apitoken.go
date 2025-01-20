@@ -6,6 +6,7 @@ package signupv1
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -41,9 +42,9 @@ import (
 //
 type ApiToken struct {
 	ApiTokenId  uuid.UUID           `json:"apiTokenId"`
-	CreatedAt   string              `json:"createdAt"`
+	CreatedAt   time.Time           `json:"createdAt"`
 	Description string              `json:"description"`
-	ExpiresAt   *string             `json:"expiresAt,omitempty"`
+	ExpiresAt   *time.Time          `json:"expiresAt,omitempty"`
 	Roles       []ApiTokenRolesItem `json:"roles"`
 }
 

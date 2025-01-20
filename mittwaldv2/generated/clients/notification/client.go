@@ -55,7 +55,7 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
-// Subscribe a user to the mStudio newsletter.
+//Subscribe a user to the mStudio newsletter.
 func (c *clientImpl) NewsletterSubscribeUser(
 	ctx context.Context,
 	req NewsletterSubscribeUserRequest,
@@ -82,7 +82,7 @@ func (c *clientImpl) NewsletterSubscribeUser(
 	return &response, httpRes, nil
 }
 
-// Getting the subscription status of the subscription.
+//Getting the subscription status of the subscription.
 func (c *clientImpl) NewsletterGetInfo(
 	ctx context.Context,
 	req NewsletterGetInfoRequest,
@@ -109,7 +109,7 @@ func (c *clientImpl) NewsletterGetInfo(
 	return &response, httpRes, nil
 }
 
-// Unsubscribe a user from the mStudio newsletter.
+//Unsubscribe a user from the mStudio newsletter.
 func (c *clientImpl) NewsletterUnsubscribeUser(
 	ctx context.Context,
 	req NewsletterUnsubscribeUserRequest,
@@ -132,10 +132,11 @@ func (c *clientImpl) NewsletterUnsubscribeUser(
 	return httpRes, nil
 }
 
-// Get the counts for unread notifications of the user.
+//Get the counts for unread notifications of the user.
 //
-// The user is determined by the access token used.
-// Lighter weight route instead of getting all unread notifications and count yourself.
+//The user is determined by the access token used.
+//Lighter weight route instead of getting all unread notifications and count yourself.
+//
 func (c *clientImpl) CountUnreadNotifications(
 	ctx context.Context,
 	req CountUnreadNotificationsRequest,
@@ -162,7 +163,7 @@ func (c *clientImpl) CountUnreadNotifications(
 	return &response, httpRes, nil
 }
 
-// List all unread notifications.
+//List all unread notifications.
 func (c *clientImpl) ListNotifications(
 	ctx context.Context,
 	req ListNotificationsRequest,
@@ -189,9 +190,9 @@ func (c *clientImpl) ListNotifications(
 	return &response, httpRes, nil
 }
 
-// Mark all notifications as read (deprecated).
+//Mark all notifications as read (deprecated).
 //
-// Deprecated route. Please use /v2/notifications/actions/read-all instead.
+//Deprecated route. Please use /v2/notifications/actions/read-all instead.
 func (c *clientImpl) ReadAllNotificationsDeprecated(
 	ctx context.Context,
 	req ReadAllNotificationsDeprecatedRequest,
@@ -218,9 +219,9 @@ func (c *clientImpl) ReadAllNotificationsDeprecated(
 	return &response, httpRes, nil
 }
 
-// Mark all notifications as read.
+//Mark all notifications as read.
 //
-// Mark all notifications for the authenticated user as read.
+//Mark all notifications for the authenticated user as read.
 func (c *clientImpl) ReadAllNotifications(
 	ctx context.Context,
 	req ReadAllNotificationsRequest,
@@ -247,7 +248,7 @@ func (c *clientImpl) ReadAllNotifications(
 	return &response, httpRes, nil
 }
 
-// Mark notification as read.
+//Mark notification as read.
 func (c *clientImpl) ReadNotification(
 	ctx context.Context,
 	req ReadNotificationRequest,

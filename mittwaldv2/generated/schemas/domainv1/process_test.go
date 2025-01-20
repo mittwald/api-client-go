@@ -14,7 +14,7 @@ import (
 var _ = Describe("Process", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"error\":\"string\",\"lastUpdate\":\"string\",\"processType\":\"UNSPECIFIED\",\"state\":\"UNSPECIFIED\",\"status\":\"string\",\"statusCode\":\"string\",\"transactionId\":\"string\"}")
+			exampleJSON := []byte("{\"error\":\"string\",\"lastUpdate\":\"2006-01-02T15:04:05Z\",\"processType\":\"UNSPECIFIED\",\"state\":\"UNSPECIFIED\",\"status\":\"string\",\"statusCode\":\"string\",\"transactionId\":\"string\"}")
 
 			sut := domainv1.Process{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

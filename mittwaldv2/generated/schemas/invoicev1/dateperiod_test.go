@@ -14,7 +14,7 @@ import (
 var _ = Describe("DatePeriod", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"end\":\"string\",\"start\":\"string\"}")
+			exampleJSON := []byte("{\"end\":\"2006-01-02T15:04:05Z\",\"start\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := invoicev1.DatePeriod{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

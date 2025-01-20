@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateSSHUserRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"authentication\":{\"password\":\"string\"},\"description\":\"string\",\"expiresAt\":\"string\"}")
+			exampleJSON := []byte("{\"authentication\":{\"password\":\"string\"},\"description\":\"string\",\"expiresAt\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := sshsftpuser.CreateSSHUserRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

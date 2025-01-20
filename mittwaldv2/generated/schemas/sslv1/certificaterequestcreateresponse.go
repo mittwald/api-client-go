@@ -5,6 +5,7 @@ package sslv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -38,14 +39,14 @@ import (
 
 //
 type CertificateRequestCreateResponse struct {
-	CommonName     *string   `json:"commonName,omitempty"`
-	Contact        Contact   `json:"contact"`
-	DnsNames       []string  `json:"dnsNames,omitempty"`
-	Id             uuid.UUID `json:"id"`
-	Issuer         *string   `json:"issuer,omitempty"`
-	SigningRequest *string   `json:"signingRequest,omitempty"`
-	ValidFrom      *string   `json:"validFrom,omitempty"`
-	ValidTo        *string   `json:"validTo,omitempty"`
+	CommonName     *string    `json:"commonName,omitempty"`
+	Contact        Contact    `json:"contact"`
+	DnsNames       []string   `json:"dnsNames,omitempty"`
+	Id             uuid.UUID  `json:"id"`
+	Issuer         *string    `json:"issuer,omitempty"`
+	SigningRequest *string    `json:"signingRequest,omitempty"`
+	ValidFrom      *time.Time `json:"validFrom,omitempty"`
+	ValidTo        *time.Time `json:"validTo,omitempty"`
 }
 
 func (o *CertificateRequestCreateResponse) Validate() error {

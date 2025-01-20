@@ -14,7 +14,7 @@ import (
 var _ = Describe("MailAddressMailboxStorageInBytes", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"current\":{\"updatedAt\":\"string\",\"value\":3.14},\"limit\":3.14}")
+			exampleJSON := []byte("{\"current\":{\"updatedAt\":\"2006-01-02T15:04:05Z\",\"value\":3.14},\"limit\":3.14}")
 
 			sut := mailv1.MailAddressMailboxStorageInBytes{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

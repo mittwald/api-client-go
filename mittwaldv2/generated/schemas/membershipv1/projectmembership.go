@@ -5,6 +5,7 @@ package membershipv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -59,11 +60,11 @@ import (
 //
 type ProjectMembership struct {
 	Email       string       `json:"email"`
-	ExpiresAt   *string      `json:"expiresAt,omitempty"`
+	ExpiresAt   *time.Time   `json:"expiresAt,omitempty"`
 	Id          uuid.UUID    `json:"id"`
 	Inherited   bool         `json:"inherited"`
 	InviteId    *uuid.UUID   `json:"inviteId,omitempty"`
-	MemberSince *string      `json:"memberSince,omitempty"`
+	MemberSince *time.Time   `json:"memberSince,omitempty"`
 	Mfa         bool         `json:"mfa"`
 	ProjectId   uuid.UUID    `json:"projectId"`
 	Role        ProjectRoles `json:"role"`

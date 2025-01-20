@@ -14,7 +14,7 @@ import (
 var _ = Describe("ApiToken", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"apiTokenId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"createdAt\":\"string\",\"description\":\"Api Token - read\",\"expiresAt\":\"string\",\"roles\":[\"api_read\"]}")
+			exampleJSON := []byte("{\"apiTokenId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"createdAt\":\"2006-01-02T15:04:05Z\",\"description\":\"Api Token - read\",\"expiresAt\":\"2006-01-02T15:04:05Z\",\"roles\":[\"api_read\"]}")
 
 			sut := signupv1.ApiToken{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

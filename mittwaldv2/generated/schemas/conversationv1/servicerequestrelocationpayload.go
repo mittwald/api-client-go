@@ -5,6 +5,7 @@ package conversationv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -111,7 +112,7 @@ type ServiceRequestRelocationPayload struct {
 	Contact                 ServiceRequestRelocationPayloadContact `json:"contact"`
 	Domain                  *ServiceRequestRelocationPayloadDomain `json:"domain,omitempty"`
 	Notes                   *string                                `json:"notes,omitempty"`
-	PreferredRelocationDate *string                                `json:"preferredRelocationDate,omitempty"`
+	PreferredRelocationDate *time.Time                             `json:"preferredRelocationDate,omitempty"`
 	RedirectusKey           float64                                `json:"redirectusKey"`
 	Source                  ServiceRequestRelocationPayloadSource  `json:"source"`
 	Target                  ServiceRequestRelocationPayloadTarget  `json:"target"`

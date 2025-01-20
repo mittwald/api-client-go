@@ -5,6 +5,7 @@ package conversationv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -65,10 +66,10 @@ import (
 type Conversation struct {
 	Category          *Category                    `json:"category,omitempty"`
 	ConversationId    uuid.UUID                    `json:"conversationId"`
-	CreatedAt         string                       `json:"createdAt"`
+	CreatedAt         time.Time                    `json:"createdAt"`
 	CreatedBy         *User                        `json:"createdBy,omitempty"`
 	LastMessage       *ConversationLastMessage     `json:"lastMessage,omitempty"`
-	LastMessageAt     *string                      `json:"lastMessageAt,omitempty"`
+	LastMessageAt     *time.Time                   `json:"lastMessageAt,omitempty"`
 	LastMessageBy     *User                        `json:"lastMessageBy,omitempty"`
 	MainUser          User                         `json:"mainUser"`
 	NotificationRoles []NotificationRole           `json:"notificationRoles,omitempty"`

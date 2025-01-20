@@ -14,7 +14,7 @@ import (
 var _ = Describe("UpdateMailAddressAutoresponderRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"autoResponder\":{\"active\":true,\"expiresAt\":\"string\",\"message\":\"string\",\"startsAt\":\"string\"}}")
+			exampleJSON := []byte("{\"autoResponder\":{\"active\":true,\"expiresAt\":\"2006-01-02T15:04:05Z\",\"message\":\"string\",\"startsAt\":\"2006-01-02T15:04:05Z\"}}")
 
 			sut := mail.UpdateMailAddressAutoresponderRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

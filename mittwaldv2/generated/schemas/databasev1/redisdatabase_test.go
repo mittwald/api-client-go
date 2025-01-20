@@ -14,7 +14,7 @@ import (
 var _ = Describe("RedisDatabase", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"configuration\":{\"additionalFlags\":[],\"maxMemory\":\"64Mi\",\"maxMemoryPolicy\":\"allkeys-lru\",\"persistent\":true},\"createdAt\":\"string\",\"description\":\"string\",\"finalizers\":[\"string\"],\"hostname\":\"string\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"name\":\"string\",\"port\":42,\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"status\":\"pending\",\"statusSetAt\":\"string\",\"storageUsageInBytes\":42,\"storageUsageInBytesSetAt\":\"string\",\"updatedAt\":\"string\",\"version\":\"string\"}")
+			exampleJSON := []byte("{\"configuration\":{\"additionalFlags\":[],\"maxMemory\":\"64Mi\",\"maxMemoryPolicy\":\"allkeys-lru\",\"persistent\":true},\"createdAt\":\"2006-01-02T15:04:05Z\",\"description\":\"string\",\"finalizers\":[\"string\"],\"hostname\":\"string\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"name\":\"string\",\"port\":42,\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"status\":\"pending\",\"statusSetAt\":\"2006-01-02T15:04:05Z\",\"storageUsageInBytes\":42,\"storageUsageInBytesSetAt\":\"2006-01-02T15:04:05Z\",\"updatedAt\":\"2006-01-02T15:04:05Z\",\"version\":\"string\"}")
 
 			sut := databasev1.RedisDatabase{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

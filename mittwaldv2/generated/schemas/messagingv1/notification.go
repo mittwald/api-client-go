@@ -5,6 +5,7 @@ package messagingv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -40,7 +41,7 @@ import (
 
 //
 type Notification struct {
-	CreatedAt string               `json:"createdAt"`
+	CreatedAt time.Time            `json:"createdAt"`
 	Id        uuid.UUID            `json:"id"`
 	Read      bool                 `json:"read"`
 	Reference AggregateReference   `json:"reference"`

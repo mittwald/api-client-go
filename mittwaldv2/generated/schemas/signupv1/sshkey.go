@@ -4,6 +4,8 @@ package signupv1
 // DO NOT EDIT.
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 )
 
@@ -41,13 +43,13 @@ import (
 
 //
 type SshKey struct {
-	Algorithm   string    `json:"algorithm"`
-	Comment     string    `json:"comment"`
-	CreatedAt   string    `json:"createdAt"`
-	ExpiresAt   *string   `json:"expiresAt,omitempty"`
-	Fingerprint string    `json:"fingerprint"`
-	Key         string    `json:"key"`
-	SshKeyId    uuid.UUID `json:"sshKeyId"`
+	Algorithm   string     `json:"algorithm"`
+	Comment     string     `json:"comment"`
+	CreatedAt   time.Time  `json:"createdAt"`
+	ExpiresAt   *time.Time `json:"expiresAt,omitempty"`
+	Fingerprint string     `json:"fingerprint"`
+	Key         string     `json:"key"`
+	SshKeyId    uuid.UUID  `json:"sshKeyId"`
 }
 
 func (o *SshKey) Validate() error {

@@ -14,7 +14,7 @@ import (
 var _ = Describe("ExtensionDeprecation", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"deprecatedAt\":\"string\"}")
+			exampleJSON := []byte("{\"deprecatedAt\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := marketplacev1.ExtensionDeprecation{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

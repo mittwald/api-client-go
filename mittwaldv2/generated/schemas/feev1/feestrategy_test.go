@@ -22,7 +22,7 @@ var _ = Describe("FeeStrategy", func() {
 			Expect(sut.AlternativeOneTimePaymentFeeStrategy).NotTo(BeNil())
 		})
 		It("should unmarshal into AlternativePeriodBasedFeeStrategy", func() {
-			exampleJSON := []byte("{\"periods\":[{\"feeValidFrom\":\"string\",\"feeValidUntil\":\"string\",\"monthlyPrice\":3.14}]}")
+			exampleJSON := []byte("{\"periods\":[{\"feeValidFrom\":\"2006-01-02T15:04:05Z\",\"feeValidUntil\":\"2006-01-02T15:04:05Z\",\"monthlyPrice\":3.14}]}")
 
 			sut := feev1.FeeStrategy{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

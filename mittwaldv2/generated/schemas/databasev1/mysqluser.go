@@ -5,6 +5,7 @@ package databasev1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -66,7 +67,7 @@ import (
 type MySqlUser struct {
 	AccessIpMask      *string              `json:"accessIpMask,omitempty"`
 	AccessLevel       MySqlUserAccessLevel `json:"accessLevel"`
-	CreatedAt         string               `json:"createdAt"`
+	CreatedAt         time.Time            `json:"createdAt"`
 	DatabaseId        uuid.UUID            `json:"databaseId"`
 	Description       *string              `json:"description,omitempty"`
 	Disabled          bool                 `json:"disabled"`
@@ -74,10 +75,10 @@ type MySqlUser struct {
 	Id                uuid.UUID            `json:"id"`
 	MainUser          bool                 `json:"mainUser"`
 	Name              string               `json:"name"`
-	PasswordUpdatedAt string               `json:"passwordUpdatedAt"`
+	PasswordUpdatedAt time.Time            `json:"passwordUpdatedAt"`
 	Status            DatabaseUserStatus   `json:"status"`
-	StatusSetAt       string               `json:"statusSetAt"`
-	UpdatedAt         string               `json:"updatedAt"`
+	StatusSetAt       time.Time            `json:"statusSetAt"`
+	UpdatedAt         time.Time            `json:"updatedAt"`
 }
 
 func (o *MySqlUser) Validate() error {

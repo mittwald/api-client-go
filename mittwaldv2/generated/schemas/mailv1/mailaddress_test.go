@@ -14,7 +14,7 @@ import (
 var _ = Describe("MailAddress", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"address\":\"string\",\"autoResponder\":{\"active\":true,\"expiresAt\":\"string\",\"message\":\"string\",\"startsAt\":\"string\"},\"forwardAddresses\":[\"string\"],\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"isArchived\":true,\"isCatchAll\":true,\"mailbox\":{\"name\":\"string\",\"passwordUpdatedAt\":\"string\",\"sendingEnabled\":true,\"spamProtection\":{\"active\":true,\"autoDeleteSpam\":true,\"folder\":\"spam\",\"relocationMinSpamScore\":42},\"storageInBytes\":{\"current\":{\"updatedAt\":\"string\",\"value\":3.14},\"limit\":3.14}},\"projectId\":\"string\",\"receivingDisabled\":true,\"updatedAt\":\"string\"}")
+			exampleJSON := []byte("{\"address\":\"string\",\"autoResponder\":{\"active\":true,\"expiresAt\":\"2006-01-02T15:04:05Z\",\"message\":\"string\",\"startsAt\":\"2006-01-02T15:04:05Z\"},\"forwardAddresses\":[\"string\"],\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"isArchived\":true,\"isCatchAll\":true,\"mailbox\":{\"name\":\"string\",\"passwordUpdatedAt\":\"2006-01-02T15:04:05Z\",\"sendingEnabled\":true,\"spamProtection\":{\"active\":true,\"autoDeleteSpam\":true,\"folder\":\"spam\",\"relocationMinSpamScore\":42},\"storageInBytes\":{\"current\":{\"updatedAt\":\"2006-01-02T15:04:05Z\",\"value\":3.14},\"limit\":3.14}},\"projectId\":\"string\",\"receivingDisabled\":true,\"updatedAt\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := mailv1.MailAddress{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

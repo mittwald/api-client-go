@@ -5,6 +5,7 @@ package projectv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -63,7 +64,7 @@ import (
 //
 type Server struct {
 	ClusterName          string                          `json:"clusterName"`
-	CreatedAt            string                          `json:"createdAt"`
+	CreatedAt            time.Time                       `json:"createdAt"`
 	CustomerId           string                          `json:"customerId"`
 	Description          string                          `json:"description"`
 	DisabledReason       *ServerDisableReason            `json:"disabledReason,omitempty"`

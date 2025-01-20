@@ -6,6 +6,7 @@ package contractv1
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -86,24 +87,24 @@ import (
 
 //
 type ContractItem struct {
-	ActivationDate              *string             `json:"activationDate,omitempty"`
+	ActivationDate              *time.Time          `json:"activationDate,omitempty"`
 	AggregateReference          *AggregateReference `json:"aggregateReference,omitempty"`
 	Articles                    []Article           `json:"articles"`
 	ContractPeriod              float64             `json:"contractPeriod"`
 	Description                 string              `json:"description"`
 	FreeTrialDays               *float64            `json:"freeTrialDays,omitempty"`
 	GroupByProjectId            *uuid.UUID          `json:"groupByProjectId,omitempty"`
-	InvoiceStop                 *string             `json:"invoiceStop,omitempty"`
+	InvoiceStop                 *time.Time          `json:"invoiceStop,omitempty"`
 	InvoicingPeriod             *float64            `json:"invoicingPeriod,omitempty"`
 	IsActivated                 bool                `json:"isActivated"`
 	IsBaseItem                  bool                `json:"isBaseItem"`
 	IsInFreeTrial               *bool               `json:"isInFreeTrial,omitempty"`
 	IsInclusive                 *bool               `json:"isInclusive,omitempty"`
 	ItemId                      uuid.UUID           `json:"itemId"`
-	NextPossibleDowngradeDate   *string             `json:"nextPossibleDowngradeDate,omitempty"`
-	NextPossibleTerminationDate *string             `json:"nextPossibleTerminationDate,omitempty"`
-	NextPossibleUpgradeDate     *string             `json:"nextPossibleUpgradeDate,omitempty"`
-	OrderDate                   *string             `json:"orderDate,omitempty"`
+	NextPossibleDowngradeDate   *time.Time          `json:"nextPossibleDowngradeDate,omitempty"`
+	NextPossibleTerminationDate *time.Time          `json:"nextPossibleTerminationDate,omitempty"`
+	NextPossibleUpgradeDate     *time.Time          `json:"nextPossibleUpgradeDate,omitempty"`
+	OrderDate                   *time.Time          `json:"orderDate,omitempty"`
 	OrderId                     *uuid.UUID          `json:"orderId,omitempty"`
 	ReplacedByItem              *uuid.UUID          `json:"replacedByItem,omitempty"`
 	TariffChange                *TariffChange       `json:"tariffChange,omitempty"`

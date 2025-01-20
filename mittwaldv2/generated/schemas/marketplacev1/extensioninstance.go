@@ -6,6 +6,7 @@ package marketplacev1
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -62,7 +63,7 @@ import (
 type ExtensionInstance struct {
 	AggregateReference  ExtensionInstanceAggregateReference `json:"aggregateReference"`
 	ConsentedScopes     []string                            `json:"consentedScopes"`
-	CreatedAt           *string                             `json:"createdAt,omitempty"`
+	CreatedAt           *time.Time                          `json:"createdAt,omitempty"`
 	Disabled            bool                                `json:"disabled"`
 	ExtensionId         uuid.UUID                           `json:"extensionId"`
 	Id                  uuid.UUID                           `json:"id"`

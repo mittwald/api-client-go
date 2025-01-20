@@ -5,6 +5,7 @@ package sslv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -74,8 +75,8 @@ type Certificate struct {
 	Issuer                     *string    `json:"issuer,omitempty"`
 	LastExpirationThresholdHit int64      `json:"lastExpirationThresholdHit"`
 	ProjectId                  uuid.UUID  `json:"projectId"`
-	ValidFrom                  string     `json:"validFrom"`
-	ValidTo                    string     `json:"validTo"`
+	ValidFrom                  time.Time  `json:"validFrom"`
+	ValidTo                    time.Time  `json:"validTo"`
 }
 
 func (o *Certificate) Validate() error {

@@ -137,7 +137,7 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
-// Schedule the Termination of a ContractItem.
+//Schedule the Termination of a ContractItem.
 func (c *clientImpl) TerminateContractItem(
 	ctx context.Context,
 	req TerminateContractItemRequest,
@@ -164,7 +164,7 @@ func (c *clientImpl) TerminateContractItem(
 	return &response, httpRes, nil
 }
 
-// Cancel the Termination for the referred ContractItem.
+//Cancel the Termination for the referred ContractItem.
 func (c *clientImpl) CancelContractItemTermination(
 	ctx context.Context,
 	req CancelContractItemTerminationRequest,
@@ -191,7 +191,7 @@ func (c *clientImpl) CancelContractItemTermination(
 	return &response, httpRes, nil
 }
 
-// Cancel the TariffChange for the referred ContractItem.
+//Cancel the TariffChange for the referred ContractItem.
 func (c *clientImpl) CancelContractTariffChange(
 	ctx context.Context,
 	req CancelContractTariffChangeRequest,
@@ -218,7 +218,7 @@ func (c *clientImpl) CancelContractTariffChange(
 	return &response, httpRes, nil
 }
 
-// Schedule the Termination of a Contract.
+//Schedule the Termination of a Contract.
 func (c *clientImpl) TerminateContract(
 	ctx context.Context,
 	req TerminateContractRequest,
@@ -245,7 +245,7 @@ func (c *clientImpl) TerminateContract(
 	return &response, httpRes, nil
 }
 
-// Cancel the Termination for the referred Contract.
+//Cancel the Termination for the referred Contract.
 func (c *clientImpl) CancelContractTermination(
 	ctx context.Context,
 	req CancelContractTerminationRequest,
@@ -272,7 +272,7 @@ func (c *clientImpl) CancelContractTermination(
 	return &response, httpRes, nil
 }
 
-// Return the BaseItem of the Contract with the given ID.
+//Return the BaseItem of the Contract with the given ID.
 func (c *clientImpl) GetBaseItemOfContract(
 	ctx context.Context,
 	req GetBaseItemOfContractRequest,
@@ -299,7 +299,7 @@ func (c *clientImpl) GetBaseItemOfContract(
 	return &response, httpRes, nil
 }
 
-// Return the Contract for the given Certificate.
+//Return the Contract for the given Certificate.
 func (c *clientImpl) GetDetailOfContractByCertificate(
 	ctx context.Context,
 	req GetDetailOfContractByCertificateRequest,
@@ -326,7 +326,7 @@ func (c *clientImpl) GetDetailOfContractByCertificate(
 	return &response, httpRes, nil
 }
 
-// Return the Contract for the given Domain.
+//Return the Contract for the given Domain.
 func (c *clientImpl) GetDetailOfContractByDomain(
 	ctx context.Context,
 	req GetDetailOfContractByDomainRequest,
@@ -353,7 +353,7 @@ func (c *clientImpl) GetDetailOfContractByDomain(
 	return &response, httpRes, nil
 }
 
-// Return the Contract for the given Project.
+//Return the Contract for the given Project.
 func (c *clientImpl) GetDetailOfContractByProject(
 	ctx context.Context,
 	req GetDetailOfContractByProjectRequest,
@@ -380,7 +380,7 @@ func (c *clientImpl) GetDetailOfContractByProject(
 	return &response, httpRes, nil
 }
 
-// Return the Contract for the given Server.
+//Return the Contract for the given Server.
 func (c *clientImpl) GetDetailOfContractByServer(
 	ctx context.Context,
 	req GetDetailOfContractByServerRequest,
@@ -407,7 +407,7 @@ func (c *clientImpl) GetDetailOfContractByServer(
 	return &response, httpRes, nil
 }
 
-// Get the ContractItem with the given ID.
+//Get the ContractItem with the given ID.
 func (c *clientImpl) GetDetailOfContractItem(
 	ctx context.Context,
 	req GetDetailOfContractItemRequest,
@@ -434,7 +434,7 @@ func (c *clientImpl) GetDetailOfContractItem(
 	return &response, httpRes, nil
 }
 
-// Returns the Contract with the given ID.
+//Returns the Contract with the given ID.
 func (c *clientImpl) GetDetailOfContract(
 	ctx context.Context,
 	req GetDetailOfContractRequest,
@@ -461,7 +461,7 @@ func (c *clientImpl) GetDetailOfContract(
 	return &response, httpRes, nil
 }
 
-// Return the next TerminationDate for the ContractItem with the given ID.
+//Return the next TerminationDate for the ContractItem with the given ID.
 func (c *clientImpl) GetNextTerminationDateForItem(
 	ctx context.Context,
 	req GetNextTerminationDateForItemRequest,
@@ -488,7 +488,7 @@ func (c *clientImpl) GetNextTerminationDateForItem(
 	return &response, httpRes, nil
 }
 
-// Return a list of Contracts for the given Customer.
+//Return a list of Contracts for the given Customer.
 func (c *clientImpl) ListContracts(
 	ctx context.Context,
 	req ListContractsRequest,
@@ -515,9 +515,9 @@ func (c *clientImpl) ListContracts(
 	return &response, httpRes, nil
 }
 
-// Get details of an Invoice.
+//Get details of an Invoice.
 //
-// This route is deprecated. Use /v2/invoices/{invoiceId} instead.
+//This route is deprecated. Use /v2/invoices/{invoiceId} instead.
 func (c *clientImpl) DeprecatedInvoiceDetailOfInvoice(
 	ctx context.Context,
 	req DeprecatedInvoiceDetailOfInvoiceRequest,
@@ -544,7 +544,7 @@ func (c *clientImpl) DeprecatedInvoiceDetailOfInvoice(
 	return &response, httpRes, nil
 }
 
-// Get details of an Invoice.
+//Get details of an Invoice.
 func (c *clientImpl) InvoiceDetail(
 	ctx context.Context,
 	req InvoiceDetailRequest,
@@ -571,7 +571,7 @@ func (c *clientImpl) InvoiceDetail(
 	return &response, httpRes, nil
 }
 
-// Get InvoiceSettings of a Customer.
+//Get InvoiceSettings of a Customer.
 func (c *clientImpl) InvoiceGetDetailOfInvoiceSettings(
 	ctx context.Context,
 	req InvoiceGetDetailOfInvoiceSettingsRequest,
@@ -598,7 +598,7 @@ func (c *clientImpl) InvoiceGetDetailOfInvoiceSettings(
 	return &response, httpRes, nil
 }
 
-// Update InvoiceSettings of a Customer.
+//Update InvoiceSettings of a Customer.
 func (c *clientImpl) InvoiceUpdateInvoiceSettings(
 	ctx context.Context,
 	req InvoiceUpdateInvoiceSettingsRequest,
@@ -625,7 +625,7 @@ func (c *clientImpl) InvoiceUpdateInvoiceSettings(
 	return &response, httpRes, nil
 }
 
-// Request an Access Token for the Invoice file.
+//Request an Access Token for the Invoice file.
 func (c *clientImpl) InvoiceGetFileAccessToken(
 	ctx context.Context,
 	req InvoiceGetFileAccessTokenRequest,
@@ -652,7 +652,7 @@ func (c *clientImpl) InvoiceGetFileAccessToken(
 	return &response, httpRes, nil
 }
 
-// List Invoices of a Customer.
+//List Invoices of a Customer.
 func (c *clientImpl) InvoiceListCustomerInvoices(
 	ctx context.Context,
 	req InvoiceListCustomerInvoicesRequest,
@@ -679,9 +679,9 @@ func (c *clientImpl) InvoiceListCustomerInvoices(
 	return &response, httpRes, nil
 }
 
-// Get list of Orders.
+//Get list of Orders.
 //
-// The list of Orders the User has access to.
+//The list of Orders the User has access to.
 func (c *clientImpl) ListOrders(
 	ctx context.Context,
 	req ListOrdersRequest,
@@ -708,7 +708,7 @@ func (c *clientImpl) ListOrders(
 	return &response, httpRes, nil
 }
 
-// Create an Order.
+//Create an Order.
 func (c *clientImpl) CreateOrder(
 	ctx context.Context,
 	req CreateOrderRequest,
@@ -735,7 +735,7 @@ func (c *clientImpl) CreateOrder(
 	return &response, httpRes, nil
 }
 
-// Create TariffChange Order.
+//Create TariffChange Order.
 func (c *clientImpl) CreateTariffChange(
 	ctx context.Context,
 	req CreateTariffChangeRequest,
@@ -762,9 +762,9 @@ func (c *clientImpl) CreateTariffChange(
 	return &response, httpRes, nil
 }
 
-// Get Order for Customer.
+//Get Order for Customer.
 //
-// Get details of a single Order, User must have access to the Order/Customer.
+//Get details of a single Order, User must have access to the Order/Customer.
 func (c *clientImpl) GetOrder(
 	ctx context.Context,
 	req GetOrderRequest,
@@ -791,9 +791,9 @@ func (c *clientImpl) GetOrder(
 	return &response, httpRes, nil
 }
 
-// Get list of Orders of a Customer.
+//Get list of Orders of a Customer.
 //
-// The list of Orders of a Customer the User has access to, can be filtered by orderStatus, articleTemplate and count.
+//The list of Orders of a Customer the User has access to, can be filtered by orderStatus, articleTemplate and count.
 func (c *clientImpl) ListCustomerOrders(
 	ctx context.Context,
 	req ListCustomerOrdersRequest,
@@ -820,9 +820,9 @@ func (c *clientImpl) ListCustomerOrders(
 	return &response, httpRes, nil
 }
 
-// Get list of Orders of a Project.
+//Get list of Orders of a Project.
 //
-// The list of Order of a Project the User has access to, can be filtered by orderStatus, articleTemplate and count.
+//The list of Order of a Project the User has access to, can be filtered by orderStatus, articleTemplate and count.
 func (c *clientImpl) ListProjectOrders(
 	ctx context.Context,
 	req ListProjectOrdersRequest,
@@ -849,7 +849,7 @@ func (c *clientImpl) ListProjectOrders(
 	return &response, httpRes, nil
 }
 
-// Preview Order.
+//Preview Order.
 func (c *clientImpl) PreviewOrder(
 	ctx context.Context,
 	req PreviewOrderRequest,
@@ -876,7 +876,7 @@ func (c *clientImpl) PreviewOrder(
 	return &response, httpRes, nil
 }
 
-// Preview TariffChange.
+//Preview TariffChange.
 func (c *clientImpl) PreviewTariffChange(
 	ctx context.Context,
 	req PreviewTariffChangeRequest,

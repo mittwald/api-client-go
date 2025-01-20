@@ -5,6 +5,7 @@ package project
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/projectv1"
@@ -83,13 +84,13 @@ import (
 //
 type ListProjectsResponseItem struct {
 	BackupStorageUsageInBytes      int64                                      `json:"backupStorageUsageInBytes"`
-	BackupStorageUsageInBytesSetAt string                                     `json:"backupStorageUsageInBytesSetAt"`
-	CreatedAt                      string                                     `json:"createdAt"`
+	BackupStorageUsageInBytesSetAt time.Time                                  `json:"backupStorageUsageInBytesSetAt"`
+	CreatedAt                      time.Time                                  `json:"createdAt"`
 	CustomerId                     string                                     `json:"customerId"`
 	CustomerMeta                   ListProjectsResponseItemCustomerMeta       `json:"customerMeta"`
 	Description                    string                                     `json:"description"`
 	DisableReason                  *projectv1.DisableReason                   `json:"disableReason,omitempty"`
-	DisabledAt                     *string                                    `json:"disabledAt,omitempty"`
+	DisabledAt                     *time.Time                                 `json:"disabledAt,omitempty"`
 	Enabled                        bool                                       `json:"enabled"`
 	Id                             string                                     `json:"id"`
 	ImageRefId                     *string                                    `json:"imageRefId,omitempty"`
@@ -99,9 +100,9 @@ type ListProjectsResponseItem struct {
 	ServerId                       *string                                    `json:"serverId,omitempty"`
 	ShortId                        string                                     `json:"shortId"`
 	Status                         projectv1.ProjectStatus                    `json:"status"`
-	StatusSetAt                    string                                     `json:"statusSetAt"`
+	StatusSetAt                    time.Time                                  `json:"statusSetAt"`
 	WebStorageUsageInBytes         int64                                      `json:"webStorageUsageInBytes"`
-	WebStorageUsageInBytesSetAt    string                                     `json:"webStorageUsageInBytesSetAt"`
+	WebStorageUsageInBytesSetAt    time.Time                                  `json:"webStorageUsageInBytesSetAt"`
 }
 
 func (o *ListProjectsResponseItem) Validate() error {

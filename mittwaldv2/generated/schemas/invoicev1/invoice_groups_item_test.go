@@ -14,7 +14,7 @@ import (
 var _ = Describe("InvoiceGroupsItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"contractId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"description\":\"Space-Server: \\\"Mein Space-Server\\\"\",\"items\":[{\"additionalDescription\":\"Short-ID: \\\"s-123456\\\"\",\"contractItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"description\":\"Space-Server: \\\"Mein Space-Server\\\"\",\"itemCancelledOrCorrectedBy\":[],\"itemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"price\":{\"currency\":\"EUR\",\"value\":1000},\"reference\":{\"sourceInvoiceId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"sourceInvoiceItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"},\"serviceDate\":\"string\",\"servicePeriod\":{\"end\":\"string\",\"start\":\"string\"},\"vatRate\":19}]}")
+			exampleJSON := []byte("{\"contractId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"description\":\"Space-Server: \\\"Mein Space-Server\\\"\",\"items\":[{\"additionalDescription\":\"Short-ID: \\\"s-123456\\\"\",\"contractItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"description\":\"Space-Server: \\\"Mein Space-Server\\\"\",\"itemCancelledOrCorrectedBy\":[],\"itemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"price\":{\"currency\":\"EUR\",\"value\":1000},\"reference\":{\"sourceInvoiceId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"sourceInvoiceItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"},\"serviceDate\":\"2006-01-02T15:04:05Z\",\"servicePeriod\":{\"end\":\"2006-01-02T15:04:05Z\",\"start\":\"2006-01-02T15:04:05Z\"},\"vatRate\":19}]}")
 
 			sut := invoicev1.InvoiceGroupsItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

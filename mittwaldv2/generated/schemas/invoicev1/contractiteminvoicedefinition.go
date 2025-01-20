@@ -5,6 +5,7 @@ package invoicev1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -33,7 +34,7 @@ import (
 type ContractItemInvoiceDefinition struct {
 	ContractItemId uuid.UUID  `json:"contractItemId"`
 	IsDue          *bool      `json:"isDue,omitempty"`
-	ServiceDate    *string    `json:"serviceDate,omitempty"`
+	ServiceDate    *time.Time `json:"serviceDate,omitempty"`
 	ServicePeriod  DatePeriod `json:"servicePeriod"`
 	VatRate        int64      `json:"vatRate"`
 }

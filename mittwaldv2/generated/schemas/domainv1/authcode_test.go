@@ -14,7 +14,7 @@ import (
 var _ = Describe("AuthCode", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"expires\":\"string\",\"value\":\"string\"}")
+			exampleJSON := []byte("{\"expires\":\"2006-01-02T15:04:05Z\",\"value\":\"string\"}")
 
 			sut := domainv1.AuthCode{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

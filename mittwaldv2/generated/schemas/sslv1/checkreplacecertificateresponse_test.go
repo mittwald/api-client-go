@@ -14,7 +14,7 @@ import (
 var _ = Describe("CheckReplaceCertificateResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{\"commonName\":{\"newValue\":\"string\",\"oldValue\":\"string\"},\"dnsNames\":{\"addedValues\":[\"string\"],\"removedValues\":[\"string\"],\"values\":[\"string\"]},\"issuer\":{\"newValue\":\"string\",\"oldValue\":\"string\"},\"validFrom\":{\"newValue\":\"string\",\"oldValue\":\"string\"},\"validTo\":{\"newValue\":\"string\",\"oldValue\":\"string\"}},\"errors\":[{\"message\":\"certificate_read_failed\"}],\"isReplaceable\":true}")
+			exampleJSON := []byte("{\"changes\":{\"commonName\":{\"newValue\":\"string\",\"oldValue\":\"string\"},\"dnsNames\":{\"addedValues\":[\"string\"],\"removedValues\":[\"string\"],\"values\":[\"string\"]},\"issuer\":{\"newValue\":\"string\",\"oldValue\":\"string\"},\"validFrom\":{\"newValue\":\"2006-01-02T15:04:05Z\",\"oldValue\":\"2006-01-02T15:04:05Z\"},\"validTo\":{\"newValue\":\"2006-01-02T15:04:05Z\",\"oldValue\":\"2006-01-02T15:04:05Z\"}},\"errors\":[{\"message\":\"certificate_read_failed\"}],\"isReplaceable\":true}")
 
 			sut := sslv1.CheckReplaceCertificateResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

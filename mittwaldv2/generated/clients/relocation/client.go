@@ -30,7 +30,7 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
-// Register a tariff change for a legacy tariff.
+//Register a tariff change for a legacy tariff.
 func (c *clientImpl) CreateLegacyTariffChange(
 	ctx context.Context,
 	req CreateLegacyTariffChangeRequest,
@@ -57,9 +57,9 @@ func (c *clientImpl) CreateLegacyTariffChange(
 	return &response, httpRes, nil
 }
 
-// Relocate an external Project to mittwald.
+//Relocate an external Project to mittwald.
 //
-// Give mittwald access to your Provider and let them move your Project to mittwald.
+//Give mittwald access to your Provider and let them move your Project to mittwald.
 func (c *clientImpl) CreateRelocation(
 	ctx context.Context,
 	req CreateRelocationRequest,

@@ -14,7 +14,7 @@ import (
 var _ = Describe("Software", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"config\":{\"configExpiration\":{\"maxVersions\":3.14,\"retentionTime\":3.14},\"latestConfigRevision\":3.14,\"revisions\":[{\"expire\":42,\"files\":[{\"meta\":{\"name\":\"string\",\"path\":\"string\"},\"refId\":\"string\"}],\"note\":\"string\",\"revision\":42,\"updated\":\"string\"}]},\"projectId\":\"string\",\"settings\":{\"string\":\"string\"},\"softwareId\":\"string\",\"softwareTemplateId\":\"string\",\"softwareVersion\":\"string\",\"updatedAt\":\"string\"}")
+			exampleJSON := []byte("{\"config\":{\"configExpiration\":{\"maxVersions\":3.14,\"retentionTime\":3.14},\"latestConfigRevision\":3.14,\"revisions\":[{\"expire\":42,\"files\":[{\"meta\":{\"name\":\"string\",\"path\":\"string\"},\"refId\":\"string\"}],\"note\":\"string\",\"revision\":42,\"updated\":\"2006-01-02T15:04:05Z\"}]},\"projectId\":\"string\",\"settings\":{\"string\":\"string\"},\"softwareId\":\"string\",\"softwareTemplateId\":\"string\",\"softwareVersion\":\"string\",\"updatedAt\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := varnishv1.Software{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

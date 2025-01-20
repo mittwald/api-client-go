@@ -14,7 +14,7 @@ import (
 var _ = Describe("AuthenticateWithAccessTokenRetrievalKeyResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"expiresAt\":\"string\",\"refreshToken\":\"string\",\"token\":\"string\"}")
+			exampleJSON := []byte("{\"expiresAt\":\"2006-01-02T15:04:05Z\",\"refreshToken\":\"string\",\"token\":\"string\"}")
 
 			sut := user.AuthenticateWithAccessTokenRetrievalKeyResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

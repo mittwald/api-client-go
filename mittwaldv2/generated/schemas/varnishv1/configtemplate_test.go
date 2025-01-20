@@ -14,7 +14,7 @@ import (
 var _ = Describe("ConfigTemplate", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"files\":[{\"meta\":{\"name\":\"string\",\"path\":\"string\"},\"refId\":\"string\"}],\"isGlobal\":true,\"note\":\"string\",\"projectId\":\"string\",\"softwareConfigTemplateId\":\"string\",\"softwareTemplateId\":\"string\",\"updatedAt\":\"string\"}")
+			exampleJSON := []byte("{\"files\":[{\"meta\":{\"name\":\"string\",\"path\":\"string\"},\"refId\":\"string\"}],\"isGlobal\":true,\"note\":\"string\",\"projectId\":\"string\",\"softwareConfigTemplateId\":\"string\",\"softwareTemplateId\":\"string\",\"updatedAt\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := varnishv1.ConfigTemplate{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

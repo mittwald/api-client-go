@@ -14,7 +14,7 @@ import (
 var _ = Describe("ProjectBackupSchedule", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"createdAt\":\"string\",\"description\":\"I'm a ProjectBackupSchedule\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"isSystemBackup\":true,\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"schedule\":\"5 4 * * *\",\"ttl\":\"7d\",\"updatedAt\":\"string\"}")
+			exampleJSON := []byte("{\"createdAt\":\"2006-01-02T15:04:05Z\",\"description\":\"I'm a ProjectBackupSchedule\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"isSystemBackup\":true,\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"schedule\":\"5 4 * * *\",\"ttl\":\"7d\",\"updatedAt\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := backupv1.ProjectBackupSchedule{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -4,6 +4,8 @@ package contract
 // DO NOT EDIT.
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 )
 
@@ -27,7 +29,7 @@ type TerminateContractItemResponse struct {
 	ContractId            *uuid.UUID `json:"contractId,omitempty"`
 	ContractItemId        *uuid.UUID `json:"contractItemId,omitempty"`
 	Reason                *string    `json:"reason,omitempty"`
-	TerminationTargetDate *string    `json:"terminationTargetDate,omitempty"`
+	TerminationTargetDate *time.Time `json:"terminationTargetDate,omitempty"`
 }
 
 func (o *TerminateContractItemResponse) Validate() error {

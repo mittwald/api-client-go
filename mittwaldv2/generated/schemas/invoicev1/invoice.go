@@ -6,6 +6,7 @@ package invoicev1
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -104,7 +105,7 @@ type Invoice struct {
 	CancellationOf  *uuid.UUID          `json:"cancellationOf,omitempty"`
 	Currency        string              `json:"currency"`
 	CustomerId      string              `json:"customerId"`
-	Date            string              `json:"date"`
+	Date            time.Time           `json:"date"`
 	Groups          []InvoiceGroupsItem `json:"groups"`
 	Id              uuid.UUID           `json:"id"`
 	InvoiceNumber   string              `json:"invoiceNumber"`

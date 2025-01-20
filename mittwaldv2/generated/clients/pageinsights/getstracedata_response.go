@@ -5,6 +5,7 @@ package pageinsights
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -29,7 +30,7 @@ import (
 
 //
 type GetStraceDataResponse struct {
-	ExecutedAt string                      `json:"executedAt"`
+	ExecutedAt time.Time                   `json:"executedAt"`
 	Id         uuid.UUID                   `json:"id"`
 	Result     GetStraceDataResponseResult `json:"result"`
 }

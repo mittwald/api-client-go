@@ -14,7 +14,7 @@ import (
 var _ = Describe("Profile", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"email\":\"a.lovelace@example.com\",\"mfaDetails\":{\"mfaConfirmed\":true,\"mfaInitialized\":true},\"passwordUpdatedAt\":\"string\",\"person\":{\"firstName\":\"Ada\",\"lastName\":\"Lovelace\",\"title\":\"mr\"},\"userId\":\"string\"}")
+			exampleJSON := []byte("{\"email\":\"a.lovelace@example.com\",\"mfaDetails\":{\"mfaConfirmed\":true,\"mfaInitialized\":true},\"passwordUpdatedAt\":\"2006-01-02T15:04:05Z\",\"person\":{\"firstName\":\"Ada\",\"lastName\":\"Lovelace\",\"title\":\"mr\"},\"userId\":\"string\"}")
 
 			sut := signupv1.Profile{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

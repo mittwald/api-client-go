@@ -128,7 +128,7 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
-// Accept a CustomerInvite.
+//Accept a CustomerInvite.
 func (c *clientImpl) AcceptCustomerInvite(
 	ctx context.Context,
 	req AcceptCustomerInviteRequest,
@@ -151,7 +151,7 @@ func (c *clientImpl) AcceptCustomerInvite(
 	return httpRes, nil
 }
 
-// List Invites belonging to a Customer.
+//List Invites belonging to a Customer.
 func (c *clientImpl) ListInvitesForCustomer(
 	ctx context.Context,
 	req ListInvitesForCustomerRequest,
@@ -178,7 +178,7 @@ func (c *clientImpl) ListInvitesForCustomer(
 	return &response, httpRes, nil
 }
 
-// Create a CustomerInvite.
+//Create a CustomerInvite.
 func (c *clientImpl) CreateCustomerInvite(
 	ctx context.Context,
 	req CreateCustomerInviteRequest,
@@ -205,7 +205,7 @@ func (c *clientImpl) CreateCustomerInvite(
 	return &response, httpRes, nil
 }
 
-// Get all customer profiles the authenticated user has access to.
+//Get all customer profiles the authenticated user has access to.
 func (c *clientImpl) ListCustomers(
 	ctx context.Context,
 	req ListCustomersRequest,
@@ -232,7 +232,7 @@ func (c *clientImpl) ListCustomers(
 	return &response, httpRes, nil
 }
 
-// Create a new customer profile.
+//Create a new customer profile.
 func (c *clientImpl) CreateCustomer(
 	ctx context.Context,
 	req CreateCustomerRequest,
@@ -259,7 +259,7 @@ func (c *clientImpl) CreateCustomer(
 	return &response, httpRes, nil
 }
 
-// Lets us know your idea for our recommendation programm.
+//Lets us know your idea for our recommendation programm.
 func (c *clientImpl) CreateRecommendationSuggestion(
 	ctx context.Context,
 	req CreateRecommendationSuggestionRequest,
@@ -286,7 +286,7 @@ func (c *clientImpl) CreateRecommendationSuggestion(
 	return &response, httpRes, nil
 }
 
-// Gets the Wallet of the Customer.
+//Gets the Wallet of the Customer.
 func (c *clientImpl) GetWallet(
 	ctx context.Context,
 	req GetWalletRequest,
@@ -313,7 +313,7 @@ func (c *clientImpl) GetWallet(
 	return &response, httpRes, nil
 }
 
-// Create the Wallet for the Customer.
+//Create the Wallet for the Customer.
 func (c *clientImpl) CreateWallet(
 	ctx context.Context,
 	req CreateWalletRequest,
@@ -340,7 +340,7 @@ func (c *clientImpl) CreateWallet(
 	return &response, httpRes, nil
 }
 
-// Decline a CustomerInvite.
+//Decline a CustomerInvite.
 func (c *clientImpl) DeclineCustomerInvite(
 	ctx context.Context,
 	req DeclineCustomerInviteRequest,
@@ -363,7 +363,7 @@ func (c *clientImpl) DeclineCustomerInvite(
 	return httpRes, nil
 }
 
-// Get a CustomerInvite.
+//Get a CustomerInvite.
 func (c *clientImpl) GetCustomerInvite(
 	ctx context.Context,
 	req GetCustomerInviteRequest,
@@ -390,7 +390,7 @@ func (c *clientImpl) GetCustomerInvite(
 	return &response, httpRes, nil
 }
 
-// Delete a CustomerInvite.
+//Delete a CustomerInvite.
 func (c *clientImpl) DeleteCustomerInvite(
 	ctx context.Context,
 	req DeleteCustomerInviteRequest,
@@ -413,7 +413,7 @@ func (c *clientImpl) DeleteCustomerInvite(
 	return httpRes, nil
 }
 
-// Get a CustomerMembership.
+//Get a CustomerMembership.
 func (c *clientImpl) GetCustomerMembership(
 	ctx context.Context,
 	req GetCustomerMembershipRequest,
@@ -440,7 +440,7 @@ func (c *clientImpl) GetCustomerMembership(
 	return &response, httpRes, nil
 }
 
-// Delete a CustomerMembership.
+//Delete a CustomerMembership.
 func (c *clientImpl) DeleteCustomerMembership(
 	ctx context.Context,
 	req DeleteCustomerMembershipRequest,
@@ -463,7 +463,7 @@ func (c *clientImpl) DeleteCustomerMembership(
 	return httpRes, nil
 }
 
-// Update a CustomerMembership.
+//Update a CustomerMembership.
 func (c *clientImpl) UpdateCustomerMembership(
 	ctx context.Context,
 	req UpdateCustomerMembershipRequest,
@@ -486,7 +486,7 @@ func (c *clientImpl) UpdateCustomerMembership(
 	return httpRes, nil
 }
 
-// Get a customer profile.
+//Get a customer profile.
 func (c *clientImpl) GetCustomer(
 	ctx context.Context,
 	req GetCustomerRequest,
@@ -513,7 +513,7 @@ func (c *clientImpl) GetCustomer(
 	return &response, httpRes, nil
 }
 
-// Update a customer profile.
+//Update a customer profile.
 func (c *clientImpl) UpdateCustomer(
 	ctx context.Context,
 	req UpdateCustomerRequest,
@@ -540,7 +540,7 @@ func (c *clientImpl) UpdateCustomer(
 	return &response, httpRes, nil
 }
 
-// Delete a customer profile.
+//Delete a customer profile.
 func (c *clientImpl) DeleteCustomer(
 	ctx context.Context,
 	req DeleteCustomerRequest,
@@ -567,7 +567,7 @@ func (c *clientImpl) DeleteCustomer(
 	return &response, httpRes, nil
 }
 
-// Get a CustomerInvite by token.
+//Get a CustomerInvite by token.
 func (c *clientImpl) GetCustomerTokenInvite(
 	ctx context.Context,
 	req GetCustomerTokenInviteRequest,
@@ -594,7 +594,7 @@ func (c *clientImpl) GetCustomerTokenInvite(
 	return &response, httpRes, nil
 }
 
-// Check if the customer profile has a valid contract partner configured.
+//Check if the customer profile has a valid contract partner configured.
 func (c *clientImpl) IsCustomerLegallyCompetent(
 	ctx context.Context,
 	req IsCustomerLegallyCompetentRequest,
@@ -621,7 +621,7 @@ func (c *clientImpl) IsCustomerLegallyCompetent(
 	return &response, httpRes, nil
 }
 
-// List CustomerInvites belonging to the executing user.
+//List CustomerInvites belonging to the executing user.
 func (c *clientImpl) ListCustomerInvites(
 	ctx context.Context,
 	req ListCustomerInvitesRequest,
@@ -648,7 +648,7 @@ func (c *clientImpl) ListCustomerInvites(
 	return &response, httpRes, nil
 }
 
-// List CustomerMemberships belonging to the executing user.
+//List CustomerMemberships belonging to the executing user.
 func (c *clientImpl) ListCustomerMemberships(
 	ctx context.Context,
 	req ListCustomerMembershipsRequest,
@@ -675,7 +675,7 @@ func (c *clientImpl) ListCustomerMemberships(
 	return &response, httpRes, nil
 }
 
-// List Memberships belonging to a Customer.
+//List Memberships belonging to a Customer.
 func (c *clientImpl) ListMembershipsForCustomer(
 	ctx context.Context,
 	req ListMembershipsForCustomerRequest,
@@ -702,7 +702,7 @@ func (c *clientImpl) ListMembershipsForCustomer(
 	return &response, httpRes, nil
 }
 
-// Request a new avatar upload for the customer profile.
+//Request a new avatar upload for the customer profile.
 func (c *clientImpl) RequestAvatarUpload(
 	ctx context.Context,
 	req RequestAvatarUploadRequest,
@@ -729,7 +729,7 @@ func (c *clientImpl) RequestAvatarUpload(
 	return &response, httpRes, nil
 }
 
-// Remove the avatar picture of the customer profile.
+//Remove the avatar picture of the customer profile.
 func (c *clientImpl) RemoveAvatar(
 	ctx context.Context,
 	req RemoveAvatarRequest,
@@ -752,7 +752,7 @@ func (c *clientImpl) RemoveAvatar(
 	return httpRes, nil
 }
 
-// Resend the mail for a CustomerInvite.
+//Resend the mail for a CustomerInvite.
 func (c *clientImpl) ResendCustomerInviteMail(
 	ctx context.Context,
 	req ResendCustomerInviteMailRequest,
@@ -775,7 +775,7 @@ func (c *clientImpl) ResendCustomerInviteMail(
 	return httpRes, nil
 }
 
-// Leave a Customer.
+//Leave a Customer.
 func (c *clientImpl) DeprecatedCustomerLeaveCustomer(
 	ctx context.Context,
 	req DeprecatedCustomerLeaveCustomerRequest,

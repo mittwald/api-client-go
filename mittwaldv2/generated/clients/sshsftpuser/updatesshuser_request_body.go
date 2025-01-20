@@ -2,6 +2,7 @@ package sshsftpuser
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/sshuserv1"
 )
@@ -30,7 +31,7 @@ import (
 type UpdateSSHUserRequestBody struct {
 	Active      *bool                 `json:"active,omitempty"`
 	Description *string               `json:"description,omitempty"`
-	ExpiresAt   *string               `json:"expiresAt,omitempty"`
+	ExpiresAt   *time.Time            `json:"expiresAt,omitempty"`
 	Password    *string               `json:"password,omitempty"`
 	PublicKeys  []sshuserv1.PublicKey `json:"publicKeys,omitempty"`
 }

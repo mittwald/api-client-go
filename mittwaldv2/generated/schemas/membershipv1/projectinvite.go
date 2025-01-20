@@ -5,6 +5,7 @@ package membershipv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -55,7 +56,7 @@ type ProjectInvite struct {
 	Id                  uuid.UUID         `json:"id"`
 	Information         InviteInformation `json:"information"`
 	MailAddress         string            `json:"mailAddress"`
-	MembershipExpiresAt *string           `json:"membershipExpiresAt,omitempty"`
+	MembershipExpiresAt *time.Time        `json:"membershipExpiresAt,omitempty"`
 	Message             *string           `json:"message,omitempty"`
 	ProjectDescription  string            `json:"projectDescription"`
 	ProjectId           uuid.UUID         `json:"projectId"`

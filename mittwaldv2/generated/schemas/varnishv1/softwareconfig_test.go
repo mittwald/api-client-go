@@ -14,7 +14,7 @@ import (
 var _ = Describe("SoftwareConfig", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"configExpiration\":{\"maxVersions\":3.14,\"retentionTime\":3.14},\"latestConfigRevision\":3.14,\"revisions\":[{\"expire\":null,\"files\":[],\"note\":null,\"revision\":42,\"updated\":\"string\"}]}")
+			exampleJSON := []byte("{\"configExpiration\":{\"maxVersions\":3.14,\"retentionTime\":3.14},\"latestConfigRevision\":3.14,\"revisions\":[{\"expire\":null,\"files\":[],\"note\":null,\"revision\":42,\"updated\":\"2006-01-02T15:04:05Z\"}]}")
 
 			sut := varnishv1.SoftwareConfig{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -17,8 +18,8 @@ type ListExecutionsRequest struct {
 	Limit     *int64
 	Skip      *int64
 	Page      *int64
-	Since     *string
-	Until     *string
+	Since     *time.Time
+	Until     *time.Time
 	Status    *string
 }
 
@@ -51,10 +52,10 @@ func (r *ListExecutionsRequest) query() url.Values {
 		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
 	if r.Since != nil {
-		q.Set("since", *r.Since)
+		q.Set("since", r.Since.Format(time.RFC3339))
 	}
 	if r.Until != nil {
-		q.Set("until", *r.Until)
+		q.Set("until", r.Until.Format(time.RFC3339))
 	}
 	if r.Status != nil {
 		q.Set("status", *r.Status)

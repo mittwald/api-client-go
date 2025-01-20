@@ -14,7 +14,7 @@ import (
 var _ = Describe("ServiceRequestMeta", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal into AlternativeServiceRequestRelocationPayload", func() {
-			exampleJSON := []byte("{\"contact\":{\"email\":\"string\",\"firstname\":\"string\",\"lastname\":\"string\",\"phone\":\"string\"},\"domain\":{\"allDomains\":true,\"domains\":[]},\"notes\":\"string\",\"preferredRelocationDate\":\"string\",\"redirectusKey\":3.14,\"source\":{\"providerName\":\"string\",\"providerPassword\":\"string\",\"providerUrl\":\"string\",\"providerUsername\":\"string\",\"sourceAccount\":\"string\"},\"target\":{\"accountShortId\":\"string\",\"application\":\"string\",\"articleType\":\"string\",\"organisation\":\"string\",\"prices\":[{\"name\":\"string\",\"price\":3.14}],\"product\":\"string\",\"withDataCompare\":true},\"userId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{\"contact\":{\"email\":\"string\",\"firstname\":\"string\",\"lastname\":\"string\",\"phone\":\"string\"},\"domain\":{\"allDomains\":true,\"domains\":[]},\"notes\":\"string\",\"preferredRelocationDate\":\"2006-01-02T15:04:05Z\",\"redirectusKey\":3.14,\"source\":{\"providerName\":\"string\",\"providerPassword\":\"string\",\"providerUrl\":\"string\",\"providerUsername\":\"string\",\"sourceAccount\":\"string\"},\"target\":{\"accountShortId\":\"string\",\"application\":\"string\",\"articleType\":\"string\",\"organisation\":\"string\",\"prices\":[{\"name\":\"string\",\"price\":3.14}],\"product\":\"string\",\"withDataCompare\":true},\"userId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
 
 			sut := conversationv1.ServiceRequestMeta{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

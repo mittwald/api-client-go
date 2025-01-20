@@ -14,7 +14,7 @@ import (
 var _ = Describe("UpdateCustomerMembershipRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"expiresAt\":\"string\",\"role\":\"notset\"}")
+			exampleJSON := []byte("{\"expiresAt\":\"2006-01-02T15:04:05Z\",\"role\":\"notset\"}")
 
 			sut := customer.UpdateCustomerMembershipRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -4,6 +4,8 @@ package invoicev1
 // DO NOT EDIT.
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 )
 
@@ -34,7 +36,7 @@ import (
 //
 type Cancellation struct {
 	CancellationId   uuid.UUID `json:"cancellationId"`
-	CancelledAt      string    `json:"cancelledAt"`
+	CancelledAt      time.Time `json:"cancelledAt"`
 	CorrectionNumber string    `json:"correctionNumber"`
 	PdfId            uuid.UUID `json:"pdfId"`
 	Reason           *string   `json:"reason,omitempty"`

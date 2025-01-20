@@ -4,6 +4,8 @@ package contract
 // DO NOT EDIT.
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 )
 
@@ -22,7 +24,7 @@ import (
 //
 type GetNextTerminationDateForItemResponse struct {
 	ContractItemId      uuid.UUID `json:"contractItemId"`
-	NextTerminationDate string    `json:"nextTerminationDate"`
+	NextTerminationDate time.Time `json:"nextTerminationDate"`
 }
 
 func (o *GetNextTerminationDateForItemResponse) Validate() error {

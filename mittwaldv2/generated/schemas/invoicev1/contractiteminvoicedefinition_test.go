@@ -14,7 +14,7 @@ import (
 var _ = Describe("ContractItemInvoiceDefinition", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"contractItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"isDue\":true,\"serviceDate\":\"string\",\"servicePeriod\":{\"end\":\"string\",\"start\":\"string\"},\"vatRate\":19}")
+			exampleJSON := []byte("{\"contractItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"isDue\":true,\"serviceDate\":\"2006-01-02T15:04:05Z\",\"servicePeriod\":{\"end\":\"2006-01-02T15:04:05Z\",\"start\":\"2006-01-02T15:04:05Z\"},\"vatRate\":19}")
 
 			sut := invoicev1.ContractItemInvoiceDefinition{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

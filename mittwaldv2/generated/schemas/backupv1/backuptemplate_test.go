@@ -14,7 +14,7 @@ import (
 var _ = Describe("BackupTemplate", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"expirationTime\":\"string\",\"ignoredSources\":{\"databases\":[],\"files\":true}}")
+			exampleJSON := []byte("{\"expirationTime\":\"2006-01-02T15:04:05Z\",\"ignoredSources\":{\"databases\":[],\"files\":true}}")
 
 			sut := backupv1.BackupTemplate{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

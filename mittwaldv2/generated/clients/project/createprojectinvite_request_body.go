@@ -2,6 +2,7 @@ package project
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/membershipv1"
 )
@@ -31,7 +32,7 @@ import (
 //
 type CreateProjectInviteRequestBody struct {
 	MailAddress         string                    `json:"mailAddress"`
-	MembershipExpiresAt *string                   `json:"membershipExpiresAt,omitempty"`
+	MembershipExpiresAt *time.Time                `json:"membershipExpiresAt,omitempty"`
 	Message             *string                   `json:"message,omitempty"`
 	Role                membershipv1.ProjectRoles `json:"role"`
 }

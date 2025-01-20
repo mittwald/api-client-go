@@ -2,6 +2,7 @@ package customer
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/membershipv1"
 )
@@ -31,7 +32,7 @@ import (
 //
 type CreateCustomerInviteRequestBody struct {
 	MailAddress         string                     `json:"mailAddress"`
-	MembershipExpiresAt *string                    `json:"membershipExpiresAt,omitempty"`
+	MembershipExpiresAt *time.Time                 `json:"membershipExpiresAt,omitempty"`
 	Message             *string                    `json:"message,omitempty"`
 	Role                membershipv1.CustomerRoles `json:"role"`
 }

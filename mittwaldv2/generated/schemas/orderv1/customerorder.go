@@ -6,6 +6,7 @@ package orderv1
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -58,10 +59,10 @@ import (
 type CustomerOrder struct {
 	ContractChangeContractId *uuid.UUID   `json:"contractChangeContractId,omitempty"`
 	CustomerId               string       `json:"customerId"`
-	DueDate                  *string      `json:"dueDate,omitempty"`
+	DueDate                  *time.Time   `json:"dueDate,omitempty"`
 	InvoicingPeriod          float64      `json:"invoicingPeriod"`
 	Items                    []OrderItem  `json:"items"`
-	OrderDate                *string      `json:"orderDate,omitempty"`
+	OrderDate                *time.Time   `json:"orderDate,omitempty"`
 	OrderId                  uuid.UUID    `json:"orderId"`
 	OrderNumber              string       `json:"orderNumber"`
 	Profile                  *Profile     `json:"profile,omitempty"`

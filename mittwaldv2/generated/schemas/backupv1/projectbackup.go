@@ -5,6 +5,7 @@ package backupv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -44,10 +45,10 @@ import (
 
 //
 type ProjectBackup struct {
-	CreatedAt   *string              `json:"createdAt,omitempty"`
+	CreatedAt   *time.Time           `json:"createdAt,omitempty"`
 	Deletable   bool                 `json:"deletable"`
 	Description *string              `json:"description,omitempty"`
-	ExpiresAt   *string              `json:"expiresAt,omitempty"`
+	ExpiresAt   *time.Time           `json:"expiresAt,omitempty"`
 	Export      *ProjectBackupExport `json:"export,omitempty"`
 	Id          uuid.UUID            `json:"id"`
 	ParentId    *uuid.UUID           `json:"parentId,omitempty"`

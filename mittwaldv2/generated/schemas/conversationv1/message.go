@@ -5,6 +5,7 @@ package conversationv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -42,7 +43,7 @@ import (
 //
 type Message struct {
 	ConversationId uuid.UUID   `json:"conversationId"`
-	CreatedAt      string      `json:"createdAt"`
+	CreatedAt      time.Time   `json:"createdAt"`
 	CreatedBy      *User       `json:"createdBy,omitempty"`
 	Files          []File      `json:"files,omitempty"`
 	Internal       *bool       `json:"internal,omitempty"`

@@ -2,6 +2,7 @@ package signupv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/commonsv1"
 )
@@ -35,7 +36,7 @@ import (
 type Account struct {
 	Email             *string            `json:"email,omitempty"`
 	MfaDetails        *AccountMFADetails `json:"mfaDetails,omitempty"`
-	PasswordUpdatedAt *string            `json:"passwordUpdatedAt,omitempty"`
+	PasswordUpdatedAt *time.Time         `json:"passwordUpdatedAt,omitempty"`
 	Person            *commonsv1.Person  `json:"person,omitempty"`
 	UserId            *string            `json:"userId,omitempty"`
 }

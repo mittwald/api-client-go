@@ -5,6 +5,7 @@ package conversationv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -50,7 +51,7 @@ import (
 //
 type ServiceRequest struct {
 	ConversationId uuid.UUID                    `json:"conversationId"`
-	CreatedAt      string                       `json:"createdAt"`
+	CreatedAt      time.Time                    `json:"createdAt"`
 	Files          []File                       `json:"files,omitempty"`
 	Internal       bool                         `json:"internal"`
 	MessageContent ServiceRequestMessageContent `json:"messageContent"`

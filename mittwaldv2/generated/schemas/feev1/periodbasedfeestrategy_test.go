@@ -14,7 +14,7 @@ import (
 var _ = Describe("PeriodBasedFeeStrategy", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"periods\":[{\"feeValidFrom\":\"string\",\"feeValidUntil\":\"string\",\"monthlyPrice\":3.14}]}")
+			exampleJSON := []byte("{\"periods\":[{\"feeValidFrom\":\"2006-01-02T15:04:05Z\",\"feeValidUntil\":\"2006-01-02T15:04:05Z\",\"monthlyPrice\":3.14}]}")
 
 			sut := feev1.PeriodBasedFeeStrategy{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

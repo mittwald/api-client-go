@@ -14,7 +14,7 @@ import (
 var _ = Describe("EditSSHKeyRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"comment\":\"a.lovelace@example.com\",\"expiresAt\":\"string\"}")
+			exampleJSON := []byte("{\"comment\":\"a.lovelace@example.com\",\"expiresAt\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := user.EditSSHKeyRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

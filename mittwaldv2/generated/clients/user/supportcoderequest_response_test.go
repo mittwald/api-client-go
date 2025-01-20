@@ -14,7 +14,7 @@ import (
 var _ = Describe("SupportCodeRequestResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"expiresAt\":\"string\",\"supportCode\":\"123456\"}")
+			exampleJSON := []byte("{\"expiresAt\":\"2006-01-02T15:04:05Z\",\"supportCode\":\"123456\"}")
 
 			sut := user.SupportCodeRequestResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

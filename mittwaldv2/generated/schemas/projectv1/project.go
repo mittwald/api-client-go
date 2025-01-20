@@ -6,6 +6,7 @@ package projectv1
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -111,16 +112,16 @@ import (
 //
 type Project struct {
 	BackupStorageUsageInBytes      int64                            `json:"backupStorageUsageInBytes"`
-	BackupStorageUsageInBytesSetAt string                           `json:"backupStorageUsageInBytesSetAt"`
+	BackupStorageUsageInBytesSetAt time.Time                        `json:"backupStorageUsageInBytesSetAt"`
 	ClusterDomain                  *string                          `json:"clusterDomain,omitempty"`
 	ClusterID                      *string                          `json:"clusterID,omitempty"`
 	ClusterId                      *string                          `json:"clusterId,omitempty"`
-	CreatedAt                      string                           `json:"createdAt"`
+	CreatedAt                      time.Time                        `json:"createdAt"`
 	CustomerId                     string                           `json:"customerId"`
 	Description                    string                           `json:"description"`
 	Directories                    map[string]string                `json:"directories"`
 	DisableReason                  *DisableReason                   `json:"disableReason,omitempty"`
-	DisabledAt                     *string                          `json:"disabledAt,omitempty"`
+	DisabledAt                     *time.Time                       `json:"disabledAt,omitempty"`
 	Enabled                        bool                             `json:"enabled"`
 	Id                             uuid.UUID                        `json:"id"`
 	ImageRefId                     *uuid.UUID                       `json:"imageRefId,omitempty"`
@@ -133,9 +134,9 @@ type Project struct {
 	Spec                           *ProjectSpec                     `json:"spec,omitempty"`
 	StatisticsBaseDomain           *string                          `json:"statisticsBaseDomain,omitempty"`
 	Status                         ProjectStatus                    `json:"status"`
-	StatusSetAt                    string                           `json:"statusSetAt"`
+	StatusSetAt                    time.Time                        `json:"statusSetAt"`
 	WebStorageUsageInBytes         int64                            `json:"webStorageUsageInBytes"`
-	WebStorageUsageInBytesSetAt    string                           `json:"webStorageUsageInBytesSetAt"`
+	WebStorageUsageInBytesSetAt    time.Time                        `json:"webStorageUsageInBytesSetAt"`
 }
 
 func (o *Project) Validate() error {

@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateProjectInviteRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"mailAddress\":\"string\",\"membershipExpiresAt\":\"string\",\"message\":\"string\",\"role\":\"notset\"}")
+			exampleJSON := []byte("{\"mailAddress\":\"string\",\"membershipExpiresAt\":\"2006-01-02T15:04:05Z\",\"message\":\"string\",\"role\":\"notset\"}")
 
 			sut := project.CreateProjectInviteRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

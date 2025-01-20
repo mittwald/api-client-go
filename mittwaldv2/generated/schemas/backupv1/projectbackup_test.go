@@ -14,7 +14,7 @@ import (
 var _ = Describe("ProjectBackup", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"createdAt\":\"string\",\"deletable\":true,\"description\":\"I'm a ProjectBackup\",\"expiresAt\":\"string\",\"export\":{\"downloadURL\":\"string\",\"expiresAt\":\"string\",\"format\":\"tar\",\"phase\":\"\",\"withPassword\":true},\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"parentId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"status\":\"Completed\"}")
+			exampleJSON := []byte("{\"createdAt\":\"2006-01-02T15:04:05Z\",\"deletable\":true,\"description\":\"I'm a ProjectBackup\",\"expiresAt\":\"2006-01-02T15:04:05Z\",\"export\":{\"downloadURL\":\"string\",\"expiresAt\":\"2006-01-02T15:04:05Z\",\"format\":\"tar\",\"phase\":\"\",\"withPassword\":true},\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"parentId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"status\":\"Completed\"}")
 
 			sut := backupv1.ProjectBackup{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

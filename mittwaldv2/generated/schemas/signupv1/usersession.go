@@ -5,6 +5,7 @@ package signupv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -30,9 +31,9 @@ import (
 
 //
 type UserSession struct {
-	Created    string     `json:"created"`
+	Created    time.Time  `json:"created"`
 	Device     DeviceInfo `json:"device"`
-	LastAccess *string    `json:"lastAccess,omitempty"`
+	LastAccess *time.Time `json:"lastAccess,omitempty"`
 	Location   *Location  `json:"location,omitempty"`
 	TokenId    uuid.UUID  `json:"tokenId"`
 }

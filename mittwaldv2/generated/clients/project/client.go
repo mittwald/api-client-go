@@ -153,7 +153,7 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
-// Leave a Project.
+//Leave a Project.
 func (c *clientImpl) DeprecatedProjectLeaveProject(
 	ctx context.Context,
 	req DeprecatedProjectLeaveProjectRequest,
@@ -176,7 +176,7 @@ func (c *clientImpl) DeprecatedProjectLeaveProject(
 	return httpRes, nil
 }
 
-// Accept a ProjectInvite.
+//Accept a ProjectInvite.
 func (c *clientImpl) AcceptProjectInvite(
 	ctx context.Context,
 	req AcceptProjectInviteRequest,
@@ -199,7 +199,7 @@ func (c *clientImpl) AcceptProjectInvite(
 	return httpRes, nil
 }
 
-// List Invites belonging to a Project.
+//List Invites belonging to a Project.
 func (c *clientImpl) ListInvitesForProject(
 	ctx context.Context,
 	req ListInvitesForProjectRequest,
@@ -226,7 +226,7 @@ func (c *clientImpl) ListInvitesForProject(
 	return &response, httpRes, nil
 }
 
-// Create a ProjectInvite.
+//Create a ProjectInvite.
 func (c *clientImpl) CreateProjectInvite(
 	ctx context.Context,
 	req CreateProjectInviteRequest,
@@ -253,7 +253,7 @@ func (c *clientImpl) CreateProjectInvite(
 	return &response, httpRes, nil
 }
 
-// Create a Project belonging to a Server.
+//Create a Project belonging to a Server.
 func (c *clientImpl) CreateProject(
 	ctx context.Context,
 	req CreateProjectRequest,
@@ -280,7 +280,7 @@ func (c *clientImpl) CreateProject(
 	return &response, httpRes, nil
 }
 
-// Decline a ProjectInvite.
+//Decline a ProjectInvite.
 func (c *clientImpl) DeclineProjectInvite(
 	ctx context.Context,
 	req DeclineProjectInviteRequest,
@@ -303,7 +303,7 @@ func (c *clientImpl) DeclineProjectInvite(
 	return httpRes, nil
 }
 
-// Request a Project avatar upload.
+//Request a Project avatar upload.
 func (c *clientImpl) RequestProjectAvatarUpload(
 	ctx context.Context,
 	req RequestProjectAvatarUploadRequest,
@@ -330,7 +330,7 @@ func (c *clientImpl) RequestProjectAvatarUpload(
 	return &response, httpRes, nil
 }
 
-// Delete a Project's avatar.
+//Delete a Project's avatar.
 func (c *clientImpl) DeleteProjectAvatar(
 	ctx context.Context,
 	req DeleteProjectAvatarRequest,
@@ -353,7 +353,7 @@ func (c *clientImpl) DeleteProjectAvatar(
 	return httpRes, nil
 }
 
-// Get a ProjectInvite.
+//Get a ProjectInvite.
 func (c *clientImpl) GetProjectInvite(
 	ctx context.Context,
 	req GetProjectInviteRequest,
@@ -380,7 +380,7 @@ func (c *clientImpl) GetProjectInvite(
 	return &response, httpRes, nil
 }
 
-// Delete a ProjectInvite.
+//Delete a ProjectInvite.
 func (c *clientImpl) DeleteProjectInvite(
 	ctx context.Context,
 	req DeleteProjectInviteRequest,
@@ -403,7 +403,7 @@ func (c *clientImpl) DeleteProjectInvite(
 	return httpRes, nil
 }
 
-// Get a ProjectMembership
+//Get a ProjectMembership
 func (c *clientImpl) GetProjectMembership(
 	ctx context.Context,
 	req GetProjectMembershipRequest,
@@ -430,7 +430,7 @@ func (c *clientImpl) GetProjectMembership(
 	return &response, httpRes, nil
 }
 
-// Delete a ProjectMembership.
+//Delete a ProjectMembership.
 func (c *clientImpl) DeleteProjectMembership(
 	ctx context.Context,
 	req DeleteProjectMembershipRequest,
@@ -453,7 +453,7 @@ func (c *clientImpl) DeleteProjectMembership(
 	return httpRes, nil
 }
 
-// Update a ProjectMembership.
+//Update a ProjectMembership.
 func (c *clientImpl) UpdateProjectMembership(
 	ctx context.Context,
 	req UpdateProjectMembershipRequest,
@@ -476,7 +476,7 @@ func (c *clientImpl) UpdateProjectMembership(
 	return httpRes, nil
 }
 
-// Get a Project.
+//Get a Project.
 func (c *clientImpl) GetProject(
 	ctx context.Context,
 	req GetProjectRequest,
@@ -503,7 +503,7 @@ func (c *clientImpl) GetProject(
 	return &response, httpRes, nil
 }
 
-// Delete a Project.
+//Delete a Project.
 func (c *clientImpl) DeleteProject(
 	ctx context.Context,
 	req DeleteProjectRequest,
@@ -526,7 +526,7 @@ func (c *clientImpl) DeleteProject(
 	return httpRes, nil
 }
 
-// Request a Server avatar upload.
+//Request a Server avatar upload.
 func (c *clientImpl) RequestServerAvatarUpload(
 	ctx context.Context,
 	req RequestServerAvatarUploadRequest,
@@ -553,7 +553,7 @@ func (c *clientImpl) RequestServerAvatarUpload(
 	return &response, httpRes, nil
 }
 
-// Delete a Server's avatar.
+//Delete a Server's avatar.
 func (c *clientImpl) DeleteServerAvatar(
 	ctx context.Context,
 	req DeleteServerAvatarRequest,
@@ -576,7 +576,7 @@ func (c *clientImpl) DeleteServerAvatar(
 	return httpRes, nil
 }
 
-// Get a ProjectInvite by token.
+//Get a ProjectInvite by token.
 func (c *clientImpl) GetProjectTokenInvite(
 	ctx context.Context,
 	req GetProjectTokenInviteRequest,
@@ -603,7 +603,7 @@ func (c *clientImpl) GetProjectTokenInvite(
 	return &response, httpRes, nil
 }
 
-// Get the executing user's membership in a Project.
+//Get the executing user's membership in a Project.
 func (c *clientImpl) GetSelfMembershipForProject(
 	ctx context.Context,
 	req GetSelfMembershipForProjectRequest,
@@ -630,7 +630,7 @@ func (c *clientImpl) GetSelfMembershipForProject(
 	return &response, httpRes, nil
 }
 
-// Get a Server.
+//Get a Server.
 func (c *clientImpl) GetServer(
 	ctx context.Context,
 	req GetServerRequest,
@@ -657,7 +657,7 @@ func (c *clientImpl) GetServer(
 	return &response, httpRes, nil
 }
 
-// List Memberships belonging to a Project.
+//List Memberships belonging to a Project.
 func (c *clientImpl) ListMembershipsForProject(
 	ctx context.Context,
 	req ListMembershipsForProjectRequest,
@@ -684,7 +684,7 @@ func (c *clientImpl) ListMembershipsForProject(
 	return &response, httpRes, nil
 }
 
-// List ProjectInvites belonging to the executing user.
+//List ProjectInvites belonging to the executing user.
 func (c *clientImpl) ListProjectInvites(
 	ctx context.Context,
 	req ListProjectInvitesRequest,
@@ -711,7 +711,7 @@ func (c *clientImpl) ListProjectInvites(
 	return &response, httpRes, nil
 }
 
-// List ProjectMemberships belonging to the executing user.
+//List ProjectMemberships belonging to the executing user.
 func (c *clientImpl) ListProjectMemberships(
 	ctx context.Context,
 	req ListProjectMembershipsRequest,
@@ -738,7 +738,7 @@ func (c *clientImpl) ListProjectMemberships(
 	return &response, httpRes, nil
 }
 
-// List Projects belonging to the executing user.
+//List Projects belonging to the executing user.
 func (c *clientImpl) ListProjects(
 	ctx context.Context,
 	req ListProjectsRequest,
@@ -765,7 +765,7 @@ func (c *clientImpl) ListProjects(
 	return &response, httpRes, nil
 }
 
-// List Servers belonging to the executing user.
+//List Servers belonging to the executing user.
 func (c *clientImpl) ListServers(
 	ctx context.Context,
 	req ListServersRequest,
@@ -792,7 +792,7 @@ func (c *clientImpl) ListServers(
 	return &response, httpRes, nil
 }
 
-// Resend the mail for a ProjectInvite.
+//Resend the mail for a ProjectInvite.
 func (c *clientImpl) ResendProjectInviteMail(
 	ctx context.Context,
 	req ResendProjectInviteMailRequest,
@@ -815,7 +815,7 @@ func (c *clientImpl) ResendProjectInviteMail(
 	return httpRes, nil
 }
 
-// Update a Project's description.
+//Update a Project's description.
 func (c *clientImpl) UpdateProjectDescription(
 	ctx context.Context,
 	req UpdateProjectDescriptionRequest,
@@ -838,7 +838,7 @@ func (c *clientImpl) UpdateProjectDescription(
 	return httpRes, nil
 }
 
-// Update a Servers's description.
+//Update a Servers's description.
 func (c *clientImpl) UpdateServerDescription(
 	ctx context.Context,
 	req UpdateServerDescriptionRequest,
@@ -861,7 +861,7 @@ func (c *clientImpl) UpdateServerDescription(
 	return httpRes, nil
 }
 
-// Get storage space Statistics belonging to a Project.
+//Get storage space Statistics belonging to a Project.
 func (c *clientImpl) StoragespaceGetProjectStatistics(
 	ctx context.Context,
 	req StoragespaceGetProjectStatisticsRequest,
@@ -888,7 +888,7 @@ func (c *clientImpl) StoragespaceGetProjectStatistics(
 	return &response, httpRes, nil
 }
 
-// Get storage space Statistics belonging to a Server.
+//Get storage space Statistics belonging to a Server.
 func (c *clientImpl) StoragespaceGetServerStatistics(
 	ctx context.Context,
 	req StoragespaceGetServerStatisticsRequest,
@@ -915,7 +915,7 @@ func (c *clientImpl) StoragespaceGetServerStatistics(
 	return &response, httpRes, nil
 }
 
-// Update a Project's storage space notification threshold.
+//Update a Project's storage space notification threshold.
 func (c *clientImpl) StoragespaceReplaceProjectNotificationThreshold(
 	ctx context.Context,
 	req StoragespaceReplaceProjectNotificationThresholdRequest,
@@ -938,7 +938,7 @@ func (c *clientImpl) StoragespaceReplaceProjectNotificationThreshold(
 	return httpRes, nil
 }
 
-// Update a Server's storage space notification threshold.
+//Update a Server's storage space notification threshold.
 func (c *clientImpl) StoragespaceReplaceServerNotificationThreshold(
 	ctx context.Context,
 	req StoragespaceReplaceServerNotificationThresholdRequest,

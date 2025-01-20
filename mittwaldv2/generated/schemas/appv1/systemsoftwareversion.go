@@ -5,6 +5,7 @@ package appv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/feev1"
@@ -40,7 +41,7 @@ import (
 
 //A SystemSoftwareVersion is an officially  supported version of a SystemSoftware, containing the necessary and recommended configuration und dependencies.
 type SystemSoftwareVersion struct {
-	ExpiryDate                 *string                    `json:"expiryDate,omitempty"`
+	ExpiryDate                 *time.Time                 `json:"expiryDate,omitempty"`
 	ExternalVersion            string                     `json:"externalVersion"`
 	Fee                        *feev1.FeeStrategy         `json:"fee,omitempty"`
 	Id                         uuid.UUID                  `json:"id"`

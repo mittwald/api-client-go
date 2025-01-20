@@ -14,7 +14,7 @@ import (
 var _ = Describe("ConfigRevision", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"expire\":42,\"files\":[{\"meta\":{\"name\":\"string\",\"path\":\"string\"},\"refId\":\"string\"}],\"note\":\"string\",\"revision\":42,\"updated\":\"string\"}")
+			exampleJSON := []byte("{\"expire\":42,\"files\":[{\"meta\":{\"name\":\"string\",\"path\":\"string\"},\"refId\":\"string\"}],\"note\":\"string\",\"revision\":42,\"updated\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := varnishv1.ConfigRevision{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

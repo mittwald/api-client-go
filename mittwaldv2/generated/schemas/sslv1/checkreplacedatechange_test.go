@@ -14,7 +14,7 @@ import (
 var _ = Describe("CheckReplaceDateChange", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"newValue\":\"string\",\"oldValue\":\"string\"}")
+			exampleJSON := []byte("{\"newValue\":\"2006-01-02T15:04:05Z\",\"oldValue\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := sslv1.CheckReplaceDateChange{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

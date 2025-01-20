@@ -5,6 +5,7 @@ package userv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/commonsv1"
@@ -74,11 +75,11 @@ type User struct {
 	EmployeeInformation *UserEmployeeInformation      `json:"employeeInformation,omitempty"`
 	IsEmployee          *bool                         `json:"isEmployee,omitempty"`
 	Mfa                 *UserMFA                      `json:"mfa,omitempty"`
-	PasswordUpdatedAt   *string                       `json:"passwordUpdatedAt,omitempty"`
+	PasswordUpdatedAt   *time.Time                    `json:"passwordUpdatedAt,omitempty"`
 	Person              commonsv1.Person              `json:"person"`
 	PhoneNumber         *string                       `json:"phoneNumber,omitempty"`
 	ProjectMemberships  map[string]ProjectMembership  `json:"projectMemberships,omitempty"`
-	RegisteredAt        *string                       `json:"registeredAt,omitempty"`
+	RegisteredAt        *time.Time                    `json:"registeredAt,omitempty"`
 	UserId              uuid.UUID                     `json:"userId"`
 }
 

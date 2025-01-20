@@ -5,6 +5,7 @@ package screenshotv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -36,7 +37,7 @@ import (
 
 //
 type Task struct {
-	ExecutedAt    *string            `json:"executedAt,omitempty"`
+	ExecutedAt    *time.Time         `json:"executedAt,omitempty"`
 	FileReference *string            `json:"fileReference,omitempty"`
 	Id            uuid.UUID          `json:"id"`
 	Priority      float64            `json:"priority"`

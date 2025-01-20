@@ -14,7 +14,7 @@ import (
 var _ = Describe("ListPerformanceDataForProjectResponseItemPathsItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"createdAt\":\"string\",\"path\":\"string\",\"performanceScore\":42,\"screenshotFileRef\":\"string\"}")
+			exampleJSON := []byte("{\"createdAt\":\"2006-01-02T15:04:05Z\",\"path\":\"string\",\"performanceScore\":42,\"screenshotFileRef\":\"string\"}")
 
 			sut := pageinsights.ListPerformanceDataForProjectResponseItemPathsItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

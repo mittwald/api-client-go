@@ -4,6 +4,8 @@ package backupv1
 // DO NOT EDIT.
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 )
 
@@ -47,14 +49,14 @@ import (
 
 //
 type ProjectBackupSchedule struct {
-	CreatedAt      *string   `json:"createdAt,omitempty"`
-	Description    *string   `json:"description,omitempty"`
-	Id             uuid.UUID `json:"id"`
-	IsSystemBackup bool      `json:"isSystemBackup"`
-	ProjectId      uuid.UUID `json:"projectId"`
-	Schedule       string    `json:"schedule"`
-	Ttl            *string   `json:"ttl,omitempty"`
-	UpdatedAt      *string   `json:"updatedAt,omitempty"`
+	CreatedAt      *time.Time `json:"createdAt,omitempty"`
+	Description    *string    `json:"description,omitempty"`
+	Id             uuid.UUID  `json:"id"`
+	IsSystemBackup bool       `json:"isSystemBackup"`
+	ProjectId      uuid.UUID  `json:"projectId"`
+	Schedule       string     `json:"schedule"`
+	Ttl            *string    `json:"ttl,omitempty"`
+	UpdatedAt      *time.Time `json:"updatedAt,omitempty"`
 }
 
 func (o *ProjectBackupSchedule) Validate() error {

@@ -14,7 +14,7 @@ import (
 var _ = Describe("SshUser", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"active\":true,\"authUpdatedAt\":\"string\",\"createdAt\":\"string\",\"description\":\"string\",\"expiresAt\":\"string\",\"hasPassword\":true,\"id\":\"string\",\"projectId\":\"string\",\"publicKeys\":[{\"comment\":\"string\",\"key\":\"string\"}],\"updatedAt\":\"string\",\"userName\":\"string\"}")
+			exampleJSON := []byte("{\"active\":true,\"authUpdatedAt\":\"2006-01-02T15:04:05Z\",\"createdAt\":\"2006-01-02T15:04:05Z\",\"description\":\"string\",\"expiresAt\":\"2006-01-02T15:04:05Z\",\"hasPassword\":true,\"id\":\"string\",\"projectId\":\"string\",\"publicKeys\":[{\"comment\":\"string\",\"key\":\"string\"}],\"updatedAt\":\"2006-01-02T15:04:05Z\",\"userName\":\"string\"}")
 
 			sut := sshuserv1.SshUser{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

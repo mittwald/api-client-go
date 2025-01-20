@@ -2,6 +2,7 @@ package project
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/membershipv1"
 )
@@ -22,7 +23,7 @@ import (
 
 //
 type UpdateProjectMembershipRequestBody struct {
-	ExpiresAt *string                   `json:"expiresAt,omitempty"`
+	ExpiresAt *time.Time                `json:"expiresAt,omitempty"`
 	Role      membershipv1.ProjectRoles `json:"role"`
 }
 

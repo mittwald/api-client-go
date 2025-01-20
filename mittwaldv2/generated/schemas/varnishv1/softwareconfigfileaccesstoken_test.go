@@ -14,7 +14,7 @@ import (
 var _ = Describe("SoftwareConfigFileAccessToken", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"accessToken\":\"string\",\"expiresAt\":\"string\"}")
+			exampleJSON := []byte("{\"accessToken\":\"string\",\"expiresAt\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := varnishv1.SoftwareConfigFileAccessToken{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

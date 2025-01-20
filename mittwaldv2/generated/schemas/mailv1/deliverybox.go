@@ -4,6 +4,8 @@ package mailv1
 // DO NOT EDIT.
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 )
 
@@ -45,10 +47,10 @@ type Deliverybox struct {
 	Description           string    `json:"description"`
 	Id                    uuid.UUID `json:"id"`
 	Name                  string    `json:"name"`
-	PasswordUpdatedAt     string    `json:"passwordUpdatedAt"`
+	PasswordUpdatedAt     time.Time `json:"passwordUpdatedAt"`
 	ProjectId             string    `json:"projectId"`
 	SendingEnabled        bool      `json:"sendingEnabled"`
-	UpdatedAt             string    `json:"updatedAt"`
+	UpdatedAt             time.Time `json:"updatedAt"`
 }
 
 func (o *Deliverybox) Validate() error {

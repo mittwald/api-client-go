@@ -63,7 +63,7 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
-// Abort a CronjobExecution.
+//Abort a CronjobExecution.
 func (c *clientImpl) AbortExecution(
 	ctx context.Context,
 	req AbortExecutionRequest,
@@ -86,7 +86,7 @@ func (c *clientImpl) AbortExecution(
 	return httpRes, nil
 }
 
-// List Cronjobs belonging to a Project.
+//List Cronjobs belonging to a Project.
 func (c *clientImpl) ListCronjobs(
 	ctx context.Context,
 	req ListCronjobsRequest,
@@ -113,7 +113,7 @@ func (c *clientImpl) ListCronjobs(
 	return &response, httpRes, nil
 }
 
-// Create a Cronjob.
+//Create a Cronjob.
 func (c *clientImpl) CreateCronjob(
 	ctx context.Context,
 	req CreateCronjobRequest,
@@ -140,7 +140,7 @@ func (c *clientImpl) CreateCronjob(
 	return &response, httpRes, nil
 }
 
-// List CronjobExecutions belonging to a Cronjob.
+//List CronjobExecutions belonging to a Cronjob.
 func (c *clientImpl) ListExecutions(
 	ctx context.Context,
 	req ListExecutionsRequest,
@@ -167,7 +167,7 @@ func (c *clientImpl) ListExecutions(
 	return &response, httpRes, nil
 }
 
-// Trigger a Cronjob.
+//Trigger a Cronjob.
 func (c *clientImpl) CreateExecution(
 	ctx context.Context,
 	req CreateExecutionRequest,
@@ -194,7 +194,7 @@ func (c *clientImpl) CreateExecution(
 	return &response, httpRes, nil
 }
 
-// Get a Cronjob.
+//Get a Cronjob.
 func (c *clientImpl) GetCronjob(
 	ctx context.Context,
 	req GetCronjobRequest,
@@ -221,7 +221,7 @@ func (c *clientImpl) GetCronjob(
 	return &response, httpRes, nil
 }
 
-// Delete a Cronjob.
+//Delete a Cronjob.
 func (c *clientImpl) DeleteCronjob(
 	ctx context.Context,
 	req DeleteCronjobRequest,
@@ -244,7 +244,7 @@ func (c *clientImpl) DeleteCronjob(
 	return httpRes, nil
 }
 
-// Update a Cronjob.
+//Update a Cronjob.
 func (c *clientImpl) UpdateCronjob(
 	ctx context.Context,
 	req UpdateCronjobRequest,
@@ -267,7 +267,7 @@ func (c *clientImpl) UpdateCronjob(
 	return httpRes, nil
 }
 
-// Get a CronjobExecution.
+//Get a CronjobExecution.
 func (c *clientImpl) GetExecution(
 	ctx context.Context,
 	req GetExecutionRequest,
@@ -294,7 +294,7 @@ func (c *clientImpl) GetExecution(
 	return &response, httpRes, nil
 }
 
-// Update a Cronjob's app id.
+//Update a Cronjob's app id.
 func (c *clientImpl) UpdateCronjobAppID(
 	ctx context.Context,
 	req UpdateCronjobAppIDRequest,

@@ -5,6 +5,7 @@ package databasev1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -69,7 +70,7 @@ import (
 //
 type RedisDatabase struct {
 	Configuration            *RedisDatabaseConfiguration `json:"configuration,omitempty"`
-	CreatedAt                string                      `json:"createdAt"`
+	CreatedAt                time.Time                   `json:"createdAt"`
 	Description              string                      `json:"description"`
 	Finalizers               []string                    `json:"finalizers,omitempty"`
 	Hostname                 string                      `json:"hostname"`
@@ -78,10 +79,10 @@ type RedisDatabase struct {
 	Port                     int64                       `json:"port"`
 	ProjectId                uuid.UUID                   `json:"projectId"`
 	Status                   DatabaseStatus              `json:"status"`
-	StatusSetAt              string                      `json:"statusSetAt"`
+	StatusSetAt              time.Time                   `json:"statusSetAt"`
 	StorageUsageInBytes      int64                       `json:"storageUsageInBytes"`
-	StorageUsageInBytesSetAt string                      `json:"storageUsageInBytesSetAt"`
-	UpdatedAt                string                      `json:"updatedAt"`
+	StorageUsageInBytesSetAt time.Time                   `json:"storageUsageInBytesSetAt"`
+	UpdatedAt                time.Time                   `json:"updatedAt"`
 	Version                  string                      `json:"version"`
 }
 

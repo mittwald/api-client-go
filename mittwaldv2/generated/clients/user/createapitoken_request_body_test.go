@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateAPITokenRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"description\":\"Api Token - read\",\"expiresAt\":\"string\",\"roles\":[\"api_read\"]}")
+			exampleJSON := []byte("{\"description\":\"Api Token - read\",\"expiresAt\":\"2006-01-02T15:04:05Z\",\"roles\":[\"api_read\"]}")
 
 			sut := user.CreateAPITokenRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

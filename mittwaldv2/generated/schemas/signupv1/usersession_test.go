@@ -14,7 +14,7 @@ import (
 var _ = Describe("UserSession", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"created\":\"string\",\"device\":{\"browser\":\"Safari\",\"model\":\"Apple Macintosh\",\"os\":\"Mac OS\",\"type\":\"Macbook\"},\"lastAccess\":\"string\",\"location\":{\"city\":\"Espelkamp\",\"country\":\"DE\",\"ipAddress\":\"string\"},\"tokenId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{\"created\":\"2006-01-02T15:04:05Z\",\"device\":{\"browser\":\"Safari\",\"model\":\"Apple Macintosh\",\"os\":\"Mac OS\",\"type\":\"Macbook\"},\"lastAccess\":\"2006-01-02T15:04:05Z\",\"location\":{\"city\":\"Espelkamp\",\"country\":\"DE\",\"ipAddress\":\"string\"},\"tokenId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
 
 			sut := signupv1.UserSession{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

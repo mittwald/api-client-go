@@ -5,6 +5,7 @@ package userv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/commonsv1"
@@ -80,17 +81,17 @@ type UserInternal struct {
 	AvatarRef           *uuid.UUID                       `json:"avatarRef,omitempty"`
 	CustomerMemberships map[string]CustomerMembership    `json:"customerMemberships,omitempty"`
 	Disabled            *bool                            `json:"disabled,omitempty"`
-	DisabledAt          *string                          `json:"disabledAt,omitempty"`
+	DisabledAt          *time.Time                       `json:"disabledAt,omitempty"`
 	DisabledBy          *uuid.UUID                       `json:"disabledBy,omitempty"`
 	Email               *string                          `json:"email,omitempty"`
 	EmployeeInformation *UserInternalEmployeeInformation `json:"employeeInformation,omitempty"`
 	IsEmployee          *bool                            `json:"isEmployee,omitempty"`
 	Mfa                 *UserInternalMFA                 `json:"mfa,omitempty"`
-	PasswordUpdatedAt   *string                          `json:"passwordUpdatedAt,omitempty"`
+	PasswordUpdatedAt   *time.Time                       `json:"passwordUpdatedAt,omitempty"`
 	Person              commonsv1.Person                 `json:"person"`
 	PhoneNumber         *string                          `json:"phoneNumber,omitempty"`
 	ProjectMemberships  map[string]ProjectMembership     `json:"projectMemberships,omitempty"`
-	RegisteredAt        *string                          `json:"registeredAt,omitempty"`
+	RegisteredAt        *time.Time                       `json:"registeredAt,omitempty"`
 	UserId              uuid.UUID                        `json:"userId"`
 }
 
