@@ -110,9 +110,9 @@ type Client interface {
 		ctx context.Context,
 		req SetDatabaseUsersRequest,
 	) (*http.Response, error)
-	DeprecatedAppLinkDatabase(
+	DeprecatedLinkDatabase(
 		ctx context.Context,
-		req DeprecatedAppLinkDatabaseRequest,
+		req DeprecatedLinkDatabaseRequest,
 	) (*http.Response, error)
 }
 type clientImpl struct {
@@ -746,9 +746,9 @@ func (c *clientImpl) SetDatabaseUsers(
 //Create linkage between an AppInstallation and a MySql-Database.
 //
 //This route is deprecated. Use PATCH /v2/app-installations/{appInstallationId}/database instead.
-func (c *clientImpl) DeprecatedAppLinkDatabase(
+func (c *clientImpl) DeprecatedLinkDatabase(
 	ctx context.Context,
-	req DeprecatedAppLinkDatabaseRequest,
+	req DeprecatedLinkDatabaseRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {

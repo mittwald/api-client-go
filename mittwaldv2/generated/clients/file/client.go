@@ -14,13 +14,13 @@ import (
 // DO NOT EDIT.
 
 type Client interface {
-	DeprecatedFileGetFileTokenRules(
+	DeprecatedGetFileTokenRules(
 		ctx context.Context,
-		req DeprecatedFileGetFileTokenRulesRequest,
+		req DeprecatedGetFileTokenRulesRequest,
 	) (*filev1.FileUploadRules, *http.Response, error)
-	DeprecatedFileGetFileTypeRules(
+	DeprecatedGetFileTypeRules(
 		ctx context.Context,
-		req DeprecatedFileGetFileTypeRulesRequest,
+		req DeprecatedGetFileTypeRulesRequest,
 	) (*filev1.FileUploadRules, *http.Response, error)
 	CreateFile(
 		ctx context.Context,
@@ -58,9 +58,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 //Get a Token's upload rules.
 //
 //Deprecated by `GET /v2/file-upload-tokens/{fileUploadToken}/rules`.
-func (c *clientImpl) DeprecatedFileGetFileTokenRules(
+func (c *clientImpl) DeprecatedGetFileTokenRules(
 	ctx context.Context,
-	req DeprecatedFileGetFileTokenRulesRequest,
+	req DeprecatedGetFileTokenRulesRequest,
 ) (*filev1.FileUploadRules, *http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -87,9 +87,9 @@ func (c *clientImpl) DeprecatedFileGetFileTokenRules(
 //Get a Type's upload rules.
 //
 //Deprecated by `GET /v2/file-upload-types/{fileUploadType}/rules`.
-func (c *clientImpl) DeprecatedFileGetFileTypeRules(
+func (c *clientImpl) DeprecatedGetFileTypeRules(
 	ctx context.Context,
-	req DeprecatedFileGetFileTypeRulesRequest,
+	req DeprecatedGetFileTypeRulesRequest,
 ) (*filev1.FileUploadRules, *http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {

@@ -16,9 +16,9 @@ import (
 // DO NOT EDIT.
 
 type Client interface {
-	DeprecatedProjectLeaveProject(
+	DeprecatedLeaveProject(
 		ctx context.Context,
-		req DeprecatedProjectLeaveProjectRequest,
+		req DeprecatedLeaveProjectRequest,
 	) (*http.Response, error)
 	AcceptProjectInvite(
 		ctx context.Context,
@@ -154,9 +154,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 }
 
 //Leave a Project.
-func (c *clientImpl) DeprecatedProjectLeaveProject(
+func (c *clientImpl) DeprecatedLeaveProject(
 	ctx context.Context,
-	req DeprecatedProjectLeaveProjectRequest,
+	req DeprecatedLeaveProjectRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {

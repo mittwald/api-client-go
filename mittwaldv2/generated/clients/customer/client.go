@@ -115,9 +115,9 @@ type Client interface {
 		ctx context.Context,
 		req ResendCustomerInviteMailRequest,
 	) (*http.Response, error)
-	DeprecatedCustomerLeaveCustomer(
+	DeprecatedLeaveCustomer(
 		ctx context.Context,
-		req DeprecatedCustomerLeaveCustomerRequest,
+		req DeprecatedLeaveCustomerRequest,
 	) (*http.Response, error)
 }
 type clientImpl struct {
@@ -776,9 +776,9 @@ func (c *clientImpl) ResendCustomerInviteMail(
 }
 
 //Leave a Customer.
-func (c *clientImpl) DeprecatedCustomerLeaveCustomer(
+func (c *clientImpl) DeprecatedLeaveCustomer(
 	ctx context.Context,
-	req DeprecatedCustomerLeaveCustomerRequest,
+	req DeprecatedLeaveCustomerRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {

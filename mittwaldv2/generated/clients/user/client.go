@@ -17,117 +17,117 @@ import (
 // DO NOT EDIT.
 
 type Client interface {
-	DeprecatedUserChangeEmail(
+	DeprecatedChangeEmail(
 		ctx context.Context,
-		req DeprecatedUserChangeEmailRequest,
+		req DeprecatedChangeEmailRequest,
 	) (*http.Response, error)
-	DeprecatedUserConfirmPasswordReset(
+	DeprecatedConfirmPasswordReset(
 		ctx context.Context,
-		req DeprecatedUserConfirmPasswordResetRequest,
+		req DeprecatedConfirmPasswordResetRequest,
 	) (*http.Response, error)
-	DeprecatedUserCreateIssue(
+	DeprecatedCreateIssue(
 		ctx context.Context,
-		req DeprecatedUserCreateIssueRequest,
-	) (*DeprecatedUserCreateIssueResponse, *http.Response, error)
-	DeprecatedUserEditAPIToken(
+		req DeprecatedCreateIssueRequest,
+	) (*DeprecatedCreateIssueResponse, *http.Response, error)
+	DeprecatedEditAPIToken(
 		ctx context.Context,
-		req DeprecatedUserEditAPITokenRequest,
+		req DeprecatedEditAPITokenRequest,
 	) (*http.Response, error)
-	DeprecatedUserDeleteAPIToken(
+	DeprecatedDeleteAPIToken(
 		ctx context.Context,
-		req DeprecatedUserDeleteAPITokenRequest,
+		req DeprecatedDeleteAPITokenRequest,
 	) (*http.Response, error)
-	DeprecatedUserEditSSHKey(
+	DeprecatedEditSSHKey(
 		ctx context.Context,
-		req DeprecatedUserEditSSHKeyRequest,
+		req DeprecatedEditSSHKeyRequest,
 	) (*http.Response, error)
-	DeprecatedUserDeleteSSHKey(
+	DeprecatedDeleteSSHKey(
 		ctx context.Context,
-		req DeprecatedUserDeleteSSHKeyRequest,
+		req DeprecatedDeleteSSHKeyRequest,
 	) (*http.Response, error)
-	DeprecatedUserDisableMFA(
+	DeprecatedDisableMFA(
 		ctx context.Context,
-		req DeprecatedUserDisableMFARequest,
-	) (*DeprecatedUserDisableMFAResponse, *http.Response, error)
-	DeprecatedUserInitPasswordReset(
+		req DeprecatedDisableMFARequest,
+	) (*DeprecatedDisableMFAResponse, *http.Response, error)
+	DeprecatedInitPasswordReset(
 		ctx context.Context,
-		req DeprecatedUserInitPasswordResetRequest,
+		req DeprecatedInitPasswordResetRequest,
 	) (*http.Response, error)
-	DeprecatedUserLogout(
+	DeprecatedLogout(
 		ctx context.Context,
-		req DeprecatedUserLogoutRequest,
+		req DeprecatedLogoutRequest,
 	) (*http.Response, error)
-	DeprecatedUserResendVerificationEmail(
+	DeprecatedResendVerificationEmail(
 		ctx context.Context,
-		req DeprecatedUserResendVerificationEmailRequest,
+		req DeprecatedResendVerificationEmailRequest,
 	) (*http.Response, error)
-	DeprecatedUserServiceAvatarRequestUpload(
+	DeprecatedServiceAvatarRequestUpload(
 		ctx context.Context,
-		req DeprecatedUserServiceAvatarRequestUploadRequest,
-	) (*DeprecatedUserServiceAvatarRequestUploadResponse, *http.Response, error)
-	DeprecatedUserServiceAvatarRemove(
+		req DeprecatedServiceAvatarRequestUploadRequest,
+	) (*DeprecatedServiceAvatarRequestUploadResponse, *http.Response, error)
+	DeprecatedServiceAvatarRemove(
 		ctx context.Context,
-		req DeprecatedUserServiceAvatarRemoveRequest,
+		req DeprecatedServiceAvatarRemoveRequest,
 	) (*http.Response, error)
-	DeprecatedUserServiceFeedbackList(
+	DeprecatedServiceFeedbackList(
 		ctx context.Context,
-		req DeprecatedUserServiceFeedbackListRequest,
+		req DeprecatedServiceFeedbackListRequest,
 	) (*[]userv1.UserFeedback, *http.Response, error)
-	DeprecatedUserServiceFeedbackCreate(
+	DeprecatedServiceFeedbackCreate(
 		ctx context.Context,
-		req DeprecatedUserServiceFeedbackCreateRequest,
-	) (*DeprecatedUserServiceFeedbackCreateResponse, *http.Response, error)
-	DeprecatedUserServiceIssueNew(
+		req DeprecatedServiceFeedbackCreateRequest,
+	) (*DeprecatedServiceFeedbackCreateResponse, *http.Response, error)
+	DeprecatedServiceIssueNew(
 		ctx context.Context,
-		req DeprecatedUserServiceIssueNewRequest,
+		req DeprecatedServiceIssueNewRequest,
 	) (*http.Response, error)
-	DeprecatedUserServiceUserGet(
+	DeprecatedServiceUserGet(
 		ctx context.Context,
-		req DeprecatedUserServiceUserGetRequest,
+		req DeprecatedServiceUserGetRequest,
 	) (*userv1.User, *http.Response, error)
-	DeprecatedUserServicePersonalInformationUpdate(
+	DeprecatedServicePersonalInformationUpdate(
 		ctx context.Context,
-		req DeprecatedUserServicePersonalInformationUpdateRequest,
+		req DeprecatedServicePersonalInformationUpdateRequest,
 	) (*http.Response, error)
-	DeprecatedUserServicePersonalizedSettingsGet(
+	DeprecatedServicePersonalizedSettingsGet(
 		ctx context.Context,
-		req DeprecatedUserServicePersonalizedSettingsGetRequest,
-	) (*DeprecatedUserServicePersonalizedSettingsGetResponse, *http.Response, error)
-	DeprecatedUserServicePersonalizedSettingsUpdate(
+		req DeprecatedServicePersonalizedSettingsGetRequest,
+	) (*DeprecatedServicePersonalizedSettingsGetResponse, *http.Response, error)
+	DeprecatedServicePersonalizedSettingsUpdate(
 		ctx context.Context,
-		req DeprecatedUserServicePersonalizedSettingsUpdateRequest,
+		req DeprecatedServicePersonalizedSettingsUpdateRequest,
 	) (*http.Response, error)
-	DeprecatedUserServicePhoneNumberAdd(
+	DeprecatedServicePhoneNumberAdd(
 		ctx context.Context,
-		req DeprecatedUserServicePhoneNumberAddRequest,
+		req DeprecatedServicePhoneNumberAddRequest,
 	) (*http.Response, error)
-	DeprecatedUserServicePhoneNumberRemove(
+	DeprecatedServicePhoneNumberRemove(
 		ctx context.Context,
-		req DeprecatedUserServicePhoneNumberRemoveRequest,
+		req DeprecatedServicePhoneNumberRemoveRequest,
 	) (*http.Response, error)
-	DeprecatedUserServicePhoneNumberVerify(
+	DeprecatedServicePhoneNumberVerify(
 		ctx context.Context,
-		req DeprecatedUserServicePhoneNumberVerifyRequest,
+		req DeprecatedServicePhoneNumberVerifyRequest,
 	) (*http.Response, error)
-	DeprecatedUserServiceUserGetOwn(
+	DeprecatedServiceUserGetOwn(
 		ctx context.Context,
-		req DeprecatedUserServiceUserGetOwnRequest,
+		req DeprecatedServiceUserGetOwnRequest,
 	) (*userv1.User, *http.Response, error)
-	DeprecatedUserTerminateAllSessions(
+	DeprecatedTerminateAllSessions(
 		ctx context.Context,
-		req DeprecatedUserTerminateAllSessionsRequest,
+		req DeprecatedTerminateAllSessionsRequest,
 	) (*http.Response, error)
-	DeprecatedUserTerminateSession(
+	DeprecatedTerminateSession(
 		ctx context.Context,
-		req DeprecatedUserTerminateSessionRequest,
+		req DeprecatedTerminateSessionRequest,
 	) (*http.Response, error)
-	DeprecatedUserUpdateAccount(
+	DeprecatedUpdateAccount(
 		ctx context.Context,
-		req DeprecatedUserUpdateAccountRequest,
+		req DeprecatedUpdateAccountRequest,
 	) (*http.Response, error)
-	DeprecatedUserVerifyEmail(
+	DeprecatedVerifyEmail(
 		ctx context.Context,
-		req DeprecatedUserVerifyEmailRequest,
+		req DeprecatedVerifyEmailRequest,
 	) (*http.Response, error)
 	PasswordValidationGetPasswordPolicy(
 		ctx context.Context,
@@ -363,9 +363,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 }
 
 //Change your Email-Address.
-func (c *clientImpl) DeprecatedUserChangeEmail(
+func (c *clientImpl) DeprecatedChangeEmail(
 	ctx context.Context,
-	req DeprecatedUserChangeEmailRequest,
+	req DeprecatedChangeEmailRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -386,9 +386,9 @@ func (c *clientImpl) DeprecatedUserChangeEmail(
 }
 
 //Confirm password reset.
-func (c *clientImpl) DeprecatedUserConfirmPasswordReset(
+func (c *clientImpl) DeprecatedConfirmPasswordReset(
 	ctx context.Context,
-	req DeprecatedUserConfirmPasswordResetRequest,
+	req DeprecatedConfirmPasswordResetRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -409,10 +409,10 @@ func (c *clientImpl) DeprecatedUserConfirmPasswordReset(
 }
 
 //Create a new issue.
-func (c *clientImpl) DeprecatedUserCreateIssue(
+func (c *clientImpl) DeprecatedCreateIssue(
 	ctx context.Context,
-	req DeprecatedUserCreateIssueRequest,
-) (*DeprecatedUserCreateIssueResponse, *http.Response, error) {
+	req DeprecatedCreateIssueRequest,
+) (*DeprecatedCreateIssueResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
 		return nil, nil, err
@@ -428,7 +428,7 @@ func (c *clientImpl) DeprecatedUserCreateIssue(
 		return nil, httpRes, err
 	}
 
-	var response DeprecatedUserCreateIssueResponse
+	var response DeprecatedCreateIssueResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -436,9 +436,9 @@ func (c *clientImpl) DeprecatedUserCreateIssue(
 }
 
 //Update an existing `ApiToken`.
-func (c *clientImpl) DeprecatedUserEditAPIToken(
+func (c *clientImpl) DeprecatedEditAPIToken(
 	ctx context.Context,
-	req DeprecatedUserEditAPITokenRequest,
+	req DeprecatedEditAPITokenRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -459,9 +459,9 @@ func (c *clientImpl) DeprecatedUserEditAPIToken(
 }
 
 //Deletes an ApiToken.
-func (c *clientImpl) DeprecatedUserDeleteAPIToken(
+func (c *clientImpl) DeprecatedDeleteAPIToken(
 	ctx context.Context,
-	req DeprecatedUserDeleteAPITokenRequest,
+	req DeprecatedDeleteAPITokenRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -482,9 +482,9 @@ func (c *clientImpl) DeprecatedUserDeleteAPIToken(
 }
 
 //Edit a stored ssh-key.
-func (c *clientImpl) DeprecatedUserEditSSHKey(
+func (c *clientImpl) DeprecatedEditSSHKey(
 	ctx context.Context,
-	req DeprecatedUserEditSSHKeyRequest,
+	req DeprecatedEditSSHKeyRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -505,9 +505,9 @@ func (c *clientImpl) DeprecatedUserEditSSHKey(
 }
 
 //Remove a ssh-key.
-func (c *clientImpl) DeprecatedUserDeleteSSHKey(
+func (c *clientImpl) DeprecatedDeleteSSHKey(
 	ctx context.Context,
-	req DeprecatedUserDeleteSSHKeyRequest,
+	req DeprecatedDeleteSSHKeyRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -528,10 +528,10 @@ func (c *clientImpl) DeprecatedUserDeleteSSHKey(
 }
 
 //Disable Multi Factor Authentication.
-func (c *clientImpl) DeprecatedUserDisableMFA(
+func (c *clientImpl) DeprecatedDisableMFA(
 	ctx context.Context,
-	req DeprecatedUserDisableMFARequest,
-) (*DeprecatedUserDisableMFAResponse, *http.Response, error) {
+	req DeprecatedDisableMFARequest,
+) (*DeprecatedDisableMFAResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
 		return nil, nil, err
@@ -547,7 +547,7 @@ func (c *clientImpl) DeprecatedUserDisableMFA(
 		return nil, httpRes, err
 	}
 
-	var response DeprecatedUserDisableMFAResponse
+	var response DeprecatedDisableMFAResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -555,9 +555,9 @@ func (c *clientImpl) DeprecatedUserDisableMFA(
 }
 
 //Initialize password reset process.
-func (c *clientImpl) DeprecatedUserInitPasswordReset(
+func (c *clientImpl) DeprecatedInitPasswordReset(
 	ctx context.Context,
-	req DeprecatedUserInitPasswordResetRequest,
+	req DeprecatedInitPasswordResetRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -578,9 +578,9 @@ func (c *clientImpl) DeprecatedUserInitPasswordReset(
 }
 
 //Terminate session and invalidate access token.
-func (c *clientImpl) DeprecatedUserLogout(
+func (c *clientImpl) DeprecatedLogout(
 	ctx context.Context,
-	req DeprecatedUserLogoutRequest,
+	req DeprecatedLogoutRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -601,9 +601,9 @@ func (c *clientImpl) DeprecatedUserLogout(
 }
 
 //Resend the Email-Address verification email.
-func (c *clientImpl) DeprecatedUserResendVerificationEmail(
+func (c *clientImpl) DeprecatedResendVerificationEmail(
 	ctx context.Context,
-	req DeprecatedUserResendVerificationEmailRequest,
+	req DeprecatedResendVerificationEmailRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -624,10 +624,10 @@ func (c *clientImpl) DeprecatedUserResendVerificationEmail(
 }
 
 //Request a new avatar upload
-func (c *clientImpl) DeprecatedUserServiceAvatarRequestUpload(
+func (c *clientImpl) DeprecatedServiceAvatarRequestUpload(
 	ctx context.Context,
-	req DeprecatedUserServiceAvatarRequestUploadRequest,
-) (*DeprecatedUserServiceAvatarRequestUploadResponse, *http.Response, error) {
+	req DeprecatedServiceAvatarRequestUploadRequest,
+) (*DeprecatedServiceAvatarRequestUploadResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
 		return nil, nil, err
@@ -643,7 +643,7 @@ func (c *clientImpl) DeprecatedUserServiceAvatarRequestUpload(
 		return nil, httpRes, err
 	}
 
-	var response DeprecatedUserServiceAvatarRequestUploadResponse
+	var response DeprecatedServiceAvatarRequestUploadResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -651,9 +651,9 @@ func (c *clientImpl) DeprecatedUserServiceAvatarRequestUpload(
 }
 
 //Remove Avatar
-func (c *clientImpl) DeprecatedUserServiceAvatarRemove(
+func (c *clientImpl) DeprecatedServiceAvatarRemove(
 	ctx context.Context,
-	req DeprecatedUserServiceAvatarRemoveRequest,
+	req DeprecatedServiceAvatarRemoveRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -674,9 +674,9 @@ func (c *clientImpl) DeprecatedUserServiceAvatarRemove(
 }
 
 //Returns your submitted feedback
-func (c *clientImpl) DeprecatedUserServiceFeedbackList(
+func (c *clientImpl) DeprecatedServiceFeedbackList(
 	ctx context.Context,
-	req DeprecatedUserServiceFeedbackListRequest,
+	req DeprecatedServiceFeedbackListRequest,
 ) (*[]userv1.UserFeedback, *http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -701,10 +701,10 @@ func (c *clientImpl) DeprecatedUserServiceFeedbackList(
 }
 
 //Submit user feedback
-func (c *clientImpl) DeprecatedUserServiceFeedbackCreate(
+func (c *clientImpl) DeprecatedServiceFeedbackCreate(
 	ctx context.Context,
-	req DeprecatedUserServiceFeedbackCreateRequest,
-) (*DeprecatedUserServiceFeedbackCreateResponse, *http.Response, error) {
+	req DeprecatedServiceFeedbackCreateRequest,
+) (*DeprecatedServiceFeedbackCreateResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
 		return nil, nil, err
@@ -720,7 +720,7 @@ func (c *clientImpl) DeprecatedUserServiceFeedbackCreate(
 		return nil, httpRes, err
 	}
 
-	var response DeprecatedUserServiceFeedbackCreateResponse
+	var response DeprecatedServiceFeedbackCreateResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -728,9 +728,9 @@ func (c *clientImpl) DeprecatedUserServiceFeedbackCreate(
 }
 
 //create a new issue
-func (c *clientImpl) DeprecatedUserServiceIssueNew(
+func (c *clientImpl) DeprecatedServiceIssueNew(
 	ctx context.Context,
-	req DeprecatedUserServiceIssueNewRequest,
+	req DeprecatedServiceIssueNewRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -751,9 +751,9 @@ func (c *clientImpl) DeprecatedUserServiceIssueNew(
 }
 
 //Get profile information for the specified user if the user is related to the executing user
-func (c *clientImpl) DeprecatedUserServiceUserGet(
+func (c *clientImpl) DeprecatedServiceUserGet(
 	ctx context.Context,
-	req DeprecatedUserServiceUserGetRequest,
+	req DeprecatedServiceUserGetRequest,
 ) (*userv1.User, *http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -778,9 +778,9 @@ func (c *clientImpl) DeprecatedUserServiceUserGet(
 }
 
 //Change your personal information
-func (c *clientImpl) DeprecatedUserServicePersonalInformationUpdate(
+func (c *clientImpl) DeprecatedServicePersonalInformationUpdate(
 	ctx context.Context,
-	req DeprecatedUserServicePersonalInformationUpdateRequest,
+	req DeprecatedServicePersonalInformationUpdateRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -801,10 +801,10 @@ func (c *clientImpl) DeprecatedUserServicePersonalInformationUpdate(
 }
 
 //Get personalized settings for the user executing the request
-func (c *clientImpl) DeprecatedUserServicePersonalizedSettingsGet(
+func (c *clientImpl) DeprecatedServicePersonalizedSettingsGet(
 	ctx context.Context,
-	req DeprecatedUserServicePersonalizedSettingsGetRequest,
-) (*DeprecatedUserServicePersonalizedSettingsGetResponse, *http.Response, error) {
+	req DeprecatedServicePersonalizedSettingsGetRequest,
+) (*DeprecatedServicePersonalizedSettingsGetResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
 		return nil, nil, err
@@ -820,7 +820,7 @@ func (c *clientImpl) DeprecatedUserServicePersonalizedSettingsGet(
 		return nil, httpRes, err
 	}
 
-	var response DeprecatedUserServicePersonalizedSettingsGetResponse
+	var response DeprecatedServicePersonalizedSettingsGetResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -828,9 +828,9 @@ func (c *clientImpl) DeprecatedUserServicePersonalizedSettingsGet(
 }
 
 //update personalized settings
-func (c *clientImpl) DeprecatedUserServicePersonalizedSettingsUpdate(
+func (c *clientImpl) DeprecatedServicePersonalizedSettingsUpdate(
 	ctx context.Context,
-	req DeprecatedUserServicePersonalizedSettingsUpdateRequest,
+	req DeprecatedServicePersonalizedSettingsUpdateRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -851,9 +851,9 @@ func (c *clientImpl) DeprecatedUserServicePersonalizedSettingsUpdate(
 }
 
 //Add phone number and init verification process
-func (c *clientImpl) DeprecatedUserServicePhoneNumberAdd(
+func (c *clientImpl) DeprecatedServicePhoneNumberAdd(
 	ctx context.Context,
-	req DeprecatedUserServicePhoneNumberAddRequest,
+	req DeprecatedServicePhoneNumberAddRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -874,9 +874,9 @@ func (c *clientImpl) DeprecatedUserServicePhoneNumberAdd(
 }
 
 //remove your PhoneNumber
-func (c *clientImpl) DeprecatedUserServicePhoneNumberRemove(
+func (c *clientImpl) DeprecatedServicePhoneNumberRemove(
 	ctx context.Context,
-	req DeprecatedUserServicePhoneNumberRemoveRequest,
+	req DeprecatedServicePhoneNumberRemoveRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -897,9 +897,9 @@ func (c *clientImpl) DeprecatedUserServicePhoneNumberRemove(
 }
 
 //Verify phone number
-func (c *clientImpl) DeprecatedUserServicePhoneNumberVerify(
+func (c *clientImpl) DeprecatedServicePhoneNumberVerify(
 	ctx context.Context,
-	req DeprecatedUserServicePhoneNumberVerifyRequest,
+	req DeprecatedServicePhoneNumberVerifyRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -920,9 +920,9 @@ func (c *clientImpl) DeprecatedUserServicePhoneNumberVerify(
 }
 
 //Get profile information for the executing user
-func (c *clientImpl) DeprecatedUserServiceUserGetOwn(
+func (c *clientImpl) DeprecatedServiceUserGetOwn(
 	ctx context.Context,
-	req DeprecatedUserServiceUserGetOwnRequest,
+	req DeprecatedServiceUserGetOwnRequest,
 ) (*userv1.User, *http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -947,9 +947,9 @@ func (c *clientImpl) DeprecatedUserServiceUserGetOwn(
 }
 
 //Terminate all sessions, except the current session.
-func (c *clientImpl) DeprecatedUserTerminateAllSessions(
+func (c *clientImpl) DeprecatedTerminateAllSessions(
 	ctx context.Context,
-	req DeprecatedUserTerminateAllSessionsRequest,
+	req DeprecatedTerminateAllSessionsRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -970,9 +970,9 @@ func (c *clientImpl) DeprecatedUserTerminateAllSessions(
 }
 
 //Terminate a specific Session.
-func (c *clientImpl) DeprecatedUserTerminateSession(
+func (c *clientImpl) DeprecatedTerminateSession(
 	ctx context.Context,
-	req DeprecatedUserTerminateSessionRequest,
+	req DeprecatedTerminateSessionRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -993,9 +993,9 @@ func (c *clientImpl) DeprecatedUserTerminateSession(
 }
 
 //Update your account information.
-func (c *clientImpl) DeprecatedUserUpdateAccount(
+func (c *clientImpl) DeprecatedUpdateAccount(
 	ctx context.Context,
-	req DeprecatedUserUpdateAccountRequest,
+	req DeprecatedUpdateAccountRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -1016,9 +1016,9 @@ func (c *clientImpl) DeprecatedUserUpdateAccount(
 }
 
 //Verify an added Email-Address.
-func (c *clientImpl) DeprecatedUserVerifyEmail(
+func (c *clientImpl) DeprecatedVerifyEmail(
 	ctx context.Context,
-	req DeprecatedUserVerifyEmailRequest,
+	req DeprecatedVerifyEmailRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
