@@ -35,7 +35,6 @@ import (
 //    - "domain"
 //    - "paths"
 
-//
 type ListPerformanceDataForProjectResponseItem struct {
 	Domain string                                               `json:"domain"`
 	Paths  []ListPerformanceDataForProjectResponseItemPathsItem `json:"paths"`

@@ -36,7 +36,6 @@ import (
 //    - "domain"
 //    - "recordSet"
 
-//
 type Zone struct {
 	Domain    string        `json:"domain"`
 	Id        uuid.UUID     `json:"id"`

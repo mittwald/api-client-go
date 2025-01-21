@@ -22,7 +22,6 @@ import "fmt"
 //            - "server"
 //            - "externalCertificate"
 
-//
 type PreviewOrderRequestBody struct {
 	OrderData *PreviewOrderRequestBodyOrderData `json:"orderData,omitempty"`
 	OrderType *PreviewOrderRequestBodyOrderType `json:"orderType,omitempty"`

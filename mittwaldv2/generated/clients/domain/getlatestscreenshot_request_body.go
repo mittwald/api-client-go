@@ -16,7 +16,6 @@ package domain
 //    - "domainName"
 //    - "path"
 
-//
 type GetLatestScreenshotRequestBody struct {
 	DomainName string `json:"domainName"`
 	Path       string `json:"path"`

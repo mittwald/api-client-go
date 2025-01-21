@@ -15,7 +15,6 @@ import "fmt"
 //required:
 //    - "method"
 
-//
 type PaymentSettingsInvoice struct {
 	Method PaymentSettingsInvoiceMethod `json:"method"`
 }

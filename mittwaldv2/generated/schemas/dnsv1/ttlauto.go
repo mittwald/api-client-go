@@ -12,7 +12,6 @@ package dnsv1
 //required:
 //    - "auto"
 
-//
 type TtlAuto struct {
 	Auto bool `json:"auto"`
 }

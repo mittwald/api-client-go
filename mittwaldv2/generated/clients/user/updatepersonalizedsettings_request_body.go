@@ -13,7 +13,6 @@ package user
 //required:
 //    - "settingsString"
 
-//
 type UpdatePersonalizedSettingsRequestBody struct {
 	SettingsString string `json:"settingsString"`
 }

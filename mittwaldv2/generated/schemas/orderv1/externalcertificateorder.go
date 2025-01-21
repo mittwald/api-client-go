@@ -21,7 +21,7 @@ import (
 //    - "certificateRequestId"
 //description: "You are able to order an External Certificate if you already created a Certificate Request."
 
-//You are able to order an External Certificate if you already created a Certificate Request.
+// You are able to order an External Certificate if you already created a Certificate Request.
 type ExternalCertificateOrder struct {
 	CertificateRequestId uuid.UUID `json:"certificateRequestId"`
 	ProjectId            uuid.UUID `json:"projectId"`

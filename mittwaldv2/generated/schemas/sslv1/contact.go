@@ -20,7 +20,6 @@ package sslv1
 //    "state":
 //        type: "string"
 
-//
 type Contact struct {
 	City               *string `json:"city,omitempty"`
 	Company            *string `json:"company,omitempty"`

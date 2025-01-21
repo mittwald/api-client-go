@@ -75,7 +75,6 @@ import (
 //    - "disabled"
 //    - "blocked"
 
-//
 type Extension struct {
 	Blocked              bool                        `json:"blocked"`
 	Context              Context                     `json:"context"`

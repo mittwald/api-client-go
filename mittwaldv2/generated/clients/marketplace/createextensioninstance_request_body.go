@@ -31,7 +31,6 @@ import (
 //    - "context"
 //    - "contextId"
 
-//
 type CreateExtensionInstanceRequestBody struct {
 	ConsentedScopes []string              `json:"consentedScopes"`
 	Context         marketplacev1.Context `json:"context"`

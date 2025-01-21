@@ -24,7 +24,6 @@ import "fmt"
 //    - "type"
 //    - "message"
 
-//
 type DeprecatedServiceIssueNewRequestBody struct {
 	Message string                                   `json:"message"`
 	Origin  *string                                  `json:"origin,omitempty"`

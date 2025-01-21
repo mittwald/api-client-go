@@ -22,7 +22,6 @@ import "fmt"
 //    - "description"
 //    - "accessLevel"
 
-//
 type UpdateMysqlUserRequestBody struct {
 	AccessIpMask   *string                               `json:"accessIpMask,omitempty"`
 	AccessLevel    UpdateMysqlUserRequestBodyAccessLevel `json:"accessLevel"`

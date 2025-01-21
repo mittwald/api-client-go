@@ -11,7 +11,7 @@ import "fmt"
 //    - "certificate_expired"
 //description: "The certificate has expired."
 
-//The certificate has expired.
+// The certificate has expired.
 type CertificateErrorMessageAlternative6 string
 
 const CertificateErrorMessageAlternative6Certificateexpired CertificateErrorMessageAlternative6 = "certificate_expired"

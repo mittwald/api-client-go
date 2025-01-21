@@ -34,7 +34,6 @@ import "fmt"
 //    - "mailbox"
 //    - "isCatchAll"
 
-//
 type CreateMailAddress struct {
 	Address    string                   `json:"address"`
 	IsCatchAll bool                     `json:"isCatchAll"`

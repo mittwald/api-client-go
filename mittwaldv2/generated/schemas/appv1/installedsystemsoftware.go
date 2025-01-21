@@ -23,7 +23,7 @@ import (
 //    - "systemSoftwareVersion"
 //description: "InstalledSystemSoftware describes the currently configured and installed SystemSoftwareVersion of a SystemSoftware besides the desired SystemSoftwareUpdatePolicy inside an AppInstallation."
 
-//InstalledSystemSoftware describes the currently configured and installed SystemSoftwareVersion of a SystemSoftware besides the desired SystemSoftwareUpdatePolicy inside an AppInstallation.
+// InstalledSystemSoftware describes the currently configured and installed SystemSoftwareVersion of a SystemSoftware besides the desired SystemSoftwareUpdatePolicy inside an AppInstallation.
 type InstalledSystemSoftware struct {
 	SystemSoftwareId      uuid.UUID                  `json:"systemSoftwareId"`
 	SystemSoftwareVersion VersionStatus              `json:"systemSoftwareVersion"`

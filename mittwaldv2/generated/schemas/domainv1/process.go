@@ -30,7 +30,6 @@ import (
 //    - "state"
 //    - "lastUpdate"
 
-//
 type Process struct {
 	Error         *string      `json:"error,omitempty"`
 	LastUpdate    time.Time    `json:"lastUpdate"`

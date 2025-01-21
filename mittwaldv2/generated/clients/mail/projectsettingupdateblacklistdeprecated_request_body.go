@@ -16,7 +16,6 @@ import "errors"
 //required:
 //    - "blacklist"
 
-//
 type ProjectsettingUpdateBlacklistDeprecatedRequestBody struct {
 	Blacklist []string `json:"blacklist"`
 }

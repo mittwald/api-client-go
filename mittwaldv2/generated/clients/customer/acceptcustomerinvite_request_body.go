@@ -10,7 +10,6 @@ package customer
 //        type: "string"
 //        description: "Token contained in the invite for authentication."
 
-//
 type AcceptCustomerInviteRequestBody struct {
 	InvitationToken *string `json:"invitationToken,omitempty"`
 }

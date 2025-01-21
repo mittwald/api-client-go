@@ -26,7 +26,7 @@ import (
 //    - "tags"
 //description: "An App is to be understood as a manifest for AppInstallations. E.g. 'WordPress' only exists inside our ecosystem, because there is an  App -Manifest for it."
 
-//An App is to be understood as a manifest for AppInstallations. E.g. 'WordPress' only exists inside our ecosystem, because there is an  App -Manifest for it.
+// An App is to be understood as a manifest for AppInstallations. E.g. 'WordPress' only exists inside our ecosystem, because there is an  App -Manifest for it.
 type App struct {
 	ActionCapabilities ActionCapabilities `json:"actionCapabilities,omitempty"`
 	Id                 string             `json:"id"`

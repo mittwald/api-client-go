@@ -7,7 +7,7 @@ package signupv1
 //type: "object"
 //description: "A json object, given further information about the error"
 
-//A json object, given further information about the error
+// A json object, given further information about the error
 type DomainErrorInfo struct {
 }
 

@@ -18,7 +18,6 @@ import "time"
 //    - "publicToken"
 //    - "expiry"
 
-//
 type AuthenticateInstanceResponse struct {
 	Expiry      time.Time `json:"expiry"`
 	PublicToken string    `json:"publicToken"`

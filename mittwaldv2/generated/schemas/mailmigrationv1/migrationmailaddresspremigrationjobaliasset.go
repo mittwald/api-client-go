@@ -14,7 +14,6 @@ package mailmigrationv1
 //    - "sourceCoabMailboxName"
 //    - "finished"
 
-//
 type MigrationMailAddressPreMigrationJobAliasSet struct {
 	Finished              bool   `json:"finished"`
 	SourceCoabMailboxName string `json:"sourceCoabMailboxName"`

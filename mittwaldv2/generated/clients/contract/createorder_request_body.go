@@ -23,7 +23,6 @@ import "fmt"
 //            - "externalCertificate"
 //        example: "projectHosting"
 
-//
 type CreateOrderRequestBody struct {
 	OrderData *CreateOrderRequestBodyOrderData `json:"orderData,omitempty"`
 	OrderType *CreateOrderRequestBodyOrderType `json:"orderType,omitempty"`

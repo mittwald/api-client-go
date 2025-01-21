@@ -14,7 +14,7 @@ import "fmt"
 //description: "deprecated by property status"
 //deprecated: true
 
-//deprecated by property status
+// deprecated by property status
 type DeprecatedServerReadinessStatus string
 
 const DeprecatedServerReadinessStatusCreating DeprecatedServerReadinessStatus = "creating"

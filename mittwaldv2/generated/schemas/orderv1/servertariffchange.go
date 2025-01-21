@@ -24,7 +24,6 @@ import (
 //    - "machineType"
 //    - "diskspaceInGiB"
 
-//
 type ServerTariffChange struct {
 	ContractId     uuid.UUID `json:"contractId"`
 	DiskspaceInGiB float64   `json:"diskspaceInGiB"`

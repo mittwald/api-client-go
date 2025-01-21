@@ -16,7 +16,6 @@ package relocation
 //    - "name"
 //    - "price"
 
-//
 type CreateRelocationRequestBodyPricesPositionsItem struct {
 	Name  string  `json:"name"`
 	Price float64 `json:"price"`

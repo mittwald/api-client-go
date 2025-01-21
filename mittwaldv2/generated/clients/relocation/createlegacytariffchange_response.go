@@ -16,7 +16,6 @@ import (
 //required:
 //    - "messageId"
 
-//
 type CreateLegacyTariffChangeResponse struct {
 	MessageId uuid.UUID `json:"messageId"`
 }

@@ -15,7 +15,6 @@ import "fmt"
 //        minItems: 2
 //        uniqueItems: true
 
-//
 type DeprecatedDeclareNameserversRequestBody struct {
 	Nameservers []string `json:"nameservers,omitempty"`
 }

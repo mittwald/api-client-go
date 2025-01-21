@@ -20,7 +20,6 @@ package orderv1
 //    - "recurringPrice"
 //    - "feePrice"
 
-//
 type ExternalCertificateOrderPreviewResponse struct {
 	FeePrice       float64 `json:"feePrice"`
 	RecurringPrice float64 `json:"recurringPrice"`

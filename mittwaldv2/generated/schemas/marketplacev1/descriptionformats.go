@@ -16,7 +16,7 @@ package marketplacev1
 //    - "markdown"
 //description: "Language specific descriptions in various formats."
 
-//Language specific descriptions in various formats.
+// Language specific descriptions in various formats.
 type DescriptionFormats struct {
 	Markdown string  `json:"markdown"`
 	Plain    *string `json:"plain,omitempty"`

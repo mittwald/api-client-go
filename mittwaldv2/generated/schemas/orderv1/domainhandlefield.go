@@ -16,7 +16,6 @@ package orderv1
 //    - "name"
 //    - "value"
 
-//
 type DomainHandleField struct {
 	Name  string `json:"name"`
 	Value string `json:"value"`

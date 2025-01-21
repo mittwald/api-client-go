@@ -37,7 +37,6 @@ import (
 //    - "missingVerifiedIngress"
 //    - "alreadyExistingMailAddress"
 
-//
 type PossibleCheckErrors struct {
 	AlreadyExistingMailAddress   []CheckMigrationIsPossibleErrorAlreadyExistingMailAddress   `json:"alreadyExistingMailAddress"`
 	AmbiguousMailAddressDelivery []CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery `json:"ambiguousMailAddressDelivery"`

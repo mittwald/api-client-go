@@ -55,7 +55,6 @@ import (
 //    - "status"
 //    - "items"
 
-//
 type CustomerOrder struct {
 	ContractChangeContractId *uuid.UUID   `json:"contractChangeContractId,omitempty"`
 	CustomerId               string       `json:"customerId"`

@@ -13,7 +13,7 @@ import "fmt"
 //    - "all"
 //description: "AppUpdatePolicy describes which updates should be applied automatically by our systems."
 
-//AppUpdatePolicy describes which updates should be applied automatically by our systems.
+// AppUpdatePolicy describes which updates should be applied automatically by our systems.
 type AppUpdatePolicy string
 
 const AppUpdatePolicyNone AppUpdatePolicy = "none"

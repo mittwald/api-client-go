@@ -26,7 +26,6 @@ import "fmt"
 //    - "stats"
 //    - "warnLevel"
 
-//
 type DataFileOpsItem struct {
 	Filename  *string                  `json:"filename,omitempty"`
 	Filepath  *string                  `json:"filepath,omitempty"`

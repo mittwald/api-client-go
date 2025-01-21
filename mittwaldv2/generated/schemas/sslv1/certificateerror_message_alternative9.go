@@ -11,7 +11,7 @@ import "fmt"
 //    - "incompatible_usage"
 //description: "The certificate's usage is incompatible."
 
-//The certificate's usage is incompatible.
+// The certificate's usage is incompatible.
 type CertificateErrorMessageAlternative9 string
 
 const CertificateErrorMessageAlternative9Incompatibleusage CertificateErrorMessageAlternative9 = "incompatible_usage"

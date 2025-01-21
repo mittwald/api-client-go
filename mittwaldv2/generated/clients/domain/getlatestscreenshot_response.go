@@ -9,7 +9,6 @@ package domain
 //    "reference":
 //        type: "string"
 
-//
 type GetLatestScreenshotResponse struct {
 	Reference *string `json:"reference,omitempty"`
 }

@@ -23,7 +23,6 @@ import "time"
 //    - "active"
 //nullable: true
 
-//
 type UpdateMailAddressAutoresponderV2DeprecatedRequestBodyAutoResponder struct {
 	Active    bool       `json:"active"`
 	ExpiresAt *time.Time `json:"expiresAt,omitempty"`

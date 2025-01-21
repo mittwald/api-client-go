@@ -12,7 +12,7 @@ import "fmt"
 //    - "mstudio"
 //description: "Which mittwald system does the targetProject use?"
 
-//Which mittwald system does the targetProject use?
+// Which mittwald system does the targetProject use?
 type CreateRelocationRequestBodyTargetSystem string
 
 const CreateRelocationRequestBodyTargetSystemKc CreateRelocationRequestBodyTargetSystem = "kc"

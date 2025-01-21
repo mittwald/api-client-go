@@ -24,7 +24,6 @@ import "fmt"
 //    - "diskspaceInGiB"
 //    - "spec"
 
-//
 type ProjectHostingOrderPreview struct {
 	CustomerId     *string                        `json:"customerId,omitempty"`
 	Description    *string                        `json:"description,omitempty"`

@@ -17,7 +17,6 @@ package user
 //required:
 //    - "password"
 
-//
 type DeleteUserRequestBody struct {
 	MultiFactorCode *string `json:"multiFactorCode,omitempty"`
 	Password        string  `json:"password"`

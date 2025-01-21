@@ -11,7 +11,6 @@ package user
 //required:
 //    - "refreshToken"
 
-//
 type RefreshSessionRequestBody struct {
 	RefreshToken string `json:"refreshToken"`
 }

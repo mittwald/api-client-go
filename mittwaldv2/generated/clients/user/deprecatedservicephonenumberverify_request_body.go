@@ -16,7 +16,6 @@ package user
 //    - "phoneNumber"
 //    - "code"
 
-//
 type DeprecatedServicePhoneNumberVerifyRequestBody struct {
 	Code        string `json:"code"`
 	PhoneNumber string `json:"phoneNumber"`

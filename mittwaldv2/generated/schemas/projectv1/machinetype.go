@@ -20,7 +20,6 @@ package projectv1
 //    - "cpu"
 //    - "memory"
 
-//
 type MachineType struct {
 	Cpu    string `json:"cpu"`
 	Memory string `json:"memory"`

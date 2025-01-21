@@ -11,7 +11,6 @@ package dnsv1
 //required:
 //    - "managed"
 
-//
 type RecordMXManaged struct {
 	Managed bool `json:"managed"`
 }

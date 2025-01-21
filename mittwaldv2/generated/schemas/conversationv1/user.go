@@ -20,7 +20,6 @@ import "fmt"
 //required:
 //    - "userId"
 
-//
 type User struct {
 	Active      *bool       `json:"active,omitempty"`
 	AvatarRefId *string     `json:"avatarRefId,omitempty"`

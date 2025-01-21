@@ -16,7 +16,6 @@ import "fmt"
 //required:
 //    - "files"
 
-//
 type IgnoredSources struct {
 	Databases []DatabaseReference `json:"databases,omitempty"`
 	Files     bool                `json:"files"`

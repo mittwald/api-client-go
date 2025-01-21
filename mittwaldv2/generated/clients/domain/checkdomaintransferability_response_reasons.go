@@ -20,7 +20,6 @@ package domain
 //    - "transferLock"
 //    - "domainAgeTooSmall"
 
-//
 type CheckDomainTransferabilityResponseReasons struct {
 	DomainAgeTooSmall  bool `json:"domainAgeTooSmall"`
 	DomainDoesNotExist bool `json:"domainDoesNotExist"`

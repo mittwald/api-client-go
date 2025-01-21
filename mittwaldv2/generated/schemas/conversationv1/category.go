@@ -23,7 +23,6 @@ import (
 //    - "name"
 //    - "referenceType"
 
-//
 type Category struct {
 	CategoryId    uuid.UUID             `json:"categoryId"`
 	Name          string                `json:"name"`

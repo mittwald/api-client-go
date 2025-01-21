@@ -9,7 +9,6 @@ package user
 //    "settingsString":
 //        type: "string"
 
-//
 type DeprecatedServicePersonalizedSettingsGetResponse struct {
 	SettingsString *string `json:"settingsString,omitempty"`
 }

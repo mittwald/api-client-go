@@ -13,7 +13,6 @@ import "fmt"
 //required:
 //    - "ownerC"
 
-//
 type DomainHandles struct {
 	AdminC *HandleReadable `json:"adminC,omitempty"`
 	OwnerC HandleReadable  `json:"ownerC"`

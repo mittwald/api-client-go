@@ -50,7 +50,6 @@ import (
 //    - "information"
 //    - "projectDescription"
 
-//
 type ProjectInvite struct {
 	AvatarRefId         *uuid.UUID        `json:"avatarRefId,omitempty"`
 	Id                  uuid.UUID         `json:"id"`

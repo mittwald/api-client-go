@@ -20,7 +20,6 @@ import "errors"
 //required:
 //    - "recoveryCodesList"
 
-//
 type ResetRecoverycodesResponse struct {
 	RecoveryCodesList []string `json:"recoveryCodesList"`
 }

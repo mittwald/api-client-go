@@ -14,7 +14,7 @@ import "fmt"
 //description: "deprecated"
 //deprecated: true
 
-//deprecated
+// deprecated
 type ExtensionState string
 
 const ExtensionStateEnabled ExtensionState = "enabled"

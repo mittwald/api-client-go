@@ -16,7 +16,6 @@ import (
 //required:
 //    - "conversationId"
 
-//
 type SetConversationStatusResponse struct {
 	ConversationId uuid.UUID `json:"conversationId"`
 }

@@ -12,7 +12,6 @@ package projectv1
 //required:
 //    - "jwt"
 
-//
 type FsApiJwt struct {
 	Jwt string `json:"jwt"`
 }

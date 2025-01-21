@@ -31,7 +31,7 @@ import (
 //    - "periods"
 //description: "A strategy for fees that occur periodically"
 
-//A strategy for fees that occur periodically
+// A strategy for fees that occur periodically
 type PeriodBasedFeeStrategy struct {
 	Periods []PeriodBasedFeeStrategyPeriodsItem `json:"periods"`
 }

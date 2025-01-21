@@ -11,7 +11,6 @@ package appv1
 //required:
 //    - "imageTemplate"
 
-//
 type AppJobImage struct {
 	ImageTemplate string `json:"imageTemplate"`
 }

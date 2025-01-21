@@ -13,7 +13,6 @@ package project
 //required:
 //    - "description"
 
-//
 type CreateProjectRequestBody struct {
 	Description string `json:"description"`
 }

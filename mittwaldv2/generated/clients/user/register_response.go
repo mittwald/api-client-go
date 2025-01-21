@@ -16,7 +16,6 @@ import (
 //required:
 //    - "userId"
 
-//
 type RegisterResponse struct {
 	UserId uuid.UUID `json:"userId"`
 }

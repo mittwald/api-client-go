@@ -36,7 +36,6 @@ import (
 //    - "format"
 //    - "withPassword"
 
-//
 type ProjectBackupExport struct {
 	DownloadURL  *string                   `json:"downloadURL,omitempty"`
 	ExpiresAt    *time.Time                `json:"expiresAt,omitempty"`

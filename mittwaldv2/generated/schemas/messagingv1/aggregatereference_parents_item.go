@@ -17,7 +17,6 @@ package messagingv1
 //    - "aggregate"
 //    - "domain"
 
-//
 type AggregateReferenceParentsItem struct {
 	Aggregate string `json:"aggregate"`
 	Domain    string `json:"domain"`

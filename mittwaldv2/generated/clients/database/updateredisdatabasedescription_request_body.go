@@ -10,7 +10,6 @@ package database
 //required:
 //    - "description"
 
-//
 type UpdateRedisDatabaseDescriptionRequestBody struct {
 	Description string `json:"description"`
 }

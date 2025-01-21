@@ -24,7 +24,6 @@ import (
 //    - "version"
 //example: {"description": "My first RedisDatabase!", "version": "7.0"}
 
-//
 type CreateRedisDatabaseRequestBody struct {
 	Configuration *databasev1.RedisDatabaseConfiguration `json:"configuration,omitempty"`
 	Description   string                                 `json:"description"`

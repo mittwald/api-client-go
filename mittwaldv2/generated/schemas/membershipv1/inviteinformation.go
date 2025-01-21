@@ -24,7 +24,6 @@ import (
 //required:
 //    - "invitedBy"
 
-//
 type InviteInformation struct {
 	InvitationToken *string    `json:"invitationToken,omitempty"`
 	InvitedBy       uuid.UUID  `json:"invitedBy"`

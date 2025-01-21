@@ -20,7 +20,7 @@ import (
 //    - "versionRange"
 //description: "A SystemSoftwareDependency is a description of a need for a specific SystemSoftware in a semver versionRange."
 
-//A SystemSoftwareDependency is a description of a need for a specific SystemSoftware in a semver versionRange.
+// A SystemSoftwareDependency is a description of a need for a specific SystemSoftware in a semver versionRange.
 type SystemSoftwareDependency struct {
 	SystemSoftwareId uuid.UUID `json:"systemSoftwareId"`
 	VersionRange     string    `json:"versionRange"`

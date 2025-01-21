@@ -17,7 +17,6 @@ import "time"
 //required:
 //    - "description"
 
-//
 type EditAPITokenRequestBody struct {
 	Description string     `json:"description"`
 	ExpiresAt   *time.Time `json:"expiresAt,omitempty"`

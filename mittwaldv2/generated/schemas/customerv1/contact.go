@@ -35,7 +35,6 @@ import (
 //    - "address"
 //    - "salutation"
 
-//
 type Contact struct {
 	Address       commonsv1.Address    `json:"address"`
 	Company       *string              `json:"company,omitempty"`

@@ -16,7 +16,6 @@ import (
 //required:
 //    - "installationId"
 
-//
 type TargetInstallation struct {
 	InstallationId uuid.UUID `json:"installationId"`
 }

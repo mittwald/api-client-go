@@ -13,7 +13,6 @@ import "fmt"
 //required:
 //    - "current"
 
-//
 type HandleReadable struct {
 	Current HandleData  `json:"current"`
 	Desired *HandleData `json:"desired,omitempty"`

@@ -10,7 +10,6 @@ package database
 //required:
 //    - "password"
 
-//
 type UpdateMysqlUserPasswordRequestBody struct {
 	Password string `json:"password"`
 }

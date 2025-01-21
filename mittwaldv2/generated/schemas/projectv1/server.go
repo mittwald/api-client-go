@@ -61,7 +61,6 @@ import (
 //    - "clusterName"
 //    - "status"
 
-//
 type Server struct {
 	ClusterName          string                          `json:"clusterName"`
 	CreatedAt            time.Time                       `json:"createdAt"`

@@ -26,7 +26,6 @@ package mailmigrationv1
 //    - "folder"
 //    - "keepDays"
 
-//
 type SpamProtection struct {
 	Active              bool   `json:"active"`
 	DeleteSensitivity   *int64 `json:"deleteSensitivity,omitempty"`

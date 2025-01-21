@@ -14,7 +14,6 @@ package user
 //required:
 //    - "email"
 
-//
 type ChangeEmailRequestBody struct {
 	Email string `json:"email"`
 }

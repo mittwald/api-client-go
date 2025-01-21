@@ -17,7 +17,6 @@ package user
 //    - "barcode"
 //    - "url"
 
-//
 type InitMFAResponse struct {
 	Barcode string `json:"barcode"`
 	Url     string `json:"url"`

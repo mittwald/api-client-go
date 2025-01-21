@@ -34,7 +34,6 @@ import (
 //    - "origin"
 //    - "message"
 
-//
 type UserFeedback struct {
 	Id      uuid.UUID `json:"id"`
 	Message string    `json:"message"`

@@ -27,7 +27,6 @@ import (
 //    - "role"
 //    - "memberSince"
 
-//
 type CustomerMembership struct {
 	ExpiresAt   *time.Time             `json:"expiresAt,omitempty"`
 	MemberSince time.Time              `json:"memberSince"`

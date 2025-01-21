@@ -116,7 +116,6 @@ import (
 //    - "networkingOps"
 //    - "dbQueries"
 
-//
 type Data struct {
 	ActualUrl       string                  `json:"actualUrl"`
 	DbQueries       []DataDbQueriesItem     `json:"dbQueries"`

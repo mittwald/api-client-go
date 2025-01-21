@@ -11,7 +11,7 @@ import "fmt"
 //    - "unknown"
 //description: "An unknown error occurred."
 
-//An unknown error occurred.
+// An unknown error occurred.
 type CertificateErrorMessageAlternative18 string
 
 const CertificateErrorMessageAlternative18Unknown CertificateErrorMessageAlternative18 = "unknown"

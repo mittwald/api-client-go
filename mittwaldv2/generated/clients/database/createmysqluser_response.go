@@ -16,7 +16,6 @@ import (
 //required:
 //    - "id"
 
-//
 type CreateMysqlUserResponse struct {
 	Id uuid.UUID `json:"id"`
 }

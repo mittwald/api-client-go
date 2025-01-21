@@ -15,7 +15,6 @@ import "errors"
 //required:
 //    - "consentedScopes"
 
-//
 type ConsentToExtensionScopesRequestBody struct {
 	ConsentedScopes []string `json:"consentedScopes"`
 }

@@ -36,7 +36,6 @@ import (
 //    - "published"
 //    - "extensionInstances"
 
-//
 type ExtensionHealth struct {
 	ExtensionInstances []ExtensionInstanceHealth `json:"extensionInstances"`
 	Functional         bool                      `json:"functional"`

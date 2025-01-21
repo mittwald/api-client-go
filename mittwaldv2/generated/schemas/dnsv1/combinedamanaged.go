@@ -20,7 +20,6 @@ import "fmt"
 //required:
 //    - "managedBy"
 
-//
 type CombinedAManaged struct {
 	ManagedBy CombinedAManagedManagedBy `json:"managedBy"`
 }

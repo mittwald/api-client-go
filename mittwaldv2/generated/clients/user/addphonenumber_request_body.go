@@ -12,7 +12,6 @@ package user
 //required:
 //    - "phoneNumber"
 
-//
 type AddPhoneNumberRequestBody struct {
 	PhoneNumber string `json:"phoneNumber"`
 }

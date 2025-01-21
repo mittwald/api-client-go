@@ -26,7 +26,6 @@ import "fmt"
 //    - "relocationMinSpamScore"
 //    - "autoDeleteSpam"
 
-//
 type UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtection struct {
 	Active                 bool                                                                       `json:"active"`
 	AutoDeleteSpam         bool                                                                       `json:"autoDeleteSpam"`

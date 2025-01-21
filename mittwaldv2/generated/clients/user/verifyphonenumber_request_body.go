@@ -18,7 +18,6 @@ package user
 //    - "phoneNumber"
 //    - "code"
 
-//
 type VerifyPhoneNumberRequestBody struct {
 	Code        string `json:"code"`
 	PhoneNumber string `json:"phoneNumber"`

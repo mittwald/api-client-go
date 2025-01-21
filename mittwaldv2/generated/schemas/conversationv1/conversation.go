@@ -62,7 +62,6 @@ import (
 //    - "visibility"
 //    - "mainUser"
 
-//
 type Conversation struct {
 	Category          *Category                    `json:"category,omitempty"`
 	ConversationId    uuid.UUID                    `json:"conversationId"`

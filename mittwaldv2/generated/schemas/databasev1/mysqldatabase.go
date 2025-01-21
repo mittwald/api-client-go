@@ -74,7 +74,6 @@ import (
 //    - "statusSetAt"
 //    - "externalHostname"
 
-//
 type MySqlDatabase struct {
 	CharacterSettings        CharacterSettings `json:"characterSettings"`
 	CreatedAt                time.Time         `json:"createdAt"`

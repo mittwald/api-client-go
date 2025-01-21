@@ -18,7 +18,6 @@ import "fmt"
 //            - "projectHosting"
 //            - "server"
 
-//
 type PreviewTariffChangeRequestBody struct {
 	TariffChangeData *PreviewTariffChangeRequestBodyTariffChangeData `json:"tariffChangeData,omitempty"`
 	TariffChangeType *PreviewTariffChangeRequestBodyTariffChangeType `json:"tariffChangeType,omitempty"`

@@ -32,7 +32,7 @@ import "fmt"
 //    - "required"
 //description: "A UserInput is a description of an information which cannot be determined or estimated by mittwald, but has to be given by the person who is requesting an AppInstallation or SystemSoftware."
 
-//A UserInput is a description of an information which cannot be determined or estimated by mittwald, but has to be given by the person who is requesting an AppInstallation or SystemSoftware.
+// A UserInput is a description of an information which cannot be determined or estimated by mittwald, but has to be given by the person who is requesting an AppInstallation or SystemSoftware.
 type UserInput struct {
 	DataSource          *string                  `json:"dataSource,omitempty"`
 	DataType            UserInputDataType        `json:"dataType"`

@@ -27,7 +27,6 @@ import (
 //    - "oldDatabaseId"
 //    - "newDatabaseId"
 
-//
 type ReplaceDatabaseRequestBody struct {
 	DatabaseUserIds map[string]string `json:"databaseUserIds,omitempty"`
 	NewDatabaseId   uuid.UUID         `json:"newDatabaseId"`

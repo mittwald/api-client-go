@@ -12,7 +12,6 @@ package misc
 //required:
 //    - "name"
 
-//
 type VerificationVerifyCompanyRequestBody struct {
 	Name string `json:"name"`
 }

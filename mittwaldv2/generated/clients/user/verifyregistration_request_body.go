@@ -29,7 +29,6 @@ import (
 //    - "token"
 //    - "userId"
 
-//
 type VerifyRegistrationRequestBody struct {
 	Email  string    `json:"email"`
 	Token  string    `json:"token"`

@@ -63,7 +63,6 @@ import (
 //    - "memberCount"
 //    - "projectCount"
 
-//
 type Customer struct {
 	ActiveSuspension     *CustomerActiveSuspension     `json:"activeSuspension,omitempty"`
 	AvatarRefId          *string                       `json:"avatarRefId,omitempty"`

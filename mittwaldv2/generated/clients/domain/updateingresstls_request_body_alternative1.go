@@ -23,7 +23,6 @@ import "time"
 //    - "acme"
 //additionalProperties: false
 
-//
 type UpdateIngressTLSRequestBodyAlternative1 struct {
 	Acme            bool       `json:"acme"`
 	IsCreated       *bool      `json:"isCreated,omitempty"`

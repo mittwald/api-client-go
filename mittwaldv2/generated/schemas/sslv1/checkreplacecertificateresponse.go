@@ -17,7 +17,6 @@ import "fmt"
 //required:
 //    - "isReplaceable"
 
-//
 type CheckReplaceCertificateResponse struct {
 	Changes       *CheckReplaceChanges `json:"changes,omitempty"`
 	Errors        []CertificateError   `json:"errors,omitempty"`

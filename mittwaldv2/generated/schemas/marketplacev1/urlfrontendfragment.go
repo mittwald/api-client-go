@@ -11,7 +11,6 @@ package marketplacev1
 //required:
 //    - "url"
 
-//
 type UrlFrontendFragment struct {
 	Url string `json:"url"`
 }

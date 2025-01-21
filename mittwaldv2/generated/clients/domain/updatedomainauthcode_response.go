@@ -11,7 +11,6 @@ package domain
 //    "transactionId":
 //        type: "string"
 
-//
 type UpdateDomainAuthCodeResponse struct {
 	IsAsync       *bool   `json:"isAsync,omitempty"`
 	TransactionId *string `json:"transactionId,omitempty"`

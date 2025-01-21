@@ -15,7 +15,6 @@ import "fmt"
 //required:
 //    - "jsonSchemaOwnerC"
 
-//
 type ListTldContactSchemasResponse struct {
 	JsonSchemaAdminC *ListTldContactSchemasResponseJsonSchemaAdminC `json:"jsonSchemaAdminC,omitempty"`
 	JsonSchemaOwnerC ListTldContactSchemasResponseJsonSchemaOwnerC  `json:"jsonSchemaOwnerC"`

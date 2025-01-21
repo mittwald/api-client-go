@@ -17,7 +17,6 @@ package conversationv1
 //    - "aggregate"
 //    - "domain"
 
-//
 type AggregateReference struct {
 	Aggregate string `json:"aggregate"`
 	Domain    string `json:"domain"`

@@ -19,7 +19,6 @@ import (
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.app.UserInput"}
 
-//
 type GetMissingDependenciesForAppinstallationResponse struct {
 	MissingSystemSoftwareDependencies []appv1.SystemSoftwareDependency `json:"missingSystemSoftwareDependencies,omitempty"`
 	MissingUserInputs                 []appv1.UserInput                `json:"missingUserInputs,omitempty"`

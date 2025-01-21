@@ -13,7 +13,6 @@ package sslv1
 //    "signingRequest":
 //        type: "string"
 
-//
 type CertificateData struct {
 	CaBundle       *string `json:"caBundle,omitempty"`
 	Certificate    *string `json:"certificate,omitempty"`

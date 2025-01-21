@@ -7,7 +7,6 @@ package dnsv1
 //type: "object"
 //additionalProperties: false
 
-//
 type RecordUnset struct {
 }
 

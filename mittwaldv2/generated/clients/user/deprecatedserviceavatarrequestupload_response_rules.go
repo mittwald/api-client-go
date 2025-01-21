@@ -41,7 +41,6 @@ import (
 //    - "mimeTypes"
 //    - "maxSizeInKB"
 
-//
 type DeprecatedServiceAvatarRequestUploadResponseRules struct {
 	MaxSizeInKB int64                                                        `json:"maxSizeInKB"`
 	MimeTypes   []string                                                     `json:"mimeTypes"`

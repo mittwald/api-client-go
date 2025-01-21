@@ -31,7 +31,7 @@ import (
 //    - "kind"
 //description: "A DatabaseDependency is a generic description of need for a database, used by AppVersions."
 
-//A DatabaseDependency is a generic description of need for a database, used by AppVersions.
+// A DatabaseDependency is a generic description of need for a database, used by AppVersions.
 type DatabaseDependency struct {
 	Description string                 `json:"description"`
 	Kind        DatabaseDependencyKind `json:"kind"`

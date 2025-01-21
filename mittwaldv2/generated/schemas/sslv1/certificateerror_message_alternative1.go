@@ -11,7 +11,7 @@ import "fmt"
 //    - "certificate_read_failed"
 //description: "Failed to read the certificate."
 
-//Failed to read the certificate.
+// Failed to read the certificate.
 type CertificateErrorMessageAlternative1 string
 
 const CertificateErrorMessageAlternative1Certificatereadfailed CertificateErrorMessageAlternative1 = "certificate_read_failed"

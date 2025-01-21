@@ -19,7 +19,6 @@ import "time"
 //required:
 //    - "expirationTime"
 
-//
 type CreateProjectBackupRequestBody struct {
 	Description    *string   `json:"description,omitempty"`
 	ExpirationTime time.Time `json:"expirationTime"`

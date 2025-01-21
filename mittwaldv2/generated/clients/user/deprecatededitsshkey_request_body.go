@@ -17,7 +17,6 @@ import "time"
 //required:
 //    - "comment"
 
-//
 type DeprecatedEditSSHKeyRequestBody struct {
 	Comment   string     `json:"comment"`
 	ExpiresAt *time.Time `json:"expiresAt,omitempty"`

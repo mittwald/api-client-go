@@ -13,7 +13,7 @@ import "fmt"
 //    - "disabled"
 //description: "deprecated"
 
-//deprecated
+// deprecated
 type OwnExtensionState string
 
 const OwnExtensionStateEnabled OwnExtensionState = "enabled"

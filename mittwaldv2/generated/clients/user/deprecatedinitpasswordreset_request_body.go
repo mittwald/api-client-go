@@ -14,7 +14,6 @@ package user
 //required:
 //    - "email"
 
-//
 type DeprecatedInitPasswordResetRequestBody struct {
 	Email string `json:"email"`
 }

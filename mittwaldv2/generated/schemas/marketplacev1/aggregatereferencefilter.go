@@ -21,7 +21,6 @@ import "fmt"
 //    "id":
 //        type: "string"
 
-//
 type AggregateReferenceFilter struct {
 	Aggregate *AggregateReferenceFilterAggregate `json:"aggregate,omitempty"`
 	Domain    *AggregateReferenceFilterDomain    `json:"domain,omitempty"`

@@ -13,7 +13,6 @@ import (
 //properties:
 //    "configuration": {"$ref": "#/components/schemas/de.mittwald.v1.database.RedisDatabaseConfiguration"}
 
-//
 type UpdateRedisDatabaseConfigurationRequestBody struct {
 	Configuration *databasev1.RedisDatabaseConfiguration `json:"configuration,omitempty"`
 }

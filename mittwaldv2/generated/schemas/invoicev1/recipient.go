@@ -40,7 +40,6 @@ import (
 //    - "address"
 //    - "salutation"
 
-//
 type Recipient struct {
 	Address       commonsv1.Address    `json:"address"`
 	Company       *string              `json:"company,omitempty"`

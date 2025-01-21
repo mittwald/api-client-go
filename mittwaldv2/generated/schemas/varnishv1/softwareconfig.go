@@ -15,7 +15,6 @@ import "fmt"
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.varnish.ConfigRevision"}
 
-//
 type SoftwareConfig struct {
 	ConfigExpiration     *ConfigExpiration `json:"configExpiration,omitempty"`
 	LatestConfigRevision *float64          `json:"latestConfigRevision,omitempty"`

@@ -36,7 +36,6 @@ import "fmt"
 //    - "name"
 //    - "meta"
 
-//
 type Statistics struct {
 	ChildStatistics              []Statistics         `json:"childStatistics,omitempty"`
 	Description                  *string              `json:"description,omitempty"`

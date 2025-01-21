@@ -14,7 +14,6 @@ import "fmt"
 //    "handleRef":
 //        type: "string"
 
-//
 type HandleData struct {
 	HandleFields []HandleField `json:"handleFields,omitempty"`
 	HandleRef    *string       `json:"handleRef,omitempty"`

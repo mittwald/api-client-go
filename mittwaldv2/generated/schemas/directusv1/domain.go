@@ -18,7 +18,6 @@ package directusv1
 //required:
 //    - "name"
 
-//
 type Domain struct {
 	AuthCode        *string `json:"authCode,omitempty"`
 	DomainOwnerData *string `json:"domainOwnerData,omitempty"`

@@ -39,7 +39,6 @@ import (
 //    - "description"
 //    - "createdAt"
 
-//
 type ApiToken struct {
 	ApiTokenId  uuid.UUID           `json:"apiTokenId"`
 	CreatedAt   time.Time           `json:"createdAt"`

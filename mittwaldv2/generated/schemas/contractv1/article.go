@@ -32,7 +32,6 @@ import "fmt"
 //    - "amount"
 //    - "unitPrice"
 
-//
 type Article struct {
 	Amount            int64   `json:"amount"`
 	ArticleTemplateId string  `json:"articleTemplateId"`

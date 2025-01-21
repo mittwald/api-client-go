@@ -13,7 +13,6 @@ package notification
 //        type: "string"
 //        example: "Lovelace"
 
-//
 type NewsletterSubscribeUserRequestBody struct {
 	FirstName *string `json:"firstName,omitempty"`
 	LastName  *string `json:"lastName,omitempty"`

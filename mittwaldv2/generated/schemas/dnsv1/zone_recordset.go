@@ -20,7 +20,6 @@ import "fmt"
 //    - "txt"
 //    - "srv"
 
-//
 type ZoneRecordSet struct {
 	Cname            RecordCNAME     `json:"cname"`
 	CombinedARecords RecordCombinedA `json:"combinedARecords"`

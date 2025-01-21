@@ -15,7 +15,6 @@ package user
 //required:
 //    - "multiFactorCode"
 
-//
 type ConfirmMFARequestBody struct {
 	MultiFactorCode string `json:"multiFactorCode"`
 }

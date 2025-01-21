@@ -20,7 +20,6 @@ import "time"
 //    - "supportCode"
 //    - "expiresAt"
 
-//
 type SupportCodeRequestResponse struct {
 	ExpiresAt   time.Time `json:"expiresAt"`
 	SupportCode string    `json:"supportCode"`

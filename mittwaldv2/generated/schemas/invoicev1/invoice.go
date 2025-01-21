@@ -98,7 +98,6 @@ import (
 //    - "currency"
 //    - "invoiceType"
 
-//
 type Invoice struct {
 	AmountPaid      float64             `json:"amountPaid"`
 	Cancellation    *Cancellation       `json:"cancellation,omitempty"`

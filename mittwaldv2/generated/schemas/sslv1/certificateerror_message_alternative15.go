@@ -11,7 +11,7 @@ import "fmt"
 //    - "private_key_not_rsa"
 //description: "The private key is not RSA."
 
-//The private key is not RSA.
+// The private key is not RSA.
 type CertificateErrorMessageAlternative15 string
 
 const CertificateErrorMessageAlternative15Privatekeynotrsa CertificateErrorMessageAlternative15 = "private_key_not_rsa"

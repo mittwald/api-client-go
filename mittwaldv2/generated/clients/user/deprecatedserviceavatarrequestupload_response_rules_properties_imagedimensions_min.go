@@ -11,7 +11,6 @@ package user
 //    "width":
 //        type: "integer"
 
-//
 type DeprecatedServiceAvatarRequestUploadResponseRulesPropertiesImageDimensionsMin struct {
 	Height *int64 `json:"height,omitempty"`
 	Width  *int64 `json:"width,omitempty"`

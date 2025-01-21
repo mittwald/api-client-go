@@ -13,7 +13,6 @@ import "fmt"
 //        items:
 //            type: "string"
 
-//
 type DeprecatedGetScreenshotForDomainResponse struct {
 	References []string `json:"references,omitempty"`
 }

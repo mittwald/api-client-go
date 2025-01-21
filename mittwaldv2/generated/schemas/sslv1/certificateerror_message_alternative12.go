@@ -11,7 +11,7 @@ import "fmt"
 //    - "private_key_decode_failed"
 //description: "Failed to decode the private key."
 
-//Failed to decode the private key.
+// Failed to decode the private key.
 type CertificateErrorMessageAlternative12 string
 
 const CertificateErrorMessageAlternative12Privatekeydecodefailed CertificateErrorMessageAlternative12 = "private_key_decode_failed"

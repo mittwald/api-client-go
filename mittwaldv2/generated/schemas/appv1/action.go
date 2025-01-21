@@ -13,7 +13,7 @@ import "fmt"
 //    - "restart"
 //description: "An Action is a string that describes a runtime concerning action which can be executed on an AppInstallation or an  App  can be capable of."
 
-//An Action is a string that describes a runtime concerning action which can be executed on an AppInstallation or an  App  can be capable of.
+// An Action is a string that describes a runtime concerning action which can be executed on an AppInstallation or an  App  can be capable of.
 type Action string
 
 const ActionStart Action = "start"

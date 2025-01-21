@@ -15,7 +15,6 @@ import "errors"
 //required:
 //    - "forwardAddresses"
 
-//
 type UpdateMailAddressForwardAddressesRequestBody struct {
 	ForwardAddresses []string `json:"forwardAddresses"`
 }

@@ -36,7 +36,6 @@ import (
 //    - "userId"
 //    - "email"
 
-//
 type Profile struct {
 	Email     string        `json:"email"`
 	FirstName *string       `json:"firstName,omitempty"`

@@ -19,7 +19,6 @@ package invoicev1
 //    - "iban"
 //    - "accountHolder"
 
-//
 type BankingInformation struct {
 	AccountHolder string  `json:"accountHolder"`
 	Bic           *string `json:"bic,omitempty"`

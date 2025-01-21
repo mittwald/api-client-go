@@ -18,7 +18,6 @@ import (
 //    - "database"
 //    - "user"
 
-//
 type CreateMysqlDatabaseRequestBody struct {
 	Database databasev1.CreateMySqlDatabase         `json:"database"`
 	User     databasev1.CreateMySqlUserWithDatabase `json:"user"`

@@ -16,7 +16,6 @@ import (
 //required:
 //    - "person"
 
-//
 type DeprecatedServicePersonalInformationUpdateRequestBody struct {
 	Person commonsv1.Person `json:"person"`
 }

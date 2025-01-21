@@ -11,7 +11,6 @@ package ingressv1
 //required:
 //    - "useDefaultPage"
 
-//
 type TargetUseDefaultPage struct {
 	UseDefaultPage bool `json:"useDefaultPage"`
 }

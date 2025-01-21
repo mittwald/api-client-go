@@ -15,7 +15,6 @@ package user
 //required:
 //    - "multiFactorCode"
 
-//
 type ResetRecoverycodesRequestBody struct {
 	MultiFactorCode string `json:"multiFactorCode"`
 }

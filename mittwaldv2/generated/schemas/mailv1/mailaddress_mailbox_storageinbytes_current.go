@@ -17,7 +17,6 @@ import "time"
 //    - "value"
 //    - "updatedAt"
 
-//
 type MailAddressMailboxStorageInBytesCurrent struct {
 	UpdatedAt time.Time `json:"updatedAt"`
 	Value     float64   `json:"value"`

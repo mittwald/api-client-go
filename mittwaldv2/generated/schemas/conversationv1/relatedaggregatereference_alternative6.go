@@ -23,7 +23,6 @@ import "fmt"
 //    - "aggregate"
 //    - "domain"
 
-//
 type RelatedAggregateReferenceAlternative6 struct {
 	Aggregate RelatedAggregateReferenceAlternative6Aggregate `json:"aggregate"`
 	Domain    RelatedAggregateReferenceAlternative6Domain    `json:"domain"`

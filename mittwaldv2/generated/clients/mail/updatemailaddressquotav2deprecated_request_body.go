@@ -13,7 +13,6 @@ package mail
 //required:
 //    - "quotaInBytes"
 
-//
 type UpdateMailAddressQuotaV2DeprecatedRequestBody struct {
 	QuotaInBytes float64 `json:"quotaInBytes"`
 }

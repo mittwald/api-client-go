@@ -29,7 +29,6 @@ import "fmt"
 //required:
 //    - "articleId"
 
-//
 type ReadableBookableArticleOptions struct {
 	ArticleId       string                              `json:"articleId"`
 	Info            *ReadableBookableArticleOptionsInfo `json:"info,omitempty"`

@@ -20,7 +20,6 @@ import (
 //required:
 //    - "multiFactorCode"
 
-//
 type DeprecatedResendVerificationEmailRequestBody struct {
 	Email  *string    `json:"email,omitempty"`
 	UserId *uuid.UUID `json:"userId,omitempty"`

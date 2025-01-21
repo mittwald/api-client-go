@@ -12,7 +12,6 @@ package marketplace
 //required:
 //    - "extensionInstanceSecret"
 
-//
 type AuthenticateInstanceRequestBody struct {
 	ExtensionInstanceSecret string `json:"extensionInstanceSecret"`
 }

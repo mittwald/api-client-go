@@ -11,7 +11,6 @@ package misc
 //required:
 //    - "exists"
 
-//
 type VerificationVerifyCompanyResponse struct {
 	Exists bool `json:"exists"`
 }

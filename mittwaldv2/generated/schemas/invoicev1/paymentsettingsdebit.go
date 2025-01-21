@@ -27,7 +27,6 @@ import "fmt"
 //    - "iban"
 //    - "accountHolder"
 
-//
 type PaymentSettingsDebit struct {
 	AccountHolder string                     `json:"accountHolder"`
 	Bic           *string                    `json:"bic,omitempty"`

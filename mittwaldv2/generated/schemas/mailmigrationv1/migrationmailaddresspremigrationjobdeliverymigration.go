@@ -20,7 +20,6 @@ package mailmigrationv1
 //    - "targetDeliveryAddress"
 //    - "finished"
 
-//
 type MigrationMailAddressPreMigrationJobDeliveryMigration struct {
 	Finished                  bool   `json:"finished"`
 	SourceCoabDeliveryMailbox string `json:"sourceCoabDeliveryMailbox"`

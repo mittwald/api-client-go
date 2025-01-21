@@ -21,7 +21,6 @@ import (
 //    - "userId"
 //    - "email"
 
-//
 type ResendVerificationEmailRequestBody struct {
 	Email  string    `json:"email"`
 	UserId uuid.UUID `json:"userId"`

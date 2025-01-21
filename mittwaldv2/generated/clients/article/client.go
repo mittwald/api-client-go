@@ -31,7 +31,7 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
-//Get an Article.
+// Get an Article.
 func (c *clientImpl) GetArticle(
 	ctx context.Context,
 	req GetArticleRequest,
@@ -58,7 +58,7 @@ func (c *clientImpl) GetArticle(
 	return &response, httpRes, nil
 }
 
-//List Articles.
+// List Articles.
 func (c *clientImpl) ListArticles(
 	ctx context.Context,
 	req ListArticlesRequest,

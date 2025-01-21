@@ -11,7 +11,6 @@ package project
 //required:
 //    - "description"
 
-//
 type UpdateServerDescriptionRequestBody struct {
 	Description string `json:"description"`
 }

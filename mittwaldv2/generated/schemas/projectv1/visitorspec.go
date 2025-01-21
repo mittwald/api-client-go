@@ -14,7 +14,6 @@ package projectv1
 //    - "visitors"
 //    - "storage"
 
-//
 type VisitorSpec struct {
 	Storage  string  `json:"storage"`
 	Visitors float64 `json:"visitors"`

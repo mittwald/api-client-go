@@ -25,7 +25,6 @@ import (
 //    - "version"
 //    - "description"
 
-//
 type CreateMySqlDatabase struct {
 	CharacterSettings *CharacterSettings `json:"characterSettings,omitempty"`
 	Description       string             `json:"description"`

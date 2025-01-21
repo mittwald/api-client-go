@@ -59,7 +59,6 @@ import (
 //    - "consentedScopes"
 //    - "aggregateReference"
 
-//
 type ExtensionInstance struct {
 	AggregateReference  ExtensionInstanceAggregateReference `json:"aggregateReference"`
 	ConsentedScopes     []string                            `json:"consentedScopes"`

@@ -19,7 +19,6 @@ import (
 //        type: "string"
 //        format: "uuid"
 
-//
 type ConversationPreferencesPreferredUsers struct {
 	CategoryUserPairs map[string]uuid.UUID `json:"categoryUserPairs,omitempty"`
 	Fallback          *uuid.UUID           `json:"fallback,omitempty"`

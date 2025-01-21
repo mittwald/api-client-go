@@ -29,7 +29,6 @@ import "fmt"
 //    - "delay"
 //    - "dataType"
 
-//
 type ScreenshotSettings struct {
 	DataType ScreenshotSettingsDataType `json:"dataType"`
 	Delay    float64                    `json:"delay"`

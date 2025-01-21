@@ -17,7 +17,6 @@ import "time"
 //    - "accessToken"
 //    - "expiresAt"
 
-//
 type SoftwareConfigFileAccessToken struct {
 	AccessToken string    `json:"accessToken"`
 	ExpiresAt   time.Time `json:"expiresAt"`

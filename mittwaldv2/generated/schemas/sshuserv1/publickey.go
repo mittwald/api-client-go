@@ -15,7 +15,7 @@ package sshuserv1
 //    - "key"
 //description: "A representation of an ssh-public-key."
 
-//A representation of an ssh-public-key.
+// A representation of an ssh-public-key.
 type PublicKey struct {
 	Comment string `json:"comment"`
 	Key     string `json:"key"`

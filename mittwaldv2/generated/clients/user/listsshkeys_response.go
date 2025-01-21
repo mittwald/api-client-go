@@ -16,7 +16,6 @@ import (
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.signup.SshKey"}
 
-//
 type ListSSHKeysResponse struct {
 	SshKeys []signupv1.SshKey `json:"sshKeys,omitempty"`
 }

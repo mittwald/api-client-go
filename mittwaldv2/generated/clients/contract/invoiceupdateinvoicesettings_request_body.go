@@ -37,7 +37,6 @@ import (
 //    - "invoicePeriod"
 //    - "paymentSettings"
 
-//
 type InvoiceUpdateInvoiceSettingsRequestBody struct {
 	AdditionalEmailRecipients []string                  `json:"additionalEmailRecipients,omitempty"`
 	InvoicePeriod             int64                     `json:"invoicePeriod"`

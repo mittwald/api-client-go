@@ -16,7 +16,6 @@ import (
 //required:
 //    - "id"
 
-//
 type CreateCronjobResponse struct {
 	Id uuid.UUID `json:"id"`
 }

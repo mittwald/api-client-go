@@ -57,7 +57,6 @@ import (
 //    - "contributorId"
 //    - "name"
 
-//
 type OwnExtension struct {
 	BackendComponents    *BackendComponents          `json:"backendComponents,omitempty"`
 	Blocked              *bool                       `json:"blocked,omitempty"`

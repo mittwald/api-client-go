@@ -14,7 +14,6 @@ import "time"
 //required:
 //    - "createdAt"
 
-//
 type CustomerActiveSuspension struct {
 	CreatedAt time.Time `json:"createdAt"`
 }

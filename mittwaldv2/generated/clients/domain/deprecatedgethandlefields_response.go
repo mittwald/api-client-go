@@ -15,7 +15,6 @@ import "fmt"
 //required:
 //    - "jsonSchemaOwnerC"
 
-//
 type DeprecatedGetHandleFieldsResponse struct {
 	JsonSchemaAdminC *DeprecatedGetHandleFieldsResponseJsonSchemaAdminC `json:"jsonSchemaAdminC,omitempty"`
 	JsonSchemaOwnerC DeprecatedGetHandleFieldsResponseJsonSchemaOwnerC  `json:"jsonSchemaOwnerC"`

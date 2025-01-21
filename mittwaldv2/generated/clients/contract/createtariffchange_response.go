@@ -10,7 +10,6 @@ package contract
 //required:
 //    - "orderId"
 
-//
 type CreateTariffChangeResponse struct {
 	OrderId string `json:"orderId"`
 }

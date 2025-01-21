@@ -23,7 +23,6 @@ import "time"
 //    - "refreshToken"
 //    - "expiresAt"
 
-//
 type RefreshSessionResponse struct {
 	ExpiresAt    time.Time `json:"expiresAt"`
 	RefreshToken string    `json:"refreshToken"`

@@ -25,7 +25,6 @@ package orderv1
 //    - "feePrice"
 //    - "domainContractDuration"
 
-//
 type DomainOrderPreviewResponse struct {
 	DomainContractDuration float64 `json:"domainContractDuration"`
 	DomainPrice            float64 `json:"domainPrice"`

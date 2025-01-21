@@ -26,7 +26,6 @@ import "time"
 //    - "scheduledAtDate"
 //    - "targetDate"
 
-//
 type Termination struct {
 	CancellationForbidden *bool     `json:"cancellationForbidden,omitempty"`
 	Reason                *string   `json:"reason,omitempty"`

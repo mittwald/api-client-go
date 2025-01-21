@@ -21,7 +21,6 @@ import (
 //required:
 //    - "role"
 
-//
 type UpdateCustomerMembershipRequestBody struct {
 	ExpiresAt *time.Time                 `json:"expiresAt,omitempty"`
 	Role      membershipv1.CustomerRoles `json:"role"`

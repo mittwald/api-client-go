@@ -20,7 +20,6 @@ import "errors"
 //    - "blacklistEntries"
 //    - "whitelistEntries"
 
-//
 type MigrationFinalizeJobProjectSetting struct {
 	BlacklistEntries []string `json:"blacklistEntries"`
 	WhitelistEntries []string `json:"whitelistEntries"`

@@ -14,7 +14,6 @@ import "time"
 //required:
 //    - "expires"
 
-//
 type AuthCode2 struct {
 	Expires time.Time `json:"expires"`
 }

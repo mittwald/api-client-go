@@ -12,7 +12,6 @@ package marketplacev1
 //required:
 //    - "url"
 
-//
 type BackendComponent struct {
 	Url string `json:"url"`
 }

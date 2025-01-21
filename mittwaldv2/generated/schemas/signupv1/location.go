@@ -16,7 +16,6 @@ package signupv1
 //        type: "string"
 //        format: "ipv4"
 
-//
 type Location struct {
 	City      *string `json:"city,omitempty"`
 	Country   *string `json:"country,omitempty"`

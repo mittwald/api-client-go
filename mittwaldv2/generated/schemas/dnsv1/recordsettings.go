@@ -13,7 +13,6 @@ import "fmt"
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.dns.TtlSeconds"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.dns.TtlAuto"}
 
-//
 type RecordSettings struct {
 	Ttl *RecordSettingsTtl `json:"ttl,omitempty"`
 }

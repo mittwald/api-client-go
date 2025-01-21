@@ -17,7 +17,6 @@ import (
 //    - "certificateId"
 //additionalProperties: false
 
-//
 type UpdateIngressTLSRequestBodyAlternative2 struct {
 	CertificateId uuid.UUID `json:"certificateId"`
 }

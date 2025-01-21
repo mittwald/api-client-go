@@ -8,7 +8,6 @@ package conversation
 //    "messageContent":
 //        type: "string"
 
-//
 type UpdateMessageRequestBody struct {
 	MessageContent *string `json:"messageContent,omitempty"`
 }

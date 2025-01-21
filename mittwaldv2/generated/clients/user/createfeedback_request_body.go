@@ -35,7 +35,6 @@ import "fmt"
 //required:
 //    - "subject"
 
-//
 type CreateFeedbackRequestBody struct {
 	Message *string                        `json:"message,omitempty"`
 	Origin  *string                        `json:"origin,omitempty"`

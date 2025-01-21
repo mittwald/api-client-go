@@ -19,7 +19,6 @@ import "fmt"
 //    - "quotaInBytes"
 //    - "mailsystem"
 
-//
 type Mailbox struct {
 	Mailsystem     MailSystemSettings `json:"mailsystem"`
 	Name           string             `json:"name"`

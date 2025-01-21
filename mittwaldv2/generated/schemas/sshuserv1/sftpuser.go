@@ -54,7 +54,7 @@ import (
 //    - "hasPassword"
 //description: "A representation of an SFTPUser."
 
-//A representation of an SFTPUser.
+// A representation of an SFTPUser.
 type SftpUser struct {
 	AccessLevel   AccessLevel `json:"accessLevel"`
 	Active        *bool       `json:"active,omitempty"`

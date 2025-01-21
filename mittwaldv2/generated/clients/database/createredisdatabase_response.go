@@ -16,7 +16,6 @@ import (
 //required:
 //    - "id"
 
-//
 type CreateRedisDatabaseResponse struct {
 	Id uuid.UUID `json:"id"`
 }

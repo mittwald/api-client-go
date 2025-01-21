@@ -19,7 +19,6 @@ import (
 //    "title":
 //        type: "string"
 
-//
 type UpdateConversationRequestBody struct {
 	CategoryId *uuid.UUID                                `json:"categoryId,omitempty"`
 	RelatedTo  *conversationv1.RelatedAggregateReference `json:"relatedTo,omitempty"`

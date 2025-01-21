@@ -23,7 +23,6 @@ package projectv1
 //required:
 //    - "storage"
 
-//
 type HardwareSpec struct {
 	Cpu     *string `json:"cpu,omitempty"`
 	Mem     *string `json:"mem,omitempty"`

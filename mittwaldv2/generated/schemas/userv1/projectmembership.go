@@ -30,7 +30,6 @@ import (
 //    - "memberSince"
 //    - "inherited"
 
-//
 type ProjectMembership struct {
 	ExpiresAt   *time.Time            `json:"expiresAt,omitempty"`
 	Inherited   bool                  `json:"inherited"`

@@ -22,7 +22,6 @@ import (
 //    - "settings"
 //    - "records"
 
-//
 type RecordMXCustom struct {
 	Records  []RecordMXRecord `json:"records"`
 	Settings RecordSettings   `json:"settings"`

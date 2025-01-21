@@ -23,7 +23,6 @@ import (
 //    - "id"
 //    - "status"
 
-//
 type RequestedFile struct {
 	Id     uuid.UUID           `json:"id"`
 	Status RequestedFileStatus `json:"status"`

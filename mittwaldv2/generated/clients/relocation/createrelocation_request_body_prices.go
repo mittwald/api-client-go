@@ -32,7 +32,6 @@ import (
 //    - "positions"
 //    - "total"
 
-//
 type CreateRelocationRequestBodyPrices struct {
 	Positions []CreateRelocationRequestBodyPricesPositionsItem `json:"positions"`
 	Total     float64                                          `json:"total"`

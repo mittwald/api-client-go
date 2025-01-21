@@ -28,7 +28,6 @@ package notification
 //    - "warning"
 //    - "error"
 
-//
 type CountUnreadNotificationsResponse struct {
 	Error   int64 `json:"error"`
 	Info    int64 `json:"info"`

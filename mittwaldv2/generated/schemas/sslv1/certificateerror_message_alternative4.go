@@ -11,7 +11,7 @@ import "fmt"
 //    - "certificate_self_signed"
 //description: "The certificate is self-signed."
 
-//The certificate is self-signed.
+// The certificate is self-signed.
 type CertificateErrorMessageAlternative4 string
 
 const CertificateErrorMessageAlternative4Certificateselfsigned CertificateErrorMessageAlternative4 = "certificate_self_signed"

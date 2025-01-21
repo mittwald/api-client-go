@@ -28,7 +28,6 @@ import "fmt"
 //        maximum: 86400
 //        minimum: 1
 
-//
 type UpdateCronjobRequestBody struct {
 	Active      *bool                                `json:"active,omitempty"`
 	Description *string                              `json:"description,omitempty"`

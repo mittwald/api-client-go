@@ -30,7 +30,6 @@ import "fmt"
 //    - "type"
 //    - "message"
 
-//
 type InvoiceSettingsStatus struct {
 	Message  string                        `json:"message"`
 	Severity InvoiceSettingsStatusSeverity `json:"severity"`

@@ -23,7 +23,6 @@ import "fmt"
 //    - "password"
 //    - "accessLevel"
 
-//
 type CreateMySqlUserWithDatabase struct {
 	AccessIpMask   *string                                `json:"accessIpMask,omitempty"`
 	AccessLevel    CreateMySqlUserWithDatabaseAccessLevel `json:"accessLevel"`

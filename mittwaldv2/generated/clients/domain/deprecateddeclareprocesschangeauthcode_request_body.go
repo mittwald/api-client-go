@@ -11,7 +11,6 @@ package domain
 //required:
 //    - "authCode"
 
-//
 type DeprecatedDeclareProcessChangeAuthcodeRequestBody struct {
 	AuthCode string `json:"authCode"`
 }

@@ -21,7 +21,6 @@ package backup
 //    - "ttl"
 //    - "schedule"
 
-//
 type CreateProjectBackupScheduleRequestBody struct {
 	Description *string `json:"description,omitempty"`
 	Schedule    string  `json:"schedule"`

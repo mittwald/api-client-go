@@ -16,7 +16,6 @@ import (
 //required:
 //    - "appId"
 
-//
 type UpdateCronjobAppIDRequestBody struct {
 	AppId uuid.UUID `json:"appId"`
 }

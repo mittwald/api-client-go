@@ -22,7 +22,6 @@ import "time"
 //    - "performanceScore"
 //    - "createdAt"
 
-//
 type ListPerformanceDataForProjectResponseItemPathsItem struct {
 	CreatedAt         time.Time `json:"createdAt"`
 	Path              string    `json:"path"`

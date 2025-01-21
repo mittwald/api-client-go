@@ -13,7 +13,7 @@ package feev1
 //    - "price"
 //description: "A strategy for fees that occur once."
 
-//A strategy for fees that occur once.
+// A strategy for fees that occur once.
 type OneTimePaymentFeeStrategy struct {
 	Price float64 `json:"price"`
 }

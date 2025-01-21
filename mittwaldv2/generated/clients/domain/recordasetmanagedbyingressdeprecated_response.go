@@ -16,7 +16,6 @@ import (
 //required:
 //    - "ingressId"
 
-//
 type RecordASetManagedByIngressDeprecatedResponse struct {
 	IngressId uuid.UUID `json:"ingressId"`
 }

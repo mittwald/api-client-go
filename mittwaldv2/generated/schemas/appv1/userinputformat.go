@@ -14,7 +14,7 @@ import "fmt"
 //    - "uri"
 //description: "UserInputFormat is an enum, describing the possible data formats of a UserInput, the given values can be validated against."
 
-//UserInputFormat is an enum, describing the possible data formats of a UserInput, the given values can be validated against.
+// UserInputFormat is an enum, describing the possible data formats of a UserInput, the given values can be validated against.
 type UserInputFormat string
 
 const UserInputFormatEmail UserInputFormat = "email"

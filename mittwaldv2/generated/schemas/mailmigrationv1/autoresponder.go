@@ -18,7 +18,6 @@ package mailmigrationv1
 //    - "active"
 //    - "message"
 
-//
 type AutoResponder struct {
 	Active    bool   `json:"active"`
 	ExpiresAt *any   `json:"expiresAt,omitempty"`

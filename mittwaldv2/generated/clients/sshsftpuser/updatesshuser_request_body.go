@@ -27,7 +27,6 @@ import (
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.sshuser.PublicKey"}
 
-//
 type UpdateSSHUserRequestBody struct {
 	Active      *bool                 `json:"active,omitempty"`
 	Description *string               `json:"description,omitempty"`

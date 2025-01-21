@@ -20,7 +20,6 @@ import "time"
 //required:
 //    - "monthlyPrice"
 
-//
 type PeriodBasedFeeStrategyPeriodsItem struct {
 	FeeValidFrom  *time.Time `json:"feeValidFrom,omitempty"`
 	FeeValidUntil *time.Time `json:"feeValidUntil,omitempty"`

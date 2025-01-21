@@ -20,7 +20,6 @@ package misc
 //    - "sub"
 //    - "exp"
 
-//
 type ServicetokenAuthenticateServiceResponseAccessTokenJwtClaims struct {
 	Exp string `json:"exp"`
 	Iat string `json:"iat"`

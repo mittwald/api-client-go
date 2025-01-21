@@ -13,7 +13,6 @@ package domain
 //required:
 //    - "certificate"
 
-//
 type CheckReplaceCertificateRequestBody struct {
 	Certificate string  `json:"certificate"`
 	PrivateKey  *string `json:"privateKey,omitempty"`

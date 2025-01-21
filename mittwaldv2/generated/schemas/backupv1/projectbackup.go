@@ -43,7 +43,6 @@ import (
 //    - "status"
 //    - "deletable"
 
-//
 type ProjectBackup struct {
 	CreatedAt   *time.Time           `json:"createdAt,omitempty"`
 	Deletable   bool                 `json:"deletable"`

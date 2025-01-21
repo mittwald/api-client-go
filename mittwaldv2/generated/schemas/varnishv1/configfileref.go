@@ -14,7 +14,6 @@ import "fmt"
 //required:
 //    - "refId"
 
-//
 type ConfigFileRef struct {
 	Meta  *ConfigFileMetadata `json:"meta,omitempty"`
 	RefId string              `json:"refId"`

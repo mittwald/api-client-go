@@ -12,7 +12,6 @@ import "fmt"
 //required:
 //    - "requirements"
 
-//
 type MigrationMailboxJobMigrate struct {
 	Requirements MigrateMailboxCommandRequirements `json:"requirements"`
 }

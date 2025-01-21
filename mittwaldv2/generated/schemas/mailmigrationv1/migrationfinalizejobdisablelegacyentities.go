@@ -20,7 +20,6 @@ import "errors"
 //    - "mailboxNames"
 //    - "addresses"
 
-//
 type MigrationFinalizeJobDisableLegacyEntities struct {
 	Addresses    []string `json:"addresses"`
 	MailboxNames []string `json:"mailboxNames"`

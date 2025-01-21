@@ -15,7 +15,6 @@ import "fmt"
 //    - "requirements"
 //    - "finished"
 
-//
 type MigrationMailAddressMigrationJobMigrate struct {
 	Finished     bool                                  `json:"finished"`
 	Requirements MigrateMailAddressCommandRequirements `json:"requirements"`

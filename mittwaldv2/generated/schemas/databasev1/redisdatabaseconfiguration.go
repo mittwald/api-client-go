@@ -28,7 +28,7 @@ import "fmt"
 //        description: "Persistent status of the database."
 //description: "The configuration for a RedisDatabase."
 
-//The configuration for a RedisDatabase.
+// The configuration for a RedisDatabase.
 type RedisDatabaseConfiguration struct {
 	AdditionalFlags []string `json:"additionalFlags,omitempty"`
 	MaxMemory       *string  `json:"maxMemory,omitempty"`

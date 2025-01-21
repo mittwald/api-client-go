@@ -14,7 +14,7 @@ import "fmt"
 //description: "the users title"
 //deprecated: true
 
-//the users title
+// the users title
 type ProfileTitle string
 
 const ProfileTitleOther ProfileTitle = "other"

@@ -13,7 +13,7 @@ import "fmt"
 //description: "The desired format to export the ProjectBackup in."
 //example: "tar"
 
-//The desired format to export the ProjectBackup in.
+// The desired format to export the ProjectBackup in.
 type CreateProjectBackupExportRequestBodyFormat string
 
 const CreateProjectBackupExportRequestBodyFormatTar CreateProjectBackupExportRequestBodyFormat = "tar"

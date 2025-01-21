@@ -23,7 +23,6 @@ package conversationv1
 //    - "providerUsername"
 //    - "providerPassword"
 
-//
 type ServiceRequestRelocationPayloadSource struct {
 	ProviderName     string `json:"providerName"`
 	ProviderPassword string `json:"providerPassword"`

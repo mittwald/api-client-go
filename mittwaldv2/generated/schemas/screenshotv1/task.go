@@ -35,7 +35,6 @@ import (
 //    - "target"
 //    - "priority"
 
-//
 type Task struct {
 	ExecutedAt    *time.Time         `json:"executedAt,omitempty"`
 	FileReference *string            `json:"fileReference,omitempty"`

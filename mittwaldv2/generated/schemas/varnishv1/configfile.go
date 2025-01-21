@@ -15,7 +15,6 @@ import "fmt"
 //required:
 //    - "content"
 
-//
 type ConfigFile struct {
 	Content string              `json:"content"`
 	Meta    *ConfigFileMetadata `json:"meta,omitempty"`

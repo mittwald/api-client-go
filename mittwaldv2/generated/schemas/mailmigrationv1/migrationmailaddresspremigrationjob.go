@@ -21,7 +21,6 @@ import (
 //    - "deliveryMigrations"
 //    - "aliasSet"
 
-//
 type MigrationMailAddressPreMigrationJob struct {
 	AliasSet           []MigrationMailAddressPreMigrationJobAliasSet          `json:"aliasSet"`
 	DeliveryMigrations []MigrationMailAddressPreMigrationJobDeliveryMigration `json:"deliveryMigrations"`

@@ -36,7 +36,6 @@ import (
 //    - "shouldShow"
 //    - "status"
 
-//
 type UserPollSettings struct {
 	CompletedAt   *time.Time             `json:"completedAt,omitempty"`
 	DontShowUntil *time.Time             `json:"dontShowUntil,omitempty"`

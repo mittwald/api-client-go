@@ -16,7 +16,6 @@ import (
 //required:
 //    - "status"
 
-//
 type ReadAllNotificationsDeprecatedResponse struct {
 	Status messagingv1.NotificationStatus `json:"status"`
 }

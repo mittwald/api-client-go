@@ -63,7 +63,6 @@ import (
 //    - "path"
 //    - "performanceScore"
 
-//
 type GetPerformanceDataResponse struct {
 	CreatedAt         *time.Time                              `json:"createdAt,omitempty"`
 	Domain            string                                  `json:"domain"`

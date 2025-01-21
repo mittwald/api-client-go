@@ -13,7 +13,6 @@ package orderv1
 //        type: "number"
 //        example: 1
 
-//
 type HardwareSpec struct {
 	Ram  *float64 `json:"ram,omitempty"`
 	Vcpu *float64 `json:"vcpu,omitempty"`

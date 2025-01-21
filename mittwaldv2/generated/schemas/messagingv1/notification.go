@@ -39,7 +39,6 @@ import (
 //    - "read"
 //    - "createdAt"
 
-//
 type Notification struct {
 	CreatedAt time.Time            `json:"createdAt"`
 	Id        uuid.UUID            `json:"id"`

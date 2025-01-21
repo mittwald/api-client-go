@@ -61,7 +61,6 @@ import (
 //    - "usesDefaultNameserver"
 //    - "hasAuthCode"
 
-//
 type Domain struct {
 	AuthCode              *AuthCode     `json:"authCode,omitempty"`
 	AuthCode2             *AuthCode2    `json:"authCode2,omitempty"`

@@ -63,7 +63,6 @@ import (
 //    - "status"
 //    - "statusSetAt"
 
-//
 type MySqlUser struct {
 	AccessIpMask      *string              `json:"accessIpMask,omitempty"`
 	AccessLevel       MySqlUserAccessLevel `json:"accessLevel"`

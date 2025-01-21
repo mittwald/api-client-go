@@ -25,7 +25,6 @@ package user
 //    - "email"
 //    - "password"
 
-//
 type AuthenticateMFARequestBody struct {
 	Email           string `json:"email"`
 	MultiFactorCode string `json:"multiFactorCode"`

@@ -14,7 +14,6 @@ package mail
 //    - "description"
 //    - "password"
 
-//
 type CreateDeliveryboxRequestBody struct {
 	Description string `json:"description"`
 	Password    string `json:"password"`

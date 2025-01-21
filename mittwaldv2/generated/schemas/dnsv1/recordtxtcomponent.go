@@ -23,7 +23,6 @@ import (
 //    - "entries"
 //additionalProperties: false
 
-//
 type RecordTXTComponent struct {
 	Entries  []string       `json:"entries"`
 	Settings RecordSettings `json:"settings"`

@@ -15,7 +15,6 @@ import "errors"
 //required:
 //    - "domains"
 
-//
 type SuggestedDomains struct {
 	Domains []string `json:"domains"`
 }

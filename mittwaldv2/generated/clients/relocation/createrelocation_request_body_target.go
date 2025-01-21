@@ -41,7 +41,6 @@ import "fmt"
 //    - "system"
 //    - "product"
 
-//
 type CreateRelocationRequestBodyTarget struct {
 	Organisation string                                   `json:"organisation"`
 	Product      CreateRelocationRequestBodyTargetProduct `json:"product"`

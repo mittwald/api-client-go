@@ -12,7 +12,6 @@ package sshuserv1
 //required:
 //    - "password"
 
-//
 type AuthenticationAlternative1 struct {
 	Password string `json:"password"`
 }

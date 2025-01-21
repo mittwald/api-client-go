@@ -45,7 +45,6 @@ import (
 //    - "price"
 //    - "isInclusive"
 
-//
 type OrderItem struct {
 	Addons                      []Addons                 `json:"addons,omitempty"`
 	ArticleId                   string                   `json:"articleId"`

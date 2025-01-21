@@ -20,7 +20,6 @@ package notification
 //    - "active"
 //    - "registered"
 
-//
 type NewsletterGetInfoResponse struct {
 	Active     bool   `json:"active"`
 	Email      string `json:"email"`

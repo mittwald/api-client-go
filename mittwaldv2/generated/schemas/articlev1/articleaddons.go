@@ -26,7 +26,6 @@ import "fmt"
 //    - "key"
 //    - "value"
 
-//
 type ArticleAddons struct {
 	Hidden         *bool                        `json:"hidden,omitempty"`
 	Key            string                       `json:"key"`

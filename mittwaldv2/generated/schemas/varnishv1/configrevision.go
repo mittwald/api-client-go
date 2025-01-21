@@ -30,7 +30,6 @@ import (
 //    - "updated"
 //    - "files"
 
-//
 type ConfigRevision struct {
 	Expire   *int64          `json:"expire,omitempty"`
 	Files    []ConfigFileRef `json:"files"`

@@ -18,7 +18,6 @@ import "fmt"
 //    - "uninstallImage"
 //    - "reconfigureImage"
 
-//
 type AppJobImages struct {
 	ReconfigureImage AppJobImage `json:"reconfigureImage"`
 	SetupImage       AppJobImage `json:"setupImage"`

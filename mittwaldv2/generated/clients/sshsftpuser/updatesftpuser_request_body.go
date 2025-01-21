@@ -37,7 +37,6 @@ import (
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.sshuser.PublicKey"}
 
-//
 type UpdateSFTPUserRequestBody struct {
 	AccessLevel *UpdateSFTPUserRequestBodyAccessLevel `json:"accessLevel,omitempty"`
 	Active      *bool                                 `json:"active,omitempty"`

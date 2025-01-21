@@ -20,7 +20,6 @@ import "fmt"
 //    - "userId"
 //    - "status"
 
-//
 type PostPollStatusRequestBody struct {
 	Status PostPollStatusRequestBodyStatus `json:"status"`
 	UserId string                          `json:"userId"`

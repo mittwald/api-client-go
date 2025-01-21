@@ -11,7 +11,6 @@ package conversationv1
 //    "price":
 //        type: "number"
 
-//
 type ServiceRequestRelocationPayloadTargetPricesItem struct {
 	Name  *string  `json:"name,omitempty"`
 	Price *float64 `json:"price,omitempty"`

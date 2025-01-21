@@ -33,7 +33,6 @@ import (
 //    - "roles"
 //    - "description"
 
-//
 type CreateAPITokenRequestBody struct {
 	Description string                               `json:"description"`
 	ExpiresAt   *time.Time                           `json:"expiresAt,omitempty"`

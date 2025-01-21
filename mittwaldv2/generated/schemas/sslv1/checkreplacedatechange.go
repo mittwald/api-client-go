@@ -18,7 +18,6 @@ import "time"
 //    - "oldValue"
 //    - "newValue"
 
-//
 type CheckReplaceDateChange struct {
 	NewValue time.Time `json:"newValue"`
 	OldValue time.Time `json:"oldValue"`

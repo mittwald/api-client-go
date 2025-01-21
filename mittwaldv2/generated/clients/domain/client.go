@@ -262,7 +262,7 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
-//Get File Service Reference for a Screenshot of a domain.
+// Get File Service Reference for a Screenshot of a domain.
 func (c *clientImpl) DeprecatedGetScreenshotForDomain(
 	ctx context.Context,
 	req DeprecatedGetScreenshotForDomainRequest,
@@ -289,7 +289,7 @@ func (c *clientImpl) DeprecatedGetScreenshotForDomain(
 	return &response, httpRes, nil
 }
 
-//Create a DNSZone.
+// Create a DNSZone.
 func (c *clientImpl) CreateDNSZone(
 	ctx context.Context,
 	req CreateDNSZoneRequest,
@@ -316,7 +316,7 @@ func (c *clientImpl) CreateDNSZone(
 	return &response, httpRes, nil
 }
 
-//Get a DNSZone.
+// Get a DNSZone.
 func (c *clientImpl) GetDNSZone(
 	ctx context.Context,
 	req GetDNSZoneRequest,
@@ -343,7 +343,7 @@ func (c *clientImpl) GetDNSZone(
 	return &response, httpRes, nil
 }
 
-//Delete a DNSZone.
+// Delete a DNSZone.
 func (c *clientImpl) DeleteDNSZone(
 	ctx context.Context,
 	req DeleteDNSZoneRequest,
@@ -366,7 +366,7 @@ func (c *clientImpl) DeleteDNSZone(
 	return httpRes, nil
 }
 
-//List DNSZones belonging to a Project.
+// List DNSZones belonging to a Project.
 func (c *clientImpl) ListDNSZones(
 	ctx context.Context,
 	req ListDNSZonesRequest,
@@ -393,7 +393,7 @@ func (c *clientImpl) ListDNSZones(
 	return &response, httpRes, nil
 }
 
-//updates a-records for a specific zone
+// updates a-records for a specific zone
 func (c *clientImpl) RecordASetCustomDeprecated(
 	ctx context.Context,
 	req RecordASetCustomDeprecatedRequest,
@@ -416,7 +416,7 @@ func (c *clientImpl) RecordASetCustomDeprecated(
 	return httpRes, nil
 }
 
-//set a-records managed by ingress for a specific zone
+// set a-records managed by ingress for a specific zone
 func (c *clientImpl) RecordASetManagedByIngressDeprecated(
 	ctx context.Context,
 	req RecordASetManagedByIngressDeprecatedRequest,
@@ -443,7 +443,7 @@ func (c *clientImpl) RecordASetManagedByIngressDeprecated(
 	return &response, httpRes, nil
 }
 
-//updates cname-record for a specific zone
+// updates cname-record for a specific zone
 func (c *clientImpl) RecordCnameSetDeprecated(
 	ctx context.Context,
 	req RecordCnameSetDeprecatedRequest,
@@ -466,7 +466,7 @@ func (c *clientImpl) RecordCnameSetDeprecated(
 	return httpRes, nil
 }
 
-//updates mx-records for a specific zone
+// updates mx-records for a specific zone
 func (c *clientImpl) RecordMxSetCustomDeprecated(
 	ctx context.Context,
 	req RecordMxSetCustomDeprecatedRequest,
@@ -489,7 +489,7 @@ func (c *clientImpl) RecordMxSetCustomDeprecated(
 	return httpRes, nil
 }
 
-//sets mx-records to managed for a specific zone
+// sets mx-records to managed for a specific zone
 func (c *clientImpl) RecordMxSetManagedDeprecated(
 	ctx context.Context,
 	req RecordMxSetManagedDeprecatedRequest,
@@ -512,7 +512,7 @@ func (c *clientImpl) RecordMxSetManagedDeprecated(
 	return httpRes, nil
 }
 
-//updates srv-records for a specific zone
+// updates srv-records for a specific zone
 func (c *clientImpl) RecordSrvSetDeprecated(
 	ctx context.Context,
 	req RecordSrvSetDeprecatedRequest,
@@ -535,7 +535,7 @@ func (c *clientImpl) RecordSrvSetDeprecated(
 	return httpRes, nil
 }
 
-//updates txt-records for a specific zone
+// updates txt-records for a specific zone
 func (c *clientImpl) RecordTxtSetDeprecated(
 	ctx context.Context,
 	req RecordTxtSetDeprecatedRequest,
@@ -558,7 +558,7 @@ func (c *clientImpl) RecordTxtSetDeprecated(
 	return httpRes, nil
 }
 
-//Set a record set on a DNSZone to managed.
+// Set a record set on a DNSZone to managed.
 func (c *clientImpl) SetRecordSetManaged(
 	ctx context.Context,
 	req SetRecordSetManagedRequest,
@@ -585,7 +585,7 @@ func (c *clientImpl) SetRecordSetManaged(
 	return &response, httpRes, nil
 }
 
-//Update a record set on a DNSZone.
+// Update a record set on a DNSZone.
 func (c *clientImpl) UpdateRecordSet(
 	ctx context.Context,
 	req UpdateRecordSetRequest,
@@ -608,9 +608,9 @@ func (c *clientImpl) UpdateRecordSet(
 	return httpRes, nil
 }
 
-//Abort a Domain declaration.
+// Abort a Domain declaration.
 //
-//Abort an incomplete Domain registration/transfer.
+// Abort an incomplete Domain registration/transfer.
 func (c *clientImpl) AbortDomainDeclaration(
 	ctx context.Context,
 	req AbortDomainDeclarationRequest,
@@ -633,9 +633,9 @@ func (c *clientImpl) AbortDomainDeclaration(
 	return httpRes, nil
 }
 
-//Check if a Domain is available to register.
+// Check if a Domain is available to register.
 //
-//If false, you have to start a transfer with an auth code instead.
+// If false, you have to start a transfer with an auth code instead.
 func (c *clientImpl) CheckDomainRegistrability(
 	ctx context.Context,
 	req CheckDomainRegistrabilityRequest,
@@ -662,9 +662,9 @@ func (c *clientImpl) CheckDomainRegistrability(
 	return &response, httpRes, nil
 }
 
-//Check if a Domain is available to transfer.
+// Check if a Domain is available to transfer.
 //
-//For some TLDs (e.g., .de), transferability cannot be evaluated. In these cases, transferable = true is returned.
+// For some TLDs (e.g., .de), transferability cannot be evaluated. In these cases, transferable = true is returned.
 func (c *clientImpl) CheckDomainTransferability(
 	ctx context.Context,
 	req CheckDomainTransferabilityRequest,
@@ -691,7 +691,7 @@ func (c *clientImpl) CheckDomainTransferability(
 	return &response, httpRes, nil
 }
 
-//Create an auth code for a Domains transfer-out process.
+// Create an auth code for a Domains transfer-out process.
 func (c *clientImpl) CreateDomainAuthCode(
 	ctx context.Context,
 	req CreateDomainAuthCodeRequest,
@@ -718,7 +718,7 @@ func (c *clientImpl) CreateDomainAuthCode(
 	return &response, httpRes, nil
 }
 
-//Get a Domain.
+// Get a Domain.
 func (c *clientImpl) GetDomain(
 	ctx context.Context,
 	req GetDomainRequest,
@@ -745,7 +745,7 @@ func (c *clientImpl) GetDomain(
 	return &response, httpRes, nil
 }
 
-//Delete a Domain.
+// Delete a Domain.
 func (c *clientImpl) DeleteDomain(
 	ctx context.Context,
 	req DeleteDomainRequest,
@@ -772,7 +772,7 @@ func (c *clientImpl) DeleteDomain(
 	return &response, httpRes, nil
 }
 
-//Get the latest screenshot's FileReference belonging to a Domain.
+// Get the latest screenshot's FileReference belonging to a Domain.
 func (c *clientImpl) GetLatestScreenshot(
 	ctx context.Context,
 	req GetLatestScreenshotRequest,
@@ -799,7 +799,7 @@ func (c *clientImpl) GetLatestScreenshot(
 	return &response, httpRes, nil
 }
 
-//List Domains
+// List Domains
 func (c *clientImpl) ListDomains(
 	ctx context.Context,
 	req ListDomainsRequest,
@@ -826,9 +826,9 @@ func (c *clientImpl) ListDomains(
 	return &response, httpRes, nil
 }
 
-//Check if a Domain is available to register.
+// Check if a Domain is available to register.
 //
-//This operation is deprecated. Use the POST /v2/domain-registrable endpoint instead.
+// This operation is deprecated. Use the POST /v2/domain-registrable endpoint instead.
 func (c *clientImpl) DeprecatedCheckDomainRegistrability(
 	ctx context.Context,
 	req DeprecatedCheckDomainRegistrabilityRequest,
@@ -855,9 +855,9 @@ func (c *clientImpl) DeprecatedCheckDomainRegistrability(
 	return &response, httpRes, nil
 }
 
-//List the contact schemas for a TLD.
+// List the contact schemas for a TLD.
 //
-//List the contact schemas describing the fields required to register/transfer a Domain.
+// List the contact schemas describing the fields required to register/transfer a Domain.
 func (c *clientImpl) ListTldContactSchemas(
 	ctx context.Context,
 	req ListTldContactSchemasRequest,
@@ -884,9 +884,9 @@ func (c *clientImpl) ListTldContactSchemas(
 	return &response, httpRes, nil
 }
 
-//List TLDs.
+// List TLDs.
 //
-//List the top level domains currently supported by our API.
+// List the top level domains currently supported by our API.
 func (c *clientImpl) ListTlds(
 	ctx context.Context,
 	req ListTldsRequest,
@@ -913,9 +913,9 @@ func (c *clientImpl) ListTlds(
 	return &response, httpRes, nil
 }
 
-//Resend a Domain email.
+// Resend a Domain email.
 //
-//Trigger a resend of a confirmation or registrant verification email. Has no effect on .de Domains.
+// Trigger a resend of a confirmation or registrant verification email. Has no effect on .de Domains.
 func (c *clientImpl) ResendDomainEmail(
 	ctx context.Context,
 	req ResendDomainEmailRequest,
@@ -938,7 +938,7 @@ func (c *clientImpl) ResendDomainEmail(
 	return httpRes, nil
 }
 
-//Suggest a list of domains based on a prompt using AI.
+// Suggest a list of domains based on a prompt using AI.
 func (c *clientImpl) Suggest(
 	ctx context.Context,
 	req SuggestRequest,
@@ -965,9 +965,9 @@ func (c *clientImpl) Suggest(
 	return &response, httpRes, nil
 }
 
-//Update the auth code of a Domain.
+// Update the auth code of a Domain.
 //
-//Update an incorrect auth code of an ongoing/failed Domain transfer. This route will also restart the transfer itself.
+// Update an incorrect auth code of an ongoing/failed Domain transfer. This route will also restart the transfer itself.
 func (c *clientImpl) UpdateDomainAuthCode(
 	ctx context.Context,
 	req UpdateDomainAuthCodeRequest,
@@ -994,7 +994,7 @@ func (c *clientImpl) UpdateDomainAuthCode(
 	return &response, httpRes, nil
 }
 
-//Update a contact of a Domain.
+// Update a contact of a Domain.
 func (c *clientImpl) UpdateDomainContact(
 	ctx context.Context,
 	req UpdateDomainContactRequest,
@@ -1021,9 +1021,9 @@ func (c *clientImpl) UpdateDomainContact(
 	return &response, httpRes, nil
 }
 
-//Change all nameservers of a Domain.
+// Change all nameservers of a Domain.
 //
-//This operation is deprecated. Use the PATCH /v2/domains/{domainId}/nameservers endpoint instead.
+// This operation is deprecated. Use the PATCH /v2/domains/{domainId}/nameservers endpoint instead.
 func (c *clientImpl) DeprecatedDeclareNameservers(
 	ctx context.Context,
 	req DeprecatedDeclareNameserversRequest,
@@ -1046,7 +1046,7 @@ func (c *clientImpl) DeprecatedDeclareNameservers(
 	return httpRes, nil
 }
 
-//Update the nameservers of a Domain.
+// Update the nameservers of a Domain.
 func (c *clientImpl) UpdateDomainNameservers(
 	ctx context.Context,
 	req UpdateDomainNameserversRequest,
@@ -1069,7 +1069,7 @@ func (c *clientImpl) UpdateDomainNameservers(
 	return httpRes, nil
 }
 
-//Update a Domain's project id.
+// Update a Domain's project id.
 func (c *clientImpl) UpdateDomainProjectID(
 	ctx context.Context,
 	req UpdateDomainProjectIDRequest,
@@ -1092,7 +1092,7 @@ func (c *clientImpl) UpdateDomainProjectID(
 	return httpRes, nil
 }
 
-//List Ingresses.
+// List Ingresses.
 func (c *clientImpl) ListIngresses(
 	ctx context.Context,
 	req ListIngressesRequest,
@@ -1119,7 +1119,7 @@ func (c *clientImpl) ListIngresses(
 	return &response, httpRes, nil
 }
 
-//Create an Ingress.
+// Create an Ingress.
 func (c *clientImpl) CreateIngress(
 	ctx context.Context,
 	req CreateIngressRequest,
@@ -1146,7 +1146,7 @@ func (c *clientImpl) CreateIngress(
 	return &response, httpRes, nil
 }
 
-//Get an Ingress.
+// Get an Ingress.
 func (c *clientImpl) GetIngress(
 	ctx context.Context,
 	req GetIngressRequest,
@@ -1173,7 +1173,7 @@ func (c *clientImpl) GetIngress(
 	return &response, httpRes, nil
 }
 
-//Delete an Ingress.
+// Delete an Ingress.
 func (c *clientImpl) DeleteIngress(
 	ctx context.Context,
 	req DeleteIngressRequest,
@@ -1196,7 +1196,7 @@ func (c *clientImpl) DeleteIngress(
 	return httpRes, nil
 }
 
-//Verifiy the ownership of an Ingress.
+// Verifiy the ownership of an Ingress.
 func (c *clientImpl) IngressVerifyOwnership(
 	ctx context.Context,
 	req IngressVerifyOwnershipRequest,
@@ -1223,9 +1223,9 @@ func (c *clientImpl) IngressVerifyOwnership(
 	return &response, httpRes, nil
 }
 
-//List Ingresses compatible with a certificate.
+// List Ingresses compatible with a certificate.
 //
-//List Ingresses in a Project compatible with a certificate.
+// List Ingresses in a Project compatible with a certificate.
 func (c *clientImpl) ListIngressesCompatibleWithCertificate(
 	ctx context.Context,
 	req ListIngressesCompatibleWithCertificateRequest,
@@ -1252,7 +1252,7 @@ func (c *clientImpl) ListIngressesCompatibleWithCertificate(
 	return &response, httpRes, nil
 }
 
-//List Ingresses belonging to a project.
+// List Ingresses belonging to a project.
 func (c *clientImpl) ListIngressesV2Deprecated(
 	ctx context.Context,
 	req ListIngressesV2DeprecatedRequest,
@@ -1279,7 +1279,7 @@ func (c *clientImpl) ListIngressesV2Deprecated(
 	return &response, httpRes, nil
 }
 
-//Update an Ingresses paths.
+// Update an Ingresses paths.
 func (c *clientImpl) PathsDeprecated(
 	ctx context.Context,
 	req PathsDeprecatedRequest,
@@ -1302,7 +1302,7 @@ func (c *clientImpl) PathsDeprecated(
 	return httpRes, nil
 }
 
-//Update the paths of an Ingress.
+// Update the paths of an Ingress.
 func (c *clientImpl) UpdateIngressPaths(
 	ctx context.Context,
 	req UpdateIngressPathsRequest,
@@ -1325,7 +1325,7 @@ func (c *clientImpl) UpdateIngressPaths(
 	return httpRes, nil
 }
 
-//Request the ACME certificate issuance of an Ingress.
+// Request the ACME certificate issuance of an Ingress.
 func (c *clientImpl) RequestIngressAcmeCertificateIssuance(
 	ctx context.Context,
 	req RequestIngressAcmeCertificateIssuanceRequest,
@@ -1348,7 +1348,7 @@ func (c *clientImpl) RequestIngressAcmeCertificateIssuance(
 	return httpRes, nil
 }
 
-//Update an Ingresses tls settings.
+// Update an Ingresses tls settings.
 func (c *clientImpl) TLSDeprecated(
 	ctx context.Context,
 	req TLSDeprecatedRequest,
@@ -1375,7 +1375,7 @@ func (c *clientImpl) TLSDeprecated(
 	return &response, httpRes, nil
 }
 
-//Update the tls settings of an Ingress.
+// Update the tls settings of an Ingress.
 func (c *clientImpl) UpdateIngressTLS(
 	ctx context.Context,
 	req UpdateIngressTLSRequest,
@@ -1402,9 +1402,9 @@ func (c *clientImpl) UpdateIngressTLS(
 	return &response, httpRes, nil
 }
 
-//Check the replacement of a Certificate.
+// Check the replacement of a Certificate.
 //
-//Checks the replacement of a Certificate and shows differences between the current and the new Certificate.
+// Checks the replacement of a Certificate and shows differences between the current and the new Certificate.
 func (c *clientImpl) CheckReplaceCertificate(
 	ctx context.Context,
 	req CheckReplaceCertificateRequest,
@@ -1431,7 +1431,7 @@ func (c *clientImpl) CheckReplaceCertificate(
 	return &response, httpRes, nil
 }
 
-//List CertificateRequests belonging to a Project or an Ingress.
+// List CertificateRequests belonging to a Project or an Ingress.
 func (c *clientImpl) ListCertificateRequests(
 	ctx context.Context,
 	req ListCertificateRequestsRequest,
@@ -1458,7 +1458,7 @@ func (c *clientImpl) ListCertificateRequests(
 	return &response, httpRes, nil
 }
 
-//Create a CertificateRequest.
+// Create a CertificateRequest.
 func (c *clientImpl) CreateCertificateRequest(
 	ctx context.Context,
 	req CreateCertificateRequestRequest,
@@ -1485,7 +1485,7 @@ func (c *clientImpl) CreateCertificateRequest(
 	return &response, httpRes, nil
 }
 
-//Delete a CertificateRequest.
+// Delete a CertificateRequest.
 func (c *clientImpl) DeleteCertificateRequest(
 	ctx context.Context,
 	req DeleteCertificateRequestRequest,
@@ -1508,7 +1508,7 @@ func (c *clientImpl) DeleteCertificateRequest(
 	return httpRes, nil
 }
 
-//Delete a Certificate.
+// Delete a Certificate.
 func (c *clientImpl) DeleteCertificate(
 	ctx context.Context,
 	req DeleteCertificateRequest,
@@ -1531,7 +1531,7 @@ func (c *clientImpl) DeleteCertificate(
 	return httpRes, nil
 }
 
-//Get a CertificateRequest.
+// Get a CertificateRequest.
 func (c *clientImpl) GetCertificateRequest(
 	ctx context.Context,
 	req GetCertificateRequestRequest,
@@ -1558,7 +1558,7 @@ func (c *clientImpl) GetCertificateRequest(
 	return &response, httpRes, nil
 }
 
-//Get a Certificate.
+// Get a Certificate.
 func (c *clientImpl) GetCertificate(
 	ctx context.Context,
 	req GetCertificateRequest,
@@ -1585,7 +1585,7 @@ func (c *clientImpl) GetCertificate(
 	return &response, httpRes, nil
 }
 
-//Update a Certificate.
+// Update a Certificate.
 func (c *clientImpl) ReplaceCertificate(
 	ctx context.Context,
 	req ReplaceCertificateRequest,
@@ -1608,7 +1608,7 @@ func (c *clientImpl) ReplaceCertificate(
 	return httpRes, nil
 }
 
-//List Certificates belonging to a Project or an Ingress.
+// List Certificates belonging to a Project or an Ingress.
 func (c *clientImpl) ListCertificates(
 	ctx context.Context,
 	req ListCertificatesRequest,
@@ -1635,9 +1635,9 @@ func (c *clientImpl) ListCertificates(
 	return &response, httpRes, nil
 }
 
-//List Domains belonging to a Project.
+// List Domains belonging to a Project.
 //
-//This operation is deprecated. Use the GET /v2/domains endpoint instead.
+// This operation is deprecated. Use the GET /v2/domains endpoint instead.
 func (c *clientImpl) DeprecatedListDomains(
 	ctx context.Context,
 	req DeprecatedListDomainsRequest,
@@ -1664,9 +1664,9 @@ func (c *clientImpl) DeprecatedListDomains(
 	return &response, httpRes, nil
 }
 
-//Get a HandleSchema.
+// Get a HandleSchema.
 //
-//This operation is deprecated. Use the GET /v2/domain-tlds/{tld}/contact-schemas endpoint instead.
+// This operation is deprecated. Use the GET /v2/domain-tlds/{tld}/contact-schemas endpoint instead.
 func (c *clientImpl) DeprecatedGetHandleFields(
 	ctx context.Context,
 	req DeprecatedGetHandleFieldsRequest,
@@ -1693,9 +1693,9 @@ func (c *clientImpl) DeprecatedGetHandleFields(
 	return &response, httpRes, nil
 }
 
-//Update an AuthCode.
+// Update an AuthCode.
 //
-//This operation is deprecated. Use the PATCH /v2/domains/{domainId}/auth-code endpoint instead.
+// This operation is deprecated. Use the PATCH /v2/domains/{domainId}/auth-code endpoint instead.
 func (c *clientImpl) DeprecatedDeclareProcessChangeAuthcode(
 	ctx context.Context,
 	req DeprecatedDeclareProcessChangeAuthcodeRequest,
@@ -1722,9 +1722,9 @@ func (c *clientImpl) DeprecatedDeclareProcessChangeAuthcode(
 	return &response, httpRes, nil
 }
 
-//Update a Domain's OwnerC handle.
+// Update a Domain's OwnerC handle.
 //
-//This operation is deprecated and does not have an alternative.
+// This operation is deprecated and does not have an alternative.
 func (c *clientImpl) DeprecatedDeclareProcessChangeHandles(
 	ctx context.Context,
 	req DeprecatedDeclareProcessChangeHandlesRequest,
@@ -1751,9 +1751,9 @@ func (c *clientImpl) DeprecatedDeclareProcessChangeHandles(
 	return &response, httpRes, nil
 }
 
-//Change the owner contact of a domain.
+// Change the owner contact of a domain.
 //
-//This operation is deprecated. Use the PATCH /v2/domains/{domainId}/contacts/{contact} endpoint instead.
+// This operation is deprecated. Use the PATCH /v2/domains/{domainId}/contacts/{contact} endpoint instead.
 func (c *clientImpl) DeprecatedChangeOwnercOfDomain(
 	ctx context.Context,
 	req DeprecatedChangeOwnercOfDomainRequest,
@@ -1780,9 +1780,9 @@ func (c *clientImpl) DeprecatedChangeOwnercOfDomain(
 	return &response, httpRes, nil
 }
 
-//Change the Project relation of a Domain.
+// Change the Project relation of a Domain.
 //
-//This operation is deprecated. Use the PATCH /v2/domains/{domainId}/project-id endpoint instead.
+// This operation is deprecated. Use the PATCH /v2/domains/{domainId}/project-id endpoint instead.
 func (c *clientImpl) DeprecatedChangeProjectOfDomain(
 	ctx context.Context,
 	req DeprecatedChangeProjectOfDomainRequest,

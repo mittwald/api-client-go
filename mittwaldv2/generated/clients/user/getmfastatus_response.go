@@ -14,7 +14,6 @@ package user
 //    - "initialized"
 //    - "confirmed"
 
-//
 type GetMFAStatusResponse struct {
 	Confirmed   bool `json:"confirmed"`
 	Initialized bool `json:"initialized"`

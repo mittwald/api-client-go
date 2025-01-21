@@ -20,7 +20,6 @@ import (
 //required:
 //    - "name"
 
-//
 type CreateCustomerRequestBody struct {
 	Name  string              `json:"name"`
 	Owner *customerv1.Contact `json:"owner,omitempty"`

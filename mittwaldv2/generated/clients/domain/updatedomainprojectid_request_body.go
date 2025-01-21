@@ -13,7 +13,6 @@ import (
 //        type: "string"
 //        format: "uuid"
 
-//
 type UpdateDomainProjectIDRequestBody struct {
 	ProjectId *uuid.UUID `json:"projectId,omitempty"`
 }

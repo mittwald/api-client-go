@@ -30,7 +30,6 @@ import "fmt"
 //    - "transferable"
 //    - "reasons"
 
-//
 type CheckDomainTransferabilityResponse struct {
 	Reasons      CheckDomainTransferabilityResponseReasons `json:"reasons"`
 	Transferable bool                                      `json:"transferable"`

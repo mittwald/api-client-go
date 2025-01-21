@@ -57,7 +57,6 @@ import (
 //    - "email"
 //    - "mfa"
 
-//
 type ProjectMembership struct {
 	Email       string       `json:"email"`
 	ExpiresAt   *time.Time   `json:"expiresAt,omitempty"`

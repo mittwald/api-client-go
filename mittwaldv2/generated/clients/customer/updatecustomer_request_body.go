@@ -23,7 +23,6 @@ import (
 //    - "customerId"
 //    - "name"
 
-//
 type UpdateCustomerRequestBody struct {
 	CustomerId string              `json:"customerId"`
 	Name       string              `json:"name"`

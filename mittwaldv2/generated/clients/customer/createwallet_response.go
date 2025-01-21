@@ -10,7 +10,6 @@ package customer
 //        type: "string"
 //        example: "edefeee4-e8e9-4e2d-ab95-9a2eb6104cfb"
 
-//
 type CreateWalletResponse struct {
 	CustomerId *string `json:"customerId,omitempty"`
 }

@@ -24,7 +24,6 @@ package relocation
 //    - "lastName"
 //    - "email"
 
-//
 type CreateRelocationRequestBodyContact struct {
 	Email       string  `json:"email"`
 	FirstName   string  `json:"firstName"`

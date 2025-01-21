@@ -21,7 +21,6 @@ import "time"
 //required:
 //    - "active"
 
-//
 type MailAddressAutoResponder struct {
 	Active    bool       `json:"active"`
 	ExpiresAt *time.Time `json:"expiresAt,omitempty"`

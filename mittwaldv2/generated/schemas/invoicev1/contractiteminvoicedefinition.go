@@ -30,7 +30,6 @@ import (
 //    - "vatRate"
 //    - "servicePeriod"
 
-//
 type ContractItemInvoiceDefinition struct {
 	ContractItemId uuid.UUID  `json:"contractItemId"`
 	IsDue          *bool      `json:"isDue,omitempty"`

@@ -17,7 +17,6 @@ package customer
 //    - "name"
 //    - "customerNumber"
 
-//
 type UpdateCustomerResponse struct {
 	CustomerId     string `json:"customerId"`
 	CustomerNumber string `json:"customerNumber"`

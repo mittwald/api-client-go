@@ -13,7 +13,7 @@ import "fmt"
 //    - "unspecified"
 //description: "The level of access for an SFTPUser."
 
-//The level of access for an SFTPUser.
+// The level of access for an SFTPUser.
 type AccessLevel string
 
 const AccessLevelFull AccessLevel = "full"

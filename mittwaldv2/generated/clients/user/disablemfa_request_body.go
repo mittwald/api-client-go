@@ -14,7 +14,6 @@ package user
 //required:
 //    - "multiFactorCode"
 
-//
 type DisableMFARequestBody struct {
 	MultiFactorCode string `json:"multiFactorCode"`
 }

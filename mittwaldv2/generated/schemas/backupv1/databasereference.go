@@ -14,7 +14,6 @@ package backupv1
 //    - "kind"
 //    - "name"
 
-//
 type DatabaseReference struct {
 	Kind string `json:"kind"`
 	Name string `json:"name"`

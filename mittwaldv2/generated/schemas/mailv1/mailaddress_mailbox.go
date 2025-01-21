@@ -64,7 +64,6 @@ import (
 //    - "storageInBytes"
 //    - "passwordUpdatedAt"
 
-//
 type MailAddressMailbox struct {
 	Name              string                           `json:"name"`
 	PasswordUpdatedAt time.Time                        `json:"passwordUpdatedAt"`

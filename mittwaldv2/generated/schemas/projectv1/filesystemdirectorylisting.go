@@ -32,7 +32,6 @@ import "fmt"
 //    - "name"
 //    - "size"
 
-//
 type FilesystemDirectoryListing struct {
 	AbsolutePath string                       `json:"absolutePath"`
 	IsDirectory  *bool                        `json:"isDirectory,omitempty"`

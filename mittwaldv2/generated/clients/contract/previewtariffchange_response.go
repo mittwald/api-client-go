@@ -19,7 +19,6 @@ package contract
 //    - "storagePrice"
 //    - "machineTypePrice"
 
-//
 type PreviewTariffChangeResponse struct {
 	MachineTypePrice float64 `json:"machineTypePrice"`
 	StoragePrice     float64 `json:"storagePrice"`

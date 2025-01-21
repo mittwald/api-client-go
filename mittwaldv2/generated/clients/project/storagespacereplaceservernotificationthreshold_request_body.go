@@ -10,7 +10,6 @@ package project
 //        nullable: true
 //        example: 10000
 
-//
 type StoragespaceReplaceServerNotificationThresholdRequestBody struct {
 	NotificationThresholdInBytes *int64 `json:"notificationThresholdInBytes,omitempty"`
 }

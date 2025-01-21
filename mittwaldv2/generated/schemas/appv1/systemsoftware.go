@@ -26,7 +26,7 @@ import "errors"
 //    - "tags"
 //description: "A SystemSoftware is a software that can be installed for an AppInstallation but mostly is not itself externally reachable and/or deliverable."
 
-//A SystemSoftware is a software that can be installed for an AppInstallation but mostly is not itself externally reachable and/or deliverable.
+// A SystemSoftware is a software that can be installed for an AppInstallation but mostly is not itself externally reachable and/or deliverable.
 type SystemSoftware struct {
 	Id   string            `json:"id"`
 	Meta map[string]string `json:"meta,omitempty"`

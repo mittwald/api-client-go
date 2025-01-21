@@ -20,7 +20,6 @@ import (
 //        type: "string"
 //        format: "uuid"
 
-//
 type Reference struct {
 	ContractItemId *uuid.UUID `json:"contractItemId,omitempty"`
 	OfferItemId    *uuid.UUID `json:"offerItemId,omitempty"`

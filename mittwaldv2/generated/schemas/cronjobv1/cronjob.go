@@ -66,7 +66,6 @@ import (
 //    - "destination"
 //    - "timeout"
 
-//
 type Cronjob struct {
 	Active            bool               `json:"active"`
 	AppId             uuid.UUID          `json:"appId"`

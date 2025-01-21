@@ -14,7 +14,7 @@ import "fmt"
 //    - "select"
 //description: "UserInputDataType is an enum, describing the possible data types of a UserInput."
 
-//UserInputDataType is an enum, describing the possible data types of a UserInput.
+// UserInputDataType is an enum, describing the possible data types of a UserInput.
 type UserInputDataType string
 
 const UserInputDataTypeText UserInputDataType = "text"

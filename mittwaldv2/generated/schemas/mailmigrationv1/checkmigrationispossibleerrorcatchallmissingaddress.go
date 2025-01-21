@@ -11,7 +11,6 @@ package mailmigrationv1
 //required:
 //    - "address"
 
-//
 type CheckMigrationIsPossibleErrorCatchAllMissingAddress struct {
 	Address string `json:"address"`
 }

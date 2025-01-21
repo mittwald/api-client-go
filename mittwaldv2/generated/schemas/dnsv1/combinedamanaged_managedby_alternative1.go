@@ -16,7 +16,6 @@ import (
 //required:
 //    - "ingressId"
 
-//
 type CombinedAManagedManagedByAlternative1 struct {
 	IngressId uuid.UUID `json:"ingressId"`
 }

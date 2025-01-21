@@ -29,7 +29,6 @@ import (
 //    - "mailAddress"
 //    - "role"
 
-//
 type CreateProjectInviteRequestBody struct {
 	MailAddress         string                    `json:"mailAddress"`
 	MembershipExpiresAt *time.Time                `json:"membershipExpiresAt,omitempty"`

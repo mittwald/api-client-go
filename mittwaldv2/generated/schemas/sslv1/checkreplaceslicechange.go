@@ -25,7 +25,6 @@ import "errors"
 //    - "addedValues"
 //    - "removedValues"
 
-//
 type CheckReplaceSliceChange struct {
 	AddedValues   []string `json:"addedValues"`
 	RemovedValues []string `json:"removedValues"`

@@ -25,7 +25,6 @@ import "fmt"
 //required:
 //    - "articleId"
 
-//
 type ReadableChangeArticleOptions struct {
 	ArticleId string                            `json:"articleId"`
 	Info      *ReadableChangeArticleOptionsInfo `json:"info,omitempty"`

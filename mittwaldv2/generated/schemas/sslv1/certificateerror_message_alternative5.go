@@ -11,7 +11,7 @@ import "fmt"
 //    - "certificate_not_authorized_to_sign"
 //description: "The certificate is not authorized to sign."
 
-//The certificate is not authorized to sign.
+// The certificate is not authorized to sign.
 type CertificateErrorMessageAlternative5 string
 
 const CertificateErrorMessageAlternative5Certificatenotauthorizedtosign CertificateErrorMessageAlternative5 = "certificate_not_authorized_to_sign"

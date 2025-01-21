@@ -15,7 +15,6 @@ import "errors"
 //required:
 //    - "databaseUserIds"
 
-//
 type SetDatabaseUsersRequestBody struct {
 	DatabaseUserIds map[string]string `json:"databaseUserIds"`
 }

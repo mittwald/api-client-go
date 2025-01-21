@@ -12,7 +12,6 @@ package ingressv1
 //    - "acme"
 //additionalProperties: false
 
-//
 type TlsAcmeDeprecated struct {
 	Acme bool `json:"acme"`
 }

@@ -21,7 +21,6 @@ import "fmt"
 //    - "path"
 //    - "target"
 
-//
 type Path struct {
 	Path   string     `json:"path"`
 	Target PathTarget `json:"target"`

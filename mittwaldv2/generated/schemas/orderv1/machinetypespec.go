@@ -10,7 +10,6 @@ package orderv1
 //        type: "string"
 //        example: "prospace.2cpu.4gb"
 
-//
 type MachineTypeSpec struct {
 	MachineType *string `json:"machineType,omitempty"`
 }

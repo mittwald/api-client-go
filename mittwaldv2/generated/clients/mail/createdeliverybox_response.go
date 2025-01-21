@@ -16,7 +16,6 @@ import (
 //required:
 //    - "id"
 
-//
 type CreateDeliveryboxResponse struct {
 	Id uuid.UUID `json:"id"`
 }

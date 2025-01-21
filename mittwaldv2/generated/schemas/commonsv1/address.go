@@ -32,7 +32,6 @@ package commonsv1
 //    - "zip"
 //    - "countryCode"
 
-//
 type Address struct {
 	Street        string  `json:"street"`
 	HouseNumber   string  `json:"houseNumber"`

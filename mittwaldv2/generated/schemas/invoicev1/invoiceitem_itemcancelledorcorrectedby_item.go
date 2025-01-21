@@ -17,7 +17,6 @@ import (
 //        type: "string"
 //        format: "uuid"
 
-//
 type InvoiceItemItemCancelledOrCorrectedByItem struct {
 	SourceInvoiceId     *uuid.UUID `json:"sourceInvoiceId,omitempty"`
 	SourceInvoiceItemId *uuid.UUID `json:"sourceInvoiceItemId,omitempty"`

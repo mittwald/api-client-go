@@ -11,7 +11,7 @@ import "fmt"
 //    - "unknown_authority"
 //description: "The certificate is signed by an unknown authority."
 
-//The certificate is signed by an unknown authority.
+// The certificate is signed by an unknown authority.
 type CertificateErrorMessageAlternative10 string
 
 const CertificateErrorMessageAlternative10Unknownauthority CertificateErrorMessageAlternative10 = "unknown_authority"

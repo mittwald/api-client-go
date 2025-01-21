@@ -15,7 +15,7 @@ package appv1
 //    - "value"
 //description: "A SavedUserInput is an entered value for a desired UserInput of an AppVersion or SystemSoftwareVersion."
 
-//A SavedUserInput is an entered value for a desired UserInput of an AppVersion or SystemSoftwareVersion.
+// A SavedUserInput is an entered value for a desired UserInput of an AppVersion or SystemSoftwareVersion.
 type SavedUserInput struct {
 	Name  string `json:"name"`
 	Value string `json:"value"`

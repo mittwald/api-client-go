@@ -11,7 +11,6 @@ package databasev1
 //required:
 //    - "url"
 
-//
 type PhpMyAdminURL struct {
 	Url string `json:"url"`
 }

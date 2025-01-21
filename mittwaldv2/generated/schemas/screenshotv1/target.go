@@ -23,7 +23,6 @@ import "fmt"
 //    - "scheme"
 //    - "domain"
 
-//
 type Target struct {
 	Domain string       `json:"domain"`
 	Path   *string      `json:"path,omitempty"`

@@ -35,7 +35,6 @@ import (
 //    - "authentication"
 //    - "directories"
 
-//
 type CreateSFTPUserRequestBody struct {
 	AccessLevel    *CreateSFTPUserRequestBodyAccessLevel `json:"accessLevel,omitempty"`
 	Authentication sshuserv1.Authentication              `json:"authentication"`

@@ -24,7 +24,6 @@ import "fmt"
 //    - "secret"
 //    - "webhookResult"
 
-//
 type RotateSecretForExtensionInstanceResponse struct {
 	Secret        string                                                `json:"secret"`
 	WebhookResult RotateSecretForExtensionInstanceResponseWebhookResult `json:"webhookResult"`

@@ -28,7 +28,6 @@ import (
 //    - "migrationJobs"
 //    - "finished"
 
-//
 type MigrationMailbox struct {
 	Description   *string             `json:"description,omitempty"`
 	Finished      bool                `json:"finished"`

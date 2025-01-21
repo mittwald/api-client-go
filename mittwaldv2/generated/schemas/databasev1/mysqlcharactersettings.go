@@ -24,7 +24,6 @@ import "errors"
 //    - "collations"
 //    - "versionId"
 
-//
 type MySqlCharacterSettings struct {
 	Collations []string `json:"collations"`
 	Name       string   `json:"name"`

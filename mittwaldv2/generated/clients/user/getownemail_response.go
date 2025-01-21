@@ -13,7 +13,6 @@ package user
 //required:
 //    - "email"
 
-//
 type GetOwnEmailResponse struct {
 	Email string `json:"email"`
 }

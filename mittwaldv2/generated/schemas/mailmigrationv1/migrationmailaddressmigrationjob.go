@@ -12,7 +12,6 @@ import "fmt"
 //required:
 //    - "migrate"
 
-//
 type MigrationMailAddressMigrationJob struct {
 	Migrate MigrationMailAddressMigrationJobMigrate `json:"migrate"`
 }

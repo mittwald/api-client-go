@@ -11,7 +11,6 @@ package user
 //required:
 //    - "phoneNumber"
 
-//
 type DeprecatedServicePhoneNumberAddRequestBody struct {
 	PhoneNumber string `json:"phoneNumber"`
 }

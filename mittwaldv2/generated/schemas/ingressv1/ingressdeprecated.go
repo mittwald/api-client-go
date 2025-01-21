@@ -70,7 +70,6 @@ import (
 //    - "dnsValidationErrors"
 //    - "ownership"
 
-//
 type IngressDeprecated struct {
 	DnsValidationErrors []IngressDeprecatedDNSValidationErrorsItem `json:"dnsValidationErrors"`
 	Hostname            string                                     `json:"hostname"`

@@ -14,7 +14,6 @@ package marketplacev1
 //    - "name"
 //    - "url"
 
-//
 type ExternalComponent struct {
 	Name string `json:"name"`
 	Url  string `json:"url"`

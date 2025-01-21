@@ -14,7 +14,6 @@ package ingressv1
 //required:
 //    - "verified"
 
-//
 type Ownership struct {
 	TxtRecord *string `json:"txtRecord,omitempty"`
 	Verified  bool    `json:"verified"`

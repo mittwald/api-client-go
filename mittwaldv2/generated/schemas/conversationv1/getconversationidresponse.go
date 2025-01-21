@@ -19,7 +19,6 @@ import (
 //    - "shortId"
 //    - "conversationId"
 
-//
 type GetConversationIdResponse struct {
 	ConversationId uuid.UUID `json:"conversationId"`
 	ShortId        string    `json:"shortId"`

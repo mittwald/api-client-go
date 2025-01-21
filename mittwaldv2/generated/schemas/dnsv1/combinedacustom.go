@@ -25,7 +25,6 @@ import (
 //    - "a"
 //    - "aaaa"
 
-//
 type CombinedACustom struct {
 	A        []CombinedAManagedARecord    `json:"a"`
 	Aaaa     []CombinedAManagedAAAARecord `json:"aaaa"`

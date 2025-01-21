@@ -16,7 +16,6 @@ import "errors"
 //required:
 //    - "v4"
 
-//
 type IngressDeprecatedIps struct {
 	V4 []string `json:"v4"`
 }

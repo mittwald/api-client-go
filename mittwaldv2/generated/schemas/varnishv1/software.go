@@ -35,7 +35,6 @@ import (
 //    - "projectId"
 //    - "config"
 
-//
 type Software struct {
 	Config             SoftwareConfig    `json:"config"`
 	ProjectId          string            `json:"projectId"`

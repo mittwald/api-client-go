@@ -19,7 +19,6 @@ import (
 //required:
 //    - "ownerC"
 
-//
 type DeprecatedDeclareProcessChangeHandlesRequestBody struct {
 	OwnerC []domainv1.HandleField `json:"ownerC"`
 }

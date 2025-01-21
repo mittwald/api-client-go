@@ -17,7 +17,6 @@ import (
 //    - "certificateId"
 //additionalProperties: false
 
-//
 type TlsCertificate struct {
 	CertificateId uuid.UUID `json:"certificateId"`
 }

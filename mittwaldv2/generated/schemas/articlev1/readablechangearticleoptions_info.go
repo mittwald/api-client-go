@@ -15,7 +15,6 @@ package articlev1
 //    "fromArticleTemplate":
 //        type: "boolean"
 
-//
 type ReadableChangeArticleOptionsInfo struct {
 	ArticleName         *string `json:"articleName,omitempty"`
 	ArticleTemplateName *string `json:"articleTemplateName,omitempty"`

@@ -64,7 +64,7 @@ import (
 //    - "disabled"
 //description: "An AppInstallation is a concrete manifestation of an App in a specific AppVersion."
 
-//An AppInstallation is a concrete manifestation of an App in a specific AppVersion.
+// An AppInstallation is a concrete manifestation of an App in a specific AppVersion.
 type AppInstallation struct {
 	AppId              uuid.UUID                 `json:"appId"`
 	AppVersion         VersionStatus             `json:"appVersion"`

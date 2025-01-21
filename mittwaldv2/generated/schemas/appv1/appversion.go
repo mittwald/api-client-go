@@ -50,7 +50,7 @@ import (
 //    - "docRootUserEditable"
 //description: "An AppVersion is an officially supported version of an App, containing the necessary and recommended configuration und dependencies."
 
-//An AppVersion is an officially supported version of an App, containing the necessary and recommended configuration und dependencies.
+// An AppVersion is an officially supported version of an App, containing the necessary and recommended configuration und dependencies.
 type AppVersion struct {
 	AppId                      uuid.UUID                  `json:"appId"`
 	BreakingNote               *BreakingNote              `json:"breakingNote,omitempty"`

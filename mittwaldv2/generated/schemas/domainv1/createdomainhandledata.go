@@ -20,7 +20,6 @@ import (
 //required:
 //    - "ownerC"
 
-//
 type CreateDomainHandleData struct {
 	AdminC []HandleField `json:"adminC,omitempty"`
 	OwnerC []HandleField `json:"ownerC"`

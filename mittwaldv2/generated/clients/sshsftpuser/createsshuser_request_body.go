@@ -23,7 +23,6 @@ import (
 //    - "description"
 //    - "authentication"
 
-//
 type CreateSSHUserRequestBody struct {
 	Authentication sshuserv1.Authentication `json:"authentication"`
 	Description    string                   `json:"description"`

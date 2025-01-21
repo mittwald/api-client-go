@@ -22,7 +22,6 @@ import (
 //    - "certificate"
 //    - "privateKey"
 
-//
 type CertificateRequestCreateRequest struct {
 	Certificate string    `json:"certificate"`
 	PrivateKey  string    `json:"privateKey"`

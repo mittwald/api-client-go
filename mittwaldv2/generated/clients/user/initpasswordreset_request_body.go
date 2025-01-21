@@ -14,7 +14,6 @@ package user
 //required:
 //    - "email"
 
-//
 type InitPasswordResetRequestBody struct {
 	Email string `json:"email"`
 }

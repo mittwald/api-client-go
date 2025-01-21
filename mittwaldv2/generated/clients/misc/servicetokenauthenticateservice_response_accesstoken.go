@@ -33,7 +33,6 @@ import "fmt"
 //    - "jwtClaims"
 //    - "publicToken"
 
-//
 type ServicetokenAuthenticateServiceResponseAccessToken struct {
 	Id          string                                                      `json:"id"`
 	JwtClaims   ServicetokenAuthenticateServiceResponseAccessTokenJwtClaims `json:"jwtClaims"`

@@ -147,7 +147,7 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
-//List DeliveryBoxes belonging to a Project.
+// List DeliveryBoxes belonging to a Project.
 func (c *clientImpl) ListDeliveryBoxes(
 	ctx context.Context,
 	req ListDeliveryBoxesRequest,
@@ -174,7 +174,7 @@ func (c *clientImpl) ListDeliveryBoxes(
 	return &response, httpRes, nil
 }
 
-//Create a DeliveryBox.
+// Create a DeliveryBox.
 func (c *clientImpl) CreateDeliverybox(
 	ctx context.Context,
 	req CreateDeliveryboxRequest,
@@ -201,7 +201,7 @@ func (c *clientImpl) CreateDeliverybox(
 	return &response, httpRes, nil
 }
 
-//List MailAddresses belonging to a Project.
+// List MailAddresses belonging to a Project.
 func (c *clientImpl) ListMailAddresses(
 	ctx context.Context,
 	req ListMailAddressesRequest,
@@ -228,7 +228,7 @@ func (c *clientImpl) ListMailAddresses(
 	return &response, httpRes, nil
 }
 
-//Create a MailAddress.
+// Create a MailAddress.
 func (c *clientImpl) CreateMailAddress(
 	ctx context.Context,
 	req CreateMailAddressRequest,
@@ -255,7 +255,7 @@ func (c *clientImpl) CreateMailAddress(
 	return &response, httpRes, nil
 }
 
-//Get a DeliveryBox.
+// Get a DeliveryBox.
 func (c *clientImpl) GetDeliveryBox(
 	ctx context.Context,
 	req GetDeliveryBoxRequest,
@@ -282,7 +282,7 @@ func (c *clientImpl) GetDeliveryBox(
 	return &response, httpRes, nil
 }
 
-//Delete a DeliveryBox.
+// Delete a DeliveryBox.
 func (c *clientImpl) DeleteDeliveryBox(
 	ctx context.Context,
 	req DeleteDeliveryBoxRequest,
@@ -305,7 +305,7 @@ func (c *clientImpl) DeleteDeliveryBox(
 	return httpRes, nil
 }
 
-//Get a MailAddress.
+// Get a MailAddress.
 func (c *clientImpl) GetMailAddress(
 	ctx context.Context,
 	req GetMailAddressRequest,
@@ -332,7 +332,7 @@ func (c *clientImpl) GetMailAddress(
 	return &response, httpRes, nil
 }
 
-//Delete a MailAddress.
+// Delete a MailAddress.
 func (c *clientImpl) DeleteMailAddress(
 	ctx context.Context,
 	req DeleteMailAddressRequest,
@@ -355,7 +355,7 @@ func (c *clientImpl) DeleteMailAddress(
 	return httpRes, nil
 }
 
-//Update the description of an deliverybox
+// Update the description of an deliverybox
 func (c *clientImpl) UpdateDescriptionDeprecated(
 	ctx context.Context,
 	req UpdateDescriptionDeprecatedRequest,
@@ -378,7 +378,7 @@ func (c *clientImpl) UpdateDescriptionDeprecated(
 	return httpRes, nil
 }
 
-//Update the password for a specific deliverybox
+// Update the password for a specific deliverybox
 func (c *clientImpl) UpdatePasswordDeprecated(
 	ctx context.Context,
 	req UpdatePasswordDeprecatedRequest,
@@ -401,7 +401,7 @@ func (c *clientImpl) UpdatePasswordDeprecated(
 	return httpRes, nil
 }
 
-//List mail settings of a Project.
+// List mail settings of a Project.
 func (c *clientImpl) ListProjectMailSettings(
 	ctx context.Context,
 	req ListProjectMailSettingsRequest,
@@ -428,7 +428,7 @@ func (c *clientImpl) ListProjectMailSettings(
 	return &response, httpRes, nil
 }
 
-//Update mail-address
+// Update mail-address
 func (c *clientImpl) MailaddressUpdateAddressDeprecated(
 	ctx context.Context,
 	req MailaddressUpdateAddressDeprecatedRequest,
@@ -451,7 +451,7 @@ func (c *clientImpl) MailaddressUpdateAddressDeprecated(
 	return httpRes, nil
 }
 
-//Update blacklist for a given project ID
+// Update blacklist for a given project ID
 func (c *clientImpl) ProjectsettingUpdateBlacklistDeprecated(
 	ctx context.Context,
 	req ProjectsettingUpdateBlacklistDeprecatedRequest,
@@ -474,7 +474,7 @@ func (c *clientImpl) ProjectsettingUpdateBlacklistDeprecated(
 	return httpRes, nil
 }
 
-//Update whitelist for a given project ID
+// Update whitelist for a given project ID
 func (c *clientImpl) ProjectsettingUpdateWhitelistDeprecated(
 	ctx context.Context,
 	req ProjectsettingUpdateWhitelistDeprecatedRequest,
@@ -497,7 +497,7 @@ func (c *clientImpl) ProjectsettingUpdateWhitelistDeprecated(
 	return httpRes, nil
 }
 
-//Update the description of a DeliveryBox.
+// Update the description of a DeliveryBox.
 func (c *clientImpl) UpdateDeliveryBoxDescription(
 	ctx context.Context,
 	req UpdateDeliveryBoxDescriptionRequest,
@@ -520,7 +520,7 @@ func (c *clientImpl) UpdateDeliveryBoxDescription(
 	return httpRes, nil
 }
 
-//Update the password of a DeliveryBox.
+// Update the password of a DeliveryBox.
 func (c *clientImpl) UpdateDeliveryBoxPassword(
 	ctx context.Context,
 	req UpdateDeliveryBoxPasswordRequest,
@@ -543,7 +543,7 @@ func (c *clientImpl) UpdateDeliveryBoxPassword(
 	return httpRes, nil
 }
 
-//Update a MailAddress.
+// Update a MailAddress.
 func (c *clientImpl) UpdateMailAddressAddress(
 	ctx context.Context,
 	req UpdateMailAddressAddressRequest,
@@ -566,7 +566,7 @@ func (c *clientImpl) UpdateMailAddressAddress(
 	return httpRes, nil
 }
 
-//Update the autoresponder of a MailAddress.
+// Update the autoresponder of a MailAddress.
 func (c *clientImpl) UpdateMailAddressAutoresponderV2Deprecated(
 	ctx context.Context,
 	req UpdateMailAddressAutoresponderV2DeprecatedRequest,
@@ -589,7 +589,7 @@ func (c *clientImpl) UpdateMailAddressAutoresponderV2Deprecated(
 	return httpRes, nil
 }
 
-//Update the autoresponder of a MailAddress.
+// Update the autoresponder of a MailAddress.
 func (c *clientImpl) UpdateMailAddressAutoresponder(
 	ctx context.Context,
 	req UpdateMailAddressAutoresponderRequest,
@@ -612,7 +612,7 @@ func (c *clientImpl) UpdateMailAddressAutoresponder(
 	return httpRes, nil
 }
 
-//Update the catchall of a MailAddress.
+// Update the catchall of a MailAddress.
 func (c *clientImpl) UpdateMailAddressCatchAll(
 	ctx context.Context,
 	req UpdateMailAddressCatchAllRequest,
@@ -635,7 +635,7 @@ func (c *clientImpl) UpdateMailAddressCatchAll(
 	return httpRes, nil
 }
 
-//Update the catchall of a MailAddress.
+// Update the catchall of a MailAddress.
 func (c *clientImpl) UpdateMailAddressCatchallV2Deprecated(
 	ctx context.Context,
 	req UpdateMailAddressCatchallV2DeprecatedRequest,
@@ -658,7 +658,7 @@ func (c *clientImpl) UpdateMailAddressCatchallV2Deprecated(
 	return httpRes, nil
 }
 
-//Update the forward addresses of a MailAddresses.
+// Update the forward addresses of a MailAddresses.
 func (c *clientImpl) UpdateMailAddressForwardAddressesV2Deprecated(
 	ctx context.Context,
 	req UpdateMailAddressForwardAddressesV2DeprecatedRequest,
@@ -681,7 +681,7 @@ func (c *clientImpl) UpdateMailAddressForwardAddressesV2Deprecated(
 	return httpRes, nil
 }
 
-//Update the forward addresses of a MailAddresses.
+// Update the forward addresses of a MailAddresses.
 func (c *clientImpl) UpdateMailAddressForwardAddresses(
 	ctx context.Context,
 	req UpdateMailAddressForwardAddressesRequest,
@@ -704,7 +704,7 @@ func (c *clientImpl) UpdateMailAddressForwardAddresses(
 	return httpRes, nil
 }
 
-//Update the password for a MailAddress.
+// Update the password for a MailAddress.
 func (c *clientImpl) UpdateMailAddressPasswordV2Deprecated(
 	ctx context.Context,
 	req UpdateMailAddressPasswordV2DeprecatedRequest,
@@ -727,7 +727,7 @@ func (c *clientImpl) UpdateMailAddressPasswordV2Deprecated(
 	return httpRes, nil
 }
 
-//Update the password for a MailAddress.
+// Update the password for a MailAddress.
 func (c *clientImpl) UpdateMailAddressPassword(
 	ctx context.Context,
 	req UpdateMailAddressPasswordRequest,
@@ -750,7 +750,7 @@ func (c *clientImpl) UpdateMailAddressPassword(
 	return httpRes, nil
 }
 
-//Update the quota of a MailAddress.
+// Update the quota of a MailAddress.
 func (c *clientImpl) UpdateMailAddressQuotaV2Deprecated(
 	ctx context.Context,
 	req UpdateMailAddressQuotaV2DeprecatedRequest,
@@ -773,7 +773,7 @@ func (c *clientImpl) UpdateMailAddressQuotaV2Deprecated(
 	return httpRes, nil
 }
 
-//Update the quota of a MailAddress.
+// Update the quota of a MailAddress.
 func (c *clientImpl) UpdateMailAddressQuota(
 	ctx context.Context,
 	req UpdateMailAddressQuotaRequest,
@@ -796,7 +796,7 @@ func (c *clientImpl) UpdateMailAddressQuota(
 	return httpRes, nil
 }
 
-//Update the spam protection of a MailAddress.
+// Update the spam protection of a MailAddress.
 func (c *clientImpl) UpdateMailAddressSpamProtectionV2Deprecated(
 	ctx context.Context,
 	req UpdateMailAddressSpamProtectionV2DeprecatedRequest,
@@ -819,7 +819,7 @@ func (c *clientImpl) UpdateMailAddressSpamProtectionV2Deprecated(
 	return httpRes, nil
 }
 
-//Update the spam protection of a MailAddress.
+// Update the spam protection of a MailAddress.
 func (c *clientImpl) UpdateMailAddressSpamProtection(
 	ctx context.Context,
 	req UpdateMailAddressSpamProtectionRequest,
@@ -842,7 +842,7 @@ func (c *clientImpl) UpdateMailAddressSpamProtection(
 	return httpRes, nil
 }
 
-//Update a mail setting of a Project.
+// Update a mail setting of a Project.
 func (c *clientImpl) UpdateProjectMailSetting(
 	ctx context.Context,
 	req UpdateProjectMailSettingRequest,
@@ -865,7 +865,7 @@ func (c *clientImpl) UpdateProjectMailSetting(
 	return httpRes, nil
 }
 
-//Update a mail setting of a Project.
+// Update a mail setting of a Project.
 func (c *clientImpl) UpdateProjectMailSettingV2Deprecated(
 	ctx context.Context,
 	req UpdateProjectMailSettingV2DeprecatedRequest,

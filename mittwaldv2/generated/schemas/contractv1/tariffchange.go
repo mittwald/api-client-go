@@ -28,7 +28,6 @@ import (
 //    - "targetDate"
 //    - "newArticles"
 
-//
 type TariffChange struct {
 	NewArticles       []Article `json:"newArticles"`
 	ScheduledAtDate   time.Time `json:"scheduledAtDate"`

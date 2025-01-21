@@ -20,7 +20,6 @@ package orderv1
 //    - "storagePrice"
 //    - "machineTypePrice"
 
-//
 type HostingOrderPreviewResponse struct {
 	MachineTypePrice float64 `json:"machineTypePrice"`
 	StoragePrice     float64 `json:"storagePrice"`

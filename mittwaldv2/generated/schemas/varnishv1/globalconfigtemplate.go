@@ -21,7 +21,6 @@ import "time"
 //    - "data"
 //    - "updatedAt"
 
-//
 type GlobalConfigTemplate struct {
 	Data      string    `json:"data"`
 	Name      string    `json:"name"`

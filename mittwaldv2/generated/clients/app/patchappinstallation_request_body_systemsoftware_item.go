@@ -16,7 +16,6 @@ import (
 //        type: "string"
 //    "updatePolicy": {"$ref": "#/components/schemas/de.mittwald.v1.app.SystemSoftwareUpdatePolicy"}
 
-//
 type PatchAppinstallationRequestBodySystemSoftwareItem struct {
 	SystemSoftwareVersion *string                           `json:"systemSoftwareVersion,omitempty"`
 	UpdatePolicy          *appv1.SystemSoftwareUpdatePolicy `json:"updatePolicy,omitempty"`

@@ -20,7 +20,6 @@ import "errors"
 //    - "address"
 //    - "forwardAddresses"
 
-//
 type CreateForwardAddress struct {
 	Address          string   `json:"address"`
 	ForwardAddresses []string `json:"forwardAddresses"`

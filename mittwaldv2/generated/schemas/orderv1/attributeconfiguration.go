@@ -15,7 +15,6 @@ package orderv1
 //required:
 //    - "key"
 
-//
 type AttributeConfiguration struct {
 	Key   string  `json:"key"`
 	Value *string `json:"value,omitempty"`

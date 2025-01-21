@@ -16,7 +16,6 @@ import "time"
 //        format: "date-time"
 //        description: "The termination date has to be a valid date according to activation and contract period of the ContractItem. If none given, the next possible termination date will be used."
 
-//
 type TerminateContractItemRequestBody struct {
 	Reason                *string    `json:"reason,omitempty"`
 	TerminationTargetDate *time.Time `json:"terminationTargetDate,omitempty"`

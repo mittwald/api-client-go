@@ -14,7 +14,7 @@ import "fmt"
 //    - "all"
 //description: "SystemSoftwareUpdatePolicy describes which updates should be applied automatically by our systems."
 
-//SystemSoftwareUpdatePolicy describes which updates should be applied automatically by our systems.
+// SystemSoftwareUpdatePolicy describes which updates should be applied automatically by our systems.
 type SystemSoftwareUpdatePolicy string
 
 const SystemSoftwareUpdatePolicyNone SystemSoftwareUpdatePolicy = "none"

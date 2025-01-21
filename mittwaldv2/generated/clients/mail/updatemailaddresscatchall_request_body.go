@@ -10,7 +10,6 @@ package mail
 //required:
 //    - "active"
 
-//
 type UpdateMailAddressCatchAllRequestBody struct {
 	Active bool `json:"active"`
 }

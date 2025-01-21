@@ -38,7 +38,6 @@ import "fmt"
 //required:
 //    - "accessToken"
 
-//
 type ServicetokenAuthenticateServiceResponse struct {
 	AccessToken ServicetokenAuthenticateServiceResponseAccessToken `json:"accessToken"`
 }

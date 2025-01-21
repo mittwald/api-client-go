@@ -34,7 +34,6 @@ import (
 //    - "description"
 //    - "accessLevel"
 
-//
 type CreateMySqlUser struct {
 	AccessIpMask   *string                    `json:"accessIpMask,omitempty"`
 	AccessLevel    CreateMySqlUserAccessLevel `json:"accessLevel"`

@@ -21,7 +21,6 @@ import "time"
 //    - "isCreated"
 //additionalProperties: false
 
-//
 type TlsAcme struct {
 	Acme            bool       `json:"acme"`
 	IsCreated       bool       `json:"isCreated"`

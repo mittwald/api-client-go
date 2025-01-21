@@ -14,7 +14,6 @@ package varnishv1
 //    - "name"
 //    - "value"
 
-//
 type SoftwareSetting struct {
 	Name  string `json:"name"`
 	Value string `json:"value"`

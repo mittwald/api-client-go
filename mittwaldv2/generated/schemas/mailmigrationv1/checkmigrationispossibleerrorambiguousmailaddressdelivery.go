@@ -18,7 +18,6 @@ import "errors"
 //    - "mailboxName"
 //    - "addresses"
 
-//
 type CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery struct {
 	Addresses   []string `json:"addresses"`
 	MailboxName string   `json:"mailboxName"`

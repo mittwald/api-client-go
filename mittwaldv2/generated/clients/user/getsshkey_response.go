@@ -16,7 +16,6 @@ import (
 //required:
 //    - "sshKey"
 
-//
 type GetSSHKeyResponse struct {
 	SshKey signupv1.SshKey `json:"sshKey"`
 }

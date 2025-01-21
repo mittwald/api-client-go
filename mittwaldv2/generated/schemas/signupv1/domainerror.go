@@ -21,7 +21,6 @@ import "fmt"
 //    - "name"
 //    - "message"
 
-//
 type DomainError struct {
 	Info    *DomainErrorInfo `json:"info,omitempty"`
 	Message string           `json:"message"`

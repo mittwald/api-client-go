@@ -40,7 +40,6 @@ import "time"
 //required:
 //    - "totalUsageInBytes"
 
-//
 type StatisticsMeta struct {
 	IsExceeding                      *bool      `json:"isExceeding,omitempty"`
 	LimitInBytes                     *int64     `json:"limitInBytes,omitempty"`

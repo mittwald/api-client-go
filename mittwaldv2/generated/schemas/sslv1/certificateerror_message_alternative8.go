@@ -11,7 +11,7 @@ import "fmt"
 //    - "too_many_intermediates"
 //description: "There are too many intermediate certificates."
 
-//There are too many intermediate certificates.
+// There are too many intermediate certificates.
 type CertificateErrorMessageAlternative8 string
 
 const CertificateErrorMessageAlternative8Toomanyintermediates CertificateErrorMessageAlternative8 = "too_many_intermediates"

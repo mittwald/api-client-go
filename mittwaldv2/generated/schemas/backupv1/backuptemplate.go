@@ -18,7 +18,6 @@ import (
 //required:
 //    - "expirationTime"
 
-//
 type BackupTemplate struct {
 	ExpirationTime time.Time       `json:"expirationTime"`
 	IgnoredSources *IgnoredSources `json:"ignoredSources,omitempty"`

@@ -29,7 +29,6 @@ import (
 //    - "databaseId"
 //    - "purpose"
 
-//
 type LinkDatabaseRequestBody struct {
 	DatabaseId      uuid.UUID                      `json:"databaseId"`
 	DatabaseUserIds map[string]string              `json:"databaseUserIds,omitempty"`

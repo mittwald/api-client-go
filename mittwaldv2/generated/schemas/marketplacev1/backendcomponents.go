@@ -13,7 +13,6 @@ import "fmt"
 //    "extensionInstanceSecretRotated": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.BackendComponent"}
 //    "extensionInstanceUpdated": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.BackendComponent"}
 
-//
 type BackendComponents struct {
 	ExtensionAddedToContext             *BackendComponent `json:"extensionAddedToContext,omitempty"`
 	ExtensionInstanceRemovedFromContext *BackendComponent `json:"extensionInstanceRemovedFromContext,omitempty"`

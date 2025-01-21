@@ -20,7 +20,6 @@ import (
 //    - "contractItemId"
 //    - "creditPeriod"
 
-//
 type CorrectionDefinition struct {
 	ContractItemId uuid.UUID  `json:"contractItemId"`
 	CreditPeriod   DatePeriod `json:"creditPeriod"`

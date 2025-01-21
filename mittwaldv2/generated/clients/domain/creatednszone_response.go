@@ -16,7 +16,6 @@ import (
 //required:
 //    - "id"
 
-//
 type CreateDNSZoneResponse struct {
 	Id uuid.UUID `json:"id"`
 }

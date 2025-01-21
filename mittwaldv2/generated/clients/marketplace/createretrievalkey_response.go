@@ -19,7 +19,6 @@ import (
 //    - "accessTokenRetrievalKey"
 //    - "userId"
 
-//
 type CreateRetrievalKeyResponse struct {
 	AccessTokenRetrievalKey string    `json:"accessTokenRetrievalKey"`
 	UserId                  uuid.UUID `json:"userId"`

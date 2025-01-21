@@ -67,7 +67,6 @@ import (
 //    - "userId"
 //    - "person"
 
-//
 type User struct {
 	AvatarRef           *uuid.UUID                    `json:"avatarRef,omitempty"`
 	CustomerMemberships map[string]CustomerMembership `json:"customerMemberships,omitempty"`

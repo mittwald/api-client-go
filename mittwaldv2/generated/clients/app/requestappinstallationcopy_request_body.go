@@ -18,7 +18,6 @@ import (
 //required:
 //    - "description"
 
-//
 type RequestAppinstallationCopyRequestBody struct {
 	Description     string     `json:"description"`
 	TargetProjectId *uuid.UUID `json:"targetProjectId,omitempty"`

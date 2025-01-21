@@ -37,7 +37,6 @@ import (
 //    - "id"
 //    - "contact"
 
-//
 type CertificateRequestCreateResponse struct {
 	CommonName     *string    `json:"commonName,omitempty"`
 	Contact        Contact    `json:"contact"`

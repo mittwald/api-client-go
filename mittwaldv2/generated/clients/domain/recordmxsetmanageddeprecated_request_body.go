@@ -7,7 +7,6 @@ package domain
 //type: "object"
 //additionalProperties: false
 
-//
 type RecordMxSetManagedDeprecatedRequestBody struct {
 }
 

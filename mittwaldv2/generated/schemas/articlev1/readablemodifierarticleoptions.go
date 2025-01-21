@@ -29,7 +29,6 @@ import "fmt"
 //    - "articleId"
 //    - "maxArticleCount"
 
-//
 type ReadableModifierArticleOptions struct {
 	ArticleId       string                              `json:"articleId"`
 	Info            *ReadableModifierArticleOptionsInfo `json:"info,omitempty"`

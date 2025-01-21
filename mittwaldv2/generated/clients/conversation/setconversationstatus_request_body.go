@@ -16,7 +16,6 @@ import "fmt"
 //required:
 //    - "status"
 
-//
 type SetConversationStatusRequestBody struct {
 	Status SetConversationStatusRequestBodyStatus `json:"status"`
 }

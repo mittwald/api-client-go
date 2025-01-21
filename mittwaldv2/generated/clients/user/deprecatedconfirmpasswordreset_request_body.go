@@ -27,7 +27,6 @@ import (
 //    - "token"
 //    - "password"
 
-//
 type DeprecatedConfirmPasswordResetRequestBody struct {
 	Password string    `json:"password"`
 	Token    string    `json:"token"`

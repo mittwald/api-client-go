@@ -23,7 +23,6 @@ import "fmt"
 //required:
 //    - "projectId"
 
-//
 type MigrateMailAddressCommandRequirements struct {
 	Address          *string        `json:"address,omitempty"`
 	AutoResponder    *AutoResponder `json:"autoResponder,omitempty"`

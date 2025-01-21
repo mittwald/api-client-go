@@ -48,7 +48,7 @@ import (
 //    - "hasPassword"
 //description: "A representation of an SSHUser."
 
-//A representation of an SSHUser.
+// A representation of an SSHUser.
 type SshUser struct {
 	Active        *bool       `json:"active,omitempty"`
 	AuthUpdatedAt time.Time   `json:"authUpdatedAt"`

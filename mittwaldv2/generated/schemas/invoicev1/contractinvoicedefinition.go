@@ -23,7 +23,6 @@ import (
 //    - "contractId"
 //    - "items"
 
-//
 type ContractInvoiceDefinition struct {
 	ContractId uuid.UUID                       `json:"contractId"`
 	Items      []ContractItemInvoiceDefinition `json:"items"`

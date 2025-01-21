@@ -26,7 +26,6 @@ import (
 //        type: "string"
 //        format: "date"
 
-//
 type TerminateContractResponse struct {
 	ContractId                   *uuid.UUID  `json:"contractId,omitempty"`
 	ItemsScheduledForTermination []uuid.UUID `json:"itemsScheduledForTermination,omitempty"`

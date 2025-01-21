@@ -11,7 +11,6 @@ package varnishv1
 //    "retentionTime":
 //        type: "number"
 
-//
 type ConfigExpiration struct {
 	MaxVersions   *float64 `json:"maxVersions,omitempty"`
 	RetentionTime *float64 `json:"retentionTime,omitempty"`

@@ -54,7 +54,6 @@ import (
 //    - "uploadToken"
 //    - "rules"
 
-//
 type RequestFileUploadResponse struct {
 	ConversationId uuid.UUID                      `json:"conversationId"`
 	Rules          RequestFileUploadResponseRules `json:"rules"`

@@ -22,7 +22,6 @@ package orderv1
 //    - "machineType"
 //    - "diskspaceInGiB"
 
-//
 type ServerOrderPreview struct {
 	CustomerId     *string `json:"customerId,omitempty"`
 	Description    *string `json:"description,omitempty"`

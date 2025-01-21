@@ -22,7 +22,6 @@ import (
 //required:
 //    - "ownerC"
 
-//
 type DomainOrderHandleData struct {
 	AdminC []DomainHandleField `json:"adminC,omitempty"`
 	OwnerC []DomainHandleField `json:"ownerC"`

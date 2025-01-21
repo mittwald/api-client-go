@@ -26,7 +26,6 @@ import (
 //    "title":
 //        type: "string"
 
-//
 type CreateConversationRequestBody struct {
 	CategoryId        *string                                     `json:"categoryId,omitempty"`
 	MainUserId        *uuid.UUID                                  `json:"mainUserId,omitempty"`

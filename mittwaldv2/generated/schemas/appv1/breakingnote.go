@@ -13,7 +13,7 @@ package appv1
 //    - "faqLink"
 //description: "A BreakingNote is a hint that something serious has changed in the AppVersion containing it, so an automatic update is not possible."
 
-//A BreakingNote is a hint that something serious has changed in the AppVersion containing it, so an automatic update is not possible.
+// A BreakingNote is a hint that something serious has changed in the AppVersion containing it, so an automatic update is not possible.
 type BreakingNote struct {
 	FaqLink string `json:"faqLink"`
 }

@@ -28,7 +28,6 @@ import (
 //    - "executedAt"
 //    - "result"
 
-//
 type GetStraceDataResponse struct {
 	ExecutedAt time.Time                   `json:"executedAt"`
 	Id         uuid.UUID                   `json:"id"`

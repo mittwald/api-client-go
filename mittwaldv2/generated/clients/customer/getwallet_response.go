@@ -23,7 +23,6 @@ package customer
 //    - "walletId"
 //    - "points"
 
-//
 type GetWalletResponse struct {
 	CustomerId         string  `json:"customerId"`
 	Points             float64 `json:"points"`

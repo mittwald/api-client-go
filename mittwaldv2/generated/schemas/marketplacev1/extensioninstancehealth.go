@@ -50,7 +50,6 @@ import (
 //    - "removalIsPending"
 //    - "pendingWebhooksCount"
 
-//
 type ExtensionInstanceHealth struct {
 	AggregateReference     ExtensionInstanceHealthAggregateReference `json:"aggregateReference"`
 	Id                     uuid.UUID                                 `json:"id"`

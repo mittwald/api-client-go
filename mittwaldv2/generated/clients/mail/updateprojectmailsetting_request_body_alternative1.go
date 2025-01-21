@@ -16,7 +16,6 @@ import "errors"
 //required:
 //    - "blacklist"
 
-//
 type UpdateProjectMailSettingRequestBodyAlternative1 struct {
 	Blacklist []string `json:"blacklist"`
 }

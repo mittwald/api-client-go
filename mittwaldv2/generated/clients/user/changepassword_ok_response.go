@@ -19,7 +19,6 @@ import "time"
 //    - "token"
 //    - "expires"
 
-//
 type ChangePasswordOKResponse struct {
 	Expires time.Time `json:"expires"`
 	Token   string    `json:"token"`

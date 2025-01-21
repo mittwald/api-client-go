@@ -11,7 +11,6 @@ package filev1
 //    "width":
 //        type: "integer"
 
-//
 type FileUploadRulesPropertiesImageDimensionsMax struct {
 	Height *int64 `json:"height,omitempty"`
 	Width  *int64 `json:"width,omitempty"`

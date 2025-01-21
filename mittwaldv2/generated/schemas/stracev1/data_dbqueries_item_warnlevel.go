@@ -13,7 +13,7 @@ import "fmt"
 //    - "SEVERE"
 //description: "Alerts when the time, syscall count or occurrence count of this group are abnormal."
 
-//Alerts when the time, syscall count or occurrence count of this group are abnormal.
+// Alerts when the time, syscall count or occurrence count of this group are abnormal.
 type DataDbQueriesItemWarnLevel string
 
 const DataDbQueriesItemWarnLevelNO DataDbQueriesItemWarnLevel = "NO"

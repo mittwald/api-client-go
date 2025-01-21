@@ -9,7 +9,6 @@ package customer
 //    "customerId":
 //        type: "string"
 
-//
 type DeleteCustomerResponse struct {
 	CustomerId *string `json:"customerId,omitempty"`
 }

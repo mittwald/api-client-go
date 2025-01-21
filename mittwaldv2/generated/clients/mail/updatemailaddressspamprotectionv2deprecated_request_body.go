@@ -30,7 +30,6 @@ import "fmt"
 //required:
 //    - "spamProtection"
 
-//
 type UpdateMailAddressSpamProtectionV2DeprecatedRequestBody struct {
 	SpamProtection UpdateMailAddressSpamProtectionV2DeprecatedRequestBodySpamProtection `json:"spamProtection"`
 }

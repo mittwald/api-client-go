@@ -20,7 +20,6 @@ import (
 //    - "id"
 //    - "userId"
 
-//
 type CreateMysqlDatabaseResponse struct {
 	Id     uuid.UUID `json:"id"`
 	UserId uuid.UUID `json:"userId"`

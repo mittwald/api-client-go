@@ -20,7 +20,6 @@ import "fmt"
 //                "domainName":
 //                    type: "string"
 
-//
 type ServiceRequestRelocationPayloadDomain struct {
 	AllDomains *bool                                              `json:"allDomains,omitempty"`
 	Domains    []ServiceRequestRelocationPayloadDomainDomainsItem `json:"domains,omitempty"`

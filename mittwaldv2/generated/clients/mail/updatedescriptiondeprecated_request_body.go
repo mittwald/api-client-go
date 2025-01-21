@@ -10,7 +10,6 @@ package mail
 //required:
 //    - "description"
 
-//
 type UpdateDescriptionDeprecatedRequestBody struct {
 	Description string `json:"description"`
 }

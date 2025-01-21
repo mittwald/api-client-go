@@ -9,7 +9,6 @@ package customer
 //    "isLegallyCompetent":
 //        type: "boolean"
 
-//
 type IsCustomerLegallyCompetentResponse struct {
 	IsLegallyCompetent *bool `json:"isLegallyCompetent,omitempty"`
 }

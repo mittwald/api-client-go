@@ -33,7 +33,6 @@ package orderv1
 //    - "diskspaceInGiB"
 //    - "description"
 
-//
 type ServerOrder struct {
 	CustomerId         string  `json:"customerId"`
 	Description        string  `json:"description"`

@@ -85,7 +85,6 @@ import "fmt"
 //required:
 //    - "message"
 
-//
 type CertificateError struct {
 	Message CertificateErrorMessage `json:"message"`
 }

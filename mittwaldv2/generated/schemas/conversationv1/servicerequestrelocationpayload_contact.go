@@ -19,7 +19,6 @@ package conversationv1
 //    - "lastname"
 //    - "email"
 
-//
 type ServiceRequestRelocationPayloadContact struct {
 	Email     string  `json:"email"`
 	Firstname string  `json:"firstname"`

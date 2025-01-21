@@ -10,7 +10,6 @@ import "fmt"
 //properties:
 //    "user": {"$ref": "#/components/schemas/de.mittwald.v1.conversation.User"}
 
-//
 type StatusUpdateMeta struct {
 	User *User `json:"user,omitempty"`
 }

@@ -13,7 +13,6 @@ import (
 //        type: "string"
 //        format: "uuid"
 
-//
 type DeprecatedChangeProjectOfDomainRequestBody struct {
 	ProjectId *uuid.UUID `json:"projectId,omitempty"`
 }

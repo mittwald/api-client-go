@@ -29,7 +29,6 @@ import (
 //    - "userInputs"
 //    - "updatePolicy"
 
-//
 type RequestAppinstallationRequestBody struct {
 	AppVersionId uuid.UUID              `json:"appVersionId"`
 	Description  string                 `json:"description"`

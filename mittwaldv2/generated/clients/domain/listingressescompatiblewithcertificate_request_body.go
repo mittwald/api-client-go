@@ -21,7 +21,6 @@ import (
 //    - "projectId"
 //    - "certificate"
 
-//
 type ListIngressesCompatibleWithCertificateRequestBody struct {
 	Certificate string    `json:"certificate"`
 	ProjectId   uuid.UUID `json:"projectId"`

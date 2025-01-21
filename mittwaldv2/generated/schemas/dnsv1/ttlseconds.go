@@ -13,7 +13,6 @@ package dnsv1
 //required:
 //    - "seconds"
 
-//
 type TtlSeconds struct {
 	Seconds int64 `json:"seconds"`
 }

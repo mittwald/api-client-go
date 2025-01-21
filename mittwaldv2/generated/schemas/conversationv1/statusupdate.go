@@ -30,7 +30,6 @@ import "fmt"
 //    - "createdAt"
 //    - "type"
 
-//
 type StatusUpdate struct {
 	ConversationId string            `json:"conversationId"`
 	CreatedAt      string            `json:"createdAt"`

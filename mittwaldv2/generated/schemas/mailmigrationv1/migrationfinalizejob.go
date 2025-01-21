@@ -11,7 +11,6 @@ import "fmt"
 //    "disableLegacyEntities": {"$ref": "#/components/schemas/de.mittwald.v1.mailmigration.MigrationFinalizeJobDisableLegacyEntities"}
 //    "projectSettingMigrations": {"$ref": "#/components/schemas/de.mittwald.v1.mailmigration.MigrationFinalizeJobProjectSetting"}
 
-//
 type MigrationFinalizeJob struct {
 	DisableLegacyEntities    *MigrationFinalizeJobDisableLegacyEntities `json:"disableLegacyEntities,omitempty"`
 	ProjectSettingMigrations *MigrationFinalizeJobProjectSetting        `json:"projectSettingMigrations,omitempty"`

@@ -16,7 +16,6 @@ import (
 //required:
 //    - "id"
 
-//
 type CreateProjectResponse struct {
 	Id uuid.UUID `json:"id"`
 }

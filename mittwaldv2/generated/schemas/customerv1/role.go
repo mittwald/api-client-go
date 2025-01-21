@@ -13,7 +13,7 @@ import "fmt"
 //    - "accountant"
 //description: "the role within a customer"
 
-//the role within a customer
+// the role within a customer
 type Role string
 
 const RoleOwner Role = "owner"

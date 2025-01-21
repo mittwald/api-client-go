@@ -10,7 +10,6 @@ package contract
 //required:
 //    - "orderId"
 
-//
 type CreateOrderResponse struct {
 	OrderId string `json:"orderId"`
 }

@@ -28,7 +28,6 @@ import (
 //    - "migrationJobs"
 //    - "finished"
 
-//
 type MigrationMailAddress struct {
 	Address          string                              `json:"address"`
 	Finished         bool                                `json:"finished"`

@@ -21,7 +21,6 @@ import (
 //    - "refId"
 //    - "rules"
 
-//
 type RequestProjectAvatarUploadResponse struct {
 	RefId uuid.UUID             `json:"refId"`
 	Rules projectv1.AvatarRules `json:"rules"`

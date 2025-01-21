@@ -16,7 +16,6 @@ import (
 //required:
 //    - "messageId"
 
-//
 type UpdateMessageResponse struct {
 	MessageId uuid.UUID `json:"messageId"`
 }

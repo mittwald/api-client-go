@@ -11,7 +11,6 @@ package user
 //required:
 //    - "settingsString"
 
-//
 type DeprecatedServicePersonalizedSettingsUpdateRequestBody struct {
 	SettingsString string `json:"settingsString"`
 }

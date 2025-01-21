@@ -26,7 +26,6 @@ import "fmt"
 //                    "width":
 //                        type: "integer"
 
-//
 type RequestFileUploadResponseRulesProperties struct {
 	ImageDimensions *RequestFileUploadResponseRulesPropertiesImageDimensions `json:"imageDimensions,omitempty"`
 }

@@ -117,7 +117,6 @@ import (
 //    - "autoResponder"
 //    - "isArchived"
 
-//
 type MailAddress struct {
 	Address           string                   `json:"address"`
 	AutoResponder     MailAddressAutoResponder `json:"autoResponder"`

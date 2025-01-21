@@ -16,7 +16,6 @@ import "errors"
 //required:
 //    - "whitelist"
 
-//
 type UpdateProjectMailSettingV2DeprecatedRequestBodyAlternative2 struct {
 	Whitelist []string `json:"whitelist"`
 }

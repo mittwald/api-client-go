@@ -33,7 +33,6 @@ import (
 //    - "cancelledAt"
 //    - "cancellationId"
 
-//
 type Cancellation struct {
 	CancellationId   uuid.UUID `json:"cancellationId"`
 	CancelledAt      time.Time `json:"cancelledAt"`

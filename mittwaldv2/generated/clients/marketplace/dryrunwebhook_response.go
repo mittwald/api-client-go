@@ -29,7 +29,6 @@ package marketplace
 //    - "successful"
 //    - "routeCalled"
 
-//
 type DryRunWebhookResponse struct {
 	ErrorMessage    *string  `json:"errorMessage,omitempty"`
 	ResponseBody    *string  `json:"responseBody,omitempty"`

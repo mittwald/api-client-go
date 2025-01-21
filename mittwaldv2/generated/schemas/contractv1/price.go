@@ -20,7 +20,6 @@ import "fmt"
 //    - "value"
 //    - "currency"
 
-//
 type Price struct {
 	Currency PriceCurrency `json:"currency"`
 	Value    int64         `json:"value"`

@@ -16,7 +16,6 @@ package orderv1
 //    - "key"
 //    - "value"
 
-//
 type Addons struct {
 	Hidden *bool  `json:"hidden,omitempty"`
 	Key    string `json:"key"`

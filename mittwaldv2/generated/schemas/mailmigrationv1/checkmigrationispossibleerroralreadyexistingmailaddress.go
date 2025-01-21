@@ -11,7 +11,6 @@ package mailmigrationv1
 //required:
 //    - "address"
 
-//
 type CheckMigrationIsPossibleErrorAlreadyExistingMailAddress struct {
 	Address string `json:"address"`
 }

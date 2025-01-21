@@ -12,7 +12,6 @@ package cronjobv1
 //required:
 //    - "url"
 
-//
 type CronjobUrl struct {
 	Url string `json:"url"`
 }

@@ -19,7 +19,6 @@ package dnsv1
 //    - "priority"
 //    - "fqdn"
 
-//
 type RecordMXRecord struct {
 	Fqdn     string `json:"fqdn"`
 	Priority int64  `json:"priority"`

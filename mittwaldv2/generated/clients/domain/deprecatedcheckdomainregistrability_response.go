@@ -11,7 +11,6 @@ package domain
 //required:
 //    - "available"
 
-//
 type DeprecatedCheckDomainRegistrabilityResponse struct {
 	Available bool `json:"available"`
 }

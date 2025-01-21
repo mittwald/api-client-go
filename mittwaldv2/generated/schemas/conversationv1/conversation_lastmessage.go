@@ -18,7 +18,6 @@ import (
 //required:
 //    - "createdAt"
 
-//
 type ConversationLastMessage struct {
 	CreatedAt time.Time `json:"createdAt"`
 	CreatedBy *User     `json:"createdBy,omitempty"`

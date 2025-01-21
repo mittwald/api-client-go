@@ -11,7 +11,6 @@ package domain
 //    "transactionId":
 //        type: "string"
 
-//
 type DeprecatedDeclareProcessChangeHandlesResponse struct {
 	IsAsync       *bool   `json:"isAsync,omitempty"`
 	TransactionId *string `json:"transactionId,omitempty"`

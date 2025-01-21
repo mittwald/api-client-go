@@ -12,7 +12,6 @@ package user
 //required:
 //    - "token"
 
-//
 type CreateAPITokenResponse struct {
 	Token string `json:"token"`
 }

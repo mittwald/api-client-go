@@ -41,7 +41,6 @@ import (
 //    - "finished"
 //    - "aborted"
 
-//
 type Migration struct {
 	Aborted              bool                   `json:"aborted"`
 	Addresses            []MigrationMailAddress `json:"addresses"`

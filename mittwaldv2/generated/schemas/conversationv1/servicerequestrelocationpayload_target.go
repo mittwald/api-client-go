@@ -35,7 +35,6 @@ import "fmt"
 //    - "product"
 //    - "articleType"
 
-//
 type ServiceRequestRelocationPayloadTarget struct {
 	AccountShortId  string                                            `json:"accountShortId"`
 	Application     *string                                           `json:"application,omitempty"`

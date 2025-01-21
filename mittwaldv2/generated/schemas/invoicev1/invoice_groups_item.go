@@ -25,7 +25,6 @@ import (
 //required:
 //    - "items"
 
-//
 type InvoiceGroupsItem struct {
 	ContractId  *uuid.UUID    `json:"contractId,omitempty"`
 	Description *string       `json:"description,omitempty"`

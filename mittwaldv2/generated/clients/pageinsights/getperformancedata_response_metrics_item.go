@@ -25,7 +25,6 @@ import "time"
 //    - "value"
 //    - "createdAt"
 
-//
 type GetPerformanceDataResponseMetricsItem struct {
 	CreatedAt time.Time `json:"createdAt"`
 	Name      string    `json:"name"`

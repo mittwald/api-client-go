@@ -85,7 +85,6 @@ import "fmt"
 //    - "orderable"
 //    - "template"
 
-//
 type ReadableArticle struct {
 	Addons                       []ArticleAddons                  `json:"addons,omitempty"`
 	ArticleId                    string                           `json:"articleId"`

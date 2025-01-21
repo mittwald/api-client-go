@@ -11,7 +11,6 @@ package user
 //        format: "base64"
 //        example: "eyJvbmJvYXJkaW5nIjp7ImNvbXBsZXRlZCI6W119LCJyZWNlbnRWaXNpdHMiOnsicmVjZW50VmlzaXRzIjp7fSwicmVjZW50VmlzaXRlZFBhdGhzIjp7fX0sImNoYW5nZWxvZ3MiOnsicmVhZElkcyI6WzIsMSwzLDQsNSw2LDgsNyw5XX19"
 
-//
 type GetPersonalizedSettingsResponse struct {
 	SettingsString *string `json:"settingsString,omitempty"`
 }

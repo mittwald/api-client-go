@@ -6,7 +6,6 @@ package domain
 //This data type was generated from the following JSON schema:
 //type: "object"
 
-//
 type DeprecatedGetHandleFieldsResponseJsonSchemaOwnerC struct {
 }
 

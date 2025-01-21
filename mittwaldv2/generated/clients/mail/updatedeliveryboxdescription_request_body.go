@@ -10,7 +10,6 @@ package mail
 //required:
 //    - "description"
 
-//
 type UpdateDeliveryBoxDescriptionRequestBody struct {
 	Description string `json:"description"`
 }

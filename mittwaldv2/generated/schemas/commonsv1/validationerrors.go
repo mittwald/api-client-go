@@ -25,7 +25,6 @@ import (
 //    - "type"
 //    - "validationErrors"
 
-//
 type ValidationErrors struct {
 	Type             ValidationErrorsType    `json:"type"`
 	Message          *string                 `json:"message,omitempty"`

@@ -19,7 +19,6 @@ package cronjobv1
 //    - "interpreter"
 //    - "path"
 
-//
 type CronjobCommand struct {
 	Interpreter string  `json:"interpreter"`
 	Parameters  *string `json:"parameters,omitempty"`

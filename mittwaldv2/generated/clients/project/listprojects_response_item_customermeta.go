@@ -11,7 +11,6 @@ package project
 //required:
 //    - "id"
 
-//
 type ListProjectsResponseItemCustomerMeta struct {
 	Id string `json:"id"`
 }

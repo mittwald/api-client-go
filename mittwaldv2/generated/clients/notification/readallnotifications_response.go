@@ -21,7 +21,6 @@ import (
 //    - "status"
 //    - "updatedCount"
 
-//
 type ReadAllNotificationsResponse struct {
 	Status       messagingv1.NotificationStatus `json:"status"`
 	UpdatedCount int64                          `json:"updatedCount"`

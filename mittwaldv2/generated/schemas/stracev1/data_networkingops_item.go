@@ -39,7 +39,6 @@ import "fmt"
 //    - "stats"
 //    - "warnLevel"
 
-//
 type DataNetworkingOpsItem struct {
 	ConnectionType DataNetworkingOpsItemConnectionType `json:"connectionType"`
 	Description    string                              `json:"description"`

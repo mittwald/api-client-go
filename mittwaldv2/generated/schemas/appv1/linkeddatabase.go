@@ -36,7 +36,7 @@ import (
 //    - "kind"
 //description: "LinkedDatabase is a reference to a concrete Database and DatabaseUsers."
 
-//LinkedDatabase is a reference to a concrete Database and DatabaseUsers.
+// LinkedDatabase is a reference to a concrete Database and DatabaseUsers.
 type LinkedDatabase struct {
 	DatabaseId      uuid.UUID             `json:"databaseId"`
 	DatabaseUserIds map[string]string     `json:"databaseUserIds,omitempty"`

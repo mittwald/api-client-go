@@ -14,7 +14,6 @@ import "time"
 //required:
 //    - "passwordUpdatedAt"
 
-//
 type GetPasswordUpdatedAtResponse struct {
 	PasswordUpdatedAt time.Time `json:"passwordUpdatedAt"`
 }

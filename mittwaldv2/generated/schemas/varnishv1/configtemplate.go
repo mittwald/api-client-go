@@ -34,7 +34,6 @@ import (
 //    - "softwareTemplateId"
 //    - "files"
 
-//
 type ConfigTemplate struct {
 	Files                    []ConfigFileRef `json:"files"`
 	IsGlobal                 *bool           `json:"isGlobal,omitempty"`

@@ -23,7 +23,7 @@ import "fmt"
 //    - "parametersTemplate"
 //description: "RequestHandlerRequirement describes the necessary properties to internally resolve the request handler or process to start."
 
-//RequestHandlerRequirement describes the necessary properties to internally resolve the request handler or process to start.
+// RequestHandlerRequirement describes the necessary properties to internally resolve the request handler or process to start.
 type RequestHandlerRequirement struct {
 	ExampleValues      []SavedUserInput `json:"exampleValues,omitempty"`
 	Name               string           `json:"name"`

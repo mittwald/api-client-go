@@ -41,7 +41,6 @@ import (
 //required:
 //    - "id"
 
-//
 type InvoiceSettings struct {
 	AdditionalEmailRecipients []string                `json:"additionalEmailRecipients,omitempty"`
 	DebitPaymentStopUntil     *time.Time              `json:"debitPaymentStopUntil,omitempty"`

@@ -22,7 +22,7 @@ import "fmt"
 //    - "firstName"
 //description: "The users personal information, e.g. first name."
 
-//The users personal information, e.g. first name.
+// The users personal information, e.g. first name.
 type Person struct {
 	FirstName string      `json:"firstName"`
 	LastName  string      `json:"lastName"`

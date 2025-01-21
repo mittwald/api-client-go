@@ -17,7 +17,6 @@ package mailmigrationv1
 //    - "mailDirectory"
 //    - "rateLimitId"
 
-//
 type MailSystemSettings struct {
 	ImapClusterId string `json:"imapClusterId"`
 	MailDirectory string `json:"mailDirectory"`

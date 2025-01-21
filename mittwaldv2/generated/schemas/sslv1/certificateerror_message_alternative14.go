@@ -11,7 +11,7 @@ import "fmt"
 //    - "private_key_encrypted"
 //description: "The private key is encrypted."
 
-//The private key is encrypted.
+// The private key is encrypted.
 type CertificateErrorMessageAlternative14 string
 
 const CertificateErrorMessageAlternative14Privatekeyencrypted CertificateErrorMessageAlternative14 = "private_key_encrypted"

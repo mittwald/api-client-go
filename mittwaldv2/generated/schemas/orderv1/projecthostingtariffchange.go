@@ -22,7 +22,6 @@ import "fmt"
 //    - "diskspaceInGiB"
 //    - "spec"
 
-//
 type ProjectHostingTariffChange struct {
 	ContractId     string                         `json:"contractId"`
 	DiskspaceInGiB float64                        `json:"diskspaceInGiB"`

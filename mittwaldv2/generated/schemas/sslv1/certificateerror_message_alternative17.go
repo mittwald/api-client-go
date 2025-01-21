@@ -11,7 +11,7 @@ import "fmt"
 //    - "unknown_cloudflare_error"
 //description: "An unknown error occurred related to Cloudflare."
 
-//An unknown error occurred related to Cloudflare.
+// An unknown error occurred related to Cloudflare.
 type CertificateErrorMessageAlternative17 string
 
 const CertificateErrorMessageAlternative17Unknowncloudflareerror CertificateErrorMessageAlternative17 = "unknown_cloudflare_error"

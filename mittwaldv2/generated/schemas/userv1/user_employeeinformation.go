@@ -13,7 +13,7 @@ package userv1
 //    - "department"
 //description: "Additional information about mittwald employees."
 
-//Additional information about mittwald employees.
+// Additional information about mittwald employees.
 type UserEmployeeInformation struct {
 	Department string `json:"department"`
 }

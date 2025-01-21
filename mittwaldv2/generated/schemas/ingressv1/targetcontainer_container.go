@@ -21,7 +21,6 @@ import (
 //    - "id"
 //    - "portProtocol"
 
-//
 type TargetContainerContainer struct {
 	Id           uuid.UUID `json:"id"`
 	PortProtocol string    `json:"portProtocol"`

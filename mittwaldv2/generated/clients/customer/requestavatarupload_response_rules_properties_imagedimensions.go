@@ -23,7 +23,6 @@ import "fmt"
 //            "width":
 //                type: "integer"
 
-//
 type RequestAvatarUploadResponseRulesPropertiesImageDimensions struct {
 	Max *RequestAvatarUploadResponseRulesPropertiesImageDimensionsMax `json:"max,omitempty"`
 	Min *RequestAvatarUploadResponseRulesPropertiesImageDimensionsMin `json:"min,omitempty"`

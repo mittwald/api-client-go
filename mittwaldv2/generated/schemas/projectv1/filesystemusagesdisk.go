@@ -13,7 +13,6 @@ package projectv1
 //    "usedBytes":
 //        type: "integer"
 
-//
 type FilesystemUsagesDisk struct {
 	Path       *string `json:"path,omitempty"`
 	TotalBytes *int64  `json:"totalBytes,omitempty"`

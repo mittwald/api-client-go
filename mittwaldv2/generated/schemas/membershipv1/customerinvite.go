@@ -50,7 +50,6 @@ import (
 //    - "information"
 //    - "customerName"
 
-//
 type CustomerInvite struct {
 	AvatarRefId         *uuid.UUID        `json:"avatarRefId,omitempty"`
 	CustomerId          uuid.UUID         `json:"customerId"`

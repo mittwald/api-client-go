@@ -17,7 +17,6 @@ package mailv1
 //    - "mailDirectory"
 //    - "rateLimitId"
 
-//
 type MailsystemSettings struct {
 	ImapClusterId string `json:"imapClusterId"`
 	MailDirectory string `json:"mailDirectory"`

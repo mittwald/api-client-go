@@ -11,7 +11,7 @@ import "fmt"
 //    - "private_key_mismatch"
 //description: "The private key does not match the certificate."
 
-//The private key does not match the certificate.
+// The private key does not match the certificate.
 type CertificateErrorMessageAlternative16 string
 
 const CertificateErrorMessageAlternative16Privatekeymismatch CertificateErrorMessageAlternative16 = "private_key_mismatch"

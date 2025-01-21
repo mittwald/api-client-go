@@ -27,7 +27,6 @@ import "fmt"
 //required:
 //    - "autoResponder"
 
-//
 type UpdateMailAddressAutoresponderRequestBody struct {
 	AutoResponder UpdateMailAddressAutoresponderRequestBodyAutoResponder `json:"autoResponder"`
 }

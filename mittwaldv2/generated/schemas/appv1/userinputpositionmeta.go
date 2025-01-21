@@ -14,7 +14,7 @@ package appv1
 //        type: "string"
 //description: "UserInputPositionMeta is a utility information, helping to position the UserInput properly on the frontend."
 
-//UserInputPositionMeta is a utility information, helping to position the UserInput properly on the frontend.
+// UserInputPositionMeta is a utility information, helping to position the UserInput properly on the frontend.
 type UserInputPositionMeta struct {
 	Index   *float64 `json:"index,omitempty"`
 	Section *string  `json:"section,omitempty"`

@@ -16,7 +16,6 @@ import (
 //required:
 //    - "id"
 
-//
 type ScheduleStraceResponse struct {
 	Id uuid.UUID `json:"id"`
 }

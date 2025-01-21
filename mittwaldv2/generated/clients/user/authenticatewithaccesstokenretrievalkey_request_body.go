@@ -22,7 +22,6 @@ import (
 //    - "accessTokenRetrievalKey"
 //    - "refreshToken"
 
-//
 type AuthenticateWithAccessTokenRetrievalKeyRequestBody struct {
 	AccessTokenRetrievalKey string    `json:"accessTokenRetrievalKey"`
 	UserId                  uuid.UUID `json:"userId"`

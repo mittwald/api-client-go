@@ -11,7 +11,7 @@ import "fmt"
 //    - "certificate_decode_failed"
 //description: "Failed to decode the certificate."
 
-//Failed to decode the certificate.
+// Failed to decode the certificate.
 type CertificateErrorMessageAlternative2 string
 
 const CertificateErrorMessageAlternative2Certificatedecodefailed CertificateErrorMessageAlternative2 = "certificate_decode_failed"

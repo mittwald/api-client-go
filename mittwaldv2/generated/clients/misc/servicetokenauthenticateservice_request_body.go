@@ -11,7 +11,6 @@ package misc
 //required:
 //    - "secretAccessKey"
 
-//
 type ServicetokenAuthenticateServiceRequestBody struct {
 	SecretAccessKey string `json:"secretAccessKey"`
 }

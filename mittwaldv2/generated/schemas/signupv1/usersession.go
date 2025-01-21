@@ -29,7 +29,6 @@ import (
 //    - "created"
 //    - "tokenId"
 
-//
 type UserSession struct {
 	Created    time.Time  `json:"created"`
 	Device     DeviceInfo `json:"device"`

@@ -21,7 +21,6 @@ package orderv1
 //    - "recurring"
 //    - "nonRecurring"
 
-//
 type OrderSummary struct {
 	NonRecurring float64 `json:"nonRecurring"`
 	Recurring    float64 `json:"recurring"`

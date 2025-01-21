@@ -15,7 +15,6 @@ package domainv1
 //    - "name"
 //    - "value"
 
-//
 type HandleField struct {
 	Name  string `json:"name"`
 	Value string `json:"value"`

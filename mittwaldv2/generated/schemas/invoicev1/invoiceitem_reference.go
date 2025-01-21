@@ -20,7 +20,6 @@ import (
 //    - "sourceInvoiceId"
 //    - "sourceInvoiceItemId"
 
-//
 type InvoiceItemReference struct {
 	SourceInvoiceId     uuid.UUID `json:"sourceInvoiceId"`
 	SourceInvoiceItemId uuid.UUID `json:"sourceInvoiceItemId"`

@@ -20,7 +20,6 @@ package contractv1
 //    - "domain"
 //    - "aggregate"
 
-//
 type AggregateReference struct {
 	Aggregate string `json:"aggregate"`
 	Domain    string `json:"domain"`

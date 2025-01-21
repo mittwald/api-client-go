@@ -16,7 +16,6 @@ package userv1
 //    - "active"
 //    - "setup"
 
-//
 type UserMFA struct {
 	Active bool `json:"active"`
 	Setup  bool `json:"setup"`

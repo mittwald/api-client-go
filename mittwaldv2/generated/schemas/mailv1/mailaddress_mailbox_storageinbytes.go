@@ -25,7 +25,6 @@ import "fmt"
 //    - "limit"
 //    - "current"
 
-//
 type MailAddressMailboxStorageInBytes struct {
 	Current MailAddressMailboxStorageInBytesCurrent `json:"current"`
 	Limit   float64                                 `json:"limit"`

@@ -67,7 +67,6 @@ import (
 //    - "successful"
 //    - "cronjobId"
 
-//
 type CronjobExecution struct {
 	AbortedBy              *CronjobExecutionAbortedBy   `json:"abortedBy,omitempty"`
 	CronjobId              string                       `json:"cronjobId"`

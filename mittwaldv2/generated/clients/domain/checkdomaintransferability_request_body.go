@@ -13,7 +13,6 @@ package domain
 //required:
 //    - "domain"
 
-//
 type CheckDomainTransferabilityRequestBody struct {
 	AuthCode *string `json:"authCode,omitempty"`
 	Domain   string  `json:"domain"`

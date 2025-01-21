@@ -39,7 +39,7 @@ import (
 //    - "externalVersion"
 //description: "A SystemSoftwareVersion is an officially  supported version of a SystemSoftware, containing the necessary and recommended configuration und dependencies."
 
-//A SystemSoftwareVersion is an officially  supported version of a SystemSoftware, containing the necessary and recommended configuration und dependencies.
+// A SystemSoftwareVersion is an officially  supported version of a SystemSoftware, containing the necessary and recommended configuration und dependencies.
 type SystemSoftwareVersion struct {
 	ExpiryDate                 *time.Time                 `json:"expiryDate,omitempty"`
 	ExternalVersion            string                     `json:"externalVersion"`

@@ -16,7 +16,6 @@ import "fmt"
 //    - "settings"
 //    - "fqdn"
 
-//
 type RecordCNAMEComponent struct {
 	Fqdn     string         `json:"fqdn"`
 	Settings RecordSettings `json:"settings"`

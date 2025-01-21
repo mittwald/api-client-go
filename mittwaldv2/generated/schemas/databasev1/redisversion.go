@@ -20,7 +20,6 @@ package databasev1
 //    - "number"
 //    - "disabled"
 
-//
 type RedisVersion struct {
 	Disabled bool   `json:"disabled"`
 	Id       string `json:"id"`

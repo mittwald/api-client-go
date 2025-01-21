@@ -13,7 +13,7 @@ import "fmt"
 //    - "reconfigure"
 //description: "The AppInstallationLifecycle can be used to express a specific point in the AppInstallation Lifecycle, e.g. while installing a new AppInstallation."
 
-//The AppInstallationLifecycle can be used to express a specific point in the AppInstallation Lifecycle, e.g. while installing a new AppInstallation.
+// The AppInstallationLifecycle can be used to express a specific point in the AppInstallation Lifecycle, e.g. while installing a new AppInstallation.
 type AppInstallationLifecycle string
 
 const AppInstallationLifecycleInstallation AppInstallationLifecycle = "installation"

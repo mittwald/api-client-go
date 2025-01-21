@@ -25,7 +25,6 @@ package articlev1
 //required:
 //    - "id"
 
-//
 type ArticleTag struct {
 	Description *string `json:"description,omitempty"`
 	HexColor    *string `json:"hexColor,omitempty"`

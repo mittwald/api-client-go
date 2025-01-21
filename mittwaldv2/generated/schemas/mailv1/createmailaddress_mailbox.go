@@ -20,7 +20,6 @@ package mailv1
 //    - "quotaInBytes"
 //    - "enableSpamProtection"
 
-//
 type CreateMailAddressMailbox struct {
 	EnableSpamProtection bool    `json:"enableSpamProtection"`
 	Password             string  `json:"password"`

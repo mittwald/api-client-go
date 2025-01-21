@@ -10,7 +10,6 @@ package mail
 //required:
 //    - "active"
 
-//
 type UpdateMailAddressCatchallV2DeprecatedRequestBody struct {
 	Active bool `json:"active"`
 }

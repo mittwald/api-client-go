@@ -16,7 +16,6 @@ import (
 //required:
 //    - "id"
 
-//
 type RequestAppinstallationCopyResponse struct {
 	Id uuid.UUID `json:"id"`
 }

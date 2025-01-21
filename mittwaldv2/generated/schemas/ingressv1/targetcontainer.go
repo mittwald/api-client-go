@@ -24,7 +24,6 @@ import "fmt"
 //required:
 //    - "container"
 
-//
 type TargetContainer struct {
 	Container TargetContainerContainer `json:"container"`
 }

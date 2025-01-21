@@ -29,7 +29,6 @@ package commonsv1
 //    - "path"
 //    - "type"
 
-//
 type ValidationErrorSchema struct {
 	Message string            `json:"message"`
 	Path    string            `json:"path"`

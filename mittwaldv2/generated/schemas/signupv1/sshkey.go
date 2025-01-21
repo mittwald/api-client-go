@@ -41,7 +41,6 @@ import (
 //    - "fingerprint"
 //    - "createdAt"
 
-//
 type SshKey struct {
 	Algorithm   string     `json:"algorithm"`
 	Comment     string     `json:"comment"`

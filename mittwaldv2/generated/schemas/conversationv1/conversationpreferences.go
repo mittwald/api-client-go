@@ -30,7 +30,6 @@ import (
 //    - "customerId"
 //    - "preferredUsers"
 
-//
 type ConversationPreferences struct {
 	CustomerId     uuid.UUID                             `json:"customerId"`
 	PreferredUsers ConversationPreferencesPreferredUsers `json:"preferredUsers"`

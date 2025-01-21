@@ -20,7 +20,6 @@ import (
 //    - "name"
 //    - "parentZoneId"
 
-//
 type CreateDNSZoneRequestBody struct {
 	Name         string    `json:"name"`
 	ParentZoneId uuid.UUID `json:"parentZoneId"`

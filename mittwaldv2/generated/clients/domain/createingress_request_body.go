@@ -29,7 +29,6 @@ import (
 //    - "projectId"
 //    - "paths"
 
-//
 type CreateIngressRequestBody struct {
 	Hostname  string           `json:"hostname"`
 	Paths     []ingressv1.Path `json:"paths"`

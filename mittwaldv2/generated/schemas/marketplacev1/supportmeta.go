@@ -12,7 +12,6 @@ package marketplacev1
 //    "phone":
 //        type: "string"
 
-//
 type SupportMeta struct {
 	Email *string `json:"email,omitempty"`
 	Phone *string `json:"phone,omitempty"`

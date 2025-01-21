@@ -17,7 +17,6 @@ import "time"
 //    - "fileRef"
 //    - "createdAt"
 
-//
 type GetPerformanceDataResponseScreenshot struct {
 	CreatedAt time.Time `json:"createdAt"`
 	FileRef   string    `json:"fileRef"`

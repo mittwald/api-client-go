@@ -14,7 +14,6 @@ import (
 //        type: "string"
 //        format: "uuid"
 
-//
 type CronjobExecutionAbortedBy struct {
 	Id *uuid.UUID `json:"id,omitempty"`
 }

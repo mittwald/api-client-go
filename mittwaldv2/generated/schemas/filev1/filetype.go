@@ -20,7 +20,6 @@ import "errors"
 //    - "mimeType"
 //    - "extensions"
 
-//
 type FileType struct {
 	Extensions []string `json:"extensions"`
 	MimeType   string   `json:"mimeType"`

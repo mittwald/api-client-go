@@ -11,7 +11,7 @@ import "fmt"
 //    - "ca_not_authorized_for_this_name"
 //description: "The Certificate Authority (CA) is not authorized for this name."
 
-//The Certificate Authority (CA) is not authorized for this name.
+// The Certificate Authority (CA) is not authorized for this name.
 type CertificateErrorMessageAlternative7 string
 
 const CertificateErrorMessageAlternative7Canotauthorizedforthisname CertificateErrorMessageAlternative7 = "ca_not_authorized_for_this_name"

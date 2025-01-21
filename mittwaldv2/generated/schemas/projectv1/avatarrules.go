@@ -43,7 +43,6 @@ import (
 //    - "mimeTypes"
 //    - "maxSizeInKB"
 
-//
 type AvatarRules struct {
 	MaxSizeInKB int64                  `json:"maxSizeInKB"`
 	MimeTypes   []string               `json:"mimeTypes"`

@@ -14,7 +14,6 @@ package databasev1
 //    - "characterSet"
 //    - "collation"
 
-//
 type CharacterSettings struct {
 	CharacterSet string `json:"characterSet"`
 	Collation    string `json:"collation"`

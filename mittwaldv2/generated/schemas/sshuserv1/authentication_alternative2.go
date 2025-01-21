@@ -17,7 +17,6 @@ import (
 //required:
 //    - "publicKeys"
 
-//
 type AuthenticationAlternative2 struct {
 	PublicKeys []PublicKey `json:"publicKeys"`
 }

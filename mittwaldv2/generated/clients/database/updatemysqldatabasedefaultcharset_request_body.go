@@ -15,7 +15,6 @@ import (
 //required:
 //    - "characterSettings"
 
-//
 type UpdateMysqlDatabaseDefaultCharsetRequestBody struct {
 	CharacterSettings databasev1.CharacterSettings `json:"characterSettings"`
 }

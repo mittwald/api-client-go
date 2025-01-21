@@ -109,7 +109,6 @@ import (
 //    - "backupStorageUsageInBytes"
 //    - "backupStorageUsageInBytesSetAt"
 
-//
 type Project struct {
 	BackupStorageUsageInBytes      int64                            `json:"backupStorageUsageInBytes"`
 	BackupStorageUsageInBytesSetAt time.Time                        `json:"backupStorageUsageInBytesSetAt"`

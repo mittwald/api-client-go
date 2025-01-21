@@ -17,7 +17,7 @@ import "fmt"
 //    - "id"
 //description: "A Fee of a Resource"
 
-//A Fee of a Resource
+// A Fee of a Resource
 type ResourceFee struct {
 	FeeStrategy *FeeStrategy `json:"feeStrategy,omitempty"`
 	Id          string       `json:"id"`

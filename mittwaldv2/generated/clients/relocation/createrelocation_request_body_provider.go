@@ -39,7 +39,6 @@ import "fmt"
 //    - "password"
 //    - "sourceAccount"
 
-//
 type CreateRelocationRequestBodyProvider struct {
 	LoginUrl      string                                  `json:"loginUrl"`
 	Name          CreateRelocationRequestBodyProviderName `json:"name"`

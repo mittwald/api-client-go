@@ -15,7 +15,6 @@ import (
 //required:
 //    - "id"
 
-//
 type CreateExtensionInstanceResponse struct {
 	Id uuid.UUID `json:"id"`
 }

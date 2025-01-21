@@ -35,7 +35,6 @@ import "fmt"
 //    - "description"
 //    - "spec"
 
-//
 type ProjectHostingOrder struct {
 	CustomerId         string                  `json:"customerId"`
 	Description        string                  `json:"description"`

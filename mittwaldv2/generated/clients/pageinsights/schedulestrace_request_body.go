@@ -13,7 +13,6 @@ package pageinsights
 //required:
 //    - "url"
 
-//
 type ScheduleStraceRequestBody struct {
 	Url string `json:"url"`
 }

@@ -25,7 +25,6 @@ import (
 //    - "algorithm"
 //    - "key"
 
-//
 type PublicKey struct {
 	Algorithm string    `json:"algorithm"`
 	Key       string    `json:"key"`

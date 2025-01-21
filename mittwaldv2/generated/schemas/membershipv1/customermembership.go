@@ -53,7 +53,6 @@ import (
 //    - "email"
 //    - "mfa"
 
-//
 type CustomerMembership struct {
 	CustomerId  uuid.UUID     `json:"customerId"`
 	Email       string        `json:"email"`

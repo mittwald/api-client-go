@@ -22,7 +22,6 @@ import (
 //    - "domain"
 //    - "aggregate"
 
-//
 type ExtensionInstanceHealthAggregateReference struct {
 	Aggregate string    `json:"aggregate"`
 	Domain    string    `json:"domain"`

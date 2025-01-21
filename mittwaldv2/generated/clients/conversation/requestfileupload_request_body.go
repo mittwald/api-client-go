@@ -6,7 +6,6 @@ package conversation
 //This data type was generated from the following JSON schema:
 //type: "object"
 
-//
 type RequestFileUploadRequestBody struct {
 }
 

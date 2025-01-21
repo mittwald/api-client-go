@@ -27,7 +27,6 @@ import "fmt"
 //                        type: "integer"
 //        description: "Supported range of dimensions for the avatar image."
 
-//
 type RequestAvatarUploadResponseRulesProperties struct {
 	ImageDimensions *RequestAvatarUploadResponseRulesPropertiesImageDimensions `json:"imageDimensions,omitempty"`
 }

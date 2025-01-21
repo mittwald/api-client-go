@@ -16,7 +16,6 @@ package customerv1
 //    - "customerId"
 //    - "name"
 
-//
 type CustomerMeta struct {
 	AvatarRefId *string `json:"avatarRefId,omitempty"`
 	CustomerId  string  `json:"customerId"`

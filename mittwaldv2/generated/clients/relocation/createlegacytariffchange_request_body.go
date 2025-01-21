@@ -16,7 +16,6 @@ package relocation
 //    - "pAccount"
 //    - "targetTariff"
 
-//
 type CreateLegacyTariffChangeRequestBody struct {
 	PAccount     string `json:"pAccount"`
 	TargetTariff string `json:"targetTariff"`

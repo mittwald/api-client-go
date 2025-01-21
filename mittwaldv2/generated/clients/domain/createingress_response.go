@@ -21,7 +21,6 @@ import (
 //    - "id"
 //    - "ownership"
 
-//
 type CreateIngressResponse struct {
 	Id        uuid.UUID           `json:"id"`
 	Ownership ingressv1.Ownership `json:"ownership"`

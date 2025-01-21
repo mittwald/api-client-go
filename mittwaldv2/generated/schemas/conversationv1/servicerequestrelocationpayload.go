@@ -107,7 +107,6 @@ import (
 //    - "contact"
 //    - "userId"
 
-//
 type ServiceRequestRelocationPayload struct {
 	Contact                 ServiceRequestRelocationPayloadContact `json:"contact"`
 	Domain                  *ServiceRequestRelocationPayloadDomain `json:"domain,omitempty"`

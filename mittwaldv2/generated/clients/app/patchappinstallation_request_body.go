@@ -33,7 +33,6 @@ import (
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.app.SavedUserInput"}
 
-//
 type PatchAppinstallationRequestBody struct {
 	AppVersionId       *uuid.UUID                                                   `json:"appVersionId,omitempty"`
 	CustomDocumentRoot *string                                                      `json:"customDocumentRoot,omitempty"`

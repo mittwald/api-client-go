@@ -30,7 +30,6 @@ import "time"
 //    - "usageInBytes"
 //    - "usageInBytesSetAt"
 
-//
 type StatisticsResource struct {
 	Description       *string   `json:"description,omitempty"`
 	Id                string    `json:"id"`

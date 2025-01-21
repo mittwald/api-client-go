@@ -23,7 +23,6 @@ import "time"
 //    - "refreshToken"
 //    - "expires"
 
-//
 type AuthenticateMFAResponse struct {
 	Expires      time.Time `json:"expires"`
 	RefreshToken string    `json:"refreshToken"`

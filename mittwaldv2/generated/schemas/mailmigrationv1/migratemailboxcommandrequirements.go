@@ -14,7 +14,6 @@ import "fmt"
 //required:
 //    - "projectId"
 
-//
 type MigrateMailboxCommandRequirements struct {
 	Mailbox   *Mailbox `json:"mailbox,omitempty"`
 	ProjectId string   `json:"projectId"`

@@ -21,7 +21,6 @@ import (
 //    - "records"
 //additionalProperties: false
 
-//
 type RecordSRVComponent struct {
 	Records  []RecordSRVRecord `json:"records"`
 	Settings RecordSettings    `json:"settings"`

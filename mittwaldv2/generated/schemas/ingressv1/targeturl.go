@@ -12,7 +12,6 @@ package ingressv1
 //required:
 //    - "url"
 
-//
 type TargetUrl struct {
 	Url string `json:"url"`
 }

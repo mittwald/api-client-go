@@ -32,7 +32,6 @@ import (
 //    - "customerId"
 //    - "baseItem"
 
-//
 type Contract struct {
 	AdditionalItems []ContractItem `json:"additionalItems,omitempty"`
 	BaseItem        ContractItem   `json:"baseItem"`

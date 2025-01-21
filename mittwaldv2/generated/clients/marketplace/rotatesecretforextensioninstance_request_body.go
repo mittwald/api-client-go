@@ -9,7 +9,6 @@ package marketplace
 //    "allowWebhookFailure":
 //        type: "boolean"
 
-//
 type RotateSecretForExtensionInstanceRequestBody struct {
 	AllowWebhookFailure *bool `json:"allowWebhookFailure,omitempty"`
 }

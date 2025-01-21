@@ -25,7 +25,7 @@ import "fmt"
 //    - "logFileLocation"
 //description: "AppInstallationStatus describes the overall runtime status of an AppInstallation."
 
-//AppInstallationStatus describes the overall runtime status of an AppInstallation.
+// AppInstallationStatus describes the overall runtime status of an AppInstallation.
 type AppInstallationStatus struct {
 	LastExitCode    *float64                   `json:"lastExitCode,omitempty"`
 	LogFileLocation string                     `json:"logFileLocation"`

@@ -23,7 +23,6 @@ import (
 //    - "domain"
 //    - "projectId"
 
-//
 type DomainOrderPreview struct {
 	AuthCode  *string   `json:"authCode,omitempty"`
 	Domain    string    `json:"domain"`

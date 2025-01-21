@@ -11,7 +11,7 @@ import "fmt"
 //    - "private_key_parse_failed"
 //description: "An error occurred while parsing the private key."
 
-//An error occurred while parsing the private key.
+// An error occurred while parsing the private key.
 type CertificateErrorMessageAlternative13 string
 
 const CertificateErrorMessageAlternative13Privatekeyparsefailed CertificateErrorMessageAlternative13 = "private_key_parse_failed"

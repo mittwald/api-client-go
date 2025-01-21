@@ -20,7 +20,6 @@ package articlev1
 //    - "cpu"
 //    - "memory"
 
-//
 type ReadableArticleMachineType struct {
 	Cpu    string `json:"cpu"`
 	Memory string `json:"memory"`

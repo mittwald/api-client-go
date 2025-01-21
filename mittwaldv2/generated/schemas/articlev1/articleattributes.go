@@ -32,7 +32,6 @@ import "fmt"
 //required:
 //    - "key"
 
-//
 type ArticleAttributes struct {
 	CustomerEditable *bool                       `json:"customerEditable,omitempty"`
 	Key              string                      `json:"key"`

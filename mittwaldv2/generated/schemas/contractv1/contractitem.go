@@ -85,7 +85,6 @@ import (
 //    - "description"
 //    - "isBaseItem"
 
-//
 type ContractItem struct {
 	ActivationDate              *time.Time          `json:"activationDate,omitempty"`
 	AggregateReference          *AggregateReference `json:"aggregateReference,omitempty"`

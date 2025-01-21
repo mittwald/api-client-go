@@ -32,7 +32,6 @@ import (
 //    "userId":
 //        type: "string"
 
-//
 type Account struct {
 	Email             *string            `json:"email,omitempty"`
 	MfaDetails        *AccountMFADetails `json:"mfaDetails,omitempty"`

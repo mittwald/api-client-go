@@ -65,7 +65,6 @@ import (
 //    - "fileTypes"
 //    - "extensions"
 
-//
 type FileUploadRules struct {
 	Extensions     []string                   `json:"extensions"`
 	FileTypes      []FileType                 `json:"fileTypes"`

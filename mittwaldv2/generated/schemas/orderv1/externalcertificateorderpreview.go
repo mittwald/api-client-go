@@ -20,7 +20,6 @@ import (
 //    - "projectId"
 //    - "certificateRequestId"
 
-//
 type ExternalCertificateOrderPreview struct {
 	CertificateRequestId uuid.UUID `json:"certificateRequestId"`
 	ProjectId            uuid.UUID `json:"projectId"`

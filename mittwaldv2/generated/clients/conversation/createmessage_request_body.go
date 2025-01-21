@@ -20,7 +20,6 @@ import (
 //        type: "string"
 //        maxLength: 8000
 
-//
 type CreateMessageRequestBody struct {
 	FileIds        []uuid.UUID `json:"fileIds,omitempty"`
 	MessageContent *string     `json:"messageContent,omitempty"`

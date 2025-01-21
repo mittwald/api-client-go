@@ -25,7 +25,6 @@ package user
 //    - "subject"
 //    - "vote"
 
-//
 type DeprecatedServiceFeedbackCreateRequestBody struct {
 	Message *string `json:"message,omitempty"`
 	Origin  string  `json:"origin"`

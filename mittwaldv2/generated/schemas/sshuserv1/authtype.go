@@ -12,7 +12,7 @@ import "fmt"
 //    - "publicKey"
 //description: "Method of authentication that a given SFTPUser or SSHuser supports."
 
-//Method of authentication that a given SFTPUser or SSHuser supports.
+// Method of authentication that a given SFTPUser or SSHuser supports.
 type AuthType string
 
 const AuthTypePassword AuthType = "password"

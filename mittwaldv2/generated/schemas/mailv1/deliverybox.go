@@ -41,7 +41,6 @@ import (
 //    - "passwordUpdatedAt"
 //    - "updatedAt"
 
-//
 type Deliverybox struct {
 	AuthenticationEnabled bool      `json:"authenticationEnabled"`
 	Description           string    `json:"description"`

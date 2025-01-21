@@ -53,7 +53,7 @@ import (
 //    - "maxSizeInBytes"
 //description: "Contstraints for the avatar image upload."
 
-//Contstraints for the avatar image upload.
+// Contstraints for the avatar image upload.
 type RequestAvatarUploadResponseRules struct {
 	MaxSizeInBytes int64                                       `json:"maxSizeInBytes"`
 	MaxSizeInKB    int64                                       `json:"maxSizeInKB"`

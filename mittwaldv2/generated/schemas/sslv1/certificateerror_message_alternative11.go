@@ -11,7 +11,7 @@ import "fmt"
 //    - "private_key_read_failed"
 //description: "Failed to read the private key."
 
-//Failed to read the private key.
+// Failed to read the private key.
 type CertificateErrorMessageAlternative11 string
 
 const CertificateErrorMessageAlternative11Privatekeyreadfailed CertificateErrorMessageAlternative11 = "private_key_read_failed"

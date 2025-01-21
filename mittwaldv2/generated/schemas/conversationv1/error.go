@@ -14,7 +14,6 @@ package conversationv1
 //    - "type"
 //    - "message"
 
-//
 type Error struct {
 	Message string `json:"message"`
 	Type    string `json:"type"`

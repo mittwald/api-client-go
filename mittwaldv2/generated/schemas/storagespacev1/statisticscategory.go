@@ -20,7 +20,6 @@ import "fmt"
 //    - "kind"
 //    - "totalUsageInBytes"
 
-//
 type StatisticsCategory struct {
 	Kind              StatisticsCategoryKind `json:"kind"`
 	Resources         []StatisticsResource   `json:"resources,omitempty"`

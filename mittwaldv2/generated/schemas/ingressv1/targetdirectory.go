@@ -11,7 +11,6 @@ package ingressv1
 //required:
 //    - "directory"
 
-//
 type TargetDirectory struct {
 	Directory string `json:"directory"`
 }

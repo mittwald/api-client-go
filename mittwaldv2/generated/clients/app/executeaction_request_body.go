@@ -6,7 +6,6 @@ package app
 //This data type was generated from the following JSON schema:
 //type: "object"
 
-//
 type ExecuteActionRequestBody struct {
 }
 

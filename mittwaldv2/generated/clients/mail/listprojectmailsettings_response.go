@@ -25,7 +25,6 @@ import "errors"
 //    - "blacklist"
 //    - "whitelist"
 
-//
 type ListProjectMailSettingsResponse struct {
 	Blacklist []string `json:"blacklist"`
 	ProjectId string   `json:"projectId"`

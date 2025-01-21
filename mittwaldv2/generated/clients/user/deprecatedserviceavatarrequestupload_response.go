@@ -51,7 +51,6 @@ import (
 //    - "refId"
 //    - "rules"
 
-//
 type DeprecatedServiceAvatarRequestUploadResponse struct {
 	RefId uuid.UUID                                         `json:"refId"`
 	Rules DeprecatedServiceAvatarRequestUploadResponseRules `json:"rules"`

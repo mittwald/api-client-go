@@ -14,7 +14,7 @@ import "fmt"
 //    - "de"
 //description: "Supported languages. Format ISO-639-1."
 
-//Supported languages. Format ISO-639-1.
+// Supported languages. Format ISO-639-1.
 type DetailedDescriptions struct {
 	De DescriptionFormats  `json:"de"`
 	En *DescriptionFormats `json:"en,omitempty"`

@@ -362,7 +362,7 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
-//Change your Email-Address.
+// Change your Email-Address.
 func (c *clientImpl) DeprecatedChangeEmail(
 	ctx context.Context,
 	req DeprecatedChangeEmailRequest,
@@ -385,7 +385,7 @@ func (c *clientImpl) DeprecatedChangeEmail(
 	return httpRes, nil
 }
 
-//Confirm password reset.
+// Confirm password reset.
 func (c *clientImpl) DeprecatedConfirmPasswordReset(
 	ctx context.Context,
 	req DeprecatedConfirmPasswordResetRequest,
@@ -408,7 +408,7 @@ func (c *clientImpl) DeprecatedConfirmPasswordReset(
 	return httpRes, nil
 }
 
-//Create a new issue.
+// Create a new issue.
 func (c *clientImpl) DeprecatedCreateIssue(
 	ctx context.Context,
 	req DeprecatedCreateIssueRequest,
@@ -435,7 +435,7 @@ func (c *clientImpl) DeprecatedCreateIssue(
 	return &response, httpRes, nil
 }
 
-//Update an existing `ApiToken`.
+// Update an existing `ApiToken`.
 func (c *clientImpl) DeprecatedEditAPIToken(
 	ctx context.Context,
 	req DeprecatedEditAPITokenRequest,
@@ -458,7 +458,7 @@ func (c *clientImpl) DeprecatedEditAPIToken(
 	return httpRes, nil
 }
 
-//Deletes an ApiToken.
+// Deletes an ApiToken.
 func (c *clientImpl) DeprecatedDeleteAPIToken(
 	ctx context.Context,
 	req DeprecatedDeleteAPITokenRequest,
@@ -481,7 +481,7 @@ func (c *clientImpl) DeprecatedDeleteAPIToken(
 	return httpRes, nil
 }
 
-//Edit a stored ssh-key.
+// Edit a stored ssh-key.
 func (c *clientImpl) DeprecatedEditSSHKey(
 	ctx context.Context,
 	req DeprecatedEditSSHKeyRequest,
@@ -504,7 +504,7 @@ func (c *clientImpl) DeprecatedEditSSHKey(
 	return httpRes, nil
 }
 
-//Remove a ssh-key.
+// Remove a ssh-key.
 func (c *clientImpl) DeprecatedDeleteSSHKey(
 	ctx context.Context,
 	req DeprecatedDeleteSSHKeyRequest,
@@ -527,7 +527,7 @@ func (c *clientImpl) DeprecatedDeleteSSHKey(
 	return httpRes, nil
 }
 
-//Disable Multi Factor Authentication.
+// Disable Multi Factor Authentication.
 func (c *clientImpl) DeprecatedDisableMFA(
 	ctx context.Context,
 	req DeprecatedDisableMFARequest,
@@ -554,7 +554,7 @@ func (c *clientImpl) DeprecatedDisableMFA(
 	return &response, httpRes, nil
 }
 
-//Initialize password reset process.
+// Initialize password reset process.
 func (c *clientImpl) DeprecatedInitPasswordReset(
 	ctx context.Context,
 	req DeprecatedInitPasswordResetRequest,
@@ -577,7 +577,7 @@ func (c *clientImpl) DeprecatedInitPasswordReset(
 	return httpRes, nil
 }
 
-//Terminate session and invalidate access token.
+// Terminate session and invalidate access token.
 func (c *clientImpl) DeprecatedLogout(
 	ctx context.Context,
 	req DeprecatedLogoutRequest,
@@ -600,7 +600,7 @@ func (c *clientImpl) DeprecatedLogout(
 	return httpRes, nil
 }
 
-//Resend the Email-Address verification email.
+// Resend the Email-Address verification email.
 func (c *clientImpl) DeprecatedResendVerificationEmail(
 	ctx context.Context,
 	req DeprecatedResendVerificationEmailRequest,
@@ -623,7 +623,7 @@ func (c *clientImpl) DeprecatedResendVerificationEmail(
 	return httpRes, nil
 }
 
-//Request a new avatar upload
+// Request a new avatar upload
 func (c *clientImpl) DeprecatedServiceAvatarRequestUpload(
 	ctx context.Context,
 	req DeprecatedServiceAvatarRequestUploadRequest,
@@ -650,7 +650,7 @@ func (c *clientImpl) DeprecatedServiceAvatarRequestUpload(
 	return &response, httpRes, nil
 }
 
-//Remove Avatar
+// Remove Avatar
 func (c *clientImpl) DeprecatedServiceAvatarRemove(
 	ctx context.Context,
 	req DeprecatedServiceAvatarRemoveRequest,
@@ -673,7 +673,7 @@ func (c *clientImpl) DeprecatedServiceAvatarRemove(
 	return httpRes, nil
 }
 
-//Returns your submitted feedback
+// Returns your submitted feedback
 func (c *clientImpl) DeprecatedServiceFeedbackList(
 	ctx context.Context,
 	req DeprecatedServiceFeedbackListRequest,
@@ -700,7 +700,7 @@ func (c *clientImpl) DeprecatedServiceFeedbackList(
 	return &response, httpRes, nil
 }
 
-//Submit user feedback
+// Submit user feedback
 func (c *clientImpl) DeprecatedServiceFeedbackCreate(
 	ctx context.Context,
 	req DeprecatedServiceFeedbackCreateRequest,
@@ -727,7 +727,7 @@ func (c *clientImpl) DeprecatedServiceFeedbackCreate(
 	return &response, httpRes, nil
 }
 
-//create a new issue
+// create a new issue
 func (c *clientImpl) DeprecatedServiceIssueNew(
 	ctx context.Context,
 	req DeprecatedServiceIssueNewRequest,
@@ -750,7 +750,7 @@ func (c *clientImpl) DeprecatedServiceIssueNew(
 	return httpRes, nil
 }
 
-//Get profile information for the specified user if the user is related to the executing user
+// Get profile information for the specified user if the user is related to the executing user
 func (c *clientImpl) DeprecatedServiceUserGet(
 	ctx context.Context,
 	req DeprecatedServiceUserGetRequest,
@@ -777,7 +777,7 @@ func (c *clientImpl) DeprecatedServiceUserGet(
 	return &response, httpRes, nil
 }
 
-//Change your personal information
+// Change your personal information
 func (c *clientImpl) DeprecatedServicePersonalInformationUpdate(
 	ctx context.Context,
 	req DeprecatedServicePersonalInformationUpdateRequest,
@@ -800,7 +800,7 @@ func (c *clientImpl) DeprecatedServicePersonalInformationUpdate(
 	return httpRes, nil
 }
 
-//Get personalized settings for the user executing the request
+// Get personalized settings for the user executing the request
 func (c *clientImpl) DeprecatedServicePersonalizedSettingsGet(
 	ctx context.Context,
 	req DeprecatedServicePersonalizedSettingsGetRequest,
@@ -827,7 +827,7 @@ func (c *clientImpl) DeprecatedServicePersonalizedSettingsGet(
 	return &response, httpRes, nil
 }
 
-//update personalized settings
+// update personalized settings
 func (c *clientImpl) DeprecatedServicePersonalizedSettingsUpdate(
 	ctx context.Context,
 	req DeprecatedServicePersonalizedSettingsUpdateRequest,
@@ -850,7 +850,7 @@ func (c *clientImpl) DeprecatedServicePersonalizedSettingsUpdate(
 	return httpRes, nil
 }
 
-//Add phone number and init verification process
+// Add phone number and init verification process
 func (c *clientImpl) DeprecatedServicePhoneNumberAdd(
 	ctx context.Context,
 	req DeprecatedServicePhoneNumberAddRequest,
@@ -873,7 +873,7 @@ func (c *clientImpl) DeprecatedServicePhoneNumberAdd(
 	return httpRes, nil
 }
 
-//remove your PhoneNumber
+// remove your PhoneNumber
 func (c *clientImpl) DeprecatedServicePhoneNumberRemove(
 	ctx context.Context,
 	req DeprecatedServicePhoneNumberRemoveRequest,
@@ -896,7 +896,7 @@ func (c *clientImpl) DeprecatedServicePhoneNumberRemove(
 	return httpRes, nil
 }
 
-//Verify phone number
+// Verify phone number
 func (c *clientImpl) DeprecatedServicePhoneNumberVerify(
 	ctx context.Context,
 	req DeprecatedServicePhoneNumberVerifyRequest,
@@ -919,7 +919,7 @@ func (c *clientImpl) DeprecatedServicePhoneNumberVerify(
 	return httpRes, nil
 }
 
-//Get profile information for the executing user
+// Get profile information for the executing user
 func (c *clientImpl) DeprecatedServiceUserGetOwn(
 	ctx context.Context,
 	req DeprecatedServiceUserGetOwnRequest,
@@ -946,7 +946,7 @@ func (c *clientImpl) DeprecatedServiceUserGetOwn(
 	return &response, httpRes, nil
 }
 
-//Terminate all sessions, except the current session.
+// Terminate all sessions, except the current session.
 func (c *clientImpl) DeprecatedTerminateAllSessions(
 	ctx context.Context,
 	req DeprecatedTerminateAllSessionsRequest,
@@ -969,7 +969,7 @@ func (c *clientImpl) DeprecatedTerminateAllSessions(
 	return httpRes, nil
 }
 
-//Terminate a specific Session.
+// Terminate a specific Session.
 func (c *clientImpl) DeprecatedTerminateSession(
 	ctx context.Context,
 	req DeprecatedTerminateSessionRequest,
@@ -992,7 +992,7 @@ func (c *clientImpl) DeprecatedTerminateSession(
 	return httpRes, nil
 }
 
-//Update your account information.
+// Update your account information.
 func (c *clientImpl) DeprecatedUpdateAccount(
 	ctx context.Context,
 	req DeprecatedUpdateAccountRequest,
@@ -1015,7 +1015,7 @@ func (c *clientImpl) DeprecatedUpdateAccount(
 	return httpRes, nil
 }
 
-//Verify an added Email-Address.
+// Verify an added Email-Address.
 func (c *clientImpl) DeprecatedVerifyEmail(
 	ctx context.Context,
 	req DeprecatedVerifyEmailRequest,
@@ -1038,7 +1038,7 @@ func (c *clientImpl) DeprecatedVerifyEmail(
 	return httpRes, nil
 }
 
-//Get a PasswordPolicy.
+// Get a PasswordPolicy.
 func (c *clientImpl) PasswordValidationGetPasswordPolicy(
 	ctx context.Context,
 	req PasswordValidationGetPasswordPolicyRequest,
@@ -1065,7 +1065,7 @@ func (c *clientImpl) PasswordValidationGetPasswordPolicy(
 	return &response, httpRes, nil
 }
 
-//Get a password policy.
+// Get a password policy.
 func (c *clientImpl) PasswordValidationGetPasswordPolicyV2Deprecated(
 	ctx context.Context,
 	req PasswordValidationGetPasswordPolicyV2DeprecatedRequest,
@@ -1092,7 +1092,7 @@ func (c *clientImpl) PasswordValidationGetPasswordPolicyV2Deprecated(
 	return &response, httpRes, nil
 }
 
-//Add phone number and start verification process.
+// Add phone number and start verification process.
 func (c *clientImpl) AddPhoneNumber(
 	ctx context.Context,
 	req AddPhoneNumberRequest,
@@ -1115,7 +1115,7 @@ func (c *clientImpl) AddPhoneNumber(
 	return httpRes, nil
 }
 
-//Remove phone number.
+// Remove phone number.
 func (c *clientImpl) RemovePhoneNumber(
 	ctx context.Context,
 	req RemovePhoneNumberRequest,
@@ -1138,7 +1138,7 @@ func (c *clientImpl) RemovePhoneNumber(
 	return httpRes, nil
 }
 
-//Validate your second factor.
+// Validate your second factor.
 func (c *clientImpl) AuthenticateMFA(
 	ctx context.Context,
 	req AuthenticateMFARequest,
@@ -1165,7 +1165,7 @@ func (c *clientImpl) AuthenticateMFA(
 	return &response, httpRes, nil
 }
 
-//Authenticate yourself to get an access token.
+// Authenticate yourself to get an access token.
 func (c *clientImpl) Authenticate(
 	ctx context.Context,
 	req AuthenticateRequest,
@@ -1192,7 +1192,7 @@ func (c *clientImpl) Authenticate(
 	return &response, httpRes, nil
 }
 
-//Authenticate an user with an access token retrieval key.
+// Authenticate an user with an access token retrieval key.
 func (c *clientImpl) AuthenticateWithAccessTokenRetrievalKey(
 	ctx context.Context,
 	req AuthenticateWithAccessTokenRetrievalKeyRequest,
@@ -1219,7 +1219,7 @@ func (c *clientImpl) AuthenticateWithAccessTokenRetrievalKey(
 	return &response, httpRes, nil
 }
 
-//Get your verified Email-Address.
+// Get your verified Email-Address.
 func (c *clientImpl) GetOwnEmail(
 	ctx context.Context,
 	req GetOwnEmailRequest,
@@ -1246,7 +1246,7 @@ func (c *clientImpl) GetOwnEmail(
 	return &response, httpRes, nil
 }
 
-//Change your Email-Address.
+// Change your Email-Address.
 func (c *clientImpl) ChangeEmail(
 	ctx context.Context,
 	req ChangeEmailRequest,
@@ -1269,7 +1269,7 @@ func (c *clientImpl) ChangeEmail(
 	return httpRes, nil
 }
 
-//Change your password.
+// Change your password.
 func (c *clientImpl) ChangePassword(
 	ctx context.Context,
 	req ChangePasswordRequest,
@@ -1296,7 +1296,7 @@ func (c *clientImpl) ChangePassword(
 	return &response, httpRes, nil
 }
 
-//Check token for validity.
+// Check token for validity.
 func (c *clientImpl) CheckToken(
 	ctx context.Context,
 	req CheckTokenRequest,
@@ -1323,7 +1323,7 @@ func (c *clientImpl) CheckToken(
 	return &response, httpRes, nil
 }
 
-//Get your current multi factor auth status.
+// Get your current multi factor auth status.
 func (c *clientImpl) GetMFAStatus(
 	ctx context.Context,
 	req GetMFAStatusRequest,
@@ -1350,7 +1350,7 @@ func (c *clientImpl) GetMFAStatus(
 	return &response, httpRes, nil
 }
 
-//Reset RecoveryCodes for MFA.
+// Reset RecoveryCodes for MFA.
 func (c *clientImpl) ResetRecoverycodes(
 	ctx context.Context,
 	req ResetRecoverycodesRequest,
@@ -1377,7 +1377,7 @@ func (c *clientImpl) ResetRecoverycodes(
 	return &response, httpRes, nil
 }
 
-//Confirm Multi Factor Authentication.
+// Confirm Multi Factor Authentication.
 func (c *clientImpl) ConfirmMFA(
 	ctx context.Context,
 	req ConfirmMFARequest,
@@ -1404,7 +1404,7 @@ func (c *clientImpl) ConfirmMFA(
 	return &response, httpRes, nil
 }
 
-//Disable Multi Factor Authentication.
+// Disable Multi Factor Authentication.
 func (c *clientImpl) DisableMFA(
 	ctx context.Context,
 	req DisableMFARequest,
@@ -1427,7 +1427,7 @@ func (c *clientImpl) DisableMFA(
 	return httpRes, nil
 }
 
-//Confirm password reset.
+// Confirm password reset.
 func (c *clientImpl) ConfirmPasswordReset(
 	ctx context.Context,
 	req ConfirmPasswordResetRequest,
@@ -1450,7 +1450,7 @@ func (c *clientImpl) ConfirmPasswordReset(
 	return httpRes, nil
 }
 
-//List all of your ApiTokens.
+// List all of your ApiTokens.
 func (c *clientImpl) ListAPITokens(
 	ctx context.Context,
 	req ListAPITokensRequest,
@@ -1477,7 +1477,7 @@ func (c *clientImpl) ListAPITokens(
 	return &response, httpRes, nil
 }
 
-//Store a new ApiToken.
+// Store a new ApiToken.
 func (c *clientImpl) CreateAPIToken(
 	ctx context.Context,
 	req CreateAPITokenRequest,
@@ -1504,7 +1504,7 @@ func (c *clientImpl) CreateAPIToken(
 	return &response, httpRes, nil
 }
 
-//Submit your user feedback.
+// Submit your user feedback.
 func (c *clientImpl) CreateFeedback(
 	ctx context.Context,
 	req CreateFeedbackRequest,
@@ -1531,7 +1531,7 @@ func (c *clientImpl) CreateFeedback(
 	return &response, httpRes, nil
 }
 
-//Get your stored ssh-keys.
+// Get your stored ssh-keys.
 func (c *clientImpl) ListSSHKeys(
 	ctx context.Context,
 	req ListSSHKeysRequest,
@@ -1558,7 +1558,7 @@ func (c *clientImpl) ListSSHKeys(
 	return &response, httpRes, nil
 }
 
-//Store a new ssh-key.
+// Store a new ssh-key.
 func (c *clientImpl) CreateSSHKey(
 	ctx context.Context,
 	req CreateSSHKeyRequest,
@@ -1585,7 +1585,7 @@ func (c *clientImpl) CreateSSHKey(
 	return &response, httpRes, nil
 }
 
-//Get a specific ApiToken.
+// Get a specific ApiToken.
 func (c *clientImpl) GetAPIToken(
 	ctx context.Context,
 	req GetAPITokenRequest,
@@ -1612,7 +1612,7 @@ func (c *clientImpl) GetAPIToken(
 	return &response, httpRes, nil
 }
 
-//Update an existing `ApiToken`.
+// Update an existing `ApiToken`.
 func (c *clientImpl) EditAPIToken(
 	ctx context.Context,
 	req EditAPITokenRequest,
@@ -1635,7 +1635,7 @@ func (c *clientImpl) EditAPIToken(
 	return httpRes, nil
 }
 
-//Deletes an ApiToken.
+// Deletes an ApiToken.
 func (c *clientImpl) DeleteAPIToken(
 	ctx context.Context,
 	req DeleteAPITokenRequest,
@@ -1658,7 +1658,7 @@ func (c *clientImpl) DeleteAPIToken(
 	return httpRes, nil
 }
 
-//Get a specific stored ssh-key.
+// Get a specific stored ssh-key.
 func (c *clientImpl) GetSSHKey(
 	ctx context.Context,
 	req GetSSHKeyRequest,
@@ -1685,7 +1685,7 @@ func (c *clientImpl) GetSSHKey(
 	return &response, httpRes, nil
 }
 
-//Edit a stored ssh-key.
+// Edit a stored ssh-key.
 func (c *clientImpl) EditSSHKey(
 	ctx context.Context,
 	req EditSSHKeyRequest,
@@ -1708,7 +1708,7 @@ func (c *clientImpl) EditSSHKey(
 	return httpRes, nil
 }
 
-//Remove a ssh-key.
+// Remove a ssh-key.
 func (c *clientImpl) DeleteSSHKey(
 	ctx context.Context,
 	req DeleteSSHKeyRequest,
@@ -1731,7 +1731,7 @@ func (c *clientImpl) DeleteSSHKey(
 	return httpRes, nil
 }
 
-//Delete your account and all your personal data.
+// Delete your account and all your personal data.
 func (c *clientImpl) DeleteUser(
 	ctx context.Context,
 	req DeleteUserRequest,
@@ -1758,7 +1758,7 @@ func (c *clientImpl) DeleteUser(
 	return &response, httpRes, nil
 }
 
-//Get your account information.
+// Get your account information.
 func (c *clientImpl) GetOwnAccount(
 	ctx context.Context,
 	req GetOwnAccountRequest,
@@ -1785,7 +1785,7 @@ func (c *clientImpl) GetOwnAccount(
 	return &response, httpRes, nil
 }
 
-//Update your account information.
+// Update your account information.
 func (c *clientImpl) UpdateAccount(
 	ctx context.Context,
 	req UpdateAccountRequest,
@@ -1808,7 +1808,7 @@ func (c *clientImpl) UpdateAccount(
 	return httpRes, nil
 }
 
-//The timestamp of your latest password change.
+// The timestamp of your latest password change.
 func (c *clientImpl) GetPasswordUpdatedAt(
 	ctx context.Context,
 	req GetPasswordUpdatedAtRequest,
@@ -1835,7 +1835,7 @@ func (c *clientImpl) GetPasswordUpdatedAt(
 	return &response, httpRes, nil
 }
 
-//Get personalized settings.
+// Get personalized settings.
 func (c *clientImpl) GetPersonalizedSettings(
 	ctx context.Context,
 	req GetPersonalizedSettingsRequest,
@@ -1862,7 +1862,7 @@ func (c *clientImpl) GetPersonalizedSettings(
 	return &response, httpRes, nil
 }
 
-//Update personalized GUI settings.
+// Update personalized GUI settings.
 func (c *clientImpl) UpdatePersonalizedSettings(
 	ctx context.Context,
 	req UpdatePersonalizedSettingsRequest,
@@ -1885,7 +1885,7 @@ func (c *clientImpl) UpdatePersonalizedSettings(
 	return httpRes, nil
 }
 
-//Get poll settings for the specified user.
+// Get poll settings for the specified user.
 func (c *clientImpl) GetPollStatus(
 	ctx context.Context,
 	req GetPollStatusRequest,
@@ -1912,7 +1912,7 @@ func (c *clientImpl) GetPollStatus(
 	return &response, httpRes, nil
 }
 
-//Store new or update poll settings.
+// Store new or update poll settings.
 func (c *clientImpl) PostPollStatus(
 	ctx context.Context,
 	req PostPollStatusRequest,
@@ -1939,7 +1939,7 @@ func (c *clientImpl) PostPollStatus(
 	return &response, httpRes, nil
 }
 
-//Get a specific session.
+// Get a specific session.
 func (c *clientImpl) GetSession(
 	ctx context.Context,
 	req GetSessionRequest,
@@ -1966,7 +1966,7 @@ func (c *clientImpl) GetSession(
 	return &response, httpRes, nil
 }
 
-//Terminate a specific Session.
+// Terminate a specific Session.
 func (c *clientImpl) TerminateSession(
 	ctx context.Context,
 	req TerminateSessionRequest,
@@ -1989,7 +1989,7 @@ func (c *clientImpl) TerminateSession(
 	return httpRes, nil
 }
 
-//Get profile information for a user.
+// Get profile information for a user.
 func (c *clientImpl) GetUser(
 	ctx context.Context,
 	req GetUserRequest,
@@ -2016,7 +2016,7 @@ func (c *clientImpl) GetUser(
 	return &response, httpRes, nil
 }
 
-//Change personal information.
+// Change personal information.
 func (c *clientImpl) UpdatePersonalInformation(
 	ctx context.Context,
 	req UpdatePersonalInformationRequest,
@@ -2039,7 +2039,7 @@ func (c *clientImpl) UpdatePersonalInformation(
 	return httpRes, nil
 }
 
-//Initialize Multi Factor Authentication. If successful, it needs to be confirmed, before usage of mfa.
+// Initialize Multi Factor Authentication. If successful, it needs to be confirmed, before usage of mfa.
 func (c *clientImpl) InitMFA(
 	ctx context.Context,
 	req InitMFARequest,
@@ -2066,7 +2066,7 @@ func (c *clientImpl) InitMFA(
 	return &response, httpRes, nil
 }
 
-//Initialize password reset process.
+// Initialize password reset process.
 func (c *clientImpl) InitPasswordReset(
 	ctx context.Context,
 	req InitPasswordResetRequest,
@@ -2093,7 +2093,7 @@ func (c *clientImpl) InitPasswordReset(
 	return &response, httpRes, nil
 }
 
-//Submitted feedback of the given user.
+// Submitted feedback of the given user.
 func (c *clientImpl) ListFeedback(
 	ctx context.Context,
 	req ListFeedbackRequest,
@@ -2120,7 +2120,7 @@ func (c *clientImpl) ListFeedback(
 	return &response, httpRes, nil
 }
 
-//List all sessions.
+// List all sessions.
 func (c *clientImpl) ListSessions(
 	ctx context.Context,
 	req ListSessionsRequest,
@@ -2147,7 +2147,7 @@ func (c *clientImpl) ListSessions(
 	return &response, httpRes, nil
 }
 
-//Refresh a session.
+// Refresh a session.
 func (c *clientImpl) RefreshSession(
 	ctx context.Context,
 	req RefreshSessionRequest,
@@ -2174,7 +2174,7 @@ func (c *clientImpl) RefreshSession(
 	return &response, httpRes, nil
 }
 
-//Terminate all sessions, except the current session.
+// Terminate all sessions, except the current session.
 func (c *clientImpl) TerminateAllSessions(
 	ctx context.Context,
 	req TerminateAllSessionsRequest,
@@ -2197,7 +2197,7 @@ func (c *clientImpl) TerminateAllSessions(
 	return httpRes, nil
 }
 
-//Terminate session and invalidate access token.
+// Terminate session and invalidate access token.
 func (c *clientImpl) Logout(
 	ctx context.Context,
 	req LogoutRequest,
@@ -2220,13 +2220,12 @@ func (c *clientImpl) Logout(
 	return httpRes, nil
 }
 
-//Obtain authorization from the resource owner.
+// Obtain authorization from the resource owner.
 //
-//The OAuth 2.0 client requests authorization from the resource owner according to
-//[RFC6749](https://datatracker.ietf.org/doc/html/rfc6749). The
-//authorization request is made indirectly via the authorization
-//server as an intermediary.
-//
+// The OAuth 2.0 client requests authorization from the resource owner according to
+// [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749). The
+// authorization request is made indirectly via the authorization
+// server as an intermediary.
 func (c *clientImpl) OauthGetAuthorization(
 	ctx context.Context,
 	req OauthGetAuthorizationRequest,
@@ -2249,11 +2248,10 @@ func (c *clientImpl) OauthGetAuthorization(
 	return httpRes, nil
 }
 
-//Retrieve Access Token from Authorization Code.
+// Retrieve Access Token from Authorization Code.
 //
-//The OAuth 2.0 client retrieves an Access Token from an existing authorization code according to
-//[RFC6749](https://datatracker.ietf.org/doc/html/rfc6749).
-//
+// The OAuth 2.0 client retrieves an Access Token from an existing authorization code according to
+// [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749).
 func (c *clientImpl) OauthRetrieveAccessToken(
 	ctx context.Context,
 	req OauthRetrieveAccessTokenRequest,
@@ -2280,7 +2278,7 @@ func (c *clientImpl) OauthRetrieveAccessToken(
 	return &response, httpRes, nil
 }
 
-//Register with email and password.
+// Register with email and password.
 func (c *clientImpl) Register(
 	ctx context.Context,
 	req RegisterRequest,
@@ -2307,7 +2305,7 @@ func (c *clientImpl) Register(
 	return &response, httpRes, nil
 }
 
-//Request a new avatar image upload.
+// Request a new avatar image upload.
 func (c *clientImpl) RequestAvatarUpload(
 	ctx context.Context,
 	req RequestAvatarUploadRequest,
@@ -2334,7 +2332,7 @@ func (c *clientImpl) RequestAvatarUpload(
 	return &response, httpRes, nil
 }
 
-//Remove Avatar.
+// Remove Avatar.
 func (c *clientImpl) RemoveAvatar(
 	ctx context.Context,
 	req RemoveAvatarRequest,
@@ -2357,7 +2355,7 @@ func (c *clientImpl) RemoveAvatar(
 	return httpRes, nil
 }
 
-//Resend the Email-Address verification email.
+// Resend the Email-Address verification email.
 func (c *clientImpl) ResendVerificationEmail(
 	ctx context.Context,
 	req ResendVerificationEmailRequest,
@@ -2380,7 +2378,7 @@ func (c *clientImpl) ResendVerificationEmail(
 	return httpRes, nil
 }
 
-//Request a support code.
+// Request a support code.
 func (c *clientImpl) SupportCodeRequest(
 	ctx context.Context,
 	req SupportCodeRequestRequest,
@@ -2407,7 +2405,7 @@ func (c *clientImpl) SupportCodeRequest(
 	return &response, httpRes, nil
 }
 
-//Verify an added Email-Address.
+// Verify an added Email-Address.
 func (c *clientImpl) VerifyEmail(
 	ctx context.Context,
 	req VerifyEmailRequest,
@@ -2430,7 +2428,7 @@ func (c *clientImpl) VerifyEmail(
 	return httpRes, nil
 }
 
-//Verify phone number.
+// Verify phone number.
 func (c *clientImpl) VerifyPhoneNumber(
 	ctx context.Context,
 	req VerifyPhoneNumberRequest,
@@ -2453,7 +2451,7 @@ func (c *clientImpl) VerifyPhoneNumber(
 	return httpRes, nil
 }
 
-//Verify your registration.
+// Verify your registration.
 func (c *clientImpl) VerifyRegistration(
 	ctx context.Context,
 	req VerifyRegistrationRequest,

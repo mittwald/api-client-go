@@ -19,7 +19,6 @@ package backup
 //        description: "TTL of the ProjectBackupSchedule as time string."
 //        example: "7d"
 
-//
 type UpdateProjectBackupScheduleRequestBody struct {
 	Description *string `json:"description,omitempty"`
 	Schedule    *string `json:"schedule,omitempty"`

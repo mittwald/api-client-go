@@ -12,7 +12,7 @@ import "fmt"
 //    - "bug"
 //description: "Type of feedback."
 
-//Type of feedback.
+// Type of feedback.
 type CreateFeedbackRequestBodyType string
 
 const CreateFeedbackRequestBodyTypeFeedback CreateFeedbackRequestBodyType = "feedback"

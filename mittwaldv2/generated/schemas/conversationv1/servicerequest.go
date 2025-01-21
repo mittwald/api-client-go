@@ -48,7 +48,6 @@ import (
 //    - "internal"
 //    - "meta"
 
-//
 type ServiceRequest struct {
 	ConversationId uuid.UUID                    `json:"conversationId"`
 	CreatedAt      time.Time                    `json:"createdAt"`

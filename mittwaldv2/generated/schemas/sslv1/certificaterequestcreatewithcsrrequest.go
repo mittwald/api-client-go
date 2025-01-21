@@ -23,7 +23,6 @@ import (
 //    - "commonName"
 //    - "contact"
 
-//
 type CertificateRequestCreateWithCSRRequest struct {
 	CommonName string    `json:"commonName"`
 	Contact    Contact   `json:"contact"`

@@ -14,7 +14,6 @@ import "fmt"
 //    "validFrom": {"$ref": "#/components/schemas/de.mittwald.v1.ssl.CheckReplaceDateChange"}
 //    "validTo": {"$ref": "#/components/schemas/de.mittwald.v1.ssl.CheckReplaceDateChange"}
 
-//
 type CheckReplaceChanges struct {
 	CommonName *CheckReplaceFieldChange `json:"commonName,omitempty"`
 	DnsNames   *CheckReplaceSliceChange `json:"dnsNames,omitempty"`

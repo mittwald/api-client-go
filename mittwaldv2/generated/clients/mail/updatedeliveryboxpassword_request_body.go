@@ -10,7 +10,6 @@ package mail
 //required:
 //    - "password"
 
-//
 type UpdateDeliveryBoxPasswordRequestBody struct {
 	Password string `json:"password"`
 }

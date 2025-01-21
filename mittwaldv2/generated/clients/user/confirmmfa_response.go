@@ -20,7 +20,6 @@ import "errors"
 //required:
 //    - "recoveryCodesList"
 
-//
 type ConfirmMFAResponse struct {
 	RecoveryCodesList []string `json:"recoveryCodesList"`
 }

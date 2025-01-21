@@ -13,7 +13,6 @@ package varnishv1
 //required:
 //    - "name"
 
-//
 type ConfigFileMetadata struct {
 	Name string  `json:"name"`
 	Path *string `json:"path,omitempty"`

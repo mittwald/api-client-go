@@ -31,7 +31,6 @@ import "fmt"
 //    - "token_type"
 //    - "expires_in"
 
-//
 type OauthRetrieveAccessTokenResponse struct {
 	Access_token  string                                    `json:"access_token"`
 	Expires_in    int64                                     `json:"expires_in"`

@@ -21,7 +21,6 @@ import (
 //    - "contractItemId"
 //    - "nextTerminationDate"
 
-//
 type GetNextTerminationDateForItemResponse struct {
 	ContractItemId      uuid.UUID `json:"contractItemId"`
 	NextTerminationDate time.Time `json:"nextTerminationDate"`

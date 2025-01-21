@@ -19,7 +19,6 @@ import (
 //required:
 //    - "contact"
 
-//
 type UpdateDomainContactRequestBody struct {
 	Contact []domainv1.HandleField `json:"contact"`
 }

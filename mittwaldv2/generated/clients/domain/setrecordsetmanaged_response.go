@@ -14,7 +14,6 @@ import (
 //        type: "string"
 //        format: "uuid"
 
-//
 type SetRecordSetManagedResponse struct {
 	IngressId *uuid.UUID `json:"ingressId,omitempty"`
 }

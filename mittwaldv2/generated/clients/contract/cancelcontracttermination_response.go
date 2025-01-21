@@ -15,7 +15,6 @@ import (
 //    "isCancelled":
 //        type: "boolean"
 
-//
 type CancelContractTerminationResponse struct {
 	ContractId  *uuid.UUID `json:"contractId,omitempty"`
 	IsCancelled *bool      `json:"isCancelled,omitempty"`

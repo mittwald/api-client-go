@@ -14,7 +14,6 @@ package mailmigrationv1
 //    - "address"
 //    - "mailboxName"
 
-//
 type CheckMigrationIsPossibleErrorCatchAllTargetWithoutAlias struct {
 	Address     string `json:"address"`
 	MailboxName string `json:"mailboxName"`

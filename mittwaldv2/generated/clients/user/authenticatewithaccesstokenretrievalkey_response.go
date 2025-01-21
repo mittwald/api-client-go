@@ -23,7 +23,6 @@ import "time"
 //    - "refreshToken"
 //    - "expiresAt"
 
-//
 type AuthenticateWithAccessTokenRetrievalKeyResponse struct {
 	ExpiresAt    time.Time `json:"expiresAt"`
 	RefreshToken string    `json:"refreshToken"`

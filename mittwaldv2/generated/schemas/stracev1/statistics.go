@@ -28,7 +28,6 @@ package stracev1
 //    - "syscallCount"
 //    - "occurrences"
 
-//
 type Statistics struct {
 	KernelMs     float64 `json:"kernelMs"`
 	Occurrences  int64   `json:"occurrences"`

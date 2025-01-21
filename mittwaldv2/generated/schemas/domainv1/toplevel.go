@@ -26,7 +26,6 @@ import "fmt"
 //    - "transferAuthCodeRequired"
 //    - "transferAuthentication"
 
-//
 type TopLevel struct {
 	Irtp                     bool                   `json:"irtp"`
 	RgpDays                  int64                  `json:"rgpDays"`

@@ -14,7 +14,6 @@ package marketplace
 //required:
 //    - "failure"
 
-//
 type RotateSecretForExtensionInstanceResponseWebhookResult struct {
 	Failure    bool    `json:"failure"`
 	StatusCode *string `json:"statusCode,omitempty"`

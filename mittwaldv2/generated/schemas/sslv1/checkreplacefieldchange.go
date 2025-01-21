@@ -14,7 +14,6 @@ package sslv1
 //    - "oldValue"
 //    - "newValue"
 
-//
 type CheckReplaceFieldChange struct {
 	NewValue string `json:"newValue"`
 	OldValue string `json:"oldValue"`

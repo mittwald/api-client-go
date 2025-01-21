@@ -18,7 +18,6 @@ import "time"
 //    - "start"
 //    - "end"
 
-//
 type DatePeriod struct {
 	End   time.Time `json:"end"`
 	Start time.Time `json:"start"`

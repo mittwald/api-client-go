@@ -12,7 +12,7 @@ package signupv1
 //        type: "boolean"
 //description: "The users mfa details."
 
-//The users mfa details.
+// The users mfa details.
 type AccountMFADetails struct {
 	MfaConfirmed   *bool `json:"mfaConfirmed,omitempty"`
 	MfaInitialized *bool `json:"mfaInitialized,omitempty"`

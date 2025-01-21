@@ -10,7 +10,6 @@ import "fmt"
 //properties:
 //    "errors": {"$ref": "#/components/schemas/de.mittwald.v1.mailmigration.PossibleCheckErrors"}
 
-//
 type CheckMigrationIsPossibleErrorResponse struct {
 	Errors *PossibleCheckErrors `json:"errors,omitempty"`
 }

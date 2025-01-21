@@ -60,7 +60,6 @@ import (
 //    - "isExpired"
 //    - "lastExpirationThresholdHit"
 
-//
 type Certificate struct {
 	CaBundle                   *string    `json:"caBundle,omitempty"`
 	Certificate                string     `json:"certificate"`

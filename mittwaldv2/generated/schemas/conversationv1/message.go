@@ -40,7 +40,6 @@ import (
 //    - "createdAt"
 //    - "type"
 
-//
 type Message struct {
 	ConversationId uuid.UUID   `json:"conversationId"`
 	CreatedAt      time.Time   `json:"createdAt"`

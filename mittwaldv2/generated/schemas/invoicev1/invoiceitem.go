@@ -63,7 +63,6 @@ import (
 //    - "contractItemId"
 //    - "description"
 
-//
 type InvoiceItem struct {
 	AdditionalDescription      *string                                     `json:"additionalDescription,omitempty"`
 	ContractItemId             uuid.UUID                                   `json:"contractItemId"`

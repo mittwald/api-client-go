@@ -11,9 +11,8 @@ import "fmt"
 //    - "bearer"
 //description: "The type of the token issued as described in\n[RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-7.1).\n"
 
-//The type of the token issued as described in
-//[RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-7.1).
-//
+// The type of the token issued as described in
+// [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-7.1).
 type OauthRetrieveAccessTokenResponseTokentype string
 
 const OauthRetrieveAccessTokenResponseTokentypeBearer OauthRetrieveAccessTokenResponseTokentype = "bearer"

@@ -19,7 +19,6 @@ package signupv1
 //        type: "string"
 //        example: "Macbook"
 
-//
 type DeviceInfo struct {
 	Browser *string `json:"browser,omitempty"`
 	Model   *string `json:"model,omitempty"`

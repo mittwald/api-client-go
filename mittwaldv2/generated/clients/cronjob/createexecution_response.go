@@ -12,7 +12,6 @@ package cronjob
 //required:
 //    - "id"
 
-//
 type CreateExecutionResponse struct {
 	Id string `json:"id"`
 }

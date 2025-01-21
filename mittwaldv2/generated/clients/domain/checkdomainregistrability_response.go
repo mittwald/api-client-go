@@ -14,7 +14,6 @@ package domain
 //    - "registrable"
 //    - "isPremium"
 
-//
 type CheckDomainRegistrabilityResponse struct {
 	IsPremium   bool `json:"isPremium"`
 	Registrable bool `json:"registrable"`

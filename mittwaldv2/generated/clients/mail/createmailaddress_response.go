@@ -16,7 +16,6 @@ import (
 //required:
 //    - "id"
 
-//
 type CreateMailAddressResponse struct {
 	Id uuid.UUID `json:"id"`
 }

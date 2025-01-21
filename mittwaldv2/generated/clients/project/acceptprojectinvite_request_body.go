@@ -10,7 +10,6 @@ package project
 //        type: "string"
 //        description: "Token contained in the invite for authentication."
 
-//
 type AcceptProjectInviteRequestBody struct {
 	InvitationToken *string `json:"invitationToken,omitempty"`
 }

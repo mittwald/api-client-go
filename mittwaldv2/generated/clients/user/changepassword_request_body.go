@@ -22,7 +22,6 @@ package user
 //    - "oldPassword"
 //    - "newPassword"
 
-//
 type ChangePasswordRequestBody struct {
 	MultiFactorCode *string `json:"multiFactorCode,omitempty"`
 	NewPassword     string  `json:"newPassword"`

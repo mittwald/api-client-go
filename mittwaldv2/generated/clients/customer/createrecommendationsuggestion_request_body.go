@@ -12,7 +12,6 @@ package customer
 //required:
 //    - "suggestion"
 
-//
 type CreateRecommendationSuggestionRequestBody struct {
 	Suggestion string `json:"suggestion"`
 }

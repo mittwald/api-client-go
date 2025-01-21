@@ -11,7 +11,6 @@ package domain
 //required:
 //    - "domain"
 
-//
 type DeprecatedCheckDomainRegistrabilityRequestBody struct {
 	Domain string `json:"domain"`
 }

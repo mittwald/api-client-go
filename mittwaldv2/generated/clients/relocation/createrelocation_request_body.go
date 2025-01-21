@@ -169,7 +169,6 @@ import (
 //    - "target"
 //    - "allowPasswordChange"
 
-//
 type CreateRelocationRequestBody struct {
 	AdditionalServices  CreateRelocationRequestBodyAdditionalServices `json:"additionalServices"`
 	AllDomains          *bool                                         `json:"allDomains,omitempty"`

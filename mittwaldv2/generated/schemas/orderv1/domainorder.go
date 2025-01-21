@@ -39,7 +39,6 @@ import (
 //    - "domain"
 //    - "handleData"
 
-//
 type DomainOrder struct {
 	AuthCode   *string               `json:"authCode,omitempty"`
 	Domain     string                `json:"domain"`

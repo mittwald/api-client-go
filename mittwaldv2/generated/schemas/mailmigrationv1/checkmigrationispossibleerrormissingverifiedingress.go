@@ -12,7 +12,6 @@ package mailmigrationv1
 //required:
 //    - "hostname"
 
-//
 type CheckMigrationIsPossibleErrorMissingVerifiedIngress struct {
 	Hostname string `json:"hostname"`
 }

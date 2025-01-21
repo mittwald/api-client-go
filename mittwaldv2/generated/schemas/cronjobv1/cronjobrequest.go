@@ -42,7 +42,6 @@ import (
 //    - "active"
 //    - "timeout"
 
-//
 type CronjobRequest struct {
 	Active      bool                      `json:"active"`
 	AppId       uuid.UUID                 `json:"appId"`

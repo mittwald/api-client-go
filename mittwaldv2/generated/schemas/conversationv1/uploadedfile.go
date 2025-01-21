@@ -29,7 +29,6 @@ import (
 //    - "name"
 //    - "type"
 
-//
 type UploadedFile struct {
 	Id     uuid.UUID          `json:"id"`
 	Name   string             `json:"name"`

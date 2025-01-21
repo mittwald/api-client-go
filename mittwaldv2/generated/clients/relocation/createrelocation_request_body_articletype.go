@@ -14,7 +14,7 @@ import "fmt"
 //    - "onlineshop-express"
 //description: "Type of the article you want to relocate."
 
-//Type of the article you want to relocate.
+// Type of the article you want to relocate.
 type CreateRelocationRequestBodyArticleType string
 
 const CreateRelocationRequestBodyArticleTypeCmsHosting CreateRelocationRequestBodyArticleType = "cms-hosting"

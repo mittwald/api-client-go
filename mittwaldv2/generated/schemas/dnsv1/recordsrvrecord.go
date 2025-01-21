@@ -28,7 +28,6 @@ package dnsv1
 //    - "fqdn"
 //additionalProperties: false
 
-//
 type RecordSRVRecord struct {
 	Fqdn     string `json:"fqdn"`
 	Port     int64  `json:"port"`

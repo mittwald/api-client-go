@@ -11,7 +11,6 @@ package conversationv1
 //    "domainName":
 //        type: "string"
 
-//
 type ServiceRequestRelocationPayloadDomainDomainsItem struct {
 	AuthCode   *string `json:"authCode,omitempty"`
 	DomainName *string `json:"domainName,omitempty"`

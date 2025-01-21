@@ -16,7 +16,6 @@ import (
 //required:
 //    - "person"
 
-//
 type UpdatePersonalInformationRequestBody struct {
 	Person commonsv1.Person `json:"person"`
 }

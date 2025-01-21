@@ -13,7 +13,6 @@ import "fmt"
 //        enum:
 //            - "SecondFactorRequired"
 
-//
 type AuthenticateAcceptedResponse struct {
 	Name *AuthenticateAcceptedResponseName `json:"name,omitempty"`
 }

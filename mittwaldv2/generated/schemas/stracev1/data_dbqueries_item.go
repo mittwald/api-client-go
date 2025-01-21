@@ -25,7 +25,6 @@ import "fmt"
 //    - "stats"
 //    - "warnLevel"
 
-//
 type DataDbQueriesItem struct {
 	Query     string                     `json:"query"`
 	Stats     Statistics                 `json:"stats"`

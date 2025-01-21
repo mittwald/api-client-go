@@ -17,7 +17,6 @@ import "time"
 //required:
 //    - "publicKey"
 
-//
 type CreateSSHKeyRequestBody struct {
 	ExpiresAt *time.Time `json:"expiresAt,omitempty"`
 	PublicKey string     `json:"publicKey"`

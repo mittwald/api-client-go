@@ -11,7 +11,6 @@ package mail
 //required:
 //    - "address"
 
-//
 type MailaddressUpdateAddressDeprecatedRequestBody struct {
 	Address string `json:"address"`
 }

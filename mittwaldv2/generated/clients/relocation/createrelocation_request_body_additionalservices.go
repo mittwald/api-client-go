@@ -16,7 +16,6 @@ import "fmt"
 //required:
 //    - "dataCompare"
 
-//
 type CreateRelocationRequestBodyAdditionalServices struct {
 	DataCompare CreateRelocationRequestBodyAdditionalServicesDataCompare `json:"dataCompare"`
 }

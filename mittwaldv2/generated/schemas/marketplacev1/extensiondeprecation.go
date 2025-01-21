@@ -15,7 +15,7 @@ import "time"
 //    - "deprecatedAt"
 //description: "The Extension is deprecated by the contributor and will expire at the given date."
 
-//The Extension is deprecated by the contributor and will expire at the given date.
+// The Extension is deprecated by the contributor and will expire at the given date.
 type ExtensionDeprecation struct {
 	DeprecatedAt time.Time `json:"deprecatedAt"`
 }

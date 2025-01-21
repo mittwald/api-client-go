@@ -19,7 +19,6 @@ import (
 //    - "id"
 //    - "publicToken"
 
-//
 type CheckTokenResponse struct {
 	Id          uuid.UUID `json:"id"`
 	PublicToken string    `json:"publicToken"`

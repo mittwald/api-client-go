@@ -33,7 +33,6 @@ import "fmt"
 //    - "type"
 //    - "message"
 
-//
 type DeprecatedCreateIssueRequestBody struct {
 	Message string                               `json:"message"`
 	Origin  *string                              `json:"origin,omitempty"`

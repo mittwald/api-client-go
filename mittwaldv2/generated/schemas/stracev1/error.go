@@ -12,7 +12,6 @@ package stracev1
 //required:
 //    - "errorMessage"
 
-//
 type Error struct {
 	ErrorMessage string `json:"errorMessage"`
 }

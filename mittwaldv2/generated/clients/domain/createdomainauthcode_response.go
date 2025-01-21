@@ -11,7 +11,6 @@ package domain
 //required:
 //    - "authCode"
 
-//
 type CreateDomainAuthCodeResponse struct {
 	AuthCode string `json:"authCode"`
 }

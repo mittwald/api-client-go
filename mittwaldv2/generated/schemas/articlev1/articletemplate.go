@@ -50,7 +50,6 @@ import "fmt"
 //    - "type"
 //    - "isManagedByDomain"
 
-//
 type ArticleTemplate struct {
 	AdditionalArticles []ReadableBookableArticleOptions `json:"additionalArticles,omitempty"`
 	Addons             []ArticleAddons                  `json:"addons,omitempty"`

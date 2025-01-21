@@ -15,7 +15,6 @@ import "errors"
 //required:
 //    - "forwardAddresses"
 
-//
 type UpdateMailAddressForwardAddressesV2DeprecatedRequestBody struct {
 	ForwardAddresses []string `json:"forwardAddresses"`
 }

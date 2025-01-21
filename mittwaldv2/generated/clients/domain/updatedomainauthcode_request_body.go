@@ -11,7 +11,6 @@ package domain
 //required:
 //    - "authCode"
 
-//
 type UpdateDomainAuthCodeRequestBody struct {
 	AuthCode string `json:"authCode"`
 }

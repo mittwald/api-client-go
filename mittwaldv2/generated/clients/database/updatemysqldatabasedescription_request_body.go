@@ -10,7 +10,6 @@ package database
 //required:
 //    - "description"
 
-//
 type UpdateMysqlDatabaseDescriptionRequestBody struct {
 	Description string `json:"description"`
 }

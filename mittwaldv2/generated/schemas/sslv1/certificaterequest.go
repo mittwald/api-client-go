@@ -49,7 +49,6 @@ import (
 //    - "isCompleted"
 //    - "createdAt"
 
-//
 type CertificateRequest struct {
 	CertificateData CertificateData `json:"certificateData"`
 	CertificateType int64           `json:"certificateType"`

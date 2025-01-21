@@ -45,7 +45,6 @@ import (
 //    - "sizeInBytes"
 //    - "mimeType"
 
-//
 type FileMeta struct {
 	FriendlyURL string    `json:"friendlyURL"`
 	FriendlyUrl string    `json:"friendlyUrl"`

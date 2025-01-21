@@ -11,7 +11,6 @@ package backup
 //        description: "Description of the ProjectBackup."
 //        example: "I'm a ProjectBackup"
 
-//
 type UpdateProjectBackupDescriptionRequestBody struct {
 	Description *string `json:"description,omitempty"`
 }
