@@ -2,16 +2,29 @@ name: Code generation
 
 on:
   workflow_dispatch: {}
+  schedule:
+    - cron: '0 19 * * *'
 
 permissions:
   contents: write
 
 jobs:
-
-  build:
-    runs-on: ubuntu-latest
+  generate:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        source:
+          - url: https://api.mittwald.de/v2/openapi.json
+            branch: master
+            tag: "true"
+          - url: https://developer.mittwald.de/specs/openapi-v2-dev.json
+            branch: next
+            tag: "false"
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.source.branch }}
+          fetch-tags: true
 
       - name: Set up Go
         uses: actions/setup-go@v4
@@ -26,8 +39,11 @@ jobs:
       - name: Generate code for v2 API
         run: |
           rm -rf mittwaldv2/generated
-          mittwald-go-client-builder https://api.mittwald.de/v2/openapi.json ./mittwaldv2/generated mittwaldv2
+          mittwald-go-client-builder ${{ matrix.source.url }} ./mittwaldv2/generated mittwaldv2
           goimports -w mittwaldv2/generated
+
+      - name: Summarise git status
+        run: git status
 
       - name: Verify generated code
         run: |
@@ -48,4 +64,14 @@ jobs:
           
           git add mittwaldv2
           git commit -m 'chore: update auto-generated code'
-          git push
+          
+          if [[ "${{ matrix.source.tag }}" == "true" ]] ; then
+            last_tag=$(git describe --abbrev=0 --tags)
+            new_tag=$(mittwald-go-client-builder next-version "${last_tag}")
+          
+            git tag -m "Release ${new_tag}" ${new_tag}
+            git push
+            git push --tags
+          else
+            git push
+          fi
