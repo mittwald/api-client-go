@@ -11,10 +11,15 @@ import (
 //This data type was generated from the following JSON schema:
 //type: "object"
 //properties:
+//    "maxSizeInBytes":
+//        type: "integer"
+//        description: "Maximum size in Bytes of the avatar image."
+//        example: 4096
 //    "maxSizeInKB":
 //        type: "integer"
-//        description: "Maximum size in kilobytes of the avatar image."
+//        description: "Deprecated. Maximum size in kilobytes of the avatar image."
 //        example: 3000
+//        deprecated: true
 //    "mimeTypes":
 //        type: "array"
 //        items:
@@ -45,13 +50,15 @@ import (
 //required:
 //    - "mimeTypes"
 //    - "maxSizeInKB"
+//    - "maxSizeInBytes"
 //description: "Contstraints for the avatar image upload."
 
 //Contstraints for the avatar image upload.
 type RequestAvatarUploadResponseRules struct {
-	MaxSizeInKB int64                                       `json:"maxSizeInKB"`
-	MimeTypes   []string                                    `json:"mimeTypes"`
-	Properties  *RequestAvatarUploadResponseRulesProperties `json:"properties,omitempty"`
+	MaxSizeInBytes int64                                       `json:"maxSizeInBytes"`
+	MaxSizeInKB    int64                                       `json:"maxSizeInKB"`
+	MimeTypes      []string                                    `json:"mimeTypes"`
+	Properties     *RequestAvatarUploadResponseRulesProperties `json:"properties,omitempty"`
 }
 
 func (o *RequestAvatarUploadResponseRules) Validate() error {

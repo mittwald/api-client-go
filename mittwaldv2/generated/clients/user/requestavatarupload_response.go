@@ -19,10 +19,15 @@ import (
 //    "rules":
 //        type: "object"
 //        properties:
+//            "maxSizeInBytes":
+//                type: "integer"
+//                description: "Maximum size in Bytes of the avatar image."
+//                example: 4096
 //            "maxSizeInKB":
 //                type: "integer"
-//                description: "Maximum size in kilobytes of the avatar image."
+//                description: "Deprecated. Maximum size in kilobytes of the avatar image."
 //                example: 3000
+//                deprecated: true
 //            "mimeTypes":
 //                type: "array"
 //                items:
@@ -53,6 +58,7 @@ import (
 //        required:
 //            - "mimeTypes"
 //            - "maxSizeInKB"
+//            - "maxSizeInBytes"
 //        description: "Contstraints for the avatar image upload."
 //required:
 //    - "refId"
