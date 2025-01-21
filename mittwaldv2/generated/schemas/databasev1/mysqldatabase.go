@@ -36,7 +36,6 @@ import (
 //        type: "boolean"
 //    "isShared":
 //        type: "boolean"
-//    "mainUser": {"$ref": "#/components/schemas/de.mittwald.v1.database.MySqlUser"}
 //    "name":
 //        type: "string"
 //    "projectId":
@@ -84,7 +83,6 @@ type MySqlDatabase struct {
 	Id                       uuid.UUID         `json:"id"`
 	IsReady                  bool              `json:"isReady"`
 	IsShared                 bool              `json:"isShared"`
-	MainUser                 *MySqlUser        `json:"mainUser,omitempty"`
 	Name                     string            `json:"name"`
 	ProjectId                uuid.UUID         `json:"projectId"`
 	Status                   DatabaseStatus    `json:"status"`
@@ -106,14 +104,6 @@ func (o *MySqlDatabase) Validate() error {
 		return nil
 	}(); err != nil {
 		return fmt.Errorf("invalid property finalizers: %w", err)
-	}
-	if err := func() error {
-		if o.MainUser == nil {
-			return nil
-		}
-		return o.MainUser.Validate()
-	}(); err != nil {
-		return fmt.Errorf("invalid property mainUser: %w", err)
 	}
 	if err := o.Status.Validate(); err != nil {
 		return fmt.Errorf("invalid property status: %w", err)

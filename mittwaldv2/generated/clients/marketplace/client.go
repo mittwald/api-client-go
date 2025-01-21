@@ -26,6 +26,10 @@ type Client interface {
 		ctx context.Context,
 		req ConsentToExtensionScopesRequest,
 	) (*any, *http.Response, error)
+	CreateContributorOnboardingProcess(
+		ctx context.Context,
+		req CreateContributorOnboardingProcessRequest,
+	) (*CreateContributorOnboardingProcessResponse, *http.Response, error)
 	ListExtensionInstances(
 		ctx context.Context,
 		req ListExtensionInstancesRequest,
@@ -174,6 +178,35 @@ func (c *clientImpl) ConsentToExtensionScopes(
 	}
 
 	var response any
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create the OnboardingProcess of a Contributor.
+//
+// The OnboardingProcess is needed to publish paid extensions.
+func (c *clientImpl) CreateContributorOnboardingProcess(
+	ctx context.Context,
+	req CreateContributorOnboardingProcessRequest,
+) (*CreateContributorOnboardingProcessResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return nil, httpRes, err
+	}
+
+	var response CreateContributorOnboardingProcessResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

@@ -20,6 +20,7 @@ import (
 //    "recordSet":
 //        type: "object"
 //        properties:
+//            "caa": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCAA"}
 //            "cname": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCNAME"}
 //            "combinedARecords": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCombinedA"}
 //            "mx": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordMX"}
@@ -31,6 +32,7 @@ import (
 //            - "mx"
 //            - "txt"
 //            - "srv"
+//            - "caa"
 //required:
 //    - "id"
 //    - "domain"

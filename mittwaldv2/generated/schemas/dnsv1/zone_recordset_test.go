@@ -14,7 +14,7 @@ import (
 var _ = Describe("ZoneRecordSet", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"cname\":{},\"combinedARecords\":{},\"mx\":{},\"srv\":{},\"txt\":{}}")
+			exampleJSON := []byte("{\"caa\":{},\"cname\":{},\"combinedARecords\":{},\"mx\":{},\"srv\":{},\"txt\":{}}")
 
 			sut := dnsv1.ZoneRecordSet{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

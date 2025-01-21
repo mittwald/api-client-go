@@ -7,6 +7,7 @@ package project
 //properties:
 //    "notificationThresholdInBytes":
 //        type: "integer"
+//        minimum: 0
 //        nullable: true
 //        example: 10000
 

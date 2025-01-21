@@ -13,6 +13,7 @@ import "fmt"
 //    - "txt"
 //    - "srv"
 //    - "cname"
+//    - "caa"
 
 type UpdateRecordSetRequestPathRecordSet string
 
@@ -21,9 +22,10 @@ const UpdateRecordSetRequestPathRecordSetMx UpdateRecordSetRequestPathRecordSet 
 const UpdateRecordSetRequestPathRecordSetTxt UpdateRecordSetRequestPathRecordSet = "txt"
 const UpdateRecordSetRequestPathRecordSetSrv UpdateRecordSetRequestPathRecordSet = "srv"
 const UpdateRecordSetRequestPathRecordSetCname UpdateRecordSetRequestPathRecordSet = "cname"
+const UpdateRecordSetRequestPathRecordSetCaa UpdateRecordSetRequestPathRecordSet = "caa"
 
 func (e UpdateRecordSetRequestPathRecordSet) Validate() error {
-	if e == UpdateRecordSetRequestPathRecordSetA || e == UpdateRecordSetRequestPathRecordSetMx || e == UpdateRecordSetRequestPathRecordSetTxt || e == UpdateRecordSetRequestPathRecordSetSrv || e == UpdateRecordSetRequestPathRecordSetCname {
+	if e == UpdateRecordSetRequestPathRecordSetA || e == UpdateRecordSetRequestPathRecordSetMx || e == UpdateRecordSetRequestPathRecordSetTxt || e == UpdateRecordSetRequestPathRecordSetSrv || e == UpdateRecordSetRequestPathRecordSetCname || e == UpdateRecordSetRequestPathRecordSetCaa {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

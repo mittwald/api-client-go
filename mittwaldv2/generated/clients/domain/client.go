@@ -169,26 +169,22 @@ type Client interface {
 		ctx context.Context,
 		req ListIngressesCompatibleWithCertificateRequest,
 	) (*[]ingressv1.Ingress, *http.Response, error)
-	ListIngressesV2Deprecated(
+	RequestIngressAcmeCertificateIssuance(
 		ctx context.Context,
-		req ListIngressesV2DeprecatedRequest,
-	) (*[]ingressv1.IngressDeprecated, *http.Response, error)
-	PathsDeprecated(
+		req RequestIngressAcmeCertificateIssuanceRequest,
+	) (*http.Response, error)
+	DeprecatedPaths(
 		ctx context.Context,
-		req PathsDeprecatedRequest,
+		req DeprecatedPathsRequest,
 	) (*http.Response, error)
 	UpdateIngressPaths(
 		ctx context.Context,
 		req UpdateIngressPathsRequest,
 	) (*http.Response, error)
-	RequestIngressAcmeCertificateIssuance(
+	DeprecatedTLS(
 		ctx context.Context,
-		req RequestIngressAcmeCertificateIssuanceRequest,
-	) (*http.Response, error)
-	TLSDeprecated(
-		ctx context.Context,
-		req TLSDeprecatedRequest,
-	) (*TLSDeprecatedResponse, *http.Response, error)
+		req DeprecatedTLSRequest,
+	) (*DeprecatedTLSResponse, *http.Response, error)
 	UpdateIngressTLS(
 		ctx context.Context,
 		req UpdateIngressTLSRequest,
@@ -229,6 +225,10 @@ type Client interface {
 		ctx context.Context,
 		req ListCertificatesRequest,
 	) (*[]sslv1.Certificate, *http.Response, error)
+	SetCertificateRequestCertificate(
+		ctx context.Context,
+		req SetCertificateRequestCertificateRequest,
+	) (*http.Response, error)
 	DeprecatedListDomains(
 		ctx context.Context,
 		req DeprecatedListDomainsRequest,
@@ -253,6 +253,10 @@ type Client interface {
 		ctx context.Context,
 		req DeprecatedChangeProjectOfDomainRequest,
 	) (*http.Response, error)
+	DeprecatedListIngresses(
+		ctx context.Context,
+		req DeprecatedListIngressesRequest,
+	) (*[]ingressv1.IngressDeprecated, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1252,37 +1256,35 @@ func (c *clientImpl) ListIngressesCompatibleWithCertificate(
 	return &response, httpRes, nil
 }
 
-// List Ingresses belonging to a project.
-func (c *clientImpl) ListIngressesV2Deprecated(
+// Request the ACME certificate issuance of an Ingress.
+func (c *clientImpl) RequestIngressAcmeCertificateIssuance(
 	ctx context.Context,
-	req ListIngressesV2DeprecatedRequest,
-) (*[]ingressv1.IngressDeprecated, *http.Response, error) {
+	req RequestIngressAcmeCertificateIssuanceRequest,
+) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
 	if err != nil {
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
 	if httpRes.StatusCode >= 400 {
 		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
-	var response []ingressv1.IngressDeprecated
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
+	return httpRes, nil
 }
 
 // Update an Ingresses paths.
-func (c *clientImpl) PathsDeprecated(
+//
+// This operation is deprecated. Use the PATCH /v2/ingresses/{ingressId}/paths endpoint instead.
+func (c *clientImpl) DeprecatedPaths(
 	ctx context.Context,
-	req PathsDeprecatedRequest,
+	req DeprecatedPathsRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -1325,34 +1327,13 @@ func (c *clientImpl) UpdateIngressPaths(
 	return httpRes, nil
 }
 
-// Request the ACME certificate issuance of an Ingress.
-func (c *clientImpl) RequestIngressAcmeCertificateIssuance(
-	ctx context.Context,
-	req RequestIngressAcmeCertificateIssuanceRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Update an Ingresses tls settings.
-func (c *clientImpl) TLSDeprecated(
+//
+// This operation is deprecated. Use the PATCH /v2/ingresses/{ingressId}/tls endpoint instead.
+func (c *clientImpl) DeprecatedTLS(
 	ctx context.Context,
-	req TLSDeprecatedRequest,
-) (*TLSDeprecatedResponse, *http.Response, error) {
+	req DeprecatedTLSRequest,
+) (*DeprecatedTLSResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
 		return nil, nil, err
@@ -1368,7 +1349,7 @@ func (c *clientImpl) TLSDeprecated(
 		return nil, httpRes, err
 	}
 
-	var response TLSDeprecatedResponse
+	var response DeprecatedTLSResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -1635,6 +1616,29 @@ func (c *clientImpl) ListCertificates(
 	return &response, httpRes, nil
 }
 
+// Update the certificate of a CertificateRequest.
+func (c *clientImpl) SetCertificateRequestCertificate(
+	ctx context.Context,
+	req SetCertificateRequestCertificateRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // List Domains belonging to a Project.
 //
 // This operation is deprecated. Use the GET /v2/domains endpoint instead.
@@ -1803,4 +1807,33 @@ func (c *clientImpl) DeprecatedChangeProjectOfDomain(
 	}
 
 	return httpRes, nil
+}
+
+// List Ingresses belonging to a project.
+//
+// This operation is deprecated. Use the GET /v2/ingresses endpoint instead.
+func (c *clientImpl) DeprecatedListIngresses(
+	ctx context.Context,
+	req DeprecatedListIngressesRequest,
+) (*[]ingressv1.IngressDeprecated, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return nil, httpRes, err
+	}
+
+	var response []ingressv1.IngressDeprecated
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }

@@ -102,13 +102,13 @@ type Client interface {
 		ctx context.Context,
 		req RetrieveStatusRequest,
 	) (*appv1.AppInstallationStatus, *http.Response, error)
-	UnlinkDatabase(
-		ctx context.Context,
-		req UnlinkDatabaseRequest,
-	) (*http.Response, error)
 	SetDatabaseUsers(
 		ctx context.Context,
 		req SetDatabaseUsersRequest,
+	) (*http.Response, error)
+	UnlinkDatabase(
+		ctx context.Context,
+		req UnlinkDatabaseRequest,
 	) (*http.Response, error)
 	DeprecatedLinkDatabase(
 		ctx context.Context,
@@ -697,10 +697,10 @@ func (c *clientImpl) RetrieveStatus(
 	return &response, httpRes, nil
 }
 
-// Remove linkage between an AppInstallation and a Database.
-func (c *clientImpl) UnlinkDatabase(
+// Create linkage between an AppInstallation and DatabaseUsers.
+func (c *clientImpl) SetDatabaseUsers(
 	ctx context.Context,
-	req UnlinkDatabaseRequest,
+	req SetDatabaseUsersRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
@@ -720,10 +720,10 @@ func (c *clientImpl) UnlinkDatabase(
 	return httpRes, nil
 }
 
-// Create linkage between an AppInstallation and DatabaseUsers.
-func (c *clientImpl) SetDatabaseUsers(
+// Remove linkage between an AppInstallation and a Database.
+func (c *clientImpl) UnlinkDatabase(
 	ctx context.Context,
-	req SetDatabaseUsersRequest,
+	req UnlinkDatabaseRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {

@@ -4,6 +4,7 @@ import (
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/app"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/article"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/backup"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/container"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/contract"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/conversation"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/cronjob"
@@ -44,6 +45,7 @@ type Client interface {
 	File() file.Client
 	Mail() mail.Client
 	Article() article.Client
+	Container() container.Client
 	PageInsights() pageinsights.Client
 	Relocation() relocation.Client
 	Marketplace() marketplace.Client
@@ -119,6 +121,10 @@ func (c *clientImpl) Mail() mail.Client {
 
 func (c *clientImpl) Article() article.Client {
 	return article.NewClient(c.client)
+}
+
+func (c *clientImpl) Container() container.Client {
+	return container.NewClient(c.client)
 }
 
 func (c *clientImpl) PageInsights() pageinsights.Client {

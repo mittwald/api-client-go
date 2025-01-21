@@ -12,6 +12,9 @@ import "time"
 //        type: "string"
 //        format: "date-time"
 //        description: "The expiration date of the token."
+//    "refreshToken":
+//        type: "string"
+//        description: "Refresh token to refresh your access token once it has expired."
 //    "token":
 //        type: "string"
 //        description: "Public token to identify yourself against the api gateway."
@@ -20,8 +23,9 @@ import "time"
 //    - "expires"
 
 type ChangePasswordOKResponse struct {
-	Expires time.Time `json:"expires"`
-	Token   string    `json:"token"`
+	Expires      time.Time `json:"expires"`
+	RefreshToken *string   `json:"refreshToken,omitempty"`
+	Token        string    `json:"token"`
 }
 
 func (o *ChangePasswordOKResponse) Validate() error {

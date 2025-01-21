@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/policyv1"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/pollv1"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/signupv1"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/userv1"
@@ -49,6 +48,14 @@ type Client interface {
 		ctx context.Context,
 		req DeprecatedDisableMFARequest,
 	) (*DeprecatedDisableMFAResponse, *http.Response, error)
+	DeprecatedGetOwnAccount(
+		ctx context.Context,
+		req DeprecatedGetOwnAccountRequest,
+	) (*signupv1.Account, *http.Response, error)
+	UpdateAccount(
+		ctx context.Context,
+		req UpdateAccountRequest,
+	) (*http.Response, error)
 	DeprecatedInitPasswordReset(
 		ctx context.Context,
 		req DeprecatedInitPasswordResetRequest,
@@ -129,14 +136,6 @@ type Client interface {
 		ctx context.Context,
 		req DeprecatedVerifyEmailRequest,
 	) (*http.Response, error)
-	PasswordValidationGetPasswordPolicy(
-		ctx context.Context,
-		req PasswordValidationGetPasswordPolicyRequest,
-	) (*policyv1.Policy, *http.Response, error)
-	PasswordValidationGetPasswordPolicyV2Deprecated(
-		ctx context.Context,
-		req PasswordValidationGetPasswordPolicyV2DeprecatedRequest,
-	) (*policyv1.Policy, *http.Response, error)
 	AddPhoneNumber(
 		ctx context.Context,
 		req AddPhoneNumberRequest,
@@ -241,14 +240,6 @@ type Client interface {
 		ctx context.Context,
 		req DeleteUserRequest,
 	) (*any, *http.Response, error)
-	GetOwnAccount(
-		ctx context.Context,
-		req GetOwnAccountRequest,
-	) (*signupv1.Account, *http.Response, error)
-	UpdateAccount(
-		ctx context.Context,
-		req UpdateAccountRequest,
-	) (*http.Response, error)
 	GetPasswordUpdatedAt(
 		ctx context.Context,
 		req GetPasswordUpdatedAtRequest,
@@ -552,6 +543,56 @@ func (c *clientImpl) DeprecatedDisableMFA(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Get your account information. Replaced by `GET` `/v2/users/self`.
+func (c *clientImpl) DeprecatedGetOwnAccount(
+	ctx context.Context,
+	req DeprecatedGetOwnAccountRequest,
+) (*signupv1.Account, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return nil, httpRes, err
+	}
+
+	var response signupv1.Account
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update your account information.
+func (c *clientImpl) UpdateAccount(
+	ctx context.Context,
+	req UpdateAccountRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // Initialize password reset process.
@@ -1036,60 +1077,6 @@ func (c *clientImpl) DeprecatedVerifyEmail(
 	}
 
 	return httpRes, nil
-}
-
-// Get a PasswordPolicy.
-func (c *clientImpl) PasswordValidationGetPasswordPolicy(
-	ctx context.Context,
-	req PasswordValidationGetPasswordPolicyRequest,
-) (*policyv1.Policy, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response policyv1.Policy
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a password policy.
-func (c *clientImpl) PasswordValidationGetPasswordPolicyV2Deprecated(
-	ctx context.Context,
-	req PasswordValidationGetPasswordPolicyV2DeprecatedRequest,
-) (*policyv1.Policy, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response policyv1.Policy
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
 
 // Add phone number and start verification process.
@@ -1756,56 +1743,6 @@ func (c *clientImpl) DeleteUser(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Get your account information.
-func (c *clientImpl) GetOwnAccount(
-	ctx context.Context,
-	req GetOwnAccountRequest,
-) (*signupv1.Account, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response signupv1.Account
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Update your account information.
-func (c *clientImpl) UpdateAccount(
-	ctx context.Context,
-	req UpdateAccountRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
 
 // The timestamp of your latest password change.

@@ -13,10 +13,6 @@ import (
 // DO NOT EDIT.
 
 type Client interface {
-	ServicetokenAuthenticateService(
-		ctx context.Context,
-		req ServicetokenAuthenticateServiceRequest,
-	) (*ServicetokenAuthenticateServiceResponse, *http.Response, error)
 	VerificationVerifyAddress(
 		ctx context.Context,
 		req VerificationVerifyAddressRequest,
@@ -32,33 +28,6 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
-}
-
-// Obtain a service token.
-func (c *clientImpl) ServicetokenAuthenticateService(
-	ctx context.Context,
-	req ServicetokenAuthenticateServiceRequest,
-) (*ServicetokenAuthenticateServiceResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response ServicetokenAuthenticateServiceResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
 
 // Check if an address exists.
