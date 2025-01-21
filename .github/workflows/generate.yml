@@ -1,0 +1,51 @@
+name: Code generation
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.23'
+
+      - name: Install dependencies
+        run: |
+          go install github.com/mittwald/api-client-go-builder/cmd/mittwald-go-client-builder@latest
+          go install golang.org/x/tools/cmd/goimports@latest
+
+      - name: Generate code for v2 API
+        run: |
+          rm -rf mittwaldv2/generated
+          mittwald-go-client-builder https://api.mittwald.de/v2/openapi.json ./mittwaldv2/generated mittwaldv2
+          goimports -w mittwaldv2/generated
+
+      - name: Verify generated code
+        run: |
+          go vet -v ./...
+          go test -v ./...
+
+      - name: Create and push commit
+        run: |
+          set -ex
+          
+          if [[ $(git status --porcelain | wc -l) -eq 0 ]]; then
+            echo "No changes detected, skipping commit."
+            exit 0
+          fi
+
+          git config --global user.name "mittwald-machine"
+          git config --global user.email "opensource@mittwald.de"
+          
+          git add mittwaldv2
+          git commit -m 'chore: update auto-generated code'
+          git push
