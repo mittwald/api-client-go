@@ -1,5 +1,7 @@
 # mittwald API Golang client
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/mittwald/api-client-go.svg)](https://pkg.go.dev/github.com/mittwald/api-client-go)
+
 This package contains a (mostly auto-generated) Golang client for the mittwald mStudio API.
 
 ## License
