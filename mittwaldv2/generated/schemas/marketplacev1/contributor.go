@@ -36,11 +36,10 @@ import (
 //    - "customerId"
 //    - "state"
 //    - "name"
-//    - "description"
 
 type Contributor struct {
 	CustomerId  uuid.UUID        `json:"customerId"`
-	Description string           `json:"description"`
+	Description *string          `json:"description,omitempty"`
 	Email       *string          `json:"email,omitempty"`
 	Id          uuid.UUID        `json:"id"`
 	LogoRefId   *string          `json:"logoRefId,omitempty"`
