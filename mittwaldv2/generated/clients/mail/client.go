@@ -14,6 +14,74 @@ import (
 // DO NOT EDIT.
 
 type Client interface {
+	DeprecatedUpdateDescription(
+		ctx context.Context,
+		req DeprecatedUpdateDescriptionRequest,
+	) (*http.Response, error)
+	DeprecatedUpdatePassword(
+		ctx context.Context,
+		req DeprecatedUpdatePasswordRequest,
+	) (*http.Response, error)
+	DeprecatedMailaddressUpdateAddress(
+		ctx context.Context,
+		req DeprecatedMailaddressUpdateAddressRequest,
+	) (*http.Response, error)
+	DeprecatedProjectsettingUpdateBlacklist(
+		ctx context.Context,
+		req DeprecatedProjectsettingUpdateBlacklistRequest,
+	) (*http.Response, error)
+	DeprecatedProjectsettingUpdateWhitelist(
+		ctx context.Context,
+		req DeprecatedProjectsettingUpdateWhitelistRequest,
+	) (*http.Response, error)
+	DeprecatedUpdateMailAddressAutoresponder(
+		ctx context.Context,
+		req DeprecatedUpdateMailAddressAutoresponderRequest,
+	) (*http.Response, error)
+	UpdateMailAddressAutoresponder(
+		ctx context.Context,
+		req UpdateMailAddressAutoresponderRequest,
+	) (*http.Response, error)
+	DeprecatedUpdateMailAddressCatchall(
+		ctx context.Context,
+		req DeprecatedUpdateMailAddressCatchallRequest,
+	) (*http.Response, error)
+	DeprecatedUpdateMailAddressForwardAddresses(
+		ctx context.Context,
+		req DeprecatedUpdateMailAddressForwardAddressesRequest,
+	) (*http.Response, error)
+	UpdateMailAddressForwardAddresses(
+		ctx context.Context,
+		req UpdateMailAddressForwardAddressesRequest,
+	) (*http.Response, error)
+	DeprecatedUpdateMailAddressPassword(
+		ctx context.Context,
+		req DeprecatedUpdateMailAddressPasswordRequest,
+	) (*http.Response, error)
+	UpdateMailAddressPassword(
+		ctx context.Context,
+		req UpdateMailAddressPasswordRequest,
+	) (*http.Response, error)
+	DeprecatedUpdateMailAddressQuota(
+		ctx context.Context,
+		req DeprecatedUpdateMailAddressQuotaRequest,
+	) (*http.Response, error)
+	UpdateMailAddressQuota(
+		ctx context.Context,
+		req UpdateMailAddressQuotaRequest,
+	) (*http.Response, error)
+	DeprecatedUpdateMailAddressSpamProtection(
+		ctx context.Context,
+		req DeprecatedUpdateMailAddressSpamProtectionRequest,
+	) (*http.Response, error)
+	UpdateMailAddressSpamProtection(
+		ctx context.Context,
+		req UpdateMailAddressSpamProtectionRequest,
+	) (*http.Response, error)
+	DeprecatedUpdateProjectMailSetting(
+		ctx context.Context,
+		req DeprecatedUpdateProjectMailSettingRequest,
+	) (*http.Response, error)
 	ListDeliveryBoxes(
 		ctx context.Context,
 		req ListDeliveryBoxesRequest,
@@ -46,30 +114,10 @@ type Client interface {
 		ctx context.Context,
 		req DeleteMailAddressRequest,
 	) (*http.Response, error)
-	UpdateDescriptionDeprecated(
-		ctx context.Context,
-		req UpdateDescriptionDeprecatedRequest,
-	) (*http.Response, error)
-	UpdatePasswordDeprecated(
-		ctx context.Context,
-		req UpdatePasswordDeprecatedRequest,
-	) (*http.Response, error)
 	ListProjectMailSettings(
 		ctx context.Context,
 		req ListProjectMailSettingsRequest,
 	) (*ListProjectMailSettingsResponse, *http.Response, error)
-	MailaddressUpdateAddressDeprecated(
-		ctx context.Context,
-		req MailaddressUpdateAddressDeprecatedRequest,
-	) (*http.Response, error)
-	ProjectsettingUpdateBlacklistDeprecated(
-		ctx context.Context,
-		req ProjectsettingUpdateBlacklistDeprecatedRequest,
-	) (*http.Response, error)
-	ProjectsettingUpdateWhitelistDeprecated(
-		ctx context.Context,
-		req ProjectsettingUpdateWhitelistDeprecatedRequest,
-	) (*http.Response, error)
 	UpdateDeliveryBoxDescription(
 		ctx context.Context,
 		req UpdateDeliveryBoxDescriptionRequest,
@@ -82,61 +130,13 @@ type Client interface {
 		ctx context.Context,
 		req UpdateMailAddressAddressRequest,
 	) (*http.Response, error)
-	UpdateMailAddressAutoresponderV2Deprecated(
-		ctx context.Context,
-		req UpdateMailAddressAutoresponderV2DeprecatedRequest,
-	) (*http.Response, error)
-	UpdateMailAddressAutoresponder(
-		ctx context.Context,
-		req UpdateMailAddressAutoresponderRequest,
-	) (*http.Response, error)
 	UpdateMailAddressCatchAll(
 		ctx context.Context,
 		req UpdateMailAddressCatchAllRequest,
 	) (*http.Response, error)
-	UpdateMailAddressCatchallV2Deprecated(
-		ctx context.Context,
-		req UpdateMailAddressCatchallV2DeprecatedRequest,
-	) (*http.Response, error)
-	UpdateMailAddressForwardAddressesV2Deprecated(
-		ctx context.Context,
-		req UpdateMailAddressForwardAddressesV2DeprecatedRequest,
-	) (*http.Response, error)
-	UpdateMailAddressForwardAddresses(
-		ctx context.Context,
-		req UpdateMailAddressForwardAddressesRequest,
-	) (*http.Response, error)
-	UpdateMailAddressPasswordV2Deprecated(
-		ctx context.Context,
-		req UpdateMailAddressPasswordV2DeprecatedRequest,
-	) (*http.Response, error)
-	UpdateMailAddressPassword(
-		ctx context.Context,
-		req UpdateMailAddressPasswordRequest,
-	) (*http.Response, error)
-	UpdateMailAddressQuotaV2Deprecated(
-		ctx context.Context,
-		req UpdateMailAddressQuotaV2DeprecatedRequest,
-	) (*http.Response, error)
-	UpdateMailAddressQuota(
-		ctx context.Context,
-		req UpdateMailAddressQuotaRequest,
-	) (*http.Response, error)
-	UpdateMailAddressSpamProtectionV2Deprecated(
-		ctx context.Context,
-		req UpdateMailAddressSpamProtectionV2DeprecatedRequest,
-	) (*http.Response, error)
-	UpdateMailAddressSpamProtection(
-		ctx context.Context,
-		req UpdateMailAddressSpamProtectionRequest,
-	) (*http.Response, error)
 	UpdateProjectMailSetting(
 		ctx context.Context,
 		req UpdateProjectMailSettingRequest,
-	) (*http.Response, error)
-	UpdateProjectMailSettingV2Deprecated(
-		ctx context.Context,
-		req UpdateProjectMailSettingV2DeprecatedRequest,
 	) (*http.Response, error)
 }
 type clientImpl struct {
@@ -145,6 +145,421 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Update the description of an deliverybox
+//
+// This operation is deprecated. Use the PATCH v2/delivery-boxes/{deliveryBoxId}/description endpoint instead.
+func (c *clientImpl) DeprecatedUpdateDescription(
+	ctx context.Context,
+	req DeprecatedUpdateDescriptionRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update the password for a specific deliverybox
+//
+// This operation is deprecated. Use the PATCH v2/delivery-boxes/{deliveryBoxId}/password endpoint instead.
+func (c *clientImpl) DeprecatedUpdatePassword(
+	ctx context.Context,
+	req DeprecatedUpdatePasswordRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update mail-address
+//
+// This operation is deprecated. Use the PATCH v2/mail-addresses/{mailAddressId}/address endpoint instead.
+func (c *clientImpl) DeprecatedMailaddressUpdateAddress(
+	ctx context.Context,
+	req DeprecatedMailaddressUpdateAddressRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update blacklist for a given project ID
+//
+// This operation is deprecated. Use the PATCH v2/{projectId}/mail-settings/{mailSetting} endpoint instead.
+func (c *clientImpl) DeprecatedProjectsettingUpdateBlacklist(
+	ctx context.Context,
+	req DeprecatedProjectsettingUpdateBlacklistRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update whitelist for a given project ID
+//
+// This operation is deprecated. Use the PATCH v2/{projectId}/mail-settings/{mailSetting} endpoint instead.
+func (c *clientImpl) DeprecatedProjectsettingUpdateWhitelist(
+	ctx context.Context,
+	req DeprecatedProjectsettingUpdateWhitelistRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update the autoresponder of a MailAddress.
+//
+// This operation is deprecated. Use the PATCH v2/mail-addresses/{mailAddressId}/autoresponder endpoint instead.
+func (c *clientImpl) DeprecatedUpdateMailAddressAutoresponder(
+	ctx context.Context,
+	req DeprecatedUpdateMailAddressAutoresponderRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update the autoresponder of a MailAddress.
+func (c *clientImpl) UpdateMailAddressAutoresponder(
+	ctx context.Context,
+	req UpdateMailAddressAutoresponderRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update the catchall of a MailAddress.
+//
+// This operation is deprecated. Use the PATCH v2/mail-addresses/{mailAddressId}/catch-all endpoint instead.
+func (c *clientImpl) DeprecatedUpdateMailAddressCatchall(
+	ctx context.Context,
+	req DeprecatedUpdateMailAddressCatchallRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update the forward addresses of a MailAddresses.
+//
+// This operation is deprecated. Use the PATCH v2/mail-addresses/{mailAddressId}/forward-addresses endpoint instead.
+func (c *clientImpl) DeprecatedUpdateMailAddressForwardAddresses(
+	ctx context.Context,
+	req DeprecatedUpdateMailAddressForwardAddressesRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update the forward addresses of a MailAddresses.
+func (c *clientImpl) UpdateMailAddressForwardAddresses(
+	ctx context.Context,
+	req UpdateMailAddressForwardAddressesRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update the password for a MailAddress.
+//
+// This operation is deprecated. Use the PATCH v2/mail-addresses/{mailAddressId}/password endpoint instead.
+func (c *clientImpl) DeprecatedUpdateMailAddressPassword(
+	ctx context.Context,
+	req DeprecatedUpdateMailAddressPasswordRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update the password for a MailAddress.
+func (c *clientImpl) UpdateMailAddressPassword(
+	ctx context.Context,
+	req UpdateMailAddressPasswordRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update the quota of a MailAddress.
+//
+// This operation is deprecated. Use the PATCH v2/mail-addresses/{mailAddressId}/quota endpoint instead.
+func (c *clientImpl) DeprecatedUpdateMailAddressQuota(
+	ctx context.Context,
+	req DeprecatedUpdateMailAddressQuotaRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update the quota of a MailAddress.
+func (c *clientImpl) UpdateMailAddressQuota(
+	ctx context.Context,
+	req UpdateMailAddressQuotaRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update the spam protection of a MailAddress.
+//
+// This operation is deprecated. Use the PATCH v2/mail-addresses/{mailAddressId}/spam-protection endpoint instead.
+func (c *clientImpl) DeprecatedUpdateMailAddressSpamProtection(
+	ctx context.Context,
+	req DeprecatedUpdateMailAddressSpamProtectionRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update the spam protection of a MailAddress.
+func (c *clientImpl) UpdateMailAddressSpamProtection(
+	ctx context.Context,
+	req UpdateMailAddressSpamProtectionRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a mail setting of a Project.
+//
+// This operation is deprecated. Use the PATCH v2/{projectId}/mail-settings/{mailSetting} endpoint instead.
+func (c *clientImpl) DeprecatedUpdateProjectMailSetting(
+	ctx context.Context,
+	req DeprecatedUpdateProjectMailSettingRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // List DeliveryBoxes belonging to a Project.
@@ -355,52 +770,6 @@ func (c *clientImpl) DeleteMailAddress(
 	return httpRes, nil
 }
 
-// Update the description of an deliverybox
-func (c *clientImpl) UpdateDescriptionDeprecated(
-	ctx context.Context,
-	req UpdateDescriptionDeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update the password for a specific deliverybox
-func (c *clientImpl) UpdatePasswordDeprecated(
-	ctx context.Context,
-	req UpdatePasswordDeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // List mail settings of a Project.
 func (c *clientImpl) ListProjectMailSettings(
 	ctx context.Context,
@@ -426,75 +795,6 @@ func (c *clientImpl) ListProjectMailSettings(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Update mail-address
-func (c *clientImpl) MailaddressUpdateAddressDeprecated(
-	ctx context.Context,
-	req MailaddressUpdateAddressDeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update blacklist for a given project ID
-func (c *clientImpl) ProjectsettingUpdateBlacklistDeprecated(
-	ctx context.Context,
-	req ProjectsettingUpdateBlacklistDeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update whitelist for a given project ID
-func (c *clientImpl) ProjectsettingUpdateWhitelistDeprecated(
-	ctx context.Context,
-	req ProjectsettingUpdateWhitelistDeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
 
 // Update the description of a DeliveryBox.
@@ -566,52 +866,6 @@ func (c *clientImpl) UpdateMailAddressAddress(
 	return httpRes, nil
 }
 
-// Update the autoresponder of a MailAddress.
-func (c *clientImpl) UpdateMailAddressAutoresponderV2Deprecated(
-	ctx context.Context,
-	req UpdateMailAddressAutoresponderV2DeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update the autoresponder of a MailAddress.
-func (c *clientImpl) UpdateMailAddressAutoresponder(
-	ctx context.Context,
-	req UpdateMailAddressAutoresponderRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Update the catchall of a MailAddress.
 func (c *clientImpl) UpdateMailAddressCatchAll(
 	ctx context.Context,
@@ -635,240 +889,10 @@ func (c *clientImpl) UpdateMailAddressCatchAll(
 	return httpRes, nil
 }
 
-// Update the catchall of a MailAddress.
-func (c *clientImpl) UpdateMailAddressCatchallV2Deprecated(
-	ctx context.Context,
-	req UpdateMailAddressCatchallV2DeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update the forward addresses of a MailAddresses.
-func (c *clientImpl) UpdateMailAddressForwardAddressesV2Deprecated(
-	ctx context.Context,
-	req UpdateMailAddressForwardAddressesV2DeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update the forward addresses of a MailAddresses.
-func (c *clientImpl) UpdateMailAddressForwardAddresses(
-	ctx context.Context,
-	req UpdateMailAddressForwardAddressesRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update the password for a MailAddress.
-func (c *clientImpl) UpdateMailAddressPasswordV2Deprecated(
-	ctx context.Context,
-	req UpdateMailAddressPasswordV2DeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update the password for a MailAddress.
-func (c *clientImpl) UpdateMailAddressPassword(
-	ctx context.Context,
-	req UpdateMailAddressPasswordRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update the quota of a MailAddress.
-func (c *clientImpl) UpdateMailAddressQuotaV2Deprecated(
-	ctx context.Context,
-	req UpdateMailAddressQuotaV2DeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update the quota of a MailAddress.
-func (c *clientImpl) UpdateMailAddressQuota(
-	ctx context.Context,
-	req UpdateMailAddressQuotaRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update the spam protection of a MailAddress.
-func (c *clientImpl) UpdateMailAddressSpamProtectionV2Deprecated(
-	ctx context.Context,
-	req UpdateMailAddressSpamProtectionV2DeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update the spam protection of a MailAddress.
-func (c *clientImpl) UpdateMailAddressSpamProtection(
-	ctx context.Context,
-	req UpdateMailAddressSpamProtectionRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Update a mail setting of a Project.
 func (c *clientImpl) UpdateProjectMailSetting(
 	ctx context.Context,
 	req UpdateProjectMailSettingRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update a mail setting of a Project.
-func (c *clientImpl) UpdateProjectMailSettingV2Deprecated(
-	ctx context.Context,
-	req UpdateProjectMailSettingV2DeprecatedRequest,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {

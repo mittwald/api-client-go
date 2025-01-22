@@ -5,6 +5,7 @@ package appv1
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -16,6 +17,10 @@ import (
 //        type: "string"
 //        format: "uuid"
 //    "appVersion": {"$ref": "#/components/schemas/de.mittwald.v1.app.VersionStatus"}
+//    "createdAt":
+//        type: "string"
+//        format: "date-time"
+//        example: "2024-09-20T22:57:32.000Z"
 //    "customDocumentRoot":
 //        type: "string"
 //    "description":
@@ -62,12 +67,14 @@ import (
 //    - "description"
 //    - "installationPath"
 //    - "disabled"
+//    - "createdAt"
 //description: "An AppInstallation is a concrete manifestation of an App in a specific AppVersion."
 
 // An AppInstallation is a concrete manifestation of an App in a specific AppVersion.
 type AppInstallation struct {
 	AppId              uuid.UUID                 `json:"appId"`
 	AppVersion         VersionStatus             `json:"appVersion"`
+	CreatedAt          time.Time                 `json:"createdAt"`
 	CustomDocumentRoot *string                   `json:"customDocumentRoot,omitempty"`
 	Description        string                    `json:"description"`
 	Disabled           bool                      `json:"disabled"`

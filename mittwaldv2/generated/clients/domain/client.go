@@ -17,10 +17,70 @@ import (
 // DO NOT EDIT.
 
 type Client interface {
+	DeprecatedChangeOwnercOfDomain(
+		ctx context.Context,
+		req DeprecatedChangeOwnercOfDomainRequest,
+	) (*DeprecatedChangeOwnercOfDomainResponse, *http.Response, error)
+	DeprecatedChangeProjectOfDomain(
+		ctx context.Context,
+		req DeprecatedChangeProjectOfDomainRequest,
+	) (*http.Response, error)
+	ListDomains(
+		ctx context.Context,
+		req ListDomainsRequest,
+	) (*[]domainv1.Domain, *http.Response, error)
+	DeprecatedCheckDomainRegistrability(
+		ctx context.Context,
+		req DeprecatedCheckDomainRegistrabilityRequest,
+	) (*DeprecatedCheckDomainRegistrabilityResponse, *http.Response, error)
+	DeprecatedDeclareNameservers(
+		ctx context.Context,
+		req DeprecatedDeclareNameserversRequest,
+	) (*http.Response, error)
+	UpdateDomainNameservers(
+		ctx context.Context,
+		req UpdateDomainNameserversRequest,
+	) (*http.Response, error)
+	DeprecatedDeclareProcessChangeAuthcode(
+		ctx context.Context,
+		req DeprecatedDeclareProcessChangeAuthcodeRequest,
+	) (*DeprecatedDeclareProcessChangeAuthcodeResponse, *http.Response, error)
+	DeprecatedDeclareProcessChangeHandles(
+		ctx context.Context,
+		req DeprecatedDeclareProcessChangeHandlesRequest,
+	) (*DeprecatedDeclareProcessChangeHandlesResponse, *http.Response, error)
+	DeprecatedGetHandleFields(
+		ctx context.Context,
+		req DeprecatedGetHandleFieldsRequest,
+	) (*DeprecatedGetHandleFieldsResponse, *http.Response, error)
 	DeprecatedGetScreenshotForDomain(
 		ctx context.Context,
 		req DeprecatedGetScreenshotForDomainRequest,
 	) (*DeprecatedGetScreenshotForDomainResponse, *http.Response, error)
+	DeprecatedListDomains(
+		ctx context.Context,
+		req DeprecatedListDomainsRequest,
+	) (*[]domainv1.Domain, *http.Response, error)
+	DeprecatedListIngresses(
+		ctx context.Context,
+		req DeprecatedListIngressesRequest,
+	) (*[]ingressv1.IngressDeprecated, *http.Response, error)
+	DeprecatedPaths(
+		ctx context.Context,
+		req DeprecatedPathsRequest,
+	) (*http.Response, error)
+	UpdateIngressPaths(
+		ctx context.Context,
+		req UpdateIngressPathsRequest,
+	) (*http.Response, error)
+	DeprecatedTLS(
+		ctx context.Context,
+		req DeprecatedTLSRequest,
+	) (*DeprecatedTLSResponse, *http.Response, error)
+	UpdateIngressTLS(
+		ctx context.Context,
+		req UpdateIngressTLSRequest,
+	) (*UpdateIngressTLSResponse, *http.Response, error)
 	CreateDNSZone(
 		ctx context.Context,
 		req CreateDNSZoneRequest,
@@ -101,14 +161,6 @@ type Client interface {
 		ctx context.Context,
 		req GetLatestScreenshotRequest,
 	) (*GetLatestScreenshotResponse, *http.Response, error)
-	ListDomains(
-		ctx context.Context,
-		req ListDomainsRequest,
-	) (*[]domainv1.Domain, *http.Response, error)
-	DeprecatedCheckDomainRegistrability(
-		ctx context.Context,
-		req DeprecatedCheckDomainRegistrabilityRequest,
-	) (*DeprecatedCheckDomainRegistrabilityResponse, *http.Response, error)
 	ListTldContactSchemas(
 		ctx context.Context,
 		req ListTldContactSchemasRequest,
@@ -133,14 +185,6 @@ type Client interface {
 		ctx context.Context,
 		req UpdateDomainContactRequest,
 	) (*UpdateDomainContactResponse, *http.Response, error)
-	DeprecatedDeclareNameservers(
-		ctx context.Context,
-		req DeprecatedDeclareNameserversRequest,
-	) (*http.Response, error)
-	UpdateDomainNameservers(
-		ctx context.Context,
-		req UpdateDomainNameserversRequest,
-	) (*http.Response, error)
 	UpdateDomainProjectID(
 		ctx context.Context,
 		req UpdateDomainProjectIDRequest,
@@ -169,30 +213,10 @@ type Client interface {
 		ctx context.Context,
 		req ListIngressesCompatibleWithCertificateRequest,
 	) (*[]ingressv1.Ingress, *http.Response, error)
-	ListIngressesV2Deprecated(
-		ctx context.Context,
-		req ListIngressesV2DeprecatedRequest,
-	) (*[]ingressv1.IngressDeprecated, *http.Response, error)
-	PathsDeprecated(
-		ctx context.Context,
-		req PathsDeprecatedRequest,
-	) (*http.Response, error)
-	UpdateIngressPaths(
-		ctx context.Context,
-		req UpdateIngressPathsRequest,
-	) (*http.Response, error)
 	RequestIngressAcmeCertificateIssuance(
 		ctx context.Context,
 		req RequestIngressAcmeCertificateIssuanceRequest,
 	) (*http.Response, error)
-	TLSDeprecated(
-		ctx context.Context,
-		req TLSDeprecatedRequest,
-	) (*TLSDeprecatedResponse, *http.Response, error)
-	UpdateIngressTLS(
-		ctx context.Context,
-		req UpdateIngressTLSRequest,
-	) (*UpdateIngressTLSResponse, *http.Response, error)
 	CheckReplaceCertificate(
 		ctx context.Context,
 		req CheckReplaceCertificateRequest,
@@ -229,30 +253,6 @@ type Client interface {
 		ctx context.Context,
 		req ListCertificatesRequest,
 	) (*[]sslv1.Certificate, *http.Response, error)
-	DeprecatedListDomains(
-		ctx context.Context,
-		req DeprecatedListDomainsRequest,
-	) (*[]domainv1.Domain, *http.Response, error)
-	DeprecatedGetHandleFields(
-		ctx context.Context,
-		req DeprecatedGetHandleFieldsRequest,
-	) (*DeprecatedGetHandleFieldsResponse, *http.Response, error)
-	DeprecatedDeclareProcessChangeAuthcode(
-		ctx context.Context,
-		req DeprecatedDeclareProcessChangeAuthcodeRequest,
-	) (*DeprecatedDeclareProcessChangeAuthcodeResponse, *http.Response, error)
-	DeprecatedDeclareProcessChangeHandles(
-		ctx context.Context,
-		req DeprecatedDeclareProcessChangeHandlesRequest,
-	) (*DeprecatedDeclareProcessChangeHandlesResponse, *http.Response, error)
-	DeprecatedChangeOwnercOfDomain(
-		ctx context.Context,
-		req DeprecatedChangeOwnercOfDomainRequest,
-	) (*DeprecatedChangeOwnercOfDomainResponse, *http.Response, error)
-	DeprecatedChangeProjectOfDomain(
-		ctx context.Context,
-		req DeprecatedChangeProjectOfDomainRequest,
-	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -260,6 +260,251 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Change the owner contact of a domain.
+//
+// This operation is deprecated. Use the PATCH /v2/domains/{domainId}/contacts/{contact} endpoint instead.
+func (c *clientImpl) DeprecatedChangeOwnercOfDomain(
+	ctx context.Context,
+	req DeprecatedChangeOwnercOfDomainRequest,
+) (*DeprecatedChangeOwnercOfDomainResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return nil, httpRes, err
+	}
+
+	var response DeprecatedChangeOwnercOfDomainResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Change the Project relation of a Domain.
+//
+// This operation is deprecated. Use the PATCH /v2/domains/{domainId}/project-id endpoint instead.
+func (c *clientImpl) DeprecatedChangeProjectOfDomain(
+	ctx context.Context,
+	req DeprecatedChangeProjectOfDomainRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// List Domains
+func (c *clientImpl) ListDomains(
+	ctx context.Context,
+	req ListDomainsRequest,
+) (*[]domainv1.Domain, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return nil, httpRes, err
+	}
+
+	var response []domainv1.Domain
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Check if a Domain is available to register.
+//
+// This operation is deprecated. Use the POST /v2/domain-registrable endpoint instead.
+func (c *clientImpl) DeprecatedCheckDomainRegistrability(
+	ctx context.Context,
+	req DeprecatedCheckDomainRegistrabilityRequest,
+) (*DeprecatedCheckDomainRegistrabilityResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return nil, httpRes, err
+	}
+
+	var response DeprecatedCheckDomainRegistrabilityResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Change all nameservers of a Domain.
+//
+// This operation is deprecated. Use the PATCH /v2/domains/{domainId}/nameservers endpoint instead.
+func (c *clientImpl) DeprecatedDeclareNameservers(
+	ctx context.Context,
+	req DeprecatedDeclareNameserversRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update the nameservers of a Domain.
+func (c *clientImpl) UpdateDomainNameservers(
+	ctx context.Context,
+	req UpdateDomainNameserversRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update an AuthCode.
+//
+// This operation is deprecated. Use the PATCH /v2/domains/{domainId}/auth-code endpoint instead.
+func (c *clientImpl) DeprecatedDeclareProcessChangeAuthcode(
+	ctx context.Context,
+	req DeprecatedDeclareProcessChangeAuthcodeRequest,
+) (*DeprecatedDeclareProcessChangeAuthcodeResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return nil, httpRes, err
+	}
+
+	var response DeprecatedDeclareProcessChangeAuthcodeResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update a Domain's OwnerC handle.
+//
+// This operation is deprecated and does not have an alternative.
+func (c *clientImpl) DeprecatedDeclareProcessChangeHandles(
+	ctx context.Context,
+	req DeprecatedDeclareProcessChangeHandlesRequest,
+) (*DeprecatedDeclareProcessChangeHandlesResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return nil, httpRes, err
+	}
+
+	var response DeprecatedDeclareProcessChangeHandlesResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get a HandleSchema.
+//
+// This operation is deprecated. Use the GET /v2/domain-tlds/{tld}/contact-schemas endpoint instead.
+func (c *clientImpl) DeprecatedGetHandleFields(
+	ctx context.Context,
+	req DeprecatedGetHandleFieldsRequest,
+) (*DeprecatedGetHandleFieldsResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return nil, httpRes, err
+	}
+
+	var response DeprecatedGetHandleFieldsResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Get File Service Reference for a Screenshot of a domain.
@@ -283,6 +528,168 @@ func (c *clientImpl) DeprecatedGetScreenshotForDomain(
 	}
 
 	var response DeprecatedGetScreenshotForDomainResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Domains belonging to a Project.
+//
+// This operation is deprecated. Use the GET /v2/domains endpoint instead.
+func (c *clientImpl) DeprecatedListDomains(
+	ctx context.Context,
+	req DeprecatedListDomainsRequest,
+) (*[]domainv1.Domain, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return nil, httpRes, err
+	}
+
+	var response []domainv1.Domain
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Ingresses belonging to a project.
+//
+// This operation is deprecated. Use the GET /v2/ingresses endpoint instead.
+func (c *clientImpl) DeprecatedListIngresses(
+	ctx context.Context,
+	req DeprecatedListIngressesRequest,
+) (*[]ingressv1.IngressDeprecated, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return nil, httpRes, err
+	}
+
+	var response []ingressv1.IngressDeprecated
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update an Ingresses paths.
+//
+// This operation is deprecated. Use the PATCH /v2/ingresses/{ingressId}/paths endpoint instead.
+func (c *clientImpl) DeprecatedPaths(
+	ctx context.Context,
+	req DeprecatedPathsRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update the paths of an Ingress.
+func (c *clientImpl) UpdateIngressPaths(
+	ctx context.Context,
+	req UpdateIngressPathsRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update an Ingresses tls settings.
+//
+// This operation is deprecated. Use the PATCH /v2/ingresses/{ingressId}/tls endpoint instead.
+func (c *clientImpl) DeprecatedTLS(
+	ctx context.Context,
+	req DeprecatedTLSRequest,
+) (*DeprecatedTLSResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return nil, httpRes, err
+	}
+
+	var response DeprecatedTLSResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update the tls settings of an Ingress.
+func (c *clientImpl) UpdateIngressTLS(
+	ctx context.Context,
+	req UpdateIngressTLSRequest,
+) (*UpdateIngressTLSResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return nil, httpRes, err
+	}
+
+	var response UpdateIngressTLSResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -799,62 +1206,6 @@ func (c *clientImpl) GetLatestScreenshot(
 	return &response, httpRes, nil
 }
 
-// List Domains
-func (c *clientImpl) ListDomains(
-	ctx context.Context,
-	req ListDomainsRequest,
-) (*[]domainv1.Domain, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response []domainv1.Domain
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Check if a Domain is available to register.
-//
-// This operation is deprecated. Use the POST /v2/domain-registrable endpoint instead.
-func (c *clientImpl) DeprecatedCheckDomainRegistrability(
-	ctx context.Context,
-	req DeprecatedCheckDomainRegistrabilityRequest,
-) (*DeprecatedCheckDomainRegistrabilityResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response DeprecatedCheckDomainRegistrabilityResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
 // List the contact schemas for a TLD.
 //
 // List the contact schemas describing the fields required to register/transfer a Domain.
@@ -1019,54 +1370,6 @@ func (c *clientImpl) UpdateDomainContact(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Change all nameservers of a Domain.
-//
-// This operation is deprecated. Use the PATCH /v2/domains/{domainId}/nameservers endpoint instead.
-func (c *clientImpl) DeprecatedDeclareNameservers(
-	ctx context.Context,
-	req DeprecatedDeclareNameserversRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update the nameservers of a Domain.
-func (c *clientImpl) UpdateDomainNameservers(
-	ctx context.Context,
-	req UpdateDomainNameserversRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
 
 // Update a Domain's project id.
@@ -1252,79 +1555,6 @@ func (c *clientImpl) ListIngressesCompatibleWithCertificate(
 	return &response, httpRes, nil
 }
 
-// List Ingresses belonging to a project.
-func (c *clientImpl) ListIngressesV2Deprecated(
-	ctx context.Context,
-	req ListIngressesV2DeprecatedRequest,
-) (*[]ingressv1.IngressDeprecated, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response []ingressv1.IngressDeprecated
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Update an Ingresses paths.
-func (c *clientImpl) PathsDeprecated(
-	ctx context.Context,
-	req PathsDeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update the paths of an Ingress.
-func (c *clientImpl) UpdateIngressPaths(
-	ctx context.Context,
-	req UpdateIngressPathsRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Request the ACME certificate issuance of an Ingress.
 func (c *clientImpl) RequestIngressAcmeCertificateIssuance(
 	ctx context.Context,
@@ -1346,60 +1576,6 @@ func (c *clientImpl) RequestIngressAcmeCertificateIssuance(
 	}
 
 	return httpRes, nil
-}
-
-// Update an Ingresses tls settings.
-func (c *clientImpl) TLSDeprecated(
-	ctx context.Context,
-	req TLSDeprecatedRequest,
-) (*TLSDeprecatedResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response TLSDeprecatedResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Update the tls settings of an Ingress.
-func (c *clientImpl) UpdateIngressTLS(
-	ctx context.Context,
-	req UpdateIngressTLSRequest,
-) (*UpdateIngressTLSResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response UpdateIngressTLSResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
 
 // Check the replacement of a Certificate.
@@ -1633,174 +1809,4 @@ func (c *clientImpl) ListCertificates(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// List Domains belonging to a Project.
-//
-// This operation is deprecated. Use the GET /v2/domains endpoint instead.
-func (c *clientImpl) DeprecatedListDomains(
-	ctx context.Context,
-	req DeprecatedListDomainsRequest,
-) (*[]domainv1.Domain, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response []domainv1.Domain
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a HandleSchema.
-//
-// This operation is deprecated. Use the GET /v2/domain-tlds/{tld}/contact-schemas endpoint instead.
-func (c *clientImpl) DeprecatedGetHandleFields(
-	ctx context.Context,
-	req DeprecatedGetHandleFieldsRequest,
-) (*DeprecatedGetHandleFieldsResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response DeprecatedGetHandleFieldsResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Update an AuthCode.
-//
-// This operation is deprecated. Use the PATCH /v2/domains/{domainId}/auth-code endpoint instead.
-func (c *clientImpl) DeprecatedDeclareProcessChangeAuthcode(
-	ctx context.Context,
-	req DeprecatedDeclareProcessChangeAuthcodeRequest,
-) (*DeprecatedDeclareProcessChangeAuthcodeResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response DeprecatedDeclareProcessChangeAuthcodeResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Update a Domain's OwnerC handle.
-//
-// This operation is deprecated and does not have an alternative.
-func (c *clientImpl) DeprecatedDeclareProcessChangeHandles(
-	ctx context.Context,
-	req DeprecatedDeclareProcessChangeHandlesRequest,
-) (*DeprecatedDeclareProcessChangeHandlesResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response DeprecatedDeclareProcessChangeHandlesResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Change the owner contact of a domain.
-//
-// This operation is deprecated. Use the PATCH /v2/domains/{domainId}/contacts/{contact} endpoint instead.
-func (c *clientImpl) DeprecatedChangeOwnercOfDomain(
-	ctx context.Context,
-	req DeprecatedChangeOwnercOfDomainRequest,
-) (*DeprecatedChangeOwnercOfDomainResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response DeprecatedChangeOwnercOfDomainResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Change the Project relation of a Domain.
-//
-// This operation is deprecated. Use the PATCH /v2/domains/{domainId}/project-id endpoint instead.
-func (c *clientImpl) DeprecatedChangeProjectOfDomain(
-	ctx context.Context,
-	req DeprecatedChangeProjectOfDomainRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
