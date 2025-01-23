@@ -19,7 +19,7 @@ const apiTokenHeader = "X-Access-Token"
 // The access token needs to be obtained ahead-of-time.
 func WithAccessToken(token string) ClientOption {
 	return func(_ context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
-		return httpclient.NewAuthenticatedClient(inner, apiTokenHeader, token), nil
+		return httpclient.NewAuthenticatedClient(inner, token, apiTokenHeader), nil
 	}
 }
 
