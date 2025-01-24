@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/filev1"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/marketplacev1"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
 	"github.com/mittwald/api-client-go/pkg/httperr"
@@ -95,10 +94,6 @@ type Client interface {
 		ctx context.Context,
 		req ListOwnExtensionsRequest,
 	) (*[]marketplacev1.OwnExtension, *http.Response, error)
-	BrokerGetLiveness(
-		ctx context.Context,
-		req BrokerGetLivenessRequest,
-	) (*filev1.FileMeta, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -644,33 +639,6 @@ func (c *clientImpl) ListOwnExtensions(
 	}
 
 	var response []marketplacev1.OwnExtension
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get Liveness status.
-func (c *clientImpl) BrokerGetLiveness(
-	ctx context.Context,
-	req BrokerGetLivenessRequest,
-) (*filev1.FileMeta, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response filev1.FileMeta
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
