@@ -6,9 +6,9 @@ package user
 //This data type was generated from the following JSON schema:
 //type: "object"
 
-type GetOwnAccountRequestBody struct {
+type DeprecatedGetOwnAccountRequestBody struct {
 }
 
-func (o *GetOwnAccountRequestBody) Validate() error {
+func (o *DeprecatedGetOwnAccountRequestBody) Validate() error {
 	return nil
 }

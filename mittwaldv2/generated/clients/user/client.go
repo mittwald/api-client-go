@@ -49,6 +49,18 @@ type Client interface {
 		ctx context.Context,
 		req DeprecatedDisableMFARequest,
 	) (*DeprecatedDisableMFAResponse, *http.Response, error)
+	DeprecatedUpdateAccount(
+		ctx context.Context,
+		req DeprecatedUpdateAccountRequest,
+	) (*http.Response, error)
+	DeprecatedGetOwnAccount(
+		ctx context.Context,
+		req DeprecatedGetOwnAccountRequest,
+	) (*signupv1.Account, *http.Response, error)
+	UpdateAccount(
+		ctx context.Context,
+		req UpdateAccountRequest,
+	) (*http.Response, error)
 	DeprecatedInitPasswordReset(
 		ctx context.Context,
 		req DeprecatedInitPasswordResetRequest,
@@ -120,10 +132,6 @@ type Client interface {
 	DeprecatedTerminateSession(
 		ctx context.Context,
 		req DeprecatedTerminateSessionRequest,
-	) (*http.Response, error)
-	DeprecatedUpdateAccount(
-		ctx context.Context,
-		req DeprecatedUpdateAccountRequest,
 	) (*http.Response, error)
 	DeprecatedVerifyEmail(
 		ctx context.Context,
@@ -241,14 +249,6 @@ type Client interface {
 		ctx context.Context,
 		req DeleteUserRequest,
 	) (*any, *http.Response, error)
-	GetOwnAccount(
-		ctx context.Context,
-		req GetOwnAccountRequest,
-	) (*signupv1.Account, *http.Response, error)
-	UpdateAccount(
-		ctx context.Context,
-		req UpdateAccountRequest,
-	) (*http.Response, error)
 	GetPasswordUpdatedAt(
 		ctx context.Context,
 		req GetPasswordUpdatedAtRequest,
@@ -362,7 +362,7 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
-// Change your Email-Address.
+// Change your Email-Address. Replaced by `PUT` `/v2/users/self/credentials/email`.
 func (c *clientImpl) DeprecatedChangeEmail(
 	ctx context.Context,
 	req DeprecatedChangeEmailRequest,
@@ -385,7 +385,7 @@ func (c *clientImpl) DeprecatedChangeEmail(
 	return httpRes, nil
 }
 
-// Confirm password reset.
+// Confirm password reset. Replaced by `POST` `/v2/users/self/credentials/password/confirm-reset`.
 func (c *clientImpl) DeprecatedConfirmPasswordReset(
 	ctx context.Context,
 	req DeprecatedConfirmPasswordResetRequest,
@@ -435,7 +435,7 @@ func (c *clientImpl) DeprecatedCreateIssue(
 	return &response, httpRes, nil
 }
 
-// Update an existing `ApiToken`.
+// Update an existing `ApiToken`. Replaced by `PUT` `/v2/users/{userId}/api-tokens/{apiTokenId}`.
 func (c *clientImpl) DeprecatedEditAPIToken(
 	ctx context.Context,
 	req DeprecatedEditAPITokenRequest,
@@ -458,7 +458,7 @@ func (c *clientImpl) DeprecatedEditAPIToken(
 	return httpRes, nil
 }
 
-// Deletes an ApiToken.
+// Deletes an ApiToken. Replaces by `DELETE` `/v2/user/{userid}/api-tokens/{apiTokenId}`.
 func (c *clientImpl) DeprecatedDeleteAPIToken(
 	ctx context.Context,
 	req DeprecatedDeleteAPITokenRequest,
@@ -481,7 +481,7 @@ func (c *clientImpl) DeprecatedDeleteAPIToken(
 	return httpRes, nil
 }
 
-// Edit a stored ssh-key.
+// Edit a stored ssh-key. Replaced by `PUT` `/v2/users/self/ssh-keys/{sshKeyId}`.
 func (c *clientImpl) DeprecatedEditSSHKey(
 	ctx context.Context,
 	req DeprecatedEditSSHKeyRequest,
@@ -504,7 +504,7 @@ func (c *clientImpl) DeprecatedEditSSHKey(
 	return httpRes, nil
 }
 
-// Remove a ssh-key.
+// Remove a ssh-key. Replaced by `DELETE` `/v2/users/self/ssh-keys/{sshKeyId}`.
 func (c *clientImpl) DeprecatedDeleteSSHKey(
 	ctx context.Context,
 	req DeprecatedDeleteSSHKeyRequest,
@@ -527,7 +527,7 @@ func (c *clientImpl) DeprecatedDeleteSSHKey(
 	return httpRes, nil
 }
 
-// Disable Multi Factor Authentication.
+// Disable Multi Factor Authentication. Replaced by `DELETE` `/v2/users/self/credentials/mfa`.
 func (c *clientImpl) DeprecatedDisableMFA(
 	ctx context.Context,
 	req DeprecatedDisableMFARequest,
@@ -554,7 +554,81 @@ func (c *clientImpl) DeprecatedDisableMFA(
 	return &response, httpRes, nil
 }
 
-// Initialize password reset process.
+// Update your account information.
+func (c *clientImpl) DeprecatedUpdateAccount(
+	ctx context.Context,
+	req DeprecatedUpdateAccountRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Get your account information. Replaced by `GET` `/v2/users/self`.
+func (c *clientImpl) DeprecatedGetOwnAccount(
+	ctx context.Context,
+	req DeprecatedGetOwnAccountRequest,
+) (*signupv1.Account, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return nil, httpRes, err
+	}
+
+	var response signupv1.Account
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update your account information.
+func (c *clientImpl) UpdateAccount(
+	ctx context.Context,
+	req UpdateAccountRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+//Initialize password reset process. Replaced by `POST` `/v2/users/self/credentials/actions/init-password-reset`.
+
 func (c *clientImpl) DeprecatedInitPasswordReset(
 	ctx context.Context,
 	req DeprecatedInitPasswordResetRequest,
@@ -577,7 +651,7 @@ func (c *clientImpl) DeprecatedInitPasswordReset(
 	return httpRes, nil
 }
 
-// Terminate session and invalidate access token.
+// Terminate session and invalidate access token. Replaced by `DELETE` `/v2/users/self/sessions/{current}`.
 func (c *clientImpl) DeprecatedLogout(
 	ctx context.Context,
 	req DeprecatedLogoutRequest,
@@ -600,7 +674,8 @@ func (c *clientImpl) DeprecatedLogout(
 	return httpRes, nil
 }
 
-// Resend the Email-Address verification email.
+//Resend the Email-Address verification email. Replaced by `POST` `/v2/users/self/credentials/email/actions/resend-email`.
+
 func (c *clientImpl) DeprecatedResendVerificationEmail(
 	ctx context.Context,
 	req DeprecatedResendVerificationEmailRequest,
@@ -946,7 +1021,7 @@ func (c *clientImpl) DeprecatedServiceUserGetOwn(
 	return &response, httpRes, nil
 }
 
-// Terminate all sessions, except the current session.
+// Terminate all sessions, except the current session. Replaced by `DELETE` `/v2/users/self/sessions`.
 func (c *clientImpl) DeprecatedTerminateAllSessions(
 	ctx context.Context,
 	req DeprecatedTerminateAllSessionsRequest,
@@ -969,7 +1044,7 @@ func (c *clientImpl) DeprecatedTerminateAllSessions(
 	return httpRes, nil
 }
 
-// Terminate a specific Session.
+// Terminate a specific Session. Replaced by `DELETE` `/v2/users/self/sessions/{tokenId}`.
 func (c *clientImpl) DeprecatedTerminateSession(
 	ctx context.Context,
 	req DeprecatedTerminateSessionRequest,
@@ -992,30 +1067,7 @@ func (c *clientImpl) DeprecatedTerminateSession(
 	return httpRes, nil
 }
 
-// Update your account information.
-func (c *clientImpl) DeprecatedUpdateAccount(
-	ctx context.Context,
-	req DeprecatedUpdateAccountRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Verify an added Email-Address.
+// Verify an added Email-Address. Replaced by `POST` `/v2/users/self/credentials/email/actions/verify-email`.
 func (c *clientImpl) DeprecatedVerifyEmail(
 	ctx context.Context,
 	req DeprecatedVerifyEmailRequest,
@@ -1756,56 +1808,6 @@ func (c *clientImpl) DeleteUser(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Get your account information.
-func (c *clientImpl) GetOwnAccount(
-	ctx context.Context,
-	req GetOwnAccountRequest,
-) (*signupv1.Account, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return nil, httpRes, err
-	}
-
-	var response signupv1.Account
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Update your account information.
-func (c *clientImpl) UpdateAccount(
-	ctx context.Context,
-	req UpdateAccountRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := &httperr.ErrUnexpectedResponse{Response: httpRes}
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
 
 // The timestamp of your latest password change.

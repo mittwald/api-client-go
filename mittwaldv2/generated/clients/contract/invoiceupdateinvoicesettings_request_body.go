@@ -32,7 +32,9 @@ import (
 //        type: "integer"
 //        maximum: 28
 //        minimum: 0
+//        description: "parameter is deprecated and will be ignored"
 //        example: 15
+//        deprecated: true
 //required:
 //    - "invoicePeriod"
 //    - "paymentSettings"

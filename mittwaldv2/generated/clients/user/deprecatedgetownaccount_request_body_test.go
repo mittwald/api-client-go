@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("GetOwnAccountRequestBody", func() {
+var _ = Describe("DeprecatedGetOwnAccountRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
 			exampleJSON := []byte("{}")
 
-			sut := user.GetOwnAccountRequestBody{}
+			sut := user.DeprecatedGetOwnAccountRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})
