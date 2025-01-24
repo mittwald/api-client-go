@@ -15,7 +15,7 @@ func ExampleNew_accessTokenFromEnvironment() {
 		panic(err)
 	}
 
-	me, _, err := client.User().GetOwnAccount(ctx, user.GetOwnAccountRequest{})
+	me, _, err := client.User().GetUser(ctx, user.GetUserRequest{UserID: "self"})
 	if err != nil {
 		panic(err)
 	}
