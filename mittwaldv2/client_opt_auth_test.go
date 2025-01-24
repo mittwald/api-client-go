@@ -17,13 +17,13 @@ var _ = Describe("Client authentication", func() {
 			ctx := context.Background()
 
 			runner := &httpclient_mock.MockRequestRunner{}
-			runner.ExpectRequest(http.MethodGet, "/v2/users/self/personal-information", httpclient_mock.WithJSONResponse(map[string]any{}))
+			runner.ExpectRequest(http.MethodGet, "/v2/users/self", httpclient_mock.WithJSONResponse(map[string]any{}))
 
 			client, err := mittwaldv2.New(ctx, mittwaldv2.WithHTTPClient(runner), mittwaldv2.WithAccessToken("FOOBAR"))
 
 			Expect(err).NotTo(HaveOccurred())
 
-			_, _, err = client.User().GetOwnAccount(ctx, user.GetOwnAccountRequest{})
+			_, _, err = client.User().GetUser(ctx, user.GetUserRequest{UserID: "self"})
 
 			Expect(err).NotTo(HaveOccurred())
 			Expect(runner.Requests).To(HaveLen(1))
@@ -38,13 +38,13 @@ var _ = Describe("Client authentication", func() {
 			ctx := context.Background()
 
 			runner := &httpclient_mock.MockRequestRunner{}
-			runner.ExpectRequest(http.MethodGet, "/v2/users/self/personal-information", httpclient_mock.WithJSONResponse(map[string]any{}))
+			runner.ExpectRequest(http.MethodGet, "/v2/users/self", httpclient_mock.WithJSONResponse(map[string]any{}))
 
 			client, err := mittwaldv2.New(ctx, mittwaldv2.WithHTTPClient(runner), mittwaldv2.WithAccessTokenFromEnv())
 
 			Expect(err).NotTo(HaveOccurred())
 
-			_, _, err = client.User().GetOwnAccount(ctx, user.GetOwnAccountRequest{})
+			_, _, err = client.User().GetUser(ctx, user.GetUserRequest{UserID: "self"})
 
 			Expect(err).NotTo(HaveOccurred())
 			Expect(runner.Requests).To(HaveLen(1))
@@ -58,13 +58,13 @@ var _ = Describe("Client authentication", func() {
 
 			runner := &httpclient_mock.MockRequestRunner{}
 			runner.ExpectRequest(http.MethodPost, "/v2/authenticate", httpclient_mock.WithJSONResponse(map[string]any{"token": "FOOBAR"}))
-			runner.ExpectRequest(http.MethodGet, "/v2/users/self/personal-information", httpclient_mock.WithJSONResponse(map[string]any{}))
+			runner.ExpectRequest(http.MethodGet, "/v2/users/self", httpclient_mock.WithJSONResponse(map[string]any{}))
 
 			client, err := mittwaldv2.New(ctx, mittwaldv2.WithHTTPClient(runner), mittwaldv2.WithUsernamePassword("martin@foo.example", "secret"))
 
 			Expect(err).NotTo(HaveOccurred())
 
-			_, _, err = client.User().GetOwnAccount(ctx, user.GetOwnAccountRequest{})
+			_, _, err = client.User().GetUser(ctx, user.GetUserRequest{UserID: "self"})
 
 			Expect(err).NotTo(HaveOccurred())
 			Expect(runner.Requests).To(HaveLen(2))
