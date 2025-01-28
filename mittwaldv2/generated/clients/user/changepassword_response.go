@@ -14,16 +14,16 @@ import (
 // null
 
 type ChangePasswordResponse struct {
-	AlternativeChangePasswordOKResponse       *ChangePasswordOKResponse
 	AlternativeChangePasswordAcceptedResponse *any
+	AlternativeChangePasswordOKResponse       *ChangePasswordOKResponse
 }
 
 func (a *ChangePasswordResponse) MarshalJSON() ([]byte, error) {
-	if a.AlternativeChangePasswordOKResponse != nil {
-		return json.Marshal(a.AlternativeChangePasswordOKResponse)
-	}
 	if a.AlternativeChangePasswordAcceptedResponse != nil {
 		return json.Marshal(a.AlternativeChangePasswordAcceptedResponse)
+	}
+	if a.AlternativeChangePasswordOKResponse != nil {
+		return json.Marshal(a.AlternativeChangePasswordOKResponse)
 	}
 	return []byte("null"), nil
 }
@@ -35,6 +35,13 @@ func (a *ChangePasswordResponse) UnmarshalJSON(input []byte) error {
 	dec.DisallowUnknownFields()
 
 	reader.Reset(input)
+	var alternativeChangePasswordAcceptedResponse any
+	if err := dec.Decode(&alternativeChangePasswordAcceptedResponse); err == nil {
+		a.AlternativeChangePasswordAcceptedResponse = &alternativeChangePasswordAcceptedResponse
+		decodedAtLeastOnce = true
+	}
+
+	reader.Reset(input)
 	var alternativeChangePasswordOKResponse ChangePasswordOKResponse
 	if err := dec.Decode(&alternativeChangePasswordOKResponse); err == nil {
 		//subtype: *generator.ObjectType
@@ -44,13 +51,6 @@ func (a *ChangePasswordResponse) UnmarshalJSON(input []byte) error {
 		}
 	}
 
-	reader.Reset(input)
-	var alternativeChangePasswordAcceptedResponse any
-	if err := dec.Decode(&alternativeChangePasswordAcceptedResponse); err == nil {
-		a.AlternativeChangePasswordAcceptedResponse = &alternativeChangePasswordAcceptedResponse
-		decodedAtLeastOnce = true
-	}
-
 	if !decodedAtLeastOnce {
 		return fmt.Errorf("could not unmarshal into any alternative for type %T", a)
 	}
@@ -58,12 +58,12 @@ func (a *ChangePasswordResponse) UnmarshalJSON(input []byte) error {
 }
 
 func (a *ChangePasswordResponse) Validate() error {
-	if a.AlternativeChangePasswordOKResponse != nil {
-		return a.AlternativeChangePasswordOKResponse.Validate()
-	}
 	// The AlternativeChangePasswordAcceptedResponse subtype does not implement validation, so we consider being non-nil as valid
 	if a.AlternativeChangePasswordAcceptedResponse != nil {
 		return nil
+	}
+	if a.AlternativeChangePasswordOKResponse != nil {
+		return a.AlternativeChangePasswordOKResponse.Validate()
 	}
 	return errors.New("no alternative set")
 }

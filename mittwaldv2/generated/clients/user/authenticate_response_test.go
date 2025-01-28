@@ -13,14 +13,6 @@ import (
 
 var _ = Describe("AuthenticateResponse", func() {
 	When("unmarshaling from JSON", func() {
-		It("should unmarshal into AlternativeAuthenticateOKResponse", func() {
-			exampleJSON := []byte("{\"expires\":\"2006-01-02T15:04:05Z\",\"refreshToken\":\"string\",\"token\":\"string\"}")
-
-			sut := user.AuthenticateResponse{}
-			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
-			Expect(sut.Validate()).To(Succeed())
-			Expect(sut.AlternativeAuthenticateOKResponse).NotTo(BeNil())
-		})
 		It("should unmarshal into AlternativeAuthenticateAcceptedResponse", func() {
 			exampleJSON := []byte("{\"name\":\"SecondFactorRequired\"}")
 
@@ -28,6 +20,14 @@ var _ = Describe("AuthenticateResponse", func() {
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 			Expect(sut.AlternativeAuthenticateAcceptedResponse).NotTo(BeNil())
+		})
+		It("should unmarshal into AlternativeAuthenticateOKResponse", func() {
+			exampleJSON := []byte("{\"expires\":\"2006-01-02T15:04:05Z\",\"refreshToken\":\"string\",\"token\":\"string\"}")
+
+			sut := user.AuthenticateResponse{}
+			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
+			Expect(sut.Validate()).To(Succeed())
+			Expect(sut.AlternativeAuthenticateOKResponse).NotTo(BeNil())
 		})
 	})
 })
