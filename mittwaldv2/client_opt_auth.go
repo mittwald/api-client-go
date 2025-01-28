@@ -108,7 +108,7 @@ func WithUsernamePassword(email, password string) ClientOption {
 // automatically.
 //
 // [1]: https://developer.mittwald.de/docs/v2/contribution/overview/concepts/authentication/
-func WithAccessTokenRetrievalKey(userID uuid.UUID, accessTokenRetrievalKey string) ClientOption {
+func WithAccessTokenRetrievalKey(userID string, accessTokenRetrievalKey string) ClientOption {
 	return func(ctx context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
 		req := user.AuthenticateWithAccessTokenRetrievalKeyRequest{
 			Body: user.AuthenticateWithAccessTokenRetrievalKeyRequestBody{
@@ -130,7 +130,7 @@ func WithAccessTokenRetrievalKey(userID uuid.UUID, accessTokenRetrievalKey strin
 //
 // Clients authenticated with this method will refresh their API tokens
 // automatically.
-func WithExtensionSecret(extensionInstanceID uuid.UUID, extensionSecret string) ClientOption {
+func WithExtensionSecret(extensionInstanceID string, extensionSecret string) ClientOption {
 	return func(ctx context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
 		refreshFunc := func() (string, time.Time, error) {
 			req := marketplace.AuthenticateInstanceRequest{
