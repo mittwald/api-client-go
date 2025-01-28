@@ -74,23 +74,23 @@ import (
 //    - "blocked"
 
 type Extension struct {
-	Blocked              bool                        `json:"blocked"`
-	Context              Context                     `json:"context"`
-	ContributorId        string                      `json:"contributorId"`
-	Deprecation          *ExtensionDeprecation       `json:"deprecation,omitempty"`
-	Description          string                      `json:"description"`
-	DetailedDescriptions *DetailedDescriptions       `json:"detailedDescriptions,omitempty"`
-	Disabled             bool                        `json:"disabled"`
-	FrontendComponents   []ExternalComponent         `json:"frontendComponents,omitempty"`
-	FrontendFragments    map[string]FrontendFragment `json:"frontendFragments,omitempty"`
-	Id                   string                      `json:"id"`
-	LogoRefId            *string                     `json:"logoRefId,omitempty"`
-	Name                 string                      `json:"name"`
-	Published            bool                        `json:"published"`
-	Scopes               []string                    `json:"scopes"`
-	State                ExtensionState              `json:"state"`
-	Support              SupportMeta                 `json:"support"`
-	Tags                 []string                    `json:"tags"`
+	Blocked              bool                  `json:"blocked"`
+	Context              Context               `json:"context"`
+	ContributorId        string                `json:"contributorId"`
+	Deprecation          *ExtensionDeprecation `json:"deprecation,omitempty"`
+	Description          string                `json:"description"`
+	DetailedDescriptions *DetailedDescriptions `json:"detailedDescriptions,omitempty"`
+	Disabled             bool                  `json:"disabled"`
+	FrontendComponents   []ExternalComponent   `json:"frontendComponents,omitempty"`
+	FrontendFragments    map[string]any        `json:"frontendFragments,omitempty"`
+	Id                   string                `json:"id"`
+	LogoRefId            *string               `json:"logoRefId,omitempty"`
+	Name                 string                `json:"name"`
+	Published            bool                  `json:"published"`
+	Scopes               []string              `json:"scopes"`
+	State                ExtensionState        `json:"state"`
+	Support              SupportMeta           `json:"support"`
+	Tags                 []string              `json:"tags"`
 }
 
 func (o *Extension) Validate() error {

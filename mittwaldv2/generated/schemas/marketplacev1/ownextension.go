@@ -54,22 +54,22 @@ import "fmt"
 //    - "name"
 
 type OwnExtension struct {
-	BackendComponents    *BackendComponents          `json:"backendComponents,omitempty"`
-	Blocked              *bool                       `json:"blocked,omitempty"`
-	Context              *Context                    `json:"context,omitempty"`
-	ContributorId        string                      `json:"contributorId"`
-	Deprecation          *ExtensionDeprecation       `json:"deprecation,omitempty"`
-	Description          *string                     `json:"description,omitempty"`
-	DetailedDescriptions *DetailedDescriptions       `json:"detailedDescriptions,omitempty"`
-	Disabled             *bool                       `json:"disabled,omitempty"`
-	FrontendComponents   []ExternalComponent         `json:"frontendComponents,omitempty"`
-	FrontendFragments    map[string]FrontendFragment `json:"frontendFragments,omitempty"`
-	Id                   string                      `json:"id"`
-	Name                 string                      `json:"name"`
-	Scopes               []string                    `json:"scopes,omitempty"`
-	State                *OwnExtensionState          `json:"state,omitempty"`
-	Support              *SupportMeta                `json:"support,omitempty"`
-	Tags                 []string                    `json:"tags,omitempty"`
+	BackendComponents    *BackendComponents    `json:"backendComponents,omitempty"`
+	Blocked              *bool                 `json:"blocked,omitempty"`
+	Context              *Context              `json:"context,omitempty"`
+	ContributorId        string                `json:"contributorId"`
+	Deprecation          *ExtensionDeprecation `json:"deprecation,omitempty"`
+	Description          *string               `json:"description,omitempty"`
+	DetailedDescriptions *DetailedDescriptions `json:"detailedDescriptions,omitempty"`
+	Disabled             *bool                 `json:"disabled,omitempty"`
+	FrontendComponents   []ExternalComponent   `json:"frontendComponents,omitempty"`
+	FrontendFragments    map[string]any        `json:"frontendFragments,omitempty"`
+	Id                   string                `json:"id"`
+	Name                 string                `json:"name"`
+	Scopes               []string              `json:"scopes,omitempty"`
+	State                *OwnExtensionState    `json:"state,omitempty"`
+	Support              *SupportMeta          `json:"support,omitempty"`
+	Tags                 []string              `json:"tags,omitempty"`
 }
 
 func (o *OwnExtension) Validate() error {
