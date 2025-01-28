@@ -4,12 +4,14 @@ package database
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "description":
 //        type: "string"
-//required:
+// required:
 //    - "description"
+// description: UpdateMysqlDatabaseDescriptionRequestBody models the JSON body of a 'database-update-mysql-database-description' request
 
+// UpdateMysqlDatabaseDescriptionRequestBody models the JSON body of a 'database-update-mysql-database-description' request
 type UpdateMysqlDatabaseDescriptionRequestBody struct {
 	Description string `json:"description"`
 }

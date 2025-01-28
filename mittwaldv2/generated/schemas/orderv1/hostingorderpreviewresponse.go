@@ -4,8 +4,8 @@ package orderv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "machineTypePrice":
 //        type: "number"
 //        example: 500
@@ -15,7 +15,7 @@ package orderv1
 //    "totalPrice":
 //        type: "number"
 //        example: 1500
-//required:
+// required:
 //    - "totalPrice"
 //    - "storagePrice"
 //    - "machineTypePrice"

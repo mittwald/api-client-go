@@ -6,8 +6,8 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "acme":
 //        type: "boolean"
 //        description: "Has to be `true`, as ssl cannot be deactivated."
@@ -16,10 +16,10 @@ import "time"
 //    "requestDeadline":
 //        type: "string"
 //        format: "date-time"
-//required:
+// required:
 //    - "acme"
 //    - "isCreated"
-//additionalProperties: false
+// additionalProperties: false
 
 type TlsAcme struct {
 	Acme            bool       `json:"acme"`

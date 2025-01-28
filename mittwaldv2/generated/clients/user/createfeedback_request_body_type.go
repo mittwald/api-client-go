@@ -6,11 +6,11 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "feedback"
 //    - "bug"
-//description: "Type of feedback."
+// description: "Type of feedback."
 
 // Type of feedback.
 type CreateFeedbackRequestBodyType string

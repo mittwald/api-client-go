@@ -4,8 +4,8 @@ package misc
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "exp":
 //        type: "string"
 //    "iat":
@@ -14,7 +14,7 @@ package misc
 //        type: "string"
 //    "sub":
 //        type: "string"
-//required:
+// required:
 //    - "iat"
 //    - "iss"
 //    - "sub"

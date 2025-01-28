@@ -4,8 +4,8 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "settingsString":
 //        type: "string"
 //        format: "base64"

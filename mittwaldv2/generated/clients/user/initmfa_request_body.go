@@ -4,8 +4,10 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
+// type: "object"
+// description: InitMFARequestBody models the JSON body of a 'user-init-mfa' request
 
+// InitMFARequestBody models the JSON body of a 'user-init-mfa' request
 type InitMFARequestBody struct {
 }
 

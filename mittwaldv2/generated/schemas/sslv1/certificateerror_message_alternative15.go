@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "private_key_not_rsa"
-//description: "The private key is not RSA."
+// description: "The private key is not RSA."
 
 // The private key is not RSA.
 type CertificateErrorMessageAlternative15 string

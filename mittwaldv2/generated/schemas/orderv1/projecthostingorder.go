@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "customerId":
 //        type: "string"
 //        example: "0f5ec9cd-1b1b-4850-9061-fcebe765c62d"
@@ -29,7 +29,7 @@ import "fmt"
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.HardwareSpec"}
 //    "useFreeTrial":
 //        type: "boolean"
-//required:
+// required:
 //    - "customerId"
 //    - "diskspaceInGiB"
 //    - "description"

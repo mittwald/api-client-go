@@ -4,15 +4,17 @@ package project
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "description":
 //        type: "string"
 //        description: "Name of the Project as it is displayed in the mStudio."
 //        example: "My first Project!"
-//required:
+// required:
 //    - "description"
+// description: CreateProjectRequestBody models the JSON body of a 'project-create-project' request
 
+// CreateProjectRequestBody models the JSON body of a 'project-create-project' request
 type CreateProjectRequestBody struct {
 	Description string `json:"description"`
 }

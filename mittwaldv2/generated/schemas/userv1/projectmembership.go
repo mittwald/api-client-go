@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "expiresAt":
 //        type: "string"
 //        format: "date-time"
@@ -25,7 +25,7 @@ import (
 //            - "owner"
 //            - "emailadmin"
 //            - "external"
-//required:
+// required:
 //    - "role"
 //    - "memberSince"
 //    - "inherited"

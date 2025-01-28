@@ -11,7 +11,7 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//oneOf:
+// oneOf:
 //    - type: "object"
 //      properties:
 //        "password":
@@ -26,7 +26,7 @@ import (
 //            items: {"$ref": "#/components/schemas/de.mittwald.v1.sshuser.PublicKey"}
 //      required:
 //        - "publicKeys"
-//description: "Method of authentication for an SFTPUser or SSHUser. Can be password or public-keys."
+// description: "Method of authentication for an SFTPUser or SSHUser. Can be password or public-keys."
 
 type Authentication struct {
 	AlternativeAuthenticationAlternative1 *AuthenticationAlternative1

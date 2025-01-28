@@ -4,13 +4,15 @@ package mail
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "address":
 //        type: "string"
 //        format: "idn-email"
-//required:
+// required:
 //    - "address"
+// description: DeprecatedMailaddressUpdateAddressRequestBody models the JSON body of a 'deprecated-mail-mailaddress-update-address' request
 
+// DeprecatedMailaddressUpdateAddressRequestBody models the JSON body of a 'deprecated-mail-mailaddress-update-address' request
 type DeprecatedMailaddressUpdateAddressRequestBody struct {
 	Address string `json:"address"`
 }

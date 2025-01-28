@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "STATUS_UPDATE"
 
 type StatusUpdateType string

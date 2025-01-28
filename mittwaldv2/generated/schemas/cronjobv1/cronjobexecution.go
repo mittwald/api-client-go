@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "abortedBy":
 //        type: "object"
 //        properties:
@@ -61,7 +61,7 @@ import (
 //            "id":
 //                type: "string"
 //                format: "uuid"
-//required:
+// required:
 //    - "id"
 //    - "status"
 //    - "successful"

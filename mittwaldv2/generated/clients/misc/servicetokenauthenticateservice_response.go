@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "accessToken":
 //        type: "object"
 //        properties:
@@ -35,7 +35,7 @@ import "fmt"
 //            - "id"
 //            - "jwtClaims"
 //            - "publicToken"
-//required:
+// required:
 //    - "accessToken"
 
 type ServicetokenAuthenticateServiceResponse struct {

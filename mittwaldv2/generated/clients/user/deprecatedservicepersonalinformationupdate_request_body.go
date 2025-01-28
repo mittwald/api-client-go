@@ -10,12 +10,14 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "person": {"$ref": "#/components/schemas/de.mittwald.v1.commons.Person"}
-//required:
+// required:
 //    - "person"
+// description: DeprecatedServicePersonalInformationUpdateRequestBody models the JSON body of a 'deprecated-user-service-personal-information-update' request
 
+// DeprecatedServicePersonalInformationUpdateRequestBody models the JSON body of a 'deprecated-user-service-personal-information-update' request
 type DeprecatedServicePersonalInformationUpdateRequestBody struct {
 	Person commonsv1.Person `json:"person"`
 }

@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "address":
 //        type: "string"
 //        format: "idn-email"
@@ -29,7 +29,7 @@ import "fmt"
 //            - "password"
 //            - "quotaInBytes"
 //            - "enableSpamProtection"
-//required:
+// required:
 //    - "address"
 //    - "mailbox"
 //    - "isCatchAll"

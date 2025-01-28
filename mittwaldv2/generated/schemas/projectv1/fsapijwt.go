@@ -4,12 +4,12 @@ package projectv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "jwt":
 //        type: "string"
 //        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFkYSBMb3ZlbGFjZSIsImlhdCI6MTUxNjIzOTAyMn0.sMjBP_p34T5mbJTVdEWQ8i2hQPVxsmlt8L6-rKpCczo"
-//required:
+// required:
 //    - "jwt"
 
 type FsApiJwt struct {

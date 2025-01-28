@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "certificate_parsing_failed"
-//description: "An error occurred while parsing the certificate."
+// description: "An error occurred while parsing the certificate."
 
 // An error occurred while parsing the certificate.
 type CertificateErrorMessageAlternative3 string

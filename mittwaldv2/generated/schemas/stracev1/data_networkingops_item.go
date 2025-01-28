@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "connectionType":
 //        type: "string"
 //        enum:
@@ -31,7 +31,7 @@ import "fmt"
 //            - "WARN"
 //            - "SEVERE"
 //        description: "Alerts when the time, syscall count or occurrence count of this group are abnormal."
-//required:
+// required:
 //    - "ip"
 //    - "port"
 //    - "description"

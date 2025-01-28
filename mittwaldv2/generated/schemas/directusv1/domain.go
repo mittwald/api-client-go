@@ -4,8 +4,8 @@ package directusv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "authCode":
 //        type: "string"
 //        description: "The authcode of the domain. Leave empty when mittwald can generate a authcode on its own"
@@ -15,7 +15,7 @@ package directusv1
 //    "name":
 //        type: "string"
 //        minLength: 1
-//required:
+// required:
 //    - "name"
 
 type Domain struct {

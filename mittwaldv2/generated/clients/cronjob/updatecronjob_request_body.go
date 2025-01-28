@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "active":
 //        type: "boolean"
 //    "description":
@@ -27,7 +27,9 @@ import "fmt"
 //        type: "number"
 //        maximum: 86400
 //        minimum: 1
+// description: UpdateCronjobRequestBody models the JSON body of a 'cronjob-update-cronjob' request
 
+// UpdateCronjobRequestBody models the JSON body of a 'cronjob-update-cronjob' request
 type UpdateCronjobRequestBody struct {
 	Active      *bool                                `json:"active,omitempty"`
 	Description *string                              `json:"description,omitempty"`

@@ -4,12 +4,14 @@ package customer
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "invitationToken":
 //        type: "string"
 //        description: "Token contained in the invite for authentication."
+// description: AcceptCustomerInviteRequestBody models the JSON body of a 'customer-accept-customer-invite' request
 
+// AcceptCustomerInviteRequestBody models the JSON body of a 'customer-accept-customer-invite' request
 type AcceptCustomerInviteRequestBody struct {
 	InvitationToken *string `json:"invitationToken,omitempty"`
 }

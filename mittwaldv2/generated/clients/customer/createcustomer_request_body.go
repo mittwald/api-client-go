@@ -10,16 +10,18 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "name":
 //        type: "string"
 //    "owner": {"$ref": "#/components/schemas/de.mittwald.v1.customer.Contact"}
 //    "vatId":
 //        type: "string"
-//required:
+// required:
 //    - "name"
+// description: CreateCustomerRequestBody models the JSON body of a 'customer-create-customer' request
 
+// CreateCustomerRequestBody models the JSON body of a 'customer-create-customer' request
 type CreateCustomerRequestBody struct {
 	Name  string              `json:"name"`
 	Owner *customerv1.Contact `json:"owner,omitempty"`

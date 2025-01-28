@@ -6,12 +6,12 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "full"
 //    - "read"
 //    - "unspecified"
-//description: "The level of access for an SFTPUser."
+// description: "The level of access for an SFTPUser."
 
 // The level of access for an SFTPUser.
 type AccessLevel string

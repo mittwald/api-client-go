@@ -10,11 +10,13 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "characterSettings": {"$ref": "#/components/schemas/de.mittwald.v1.database.characterSettings"}
-//required:
+// required:
 //    - "characterSettings"
+// description: UpdateMysqlDatabaseDefaultCharsetRequestBody models the JSON body of a 'database-update-mysql-database-default-charset' request
 
+// UpdateMysqlDatabaseDefaultCharsetRequestBody models the JSON body of a 'database-update-mysql-database-default-charset' request
 type UpdateMysqlDatabaseDefaultCharsetRequestBody struct {
 	CharacterSettings databasev1.CharacterSettings `json:"characterSettings"`
 }

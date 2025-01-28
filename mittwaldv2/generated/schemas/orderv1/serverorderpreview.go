@@ -4,8 +4,8 @@ package orderv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "customerId":
 //        type: "string"
 //        example: "f3435305-fd26-470e-9f21-43d9be7e67e7"
@@ -18,7 +18,7 @@ package orderv1
 //    "machineType":
 //        type: "string"
 //        example: "shared.xlarge"
-//required:
+// required:
 //    - "machineType"
 //    - "diskspaceInGiB"
 

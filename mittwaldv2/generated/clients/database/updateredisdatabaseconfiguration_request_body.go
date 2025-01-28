@@ -10,9 +10,11 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "configuration": {"$ref": "#/components/schemas/de.mittwald.v1.database.RedisDatabaseConfiguration"}
+// description: UpdateRedisDatabaseConfigurationRequestBody models the JSON body of a 'database-update-redis-database-configuration' request
 
+// UpdateRedisDatabaseConfigurationRequestBody models the JSON body of a 'database-update-redis-database-configuration' request
 type UpdateRedisDatabaseConfigurationRequestBody struct {
 	Configuration *databasev1.RedisDatabaseConfiguration `json:"configuration,omitempty"`
 }

@@ -4,8 +4,8 @@ package relocation
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "email":
 //        type: "string"
 //        minLength: 1
@@ -19,7 +19,7 @@ package relocation
 //    "phoneNumber":
 //        type: "string"
 //        pattern: "|^\\+([0-9]{2,3}|1)-[0-9]{2,5}-[0-9]+$"
-//required:
+// required:
 //    - "firstName"
 //    - "lastName"
 //    - "email"

@@ -11,14 +11,16 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "ownerC":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.domain.HandleField"}
 //        minItems: 1
-//required:
+// required:
 //    - "ownerC"
+// description: DeprecatedChangeOwnercOfDomainRequestBody models the JSON body of a 'deprecated-domain-change-ownerc-of-domain' request
 
+// DeprecatedChangeOwnercOfDomainRequestBody models the JSON body of a 'deprecated-domain-change-ownerc-of-domain' request
 type DeprecatedChangeOwnercOfDomainRequestBody struct {
 	OwnerC []domainv1.HandleField `json:"ownerC"`
 }

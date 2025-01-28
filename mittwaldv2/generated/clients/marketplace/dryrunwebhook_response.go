@@ -4,8 +4,8 @@ package marketplace
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "errorMessage":
 //        type: "string"
 //        description: "The error message of an internal error."
@@ -25,7 +25,7 @@ package marketplace
 //        type: "boolean"
 //        description: "This shows if the response of the external application has been accepted as successful."
 //        example: true
-//required:
+// required:
 //    - "successful"
 //    - "routeCalled"
 

@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "type":
 //        type: "string"
 //        enum:
@@ -21,7 +21,7 @@ import (
 //    "validationErrors":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.commons.ValidationErrorSchema"}
-//required:
+// required:
 //    - "type"
 //    - "validationErrors"
 

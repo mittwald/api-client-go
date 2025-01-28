@@ -4,8 +4,10 @@ package app
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
+// type: "object"
+// description: ExecuteActionRequestBody models the JSON body of a 'app-execute-action' request
 
+// ExecuteActionRequestBody models the JSON body of a 'app-execute-action' request
 type ExecuteActionRequestBody struct {
 }
 

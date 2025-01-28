@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "extensions":
 //        type: "array"
 //        items:
@@ -57,7 +57,7 @@ import (
 //                                type: "integer"
 //                            "width":
 //                                type: "integer"
-//required:
+// required:
 //    - "maxSizeInBytes"
 //    - "maxSizeInKB"
 //    - "maxSizeInKb"

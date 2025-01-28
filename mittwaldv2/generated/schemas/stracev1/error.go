@@ -4,12 +4,12 @@ package stracev1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "errorMessage":
 //        type: "string"
 //        example: "wrong PHP version"
-//required:
+// required:
 //    - "errorMessage"
 
 type Error struct {

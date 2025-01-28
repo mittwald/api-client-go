@@ -6,14 +6,14 @@ import "errors"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "whitelist":
 //        type: "array"
 //        items:
 //            type: "string"
 //            format: "idn-email"
-//required:
+// required:
 //    - "whitelist"
 
 type UpdateProjectMailSettingRequestBodyAlternative2 struct {

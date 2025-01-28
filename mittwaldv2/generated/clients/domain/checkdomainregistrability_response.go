@@ -4,13 +4,13 @@ package domain
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "isPremium":
 //        type: "boolean"
 //    "registrable":
 //        type: "boolean"
-//required:
+// required:
 //    - "registrable"
 //    - "isPremium"
 

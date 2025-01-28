@@ -4,16 +4,18 @@ package mail
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "description":
 //        type: "string"
 //    "password":
 //        type: "string"
-//required:
+// required:
 //    - "description"
 //    - "password"
+// description: CreateDeliveryboxRequestBody models the JSON body of a 'mail-create-deliverybox' request
 
+// CreateDeliveryboxRequestBody models the JSON body of a 'mail-create-deliverybox' request
 type CreateDeliveryboxRequestBody struct {
 	Description string `json:"description"`
 	Password    string `json:"password"`

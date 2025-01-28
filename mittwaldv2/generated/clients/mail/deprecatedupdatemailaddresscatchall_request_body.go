@@ -4,12 +4,14 @@ package mail
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "active":
 //        type: "boolean"
-//required:
+// required:
 //    - "active"
+// description: DeprecatedUpdateMailAddressCatchallRequestBody models the JSON body of a 'deprecated-mail-update-mail-address-catchall' request
 
+// DeprecatedUpdateMailAddressCatchallRequestBody models the JSON body of a 'deprecated-mail-update-mail-address-catchall' request
 type DeprecatedUpdateMailAddressCatchallRequestBody struct {
 	Active bool `json:"active"`
 }

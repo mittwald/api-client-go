@@ -4,10 +4,10 @@ package contract
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "orderId":
 //        type: "string"
-//required:
+// required:
 //    - "orderId"
 
 type CreateOrderResponse struct {

@@ -4,13 +4,13 @@ package varnishv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "name":
 //        type: "string"
 //    "path":
 //        type: "string"
-//required:
+// required:
 //    - "name"
 
 type ConfigFileMetadata struct {

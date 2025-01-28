@@ -4,12 +4,14 @@ package mail
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "active":
 //        type: "boolean"
-//required:
+// required:
 //    - "active"
+// description: UpdateMailAddressCatchAllRequestBody models the JSON body of a 'mail-update-mail-address-catch-all' request
 
+// UpdateMailAddressCatchAllRequestBody models the JSON body of a 'mail-update-mail-address-catch-all' request
 type UpdateMailAddressCatchAllRequestBody struct {
 	Active bool `json:"active"`
 }

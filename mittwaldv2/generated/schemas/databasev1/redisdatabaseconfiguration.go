@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "additionalFlags":
 //        type: "array"
 //        items:
@@ -26,7 +26,7 @@ import "fmt"
 //    "persistent":
 //        type: "boolean"
 //        description: "Persistent status of the database."
-//description: "The configuration for a RedisDatabase."
+// description: "The configuration for a RedisDatabase."
 
 // The configuration for a RedisDatabase.
 type RedisDatabaseConfiguration struct {

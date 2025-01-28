@@ -11,7 +11,7 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//oneOf:
+// oneOf:
 //    - type: "object"
 //      properties:
 //        "acme":
@@ -36,6 +36,7 @@ import (
 //      required:
 //        - "certificateId"
 //      additionalProperties: false
+// description: UpdateIngressTLSRequestBody models the JSON body of a 'ingress-update-ingress-tls' request
 
 type UpdateIngressTLSRequestBody struct {
 	AlternativeUpdateIngressTLSRequestBodyAlternative1 *UpdateIngressTLSRequestBodyAlternative1

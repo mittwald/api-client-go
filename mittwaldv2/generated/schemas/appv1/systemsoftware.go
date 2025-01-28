@@ -6,8 +6,8 @@ import "errors"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "id":
 //        type: "string"
 //    "meta":
@@ -20,11 +20,11 @@ import "errors"
 //        type: "array"
 //        items:
 //            type: "string"
-//required:
+// required:
 //    - "id"
 //    - "name"
 //    - "tags"
-//description: "A SystemSoftware is a software that can be installed for an AppInstallation but mostly is not itself externally reachable and/or deliverable."
+// description: "A SystemSoftware is a software that can be installed for an AppInstallation but mostly is not itself externally reachable and/or deliverable."
 
 // A SystemSoftware is a software that can be installed for an AppInstallation but mostly is not itself externally reachable and/or deliverable.
 type SystemSoftware struct {

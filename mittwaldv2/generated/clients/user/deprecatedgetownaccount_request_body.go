@@ -4,8 +4,10 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
+// type: "object"
+// description: DeprecatedGetOwnAccountRequestBody models the JSON body of a 'deprecated-user-get-own-account' request
 
+// DeprecatedGetOwnAccountRequestBody models the JSON body of a 'deprecated-user-get-own-account' request
 type DeprecatedGetOwnAccountRequestBody struct {
 }
 

@@ -4,8 +4,8 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "code":
 //        type: "string"
 //        maxLength: 6
@@ -14,10 +14,12 @@ package user
 //    "phoneNumber":
 //        type: "string"
 //        example: "+491701234567"
-//required:
+// required:
 //    - "phoneNumber"
 //    - "code"
+// description: VerifyPhoneNumberRequestBody models the JSON body of a 'user-verify-phone-number' request
 
+// VerifyPhoneNumberRequestBody models the JSON body of a 'user-verify-phone-number' request
 type VerifyPhoneNumberRequestBody struct {
 	Code        string `json:"code"`
 	PhoneNumber string `json:"phoneNumber"`

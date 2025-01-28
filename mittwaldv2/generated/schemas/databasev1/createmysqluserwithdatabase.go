@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "accessIpMask":
 //        type: "string"
 //    "accessLevel":
@@ -19,7 +19,7 @@ import "fmt"
 //        type: "boolean"
 //    "password":
 //        type: "string"
-//required:
+// required:
 //    - "password"
 //    - "accessLevel"
 

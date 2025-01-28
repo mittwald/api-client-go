@@ -6,17 +6,19 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "comment":
 //        type: "string"
 //        example: "a.lovelace@example.com"
 //    "expiresAt":
 //        type: "string"
 //        format: "date-time"
-//required:
+// required:
 //    - "comment"
+// description: EditSSHKeyRequestBody models the JSON body of a 'user-edit-ssh-key' request
 
+// EditSSHKeyRequestBody models the JSON body of a 'user-edit-ssh-key' request
 type EditSSHKeyRequestBody struct {
 	Comment   string     `json:"comment"`
 	ExpiresAt *time.Time `json:"expiresAt,omitempty"`

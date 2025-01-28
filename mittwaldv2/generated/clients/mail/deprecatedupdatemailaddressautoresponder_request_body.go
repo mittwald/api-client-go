@@ -6,7 +6,7 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "autoResponder":
 //        type: "object"
 //        properties:
@@ -24,9 +24,11 @@ import "fmt"
 //            - "message"
 //            - "active"
 //        nullable: true
-//required:
+// required:
 //    - "autoResponder"
+// description: DeprecatedUpdateMailAddressAutoresponderRequestBody models the JSON body of a 'deprecated-mail-update-mail-address-autoresponder' request
 
+// DeprecatedUpdateMailAddressAutoresponderRequestBody models the JSON body of a 'deprecated-mail-update-mail-address-autoresponder' request
 type DeprecatedUpdateMailAddressAutoresponderRequestBody struct {
 	AutoResponder DeprecatedUpdateMailAddressAutoresponderRequestBodyAutoResponder `json:"autoResponder"`
 }

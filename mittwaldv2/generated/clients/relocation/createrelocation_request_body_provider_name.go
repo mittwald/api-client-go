@@ -11,14 +11,14 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//oneOf:
+// oneOf:
 //    - type: "string"
 //      minLength: 1
 //    - type: "string"
 //      enum:
 //        - "1und1"
 //        - "strato"
-//description: "Name of your provider"
+// description: "Name of your provider"
 
 type CreateRelocationRequestBodyProviderName struct {
 	AlternativeCreateRelocationRequestBodyProviderNameAlternative1 *string

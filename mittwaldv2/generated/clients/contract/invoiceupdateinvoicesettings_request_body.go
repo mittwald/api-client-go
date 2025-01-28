@@ -10,8 +10,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "additionalEmailRecipients":
 //        type: "array"
 //        items:
@@ -35,10 +35,12 @@ import (
 //        description: "parameter is deprecated and will be ignored"
 //        example: 15
 //        deprecated: true
-//required:
+// required:
 //    - "invoicePeriod"
 //    - "paymentSettings"
+// description: InvoiceUpdateInvoiceSettingsRequestBody models the JSON body of a 'invoice-update-invoice-settings' request
 
+// InvoiceUpdateInvoiceSettingsRequestBody models the JSON body of a 'invoice-update-invoice-settings' request
 type InvoiceUpdateInvoiceSettingsRequestBody struct {
 	AdditionalEmailRecipients []string                  `json:"additionalEmailRecipients,omitempty"`
 	InvoicePeriod             int64                     `json:"invoicePeriod"`

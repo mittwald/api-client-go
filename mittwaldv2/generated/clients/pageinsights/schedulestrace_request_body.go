@@ -4,15 +4,17 @@ package pageinsights
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "url":
 //        type: "string"
 //        description: "A call to this URL is measured via strace."
 //        example: "https://example.com"
-//required:
+// required:
 //    - "url"
+// description: ScheduleStraceRequestBody models the JSON body of a 'pageinsights-schedule-strace' request
 
+// ScheduleStraceRequestBody models the JSON body of a 'pageinsights-schedule-strace' request
 type ScheduleStraceRequestBody struct {
 	Url string `json:"url"`
 }

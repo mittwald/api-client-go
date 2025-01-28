@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "private_key_mismatch"
-//description: "The private key does not match the certificate."
+// description: "The private key does not match the certificate."
 
 // The private key does not match the certificate.
 type CertificateErrorMessageAlternative16 string

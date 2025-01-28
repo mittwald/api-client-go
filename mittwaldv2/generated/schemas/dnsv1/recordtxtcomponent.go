@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "entries":
 //        type: "array"
 //        items:
@@ -18,10 +18,10 @@ import (
 //            maxLength: 2048
 //        maxItems: 20
 //    "settings": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordSettings"}
-//required:
+// required:
 //    - "settings"
 //    - "entries"
-//additionalProperties: false
+// additionalProperties: false
 
 type RecordTXTComponent struct {
 	Entries  []string       `json:"entries"`

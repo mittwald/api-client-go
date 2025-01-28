@@ -6,17 +6,19 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "expiresAt":
 //        type: "string"
 //        format: "date-time"
 //    "publicKey":
 //        type: "string"
 //        example: "ssh-rsa ..."
-//required:
+// required:
 //    - "publicKey"
+// description: CreateSSHKeyRequestBody models the JSON body of a 'user-create-ssh-key' request
 
+// CreateSSHKeyRequestBody models the JSON body of a 'user-create-ssh-key' request
 type CreateSSHKeyRequestBody struct {
 	ExpiresAt *time.Time `json:"expiresAt,omitempty"`
 	PublicKey string     `json:"publicKey"`

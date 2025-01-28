@@ -6,8 +6,8 @@ import "errors"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "collations":
 //        type: "array"
 //        items:
@@ -19,7 +19,7 @@ import "errors"
 //    "versionId":
 //        type: "string"
 //        example: "mysql57"
-//required:
+// required:
 //    - "name"
 //    - "collations"
 //    - "versionId"

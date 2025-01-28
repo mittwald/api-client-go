@@ -6,12 +6,12 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "start"
 //    - "stop"
 //    - "restart"
-//description: "An Action is a string that describes a runtime concerning action which can be executed on an AppInstallation or an  App  can be capable of."
+// description: "An Action is a string that describes a runtime concerning action which can be executed on an AppInstallation or an  App  can be capable of."
 
 // An Action is a string that describes a runtime concerning action which can be executed on an AppInstallation or an  App  can be capable of.
 type Action string

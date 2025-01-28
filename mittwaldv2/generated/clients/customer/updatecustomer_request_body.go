@@ -10,8 +10,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "customerId":
 //        type: "string"
 //    "name":
@@ -19,10 +19,12 @@ import (
 //    "owner": {"$ref": "#/components/schemas/de.mittwald.v1.customer.Contact"}
 //    "vatId":
 //        type: "string"
-//required:
+// required:
 //    - "customerId"
 //    - "name"
+// description: UpdateCustomerRequestBody models the JSON body of a 'customer-update-customer' request
 
+// UpdateCustomerRequestBody models the JSON body of a 'customer-update-customer' request
 type UpdateCustomerRequestBody struct {
 	CustomerId string              `json:"customerId"`
 	Name       string              `json:"name"`

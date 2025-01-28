@@ -4,11 +4,11 @@ package misc
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "exists":
 //        type: "boolean"
-//required:
+// required:
 //    - "exists"
 
 type VerificationVerifyAddressResponse struct {

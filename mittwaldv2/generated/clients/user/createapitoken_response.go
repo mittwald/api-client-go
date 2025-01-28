@@ -4,12 +4,12 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "token":
 //        type: "string"
 //        description: "The `ApiToken`."
-//required:
+// required:
 //    - "token"
 
 type CreateAPITokenResponse struct {

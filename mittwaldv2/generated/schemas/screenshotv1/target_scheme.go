@@ -6,11 +6,11 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "http"
 //    - "https"
-//example: "https"
+// example: "https"
 
 type TargetScheme string
 

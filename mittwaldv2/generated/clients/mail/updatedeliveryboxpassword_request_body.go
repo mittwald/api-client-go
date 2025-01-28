@@ -4,12 +4,14 @@ package mail
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "password":
 //        type: "string"
-//required:
+// required:
 //    - "password"
+// description: UpdateDeliveryBoxPasswordRequestBody models the JSON body of a 'mail-update-delivery-box-password' request
 
+// UpdateDeliveryBoxPasswordRequestBody models the JSON body of a 'mail-update-delivery-box-password' request
 type UpdateDeliveryBoxPasswordRequestBody struct {
 	Password string `json:"password"`
 }

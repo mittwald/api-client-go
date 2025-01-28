@@ -4,16 +4,18 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "email":
 //        type: "string"
 //        format: "email"
 //        description: "Email address to reset the password for."
 //        example: "a.lovelace@example.com"
-//required:
+// required:
 //    - "email"
+// description: InitPasswordResetRequestBody models the JSON body of a 'user-init-password-reset' request
 
+// InitPasswordResetRequestBody models the JSON body of a 'user-init-password-reset' request
 type InitPasswordResetRequestBody struct {
 	Email string `json:"email"`
 }

@@ -10,8 +10,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "configuration": {"$ref": "#/components/schemas/de.mittwald.v1.database.RedisDatabaseConfiguration"}
 //    "description":
 //        type: "string"
@@ -19,11 +19,13 @@ import (
 //    "version":
 //        type: "string"
 //        description: "The version the database should use."
-//required:
+// required:
 //    - "description"
 //    - "version"
-//example: {"description": "My first RedisDatabase!", "version": "7.0"}
+// example: {"description": "My first RedisDatabase!", "version": "7.0"}
+// description: CreateRedisDatabaseRequestBody models the JSON body of a 'database-create-redis-database' request
 
+// CreateRedisDatabaseRequestBody models the JSON body of a 'database-create-redis-database' request
 type CreateRedisDatabaseRequestBody struct {
 	Configuration *databasev1.RedisDatabaseConfiguration `json:"configuration,omitempty"`
 	Description   string                                 `json:"description"`

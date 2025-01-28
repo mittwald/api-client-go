@@ -11,8 +11,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "mailAddress":
 //        type: "string"
 //        format: "email"
@@ -25,10 +25,12 @@ import (
 //        type: "string"
 //        description: "Message contained in the CustomerInvite."
 //    "role": {"$ref": "#/components/schemas/de.mittwald.v1.membership.CustomerRoles"}
-//required:
+// required:
 //    - "mailAddress"
 //    - "role"
+// description: CreateCustomerInviteRequestBody models the JSON body of a 'customer-create-customer-invite' request
 
+// CreateCustomerInviteRequestBody models the JSON body of a 'customer-create-customer-invite' request
 type CreateCustomerInviteRequestBody struct {
 	MailAddress         string                     `json:"mailAddress"`
 	MembershipExpiresAt *time.Time                 `json:"membershipExpiresAt,omitempty"`

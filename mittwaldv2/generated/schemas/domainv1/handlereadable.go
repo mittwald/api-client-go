@@ -6,11 +6,11 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "current": {"$ref": "#/components/schemas/de.mittwald.v1.domain.HandleData"}
 //    "desired": {"$ref": "#/components/schemas/de.mittwald.v1.domain.HandleData"}
-//required:
+// required:
 //    - "current"
 
 type HandleReadable struct {

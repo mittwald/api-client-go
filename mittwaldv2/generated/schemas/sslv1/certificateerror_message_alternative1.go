@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "certificate_read_failed"
-//description: "Failed to read the certificate."
+// description: "Failed to read the certificate."
 
 // Failed to read the certificate.
 type CertificateErrorMessageAlternative1 string

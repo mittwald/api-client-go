@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "active":
 //        type: "boolean"
 //    "avatarRefId":
@@ -17,7 +17,7 @@ import "fmt"
 //    "department": {"$ref": "#/components/schemas/de.mittwald.v1.conversation.Department"}
 //    "userId":
 //        type: "string"
-//required:
+// required:
 //    - "userId"
 
 type User struct {

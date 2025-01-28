@@ -4,12 +4,12 @@ package marketplacev1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "url":
 //        type: "string"
 //        minLength: 1
-//required:
+// required:
 //    - "url"
 
 type BackendComponent struct {

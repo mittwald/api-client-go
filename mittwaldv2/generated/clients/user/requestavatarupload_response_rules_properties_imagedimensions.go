@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "max":
 //        type: "object"
 //        properties:
@@ -22,7 +22,7 @@ import "fmt"
 //                type: "integer"
 //            "width":
 //                type: "integer"
-//description: "Supported range of dimensions for the avatar image."
+// description: "Supported range of dimensions for the avatar image."
 
 // Supported range of dimensions for the avatar image.
 type RequestAvatarUploadResponseRulesPropertiesImageDimensions struct {

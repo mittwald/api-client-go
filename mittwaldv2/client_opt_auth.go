@@ -3,13 +3,13 @@ package mittwaldv2
 import (
 	"context"
 	"fmt"
-	"github.com/google/uuid"
+	"os"
+	"time"
+
 	generatedv2 "github.com/mittwald/api-client-go/mittwaldv2/generated/clients"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/marketplace"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/user"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
-	"os"
-	"time"
 )
 
 const apiTokenEnvVar = "MITTWALD_API_TOKEN"

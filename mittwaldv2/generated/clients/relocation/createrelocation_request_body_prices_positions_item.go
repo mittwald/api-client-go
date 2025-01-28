@@ -4,15 +4,15 @@ package relocation
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "name":
 //        type: "string"
 //        minLength: 1
 //    "price":
 //        type: "number"
 //        minimum: 0
-//required:
+// required:
 //    - "name"
 //    - "price"
 

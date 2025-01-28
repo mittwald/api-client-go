@@ -4,8 +4,10 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
+// type: "object"
+// description: DeprecatedLogoutRequestBody models the JSON body of a 'deprecated-user-logout' request
 
+// DeprecatedLogoutRequestBody models the JSON body of a 'deprecated-user-logout' request
 type DeprecatedLogoutRequestBody struct {
 }
 

@@ -4,12 +4,12 @@ package mailmigrationv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "hostname":
 //        type: "string"
 //        format: "idn-hostname"
-//required:
+// required:
 //    - "hostname"
 
 type CheckMigrationIsPossibleErrorMissingVerifiedIngress struct {

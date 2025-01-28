@@ -6,15 +6,17 @@ import "errors"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "consentedScopes":
 //        type: "array"
 //        items:
 //            type: "string"
-//required:
+// required:
 //    - "consentedScopes"
+// description: ConsentToExtensionScopesRequestBody models the JSON body of a 'extension-consent-to-extension-scopes' request
 
+// ConsentToExtensionScopesRequestBody models the JSON body of a 'extension-consent-to-extension-scopes' request
 type ConsentToExtensionScopesRequestBody struct {
 	ConsentedScopes []string `json:"consentedScopes"`
 }

@@ -4,13 +4,15 @@ package project
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "description":
 //        type: "string"
 //        example: "My first Server!"
-//required:
+// required:
 //    - "description"
+// description: UpdateServerDescriptionRequestBody models the JSON body of a 'project-update-server-description' request
 
+// UpdateServerDescriptionRequestBody models the JSON body of a 'project-update-server-description' request
 type UpdateServerDescriptionRequestBody struct {
 	Description string `json:"description"`
 }

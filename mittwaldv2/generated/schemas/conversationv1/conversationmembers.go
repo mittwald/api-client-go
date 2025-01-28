@@ -4,8 +4,8 @@ package conversationv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "array"
-//items:
+// type: "array"
+// items:
 //    allOf:
 //        - {"$ref": "#/components/schemas/de.mittwald.v1.conversation.User"}
 //        - type: "object"

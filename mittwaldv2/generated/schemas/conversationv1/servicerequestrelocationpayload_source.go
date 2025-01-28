@@ -4,8 +4,8 @@ package conversationv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "providerName":
 //        type: "string"
 //    "providerPassword":
@@ -16,7 +16,7 @@ package conversationv1
 //        type: "string"
 //    "sourceAccount":
 //        type: "string"
-//required:
+// required:
 //    - "sourceAccount"
 //    - "providerName"
 //    - "providerUrl"

@@ -10,10 +10,10 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "status": {"$ref": "#/components/schemas/de.mittwald.v1.messaging.NotificationStatus"}
-//required:
+// required:
 //    - "status"
 
 type ReadNotificationResponse struct {

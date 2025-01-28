@@ -4,9 +4,11 @@ package domain
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//additionalProperties: false
+// type: "object"
+// additionalProperties: false
+// description: RecordASetManagedByIngressDeprecatedRequestBody models the JSON body of a 'dns-record-a-set-managed-by-ingress-deprecated' request
 
+// RecordASetManagedByIngressDeprecatedRequestBody models the JSON body of a 'dns-record-a-set-managed-by-ingress-deprecated' request
 type RecordASetManagedByIngressDeprecatedRequestBody struct {
 }
 

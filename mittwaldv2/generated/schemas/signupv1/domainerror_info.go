@@ -4,8 +4,8 @@ package signupv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//description: "A json object, given further information about the error"
+// type: "object"
+// description: "A json object, given further information about the error"
 
 // A json object, given further information about the error
 type DomainErrorInfo struct {

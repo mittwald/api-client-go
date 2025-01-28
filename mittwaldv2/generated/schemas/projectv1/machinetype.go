@@ -4,8 +4,8 @@ package projectv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "cpu":
 //        type: "string"
 //        example: "2"
@@ -15,7 +15,7 @@ package projectv1
 //    "name":
 //        type: "string"
 //        example: "shared.large"
-//required:
+// required:
 //    - "name"
 //    - "cpu"
 //    - "memory"

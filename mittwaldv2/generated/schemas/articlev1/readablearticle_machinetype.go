@@ -4,8 +4,8 @@ package articlev1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "cpu":
 //        type: "string"
 //        example: 1
@@ -15,7 +15,7 @@ package articlev1
 //    "name":
 //        type: "string"
 //        example: "psplus-shared"
-//required:
+// required:
 //    - "name"
 //    - "cpu"
 //    - "memory"

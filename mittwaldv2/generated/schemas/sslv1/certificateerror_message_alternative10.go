@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "unknown_authority"
-//description: "The certificate is signed by an unknown authority."
+// description: "The certificate is signed by an unknown authority."
 
 // The certificate is signed by an unknown authority.
 type CertificateErrorMessageAlternative10 string

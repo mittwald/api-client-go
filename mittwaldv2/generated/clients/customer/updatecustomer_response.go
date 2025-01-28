@@ -4,15 +4,15 @@ package customer
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "customerId":
 //        type: "string"
 //    "customerNumber":
 //        type: "string"
 //    "name":
 //        type: "string"
-//required:
+// required:
 //    - "customerId"
 //    - "name"
 //    - "customerNumber"

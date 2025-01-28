@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "message":
 //        type: "string"
 //        maxLength: 1000000
@@ -20,10 +20,12 @@ import "fmt"
 //        enum:
 //            - "feedback"
 //            - "bug"
-//required:
+// required:
 //    - "type"
 //    - "message"
+// description: DeprecatedServiceIssueNewRequestBody models the JSON body of a 'deprecated-user-service-issue-new' request
 
+// DeprecatedServiceIssueNewRequestBody models the JSON body of a 'deprecated-user-service-issue-new' request
 type DeprecatedServiceIssueNewRequestBody struct {
 	Message string                                   `json:"message"`
 	Origin  *string                                  `json:"origin,omitempty"`

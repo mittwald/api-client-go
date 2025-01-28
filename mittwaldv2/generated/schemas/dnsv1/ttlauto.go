@@ -4,12 +4,12 @@ package dnsv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "auto":
 //        type: "boolean"
 //        description: "this will always be true"
-//required:
+// required:
 //    - "auto"
 
 type TtlAuto struct {

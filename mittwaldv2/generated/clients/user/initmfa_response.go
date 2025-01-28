@@ -4,8 +4,8 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "barcode":
 //        type: "string"
 //        description: "base64 encoded barcode content to scan from your mfa app. e.g. `iVBORw0KGgoAAAANSUhEUgAAAMgAAADIEAAAAADYoy...`. You\ncan display it with `<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUh..\" />`\n"
@@ -13,7 +13,7 @@ package user
 //        type: "string"
 //        description: "Same as barcode,  but in URL form.\n"
 //        example: "otpauth://totp/mStudio:test@gmail.com?algorithm=SHA1&digits=6&issuer=mStudio&period=30&secret=HTXT7KJFVNAJUPYWQRWMNVQE5AF5YZI2"
-//required:
+// required:
 //    - "barcode"
 //    - "url"
 

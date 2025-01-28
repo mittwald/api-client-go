@@ -6,14 +6,14 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "expires":
 //        type: "string"
 //        format: "date-time"
 //    "value":
 //        type: "string"
-//required:
+// required:
 //    - "value"
 
 type AuthCode struct {

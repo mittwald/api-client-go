@@ -9,13 +9,13 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "expirationTime":
 //        type: "string"
 //        format: "date-time"
 //    "ignoredSources": {"$ref": "#/components/schemas/de.mittwald.v1.backup.IgnoredSources"}
-//required:
+// required:
 //    - "expirationTime"
 
 type BackupTemplate struct {

@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "actualUrl":
 //        type: "string"
 //        example: "https://www.mittwald.de/~b"
@@ -104,7 +104,7 @@ import (
 //        type: "integer"
 //        description: "Time to first byte in milliseconds while tracing the website."
 //        example: 1532
-//required:
+// required:
 //    - "actualUrl"
 //    - "ttfbMs"
 //    - "slowdownFactor"

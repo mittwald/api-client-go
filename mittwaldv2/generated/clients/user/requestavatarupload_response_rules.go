@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "maxSizeInBytes":
 //        type: "integer"
 //        description: "Maximum size in Bytes of the avatar image."
@@ -47,11 +47,11 @@ import (
 //                            "width":
 //                                type: "integer"
 //                description: "Supported range of dimensions for the avatar image."
-//required:
+// required:
 //    - "mimeTypes"
 //    - "maxSizeInKB"
 //    - "maxSizeInBytes"
-//description: "Contstraints for the avatar image upload."
+// description: "Contstraints for the avatar image upload."
 
 // Contstraints for the avatar image upload.
 type RequestAvatarUploadResponseRules struct {

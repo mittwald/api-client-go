@@ -4,13 +4,15 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "refreshToken":
 //        type: "string"
-//required:
+// required:
 //    - "refreshToken"
+// description: RefreshSessionRequestBody models the JSON body of a 'user-refresh-session' request
 
+// RefreshSessionRequestBody models the JSON body of a 'user-refresh-session' request
 type RefreshSessionRequestBody struct {
 	RefreshToken string `json:"refreshToken"`
 }

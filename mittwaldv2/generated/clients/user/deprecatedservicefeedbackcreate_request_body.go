@@ -4,8 +4,8 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "message":
 //        type: "string"
 //        maxLength: 5000
@@ -20,11 +20,13 @@ package user
 //        type: "number"
 //        maximum: 10
 //        minimum: 0
-//required:
+// required:
 //    - "origin"
 //    - "subject"
 //    - "vote"
+// description: DeprecatedServiceFeedbackCreateRequestBody models the JSON body of a 'deprecated-user-service-feedback-create' request
 
+// DeprecatedServiceFeedbackCreateRequestBody models the JSON body of a 'deprecated-user-service-feedback-create' request
 type DeprecatedServiceFeedbackCreateRequestBody struct {
 	Message *string `json:"message,omitempty"`
 	Origin  string  `json:"origin"`

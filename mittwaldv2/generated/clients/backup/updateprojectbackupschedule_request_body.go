@@ -4,8 +4,8 @@ package backup
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "description":
 //        type: "string"
 //        description: "Description of the ProjectBackupSchedule. Note that the description of isSystemBackup true items cannot be changed."
@@ -18,7 +18,9 @@ package backup
 //        type: "string"
 //        description: "TTL of the ProjectBackupSchedule as time string."
 //        example: "7d"
+// description: UpdateProjectBackupScheduleRequestBody models the JSON body of a 'backup-update-project-backup-schedule' request
 
+// UpdateProjectBackupScheduleRequestBody models the JSON body of a 'backup-update-project-backup-schedule' request
 type UpdateProjectBackupScheduleRequestBody struct {
 	Description *string `json:"description,omitempty"`
 	Schedule    *string `json:"schedule,omitempty"`

@@ -4,16 +4,18 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "email":
 //        type: "string"
 //        format: "email"
 //        description: "The new Email-Address"
 //        example: "ada.lovelace@example.com"
-//required:
+// required:
 //    - "email"
+// description: ChangeEmailRequestBody models the JSON body of a 'user-change-email' request
 
+// ChangeEmailRequestBody models the JSON body of a 'user-change-email' request
 type ChangeEmailRequestBody struct {
 	Email string `json:"email"`
 }

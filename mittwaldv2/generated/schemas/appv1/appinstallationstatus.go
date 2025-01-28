@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "lastExitCode":
 //        type: "number"
 //    "logFileLocation":
@@ -20,10 +20,10 @@ import "fmt"
 //            - "exited"
 //    "uptimeSeconds":
 //        type: "number"
-//required:
+// required:
 //    - "state"
 //    - "logFileLocation"
-//description: "AppInstallationStatus describes the overall runtime status of an AppInstallation."
+// description: "AppInstallationStatus describes the overall runtime status of an AppInstallation."
 
 // AppInstallationStatus describes the overall runtime status of an AppInstallation.
 type AppInstallationStatus struct {

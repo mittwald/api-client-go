@@ -4,11 +4,13 @@ package marketplace
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "allowWebhookFailure":
 //        type: "boolean"
+// description: RotateSecretForExtensionInstanceRequestBody models the JSON body of a 'contributor-rotate-secret-for-extension-instance' request
 
+// RotateSecretForExtensionInstanceRequestBody models the JSON body of a 'contributor-rotate-secret-for-extension-instance' request
 type RotateSecretForExtensionInstanceRequestBody struct {
 	AllowWebhookFailure *bool `json:"allowWebhookFailure,omitempty"`
 }

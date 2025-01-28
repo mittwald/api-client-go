@@ -4,9 +4,11 @@ package domain
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//additionalProperties: false
+// type: "object"
+// additionalProperties: false
+// description: SetRecordSetManagedRequestBody models the JSON body of a 'dns-set-record-set-managed' request
 
+// SetRecordSetManagedRequestBody models the JSON body of a 'dns-set-record-set-managed' request
 type SetRecordSetManagedRequestBody struct {
 }
 

@@ -11,8 +11,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "accessLevel":
 //        type: "string"
 //        enum:
@@ -36,7 +36,9 @@ import (
 //    "publicKeys":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.sshuser.PublicKey"}
+// description: UpdateSFTPUserRequestBody models the JSON body of a 'sftp-user-update-sftp-user' request
 
+// UpdateSFTPUserRequestBody models the JSON body of a 'sftp-user-update-sftp-user' request
 type UpdateSFTPUserRequestBody struct {
 	AccessLevel *UpdateSFTPUserRequestBodyAccessLevel `json:"accessLevel,omitempty"`
 	Active      *bool                                 `json:"active,omitempty"`

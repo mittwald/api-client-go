@@ -4,13 +4,15 @@ package domain
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "authCode":
 //        type: "string"
 //        minLength: 4
-//required:
+// required:
 //    - "authCode"
+// description: UpdateDomainAuthCodeRequestBody models the JSON body of a 'domain-update-domain-auth-code' request
 
+// UpdateDomainAuthCodeRequestBody models the JSON body of a 'domain-update-domain-auth-code' request
 type UpdateDomainAuthCodeRequestBody struct {
 	AuthCode string `json:"authCode"`
 }

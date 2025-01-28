@@ -10,8 +10,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "additionalServices":
 //        type: "object"
 //        properties:
@@ -160,7 +160,7 @@ import (
 //              minLength: 1
 //              format: "uuid"
 //            - type: "string"
-//required:
+// required:
 //    - "articleType"
 //    - "additionalServices"
 //    - "prices"
@@ -168,7 +168,9 @@ import (
 //    - "contact"
 //    - "target"
 //    - "allowPasswordChange"
+// description: CreateRelocationRequestBody models the JSON body of a 'relocation-create-relocation' request
 
+// CreateRelocationRequestBody models the JSON body of a 'relocation-create-relocation' request
 type CreateRelocationRequestBody struct {
 	AdditionalServices  CreateRelocationRequestBodyAdditionalServices `json:"additionalServices"`
 	AllDomains          *bool                                         `json:"allDomains,omitempty"`

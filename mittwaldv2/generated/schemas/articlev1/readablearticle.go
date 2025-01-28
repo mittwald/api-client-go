@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "addons":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.article.ArticleAddons"}
@@ -78,7 +78,7 @@ import "fmt"
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.article.ArticleTag"}
 //    "template": {"$ref": "#/components/schemas/de.mittwald.v1.article.ArticleTemplate"}
-//required:
+// required:
 //    - "articleId"
 //    - "name"
 //    - "contractDurationInMonth"

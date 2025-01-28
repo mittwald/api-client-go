@@ -4,13 +4,15 @@ package backup
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "description":
 //        type: "string"
 //        description: "Description of the ProjectBackup."
 //        example: "I'm a ProjectBackup"
+// description: UpdateProjectBackupDescriptionRequestBody models the JSON body of a 'backup-update-project-backup-description' request
 
+// UpdateProjectBackupDescriptionRequestBody models the JSON body of a 'backup-update-project-backup-description' request
 type UpdateProjectBackupDescriptionRequestBody struct {
 	Description *string `json:"description,omitempty"`
 }

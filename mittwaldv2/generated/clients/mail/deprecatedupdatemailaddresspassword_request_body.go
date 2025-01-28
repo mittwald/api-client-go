@@ -4,12 +4,14 @@ package mail
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "password":
 //        type: "string"
-//required:
+// required:
 //    - "password"
+// description: DeprecatedUpdateMailAddressPasswordRequestBody models the JSON body of a 'deprecated-mail-update-mail-address-password' request
 
+// DeprecatedUpdateMailAddressPasswordRequestBody models the JSON body of a 'deprecated-mail-update-mail-address-password' request
 type DeprecatedUpdateMailAddressPasswordRequestBody struct {
 	Password string `json:"password"`
 }

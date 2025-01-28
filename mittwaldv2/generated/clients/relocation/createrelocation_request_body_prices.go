@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "positions":
 //        type: "array"
 //        items:
@@ -28,7 +28,7 @@ import (
 //    "total":
 //        type: "number"
 //        minimum: 0
-//required:
+// required:
 //    - "positions"
 //    - "total"
 

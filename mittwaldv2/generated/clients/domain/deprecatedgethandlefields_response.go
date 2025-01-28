@@ -6,13 +6,13 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "jsonSchemaAdminC":
 //        type: "object"
 //    "jsonSchemaOwnerC":
 //        type: "object"
-//required:
+// required:
 //    - "jsonSchemaOwnerC"
 
 type DeprecatedGetHandleFieldsResponse struct {

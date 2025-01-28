@@ -4,8 +4,8 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "multiFactorCode":
 //        type: "string"
 //        maxLength: 16
@@ -18,10 +18,12 @@ package user
 //    "oldPassword":
 //        type: "string"
 //        description: "The old password."
-//required:
+// required:
 //    - "oldPassword"
 //    - "newPassword"
+// description: ChangePasswordRequestBody models the JSON body of a 'user-change-password' request
 
+// ChangePasswordRequestBody models the JSON body of a 'user-change-password' request
 type ChangePasswordRequestBody struct {
 	MultiFactorCode *string `json:"multiFactorCode,omitempty"`
 	NewPassword     string  `json:"newPassword"`

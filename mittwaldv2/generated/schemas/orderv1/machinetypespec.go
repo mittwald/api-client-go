@@ -4,8 +4,8 @@ package orderv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "machineType":
 //        type: "string"
 //        example: "prospace.2cpu.4gb"

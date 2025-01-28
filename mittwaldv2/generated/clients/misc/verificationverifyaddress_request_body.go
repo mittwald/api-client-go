@@ -4,8 +4,8 @@ package misc
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "city":
 //        type: "string"
 //        example: "Bremen"
@@ -20,12 +20,14 @@ package misc
 //    "zip":
 //        type: "string"
 //        example: "28203"
-//required:
+// required:
 //    - "street"
 //    - "zip"
 //    - "city"
 //    - "country"
+// description: VerificationVerifyAddressRequestBody models the JSON body of a 'verification-verify-address' request
 
+// VerificationVerifyAddressRequestBody models the JSON body of a 'verification-verify-address' request
 type VerificationVerifyAddressRequestBody struct {
 	City    string `json:"city"`
 	Country string `json:"country"`

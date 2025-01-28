@@ -4,8 +4,8 @@ package mailmigrationv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "finished":
 //        type: "boolean"
 //    "sourceCoabDeliveryMailbox":
@@ -14,7 +14,7 @@ package mailmigrationv1
 //        type: "integer"
 //    "targetDeliveryAddress":
 //        type: "string"
-//required:
+// required:
 //    - "sourceCoabDeliveryUid"
 //    - "sourceCoabDeliveryMailbox"
 //    - "targetDeliveryAddress"

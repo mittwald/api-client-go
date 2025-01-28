@@ -11,8 +11,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "mailAddress":
 //        type: "string"
 //        format: "email"
@@ -25,10 +25,12 @@ import (
 //        type: "string"
 //        description: "Message contained in the ProjectInvite."
 //    "role": {"$ref": "#/components/schemas/de.mittwald.v1.membership.ProjectRoles"}
-//required:
+// required:
 //    - "mailAddress"
 //    - "role"
+// description: CreateProjectInviteRequestBody models the JSON body of a 'project-create-project-invite' request
 
+// CreateProjectInviteRequestBody models the JSON body of a 'project-create-project-invite' request
 type CreateProjectInviteRequestBody struct {
 	MailAddress         string                    `json:"mailAddress"`
 	MembershipExpiresAt *time.Time                `json:"membershipExpiresAt,omitempty"`

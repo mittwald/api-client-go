@@ -4,13 +4,15 @@ package domain
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "domain":
 //        type: "string"
 //        format: "naked-domain"
-//required:
+// required:
 //    - "domain"
+// description: CheckDomainRegistrabilityRequestBody models the JSON body of a 'domain-check-domain-registrability' request
 
+// CheckDomainRegistrabilityRequestBody models the JSON body of a 'domain-check-domain-registrability' request
 type CheckDomainRegistrabilityRequestBody struct {
 	Domain string `json:"domain"`
 }

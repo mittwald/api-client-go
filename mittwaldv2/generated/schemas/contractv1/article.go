@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "amount":
 //        type: "integer"
 //        minimum: 1
@@ -25,7 +25,7 @@ import "fmt"
 //        type: "string"
 //        example: "Musterartikel"
 //    "unitPrice": {"$ref": "#/components/schemas/de.mittwald.v1.contract.Price"}
-//required:
+// required:
 //    - "id"
 //    - "name"
 //    - "articleTemplateId"

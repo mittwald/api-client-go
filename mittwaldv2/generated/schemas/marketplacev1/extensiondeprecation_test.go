@@ -14,7 +14,7 @@ import (
 var _ = Describe("ExtensionDeprecation", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"deprecatedAt\":\"2006-01-02T15:04:05Z\"}")
+			exampleJSON := []byte("{\"deprecatedAt\":\"2006-01-02T15:04:05Z\",\"note\":\"This extension is no longer actively maintained. Please Use the successor extension instead.\",\"successorId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
 
 			sut := marketplacev1.ExtensionDeprecation{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

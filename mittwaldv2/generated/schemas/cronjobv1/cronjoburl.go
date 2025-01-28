@@ -4,12 +4,12 @@ package cronjobv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "url":
 //        type: "string"
 //        example: "https://mydomain.com"
-//required:
+// required:
 //    - "url"
 
 type CronjobUrl struct {

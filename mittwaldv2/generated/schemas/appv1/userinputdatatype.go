@@ -6,13 +6,13 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "text"
 //    - "number"
 //    - "boolean"
 //    - "select"
-//description: "UserInputDataType is an enum, describing the possible data types of a UserInput."
+// description: "UserInputDataType is an enum, describing the possible data types of a UserInput."
 
 // UserInputDataType is an enum, describing the possible data types of a UserInput.
 type UserInputDataType string

@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "certificate_expired"
-//description: "The certificate has expired."
+// description: "The certificate has expired."
 
 // The certificate has expired.
 type CertificateErrorMessageAlternative6 string

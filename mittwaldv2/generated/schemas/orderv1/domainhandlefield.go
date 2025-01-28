@@ -4,15 +4,15 @@ package orderv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "name":
 //        type: "string"
 //        example: "name"
 //    "value":
 //        type: "string"
 //        example: "Ada Lovelace"
-//required:
+// required:
 //    - "name"
 //    - "value"
 

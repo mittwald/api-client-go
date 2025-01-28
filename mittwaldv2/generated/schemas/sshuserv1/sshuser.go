@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "active":
 //        type: "boolean"
 //    "authUpdatedAt":
@@ -38,7 +38,7 @@ import (
 //        format: "date-time"
 //    "userName":
 //        type: "string"
-//required:
+// required:
 //    - "id"
 //    - "projectId"
 //    - "description"
@@ -46,7 +46,7 @@ import (
 //    - "createdAt"
 //    - "authUpdatedAt"
 //    - "hasPassword"
-//description: "A representation of an SSHUser."
+// description: "A representation of an SSHUser."
 
 // A representation of an SSHUser.
 type SshUser struct {

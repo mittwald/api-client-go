@@ -6,14 +6,14 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "dataCompare":
 //        type: "string"
 //        enum:
 //            - "default"
 //            - "additionalCompare"
-//required:
+// required:
 //    - "dataCompare"
 
 type CreateRelocationRequestBodyAdditionalServices struct {

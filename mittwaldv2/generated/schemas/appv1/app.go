@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "actionCapabilities": {"$ref": "#/components/schemas/de.mittwald.v1.app.ActionCapabilities"}
 //    "id":
 //        type: "string"
@@ -20,11 +20,11 @@ import (
 //        type: "array"
 //        items:
 //            type: "string"
-//required:
+// required:
 //    - "id"
 //    - "name"
 //    - "tags"
-//description: "An App is to be understood as a manifest for AppInstallations. E.g. 'WordPress' only exists inside our ecosystem, because there is an  App -Manifest for it."
+// description: "An App is to be understood as a manifest for AppInstallations. E.g. 'WordPress' only exists inside our ecosystem, because there is an  App -Manifest for it."
 
 // An App is to be understood as a manifest for AppInstallations. E.g. 'WordPress' only exists inside our ecosystem, because there is an  App -Manifest for it.
 type App struct {

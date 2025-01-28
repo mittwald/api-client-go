@@ -6,13 +6,13 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "de": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.DescriptionFormats"}
 //    "en": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.DescriptionFormats"}
-//required:
+// required:
 //    - "de"
-//description: "Supported languages. Format ISO-639-1."
+// description: "Supported languages. Format ISO-639-1."
 
 // Supported languages. Format ISO-639-1.
 type DetailedDescriptions struct {

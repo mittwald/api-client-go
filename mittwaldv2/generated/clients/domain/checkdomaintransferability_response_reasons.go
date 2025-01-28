@@ -4,8 +4,8 @@ package domain
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "domainAgeTooSmall":
 //        type: "boolean"
 //    "domainDoesNotExist":
@@ -14,7 +14,7 @@ package domain
 //        type: "boolean"
 //    "wrongAuthCode":
 //        type: "boolean"
-//required:
+// required:
 //    - "domainDoesNotExist"
 //    - "wrongAuthCode"
 //    - "transferLock"

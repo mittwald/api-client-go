@@ -13,9 +13,10 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//oneOf:
+// oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.ssl.CertificateRequestCreateRequest"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.ssl.CertificateRequestCreateWithCSRRequest"}
+// description: CreateCertificateRequestRequestBody models the JSON body of a 'ssl-create-certificate-request' request
 
 type CreateCertificateRequestRequestBody struct {
 	AlternativeCertificateRequestCreateRequest        *sslv1.CertificateRequestCreateRequest

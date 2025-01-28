@@ -6,8 +6,8 @@ import "errors"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "recoveryCodesList":
 //        type: "array"
 //        items:
@@ -17,7 +17,7 @@ import "errors"
 //            example: 1234123412341234
 //        maxItems: 20
 //        minItems: 20
-//required:
+// required:
 //    - "recoveryCodesList"
 
 type ConfirmMFAResponse struct {

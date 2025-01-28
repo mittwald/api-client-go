@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "id":
 //        type: "string"
 //    "jwtClaims":
@@ -28,7 +28,7 @@ import "fmt"
 //            - "exp"
 //    "publicToken":
 //        type: "string"
-//required:
+// required:
 //    - "id"
 //    - "jwtClaims"
 //    - "publicToken"

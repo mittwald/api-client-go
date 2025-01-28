@@ -4,8 +4,8 @@ package mailmigrationv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "active":
 //        type: "boolean"
 //    "deleteSensitivity":
@@ -21,7 +21,7 @@ package mailmigrationv1
 //        type: "integer"
 //    "relocateSensitivity":
 //        type: "integer"
-//required:
+// required:
 //    - "active"
 //    - "folder"
 //    - "keepDays"

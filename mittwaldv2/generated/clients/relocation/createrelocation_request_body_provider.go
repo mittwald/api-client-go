@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "loginUrl":
 //        type: "string"
 //        minLength: 1
@@ -32,7 +32,7 @@ import "fmt"
 //        type: "string"
 //        minLength: 1
 //        description: "Login name to your provider"
-//required:
+// required:
 //    - "name"
 //    - "loginUrl"
 //    - "userName"

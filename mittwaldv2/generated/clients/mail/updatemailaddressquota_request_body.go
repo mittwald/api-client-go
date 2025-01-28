@@ -4,15 +4,17 @@ package mail
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "quotaInBytes":
 //        type: "number"
 //        minimum: -1
 //        description: "2 GB"
 //        example: 2147483648
-//required:
+// required:
 //    - "quotaInBytes"
+// description: UpdateMailAddressQuotaRequestBody models the JSON body of a 'mail-update-mail-address-quota' request
 
+// UpdateMailAddressQuotaRequestBody models the JSON body of a 'mail-update-mail-address-quota' request
 type UpdateMailAddressQuotaRequestBody struct {
 	QuotaInBytes float64 `json:"quotaInBytes"`
 }

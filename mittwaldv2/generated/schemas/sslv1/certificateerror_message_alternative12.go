@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "private_key_decode_failed"
-//description: "Failed to decode the private key."
+// description: "Failed to decode the private key."
 
 // Failed to decode the private key.
 type CertificateErrorMessageAlternative12 string

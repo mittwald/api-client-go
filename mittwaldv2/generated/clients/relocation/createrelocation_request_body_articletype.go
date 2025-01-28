@@ -6,13 +6,13 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "cms-hosting"
 //    - "cms-hosting-express"
 //    - "onlineshop"
 //    - "onlineshop-express"
-//description: "Type of the article you want to relocate."
+// description: "Type of the article you want to relocate."
 
 // Type of the article you want to relocate.
 type CreateRelocationRequestBodyArticleType string

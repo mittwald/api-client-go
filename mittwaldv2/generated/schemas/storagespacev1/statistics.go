@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "childStatistics":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.storagespace.Statistics"}
@@ -30,7 +30,7 @@ import "fmt"
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.storagespace.StatisticsCategory"}
 //        uniqueItems: true
-//required:
+// required:
 //    - "id"
 //    - "kind"
 //    - "name"

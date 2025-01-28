@@ -6,8 +6,8 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "active":
 //        type: "boolean"
 //    "expiresAt":
@@ -18,7 +18,7 @@ import "time"
 //    "startsAt":
 //        type: "string"
 //        format: "date-time"
-//required:
+// required:
 //    - "active"
 
 type MailAddressAutoResponder struct {

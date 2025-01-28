@@ -4,14 +4,16 @@ package marketplace
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "extensionInstanceSecret":
 //        type: "string"
 //        description: "The latest secret an external application received via lifecycle webhooks.\nNamely ExtensionAddedToContext and ExtensionInstanceSecretRotated.\n"
-//required:
+// required:
 //    - "extensionInstanceSecret"
+// description: AuthenticateInstanceRequestBody models the JSON body of a 'extension-authenticate-instance' request
 
+// AuthenticateInstanceRequestBody models the JSON body of a 'extension-authenticate-instance' request
 type AuthenticateInstanceRequestBody struct {
 	ExtensionInstanceSecret string `json:"extensionInstanceSecret"`
 }

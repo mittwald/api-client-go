@@ -4,8 +4,8 @@ package orderv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "domainContractDuration":
 //        type: "number"
 //        description: "Contract duration in months."
@@ -19,7 +19,7 @@ package orderv1
 //    "totalPrice":
 //        type: "number"
 //        example: 900
-//required:
+// required:
 //    - "totalPrice"
 //    - "domainPrice"
 //    - "feePrice"

@@ -11,7 +11,7 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//oneOf:
+// oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.CronjobUrl"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.CronjobCommand"}
 

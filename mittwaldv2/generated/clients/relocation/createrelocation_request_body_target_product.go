@@ -11,8 +11,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//oneOf:
+// type: "string"
+// oneOf:
 //    - type: "string"
 //      minLength: 1
 //    - type: "string"
@@ -22,7 +22,7 @@ import (
 //        - "Agentur-Server"
 //        - "CMS-Hosting"
 //        - "Shop-Hosting"
-//description: "Help our customer service finding your target account"
+// description: "Help our customer service finding your target account"
 
 type CreateRelocationRequestBodyTargetProduct struct {
 	AlternativeCreateRelocationRequestBodyTargetProductAlternative1 *string

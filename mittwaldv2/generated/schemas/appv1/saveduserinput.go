@@ -4,16 +4,16 @@ package appv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "name":
 //        type: "string"
 //    "value":
 //        type: "string"
-//required:
+// required:
 //    - "name"
 //    - "value"
-//description: "A SavedUserInput is an entered value for a desired UserInput of an AppVersion or SystemSoftwareVersion."
+// description: "A SavedUserInput is an entered value for a desired UserInput of an AppVersion or SystemSoftwareVersion."
 
 // A SavedUserInput is an entered value for a desired UserInput of an AppVersion or SystemSoftwareVersion.
 type SavedUserInput struct {

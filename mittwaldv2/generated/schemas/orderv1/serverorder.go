@@ -4,8 +4,8 @@ package orderv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "customerId":
 //        type: "string"
 //        minLength: 1
@@ -27,7 +27,7 @@ package orderv1
 //        example: "mp-123456"
 //    "useFreeTrial":
 //        type: "boolean"
-//required:
+// required:
 //    - "customerId"
 //    - "machineType"
 //    - "diskspaceInGiB"

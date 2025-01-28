@@ -4,8 +4,10 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
+// type: "object"
+// description: CheckTokenRequestBody models the JSON body of a 'user-check-token' request
 
+// CheckTokenRequestBody models the JSON body of a 'user-check-token' request
 type CheckTokenRequestBody struct {
 }
 

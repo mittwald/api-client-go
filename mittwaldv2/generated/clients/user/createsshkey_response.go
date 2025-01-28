@@ -4,7 +4,7 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
+// type: "object"
 
 type CreateSSHKeyResponse struct {
 }

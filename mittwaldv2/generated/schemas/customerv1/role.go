@@ -6,12 +6,12 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "owner"
 //    - "member"
 //    - "accountant"
-//description: "the role within a customer"
+// description: "the role within a customer"
 
 // the role within a customer
 type Role string

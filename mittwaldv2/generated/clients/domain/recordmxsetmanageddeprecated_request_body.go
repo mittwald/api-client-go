@@ -4,9 +4,11 @@ package domain
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//additionalProperties: false
+// type: "object"
+// additionalProperties: false
+// description: RecordMxSetManagedDeprecatedRequestBody models the JSON body of a 'dns-record-mx-set-managed-deprecated' request
 
+// RecordMxSetManagedDeprecatedRequestBody models the JSON body of a 'dns-record-mx-set-managed-deprecated' request
 type RecordMxSetManagedDeprecatedRequestBody struct {
 }
 

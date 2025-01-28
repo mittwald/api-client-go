@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "organisation":
 //        type: "string"
 //        minLength: 1
@@ -35,7 +35,7 @@ import "fmt"
 //            - "kc"
 //            - "mstudio"
 //        description: "Which mittwald system does the targetProject use?"
-//required:
+// required:
 //    - "organisation"
 //    - "projectName"
 //    - "system"

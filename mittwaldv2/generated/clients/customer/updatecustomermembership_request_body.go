@@ -11,16 +11,18 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "expiresAt":
 //        type: "string"
 //        format: "date-time"
 //        description: "Time the CustomerMembership should expire at."
 //    "role": {"$ref": "#/components/schemas/de.mittwald.v1.membership.CustomerRoles"}
-//required:
+// required:
 //    - "role"
+// description: UpdateCustomerMembershipRequestBody models the JSON body of a 'customer-update-customer-membership' request
 
+// UpdateCustomerMembershipRequestBody models the JSON body of a 'customer-update-customer-membership' request
 type UpdateCustomerMembershipRequestBody struct {
 	ExpiresAt *time.Time                 `json:"expiresAt,omitempty"`
 	Role      membershipv1.CustomerRoles `json:"role"`

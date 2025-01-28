@@ -4,8 +4,8 @@ package articlev1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "description":
 //        type: "string"
 //        minLength: 1
@@ -22,7 +22,7 @@ package articlev1
 //        type: "string"
 //        minLength: 1
 //        example: "cpu-optimized"
-//required:
+// required:
 //    - "id"
 
 type ArticleTag struct {

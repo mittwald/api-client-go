@@ -4,8 +4,10 @@ package notification
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
+// type: "object"
+// description: ReadAllNotificationsRequestBody models the JSON body of a 'notifications-read-all-notifications' request
 
+// ReadAllNotificationsRequestBody models the JSON body of a 'notifications-read-all-notifications' request
 type ReadAllNotificationsRequestBody struct {
 }
 

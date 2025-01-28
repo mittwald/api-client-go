@@ -4,12 +4,14 @@ package database
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "description":
 //        type: "string"
-//required:
+// required:
 //    - "description"
+// description: UpdateRedisDatabaseDescriptionRequestBody models the JSON body of a 'database-update-redis-database-description' request
 
+// UpdateRedisDatabaseDescriptionRequestBody models the JSON body of a 'database-update-redis-database-description' request
 type UpdateRedisDatabaseDescriptionRequestBody struct {
 	Description string `json:"description"`
 }

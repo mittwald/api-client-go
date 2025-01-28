@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "message":
 //        type: "string"
 //        maxLength: 5000
@@ -29,10 +29,12 @@ import "fmt"
 //        maximum: 10
 //        minimum: 0
 //        description: "Feedback rating from bad to good."
-//required:
+// required:
 //    - "type"
 //    - "message"
+// description: DeprecatedCreateIssueRequestBody models the JSON body of a 'deprecated-user-create-issue' request
 
+// DeprecatedCreateIssueRequestBody models the JSON body of a 'deprecated-user-create-issue' request
 type DeprecatedCreateIssueRequestBody struct {
 	Message string                               `json:"message"`
 	Origin  *string                              `json:"origin,omitempty"`

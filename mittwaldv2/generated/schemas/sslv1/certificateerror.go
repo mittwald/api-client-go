@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "message":
 //        oneOf:
 //            - type: "string"
@@ -82,7 +82,7 @@ import "fmt"
 //              enum:
 //                - "unknown"
 //              description: "An unknown error occurred."
-//required:
+// required:
 //    - "message"
 
 type CertificateError struct {

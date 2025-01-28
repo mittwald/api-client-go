@@ -6,8 +6,8 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "description":
 //        type: "string"
 //        description: "Description of the Backup."
@@ -16,9 +16,11 @@ import "time"
 //        type: "string"
 //        format: "date-time"
 //        description: "Time when to expire the Backup."
-//required:
+// required:
 //    - "expirationTime"
+// description: CreateProjectBackupRequestBody models the JSON body of a 'backup-create-project-backup' request
 
+// CreateProjectBackupRequestBody models the JSON body of a 'backup-create-project-backup' request
 type CreateProjectBackupRequestBody struct {
 	Description    *string   `json:"description,omitempty"`
 	ExpirationTime time.Time `json:"expirationTime"`

@@ -6,14 +6,14 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "cname": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCNAME"}
 //    "combinedARecords": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCombinedA"}
 //    "mx": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordMX"}
 //    "srv": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordSRV"}
 //    "txt": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordTXT"}
-//required:
+// required:
 //    - "combinedARecords"
 //    - "cname"
 //    - "mx"

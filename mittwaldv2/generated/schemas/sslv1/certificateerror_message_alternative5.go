@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "certificate_not_authorized_to_sign"
-//description: "The certificate is not authorized to sign."
+// description: "The certificate is not authorized to sign."
 
 // The certificate is not authorized to sign.
 type CertificateErrorMessageAlternative5 string

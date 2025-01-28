@@ -6,7 +6,7 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "reason":
 //        type: "string"
 //        description: "A reason for the Termination can be given as plain text."
@@ -15,7 +15,9 @@ import "time"
 //        type: "string"
 //        format: "date-time"
 //        description: "The termination date has to be a valid date according to activation and contract period of the ContractItem. If none given, the next possible termination date will be used."
+// description: TerminateContractItemRequestBody models the JSON body of a 'contract-terminate-contract-item' request
 
+// TerminateContractItemRequestBody models the JSON body of a 'contract-terminate-contract-item' request
 type TerminateContractItemRequestBody struct {
 	Reason                *string    `json:"reason,omitempty"`
 	TerminationTargetDate *time.Time `json:"terminationTargetDate,omitempty"`

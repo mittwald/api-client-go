@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "domain":
 //        type: "string"
 //        example: "example.com"
@@ -19,7 +19,7 @@ import "fmt"
 //            - "http"
 //            - "https"
 //        example: "https"
-//required:
+// required:
 //    - "scheme"
 //    - "domain"
 

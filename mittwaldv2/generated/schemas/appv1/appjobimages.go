@@ -6,13 +6,13 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "reconfigureImage": {"$ref": "#/components/schemas/de.mittwald.v1.app.AppJobImage"}
 //    "setupImage": {"$ref": "#/components/schemas/de.mittwald.v1.app.AppJobImage"}
 //    "uninstallImage": {"$ref": "#/components/schemas/de.mittwald.v1.app.AppJobImage"}
 //    "upgradeImage": {"$ref": "#/components/schemas/de.mittwald.v1.app.AppJobImage"}
-//required:
+// required:
 //    - "setupImage"
 //    - "upgradeImage"
 //    - "uninstallImage"

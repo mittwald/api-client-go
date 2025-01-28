@@ -4,18 +4,20 @@ package relocation
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "pAccount":
 //        type: "string"
 //        pattern: "^[pr][0-9]{2,8}$"
 //    "targetTariff":
 //        type: "string"
 //        minLength: 1
-//required:
+// required:
 //    - "pAccount"
 //    - "targetTariff"
+// description: CreateLegacyTariffChangeRequestBody models the JSON body of a 'relocation-create-legacy-tariff-change' request
 
+// CreateLegacyTariffChangeRequestBody models the JSON body of a 'relocation-create-legacy-tariff-change' request
 type CreateLegacyTariffChangeRequestBody struct {
 	PAccount     string `json:"pAccount"`
 	TargetTariff string `json:"targetTariff"`

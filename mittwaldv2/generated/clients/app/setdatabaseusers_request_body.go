@@ -6,15 +6,17 @@ import "errors"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "databaseUserIds":
 //        type: "object"
 //        additionalProperties:
 //            type: "string"
-//required:
+// required:
 //    - "databaseUserIds"
+// description: SetDatabaseUsersRequestBody models the JSON body of a 'app-set-database-users' request
 
+// SetDatabaseUsersRequestBody models the JSON body of a 'app-set-database-users' request
 type SetDatabaseUsersRequestBody struct {
 	DatabaseUserIds map[string]string `json:"databaseUserIds"`
 }

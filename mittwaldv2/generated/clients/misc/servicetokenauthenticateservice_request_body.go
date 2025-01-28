@@ -4,13 +4,15 @@ package misc
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "secretAccessKey":
 //        type: "string"
-//required:
+// required:
 //    - "secretAccessKey"
+// description: ServicetokenAuthenticateServiceRequestBody models the JSON body of a 'servicetoken-authenticate-service' request
 
+// ServicetokenAuthenticateServiceRequestBody models the JSON body of a 'servicetoken-authenticate-service' request
 type ServicetokenAuthenticateServiceRequestBody struct {
 	SecretAccessKey string `json:"secretAccessKey"`
 }

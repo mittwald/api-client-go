@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "status":
 //        type: "string"
 //        enum:
@@ -16,10 +16,12 @@ import "fmt"
 //            - "ignored"
 //    "userId":
 //        type: "string"
-//required:
+// required:
 //    - "userId"
 //    - "status"
+// description: PostPollStatusRequestBody models the JSON body of a 'user-post-poll-status' request
 
+// PostPollStatusRequestBody models the JSON body of a 'user-post-poll-status' request
 type PostPollStatusRequestBody struct {
 	Status PostPollStatusRequestBodyStatus `json:"status"`
 	UserId string                          `json:"userId"`

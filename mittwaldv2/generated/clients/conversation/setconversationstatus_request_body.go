@@ -6,16 +6,18 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "status":
 //        type: "string"
 //        enum:
 //            - "open"
 //            - "answered"
 //            - "closed"
-//required:
+// required:
 //    - "status"
+// description: SetConversationStatusRequestBody models the JSON body of a 'conversation-set-conversation-status' request
 
+// SetConversationStatusRequestBody models the JSON body of a 'conversation-set-conversation-status' request
 type SetConversationStatusRequestBody struct {
 	Status SetConversationStatusRequestBodyStatus `json:"status"`
 }

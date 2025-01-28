@@ -4,14 +4,16 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "phoneNumber":
 //        type: "string"
 //        example: "+491701234567"
-//required:
+// required:
 //    - "phoneNumber"
+// description: AddPhoneNumberRequestBody models the JSON body of a 'user-add-phone-number' request
 
+// AddPhoneNumberRequestBody models the JSON body of a 'user-add-phone-number' request
 type AddPhoneNumberRequestBody struct {
 	PhoneNumber string `json:"phoneNumber"`
 }

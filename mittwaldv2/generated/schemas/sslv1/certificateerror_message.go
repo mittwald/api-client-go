@@ -11,7 +11,7 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//oneOf:
+// oneOf:
 //    - type: "string"
 //      enum:
 //        - "certificate_read_failed"

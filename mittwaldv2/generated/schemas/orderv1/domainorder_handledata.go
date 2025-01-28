@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "adminC":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.order.DomainHandleField"}
@@ -19,7 +19,7 @@ import (
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.order.DomainHandleField"}
 //        minItems: 1
-//required:
+// required:
 //    - "ownerC"
 
 type DomainOrderHandleData struct {

@@ -4,8 +4,10 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
+// type: "object"
+// description: GetPasswordUpdatedAtRequestBody models the JSON body of a 'user-get-password-updated-at' request
 
+// GetPasswordUpdatedAtRequestBody models the JSON body of a 'user-get-password-updated-at' request
 type GetPasswordUpdatedAtRequestBody struct {
 }
 

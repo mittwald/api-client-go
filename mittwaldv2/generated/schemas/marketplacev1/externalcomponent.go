@@ -4,13 +4,13 @@ package marketplacev1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "name":
 //        type: "string"
 //    "url":
 //        type: "string"
-//required:
+// required:
 //    - "name"
 //    - "url"
 

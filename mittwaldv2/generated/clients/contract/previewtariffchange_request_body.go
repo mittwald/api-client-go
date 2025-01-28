@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "tariffChangeData":
 //        oneOf:
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.ProjectHostingTariffChange"}
@@ -17,7 +17,9 @@ import "fmt"
 //        enum:
 //            - "projectHosting"
 //            - "server"
+// description: PreviewTariffChangeRequestBody models the JSON body of a 'order-preview-tariff-change' request
 
+// PreviewTariffChangeRequestBody models the JSON body of a 'order-preview-tariff-change' request
 type PreviewTariffChangeRequestBody struct {
 	TariffChangeData *PreviewTariffChangeRequestBodyTariffChangeData `json:"tariffChangeData,omitempty"`
 	TariffChangeType *PreviewTariffChangeRequestBodyTariffChangeType `json:"tariffChangeType,omitempty"`

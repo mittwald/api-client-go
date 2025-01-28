@@ -6,14 +6,14 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "databases":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.backup.DatabaseReference"}
 //    "files":
 //        type: "boolean"
-//required:
+// required:
 //    - "files"
 
 type IgnoredSources struct {

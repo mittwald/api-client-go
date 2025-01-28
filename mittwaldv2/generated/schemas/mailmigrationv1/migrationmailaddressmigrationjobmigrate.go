@@ -6,12 +6,12 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "finished":
 //        type: "boolean"
 //    "requirements": {"$ref": "#/components/schemas/de.mittwald.v1.mailmigration.MigrateMailAddressCommandRequirements"}
-//required:
+// required:
 //    - "requirements"
 //    - "finished"
 

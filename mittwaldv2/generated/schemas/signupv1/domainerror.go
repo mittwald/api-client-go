@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "info":
 //        type: "object"
 //        description: "A json object, given further information about the error"
@@ -17,7 +17,7 @@ import "fmt"
 //    "name":
 //        type: "string"
 //        description: "Unique key for the error type"
-//required:
+// required:
 //    - "name"
 //    - "message"
 

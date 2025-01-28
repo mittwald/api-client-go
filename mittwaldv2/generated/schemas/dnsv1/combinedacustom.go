@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "a":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.dns.CombinedAManagedARecord"}
@@ -20,7 +20,7 @@ import (
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.dns.CombinedAManagedAAAARecord"}
 //        maxItems: 10
 //    "settings": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordSettings"}
-//required:
+// required:
 //    - "settings"
 //    - "a"
 //    - "aaaa"

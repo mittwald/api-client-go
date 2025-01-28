@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "filename":
 //        type: "string"
 //        example: "my_file.php"
@@ -22,7 +22,7 @@ import "fmt"
 //            - "WARN"
 //            - "SEVERE"
 //        description: "Alerts when the time, syscall count or occurrence count of this group are abnormal."
-//required:
+// required:
 //    - "stats"
 //    - "warnLevel"
 

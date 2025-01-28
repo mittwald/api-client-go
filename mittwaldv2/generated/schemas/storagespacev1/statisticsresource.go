@@ -6,8 +6,8 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "description":
 //        type: "string"
 //        example: "MySQL DB for Wordpress"
@@ -24,7 +24,7 @@ import "time"
 //        type: "string"
 //        format: "date-time"
 //        example: "2023-12-22T13:46:52.000Z"
-//required:
+// required:
 //    - "id"
 //    - "name"
 //    - "usageInBytes"

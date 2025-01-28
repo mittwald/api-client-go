@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "kind": {"$ref": "#/components/schemas/de.mittwald.v1.storagespace.StatisticsCategoryKind"}
 //    "resources":
 //        type: "array"
@@ -16,7 +16,7 @@ import "fmt"
 //    "totalUsageInBytes":
 //        type: "integer"
 //        example: 1000
-//required:
+// required:
 //    - "kind"
 //    - "totalUsageInBytes"
 

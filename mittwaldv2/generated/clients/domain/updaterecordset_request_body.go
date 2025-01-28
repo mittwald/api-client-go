@@ -13,13 +13,14 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//oneOf:
+// oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordUnset"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.CombinedACustom"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordMXCustom"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordTXTComponent"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordSRVComponent"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCNAMEComponent"}
+// description: UpdateRecordSetRequestBody models the JSON body of a 'dns-update-record-set' request
 
 type UpdateRecordSetRequestBody struct {
 	AlternativeRecordUnset          *dnsv1.RecordUnset

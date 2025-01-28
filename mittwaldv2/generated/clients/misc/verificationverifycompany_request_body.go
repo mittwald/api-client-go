@@ -4,14 +4,16 @@ package misc
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "name":
 //        type: "string"
 //        example: "Mittwald CM Service GmbH & Co. KG"
-//required:
+// required:
 //    - "name"
+// description: VerificationVerifyCompanyRequestBody models the JSON body of a 'verification-verify-company' request
 
+// VerificationVerifyCompanyRequestBody models the JSON body of a 'verification-verify-company' request
 type VerificationVerifyCompanyRequestBody struct {
 	Name string `json:"name"`
 }

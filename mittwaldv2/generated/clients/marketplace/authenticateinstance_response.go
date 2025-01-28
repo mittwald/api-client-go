@@ -6,15 +6,15 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "expiry":
 //        type: "string"
 //        format: "date-time"
 //    "publicToken":
 //        type: "string"
 //        description: "Set this in the 'x-access-token' header when performing domain actions."
-//required:
+// required:
 //    - "publicToken"
 //    - "expiry"
 
