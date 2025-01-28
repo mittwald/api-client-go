@@ -4,8 +4,10 @@ package customer
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
+// type: "object"
+// description: CreateWalletRequestBody models the JSON body of a 'customer-create-wallet' request
 
+// CreateWalletRequestBody models the JSON body of a 'customer-create-wallet' request
 type CreateWalletRequestBody struct {
 }
 

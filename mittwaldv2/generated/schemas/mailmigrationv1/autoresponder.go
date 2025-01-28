@@ -4,8 +4,8 @@ package mailmigrationv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "active":
 //        type: "boolean"
 //    "expiresAt":
@@ -14,7 +14,7 @@ package mailmigrationv1
 //        type: "string"
 //    "startsAt":
 //        format: "date-time"
-//required:
+// required:
 //    - "active"
 //    - "message"
 

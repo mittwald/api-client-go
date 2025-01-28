@@ -6,8 +6,8 @@ import "errors"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "addresses":
 //        type: "array"
 //        items:
@@ -16,7 +16,7 @@ import "errors"
 //        type: "array"
 //        items:
 //            type: "string"
-//required:
+// required:
 //    - "mailboxNames"
 //    - "addresses"
 

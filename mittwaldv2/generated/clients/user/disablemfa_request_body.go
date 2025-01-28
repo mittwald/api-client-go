@@ -4,16 +4,18 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "multiFactorCode":
 //        type: "string"
 //        maxLength: 16
 //        minLength: 6
 //        description: "Multi Factor Code to confirm MFA."
-//required:
+// required:
 //    - "multiFactorCode"
+// description: DisableMFARequestBody models the JSON body of a 'user-disable-mfa' request
 
+// DisableMFARequestBody models the JSON body of a 'user-disable-mfa' request
 type DisableMFARequestBody struct {
 	MultiFactorCode string `json:"multiFactorCode"`
 }

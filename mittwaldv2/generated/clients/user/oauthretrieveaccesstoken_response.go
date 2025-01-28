@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "access_token":
 //        type: "string"
 //        description: "The access token issued by the authorization server.\n"
@@ -25,7 +25,7 @@ import "fmt"
 //        enum:
 //            - "bearer"
 //        description: "The type of the token issued as described in\n[RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-7.1).\n"
-//required:
+// required:
 //    - "access_token"
 //    - "refresh_token"
 //    - "token_type"

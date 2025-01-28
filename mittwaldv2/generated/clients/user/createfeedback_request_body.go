@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "message":
 //        type: "string"
 //        maxLength: 5000
@@ -32,9 +32,11 @@ import "fmt"
 //        maximum: 10
 //        minimum: 0
 //        description: "Feedback rating from bad to good. Set to 0 or skip this field to not vote at all."
-//required:
+// required:
 //    - "subject"
+// description: CreateFeedbackRequestBody models the JSON body of a 'user-create-feedback' request
 
+// CreateFeedbackRequestBody models the JSON body of a 'user-create-feedback' request
 type CreateFeedbackRequestBody struct {
 	Message *string                        `json:"message,omitempty"`
 	Origin  *string                        `json:"origin,omitempty"`

@@ -4,15 +4,15 @@ package invoicev1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "message":
 //        type: "string"
 //        example: "Whoops, something went wrong."
 //    "type":
 //        type: "string"
 //        example: "InternalServerError"
-//required:
+// required:
 //    - "type"
 //    - "message"
 

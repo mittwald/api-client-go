@@ -4,14 +4,14 @@ package userv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "department":
 //        type: "string"
 //        example: "Kundenservice"
-//required:
+// required:
 //    - "department"
-//description: "Additional information about mittwald employees."
+// description: "Additional information about mittwald employees."
 
 // Additional information about mittwald employees.
 type UserEmployeeInformation struct {

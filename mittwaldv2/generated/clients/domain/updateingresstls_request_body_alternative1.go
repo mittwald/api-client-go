@@ -6,8 +6,8 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "acme":
 //        type: "boolean"
 //    "isCreated":
@@ -19,9 +19,9 @@ import "time"
 //        format: "date-time"
 //        description: "Was added by mistake. Never did anything."
 //        deprecated: true
-//required:
+// required:
 //    - "acme"
-//additionalProperties: false
+// additionalProperties: false
 
 type UpdateIngressTLSRequestBodyAlternative1 struct {
 	Acme            bool       `json:"acme"`

@@ -11,7 +11,7 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//null
+// null
 
 type ChangePasswordResponse struct {
 	AlternativeChangePasswordOKResponse       *ChangePasswordOKResponse

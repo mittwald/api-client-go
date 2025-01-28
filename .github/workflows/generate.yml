@@ -24,6 +24,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ matrix.source.branch }}
+          fetch-depth: 0
           fetch-tags: true
 
       - name: Set up Go
@@ -39,7 +40,7 @@ jobs:
       - name: Generate code for v2 API
         run: |
           rm -rf mittwaldv2/generated
-          mittwald-go-client-builder ${{ matrix.source.url }} ./mittwaldv2/generated mittwaldv2
+          mittwald-go-client-builder generate ${{ matrix.source.url }} ./mittwaldv2/generated mittwaldv2
           goimports -w mittwaldv2/generated
 
       - name: Summarise git status

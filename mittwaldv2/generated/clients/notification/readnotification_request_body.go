@@ -10,12 +10,14 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "status": {"$ref": "#/components/schemas/de.mittwald.v1.messaging.NotificationStatus"}
-//required:
+// required:
 //    - "status"
+// description: ReadNotificationRequestBody models the JSON body of a 'notifications-read-notification' request
 
+// ReadNotificationRequestBody models the JSON body of a 'notifications-read-notification' request
 type ReadNotificationRequestBody struct {
 	Status messagingv1.NotificationStatus `json:"status"`
 }

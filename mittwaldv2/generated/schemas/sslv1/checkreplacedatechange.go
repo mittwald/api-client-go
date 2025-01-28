@@ -6,15 +6,15 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "newValue":
 //        type: "string"
 //        format: "date-time"
 //    "oldValue":
 //        type: "string"
 //        format: "date-time"
-//required:
+// required:
 //    - "oldValue"
 //    - "newValue"
 

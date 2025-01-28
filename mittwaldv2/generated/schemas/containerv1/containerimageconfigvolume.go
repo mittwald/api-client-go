@@ -4,8 +4,8 @@ package containerv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "description":
 //        type: "string"
 //        description: "The description of the volume path."
@@ -18,7 +18,7 @@ package containerv1
 //        type: "string"
 //        description: "The volume path."
 //        example: "/var/lib/mysql"
-//required:
+// required:
 //    - "volume"
 //    - "isAiGenerated"
 

@@ -4,8 +4,8 @@ package containerv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "password":
 //        type: "string"
 //        description: "Your registry password or access token."
@@ -14,7 +14,7 @@ package containerv1
 //        type: "string"
 //        description: "Your registry username, use 'oauth2accesstoken' for access token authentication."
 //        example: "username"
-//required:
+// required:
 //    - "username"
 //    - "password"
 

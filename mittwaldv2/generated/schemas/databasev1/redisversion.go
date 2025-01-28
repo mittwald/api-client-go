@@ -4,8 +4,8 @@ package databasev1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "disabled":
 //        type: "boolean"
 //    "id":
@@ -14,7 +14,7 @@ package databasev1
 //        type: "string"
 //    "number":
 //        type: "string"
-//required:
+// required:
 //    - "id"
 //    - "name"
 //    - "number"

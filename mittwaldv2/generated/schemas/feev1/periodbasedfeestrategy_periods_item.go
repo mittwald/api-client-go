@@ -6,8 +6,8 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "feeValidFrom":
 //        type: "string"
 //        format: "date-time"
@@ -17,7 +17,7 @@ import "time"
 //    "monthlyPrice":
 //        type: "number"
 //        description: "The monthly price in Euro Cents."
-//required:
+// required:
 //    - "monthlyPrice"
 
 type PeriodBasedFeeStrategyPeriodsItem struct {

@@ -4,15 +4,15 @@ package appv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "index":
 //        type: "number"
 //    "section":
 //        type: "string"
 //    "step":
 //        type: "string"
-//description: "UserInputPositionMeta is a utility information, helping to position the UserInput properly on the frontend."
+// description: "UserInputPositionMeta is a utility information, helping to position the UserInput properly on the frontend."
 
 // UserInputPositionMeta is a utility information, helping to position the UserInput properly on the frontend.
 type UserInputPositionMeta struct {

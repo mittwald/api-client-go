@@ -4,8 +4,8 @@ package cronjobv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "interpreter":
 //        type: "string"
 //        example: "/usr/bin/bash"
@@ -15,7 +15,7 @@ package cronjobv1
 //    "path":
 //        type: "string"
 //        example: "/html/my-wordpress/script.sh"
-//required:
+// required:
 //    - "interpreter"
 //    - "path"
 

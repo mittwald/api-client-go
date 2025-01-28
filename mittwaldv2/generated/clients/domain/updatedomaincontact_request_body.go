@@ -11,14 +11,16 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "contact":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.domain.HandleField"}
 //        minItems: 1
-//required:
+// required:
 //    - "contact"
+// description: UpdateDomainContactRequestBody models the JSON body of a 'domain-update-domain-contact' request
 
+// UpdateDomainContactRequestBody models the JSON body of a 'domain-update-domain-contact' request
 type UpdateDomainContactRequestBody struct {
 	Contact []domainv1.HandleField `json:"contact"`
 }

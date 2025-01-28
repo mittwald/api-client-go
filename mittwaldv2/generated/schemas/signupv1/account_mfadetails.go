@@ -4,13 +4,13 @@ package signupv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "mfaConfirmed":
 //        type: "boolean"
 //    "mfaInitialized":
 //        type: "boolean"
-//description: "The users mfa details."
+// description: "The users mfa details."
 
 // The users mfa details.
 type AccountMFADetails struct {

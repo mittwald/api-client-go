@@ -4,8 +4,8 @@ package containerv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "username":
 //        type: "string"
 //        description: "Your registry username."
@@ -14,7 +14,7 @@ package containerv1
 //        type: "boolean"
 //        description: "Status of the credentials."
 //        example: true
-//required:
+// required:
 //    - "username"
 //    - "valid"
 

@@ -6,13 +6,13 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "enabled"
 //    - "blocked"
 //    - "disabled"
-//description: "deprecated"
-//deprecated: true
+// description: "deprecated"
+// deprecated: true
 
 // deprecated
 type ExtensionState string

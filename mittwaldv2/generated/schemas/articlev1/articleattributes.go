@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "customerEditable":
 //        type: "boolean"
 //    "key":
@@ -29,7 +29,7 @@ import "fmt"
 //    "value":
 //        type: "string"
 //        example: "4"
-//required:
+// required:
 //    - "key"
 
 type ArticleAttributes struct {

@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "unknown_cloudflare_error"
-//description: "An unknown error occurred related to Cloudflare."
+// description: "An unknown error occurred related to Cloudflare."
 
 // An unknown error occurred related to Cloudflare.
 type CertificateErrorMessageAlternative17 string

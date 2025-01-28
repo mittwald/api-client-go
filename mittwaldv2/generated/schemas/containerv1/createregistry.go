@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "credentials": {"$ref": "#/components/schemas/de.mittwald.v1.container.SetRegistryCredentials"}
 //    "description":
 //        type: "string"
@@ -15,7 +15,7 @@ import "fmt"
 //    "uri":
 //        type: "string"
 //        example: "index.docker.io"
-//required:
+// required:
 //    - "uri"
 //    - "description"
 

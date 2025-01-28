@@ -4,8 +4,8 @@ package sslv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "integer"
-//enum:
+// type: "integer"
+// enum:
 //    - 0
 //    - 1
 //    - 2

@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "accountHolder":
 //        type: "string"
 //        example: "Ada Lovelace"
@@ -22,7 +22,7 @@ import "fmt"
 //        type: "string"
 //        enum:
 //            - "debit"
-//required:
+// required:
 //    - "method"
 //    - "iban"
 //    - "accountHolder"

@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "absolutePath":
 //        type: "string"
 //    "isDirectory":
@@ -27,7 +27,7 @@ import "fmt"
 //        type: "integer"
 //    "target":
 //        type: "string"
-//required:
+// required:
 //    - "absolutePath"
 //    - "name"
 //    - "size"

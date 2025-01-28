@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "orderData":
 //        oneOf:
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.ProjectHostingOrderPreview"}
@@ -21,7 +21,9 @@ import "fmt"
 //            - "projectHosting"
 //            - "server"
 //            - "externalCertificate"
+// description: PreviewOrderRequestBody models the JSON body of a 'order-preview-order' request
 
+// PreviewOrderRequestBody models the JSON body of a 'order-preview-order' request
 type PreviewOrderRequestBody struct {
 	OrderData *PreviewOrderRequestBodyOrderData `json:"orderData,omitempty"`
 	OrderType *PreviewOrderRequestBodyOrderType `json:"orderType,omitempty"`

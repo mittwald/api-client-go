@@ -6,7 +6,7 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "accessIpMask":
 //        type: "string"
 //    "accessLevel":
@@ -18,10 +18,12 @@ import "fmt"
 //        type: "string"
 //    "externalAccess":
 //        type: "boolean"
-//required:
+// required:
 //    - "description"
 //    - "accessLevel"
+// description: UpdateMysqlUserRequestBody models the JSON body of a 'database-update-mysql-user' request
 
+// UpdateMysqlUserRequestBody models the JSON body of a 'database-update-mysql-user' request
 type UpdateMysqlUserRequestBody struct {
 	AccessIpMask   *string                               `json:"accessIpMask,omitempty"`
 	AccessLevel    UpdateMysqlUserRequestBodyAccessLevel `json:"accessLevel"`

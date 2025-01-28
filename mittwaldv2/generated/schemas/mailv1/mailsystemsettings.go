@@ -4,15 +4,15 @@ package mailv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "imapClusterId":
 //        type: "string"
 //    "mailDirectory":
 //        type: "string"
 //    "rateLimitId":
 //        type: "string"
-//required:
+// required:
 //    - "imapClusterId"
 //    - "mailDirectory"
 //    - "rateLimitId"

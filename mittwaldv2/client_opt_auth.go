@@ -3,13 +3,13 @@ package mittwaldv2
 import (
 	"context"
 	"fmt"
-	"github.com/google/uuid"
+	"os"
+	"time"
+
 	generatedv2 "github.com/mittwald/api-client-go/mittwaldv2/generated/clients"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/marketplace"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/user"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
-	"os"
-	"time"
 )
 
 const apiTokenEnvVar = "MITTWALD_API_TOKEN"
@@ -19,7 +19,7 @@ const apiTokenHeader = "X-Access-Token"
 // The access token needs to be obtained ahead-of-time.
 func WithAccessToken(token string) ClientOption {
 	return func(_ context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
-		return httpclient.NewAuthenticatedClient(inner, apiTokenHeader, token), nil
+		return httpclient.NewAuthenticatedClient(inner, token, apiTokenHeader), nil
 	}
 }
 
@@ -108,7 +108,7 @@ func WithUsernamePassword(email, password string) ClientOption {
 // automatically.
 //
 // [1]: https://developer.mittwald.de/docs/v2/contribution/overview/concepts/authentication/
-func WithAccessTokenRetrievalKey(userID uuid.UUID, accessTokenRetrievalKey string) ClientOption {
+func WithAccessTokenRetrievalKey(userID string, accessTokenRetrievalKey string) ClientOption {
 	return func(ctx context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
 		req := user.AuthenticateWithAccessTokenRetrievalKeyRequest{
 			Body: user.AuthenticateWithAccessTokenRetrievalKeyRequestBody{
@@ -130,7 +130,7 @@ func WithAccessTokenRetrievalKey(userID uuid.UUID, accessTokenRetrievalKey strin
 //
 // Clients authenticated with this method will refresh their API tokens
 // automatically.
-func WithExtensionSecret(extensionInstanceID uuid.UUID, extensionSecret string) ClientOption {
+func WithExtensionSecret(extensionInstanceID string, extensionSecret string) ClientOption {
 	return func(ctx context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
 		refreshFunc := func() (string, time.Time, error) {
 			req := marketplace.AuthenticateInstanceRequest{

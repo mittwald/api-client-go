@@ -11,7 +11,7 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//oneOf:
+// oneOf:
 //    - type: "object"
 //      properties:
 //        "blacklist":
@@ -30,6 +30,7 @@ import (
 //                format: "idn-email"
 //      required:
 //        - "whitelist"
+// description: DeprecatedUpdateProjectMailSettingRequestBody models the JSON body of a 'deprecated-mail-update-project-mail-setting' request
 
 type DeprecatedUpdateProjectMailSettingRequestBody struct {
 	AlternativeDeprecatedUpdateProjectMailSettingRequestBodyAlternative1 *DeprecatedUpdateProjectMailSettingRequestBodyAlternative1

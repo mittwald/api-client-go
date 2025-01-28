@@ -4,13 +4,13 @@ package projectv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "storage":
 //        type: "string"
 //    "visitors":
 //        type: "number"
-//required:
+// required:
 //    - "visitors"
 //    - "storage"
 

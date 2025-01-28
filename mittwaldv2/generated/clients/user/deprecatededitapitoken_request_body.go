@@ -6,17 +6,19 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "description":
 //        type: "string"
 //        example: "Api Token for ..."
 //    "expiresAt":
 //        type: "string"
 //        format: "date-time"
-//required:
+// required:
 //    - "description"
+// description: DeprecatedEditAPITokenRequestBody models the JSON body of a 'deprecated-user-edit-api-token' request
 
+// DeprecatedEditAPITokenRequestBody models the JSON body of a 'deprecated-user-edit-api-token' request
 type DeprecatedEditAPITokenRequestBody struct {
 	Description string     `json:"description"`
 	ExpiresAt   *time.Time `json:"expiresAt,omitempty"`

@@ -4,6 +4,6 @@ package screenshotv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
+// type: "string"
 
 type LifecycleState string

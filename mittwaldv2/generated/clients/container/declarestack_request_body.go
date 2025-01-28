@@ -6,8 +6,8 @@ import "github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/container
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "services":
 //        type: "object"
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.container.ServiceDeclareRequest"}
@@ -15,7 +15,9 @@ import "github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/container
 //        type: "object"
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.container.VolumeDeclareRequest"}
 //        description: "Volumes belonging to a Stack. Removing results in a detach, delete must be explicit."
+// description: DeclareStackRequestBody models the JSON body of a 'container-declare-stack' request
 
+// DeclareStackRequestBody models the JSON body of a 'container-declare-stack' request
 type DeclareStackRequestBody struct {
 	Services map[string]containerv1.ServiceDeclareRequest `json:"services,omitempty"`
 	Volumes  map[string]containerv1.VolumeDeclareRequest  `json:"volumes,omitempty"`

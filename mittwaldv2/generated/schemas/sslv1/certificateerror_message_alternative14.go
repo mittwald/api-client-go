@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "private_key_encrypted"
-//description: "The private key is encrypted."
+// description: "The private key is encrypted."
 
 // The private key is encrypted.
 type CertificateErrorMessageAlternative14 string

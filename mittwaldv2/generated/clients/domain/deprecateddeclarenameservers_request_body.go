@@ -6,7 +6,7 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "nameservers":
 //        type: "array"
 //        items:
@@ -14,7 +14,9 @@ import "fmt"
 //            format: "idn-hostname"
 //        minItems: 2
 //        uniqueItems: true
+// description: DeprecatedDeclareNameserversRequestBody models the JSON body of a 'deprecated-domain-declare-nameservers' request
 
+// DeprecatedDeclareNameserversRequestBody models the JSON body of a 'deprecated-domain-declare-nameservers' request
 type DeprecatedDeclareNameserversRequestBody struct {
 	Nameservers []string `json:"nameservers,omitempty"`
 }

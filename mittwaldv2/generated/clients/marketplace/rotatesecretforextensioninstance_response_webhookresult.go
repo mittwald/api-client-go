@@ -4,14 +4,14 @@ package marketplace
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "failure":
 //        type: "boolean"
 //    "statusCode":
 //        type: "string"
 //        description: "The status code returned by the external application."
-//required:
+// required:
 //    - "failure"
 
 type RotateSecretForExtensionInstanceResponseWebhookResult struct {

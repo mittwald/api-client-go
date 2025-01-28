@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "name":
 //        type: "string"
 //    "passwordUpdatedAt":
@@ -57,7 +57,7 @@ import (
 //        required:
 //            - "limit"
 //            - "current"
-//required:
+// required:
 //    - "name"
 //    - "sendingEnabled"
 //    - "spamProtection"

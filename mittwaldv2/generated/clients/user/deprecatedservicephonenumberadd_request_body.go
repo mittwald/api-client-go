@@ -4,13 +4,15 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "phoneNumber":
 //        type: "string"
-//required:
+// required:
 //    - "phoneNumber"
+// description: DeprecatedServicePhoneNumberAddRequestBody models the JSON body of a 'deprecated-user-service-phone-number-add' request
 
+// DeprecatedServicePhoneNumberAddRequestBody models the JSON body of a 'deprecated-user-service-phone-number-add' request
 type DeprecatedServicePhoneNumberAddRequestBody struct {
 	PhoneNumber string `json:"phoneNumber"`
 }

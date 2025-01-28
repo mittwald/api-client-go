@@ -6,13 +6,13 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "other"
 //    - "mr"
 //    - "ms"
-//description: "the users title"
-//deprecated: true
+// description: "the users title"
+// deprecated: true
 
 // the users title
 type ProfileTitle string

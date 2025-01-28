@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "additionalArticles":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.article.ReadableBookableArticleOptions"}
@@ -43,7 +43,7 @@ import "fmt"
 //            - "additional"
 //            - "modifier"
 //            - "setup_fee"
-//required:
+// required:
 //    - "id"
 //    - "name"
 //    - "isRecurring"

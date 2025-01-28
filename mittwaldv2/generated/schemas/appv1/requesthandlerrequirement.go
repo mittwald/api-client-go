@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "exampleValues":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.app.SavedUserInput"}
@@ -17,11 +17,11 @@ import "fmt"
 //        type: "string"
 //    "parametersTemplate":
 //        type: "string"
-//required:
+// required:
 //    - "name"
 //    - "namespace"
 //    - "parametersTemplate"
-//description: "RequestHandlerRequirement describes the necessary properties to internally resolve the request handler or process to start."
+// description: "RequestHandlerRequirement describes the necessary properties to internally resolve the request handler or process to start."
 
 // RequestHandlerRequirement describes the necessary properties to internally resolve the request handler or process to start.
 type RequestHandlerRequirement struct {

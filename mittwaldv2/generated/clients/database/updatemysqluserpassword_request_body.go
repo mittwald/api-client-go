@@ -4,12 +4,14 @@ package database
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "password":
 //        type: "string"
-//required:
+// required:
 //    - "password"
+// description: UpdateMysqlUserPasswordRequestBody models the JSON body of a 'database-update-mysql-user-password' request
 
+// UpdateMysqlUserPasswordRequestBody models the JSON body of a 'database-update-mysql-user-password' request
 type UpdateMysqlUserPasswordRequestBody struct {
 	Password string `json:"password"`
 }

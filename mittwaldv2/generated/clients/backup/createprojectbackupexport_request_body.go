@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "format":
 //        type: "string"
 //        enum:
@@ -19,9 +19,11 @@ import "fmt"
 //        type: "string"
 //        description: "Password to use to protect the archive."
 //        example: "password"
-//required:
+// required:
 //    - "format"
+// description: CreateProjectBackupExportRequestBody models the JSON body of a 'backup-create-project-backup-export' request
 
+// CreateProjectBackupExportRequestBody models the JSON body of a 'backup-create-project-backup-export' request
 type CreateProjectBackupExportRequestBody struct {
 	Format   CreateProjectBackupExportRequestBodyFormat `json:"format"`
 	Password *string                                    `json:"password,omitempty"`

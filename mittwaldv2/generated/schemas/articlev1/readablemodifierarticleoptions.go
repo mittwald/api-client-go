@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "articleId":
 //        type: "string"
 //        minLength: 1
@@ -25,7 +25,7 @@ import "fmt"
 //    "maxArticleCount":
 //        type: "number"
 //        minimum: 1
-//required:
+// required:
 //    - "articleId"
 //    - "maxArticleCount"
 

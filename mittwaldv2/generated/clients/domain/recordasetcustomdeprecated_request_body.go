@@ -13,9 +13,10 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//oneOf:
+// oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordUnset"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.CombinedACustom"}
+// description: RecordASetCustomDeprecatedRequestBody models the JSON body of a 'dns-record-a-set-custom-deprecated' request
 
 type RecordASetCustomDeprecatedRequestBody struct {
 	AlternativeRecordUnset     *dnsv1.RecordUnset

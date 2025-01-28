@@ -4,8 +4,8 @@ package containerv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "description":
 //        type: "string"
 //        description: "The description of the env key."
@@ -26,7 +26,7 @@ package containerv1
 //        type: "string"
 //        description: "The env default value."
 //        example: "my_password"
-//required:
+// required:
 //    - "key"
 //    - "isAiGenerated"
 

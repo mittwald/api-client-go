@@ -4,14 +4,14 @@ package ingressv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "txtRecord":
 //        type: "string"
 //    "verified":
 //        type: "boolean"
 //        description: "Whether the domain ownership is verified or not."
-//required:
+// required:
 //    - "verified"
 
 type Ownership struct {

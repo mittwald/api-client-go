@@ -6,8 +6,8 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "data":
 //        type: "string"
 //        format: "byte"
@@ -16,7 +16,7 @@ import "time"
 //    "updatedAt":
 //        type: "string"
 //        format: "date-time"
-//required:
+// required:
 //    - "name"
 //    - "data"
 //    - "updatedAt"

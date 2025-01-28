@@ -10,8 +10,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "expire":
 //        type: "integer"
 //    "files":
@@ -25,7 +25,7 @@ import (
 //    "updated":
 //        type: "string"
 //        format: "date-time"
-//required:
+// required:
 //    - "revision"
 //    - "updated"
 //    - "files"

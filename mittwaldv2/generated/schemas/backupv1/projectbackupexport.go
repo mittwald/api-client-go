@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "downloadURL":
 //        type: "string"
 //        format: "url"
@@ -32,7 +32,7 @@ import (
 //        example: "Completed"
 //    "withPassword":
 //        type: "boolean"
-//required:
+// required:
 //    - "format"
 //    - "withPassword"
 

@@ -6,8 +6,8 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "cancellationForbidden":
 //        type: "boolean"
 //        description: "Indicates whether the User is allowed to cancel the Termination."
@@ -22,7 +22,7 @@ import "time"
 //    "targetDate":
 //        type: "string"
 //        format: "date-time"
-//required:
+// required:
 //    - "scheduledAtDate"
 //    - "targetDate"
 

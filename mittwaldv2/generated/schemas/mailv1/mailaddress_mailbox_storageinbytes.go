@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "current":
 //        type: "object"
 //        properties:
@@ -21,7 +21,7 @@ import "fmt"
 //            - "updatedAt"
 //    "limit":
 //        type: "number"
-//required:
+// required:
 //    - "limit"
 //    - "current"
 

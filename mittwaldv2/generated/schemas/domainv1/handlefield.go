@@ -4,14 +4,14 @@ package domainv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "name":
 //        type: "string"
 //    "value":
 //        type: "string"
 //        pattern: "^[0-9a-zA-ZÀ-ÖØ-öø-ÿ /&()+,.@_-]+$"
-//required:
+// required:
 //    - "name"
 //    - "value"
 

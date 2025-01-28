@@ -13,9 +13,10 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//oneOf:
+// oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TlsAcme"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TlsCertificate"}
+// description: DeprecatedTLSRequestBody models the JSON body of a 'deprecated-ingress-tls' request
 
 type DeprecatedTLSRequestBody struct {
 	AlternativeTlsAcme        *ingressv1.TlsAcme

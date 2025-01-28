@@ -4,15 +4,15 @@ package customerv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "avatarRefId":
 //        type: "string"
 //    "customerId":
 //        type: "string"
 //    "name":
 //        type: "string"
-//required:
+// required:
 //    - "customerId"
 //    - "name"
 

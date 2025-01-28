@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "activeSuspension":
 //        type: "object"
 //        properties:
@@ -55,7 +55,7 @@ import (
 //            - "invalid"
 //            - "pending"
 //            - "unspecified"
-//required:
+// required:
 //    - "customerId"
 //    - "customerNumber"
 //    - "name"

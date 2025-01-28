@@ -4,8 +4,8 @@ package contractv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "aggregate":
 //        type: "string"
 //        example: "project"
@@ -15,7 +15,7 @@ package contractv1
 //    "id":
 //        type: "string"
 //        example: "a1b8f0e9-904f-4716-a1c0-81ccf5342a56"
-//required:
+// required:
 //    - "id"
 //    - "domain"
 //    - "aggregate"

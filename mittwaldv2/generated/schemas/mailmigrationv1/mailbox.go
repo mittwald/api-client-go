@@ -6,15 +6,15 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "mailsystem": {"$ref": "#/components/schemas/de.mittwald.v1.mailmigration.MailSystemSettings"}
 //    "name":
 //        type: "string"
 //    "quotaInBytes":
 //        type: "integer"
 //    "spamProtection": {"$ref": "#/components/schemas/de.mittwald.v1.mailmigration.SpamProtection"}
-//required:
+// required:
 //    - "name"
 //    - "quotaInBytes"
 //    - "mailsystem"

@@ -10,8 +10,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "description":
 //        type: "string"
 //        example: "Api Token - read"
@@ -29,10 +29,12 @@ import (
 //        uniqueItems: true
 //        description: "Determines the access rights of the ApiToken."
 //        example: {"value": ["api_read"]}
-//required:
+// required:
 //    - "roles"
 //    - "description"
+// description: CreateAPITokenRequestBody models the JSON body of a 'user-create-api-token' request
 
+// CreateAPITokenRequestBody models the JSON body of a 'user-create-api-token' request
 type CreateAPITokenRequestBody struct {
 	Description string                               `json:"description"`
 	ExpiresAt   *time.Time                           `json:"expiresAt,omitempty"`

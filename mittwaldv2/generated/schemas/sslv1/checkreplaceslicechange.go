@@ -6,8 +6,8 @@ import "errors"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "addedValues":
 //        type: "array"
 //        items:
@@ -20,7 +20,7 @@ import "errors"
 //        type: "array"
 //        items:
 //            type: "string"
-//required:
+// required:
 //    - "values"
 //    - "addedValues"
 //    - "removedValues"

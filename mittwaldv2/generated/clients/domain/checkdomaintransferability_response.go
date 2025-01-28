@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "reasons":
 //        type: "object"
 //        properties:
@@ -26,7 +26,7 @@ import "fmt"
 //            - "domainAgeTooSmall"
 //    "transferable":
 //        type: "boolean"
-//required:
+// required:
 //    - "transferable"
 //    - "reasons"
 

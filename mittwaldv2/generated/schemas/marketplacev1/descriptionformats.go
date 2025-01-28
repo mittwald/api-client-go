@@ -4,17 +4,17 @@ package marketplacev1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "markdown":
 //        type: "string"
 //        minLength: 1
 //    "plain":
 //        type: "string"
 //        minLength: 1
-//required:
+// required:
 //    - "markdown"
-//description: "Language specific descriptions in various formats."
+// description: "Language specific descriptions in various formats."
 
 // Language specific descriptions in various formats.
 type DescriptionFormats struct {

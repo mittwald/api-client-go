@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateContributorOnboardingProcessRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{}")
+			exampleJSON := []byte("{\"shippingCountryRestriction\":\"onlyDomestic\"}")
 
 			sut := marketplace.CreateContributorOnboardingProcessRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

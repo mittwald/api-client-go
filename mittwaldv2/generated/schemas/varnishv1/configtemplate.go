@@ -10,8 +10,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "files":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.varnish.ConfigFileRef"}
@@ -29,7 +29,7 @@ import (
 //    "updatedAt":
 //        type: "string"
 //        format: "date-time"
-//required:
+// required:
 //    - "softwareConfigTemplateId"
 //    - "softwareTemplateId"
 //    - "files"

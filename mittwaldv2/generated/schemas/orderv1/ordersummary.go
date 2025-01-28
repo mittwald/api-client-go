@@ -4,8 +4,8 @@ package orderv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "nonRecurring":
 //        type: "number"
 //        example: 1000
@@ -16,7 +16,7 @@ package orderv1
 //        type: "number"
 //        description: "The total price of the order"
 //        example: 10000
-//required:
+// required:
 //    - "summary"
 //    - "recurring"
 //    - "nonRecurring"

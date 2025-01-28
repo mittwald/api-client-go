@@ -4,8 +4,10 @@ package customer
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
+// type: "object"
+// description: RequestAvatarUploadRequestBody models the JSON body of a 'customer-request-avatar-upload' request
 
+// RequestAvatarUploadRequestBody models the JSON body of a 'customer-request-avatar-upload' request
 type RequestAvatarUploadRequestBody struct {
 }
 

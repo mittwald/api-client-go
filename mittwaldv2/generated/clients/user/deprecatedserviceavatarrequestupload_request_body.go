@@ -4,8 +4,10 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
+// type: "object"
+// description: DeprecatedServiceAvatarRequestUploadRequestBody models the JSON body of a 'deprecated-user-service-avatar-request-upload' request
 
+// DeprecatedServiceAvatarRequestUploadRequestBody models the JSON body of a 'deprecated-user-service-avatar-request-upload' request
 type DeprecatedServiceAvatarRequestUploadRequestBody struct {
 }
 

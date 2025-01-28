@@ -4,12 +4,14 @@ package mail
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "description":
 //        type: "string"
-//required:
+// required:
 //    - "description"
+// description: UpdateDeliveryBoxDescriptionRequestBody models the JSON body of a 'mail-update-delivery-box-description' request
 
+// UpdateDeliveryBoxDescriptionRequestBody models the JSON body of a 'mail-update-delivery-box-description' request
 type UpdateDeliveryBoxDescriptionRequestBody struct {
 	Description string `json:"description"`
 }

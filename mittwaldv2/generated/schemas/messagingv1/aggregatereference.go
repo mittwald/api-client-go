@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "aggregate":
 //        type: "string"
 //    "domain":
@@ -29,7 +29,7 @@ import "fmt"
 //                - "id"
 //                - "aggregate"
 //                - "domain"
-//required:
+// required:
 //    - "id"
 //    - "aggregate"
 //    - "domain"

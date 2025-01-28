@@ -6,13 +6,13 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "method":
 //        type: "string"
 //        enum:
 //            - "invoice"
-//required:
+// required:
 //    - "method"
 
 type PaymentSettingsInvoice struct {

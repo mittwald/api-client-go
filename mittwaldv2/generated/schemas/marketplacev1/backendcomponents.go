@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "extensionAddedToContext": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.BackendComponent"}
 //    "extensionInstanceRemovedFromContext": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.BackendComponent"}
 //    "extensionInstanceSecretRotated": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.BackendComponent"}

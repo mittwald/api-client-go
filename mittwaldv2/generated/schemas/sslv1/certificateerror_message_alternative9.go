@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "incompatible_usage"
-//description: "The certificate's usage is incompatible."
+// description: "The certificate's usage is incompatible."
 
 // The certificate's usage is incompatible.
 type CertificateErrorMessageAlternative9 string

@@ -12,8 +12,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "accessLevel":
 //        type: "string"
 //        enum:
@@ -30,11 +30,13 @@ import (
 //    "expiresAt":
 //        type: "string"
 //        format: "date-time"
-//required:
+// required:
 //    - "description"
 //    - "authentication"
 //    - "directories"
+// description: CreateSFTPUserRequestBody models the JSON body of a 'sftp-user-create-sftp-user' request
 
+// CreateSFTPUserRequestBody models the JSON body of a 'sftp-user-create-sftp-user' request
 type CreateSFTPUserRequestBody struct {
 	AccessLevel    *CreateSFTPUserRequestBodyAccessLevel `json:"accessLevel,omitempty"`
 	Authentication sshuserv1.Authentication              `json:"authentication"`

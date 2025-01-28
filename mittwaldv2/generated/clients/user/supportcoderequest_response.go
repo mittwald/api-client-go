@@ -6,8 +6,8 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "expiresAt":
 //        type: "string"
 //        format: "date-time"
@@ -16,7 +16,7 @@ import "time"
 //        type: "string"
 //        description: "support code to authenticate yourself against the mittwald support via telephone"
 //        example: "123456"
-//required:
+// required:
 //    - "supportCode"
 //    - "expiresAt"
 

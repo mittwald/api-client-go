@@ -4,13 +4,15 @@ package domain
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "certificate":
 //        type: "string"
-//required:
+// required:
 //    - "certificate"
+// description: SetCertificateRequestCertificateRequestBody models the JSON body of a 'ssl-set-certificate-request-certificate' request
 
+// SetCertificateRequestCertificateRequestBody models the JSON body of a 'ssl-set-certificate-request-certificate' request
 type SetCertificateRequestCertificateRequestBody struct {
 	Certificate string `json:"certificate"`
 }

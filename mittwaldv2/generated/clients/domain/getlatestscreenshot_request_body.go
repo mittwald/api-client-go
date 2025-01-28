@@ -4,18 +4,20 @@ package domain
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "domainName":
 //        type: "string"
 //        example: "example.com"
 //    "path":
 //        type: "string"
 //        example: "/var/www"
-//required:
+// required:
 //    - "domainName"
 //    - "path"
+// description: GetLatestScreenshotRequestBody models the JSON body of a 'domain-get-latest-screenshot' request
 
+// GetLatestScreenshotRequestBody models the JSON body of a 'domain-get-latest-screenshot' request
 type GetLatestScreenshotRequestBody struct {
 	DomainName string `json:"domainName"`
 	Path       string `json:"path"`

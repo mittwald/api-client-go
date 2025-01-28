@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "domain":
 //        type: "string"
 //    "paths":
@@ -31,7 +31,7 @@ import (
 //                - "path"
 //                - "performanceScore"
 //                - "createdAt"
-//required:
+// required:
 //    - "domain"
 //    - "paths"
 

@@ -4,8 +4,8 @@ package notification
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "active":
 //        type: "boolean"
 //        example: true
@@ -15,7 +15,7 @@ package notification
 //    "registered":
 //        type: "boolean"
 //        example: true
-//required:
+// required:
 //    - "email"
 //    - "active"
 //    - "registered"

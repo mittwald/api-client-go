@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "flags":
 //        type: "integer"
 //        maximum: 255
@@ -21,11 +21,11 @@ import "fmt"
 //    "value":
 //        type: "string"
 //        format: "idn-dnsname"
-//required:
+// required:
 //    - "flags"
 //    - "tag"
 //    - "value"
-//additionalProperties: false
+// additionalProperties: false
 
 type RecordCAARecord struct {
 	Flags int64              `json:"flags"`

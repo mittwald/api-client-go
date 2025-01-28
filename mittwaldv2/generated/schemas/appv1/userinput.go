@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "dataSource":
 //        type: "string"
 //        description: "Optional field to tell the frontend, which data to put into the select."
@@ -24,13 +24,13 @@ import "fmt"
 //    "validationSchema":
 //        type: "string"
 //        description: "JSON Schema formatted (https://json-schema.org/)."
-//required:
+// required:
 //    - "name"
 //    - "dataType"
 //    - "validationSchema"
 //    - "lifecycleConstraint"
 //    - "required"
-//description: "A UserInput is a description of an information which cannot be determined or estimated by mittwald, but has to be given by the person who is requesting an AppInstallation or SystemSoftware."
+// description: "A UserInput is a description of an information which cannot be determined or estimated by mittwald, but has to be given by the person who is requesting an AppInstallation or SystemSoftware."
 
 // A UserInput is a description of an information which cannot be determined or estimated by mittwald, but has to be given by the person who is requesting an AppInstallation or SystemSoftware.
 type UserInput struct {

@@ -4,14 +4,14 @@ package feev1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "price":
 //        type: "number"
 //        description: "The one-time price in Euro Cents."
-//required:
+// required:
 //    - "price"
-//description: "A strategy for fees that occur once."
+// description: "A strategy for fees that occur once."
 
 // A strategy for fees that occur once.
 type OneTimePaymentFeeStrategy struct {

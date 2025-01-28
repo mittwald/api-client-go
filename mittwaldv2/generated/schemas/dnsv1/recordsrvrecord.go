@@ -4,8 +4,8 @@ package dnsv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "fqdn":
 //        type: "string"
 //        maxLength: 50
@@ -23,10 +23,10 @@ package dnsv1
 //        type: "integer"
 //        maximum: 65535
 //        minimum: 0
-//required:
+// required:
 //    - "port"
 //    - "fqdn"
-//additionalProperties: false
+// additionalProperties: false
 
 type RecordSRVRecord struct {
 	Fqdn     string `json:"fqdn"`

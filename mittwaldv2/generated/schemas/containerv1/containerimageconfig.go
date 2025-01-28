@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "command":
 //        type: "array"
 //        items:
@@ -48,7 +48,7 @@ import "fmt"
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.container.ContainerImageConfigVolume"}
 //        description: "List of volumes the container image has."
-//required:
+// required:
 //    - "user"
 //    - "isUserRoot"
 //    - "hasAiGeneratedData"

@@ -4,13 +4,15 @@ package domain
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "authCode":
 //        type: "string"
 //        minLength: 4
-//required:
+// required:
 //    - "authCode"
+// description: DeprecatedDeclareProcessChangeAuthcodeRequestBody models the JSON body of a 'deprecated-domain-declare-process-change-authcode' request
 
+// DeprecatedDeclareProcessChangeAuthcodeRequestBody models the JSON body of a 'deprecated-domain-declare-process-change-authcode' request
 type DeprecatedDeclareProcessChangeAuthcodeRequestBody struct {
 	AuthCode string `json:"authCode"`
 }

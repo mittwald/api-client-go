@@ -6,12 +6,12 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "tar"
 //    - "zip"
-//description: "The desired format to export the ProjectBackup in."
-//example: "tar"
+// description: "The desired format to export the ProjectBackup in."
+// example: "tar"
 
 // The desired format to export the ProjectBackup in.
 type CreateProjectBackupExportRequestBodyFormat string

@@ -4,7 +4,7 @@ package contract
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "machineTypePrice":
 //        type: "number"
 //        example: 100
@@ -14,7 +14,7 @@ package contract
 //    "totalPrice":
 //        type: "number"
 //        example: 1000
-//required:
+// required:
 //    - "totalPrice"
 //    - "storagePrice"
 //    - "machineTypePrice"

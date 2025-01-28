@@ -10,8 +10,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "address": {"$ref": "#/components/schemas/de.mittwald.v1.commons.Address"}
 //    "company":
 //        type: "string"
@@ -36,7 +36,7 @@ import (
 //        example: "Dr."
 //    "useFormalTerm":
 //        type: "boolean"
-//required:
+// required:
 //    - "address"
 //    - "salutation"
 

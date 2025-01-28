@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "accessLevel": {"$ref": "#/components/schemas/de.mittwald.v1.sshuser.AccessLevel"}
 //    "active":
 //        type: "boolean"
@@ -43,7 +43,7 @@ import (
 //        format: "date-time"
 //    "userName":
 //        type: "string"
-//required:
+// required:
 //    - "id"
 //    - "projectId"
 //    - "description"
@@ -52,7 +52,7 @@ import (
 //    - "authUpdatedAt"
 //    - "accessLevel"
 //    - "hasPassword"
-//description: "A representation of an SFTPUser."
+// description: "A representation of an SFTPUser."
 
 // A representation of an SFTPUser.
 type SftpUser struct {

@@ -10,14 +10,14 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "status": {"$ref": "#/components/schemas/de.mittwald.v1.messaging.NotificationStatus"}
 //    "updatedCount":
 //        type: "integer"
 //        format: "int32"
 //        description: "The number of notifications that have been updated."
-//required:
+// required:
 //    - "status"
 //    - "updatedCount"
 

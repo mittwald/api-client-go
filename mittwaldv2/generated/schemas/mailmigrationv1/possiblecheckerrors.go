@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "alreadyExistingMailAddress":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.mailmigration.CheckMigrationIsPossibleErrorAlreadyExistingMailAddress"}
@@ -29,7 +29,7 @@ import (
 //    "missingVerifiedIngress":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.mailmigration.CheckMigrationIsPossibleErrorMissingVerifiedIngress"}
-//required:
+// required:
 //    - "ambiguousMailAddressDelivery"
 //    - "ambiguousMailboxDelivery"
 //    - "catchAllMissingAddress"

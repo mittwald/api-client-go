@@ -9,12 +9,12 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "publicKeys":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.sshuser.PublicKey"}
-//required:
+// required:
 //    - "publicKeys"
 
 type AuthenticationAlternative2 struct {

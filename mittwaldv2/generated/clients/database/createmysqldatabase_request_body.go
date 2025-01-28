@@ -10,14 +10,16 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "database": {"$ref": "#/components/schemas/de.mittwald.v1.database.CreateMySqlDatabase"}
 //    "user": {"$ref": "#/components/schemas/de.mittwald.v1.database.CreateMySqlUserWithDatabase"}
-//required:
+// required:
 //    - "database"
 //    - "user"
+// description: CreateMysqlDatabaseRequestBody models the JSON body of a 'database-create-mysql-database' request
 
+// CreateMysqlDatabaseRequestBody models the JSON body of a 'database-create-mysql-database' request
 type CreateMysqlDatabaseRequestBody struct {
 	Database databasev1.CreateMySqlDatabase         `json:"database"`
 	User     databasev1.CreateMySqlUserWithDatabase `json:"user"`

@@ -13,7 +13,7 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//oneOf:
+// oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordUnset"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.CombinedACustom"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordMXCustom"}
@@ -21,6 +21,7 @@ import (
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordSRVComponent"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCNAMEComponent"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCAAComponent"}
+// description: UpdateRecordSetRequestBody models the JSON body of a 'dns-update-record-set' request
 
 type UpdateRecordSetRequestBody struct {
 	AlternativeRecordUnset          *dnsv1.RecordUnset

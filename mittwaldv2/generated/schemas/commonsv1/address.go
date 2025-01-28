@@ -4,8 +4,8 @@ package commonsv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "street":
 //        type: "string"
 //        example: "Königsberger Straße"
@@ -25,7 +25,7 @@ package commonsv1
 //    "addressPrefix":
 //        type: "string"
 //        example: "c/o Ada Lovelace"
-//required:
+// required:
 //    - "street"
 //    - "houseNumber"
 //    - "city"

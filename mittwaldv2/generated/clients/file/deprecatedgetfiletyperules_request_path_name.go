@@ -6,11 +6,11 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "avatar"
 //    - "conversation"
-//example: "avatar"
+// example: "avatar"
 
 type DeprecatedGetFileTypeRulesRequestPathName string
 

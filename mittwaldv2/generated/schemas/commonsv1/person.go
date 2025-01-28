@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "firstName":
 //        type: "string"
 //        description: "The users first name"
@@ -17,10 +17,10 @@ import "fmt"
 //        description: "The users last name"
 //        example: "Lovelace"
 //    "title": {"$ref": "#/components/schemas/de.mittwald.v1.commons.Salutation"}
-//required:
+// required:
 //    - "lastName"
 //    - "firstName"
-//description: "The users personal information, e.g. first name."
+// description: "The users personal information, e.g. first name."
 
 // The users personal information, e.g. first name.
 type Person struct {

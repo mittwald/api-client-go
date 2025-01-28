@@ -6,11 +6,11 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "kc"
 //    - "mstudio"
-//description: "Which mittwald system does the targetProject use?"
+// description: "Which mittwald system does the targetProject use?"
 
 // Which mittwald system does the targetProject use?
 type CreateRelocationRequestBodyTargetSystem string

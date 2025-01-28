@@ -4,8 +4,8 @@ package invoicev1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "accountHolder":
 //        type: "string"
 //        example: "Ada Lovelace"
@@ -15,7 +15,7 @@ package invoicev1
 //    "iban":
 //        type: "string"
 //        example: "DE12345678901234567890"
-//required:
+// required:
 //    - "iban"
 //    - "accountHolder"
 

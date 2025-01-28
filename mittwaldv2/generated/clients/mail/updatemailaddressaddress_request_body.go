@@ -4,13 +4,15 @@ package mail
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "address":
 //        type: "string"
 //        format: "idn-email"
-//required:
+// required:
 //    - "address"
+// description: UpdateMailAddressAddressRequestBody models the JSON body of a 'mail-update-mail-address-address' request
 
+// UpdateMailAddressAddressRequestBody models the JSON body of a 'mail-update-mail-address-address' request
 type UpdateMailAddressAddressRequestBody struct {
 	Address string `json:"address"`
 }

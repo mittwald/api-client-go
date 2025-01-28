@@ -11,8 +11,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "active":
 //        type: "boolean"
 //    "description":
@@ -26,7 +26,9 @@ import (
 //    "publicKeys":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.sshuser.PublicKey"}
+// description: UpdateSSHUserRequestBody models the JSON body of a 'ssh-user-update-ssh-user' request
 
+// UpdateSSHUserRequestBody models the JSON body of a 'ssh-user-update-ssh-user' request
 type UpdateSSHUserRequestBody struct {
 	Active      *bool                 `json:"active,omitempty"`
 	Description *string               `json:"description,omitempty"`

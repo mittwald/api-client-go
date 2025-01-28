@@ -4,13 +4,13 @@ package container
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "registryUri":
 //        type: "string"
-//required:
+// required:
 //    - "registryUri"
-//description: "The Registry URI to validate."
+// description: "The Registry URI to validate."
 
 // The Registry URI to validate.
 type ValidateContainerRegistryUriRequestBody struct {

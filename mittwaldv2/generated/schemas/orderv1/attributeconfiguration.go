@@ -4,15 +4,15 @@ package orderv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "key":
 //        type: "string"
 //        example: "storage"
 //    "value":
 //        type: "string"
 //        example: 10
-//required:
+// required:
 //    - "key"
 
 type AttributeConfiguration struct {

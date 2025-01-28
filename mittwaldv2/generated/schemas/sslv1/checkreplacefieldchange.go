@@ -4,13 +4,13 @@ package sslv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "newValue":
 //        type: "string"
 //    "oldValue":
 //        type: "string"
-//required:
+// required:
 //    - "oldValue"
 //    - "newValue"
 

@@ -11,18 +11,20 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "authentication": {"$ref": "#/components/schemas/de.mittwald.v1.sshuser.Authentication"}
 //    "description":
 //        type: "string"
 //    "expiresAt":
 //        type: "string"
 //        format: "date-time"
-//required:
+// required:
 //    - "description"
 //    - "authentication"
+// description: CreateSSHUserRequestBody models the JSON body of a 'ssh-user-create-ssh-user' request
 
+// CreateSSHUserRequestBody models the JSON body of a 'ssh-user-create-ssh-user' request
 type CreateSSHUserRequestBody struct {
 	Authentication sshuserv1.Authentication `json:"authentication"`
 	Description    string                   `json:"description"`

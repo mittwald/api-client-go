@@ -4,11 +4,11 @@ package container
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "valid":
 //        type: "boolean"
-//required:
+// required:
 //    - "valid"
 
 type ValidateRegistryCredentialsResponse struct {

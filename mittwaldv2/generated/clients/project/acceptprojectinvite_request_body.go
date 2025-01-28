@@ -4,12 +4,14 @@ package project
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "invitationToken":
 //        type: "string"
 //        description: "Token contained in the invite for authentication."
+// description: AcceptProjectInviteRequestBody models the JSON body of a 'project-accept-project-invite' request
 
+// AcceptProjectInviteRequestBody models the JSON body of a 'project-accept-project-invite' request
 type AcceptProjectInviteRequestBody struct {
 	InvitationToken *string `json:"invitationToken,omitempty"`
 }

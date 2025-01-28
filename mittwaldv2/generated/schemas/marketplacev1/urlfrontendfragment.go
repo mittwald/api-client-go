@@ -4,11 +4,11 @@ package marketplacev1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "url":
 //        type: "string"
-//required:
+// required:
 //    - "url"
 
 type UrlFrontendFragment struct {

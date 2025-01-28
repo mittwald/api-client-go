@@ -4,15 +4,17 @@ package notification
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "firstName":
 //        type: "string"
 //        example: "Ada"
 //    "lastName":
 //        type: "string"
 //        example: "Lovelace"
+// description: NewsletterSubscribeUserRequestBody models the JSON body of a 'newsletter-subscribe-user' request
 
+// NewsletterSubscribeUserRequestBody models the JSON body of a 'newsletter-subscribe-user' request
 type NewsletterSubscribeUserRequestBody struct {
 	FirstName *string `json:"firstName,omitempty"`
 	LastName  *string `json:"lastName,omitempty"`

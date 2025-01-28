@@ -4,8 +4,8 @@ package stracev1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "kernelMs":
 //        type: "number"
 //        description: "Elapsed kernel space time in milliseconds."
@@ -22,7 +22,7 @@ package stracev1
 //        type: "number"
 //        description: "Elapsed user space time in milliseconds."
 //        example: 1.2345
-//required:
+// required:
 //    - "kernelMs"
 //    - "userspaceMs"
 //    - "syscallCount"

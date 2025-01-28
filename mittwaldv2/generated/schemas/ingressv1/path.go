@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "path":
 //        type: "string"
 //    "target":
@@ -17,7 +17,7 @@ import "fmt"
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TargetInstallation"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TargetUseDefaultPage"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TargetContainer"}
-//required:
+// required:
 //    - "path"
 //    - "target"
 

@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "additionalEmailRecipients":
 //        type: "array"
 //        items:
@@ -38,7 +38,7 @@ import (
 //    "targetDay":
 //        type: "integer"
 //        example: 15
-//required:
+// required:
 //    - "id"
 
 type InvoiceSettings struct {

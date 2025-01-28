@@ -6,12 +6,12 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "inline"
 //    - "attachment"
-//default: "inline"
-//example: "inline"
+// default: "inline"
+// example: "inline"
 
 type GetFileRequestHeaderContentDisposition string
 

@@ -4,8 +4,8 @@ package dnsv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "fqdn":
 //        type: "string"
 //        maxLength: 50
@@ -15,7 +15,7 @@ package dnsv1
 //        type: "integer"
 //        maximum: 100
 //        minimum: 0
-//required:
+// required:
 //    - "priority"
 //    - "fqdn"
 

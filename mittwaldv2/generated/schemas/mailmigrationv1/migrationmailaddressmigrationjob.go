@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "migrate": {"$ref": "#/components/schemas/de.mittwald.v1.mailmigration.MigrationMailAddressMigrationJobMigrate"}
-//required:
+// required:
 //    - "migrate"
 
 type MigrationMailAddressMigrationJob struct {

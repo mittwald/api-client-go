@@ -6,15 +6,15 @@ import "errors"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "addresses":
 //        type: "array"
 //        items:
 //            type: "string"
 //    "mailboxName":
 //        type: "string"
-//required:
+// required:
 //    - "mailboxName"
 //    - "addresses"
 

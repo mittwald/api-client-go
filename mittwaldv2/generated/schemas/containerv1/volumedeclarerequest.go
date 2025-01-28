@@ -4,12 +4,12 @@ package containerv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "name":
 //        type: "string"
 //        example: "mysql-volume"
-//required:
+// required:
 //    - "name"
 
 type VolumeDeclareRequest struct {

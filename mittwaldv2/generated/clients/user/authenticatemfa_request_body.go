@@ -4,8 +4,8 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "email":
 //        type: "string"
 //        format: "email"
@@ -20,11 +20,13 @@ package user
 //    "password":
 //        type: "string"
 //        description: "The password of the user."
-//required:
+// required:
 //    - "multiFactorCode"
 //    - "email"
 //    - "password"
+// description: AuthenticateMFARequestBody models the JSON body of a 'user-authenticate-mfa' request
 
+// AuthenticateMFARequestBody models the JSON body of a 'user-authenticate-mfa' request
 type AuthenticateMFARequestBody struct {
 	Email           string `json:"email"`
 	MultiFactorCode string `json:"multiFactorCode"`

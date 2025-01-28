@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "conversationId":
 //        type: "string"
 //    "createdAt":
@@ -24,7 +24,7 @@ import "fmt"
 //        type: "string"
 //        enum:
 //            - "STATUS_UPDATE"
-//required:
+// required:
 //    - "conversationId"
 //    - "messageContent"
 //    - "createdAt"

@@ -4,8 +4,8 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "email":
 //        type: "string"
 //        format: "email"
@@ -15,9 +15,11 @@ package user
 //        type: "string"
 //        description: "The token found in the verification email."
 //        example: "123456"
-//required:
+// required:
 //    - "email"
+// description: DeprecatedVerifyEmailRequestBody models the JSON body of a 'deprecated-user-verify-email' request
 
+// DeprecatedVerifyEmailRequestBody models the JSON body of a 'deprecated-user-verify-email' request
 type DeprecatedVerifyEmailRequestBody struct {
 	Email string  `json:"email"`
 	Token *string `json:"token,omitempty"`

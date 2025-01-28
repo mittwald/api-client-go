@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "dataType":
 //        type: "string"
 //        enum:
@@ -22,7 +22,7 @@ import "fmt"
 //        type: "number"
 //    "width":
 //        type: "number"
-//required:
+// required:
 //    - "width"
 //    - "height"
 //    - "quality"

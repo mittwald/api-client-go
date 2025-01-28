@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "certificate_self_signed"
-//description: "The certificate is self-signed."
+// description: "The certificate is self-signed."
 
 // The certificate is self-signed.
 type CertificateErrorMessageAlternative4 string

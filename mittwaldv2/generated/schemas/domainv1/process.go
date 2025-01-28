@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "error":
 //        type: "string"
 //    "lastUpdate":
@@ -24,7 +24,7 @@ import (
 //        type: "string"
 //    "transactionId":
 //        type: "string"
-//required:
+// required:
 //    - "transactionId"
 //    - "processType"
 //    - "state"

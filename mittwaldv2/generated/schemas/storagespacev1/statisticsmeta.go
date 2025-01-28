@@ -6,8 +6,8 @@ import "time"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "isExceeding":
 //        type: "boolean"
 //        example: false
@@ -37,7 +37,7 @@ import "time"
 //    "totalUsageInPercentage":
 //        type: "number"
 //        example: 10
-//required:
+// required:
 //    - "totalUsageInBytes"
 
 type StatisticsMeta struct {

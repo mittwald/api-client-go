@@ -4,8 +4,8 @@ package mailv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "enableSpamProtection":
 //        type: "boolean"
 //    "password":
@@ -15,7 +15,7 @@ package mailv1
 //        minimum: -1
 //        description: "2 GB"
 //        example: 2147483648
-//required:
+// required:
 //    - "password"
 //    - "quotaInBytes"
 //    - "enableSpamProtection"

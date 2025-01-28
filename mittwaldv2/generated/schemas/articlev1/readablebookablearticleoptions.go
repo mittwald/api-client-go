@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "articleId":
 //        type: "string"
 //        minLength: 1
@@ -26,7 +26,7 @@ import "fmt"
 //    "maxArticleCount":
 //        type: "number"
 //        example: 10
-//required:
+// required:
 //    - "articleId"
 
 type ReadableBookableArticleOptions struct {

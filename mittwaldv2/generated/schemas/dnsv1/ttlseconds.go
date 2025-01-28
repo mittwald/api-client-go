@@ -4,13 +4,13 @@ package dnsv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "seconds":
 //        type: "integer"
 //        maximum: 86400
 //        minimum: 300
-//required:
+// required:
 //    - "seconds"
 
 type TtlSeconds struct {

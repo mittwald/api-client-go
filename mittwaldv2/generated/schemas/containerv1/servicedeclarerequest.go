@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "command":
 //        type: "array"
 //        items:
@@ -44,7 +44,7 @@ import (
 //        items:
 //            type: "string"
 //        example: ["data:/var/lib/mysql"]
-//required:
+// required:
 //    - "description"
 //    - "image"
 //    - "ports"

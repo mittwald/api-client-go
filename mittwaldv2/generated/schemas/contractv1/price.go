@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "currency":
 //        type: "string"
 //        enum:
@@ -16,7 +16,7 @@ import "fmt"
 //        type: "integer"
 //        description: "The value of the price in the smallest currency unit (e.g. cents)"
 //        example: 100
-//required:
+// required:
 //    - "value"
 //    - "currency"
 

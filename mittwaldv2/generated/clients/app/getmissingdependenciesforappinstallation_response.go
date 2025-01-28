@@ -10,8 +10,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "missingSystemSoftwareDependencies":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.app.SystemSoftwareDependency"}

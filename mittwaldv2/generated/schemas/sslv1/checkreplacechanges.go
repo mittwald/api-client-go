@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "commonName": {"$ref": "#/components/schemas/de.mittwald.v1.ssl.CheckReplaceFieldChange"}
 //    "dnsNames": {"$ref": "#/components/schemas/de.mittwald.v1.ssl.CheckReplaceSliceChange"}
 //    "issuer": {"$ref": "#/components/schemas/de.mittwald.v1.ssl.CheckReplaceFieldChange"}

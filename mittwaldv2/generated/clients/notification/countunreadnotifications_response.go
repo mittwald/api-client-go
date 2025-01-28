@@ -4,8 +4,8 @@ package notification
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "error":
 //        type: "integer"
 //        minimum: 0
@@ -21,7 +21,7 @@ package notification
 //    "warning":
 //        type: "integer"
 //        minimum: 0
-//required:
+// required:
 //    - "total"
 //    - "success"
 //    - "info"

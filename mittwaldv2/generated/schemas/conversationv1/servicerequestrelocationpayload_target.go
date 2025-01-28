@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "accountShortId":
 //        type: "string"
 //    "application":
@@ -29,7 +29,7 @@ import "fmt"
 //        type: "string"
 //    "withDataCompare":
 //        type: "boolean"
-//required:
+// required:
 //    - "organisation"
 //    - "accountShortId"
 //    - "product"

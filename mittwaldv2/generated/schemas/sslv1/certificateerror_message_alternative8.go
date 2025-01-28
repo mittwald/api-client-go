@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "too_many_intermediates"
-//description: "There are too many intermediate certificates."
+// description: "There are too many intermediate certificates."
 
 // There are too many intermediate certificates.
 type CertificateErrorMessageAlternative8 string

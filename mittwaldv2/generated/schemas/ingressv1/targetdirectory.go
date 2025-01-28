@@ -4,11 +4,11 @@ package ingressv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "directory":
 //        type: "string"
-//required:
+// required:
 //    - "directory"
 
 type TargetDirectory struct {

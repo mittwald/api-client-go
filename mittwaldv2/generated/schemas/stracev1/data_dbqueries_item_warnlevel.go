@@ -6,12 +6,12 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "NO"
 //    - "WARN"
 //    - "SEVERE"
-//description: "Alerts when the time, syscall count or occurrence count of this group are abnormal."
+// description: "Alerts when the time, syscall count or occurrence count of this group are abnormal."
 
 // Alerts when the time, syscall count or occurrence count of this group are abnormal.
 type DataDbQueriesItemWarnLevel string

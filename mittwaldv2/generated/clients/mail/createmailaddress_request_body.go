@@ -13,9 +13,10 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//oneOf:
+// oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.mail.CreateForwardAddress"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.mail.CreateMailAddress"}
+// description: CreateMailAddressRequestBody models the JSON body of a 'mail-create-mail-address' request
 
 type CreateMailAddressRequestBody struct {
 	AlternativeCreateForwardAddress *mailv1.CreateForwardAddress

@@ -4,11 +4,11 @@ package dnsv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "managed":
 //        type: "boolean"
-//required:
+// required:
 //    - "managed"
 
 type RecordMXManaged struct {

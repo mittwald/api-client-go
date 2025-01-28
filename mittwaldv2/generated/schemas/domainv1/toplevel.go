@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "irtp":
 //        type: "boolean"
 //    "rgpDays":
@@ -19,7 +19,7 @@ import "fmt"
 //        type: "boolean"
 //        deprecated: true
 //    "transferAuthentication": {"$ref": "#/components/schemas/de.mittwald.v1.domain.TransferAuthentication"}
-//required:
+// required:
 //    - "tld"
 //    - "rgpDays"
 //    - "irtp"

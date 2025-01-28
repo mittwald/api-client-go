@@ -4,13 +4,13 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "email":
 //        type: "string"
 //        format: "email"
 //        example: "a.lovelace@example.com"
-//required:
+// required:
 //    - "email"
 
 type GetOwnEmailResponse struct {

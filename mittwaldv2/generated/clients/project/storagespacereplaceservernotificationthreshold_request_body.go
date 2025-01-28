@@ -4,13 +4,15 @@ package project
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "notificationThresholdInBytes":
 //        type: "integer"
 //        minimum: 0
 //        nullable: true
 //        example: 10000
+// description: StoragespaceReplaceServerNotificationThresholdRequestBody models the JSON body of a 'storagespace-replace-server-notification-threshold' request
 
+// StoragespaceReplaceServerNotificationThresholdRequestBody models the JSON body of a 'storagespace-replace-server-notification-threshold' request
 type StoragespaceReplaceServerNotificationThresholdRequestBody struct {
 	NotificationThresholdInBytes *int64 `json:"notificationThresholdInBytes,omitempty"`
 }

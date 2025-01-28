@@ -10,8 +10,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "email":
 //        type: "string"
 //        format: "email"
@@ -20,11 +20,13 @@ import (
 //        type: "string"
 //        description: "The users password."
 //    "person": {"$ref": "#/components/schemas/de.mittwald.v1.commons.Person"}
-//required:
+// required:
 //    - "email"
 //    - "password"
 //    - "person"
+// description: RegisterRequestBody models the JSON body of a 'user-register' request
 
+// RegisterRequestBody models the JSON body of a 'user-register' request
 type RegisterRequestBody struct {
 	Email    string           `json:"email"`
 	Password string           `json:"password"`

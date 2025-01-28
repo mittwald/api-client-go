@@ -4,7 +4,7 @@ package appv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "array"
-//items: {"$ref": "#/components/schemas/de.mittwald.v1.app.Action"}
+// type: "array"
+// items: {"$ref": "#/components/schemas/de.mittwald.v1.app.Action"}
 
 type ActionCapabilities []Action

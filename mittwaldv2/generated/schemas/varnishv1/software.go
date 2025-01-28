@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "config": {"$ref": "#/components/schemas/de.mittwald.v1.varnish.SoftwareConfig"}
 //    "projectId":
 //        type: "string"
@@ -27,7 +27,7 @@ import (
 //    "updatedAt":
 //        type: "string"
 //        format: "date-time"
-//required:
+// required:
 //    - "softwareId"
 //    - "updatedAt"
 //    - "softwareTemplateId"

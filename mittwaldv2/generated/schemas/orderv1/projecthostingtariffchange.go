@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "contractId":
 //        type: "string"
 //    "diskspaceInGiB":
@@ -17,7 +17,7 @@ import "fmt"
 //        oneOf:
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.MachineTypeSpec"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.HardwareSpec"}
-//required:
+// required:
 //    - "contractId"
 //    - "diskspaceInGiB"
 //    - "spec"

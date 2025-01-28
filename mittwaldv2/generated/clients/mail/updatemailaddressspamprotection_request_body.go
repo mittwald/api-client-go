@@ -6,7 +6,7 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "spamProtection":
 //        type: "object"
 //        properties:
@@ -27,9 +27,11 @@ import "fmt"
 //            - "folder"
 //            - "relocationMinSpamScore"
 //            - "autoDeleteSpam"
-//required:
+// required:
 //    - "spamProtection"
+// description: UpdateMailAddressSpamProtectionRequestBody models the JSON body of a 'mail-update-mail-address-spam-protection' request
 
+// UpdateMailAddressSpamProtectionRequestBody models the JSON body of a 'mail-update-mail-address-spam-protection' request
 type UpdateMailAddressSpamProtectionRequestBody struct {
 	SpamProtection UpdateMailAddressSpamProtectionRequestBodySpamProtection `json:"spamProtection"`
 }

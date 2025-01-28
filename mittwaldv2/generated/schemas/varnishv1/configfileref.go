@@ -6,12 +6,12 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "meta": {"$ref": "#/components/schemas/de.mittwald.v1.varnish.ConfigFileMetadata"}
 //    "refId":
 //        type: "string"
-//required:
+// required:
 //    - "refId"
 
 type ConfigFileRef struct {

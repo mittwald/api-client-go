@@ -4,8 +4,8 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "email":
 //        type: "string"
 //        description: "The users Email-Address."
@@ -13,10 +13,12 @@ package user
 //    "password":
 //        type: "string"
 //        description: "Password of the User."
-//required:
+// required:
 //    - "email"
 //    - "password"
+// description: AuthenticateRequestBody models the JSON body of a 'user-authenticate' request
 
+// AuthenticateRequestBody models the JSON body of a 'user-authenticate' request
 type AuthenticateRequestBody struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`

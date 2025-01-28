@@ -6,10 +6,10 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "string"
-//enum:
+// type: "string"
+// enum:
 //    - "ca_not_authorized_for_this_name"
-//description: "The Certificate Authority (CA) is not authorized for this name."
+// description: "The Certificate Authority (CA) is not authorized for this name."
 
 // The Certificate Authority (CA) is not authorized for this name.
 type CertificateErrorMessageAlternative7 string

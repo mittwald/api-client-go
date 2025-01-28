@@ -4,8 +4,8 @@ package commonsv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "message":
 //        type: "string"
 //        description: "The standard error message"
@@ -24,7 +24,7 @@ package commonsv1
 //            type: "string"
 //        description: "The object with the additional information about the error that can be used to create custom error messages. Keys depend on the\ntype that failed validation (e.g. \"missingProperty\" for type \"required\")\n"
 //        example: {"format": "email"}
-//required:
+// required:
 //    - "message"
 //    - "path"
 //    - "type"

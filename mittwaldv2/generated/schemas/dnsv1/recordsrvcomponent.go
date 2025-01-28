@@ -9,17 +9,17 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "records":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordSRVRecord"}
 //        minItems: 1
 //    "settings": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordSettings"}
-//required:
+// required:
 //    - "settings"
 //    - "records"
-//additionalProperties: false
+// additionalProperties: false
 
 type RecordSRVComponent struct {
 	Records  []RecordSRVRecord `json:"records"`

@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "orderData":
 //        oneOf:
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.ProjectHostingOrder"}
@@ -22,7 +22,9 @@ import "fmt"
 //            - "server"
 //            - "externalCertificate"
 //        example: "projectHosting"
+// description: CreateOrderRequestBody models the JSON body of a 'order-create-order' request
 
+// CreateOrderRequestBody models the JSON body of a 'order-create-order' request
 type CreateOrderRequestBody struct {
 	OrderData *CreateOrderRequestBodyOrderData `json:"orderData,omitempty"`
 	OrderType *CreateOrderRequestBodyOrderType `json:"orderType,omitempty"`

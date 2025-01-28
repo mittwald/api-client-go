@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "managedBy":
 //        oneOf:
 //            - type: "object"
@@ -17,7 +17,7 @@ import "fmt"
 //                    format: "uuid"
 //              required:
 //                - "ingressId"
-//required:
+// required:
 //    - "managedBy"
 
 type CombinedAManaged struct {

@@ -6,8 +6,8 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "message":
 //        type: "string"
 //        example: "Unfortunately, we were unable to debit your account. Please update your account details."
@@ -25,7 +25,7 @@ import "fmt"
 //            - "returnDebitNoteWaitingForPayment"
 //            - "debtWrittenOff"
 //            - "bankrupt"
-//required:
+// required:
 //    - "severity"
 //    - "type"
 //    - "message"

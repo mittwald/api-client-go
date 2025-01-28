@@ -9,8 +9,8 @@ import (
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "periods":
 //        type: "array"
 //        items:
@@ -27,9 +27,9 @@ import (
 //                    description: "The monthly price in Euro Cents."
 //            required:
 //                - "monthlyPrice"
-//required:
+// required:
 //    - "periods"
-//description: "A strategy for fees that occur periodically"
+// description: "A strategy for fees that occur periodically"
 
 // A strategy for fees that occur periodically
 type PeriodBasedFeeStrategy struct {

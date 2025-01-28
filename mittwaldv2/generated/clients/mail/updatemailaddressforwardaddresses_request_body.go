@@ -6,15 +6,17 @@ import "errors"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//properties:
+// properties:
 //    "forwardAddresses":
 //        type: "array"
 //        items:
 //            type: "string"
 //            format: "idn-email"
-//required:
+// required:
 //    - "forwardAddresses"
+// description: UpdateMailAddressForwardAddressesRequestBody models the JSON body of a 'mail-update-mail-address-forward-addresses' request
 
+// UpdateMailAddressForwardAddressesRequestBody models the JSON body of a 'mail-update-mail-address-forward-addresses' request
 type UpdateMailAddressForwardAddressesRequestBody struct {
 	ForwardAddresses []string `json:"forwardAddresses"`
 }

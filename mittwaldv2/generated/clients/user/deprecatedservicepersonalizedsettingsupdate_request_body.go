@@ -4,13 +4,15 @@ package user
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "settingsString":
 //        type: "string"
-//required:
+// required:
 //    - "settingsString"
+// description: DeprecatedServicePersonalizedSettingsUpdateRequestBody models the JSON body of a 'deprecated-user-service-personalized-settings-update' request
 
+// DeprecatedServicePersonalizedSettingsUpdateRequestBody models the JSON body of a 'deprecated-user-service-personalized-settings-update' request
 type DeprecatedServicePersonalizedSettingsUpdateRequestBody struct {
 	SettingsString string `json:"settingsString"`
 }

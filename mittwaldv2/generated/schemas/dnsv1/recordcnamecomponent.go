@@ -6,13 +6,13 @@ import "fmt"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "fqdn":
 //        type: "string"
 //        format: "idn-dnsname"
 //    "settings": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordSettings"}
-//required:
+// required:
 //    - "settings"
 //    - "fqdn"
 

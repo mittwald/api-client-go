@@ -6,16 +6,18 @@ import "errors"
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "whitelist":
 //        type: "array"
 //        items:
 //            type: "string"
 //            format: "idn-email"
-//required:
+// required:
 //    - "whitelist"
+// description: DeprecatedProjectsettingUpdateWhitelistRequestBody models the JSON body of a 'deprecated-mail-projectsetting-update-whitelist' request
 
+// DeprecatedProjectsettingUpdateWhitelistRequestBody models the JSON body of a 'deprecated-mail-projectsetting-update-whitelist' request
 type DeprecatedProjectsettingUpdateWhitelistRequestBody struct {
 	Whitelist []string `json:"whitelist"`
 }

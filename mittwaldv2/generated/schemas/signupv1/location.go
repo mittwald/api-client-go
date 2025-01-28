@@ -4,8 +4,8 @@ package signupv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "city":
 //        type: "string"
 //        example: "Espelkamp"

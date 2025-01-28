@@ -4,15 +4,15 @@ package userv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "active":
 //        type: "boolean"
 //        default: false
 //    "setup":
 //        type: "boolean"
 //        default: false
-//required:
+// required:
 //    - "active"
 //    - "setup"
 

@@ -4,16 +4,16 @@ package sshuserv1
 // DO NOT EDIT.
 
 //This data type was generated from the following JSON schema:
-//type: "object"
-//properties:
+// type: "object"
+// properties:
 //    "comment":
 //        type: "string"
 //    "key":
 //        type: "string"
-//required:
+// required:
 //    - "comment"
 //    - "key"
-//description: "A representation of an ssh-public-key."
+// description: "A representation of an ssh-public-key."
 
 // A representation of an ssh-public-key.
 type PublicKey struct {
