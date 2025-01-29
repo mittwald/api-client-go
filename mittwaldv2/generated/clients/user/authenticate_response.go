@@ -14,16 +14,16 @@ import (
 // null
 
 type AuthenticateResponse struct {
-	AlternativeAuthenticateAcceptedResponse *AuthenticateAcceptedResponse
 	AlternativeAuthenticateOKResponse       *AuthenticateOKResponse
+	AlternativeAuthenticateAcceptedResponse *AuthenticateAcceptedResponse
 }
 
 func (a *AuthenticateResponse) MarshalJSON() ([]byte, error) {
-	if a.AlternativeAuthenticateAcceptedResponse != nil {
-		return json.Marshal(a.AlternativeAuthenticateAcceptedResponse)
-	}
 	if a.AlternativeAuthenticateOKResponse != nil {
 		return json.Marshal(a.AlternativeAuthenticateOKResponse)
+	}
+	if a.AlternativeAuthenticateAcceptedResponse != nil {
+		return json.Marshal(a.AlternativeAuthenticateAcceptedResponse)
 	}
 	return []byte("null"), nil
 }
@@ -35,21 +35,21 @@ func (a *AuthenticateResponse) UnmarshalJSON(input []byte) error {
 	dec.DisallowUnknownFields()
 
 	reader.Reset(input)
-	var alternativeAuthenticateAcceptedResponse AuthenticateAcceptedResponse
-	if err := dec.Decode(&alternativeAuthenticateAcceptedResponse); err == nil {
-		//subtype: *generator.ObjectType
-		if vErr := alternativeAuthenticateAcceptedResponse.Validate(); vErr == nil {
-			a.AlternativeAuthenticateAcceptedResponse = &alternativeAuthenticateAcceptedResponse
-			decodedAtLeastOnce = true
-		}
-	}
-
-	reader.Reset(input)
 	var alternativeAuthenticateOKResponse AuthenticateOKResponse
 	if err := dec.Decode(&alternativeAuthenticateOKResponse); err == nil {
 		//subtype: *generator.ObjectType
 		if vErr := alternativeAuthenticateOKResponse.Validate(); vErr == nil {
 			a.AlternativeAuthenticateOKResponse = &alternativeAuthenticateOKResponse
+			decodedAtLeastOnce = true
+		}
+	}
+
+	reader.Reset(input)
+	var alternativeAuthenticateAcceptedResponse AuthenticateAcceptedResponse
+	if err := dec.Decode(&alternativeAuthenticateAcceptedResponse); err == nil {
+		//subtype: *generator.ObjectType
+		if vErr := alternativeAuthenticateAcceptedResponse.Validate(); vErr == nil {
+			a.AlternativeAuthenticateAcceptedResponse = &alternativeAuthenticateAcceptedResponse
 			decodedAtLeastOnce = true
 		}
 	}
@@ -61,11 +61,11 @@ func (a *AuthenticateResponse) UnmarshalJSON(input []byte) error {
 }
 
 func (a *AuthenticateResponse) Validate() error {
-	if a.AlternativeAuthenticateAcceptedResponse != nil {
-		return a.AlternativeAuthenticateAcceptedResponse.Validate()
-	}
 	if a.AlternativeAuthenticateOKResponse != nil {
 		return a.AlternativeAuthenticateOKResponse.Validate()
+	}
+	if a.AlternativeAuthenticateAcceptedResponse != nil {
+		return a.AlternativeAuthenticateAcceptedResponse.Validate()
 	}
 	return errors.New("no alternative set")
 }

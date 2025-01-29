@@ -20,6 +20,7 @@ import (
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordTXTComponent"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordSRVComponent"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCNAMEComponent"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCAAComponent"}
 // description: UpdateRecordSetRequestBody models the JSON body of a 'dns-update-record-set' request
 
 type UpdateRecordSetRequestBody struct {
@@ -29,6 +30,7 @@ type UpdateRecordSetRequestBody struct {
 	AlternativeRecordTXTComponent   *dnsv1.RecordTXTComponent
 	AlternativeRecordSRVComponent   *dnsv1.RecordSRVComponent
 	AlternativeRecordCNAMEComponent *dnsv1.RecordCNAMEComponent
+	AlternativeRecordCAAComponent   *dnsv1.RecordCAAComponent
 }
 
 func (a *UpdateRecordSetRequestBody) MarshalJSON() ([]byte, error) {
@@ -49,6 +51,9 @@ func (a *UpdateRecordSetRequestBody) MarshalJSON() ([]byte, error) {
 	}
 	if a.AlternativeRecordCNAMEComponent != nil {
 		return json.Marshal(a.AlternativeRecordCNAMEComponent)
+	}
+	if a.AlternativeRecordCAAComponent != nil {
+		return json.Marshal(a.AlternativeRecordCAAComponent)
 	}
 	return []byte("null"), nil
 }
@@ -119,6 +124,16 @@ func (a *UpdateRecordSetRequestBody) UnmarshalJSON(input []byte) error {
 		}
 	}
 
+	reader.Reset(input)
+	var alternativeRecordCAAComponent dnsv1.RecordCAAComponent
+	if err := dec.Decode(&alternativeRecordCAAComponent); err == nil {
+		//subtype: *generator.ReferenceType
+		if vErr := alternativeRecordCAAComponent.Validate(); vErr == nil {
+			a.AlternativeRecordCAAComponent = &alternativeRecordCAAComponent
+			decodedAtLeastOnce = true
+		}
+	}
+
 	if !decodedAtLeastOnce {
 		return fmt.Errorf("could not unmarshal into any alternative for type %T", a)
 	}
@@ -143,6 +158,9 @@ func (a *UpdateRecordSetRequestBody) Validate() error {
 	}
 	if a.AlternativeRecordCNAMEComponent != nil {
 		return a.AlternativeRecordCNAMEComponent.Validate()
+	}
+	if a.AlternativeRecordCAAComponent != nil {
+		return a.AlternativeRecordCAAComponent.Validate()
 	}
 	return errors.New("no alternative set")
 }

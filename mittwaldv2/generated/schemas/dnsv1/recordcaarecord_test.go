@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("ZoneRecordSet", func() {
+var _ = Describe("RecordCAARecord", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"caa\":{},\"cname\":{},\"combinedARecords\":{},\"mx\":{},\"srv\":{},\"txt\":{}}")
+			exampleJSON := []byte("{\"flags\":42,\"tag\":\"issue\",\"value\":\"string\"}")
 
-			sut := dnsv1.ZoneRecordSet{}
+			sut := dnsv1.RecordCAARecord{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

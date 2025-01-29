@@ -61,5 +61,13 @@ var _ = Describe("UpdateRecordSetRequestBody", func() {
 			Expect(sut.Validate()).To(Succeed())
 			Expect(sut.AlternativeRecordCNAMEComponent).NotTo(BeNil())
 		})
+		It("should unmarshal into AlternativeRecordCAAComponent", func() {
+			exampleJSON := []byte("{\"records\":[{\"flags\":42,\"tag\":\"issue\",\"value\":\"string\"}],\"settings\":{\"ttl\":{\"seconds\":42}}}")
+
+			sut := domain.UpdateRecordSetRequestBody{}
+			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
+			Expect(sut.Validate()).To(Succeed())
+			Expect(sut.AlternativeRecordCAAComponent).NotTo(BeNil())
+		})
 	})
 })

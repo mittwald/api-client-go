@@ -8,6 +8,7 @@ import "fmt"
 //This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "caa": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCAA"}
 //    "cname": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCNAME"}
 //    "combinedARecords": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCombinedA"}
 //    "mx": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordMX"}
@@ -19,8 +20,10 @@ import "fmt"
 //    - "mx"
 //    - "txt"
 //    - "srv"
+//    - "caa"
 
 type ZoneRecordSet struct {
+	Caa              RecordCAA       `json:"caa"`
 	Cname            RecordCNAME     `json:"cname"`
 	CombinedARecords RecordCombinedA `json:"combinedARecords"`
 	Mx               RecordMX        `json:"mx"`
@@ -29,6 +32,9 @@ type ZoneRecordSet struct {
 }
 
 func (o *ZoneRecordSet) Validate() error {
+	if err := o.Caa.Validate(); err != nil {
+		return fmt.Errorf("invalid property caa: %w", err)
+	}
 	if err := o.Cname.Validate(); err != nil {
 		return fmt.Errorf("invalid property cname: %w", err)
 	}
