@@ -93,10 +93,6 @@ type Client interface {
 		ctx context.Context,
 		req DeleteDNSZoneRequest,
 	) (*http.Response, error)
-	GetZoneFile(
-		ctx context.Context,
-		req GetZoneFileRequest,
-	) (*GetZoneFileResponse, *http.Response, error)
 	ListDNSZones(
 		ctx context.Context,
 		req ListDNSZonesRequest,
@@ -779,35 +775,6 @@ func (c *clientImpl) DeleteDNSZone(
 	}
 
 	return httpRes, nil
-}
-
-// Get a zone file for a DNSZone.
-//
-// Returns a BIND-compliant DNS zone file per RFC 1035 for the specified dnsZoneId, including all sub zone information. Entering the dnsZoneId of a sub zone will result in an error.
-func (c *clientImpl) GetZoneFile(
-	ctx context.Context,
-	req GetZoneFileRequest,
-) (*GetZoneFileResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response GetZoneFileResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
 
 // List DNSZones belonging to a Project.
