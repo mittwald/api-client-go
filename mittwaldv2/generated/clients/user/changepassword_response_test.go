@@ -13,14 +13,6 @@ import (
 
 var _ = Describe("ChangePasswordResponse", func() {
 	When("unmarshaling from JSON", func() {
-		It("should unmarshal into AlternativeChangePasswordOKResponse", func() {
-			exampleJSON := []byte("{\"expires\":\"2006-01-02T15:04:05Z\",\"token\":\"string\"}")
-
-			sut := user.ChangePasswordResponse{}
-			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
-			Expect(sut.Validate()).To(Succeed())
-			Expect(sut.AlternativeChangePasswordOKResponse).NotTo(BeNil())
-		})
 		It("should unmarshal into AlternativeChangePasswordAcceptedResponse", func() {
 			exampleJSON := []byte("null")
 
@@ -28,6 +20,14 @@ var _ = Describe("ChangePasswordResponse", func() {
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 			Expect(sut.AlternativeChangePasswordAcceptedResponse).NotTo(BeNil())
+		})
+		It("should unmarshal into AlternativeChangePasswordOKResponse", func() {
+			exampleJSON := []byte("{\"expires\":\"2006-01-02T15:04:05Z\",\"token\":\"string\"}")
+
+			sut := user.ChangePasswordResponse{}
+			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
+			Expect(sut.Validate()).To(Succeed())
+			Expect(sut.AlternativeChangePasswordOKResponse).NotTo(BeNil())
 		})
 	})
 })
