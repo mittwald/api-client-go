@@ -62,8 +62,8 @@ on how to obtain an API token and how to get started with the API.
 ## Example
 
 ```go
-req := project.ListProjectsRequest{
-	CustomerId: pointer.To("2ef23459-beb1-4ac2-9a38-d3a9df62bf93"),
+req := projectclientv2.ListProjectsRequest{
+	CustomerID: pointer.To("2ef23459-beb1-4ac2-9a38-d3a9df62bf93"),
 	Limit: pointer.To(100),
 }
 

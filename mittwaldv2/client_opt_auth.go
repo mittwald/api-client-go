@@ -7,8 +7,8 @@ import (
 	"time"
 
 	generatedv2 "github.com/mittwald/api-client-go/mittwaldv2/generated/clients"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/marketplace"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/user"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/marketplaceclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/userclientv2"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
 )
 
@@ -43,8 +43,8 @@ func WithAccessTokenAndRefresh(token, refreshToken string, expiration time.Time)
 	return func(ctx context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
 		refreshToken := refreshToken
 		refreshFunc := func() (string, time.Time, error) {
-			req := user.RefreshSessionRequest{
-				Body: user.RefreshSessionRequestBody{
+			req := userclientv2.RefreshSessionRequest{
+				Body: userclientv2.RefreshSessionRequestBody{
 					RefreshToken: refreshToken,
 				},
 			}
@@ -79,8 +79,8 @@ func WithAccessTokenAndRefreshFunc(token string, expiration time.Time, refreshFu
 // it is recommended to use API tokens, instead of username+password.
 func WithUsernamePassword(email, password string) ClientOption {
 	return func(ctx context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
-		req := user.AuthenticateRequest{
-			Body: user.AuthenticateRequestBody{
+		req := userclientv2.AuthenticateRequest{
+			Body: userclientv2.AuthenticateRequestBody{
 				Email:    email,
 				Password: password,
 			},
@@ -110,8 +110,8 @@ func WithUsernamePassword(email, password string) ClientOption {
 // [1]: https://developer.mittwald.de/docs/v2/contribution/overview/concepts/authentication/
 func WithAccessTokenRetrievalKey(userID string, accessTokenRetrievalKey string) ClientOption {
 	return func(ctx context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
-		req := user.AuthenticateWithAccessTokenRetrievalKeyRequest{
-			Body: user.AuthenticateWithAccessTokenRetrievalKeyRequestBody{
+		req := userclientv2.AuthenticateWithAccessTokenRetrievalKeyRequest{
+			Body: userclientv2.AuthenticateWithAccessTokenRetrievalKeyRequestBody{
 				AccessTokenRetrievalKey: accessTokenRetrievalKey,
 				UserId:                  userID,
 			},
@@ -133,9 +133,9 @@ func WithAccessTokenRetrievalKey(userID string, accessTokenRetrievalKey string) 
 func WithExtensionSecret(extensionInstanceID string, extensionSecret string) ClientOption {
 	return func(ctx context.Context, inner httpclient.RequestRunner) (httpclient.RequestRunner, error) {
 		refreshFunc := func() (string, time.Time, error) {
-			req := marketplace.AuthenticateInstanceRequest{
+			req := marketplaceclientv2.AuthenticateInstanceRequest{
 				ExtensionInstanceID: extensionInstanceID,
-				Body: marketplace.AuthenticateInstanceRequestBody{
+				Body: marketplaceclientv2.AuthenticateInstanceRequestBody{
 					ExtensionInstanceSecret: extensionSecret,
 				},
 			}
