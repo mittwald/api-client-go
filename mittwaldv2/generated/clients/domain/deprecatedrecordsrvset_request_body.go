@@ -15,25 +15,25 @@ import (
 //This data type was generated from the following JSON schema:
 // oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordUnset"}
-//    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCNAMEComponent"}
-// description: RecordCnameSetDeprecatedRequestBody models the JSON body of a 'dns-record-cname-set-deprecated' request
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordSRVComponent"}
+// description: DeprecatedRecordSrvSetRequestBody models the JSON body of a 'deprecated-dns-record-srv-set' request
 
-type RecordCnameSetDeprecatedRequestBody struct {
-	AlternativeRecordUnset          *dnsv1.RecordUnset
-	AlternativeRecordCNAMEComponent *dnsv1.RecordCNAMEComponent
+type DeprecatedRecordSrvSetRequestBody struct {
+	AlternativeRecordUnset        *dnsv1.RecordUnset
+	AlternativeRecordSRVComponent *dnsv1.RecordSRVComponent
 }
 
-func (a *RecordCnameSetDeprecatedRequestBody) MarshalJSON() ([]byte, error) {
+func (a *DeprecatedRecordSrvSetRequestBody) MarshalJSON() ([]byte, error) {
 	if a.AlternativeRecordUnset != nil {
 		return json.Marshal(a.AlternativeRecordUnset)
 	}
-	if a.AlternativeRecordCNAMEComponent != nil {
-		return json.Marshal(a.AlternativeRecordCNAMEComponent)
+	if a.AlternativeRecordSRVComponent != nil {
+		return json.Marshal(a.AlternativeRecordSRVComponent)
 	}
 	return []byte("null"), nil
 }
 
-func (a *RecordCnameSetDeprecatedRequestBody) UnmarshalJSON(input []byte) error {
+func (a *DeprecatedRecordSrvSetRequestBody) UnmarshalJSON(input []byte) error {
 	reader := bytes.NewReader(input)
 	decodedAtLeastOnce := false
 	dec := json.NewDecoder(reader)
@@ -50,11 +50,11 @@ func (a *RecordCnameSetDeprecatedRequestBody) UnmarshalJSON(input []byte) error 
 	}
 
 	reader.Reset(input)
-	var alternativeRecordCNAMEComponent dnsv1.RecordCNAMEComponent
-	if err := dec.Decode(&alternativeRecordCNAMEComponent); err == nil {
+	var alternativeRecordSRVComponent dnsv1.RecordSRVComponent
+	if err := dec.Decode(&alternativeRecordSRVComponent); err == nil {
 		//subtype: *generator.ReferenceType
-		if vErr := alternativeRecordCNAMEComponent.Validate(); vErr == nil {
-			a.AlternativeRecordCNAMEComponent = &alternativeRecordCNAMEComponent
+		if vErr := alternativeRecordSRVComponent.Validate(); vErr == nil {
+			a.AlternativeRecordSRVComponent = &alternativeRecordSRVComponent
 			decodedAtLeastOnce = true
 		}
 	}
@@ -65,12 +65,12 @@ func (a *RecordCnameSetDeprecatedRequestBody) UnmarshalJSON(input []byte) error 
 	return nil
 }
 
-func (a *RecordCnameSetDeprecatedRequestBody) Validate() error {
+func (a *DeprecatedRecordSrvSetRequestBody) Validate() error {
 	if a.AlternativeRecordUnset != nil {
 		return a.AlternativeRecordUnset.Validate()
 	}
-	if a.AlternativeRecordCNAMEComponent != nil {
-		return a.AlternativeRecordCNAMEComponent.Validate()
+	if a.AlternativeRecordSRVComponent != nil {
+		return a.AlternativeRecordSRVComponent.Validate()
 	}
 	return errors.New("no alternative set")
 }

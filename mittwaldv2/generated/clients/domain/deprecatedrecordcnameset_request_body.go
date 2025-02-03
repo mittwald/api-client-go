@@ -15,25 +15,25 @@ import (
 //This data type was generated from the following JSON schema:
 // oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordUnset"}
-//    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordMXCustom"}
-// description: RecordMxSetCustomDeprecatedRequestBody models the JSON body of a 'dns-record-mx-set-custom-deprecated' request
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordCNAMEComponent"}
+// description: DeprecatedRecordCnameSetRequestBody models the JSON body of a 'deprecated-dns-record-cname-set' request
 
-type RecordMxSetCustomDeprecatedRequestBody struct {
-	AlternativeRecordUnset    *dnsv1.RecordUnset
-	AlternativeRecordMXCustom *dnsv1.RecordMXCustom
+type DeprecatedRecordCnameSetRequestBody struct {
+	AlternativeRecordUnset          *dnsv1.RecordUnset
+	AlternativeRecordCNAMEComponent *dnsv1.RecordCNAMEComponent
 }
 
-func (a *RecordMxSetCustomDeprecatedRequestBody) MarshalJSON() ([]byte, error) {
+func (a *DeprecatedRecordCnameSetRequestBody) MarshalJSON() ([]byte, error) {
 	if a.AlternativeRecordUnset != nil {
 		return json.Marshal(a.AlternativeRecordUnset)
 	}
-	if a.AlternativeRecordMXCustom != nil {
-		return json.Marshal(a.AlternativeRecordMXCustom)
+	if a.AlternativeRecordCNAMEComponent != nil {
+		return json.Marshal(a.AlternativeRecordCNAMEComponent)
 	}
 	return []byte("null"), nil
 }
 
-func (a *RecordMxSetCustomDeprecatedRequestBody) UnmarshalJSON(input []byte) error {
+func (a *DeprecatedRecordCnameSetRequestBody) UnmarshalJSON(input []byte) error {
 	reader := bytes.NewReader(input)
 	decodedAtLeastOnce := false
 	dec := json.NewDecoder(reader)
@@ -50,11 +50,11 @@ func (a *RecordMxSetCustomDeprecatedRequestBody) UnmarshalJSON(input []byte) err
 	}
 
 	reader.Reset(input)
-	var alternativeRecordMXCustom dnsv1.RecordMXCustom
-	if err := dec.Decode(&alternativeRecordMXCustom); err == nil {
+	var alternativeRecordCNAMEComponent dnsv1.RecordCNAMEComponent
+	if err := dec.Decode(&alternativeRecordCNAMEComponent); err == nil {
 		//subtype: *generator.ReferenceType
-		if vErr := alternativeRecordMXCustom.Validate(); vErr == nil {
-			a.AlternativeRecordMXCustom = &alternativeRecordMXCustom
+		if vErr := alternativeRecordCNAMEComponent.Validate(); vErr == nil {
+			a.AlternativeRecordCNAMEComponent = &alternativeRecordCNAMEComponent
 			decodedAtLeastOnce = true
 		}
 	}
@@ -65,12 +65,12 @@ func (a *RecordMxSetCustomDeprecatedRequestBody) UnmarshalJSON(input []byte) err
 	return nil
 }
 
-func (a *RecordMxSetCustomDeprecatedRequestBody) Validate() error {
+func (a *DeprecatedRecordCnameSetRequestBody) Validate() error {
 	if a.AlternativeRecordUnset != nil {
 		return a.AlternativeRecordUnset.Validate()
 	}
-	if a.AlternativeRecordMXCustom != nil {
-		return a.AlternativeRecordMXCustom.Validate()
+	if a.AlternativeRecordCNAMEComponent != nil {
+		return a.AlternativeRecordCNAMEComponent.Validate()
 	}
 	return errors.New("no alternative set")
 }

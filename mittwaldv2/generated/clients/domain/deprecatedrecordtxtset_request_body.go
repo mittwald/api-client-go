@@ -16,14 +16,14 @@ import (
 // oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordUnset"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordTXTComponent"}
-// description: RecordTxtSetDeprecatedRequestBody models the JSON body of a 'dns-record-txt-set-deprecated' request
+// description: DeprecatedRecordTxtSetRequestBody models the JSON body of a 'deprecated-dns-record-txt-set' request
 
-type RecordTxtSetDeprecatedRequestBody struct {
+type DeprecatedRecordTxtSetRequestBody struct {
 	AlternativeRecordUnset        *dnsv1.RecordUnset
 	AlternativeRecordTXTComponent *dnsv1.RecordTXTComponent
 }
 
-func (a *RecordTxtSetDeprecatedRequestBody) MarshalJSON() ([]byte, error) {
+func (a *DeprecatedRecordTxtSetRequestBody) MarshalJSON() ([]byte, error) {
 	if a.AlternativeRecordUnset != nil {
 		return json.Marshal(a.AlternativeRecordUnset)
 	}
@@ -33,7 +33,7 @@ func (a *RecordTxtSetDeprecatedRequestBody) MarshalJSON() ([]byte, error) {
 	return []byte("null"), nil
 }
 
-func (a *RecordTxtSetDeprecatedRequestBody) UnmarshalJSON(input []byte) error {
+func (a *DeprecatedRecordTxtSetRequestBody) UnmarshalJSON(input []byte) error {
 	reader := bytes.NewReader(input)
 	decodedAtLeastOnce := false
 	dec := json.NewDecoder(reader)
@@ -65,7 +65,7 @@ func (a *RecordTxtSetDeprecatedRequestBody) UnmarshalJSON(input []byte) error {
 	return nil
 }
 
-func (a *RecordTxtSetDeprecatedRequestBody) Validate() error {
+func (a *DeprecatedRecordTxtSetRequestBody) Validate() error {
 	if a.AlternativeRecordUnset != nil {
 		return a.AlternativeRecordUnset.Validate()
 	}

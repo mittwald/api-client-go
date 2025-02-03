@@ -12,10 +12,10 @@ package domain
 // required:
 //    - "ingressId"
 
-type RecordASetManagedByIngressDeprecatedResponse struct {
+type DeprecatedRecordASetManagedByIngressResponse struct {
 	IngressId string `json:"ingressId"`
 }
 
-func (o *RecordASetManagedByIngressDeprecatedResponse) Validate() error {
+func (o *DeprecatedRecordASetManagedByIngressResponse) Validate() error {
 	return nil
 }

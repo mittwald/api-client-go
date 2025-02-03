@@ -15,25 +15,25 @@ import (
 //This data type was generated from the following JSON schema:
 // oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordUnset"}
-//    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordSRVComponent"}
-// description: RecordSrvSetDeprecatedRequestBody models the JSON body of a 'dns-record-srv-set-deprecated' request
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.CombinedACustom"}
+// description: DeprecatedRecordASetCustomRequestBody models the JSON body of a 'deprecated-dns-record-a-set-custom' request
 
-type RecordSrvSetDeprecatedRequestBody struct {
-	AlternativeRecordUnset        *dnsv1.RecordUnset
-	AlternativeRecordSRVComponent *dnsv1.RecordSRVComponent
+type DeprecatedRecordASetCustomRequestBody struct {
+	AlternativeRecordUnset     *dnsv1.RecordUnset
+	AlternativeCombinedACustom *dnsv1.CombinedACustom
 }
 
-func (a *RecordSrvSetDeprecatedRequestBody) MarshalJSON() ([]byte, error) {
+func (a *DeprecatedRecordASetCustomRequestBody) MarshalJSON() ([]byte, error) {
 	if a.AlternativeRecordUnset != nil {
 		return json.Marshal(a.AlternativeRecordUnset)
 	}
-	if a.AlternativeRecordSRVComponent != nil {
-		return json.Marshal(a.AlternativeRecordSRVComponent)
+	if a.AlternativeCombinedACustom != nil {
+		return json.Marshal(a.AlternativeCombinedACustom)
 	}
 	return []byte("null"), nil
 }
 
-func (a *RecordSrvSetDeprecatedRequestBody) UnmarshalJSON(input []byte) error {
+func (a *DeprecatedRecordASetCustomRequestBody) UnmarshalJSON(input []byte) error {
 	reader := bytes.NewReader(input)
 	decodedAtLeastOnce := false
 	dec := json.NewDecoder(reader)
@@ -50,11 +50,11 @@ func (a *RecordSrvSetDeprecatedRequestBody) UnmarshalJSON(input []byte) error {
 	}
 
 	reader.Reset(input)
-	var alternativeRecordSRVComponent dnsv1.RecordSRVComponent
-	if err := dec.Decode(&alternativeRecordSRVComponent); err == nil {
+	var alternativeCombinedACustom dnsv1.CombinedACustom
+	if err := dec.Decode(&alternativeCombinedACustom); err == nil {
 		//subtype: *generator.ReferenceType
-		if vErr := alternativeRecordSRVComponent.Validate(); vErr == nil {
-			a.AlternativeRecordSRVComponent = &alternativeRecordSRVComponent
+		if vErr := alternativeCombinedACustom.Validate(); vErr == nil {
+			a.AlternativeCombinedACustom = &alternativeCombinedACustom
 			decodedAtLeastOnce = true
 		}
 	}
@@ -65,12 +65,12 @@ func (a *RecordSrvSetDeprecatedRequestBody) UnmarshalJSON(input []byte) error {
 	return nil
 }
 
-func (a *RecordSrvSetDeprecatedRequestBody) Validate() error {
+func (a *DeprecatedRecordASetCustomRequestBody) Validate() error {
 	if a.AlternativeRecordUnset != nil {
 		return a.AlternativeRecordUnset.Validate()
 	}
-	if a.AlternativeRecordSRVComponent != nil {
-		return a.AlternativeRecordSRVComponent.Validate()
+	if a.AlternativeCombinedACustom != nil {
+		return a.AlternativeCombinedACustom.Validate()
 	}
 	return errors.New("no alternative set")
 }

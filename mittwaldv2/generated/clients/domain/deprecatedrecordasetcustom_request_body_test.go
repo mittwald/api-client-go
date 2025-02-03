@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("RecordASetCustomDeprecatedRequestBody", func() {
+var _ = Describe("DeprecatedRecordASetCustomRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal into AlternativeRecordUnset", func() {
 			exampleJSON := []byte("{}")
 
-			sut := domain.RecordASetCustomDeprecatedRequestBody{}
+			sut := domain.DeprecatedRecordASetCustomRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 			Expect(sut.AlternativeRecordUnset).NotTo(BeNil())
@@ -24,7 +24,7 @@ var _ = Describe("RecordASetCustomDeprecatedRequestBody", func() {
 		It("should unmarshal into AlternativeCombinedACustom", func() {
 			exampleJSON := []byte("{\"a\":[\"string\"],\"aaaa\":[\"string\"],\"settings\":{\"ttl\":{\"seconds\":42}}}")
 
-			sut := domain.RecordASetCustomDeprecatedRequestBody{}
+			sut := domain.DeprecatedRecordASetCustomRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 			Expect(sut.AlternativeCombinedACustom).NotTo(BeNil())

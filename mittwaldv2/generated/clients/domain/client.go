@@ -97,34 +97,6 @@ type Client interface {
 		ctx context.Context,
 		req ListDNSZonesRequest,
 	) (*[]dnsv1.Zone, *http.Response, error)
-	RecordASetCustomDeprecated(
-		ctx context.Context,
-		req RecordASetCustomDeprecatedRequest,
-	) (*http.Response, error)
-	RecordASetManagedByIngressDeprecated(
-		ctx context.Context,
-		req RecordASetManagedByIngressDeprecatedRequest,
-	) (*RecordASetManagedByIngressDeprecatedResponse, *http.Response, error)
-	RecordCnameSetDeprecated(
-		ctx context.Context,
-		req RecordCnameSetDeprecatedRequest,
-	) (*http.Response, error)
-	RecordMxSetCustomDeprecated(
-		ctx context.Context,
-		req RecordMxSetCustomDeprecatedRequest,
-	) (*http.Response, error)
-	RecordMxSetManagedDeprecated(
-		ctx context.Context,
-		req RecordMxSetManagedDeprecatedRequest,
-	) (*http.Response, error)
-	RecordSrvSetDeprecated(
-		ctx context.Context,
-		req RecordSrvSetDeprecatedRequest,
-	) (*http.Response, error)
-	RecordTxtSetDeprecated(
-		ctx context.Context,
-		req RecordTxtSetDeprecatedRequest,
-	) (*http.Response, error)
 	SetRecordSetManaged(
 		ctx context.Context,
 		req SetRecordSetManagedRequest,
@@ -253,6 +225,34 @@ type Client interface {
 		ctx context.Context,
 		req ListCertificatesRequest,
 	) (*[]sslv1.Certificate, *http.Response, error)
+	DeprecatedRecordASetManagedByIngress(
+		ctx context.Context,
+		req DeprecatedRecordASetManagedByIngressRequest,
+	) (*DeprecatedRecordASetManagedByIngressResponse, *http.Response, error)
+	DeprecatedRecordMxSetManaged(
+		ctx context.Context,
+		req DeprecatedRecordMxSetManagedRequest,
+	) (*http.Response, error)
+	DeprecatedRecordASetCustom(
+		ctx context.Context,
+		req DeprecatedRecordASetCustomRequest,
+	) (*http.Response, error)
+	DeprecatedRecordCnameSet(
+		ctx context.Context,
+		req DeprecatedRecordCnameSetRequest,
+	) (*http.Response, error)
+	DeprecatedRecordMxSetCustom(
+		ctx context.Context,
+		req DeprecatedRecordMxSetCustomRequest,
+	) (*http.Response, error)
+	DeprecatedRecordSrvSet(
+		ctx context.Context,
+		req DeprecatedRecordSrvSetRequest,
+	) (*http.Response, error)
+	DeprecatedRecordTxtSet(
+		ctx context.Context,
+		req DeprecatedRecordTxtSetRequest,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -798,171 +798,6 @@ func (c *clientImpl) ListDNSZones(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// updates a-records for a specific zone
-func (c *clientImpl) RecordASetCustomDeprecated(
-	ctx context.Context,
-	req RecordASetCustomDeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// set a-records managed by ingress for a specific zone
-func (c *clientImpl) RecordASetManagedByIngressDeprecated(
-	ctx context.Context,
-	req RecordASetManagedByIngressDeprecatedRequest,
-) (*RecordASetManagedByIngressDeprecatedResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response RecordASetManagedByIngressDeprecatedResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// updates cname-record for a specific zone
-func (c *clientImpl) RecordCnameSetDeprecated(
-	ctx context.Context,
-	req RecordCnameSetDeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// updates mx-records for a specific zone
-func (c *clientImpl) RecordMxSetCustomDeprecated(
-	ctx context.Context,
-	req RecordMxSetCustomDeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// sets mx-records to managed for a specific zone
-func (c *clientImpl) RecordMxSetManagedDeprecated(
-	ctx context.Context,
-	req RecordMxSetManagedDeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// updates srv-records for a specific zone
-func (c *clientImpl) RecordSrvSetDeprecated(
-	ctx context.Context,
-	req RecordSrvSetDeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// updates txt-records for a specific zone
-func (c *clientImpl) RecordTxtSetDeprecated(
-	ctx context.Context,
-	req RecordTxtSetDeprecatedRequest,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
 
 // Set a record set on a DNSZone to managed.
@@ -1809,4 +1644,183 @@ func (c *clientImpl) ListCertificates(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// set a-records managed by ingress for a specific zone
+//
+// This operation is deprecated. Use the POST v2/dns-zones/{dnsZoneId}/record-sets/{recordSet}/actions/set-managed endpoint instead.
+func (c *clientImpl) DeprecatedRecordASetManagedByIngress(
+	ctx context.Context,
+	req DeprecatedRecordASetManagedByIngressRequest,
+) (*DeprecatedRecordASetManagedByIngressResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response DeprecatedRecordASetManagedByIngressResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// sets mx-records to managed for a specific zone
+//
+// This operation is deprecated. Use the POST v2/dns-zones/{dnsZoneId}/record-sets/{recordSet}/actions/set-managed endpoint instead.
+func (c *clientImpl) DeprecatedRecordMxSetManaged(
+	ctx context.Context,
+	req DeprecatedRecordMxSetManagedRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// updates a-records for a specific zone
+//
+// This operation is deprecated. Use the PUT v2/dns-zones/{dnsZoneId}/record-sets/{recordSet} endpoint instead.
+func (c *clientImpl) DeprecatedRecordASetCustom(
+	ctx context.Context,
+	req DeprecatedRecordASetCustomRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// updates cname-record for a specific zone
+//
+// This operation is deprecated. Use the PUT v2/dns-zones/{dnsZoneId}/record-sets/{recordSet} endpoint instead.
+func (c *clientImpl) DeprecatedRecordCnameSet(
+	ctx context.Context,
+	req DeprecatedRecordCnameSetRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// updates mx-records for a specific zone
+//
+// This operation is deprecated. Use the PUT v2/dns-zones/{dnsZoneId}/record-sets/{recordSet} endpoint instead.
+func (c *clientImpl) DeprecatedRecordMxSetCustom(
+	ctx context.Context,
+	req DeprecatedRecordMxSetCustomRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// updates srv-records for a specific zone
+//
+// This operation is deprecated. Use the PUT v2/dns-zones/{dnsZoneId}/record-sets/{recordSet} endpoint instead.
+func (c *clientImpl) DeprecatedRecordSrvSet(
+	ctx context.Context,
+	req DeprecatedRecordSrvSetRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// updates txt-records for a specific zone
+//
+// This operation is deprecated. Use the PUT v2/dns-zones/{dnsZoneId}/record-sets/{recordSet} endpoint instead.
+func (c *clientImpl) DeprecatedRecordTxtSet(
+	ctx context.Context,
+	req DeprecatedRecordTxtSetRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }

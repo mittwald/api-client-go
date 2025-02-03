@@ -15,25 +15,25 @@ import (
 //This data type was generated from the following JSON schema:
 // oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordUnset"}
-//    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.CombinedACustom"}
-// description: RecordASetCustomDeprecatedRequestBody models the JSON body of a 'dns-record-a-set-custom-deprecated' request
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordMXCustom"}
+// description: DeprecatedRecordMxSetCustomRequestBody models the JSON body of a 'deprecated-dns-record-mx-set-custom' request
 
-type RecordASetCustomDeprecatedRequestBody struct {
-	AlternativeRecordUnset     *dnsv1.RecordUnset
-	AlternativeCombinedACustom *dnsv1.CombinedACustom
+type DeprecatedRecordMxSetCustomRequestBody struct {
+	AlternativeRecordUnset    *dnsv1.RecordUnset
+	AlternativeRecordMXCustom *dnsv1.RecordMXCustom
 }
 
-func (a *RecordASetCustomDeprecatedRequestBody) MarshalJSON() ([]byte, error) {
+func (a *DeprecatedRecordMxSetCustomRequestBody) MarshalJSON() ([]byte, error) {
 	if a.AlternativeRecordUnset != nil {
 		return json.Marshal(a.AlternativeRecordUnset)
 	}
-	if a.AlternativeCombinedACustom != nil {
-		return json.Marshal(a.AlternativeCombinedACustom)
+	if a.AlternativeRecordMXCustom != nil {
+		return json.Marshal(a.AlternativeRecordMXCustom)
 	}
 	return []byte("null"), nil
 }
 
-func (a *RecordASetCustomDeprecatedRequestBody) UnmarshalJSON(input []byte) error {
+func (a *DeprecatedRecordMxSetCustomRequestBody) UnmarshalJSON(input []byte) error {
 	reader := bytes.NewReader(input)
 	decodedAtLeastOnce := false
 	dec := json.NewDecoder(reader)
@@ -50,11 +50,11 @@ func (a *RecordASetCustomDeprecatedRequestBody) UnmarshalJSON(input []byte) erro
 	}
 
 	reader.Reset(input)
-	var alternativeCombinedACustom dnsv1.CombinedACustom
-	if err := dec.Decode(&alternativeCombinedACustom); err == nil {
+	var alternativeRecordMXCustom dnsv1.RecordMXCustom
+	if err := dec.Decode(&alternativeRecordMXCustom); err == nil {
 		//subtype: *generator.ReferenceType
-		if vErr := alternativeCombinedACustom.Validate(); vErr == nil {
-			a.AlternativeCombinedACustom = &alternativeCombinedACustom
+		if vErr := alternativeRecordMXCustom.Validate(); vErr == nil {
+			a.AlternativeRecordMXCustom = &alternativeRecordMXCustom
 			decodedAtLeastOnce = true
 		}
 	}
@@ -65,12 +65,12 @@ func (a *RecordASetCustomDeprecatedRequestBody) UnmarshalJSON(input []byte) erro
 	return nil
 }
 
-func (a *RecordASetCustomDeprecatedRequestBody) Validate() error {
+func (a *DeprecatedRecordMxSetCustomRequestBody) Validate() error {
 	if a.AlternativeRecordUnset != nil {
 		return a.AlternativeRecordUnset.Validate()
 	}
-	if a.AlternativeCombinedACustom != nil {
-		return a.AlternativeCombinedACustom.Validate()
+	if a.AlternativeRecordMXCustom != nil {
+		return a.AlternativeRecordMXCustom.Validate()
 	}
 	return errors.New("no alternative set")
 }
