@@ -2,13 +2,14 @@ package mittwaldv2_test
 
 import (
 	"context"
+	"net/http"
+	"os"
+
 	"github.com/mittwald/api-client-go/mittwaldv2"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/user"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/userclientv2"
 	"github.com/mittwald/api-client-go/pkg/httpclient_mock"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	"net/http"
-	"os"
 )
 
 var _ = Describe("Client authentication", func() {
@@ -23,7 +24,7 @@ var _ = Describe("Client authentication", func() {
 
 			Expect(err).NotTo(HaveOccurred())
 
-			_, _, err = client.User().GetUser(ctx, user.GetUserRequest{UserID: "self"})
+			_, _, err = client.User().GetUser(ctx, userclientv2.GetUserRequest{UserID: "self"})
 
 			Expect(err).NotTo(HaveOccurred())
 			Expect(runner.Requests).To(HaveLen(1))
@@ -44,7 +45,7 @@ var _ = Describe("Client authentication", func() {
 
 			Expect(err).NotTo(HaveOccurred())
 
-			_, _, err = client.User().GetUser(ctx, user.GetUserRequest{UserID: "self"})
+			_, _, err = client.User().GetUser(ctx, userclientv2.GetUserRequest{UserID: "self"})
 
 			Expect(err).NotTo(HaveOccurred())
 			Expect(runner.Requests).To(HaveLen(1))
@@ -64,7 +65,7 @@ var _ = Describe("Client authentication", func() {
 
 			Expect(err).NotTo(HaveOccurred())
 
-			_, _, err = client.User().GetUser(ctx, user.GetUserRequest{UserID: "self"})
+			_, _, err = client.User().GetUser(ctx, userclientv2.GetUserRequest{UserID: "self"})
 
 			Expect(err).NotTo(HaveOccurred())
 			Expect(runner.Requests).To(HaveLen(2))

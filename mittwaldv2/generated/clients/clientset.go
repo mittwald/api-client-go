@@ -1,26 +1,26 @@
 package mittwaldv2
 
 import (
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/app"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/article"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/backup"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/contract"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/conversation"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/cronjob"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/customer"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/database"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/domain"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/file"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/mail"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/marketplace"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/misc"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/notification"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/pageinsights"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/project"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/projectfilesystem"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/relocation"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/sshsftpuser"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/user"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/appclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/articleclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/backupclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/contractclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/conversationclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/cronjobclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/customerclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/databaseclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/domainclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/fileclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/mailclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/marketplaceclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/miscclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/notificationclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/pageinsightsclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/projectclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/projectfilesystemclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/relocationclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/sshsftpuserclientv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/userclientv2"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
 )
 
@@ -28,26 +28,26 @@ import (
 // DO NOT EDIT.
 
 type Client interface {
-	Project() project.Client
-	Backup() backup.Client
-	SSHSFTPUser() sshsftpuser.Client
-	Cronjob() cronjob.Client
-	App() app.Client
-	ProjectFileSystem() projectfilesystem.Client
-	Contract() contract.Client
-	Database() database.Client
-	Domain() domain.Client
-	Conversation() conversation.Client
-	Customer() customer.Client
-	User() user.Client
-	Notification() notification.Client
-	File() file.Client
-	Mail() mail.Client
-	Article() article.Client
-	PageInsights() pageinsights.Client
-	Relocation() relocation.Client
-	Marketplace() marketplace.Client
-	Misc() misc.Client
+	Project() projectclientv2.Client
+	Backup() backupclientv2.Client
+	SSHSFTPUser() sshsftpuserclientv2.Client
+	Cronjob() cronjobclientv2.Client
+	App() appclientv2.Client
+	ProjectFileSystem() projectfilesystemclientv2.Client
+	Contract() contractclientv2.Client
+	Database() databaseclientv2.Client
+	Domain() domainclientv2.Client
+	Conversation() conversationclientv2.Client
+	Customer() customerclientv2.Client
+	User() userclientv2.Client
+	Notification() notificationclientv2.Client
+	File() fileclientv2.Client
+	Mail() mailclientv2.Client
+	Article() articleclientv2.Client
+	PageInsights() pageinsightsclientv2.Client
+	Relocation() relocationclientv2.Client
+	Marketplace() marketplaceclientv2.Client
+	Misc() miscclientv2.Client
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -57,82 +57,82 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
-func (c *clientImpl) Project() project.Client {
-	return project.NewClient(c.client)
+func (c *clientImpl) Project() projectclientv2.Client {
+	return projectclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) Backup() backup.Client {
-	return backup.NewClient(c.client)
+func (c *clientImpl) Backup() backupclientv2.Client {
+	return backupclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) SSHSFTPUser() sshsftpuser.Client {
-	return sshsftpuser.NewClient(c.client)
+func (c *clientImpl) SSHSFTPUser() sshsftpuserclientv2.Client {
+	return sshsftpuserclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) Cronjob() cronjob.Client {
-	return cronjob.NewClient(c.client)
+func (c *clientImpl) Cronjob() cronjobclientv2.Client {
+	return cronjobclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) App() app.Client {
-	return app.NewClient(c.client)
+func (c *clientImpl) App() appclientv2.Client {
+	return appclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) ProjectFileSystem() projectfilesystem.Client {
-	return projectfilesystem.NewClient(c.client)
+func (c *clientImpl) ProjectFileSystem() projectfilesystemclientv2.Client {
+	return projectfilesystemclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) Contract() contract.Client {
-	return contract.NewClient(c.client)
+func (c *clientImpl) Contract() contractclientv2.Client {
+	return contractclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) Database() database.Client {
-	return database.NewClient(c.client)
+func (c *clientImpl) Database() databaseclientv2.Client {
+	return databaseclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) Domain() domain.Client {
-	return domain.NewClient(c.client)
+func (c *clientImpl) Domain() domainclientv2.Client {
+	return domainclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) Conversation() conversation.Client {
-	return conversation.NewClient(c.client)
+func (c *clientImpl) Conversation() conversationclientv2.Client {
+	return conversationclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) Customer() customer.Client {
-	return customer.NewClient(c.client)
+func (c *clientImpl) Customer() customerclientv2.Client {
+	return customerclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) User() user.Client {
-	return user.NewClient(c.client)
+func (c *clientImpl) User() userclientv2.Client {
+	return userclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) Notification() notification.Client {
-	return notification.NewClient(c.client)
+func (c *clientImpl) Notification() notificationclientv2.Client {
+	return notificationclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) File() file.Client {
-	return file.NewClient(c.client)
+func (c *clientImpl) File() fileclientv2.Client {
+	return fileclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) Mail() mail.Client {
-	return mail.NewClient(c.client)
+func (c *clientImpl) Mail() mailclientv2.Client {
+	return mailclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) Article() article.Client {
-	return article.NewClient(c.client)
+func (c *clientImpl) Article() articleclientv2.Client {
+	return articleclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) PageInsights() pageinsights.Client {
-	return pageinsights.NewClient(c.client)
+func (c *clientImpl) PageInsights() pageinsightsclientv2.Client {
+	return pageinsightsclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) Relocation() relocation.Client {
-	return relocation.NewClient(c.client)
+func (c *clientImpl) Relocation() relocationclientv2.Client {
+	return relocationclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) Marketplace() marketplace.Client {
-	return marketplace.NewClient(c.client)
+func (c *clientImpl) Marketplace() marketplaceclientv2.Client {
+	return marketplaceclientv2.NewClient(c.client)
 }
 
-func (c *clientImpl) Misc() misc.Client {
-	return misc.NewClient(c.client)
+func (c *clientImpl) Misc() miscclientv2.Client {
+	return miscclientv2.NewClient(c.client)
 }

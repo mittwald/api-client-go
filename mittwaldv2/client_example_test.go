@@ -3,8 +3,9 @@ package mittwaldv2_test
 import (
 	"context"
 	"fmt"
+
 	"github.com/mittwald/api-client-go/mittwaldv2"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/user"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/userclientv2"
 )
 
 func ExampleNew_accessTokenFromEnvironment() {
@@ -15,7 +16,7 @@ func ExampleNew_accessTokenFromEnvironment() {
 		panic(err)
 	}
 
-	me, _, err := client.User().GetUser(ctx, user.GetUserRequest{UserID: "self"})
+	me, _, err := client.User().GetUser(ctx, userclientv2.GetUserRequest{UserID: "self"})
 	if err != nil {
 		panic(err)
 	}
