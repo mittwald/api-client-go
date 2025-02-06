@@ -17,6 +17,8 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/conversation/conversation-list-conversations
 type ListConversationsRequest struct {
+	Sort  []ListConversationsRequestQuerySortItem
+	Order []ListConversationsRequestQueryOrderItem
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -39,5 +41,12 @@ func (r *ListConversationsRequest) url() string {
 }
 
 func (r *ListConversationsRequest) query() url.Values {
-	return nil
+	q := make(url.Values)
+	for _, val := range r.Sort {
+		q.Add("sort", string(val))
+	}
+	for _, val := range r.Order {
+		q.Add("order", string(val))
+	}
+	return q
 }
