@@ -21,6 +21,7 @@ import (
 //    "deprecation": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExtensionDeprecation"}
 //    "description":
 //        type: "string"
+//        description: "A short description of the capabilites of the Extension."
 //    "detailedDescriptions": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions"}
 //    "disabled":
 //        type: "boolean"
@@ -39,6 +40,7 @@ import (
 //        description: "This is the FileId of the Logo. Retrieve the file with this id on `/v2/files/{logoRefId}`."
 //    "name":
 //        type: "string"
+//        example: "MyPingExtension"
 //    "published":
 //        type: "boolean"
 //        description: "Whether the extension has been published by the contributor."
@@ -54,6 +56,7 @@ import (
 //            - "disabled"
 //        description: "deprecated"
 //        deprecated: true
+//    "subTitle": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SubTitle"}
 //    "support": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SupportMeta"}
 //    "tags":
 //        type: "array"
@@ -66,6 +69,7 @@ import (
 //    - "state"
 //    - "published"
 //    - "name"
+//    - "subTitle"
 //    - "description"
 //    - "tags"
 //    - "context"
@@ -89,6 +93,7 @@ type Extension struct {
 	Published            bool                  `json:"published"`
 	Scopes               []string              `json:"scopes"`
 	State                ExtensionState        `json:"state"`
+	SubTitle             SubTitle              `json:"subTitle"`
 	Support              SupportMeta           `json:"support"`
 	Tags                 []string              `json:"tags"`
 }
@@ -133,6 +138,9 @@ func (o *Extension) Validate() error {
 	}
 	if err := o.State.Validate(); err != nil {
 		return fmt.Errorf("invalid property state: %w", err)
+	}
+	if err := o.SubTitle.Validate(); err != nil {
+		return fmt.Errorf("invalid property subTitle: %w", err)
 	}
 	if err := o.Support.Validate(); err != nil {
 		return fmt.Errorf("invalid property support: %w", err)

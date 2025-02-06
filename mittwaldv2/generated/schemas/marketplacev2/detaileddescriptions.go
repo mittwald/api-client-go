@@ -12,9 +12,9 @@ import "fmt"
 //    "en": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.DescriptionFormats"}
 // required:
 //    - "de"
-// description: "Supported languages. Format ISO-639-1."
+// description: "A detailed description of the capabilities of the extension."
 
-// Supported languages. Format ISO-639-1.
+// A detailed description of the capabilities of the extension.
 type DetailedDescriptions struct {
 	De DescriptionFormats  `json:"de"`
 	En *DescriptionFormats `json:"en,omitempty"`
