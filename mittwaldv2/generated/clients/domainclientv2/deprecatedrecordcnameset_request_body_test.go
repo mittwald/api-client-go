@@ -11,23 +11,23 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("RecordMxSetCustomDeprecatedRequestBody", func() {
+var _ = Describe("DeprecatedRecordCnameSetRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal into AlternativeRecordUnset", func() {
 			exampleJSON := []byte("{}")
 
-			sut := domainclientv2.RecordMxSetCustomDeprecatedRequestBody{}
+			sut := domainclientv2.DeprecatedRecordCnameSetRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 			Expect(sut.AlternativeRecordUnset).NotTo(BeNil())
 		})
-		It("should unmarshal into AlternativeRecordMXCustom", func() {
-			exampleJSON := []byte("{\"records\":[{\"fqdn\":\"string\",\"priority\":42}],\"settings\":{\"ttl\":{\"seconds\":42}}}")
+		It("should unmarshal into AlternativeRecordCNAMEComponent", func() {
+			exampleJSON := []byte("{\"fqdn\":\"string\",\"settings\":{\"ttl\":{\"seconds\":42}}}")
 
-			sut := domainclientv2.RecordMxSetCustomDeprecatedRequestBody{}
+			sut := domainclientv2.DeprecatedRecordCnameSetRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
-			Expect(sut.AlternativeRecordMXCustom).NotTo(BeNil())
+			Expect(sut.AlternativeRecordCNAMEComponent).NotTo(BeNil())
 		})
 	})
 })

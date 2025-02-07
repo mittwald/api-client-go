@@ -6,16 +6,13 @@ package domainclientv2
 //This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "ingressId":
+//    "file":
 //        type: "string"
-//        format: "uuid"
-// required:
-//    - "ingressId"
 
-type RecordASetManagedByIngressDeprecatedResponse struct {
-	IngressId string `json:"ingressId"`
+type GetZoneFileResponse struct {
+	File *string `json:"file,omitempty"`
 }
 
-func (o *RecordASetManagedByIngressDeprecatedResponse) Validate() error {
+func (o *GetZoneFileResponse) Validate() error {
 	return nil
 }

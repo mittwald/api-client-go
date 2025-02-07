@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("RecordASetManagedByIngressDeprecatedResponse", func() {
+var _ = Describe("DeprecatedRecordASetManagedByIngressRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"ingressId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{}")
 
-			sut := domainclientv2.RecordASetManagedByIngressDeprecatedResponse{}
+			sut := domainclientv2.DeprecatedRecordASetManagedByIngressRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

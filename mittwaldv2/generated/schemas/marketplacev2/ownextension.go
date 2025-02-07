@@ -43,6 +43,8 @@ import "fmt"
 //            - "blocked"
 //            - "disabled"
 //        description: "deprecated"
+//    "statistics": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExtensionStatistics"}
+//    "subTitle": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SubTitle"}
 //    "support": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SupportMeta"}
 //    "tags":
 //        type: "array"
@@ -52,6 +54,7 @@ import "fmt"
 //    - "id"
 //    - "contributorId"
 //    - "name"
+//    - "statistics"
 
 type OwnExtension struct {
 	BackendComponents    *BackendComponents    `json:"backendComponents,omitempty"`
@@ -68,6 +71,8 @@ type OwnExtension struct {
 	Name                 string                `json:"name"`
 	Scopes               []string              `json:"scopes,omitempty"`
 	State                *OwnExtensionState    `json:"state,omitempty"`
+	Statistics           ExtensionStatistics   `json:"statistics"`
+	SubTitle             *SubTitle             `json:"subTitle,omitempty"`
 	Support              *SupportMeta          `json:"support,omitempty"`
 	Tags                 []string              `json:"tags,omitempty"`
 }
@@ -135,6 +140,17 @@ func (o *OwnExtension) Validate() error {
 		return o.State.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property state: %w", err)
+	}
+	if err := o.Statistics.Validate(); err != nil {
+		return fmt.Errorf("invalid property statistics: %w", err)
+	}
+	if err := func() error {
+		if o.SubTitle == nil {
+			return nil
+		}
+		return o.SubTitle.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property subTitle: %w", err)
 	}
 	if err := func() error {
 		if o.Support == nil {

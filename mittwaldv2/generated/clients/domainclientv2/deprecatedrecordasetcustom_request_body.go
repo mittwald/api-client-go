@@ -16,14 +16,14 @@ import (
 // oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordUnset"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.dns.CombinedACustom"}
-// description: RecordASetCustomDeprecatedRequestBody models the JSON body of a 'dns-record-a-set-custom-deprecated' request
+// description: DeprecatedRecordASetCustomRequestBody models the JSON body of a 'deprecated-dns-record-a-set-custom' request
 
-type RecordASetCustomDeprecatedRequestBody struct {
+type DeprecatedRecordASetCustomRequestBody struct {
 	AlternativeRecordUnset     *dnsv2.RecordUnset
 	AlternativeCombinedACustom *dnsv2.CombinedACustom
 }
 
-func (a *RecordASetCustomDeprecatedRequestBody) MarshalJSON() ([]byte, error) {
+func (a *DeprecatedRecordASetCustomRequestBody) MarshalJSON() ([]byte, error) {
 	if a.AlternativeRecordUnset != nil {
 		return json.Marshal(a.AlternativeRecordUnset)
 	}
@@ -33,7 +33,7 @@ func (a *RecordASetCustomDeprecatedRequestBody) MarshalJSON() ([]byte, error) {
 	return []byte("null"), nil
 }
 
-func (a *RecordASetCustomDeprecatedRequestBody) UnmarshalJSON(input []byte) error {
+func (a *DeprecatedRecordASetCustomRequestBody) UnmarshalJSON(input []byte) error {
 	reader := bytes.NewReader(input)
 	decodedAtLeastOnce := false
 	dec := json.NewDecoder(reader)
@@ -65,7 +65,7 @@ func (a *RecordASetCustomDeprecatedRequestBody) UnmarshalJSON(input []byte) erro
 	return nil
 }
 
-func (a *RecordASetCustomDeprecatedRequestBody) Validate() error {
+func (a *DeprecatedRecordASetCustomRequestBody) Validate() error {
 	if a.AlternativeRecordUnset != nil {
 		return a.AlternativeRecordUnset.Validate()
 	}
