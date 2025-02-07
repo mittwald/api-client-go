@@ -56,6 +56,7 @@ import (
 //            - "disabled"
 //        description: "deprecated"
 //        deprecated: true
+//    "statistics": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExtensionStatistics"}
 //    "subTitle": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SubTitle"}
 //    "support": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SupportMeta"}
 //    "tags":
@@ -76,6 +77,7 @@ import (
 //    - "scopes"
 //    - "disabled"
 //    - "blocked"
+//    - "statistics"
 
 type Extension struct {
 	Blocked              bool                  `json:"blocked"`
@@ -93,6 +95,7 @@ type Extension struct {
 	Published            bool                  `json:"published"`
 	Scopes               []string              `json:"scopes"`
 	State                ExtensionState        `json:"state"`
+	Statistics           ExtensionStatistics   `json:"statistics"`
 	SubTitle             SubTitle              `json:"subTitle"`
 	Support              SupportMeta           `json:"support"`
 	Tags                 []string              `json:"tags"`
@@ -138,6 +141,9 @@ func (o *Extension) Validate() error {
 	}
 	if err := o.State.Validate(); err != nil {
 		return fmt.Errorf("invalid property state: %w", err)
+	}
+	if err := o.Statistics.Validate(); err != nil {
+		return fmt.Errorf("invalid property statistics: %w", err)
 	}
 	if err := o.SubTitle.Validate(); err != nil {
 		return fmt.Errorf("invalid property subTitle: %w", err)
