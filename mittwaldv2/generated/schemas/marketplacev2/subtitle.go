@@ -8,15 +8,17 @@ package marketplacev2
 // properties:
 //    "de":
 //        type: "string"
+//        maxLength: 40
 //        example: "Ping deine App an"
 //    "en":
 //        type: "string"
+//        maxLength: 40
 //        example: "Ping your app"
 // required:
 //    - "de"
-// description: "A brief subtitle for the extension."
+// description: "A few words to promote your Extension."
 
-// A brief subtitle for the extension.
+// A few words to promote your Extension.
 type SubTitle struct {
 	De string  `json:"de"`
 	En *string `json:"en,omitempty"`

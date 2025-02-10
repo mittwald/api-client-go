@@ -15,6 +15,7 @@ import "fmt"
 //        type: "string"
 //    "email":
 //        type: "string"
+//        deprecated: true
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -24,7 +25,9 @@ import "fmt"
 //        type: "string"
 //    "phone":
 //        type: "string"
+//        deprecated: true
 //    "state": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ContributorState"}
+//    "supportInformation": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SupportMeta"}
 //    "url":
 //        type: "string"
 // required:
@@ -32,22 +35,27 @@ import "fmt"
 //    - "customerId"
 //    - "state"
 //    - "name"
+//    - "supportInformation"
 
 type Contributor struct {
-	CustomerId  string           `json:"customerId"`
-	Description *string          `json:"description,omitempty"`
-	Email       *string          `json:"email,omitempty"`
-	Id          string           `json:"id"`
-	LogoRefId   *string          `json:"logoRefId,omitempty"`
-	Name        string           `json:"name"`
-	Phone       *string          `json:"phone,omitempty"`
-	State       ContributorState `json:"state"`
-	Url         *string          `json:"url,omitempty"`
+	CustomerId         string           `json:"customerId"`
+	Description        *string          `json:"description,omitempty"`
+	Email              *string          `json:"email,omitempty"`
+	Id                 string           `json:"id"`
+	LogoRefId          *string          `json:"logoRefId,omitempty"`
+	Name               string           `json:"name"`
+	Phone              *string          `json:"phone,omitempty"`
+	State              ContributorState `json:"state"`
+	SupportInformation SupportMeta      `json:"supportInformation"`
+	Url                *string          `json:"url,omitempty"`
 }
 
 func (o *Contributor) Validate() error {
 	if err := o.State.Validate(); err != nil {
 		return fmt.Errorf("invalid property state: %w", err)
+	}
+	if err := o.SupportInformation.Validate(); err != nil {
+		return fmt.Errorf("invalid property supportInformation: %w", err)
 	}
 	return nil
 }
