@@ -8,6 +8,8 @@ package ingressv2
 // properties:
 //    "directory":
 //        type: "string"
+//        description: "This property is deprecated. It will only be supported until the end of march. Please use installationId instead."
+//        deprecated: true
 // required:
 //    - "directory"
 
