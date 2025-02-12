@@ -7,7 +7,6 @@ package marketplacev2
 // type: "object"
 // properties:
 //    "amountOfInstances":
-//        exclusiveMinimum: false
 //        type: "integer"
 //        minimum: 0
 //        example: 42

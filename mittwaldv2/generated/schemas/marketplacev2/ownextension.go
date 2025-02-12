@@ -27,11 +27,29 @@ import "fmt"
 //    "frontendFragments":
 //        type: "object"
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.FrontendFragment"}
+//    "functional":
+//        type: "boolean"
 //    "id":
 //        type: "string"
 //        format: "uuid"
+//    "logoRefId":
+//        type: "string"
+//        format: "uuid"
+//        description: "This is the FileId of the Logo. Retrieve the file with this id on `/v2/files/{logoRefId}`."
 //    "name":
 //        type: "string"
+//    "published":
+//        type: "boolean"
+//    "requestedChanges":
+//        type: "object"
+//        properties:
+//            "context": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.Context"}
+//            "scopes":
+//                type: "array"
+//                items:
+//                    type: "string"
+//            "webhookUrls": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.BackendComponents"}
+//        additionalProperties: false
 //    "scopes":
 //        type: "array"
 //        items:
@@ -50,31 +68,45 @@ import "fmt"
 //        type: "array"
 //        items:
 //            type: "string"
+//    "verificationRequested":
+//        type: "boolean"
+//    "verified":
+//        type: "boolean"
 // required:
 //    - "id"
 //    - "contributorId"
 //    - "name"
 //    - "statistics"
+//    - "published"
+//    - "verified"
+//    - "verificationRequested"
+//    - "functional"
 
 type OwnExtension struct {
-	BackendComponents    *BackendComponents    `json:"backendComponents,omitempty"`
-	Blocked              *bool                 `json:"blocked,omitempty"`
-	Context              *Context              `json:"context,omitempty"`
-	ContributorId        string                `json:"contributorId"`
-	Deprecation          *ExtensionDeprecation `json:"deprecation,omitempty"`
-	Description          *string               `json:"description,omitempty"`
-	DetailedDescriptions *DetailedDescriptions `json:"detailedDescriptions,omitempty"`
-	Disabled             *bool                 `json:"disabled,omitempty"`
-	FrontendComponents   []ExternalComponent   `json:"frontendComponents,omitempty"`
-	FrontendFragments    map[string]any        `json:"frontendFragments,omitempty"`
-	Id                   string                `json:"id"`
-	Name                 string                `json:"name"`
-	Scopes               []string              `json:"scopes,omitempty"`
-	State                *OwnExtensionState    `json:"state,omitempty"`
-	Statistics           ExtensionStatistics   `json:"statistics"`
-	SubTitle             *SubTitle             `json:"subTitle,omitempty"`
-	Support              *SupportMeta          `json:"support,omitempty"`
-	Tags                 []string              `json:"tags,omitempty"`
+	BackendComponents     *BackendComponents            `json:"backendComponents,omitempty"`
+	Blocked               *bool                         `json:"blocked,omitempty"`
+	Context               *Context                      `json:"context,omitempty"`
+	ContributorId         string                        `json:"contributorId"`
+	Deprecation           *ExtensionDeprecation         `json:"deprecation,omitempty"`
+	Description           *string                       `json:"description,omitempty"`
+	DetailedDescriptions  *DetailedDescriptions         `json:"detailedDescriptions,omitempty"`
+	Disabled              *bool                         `json:"disabled,omitempty"`
+	FrontendComponents    []ExternalComponent           `json:"frontendComponents,omitempty"`
+	FrontendFragments     map[string]any                `json:"frontendFragments,omitempty"`
+	Functional            bool                          `json:"functional"`
+	Id                    string                        `json:"id"`
+	LogoRefId             *string                       `json:"logoRefId,omitempty"`
+	Name                  string                        `json:"name"`
+	Published             bool                          `json:"published"`
+	RequestedChanges      *OwnExtensionRequestedChanges `json:"requestedChanges,omitempty"`
+	Scopes                []string                      `json:"scopes,omitempty"`
+	State                 *OwnExtensionState            `json:"state,omitempty"`
+	Statistics            ExtensionStatistics           `json:"statistics"`
+	SubTitle              *SubTitle                     `json:"subTitle,omitempty"`
+	Support               *SupportMeta                  `json:"support,omitempty"`
+	Tags                  []string                      `json:"tags,omitempty"`
+	VerificationRequested bool                          `json:"verificationRequested"`
+	Verified              bool                          `json:"verified"`
 }
 
 func (o *OwnExtension) Validate() error {
@@ -124,6 +156,14 @@ func (o *OwnExtension) Validate() error {
 		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property frontendComponents: %w", err)
+	}
+	if err := func() error {
+		if o.RequestedChanges == nil {
+			return nil
+		}
+		return o.RequestedChanges.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property requestedChanges: %w", err)
 	}
 	if err := func() error {
 		if o.Scopes == nil {
