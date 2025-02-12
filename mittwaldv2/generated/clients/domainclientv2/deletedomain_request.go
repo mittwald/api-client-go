@@ -26,16 +26,21 @@ type DeleteDomainRequest struct {
 // BuildRequest builds an *http.Request instance from this request that may be used
 // with any regular *http.Client instance.
 func (r *DeleteDomainRequest) BuildRequest() (*http.Request, error) {
-	body, err := r.body()
+	body, contentType, err := r.body()
 	if err != nil {
 		return nil, err
 	}
 
-	return http.NewRequest(http.MethodDelete, r.url(), body)
+	req, err := http.NewRequest(http.MethodDelete, r.url(), body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", contentType)
+	return req, nil
 }
 
-func (r *DeleteDomainRequest) body() (io.Reader, error) {
-	return nil, nil
+func (r *DeleteDomainRequest) body() (io.Reader, string, error) {
+	return nil, "", nil
 }
 
 func (r *DeleteDomainRequest) url() string {
