@@ -42,14 +42,19 @@ import "fmt"
 //        example: 1000
 //    "user":
 //        type: "string"
-//        description: "The user the container image is running with."
+//        description: "The user the container image is running with, if overwritingUser is not set."
 //        example: "mysql"
+//    "userId":
+//        type: "integer"
+//        description: "The user id the container image is running with, if overwritingUser is not set."
+//        example: 0
 //    "volumes":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.container.ContainerImageConfigVolume"}
 //        description: "List of volumes the container image has."
 // required:
 //    - "user"
+//    - "userId"
 //    - "isUserRoot"
 //    - "hasAiGeneratedData"
 
@@ -62,6 +67,7 @@ type ContainerImageConfig struct {
 	IsUserRoot         bool                              `json:"isUserRoot"`
 	OverwritingUser    *int64                            `json:"overwritingUser,omitempty"`
 	User               string                            `json:"user"`
+	UserId             int64                             `json:"userId"`
 	Volumes            []ContainerImageConfigVolume      `json:"volumes,omitempty"`
 }
 
