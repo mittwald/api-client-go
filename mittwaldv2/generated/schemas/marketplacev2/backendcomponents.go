@@ -12,6 +12,7 @@ import "fmt"
 //    "extensionInstanceRemovedFromContext": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.BackendComponent"}
 //    "extensionInstanceSecretRotated": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.BackendComponent"}
 //    "extensionInstanceUpdated": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.BackendComponent"}
+// deprecated: true
 
 type BackendComponents struct {
 	ExtensionAddedToContext             *BackendComponent `json:"extensionAddedToContext,omitempty"`

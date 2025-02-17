@@ -11,12 +11,11 @@ package marketplacev2
 //        minLength: 1
 // required:
 //    - "url"
-// deprecated: true
 
-type BackendComponent struct {
+type WebhookUrl struct {
 	Url string `json:"url"`
 }
 
-func (o *BackendComponent) Validate() error {
+func (o *WebhookUrl) Validate() error {
 	return nil
 }

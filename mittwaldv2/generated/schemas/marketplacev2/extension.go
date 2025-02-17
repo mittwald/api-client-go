@@ -11,6 +11,11 @@ import (
 //This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "assets":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExtensionAsset"}
+//        maxItems: 4
+//        description: "The assets/media (images and videos) of the extension."
 //    "blocked":
 //        type: "boolean"
 //        deprecated: true
@@ -25,9 +30,13 @@ import (
 //    "detailedDescriptions": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions"}
 //    "disabled":
 //        type: "boolean"
+//    "externalFrontends":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent"}
 //    "frontendComponents":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent"}
+//        deprecated: true
 //    "frontendFragments":
 //        type: "object"
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.FrontendFragment"}
@@ -77,9 +86,11 @@ import (
 //    - "scopes"
 //    - "disabled"
 //    - "blocked"
+//    - "assets"
 //    - "statistics"
 
 type Extension struct {
+	Assets               []ExtensionAsset      `json:"assets"`
 	Blocked              bool                  `json:"blocked"`
 	Context              Context               `json:"context"`
 	ContributorId        string                `json:"contributorId"`
@@ -87,6 +98,7 @@ type Extension struct {
 	Description          string                `json:"description"`
 	DetailedDescriptions *DetailedDescriptions `json:"detailedDescriptions,omitempty"`
 	Disabled             bool                  `json:"disabled"`
+	ExternalFrontends    []ExternalComponent   `json:"externalFrontends,omitempty"`
 	FrontendComponents   []ExternalComponent   `json:"frontendComponents,omitempty"`
 	FrontendFragments    map[string]any        `json:"frontendFragments,omitempty"`
 	Id                   string                `json:"id"`
@@ -102,6 +114,19 @@ type Extension struct {
 }
 
 func (o *Extension) Validate() error {
+	if o.Assets == nil {
+		return errors.New("property assets is required, but not set")
+	}
+	if err := func() error {
+		for i := range o.Assets {
+			if err := o.Assets[i].Validate(); err != nil {
+				return fmt.Errorf("item %d is invalid %w", i, err)
+			}
+		}
+		return nil
+	}(); err != nil {
+		return fmt.Errorf("invalid property assets: %w", err)
+	}
 	if err := o.Context.Validate(); err != nil {
 		return fmt.Errorf("invalid property context: %w", err)
 	}
@@ -120,6 +145,21 @@ func (o *Extension) Validate() error {
 		return o.DetailedDescriptions.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property detailedDescriptions: %w", err)
+	}
+	if err := func() error {
+		if o.ExternalFrontends == nil {
+			return nil
+		}
+		return func() error {
+			for i := range o.ExternalFrontends {
+				if err := o.ExternalFrontends[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}()
+	}(); err != nil {
+		return fmt.Errorf("invalid property externalFrontends: %w", err)
 	}
 	if err := func() error {
 		if o.FrontendComponents == nil {

@@ -62,6 +62,10 @@ type Client interface {
 		ctx context.Context,
 		req UpdateProjectBackupDescriptionRequest,
 	) (*http.Response, error)
+	GetSuccessfulBackupListProjectBackups(
+		ctx context.Context,
+		req GetSuccessfulBackupListProjectBackupsRequest,
+	) (*[]backupv2.ProjectBackup, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -369,4 +373,31 @@ func (c *clientImpl) UpdateProjectBackupDescription(
 	}
 
 	return httpRes, nil
+}
+
+// List projects with last successful backups older than 24 hours or no backups at all.
+func (c *clientImpl) GetSuccessfulBackupListProjectBackups(
+	ctx context.Context,
+	req GetSuccessfulBackupListProjectBackupsRequest,
+) (*[]backupv2.ProjectBackup, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []backupv2.ProjectBackup
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }

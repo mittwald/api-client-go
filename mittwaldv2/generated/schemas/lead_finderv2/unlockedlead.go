@@ -52,11 +52,11 @@ import (
 //    - "businessFields"
 //    - "description"
 //    - "technologies"
-//    - "unlockedAt"
 //    - "domain"
 //    - "socialMedia"
 //    - "contact"
 //    - "hoster"
+//    - "unlockedAt"
 
 type UnlockedLead struct {
 	BusinessFields []string      `json:"businessFields"`
