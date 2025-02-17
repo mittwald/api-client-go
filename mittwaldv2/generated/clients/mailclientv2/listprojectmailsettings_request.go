@@ -42,7 +42,10 @@ func (r *ListProjectMailSettingsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListProjectMailSettingsRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/mail-settings", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/mail-settings", url.PathEscape(r.ProjectID)),
+	}
+	return u.String()
 }
 
 func (r *ListProjectMailSettingsRequest) query() url.Values {

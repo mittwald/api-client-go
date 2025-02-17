@@ -49,7 +49,10 @@ func (r *SetConversationStatusRequest) body() (io.Reader, string, error) {
 }
 
 func (r *SetConversationStatusRequest) url() string {
-	return fmt.Sprintf("/v2/conversations/%s/status", url.PathEscape(r.ConversationID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/conversations/%s/status", url.PathEscape(r.ConversationID)),
+	}
+	return u.String()
 }
 
 func (r *SetConversationStatusRequest) query() url.Values {

@@ -45,7 +45,11 @@ func (r *ListOwnExtensionsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListOwnExtensionsRequest) url() string {
-	return fmt.Sprintf("/v2/contributors/%s/extensions", url.PathEscape(r.ContributorID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/contributors/%s/extensions", url.PathEscape(r.ContributorID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListOwnExtensionsRequest) query() url.Values {

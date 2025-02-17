@@ -53,7 +53,10 @@ func (r *DeprecatedUpdateMailAddressQuotaRequest) body() (io.Reader, string, err
 }
 
 func (r *DeprecatedUpdateMailAddressQuotaRequest) url() string {
-	return fmt.Sprintf("/v2/mail-addresses/%s/quota", url.PathEscape(r.MailAddressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mail-addresses/%s/quota", url.PathEscape(r.MailAddressID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedUpdateMailAddressQuotaRequest) query() url.Values {

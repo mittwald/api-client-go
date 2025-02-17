@@ -48,7 +48,10 @@ func (r *CreateCertificateRequestRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateCertificateRequestRequest) url() string {
-	return "/v2/certificate-requests"
+	u := url.URL{
+		Path: "/v2/certificate-requests",
+	}
+	return u.String()
 }
 
 func (r *CreateCertificateRequestRequest) query() url.Values {

@@ -50,7 +50,10 @@ func (r *UpdateDomainContactRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateDomainContactRequest) url() string {
-	return fmt.Sprintf("/v2/domains/%s/contacts/%s", url.PathEscape(r.DomainID), url.PathEscape(string(r.Contact)))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domains/%s/contacts/%s", url.PathEscape(r.DomainID), url.PathEscape(string(r.Contact))),
+	}
+	return u.String()
 }
 
 func (r *UpdateDomainContactRequest) query() url.Values {

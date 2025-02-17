@@ -47,7 +47,11 @@ func (r *ListExtensionsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListExtensionsRequest) url() string {
-	return "/v2/extensions"
+	u := url.URL{
+		Path:     "/v2/extensions",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListExtensionsRequest) query() url.Values {

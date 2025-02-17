@@ -49,7 +49,10 @@ func (r *RequestFileUploadRequest) body() (io.Reader, string, error) {
 }
 
 func (r *RequestFileUploadRequest) url() string {
-	return fmt.Sprintf("/v2/conversations/%s/files", url.PathEscape(r.ConversationID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/conversations/%s/files", url.PathEscape(r.ConversationID)),
+	}
+	return u.String()
 }
 
 func (r *RequestFileUploadRequest) query() url.Values {

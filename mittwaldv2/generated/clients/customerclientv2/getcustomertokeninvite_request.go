@@ -40,7 +40,10 @@ func (r *GetCustomerTokenInviteRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetCustomerTokenInviteRequest) url() string {
-	return "/v2/customer-token-invite"
+	u := url.URL{
+		Path: "/v2/customer-token-invite",
+	}
+	return u.String()
 }
 
 func (r *GetCustomerTokenInviteRequest) query() url.Values {

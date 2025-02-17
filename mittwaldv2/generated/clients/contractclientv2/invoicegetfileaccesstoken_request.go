@@ -43,7 +43,10 @@ func (r *InvoiceGetFileAccessTokenRequest) body() (io.Reader, string, error) {
 }
 
 func (r *InvoiceGetFileAccessTokenRequest) url() string {
-	return fmt.Sprintf("/v2/customers/%s/invoices/%s/file-access-token", url.PathEscape(r.CustomerID), url.PathEscape(r.InvoiceID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/customers/%s/invoices/%s/file-access-token", url.PathEscape(r.CustomerID), url.PathEscape(r.InvoiceID)),
+	}
+	return u.String()
 }
 
 func (r *InvoiceGetFileAccessTokenRequest) query() url.Values {

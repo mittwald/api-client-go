@@ -50,7 +50,10 @@ func (r *DeprecatedServiceAvatarRequestUploadRequest) body() (io.Reader, string,
 }
 
 func (r *DeprecatedServiceAvatarRequestUploadRequest) url() string {
-	return fmt.Sprintf("/v2/user/%s/avatar", url.PathEscape(r.UserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/user/%s/avatar", url.PathEscape(r.UserID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedServiceAvatarRequestUploadRequest) query() url.Values {

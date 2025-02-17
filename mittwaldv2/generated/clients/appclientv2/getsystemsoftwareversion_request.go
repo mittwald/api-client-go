@@ -43,7 +43,10 @@ func (r *GetSystemsoftwareversionRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetSystemsoftwareversionRequest) url() string {
-	return fmt.Sprintf("/v2/system-software/%s/versions/%s", url.PathEscape(r.SystemSoftwareID), url.PathEscape(r.SystemSoftwareVersionID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/system-software/%s/versions/%s", url.PathEscape(r.SystemSoftwareID), url.PathEscape(r.SystemSoftwareVersionID)),
+	}
+	return u.String()
 }
 
 func (r *GetSystemsoftwareversionRequest) query() url.Values {

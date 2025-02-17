@@ -41,7 +41,11 @@ func (r *ListRedisVersionsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListRedisVersionsRequest) url() string {
-	return "/v2/redis-versions"
+	u := url.URL{
+		Path:     "/v2/redis-versions",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListRedisVersionsRequest) query() url.Values {

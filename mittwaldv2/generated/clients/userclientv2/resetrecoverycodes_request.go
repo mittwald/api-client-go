@@ -48,7 +48,10 @@ func (r *ResetRecoverycodesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ResetRecoverycodesRequest) url() string {
-	return "/v2/users/self/credentials/mfa"
+	u := url.URL{
+		Path: "/v2/users/self/credentials/mfa",
+	}
+	return u.String()
 }
 
 func (r *ResetRecoverycodesRequest) query() url.Values {

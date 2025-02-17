@@ -42,7 +42,10 @@ func (r *CancelContractTerminationRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CancelContractTerminationRequest) url() string {
-	return fmt.Sprintf("/v2/contracts/%s/termination", url.PathEscape(r.ContractID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/contracts/%s/termination", url.PathEscape(r.ContractID)),
+	}
+	return u.String()
 }
 
 func (r *CancelContractTerminationRequest) query() url.Values {

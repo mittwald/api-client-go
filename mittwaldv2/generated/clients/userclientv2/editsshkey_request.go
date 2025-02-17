@@ -48,7 +48,10 @@ func (r *EditSSHKeyRequest) body() (io.Reader, string, error) {
 }
 
 func (r *EditSSHKeyRequest) url() string {
-	return fmt.Sprintf("/v2/users/self/ssh-keys/%s", url.PathEscape(r.SSHKeyID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/users/self/ssh-keys/%s", url.PathEscape(r.SSHKeyID)),
+	}
+	return u.String()
 }
 
 func (r *EditSSHKeyRequest) query() url.Values {

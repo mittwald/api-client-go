@@ -44,7 +44,10 @@ func (r *DeprecatedGetFileTokenRulesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedGetFileTokenRulesRequest) url() string {
-	return fmt.Sprintf("/v2/file-token-rules/%s", url.PathEscape(r.Token))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/file-token-rules/%s", url.PathEscape(r.Token)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedGetFileTokenRulesRequest) query() url.Values {

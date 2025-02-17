@@ -49,7 +49,10 @@ func (r *AuthenticateWithAccessTokenRetrievalKeyRequest) body() (io.Reader, stri
 }
 
 func (r *AuthenticateWithAccessTokenRetrievalKeyRequest) url() string {
-	return "/v2/authenticate-token-retrieval-key"
+	u := url.URL{
+		Path: "/v2/authenticate-token-retrieval-key",
+	}
+	return u.String()
 }
 
 func (r *AuthenticateWithAccessTokenRetrievalKeyRequest) query() url.Values {

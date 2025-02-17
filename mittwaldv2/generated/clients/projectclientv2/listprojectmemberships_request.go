@@ -43,7 +43,11 @@ func (r *ListProjectMembershipsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListProjectMembershipsRequest) url() string {
-	return "/v2/project-memberships"
+	u := url.URL{
+		Path:     "/v2/project-memberships",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListProjectMembershipsRequest) query() url.Values {

@@ -47,7 +47,10 @@ func (r *ChangePasswordRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ChangePasswordRequest) url() string {
-	return "/v2/users/self/credentials/password"
+	u := url.URL{
+		Path: "/v2/users/self/credentials/password",
+	}
+	return u.String()
 }
 
 func (r *ChangePasswordRequest) query() url.Values {

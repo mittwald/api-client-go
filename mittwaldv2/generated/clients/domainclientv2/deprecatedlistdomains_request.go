@@ -47,7 +47,11 @@ func (r *DeprecatedListDomainsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedListDomainsRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/domains", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/projects/%s/domains", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedListDomainsRequest) query() url.Values {

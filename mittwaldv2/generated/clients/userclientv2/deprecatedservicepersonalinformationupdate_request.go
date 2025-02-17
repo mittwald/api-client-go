@@ -50,7 +50,10 @@ func (r *DeprecatedServicePersonalInformationUpdateRequest) body() (io.Reader, s
 }
 
 func (r *DeprecatedServicePersonalInformationUpdateRequest) url() string {
-	return fmt.Sprintf("/v2/user/%s", url.PathEscape(r.UserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/user/%s", url.PathEscape(r.UserID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedServicePersonalInformationUpdateRequest) query() url.Values {

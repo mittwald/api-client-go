@@ -41,7 +41,10 @@ func (r *GetProjectRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetProjectRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s", url.PathEscape(r.ProjectID)),
+	}
+	return u.String()
 }
 
 func (r *GetProjectRequest) query() url.Values {

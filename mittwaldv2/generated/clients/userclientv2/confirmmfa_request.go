@@ -47,7 +47,10 @@ func (r *ConfirmMFARequest) body() (io.Reader, string, error) {
 }
 
 func (r *ConfirmMFARequest) url() string {
-	return "/v2/users/self/credentials/mfa"
+	u := url.URL{
+		Path: "/v2/users/self/credentials/mfa",
+	}
+	return u.String()
 }
 
 func (r *ConfirmMFARequest) query() url.Values {

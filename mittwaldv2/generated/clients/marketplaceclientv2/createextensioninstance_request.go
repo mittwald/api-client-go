@@ -48,7 +48,10 @@ func (r *CreateExtensionInstanceRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateExtensionInstanceRequest) url() string {
-	return "/v2/extension-instances"
+	u := url.URL{
+		Path: "/v2/extension-instances",
+	}
+	return u.String()
 }
 
 func (r *CreateExtensionInstanceRequest) query() url.Values {

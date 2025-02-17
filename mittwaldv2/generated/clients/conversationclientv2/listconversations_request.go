@@ -42,7 +42,11 @@ func (r *ListConversationsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListConversationsRequest) url() string {
-	return "/v2/conversations"
+	u := url.URL{
+		Path:     "/v2/conversations",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListConversationsRequest) query() url.Values {

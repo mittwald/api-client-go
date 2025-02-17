@@ -50,7 +50,10 @@ func (r *SetRecordSetManagedRequest) body() (io.Reader, string, error) {
 }
 
 func (r *SetRecordSetManagedRequest) url() string {
-	return fmt.Sprintf("/v2/dns-zones/%s/record-sets/%s/actions/set-managed", url.PathEscape(r.DNSZoneID), url.PathEscape(string(r.RecordSet)))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/dns-zones/%s/record-sets/%s/actions/set-managed", url.PathEscape(r.DNSZoneID), url.PathEscape(string(r.RecordSet))),
+	}
+	return u.String()
 }
 
 func (r *SetRecordSetManagedRequest) query() url.Values {

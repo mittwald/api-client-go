@@ -44,7 +44,11 @@ func (r *GetFileRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetFileRequest) url() string {
-	return fmt.Sprintf("/v2/files/%s", url.PathEscape(r.FileID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/files/%s", url.PathEscape(r.FileID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *GetFileRequest) query() url.Values {

@@ -42,7 +42,11 @@ func (r *GetFileMetaRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetFileMetaRequest) url() string {
-	return fmt.Sprintf("/v2/files/%s/meta", url.PathEscape(r.FileID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/files/%s/meta", url.PathEscape(r.FileID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *GetFileMetaRequest) query() url.Values {

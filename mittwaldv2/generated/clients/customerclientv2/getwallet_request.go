@@ -42,7 +42,10 @@ func (r *GetWalletRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetWalletRequest) url() string {
-	return fmt.Sprintf("/v2/customers/%s/wallet", url.PathEscape(r.CustomerID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/customers/%s/wallet", url.PathEscape(r.CustomerID)),
+	}
+	return u.String()
 }
 
 func (r *GetWalletRequest) query() url.Values {

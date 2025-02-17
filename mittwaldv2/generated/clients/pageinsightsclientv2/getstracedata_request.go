@@ -43,7 +43,10 @@ func (r *GetStraceDataRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetStraceDataRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/straces/%s", url.PathEscape(r.ProjectID), url.PathEscape(r.StraceID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/straces/%s", url.PathEscape(r.ProjectID), url.PathEscape(r.StraceID)),
+	}
+	return u.String()
 }
 
 func (r *GetStraceDataRequest) query() url.Values {

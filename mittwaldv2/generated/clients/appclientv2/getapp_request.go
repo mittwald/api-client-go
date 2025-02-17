@@ -41,7 +41,10 @@ func (r *GetAppRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetAppRequest) url() string {
-	return fmt.Sprintf("/v2/apps/%s", url.PathEscape(r.AppID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/apps/%s", url.PathEscape(r.AppID)),
+	}
+	return u.String()
 }
 
 func (r *GetAppRequest) query() url.Values {

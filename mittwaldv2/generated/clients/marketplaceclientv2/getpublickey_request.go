@@ -42,7 +42,10 @@ func (r *GetPublicKeyRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetPublicKeyRequest) url() string {
-	return fmt.Sprintf("/v2/webhook-public-keys/%s", url.PathEscape(r.Serial))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/webhook-public-keys/%s", url.PathEscape(r.Serial)),
+	}
+	return u.String()
 }
 
 func (r *GetPublicKeyRequest) query() url.Values {

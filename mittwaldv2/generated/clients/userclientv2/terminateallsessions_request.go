@@ -40,7 +40,10 @@ func (r *TerminateAllSessionsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *TerminateAllSessionsRequest) url() string {
-	return "/v2/users/self/sessions"
+	u := url.URL{
+		Path: "/v2/users/self/sessions",
+	}
+	return u.String()
 }
 
 func (r *TerminateAllSessionsRequest) query() url.Values {

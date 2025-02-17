@@ -39,7 +39,10 @@ func (r *ListSSHKeysRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListSSHKeysRequest) url() string {
-	return "/v2/users/self/ssh-keys"
+	u := url.URL{
+		Path: "/v2/users/self/ssh-keys",
+	}
+	return u.String()
 }
 
 func (r *ListSSHKeysRequest) query() url.Values {

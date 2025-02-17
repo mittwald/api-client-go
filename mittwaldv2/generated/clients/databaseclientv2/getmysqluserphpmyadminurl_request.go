@@ -43,7 +43,10 @@ func (r *GetMysqlUserPhpMyAdminURLRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetMysqlUserPhpMyAdminURLRequest) url() string {
-	return fmt.Sprintf("/v2/mysql-users/%s/php-my-admin-url", url.PathEscape(r.MysqlUserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mysql-users/%s/php-my-admin-url", url.PathEscape(r.MysqlUserID)),
+	}
+	return u.String()
 }
 
 func (r *GetMysqlUserPhpMyAdminURLRequest) query() url.Values {

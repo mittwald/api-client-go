@@ -44,7 +44,11 @@ func (r *ListAppinstallationsForUserRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListAppinstallationsForUserRequest) url() string {
-	return "/v2/app-installations"
+	u := url.URL{
+		Path:     "/v2/app-installations",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListAppinstallationsForUserRequest) query() url.Values {

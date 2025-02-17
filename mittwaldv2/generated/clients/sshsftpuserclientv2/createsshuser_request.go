@@ -49,7 +49,10 @@ func (r *CreateSSHUserRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateSSHUserRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/ssh-users", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/ssh-users", url.PathEscape(r.ProjectID)),
+	}
+	return u.String()
 }
 
 func (r *CreateSSHUserRequest) query() url.Values {

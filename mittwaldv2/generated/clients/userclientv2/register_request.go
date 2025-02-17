@@ -47,7 +47,10 @@ func (r *RegisterRequest) body() (io.Reader, string, error) {
 }
 
 func (r *RegisterRequest) url() string {
-	return "/v2/register"
+	u := url.URL{
+		Path: "/v2/register",
+	}
+	return u.String()
 }
 
 func (r *RegisterRequest) query() url.Values {

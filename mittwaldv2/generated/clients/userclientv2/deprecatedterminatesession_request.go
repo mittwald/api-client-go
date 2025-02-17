@@ -43,7 +43,10 @@ func (r *DeprecatedTerminateSessionRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedTerminateSessionRequest) url() string {
-	return fmt.Sprintf("/v2/signup/sessions/%s", url.PathEscape(r.TokenID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/signup/sessions/%s", url.PathEscape(r.TokenID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedTerminateSessionRequest) query() url.Values {

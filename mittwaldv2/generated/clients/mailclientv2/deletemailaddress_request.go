@@ -42,7 +42,10 @@ func (r *DeleteMailAddressRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteMailAddressRequest) url() string {
-	return fmt.Sprintf("/v2/mail-addresses/%s", url.PathEscape(r.MailAddressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mail-addresses/%s", url.PathEscape(r.MailAddressID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteMailAddressRequest) query() url.Values {

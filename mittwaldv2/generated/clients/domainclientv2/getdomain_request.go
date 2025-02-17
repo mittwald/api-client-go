@@ -41,7 +41,10 @@ func (r *GetDomainRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetDomainRequest) url() string {
-	return fmt.Sprintf("/v2/domains/%s", url.PathEscape(r.DomainID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domains/%s", url.PathEscape(r.DomainID)),
+	}
+	return u.String()
 }
 
 func (r *GetDomainRequest) query() url.Values {

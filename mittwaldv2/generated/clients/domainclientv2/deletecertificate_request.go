@@ -42,7 +42,10 @@ func (r *DeleteCertificateRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteCertificateRequest) url() string {
-	return fmt.Sprintf("/v2/certificate/%s", url.PathEscape(r.CertificateID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/certificate/%s", url.PathEscape(r.CertificateID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteCertificateRequest) query() url.Values {

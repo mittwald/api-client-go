@@ -41,7 +41,10 @@ func (r *GetSessionRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetSessionRequest) url() string {
-	return fmt.Sprintf("/v2/users/self/sessions/%s", url.PathEscape(r.TokenID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/users/self/sessions/%s", url.PathEscape(r.TokenID)),
+	}
+	return u.String()
 }
 
 func (r *GetSessionRequest) query() url.Values {

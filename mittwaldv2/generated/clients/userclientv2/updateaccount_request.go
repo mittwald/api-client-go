@@ -47,7 +47,10 @@ func (r *UpdateAccountRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateAccountRequest) url() string {
-	return "/v2/users/self/personal-information"
+	u := url.URL{
+		Path: "/v2/users/self/personal-information",
+	}
+	return u.String()
 }
 
 func (r *UpdateAccountRequest) query() url.Values {

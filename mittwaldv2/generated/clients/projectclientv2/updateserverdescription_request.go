@@ -49,7 +49,10 @@ func (r *UpdateServerDescriptionRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateServerDescriptionRequest) url() string {
-	return fmt.Sprintf("/v2/servers/%s/description", url.PathEscape(r.ServerID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/servers/%s/description", url.PathEscape(r.ServerID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateServerDescriptionRequest) query() url.Values {

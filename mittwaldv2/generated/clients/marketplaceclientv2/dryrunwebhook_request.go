@@ -54,7 +54,11 @@ func (r *DryRunWebhookRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DryRunWebhookRequest) url() string {
-	return fmt.Sprintf("/v2/contributors/%s/extensions/%s/extension-instances/%s/actions/dry-run/%s", url.PathEscape(r.ContributorID), url.PathEscape(r.ExtensionID), url.PathEscape(r.ExtensionInstanceID), url.PathEscape(string(r.WebhookKind)))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/contributors/%s/extensions/%s/extension-instances/%s/actions/dry-run/%s", url.PathEscape(r.ContributorID), url.PathEscape(r.ExtensionID), url.PathEscape(r.ExtensionInstanceID), url.PathEscape(string(r.WebhookKind))),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *DryRunWebhookRequest) query() url.Values {

@@ -49,7 +49,10 @@ func (r *SetDatabaseUsersRequest) body() (io.Reader, string, error) {
 }
 
 func (r *SetDatabaseUsersRequest) url() string {
-	return fmt.Sprintf("/v2/app-installations/%s/databases/%s/users", url.PathEscape(r.AppInstallationID), url.PathEscape(r.DatabaseID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/app-installations/%s/databases/%s/users", url.PathEscape(r.AppInstallationID), url.PathEscape(r.DatabaseID)),
+	}
+	return u.String()
 }
 
 func (r *SetDatabaseUsersRequest) query() url.Values {

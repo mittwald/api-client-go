@@ -46,7 +46,11 @@ func (r *ListCustomersRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListCustomersRequest) url() string {
-	return "/v2/customers"
+	u := url.URL{
+		Path:     "/v2/customers",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListCustomersRequest) query() url.Values {

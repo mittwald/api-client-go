@@ -42,7 +42,10 @@ func (r *GetProjectMembershipRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetProjectMembershipRequest) url() string {
-	return fmt.Sprintf("/v2/project-memberships/%s", url.PathEscape(r.ProjectMembershipID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/project-memberships/%s", url.PathEscape(r.ProjectMembershipID)),
+	}
+	return u.String()
 }
 
 func (r *GetProjectMembershipRequest) query() url.Values {

@@ -54,7 +54,10 @@ func (r *DeprecatedUpdateProjectMailSettingRequest) body() (io.Reader, string, e
 }
 
 func (r *DeprecatedUpdateProjectMailSettingRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/mail-settings/%s", url.PathEscape(r.ProjectID), url.PathEscape(string(r.Setting)))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/mail-settings/%s", url.PathEscape(r.ProjectID), url.PathEscape(string(r.Setting))),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedUpdateProjectMailSettingRequest) query() url.Values {

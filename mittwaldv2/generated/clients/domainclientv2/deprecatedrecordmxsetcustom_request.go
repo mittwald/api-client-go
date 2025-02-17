@@ -52,7 +52,10 @@ func (r *DeprecatedRecordMxSetCustomRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedRecordMxSetCustomRequest) url() string {
-	return fmt.Sprintf("/v2/dns/zones/%s/recordset/mx/custom", url.PathEscape(r.ZoneID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/dns/zones/%s/recordset/mx/custom", url.PathEscape(r.ZoneID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedRecordMxSetCustomRequest) query() url.Values {

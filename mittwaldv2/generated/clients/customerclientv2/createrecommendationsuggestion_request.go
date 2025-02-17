@@ -50,7 +50,10 @@ func (r *CreateRecommendationSuggestionRequest) body() (io.Reader, string, error
 }
 
 func (r *CreateRecommendationSuggestionRequest) url() string {
-	return fmt.Sprintf("/v2/customers/%s/recommendation-suggestions", url.PathEscape(r.CustomerID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/customers/%s/recommendation-suggestions", url.PathEscape(r.CustomerID)),
+	}
+	return u.String()
 }
 
 func (r *CreateRecommendationSuggestionRequest) query() url.Values {

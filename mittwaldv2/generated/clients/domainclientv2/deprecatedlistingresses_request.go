@@ -44,7 +44,10 @@ func (r *DeprecatedListIngressesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedListIngressesRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/ingresses", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/ingresses", url.PathEscape(r.ProjectID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedListIngressesRequest) query() url.Values {

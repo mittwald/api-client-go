@@ -44,7 +44,11 @@ func (r *ListSSHUsersRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListSSHUsersRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/ssh-users", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/projects/%s/ssh-users", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListSSHUsersRequest) query() url.Values {

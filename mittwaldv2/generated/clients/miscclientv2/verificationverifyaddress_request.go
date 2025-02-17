@@ -50,7 +50,10 @@ func (r *VerificationVerifyAddressRequest) body() (io.Reader, string, error) {
 }
 
 func (r *VerificationVerifyAddressRequest) url() string {
-	return "/v2/actions/verify-address"
+	u := url.URL{
+		Path: "/v2/actions/verify-address",
+	}
+	return u.String()
 }
 
 func (r *VerificationVerifyAddressRequest) query() url.Values {

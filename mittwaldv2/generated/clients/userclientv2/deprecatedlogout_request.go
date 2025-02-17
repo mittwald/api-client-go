@@ -48,7 +48,10 @@ func (r *DeprecatedLogoutRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedLogoutRequest) url() string {
-	return "/v2/signup/logout"
+	u := url.URL{
+		Path: "/v2/signup/logout",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedLogoutRequest) query() url.Values {

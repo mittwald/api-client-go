@@ -49,7 +49,10 @@ func (r *CreateMailAddressRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateMailAddressRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/mail-addresses", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/mail-addresses", url.PathEscape(r.ProjectID)),
+	}
+	return u.String()
 }
 
 func (r *CreateMailAddressRequest) query() url.Values {

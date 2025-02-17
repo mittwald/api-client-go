@@ -42,7 +42,11 @@ func (r *ListCertificateRequestsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListCertificateRequestsRequest) url() string {
-	return "/v2/certificate-requests"
+	u := url.URL{
+		Path:     "/v2/certificate-requests",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListCertificateRequestsRequest) query() url.Values {

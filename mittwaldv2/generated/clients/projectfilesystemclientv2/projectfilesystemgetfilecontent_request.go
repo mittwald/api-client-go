@@ -45,7 +45,11 @@ func (r *ProjectFileSystemGetFileContentRequest) body() (io.Reader, string, erro
 }
 
 func (r *ProjectFileSystemGetFileContentRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/filesystem-file-content", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/projects/%s/filesystem-file-content", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ProjectFileSystemGetFileContentRequest) query() url.Values {

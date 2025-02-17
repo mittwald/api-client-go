@@ -44,7 +44,11 @@ func (r *ListContributorsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListContributorsRequest) url() string {
-	return "/v2/contributors"
+	u := url.URL{
+		Path:     "/v2/contributors",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListContributorsRequest) query() url.Values {

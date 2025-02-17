@@ -41,7 +41,10 @@ func (r *GetUserRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetUserRequest) url() string {
-	return fmt.Sprintf("/v2/users/%s", url.PathEscape(r.UserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/users/%s", url.PathEscape(r.UserID)),
+	}
+	return u.String()
 }
 
 func (r *GetUserRequest) query() url.Values {

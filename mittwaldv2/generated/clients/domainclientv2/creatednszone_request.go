@@ -47,7 +47,10 @@ func (r *CreateDNSZoneRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateDNSZoneRequest) url() string {
-	return "/v2/dns-zones"
+	u := url.URL{
+		Path: "/v2/dns-zones",
+	}
+	return u.String()
 }
 
 func (r *CreateDNSZoneRequest) query() url.Values {

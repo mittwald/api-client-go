@@ -42,7 +42,10 @@ func (r *DeleteServerAvatarRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteServerAvatarRequest) url() string {
-	return fmt.Sprintf("/v2/servers/%s/avatar", url.PathEscape(r.ServerID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/servers/%s/avatar", url.PathEscape(r.ServerID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteServerAvatarRequest) query() url.Values {

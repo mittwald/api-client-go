@@ -49,7 +49,10 @@ func (r *CreateProjectBackupExportRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateProjectBackupExportRequest) url() string {
-	return fmt.Sprintf("/v2/project-backups/%s/export", url.PathEscape(r.ProjectBackupID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/project-backups/%s/export", url.PathEscape(r.ProjectBackupID)),
+	}
+	return u.String()
 }
 
 func (r *CreateProjectBackupExportRequest) query() url.Values {

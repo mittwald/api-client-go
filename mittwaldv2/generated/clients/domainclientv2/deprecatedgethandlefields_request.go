@@ -45,7 +45,10 @@ func (r *DeprecatedGetHandleFieldsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedGetHandleFieldsRequest) url() string {
-	return fmt.Sprintf("/v2/domains/handle-schema/%s", url.PathEscape(r.DomainName))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domains/handle-schema/%s", url.PathEscape(r.DomainName)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedGetHandleFieldsRequest) query() url.Values {

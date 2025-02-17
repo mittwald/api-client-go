@@ -42,7 +42,10 @@ func (r *DeleteCustomerMembershipRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteCustomerMembershipRequest) url() string {
-	return fmt.Sprintf("/v2/customer-memberships/%s", url.PathEscape(r.CustomerMembershipID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/customer-memberships/%s", url.PathEscape(r.CustomerMembershipID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteCustomerMembershipRequest) query() url.Values {

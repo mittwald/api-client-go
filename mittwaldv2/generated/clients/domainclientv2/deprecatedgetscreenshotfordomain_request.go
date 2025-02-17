@@ -50,7 +50,10 @@ func (r *DeprecatedGetScreenshotForDomainRequest) body() (io.Reader, string, err
 }
 
 func (r *DeprecatedGetScreenshotForDomainRequest) url() string {
-	return fmt.Sprintf("/v2/domains/%s/screenshots/newest", url.PathEscape(r.DomainID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domains/%s/screenshots/newest", url.PathEscape(r.DomainID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedGetScreenshotForDomainRequest) query() url.Values {

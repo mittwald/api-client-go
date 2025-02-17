@@ -54,7 +54,11 @@ func (r *ReadAllNotificationsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ReadAllNotificationsRequest) url() string {
-	return "/v2/notifications/actions/read-all"
+	u := url.URL{
+		Path:     "/v2/notifications/actions/read-all",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ReadAllNotificationsRequest) query() url.Values {

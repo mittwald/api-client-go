@@ -45,7 +45,11 @@ func (r *ListContractsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListContractsRequest) url() string {
-	return fmt.Sprintf("/v2/customers/%s/contracts", url.PathEscape(r.CustomerID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/customers/%s/contracts", url.PathEscape(r.CustomerID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListContractsRequest) query() url.Values {

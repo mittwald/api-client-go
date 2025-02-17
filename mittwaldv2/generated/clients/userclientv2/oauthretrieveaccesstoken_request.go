@@ -44,7 +44,10 @@ func (r *OauthRetrieveAccessTokenRequest) body() (io.Reader, string, error) {
 }
 
 func (r *OauthRetrieveAccessTokenRequest) url() string {
-	return "/v2/oauth2/token"
+	u := url.URL{
+		Path: "/v2/oauth2/token",
+	}
+	return u.String()
 }
 
 func (r *OauthRetrieveAccessTokenRequest) query() url.Values {

@@ -50,7 +50,10 @@ func (r *AbortExecutionRequest) body() (io.Reader, string, error) {
 }
 
 func (r *AbortExecutionRequest) url() string {
-	return fmt.Sprintf("/v2/cronjobs/%s/executions/%s/actions/abort", url.PathEscape(r.CronjobID), url.PathEscape(r.ExecutionID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/cronjobs/%s/executions/%s/actions/abort", url.PathEscape(r.CronjobID), url.PathEscape(r.ExecutionID)),
+	}
+	return u.String()
 }
 
 func (r *AbortExecutionRequest) query() url.Values {

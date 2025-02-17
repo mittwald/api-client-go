@@ -49,7 +49,10 @@ func (r *GetLatestScreenshotRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetLatestScreenshotRequest) url() string {
-	return fmt.Sprintf("/v2/domains/%s/latest-screenshot", url.PathEscape(r.DomainID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domains/%s/latest-screenshot", url.PathEscape(r.DomainID)),
+	}
+	return u.String()
 }
 
 func (r *GetLatestScreenshotRequest) query() url.Values {

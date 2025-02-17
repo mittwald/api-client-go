@@ -42,7 +42,10 @@ func (r *DeleteIngressRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteIngressRequest) url() string {
-	return fmt.Sprintf("/v2/ingresses/%s", url.PathEscape(r.IngressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/ingresses/%s", url.PathEscape(r.IngressID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteIngressRequest) query() url.Values {

@@ -43,7 +43,11 @@ func (r *ListAppsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListAppsRequest) url() string {
-	return "/v2/apps"
+	u := url.URL{
+		Path:     "/v2/apps",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListAppsRequest) query() url.Values {

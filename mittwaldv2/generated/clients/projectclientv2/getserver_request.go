@@ -41,7 +41,10 @@ func (r *GetServerRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetServerRequest) url() string {
-	return fmt.Sprintf("/v2/servers/%s", url.PathEscape(r.ServerID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/servers/%s", url.PathEscape(r.ServerID)),
+	}
+	return u.String()
 }
 
 func (r *GetServerRequest) query() url.Values {

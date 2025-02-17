@@ -41,7 +41,10 @@ func (r *TerminateSessionRequest) body() (io.Reader, string, error) {
 }
 
 func (r *TerminateSessionRequest) url() string {
-	return fmt.Sprintf("/v2/users/self/sessions/%s", url.PathEscape(r.TokenID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/users/self/sessions/%s", url.PathEscape(r.TokenID)),
+	}
+	return u.String()
 }
 
 func (r *TerminateSessionRequest) query() url.Values {

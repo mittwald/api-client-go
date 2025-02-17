@@ -39,7 +39,10 @@ func (r *ListSessionsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListSessionsRequest) url() string {
-	return "/v2/users/self/sessions"
+	u := url.URL{
+		Path: "/v2/users/self/sessions",
+	}
+	return u.String()
 }
 
 func (r *ListSessionsRequest) query() url.Values {

@@ -42,7 +42,10 @@ func (r *IngressVerifyOwnershipRequest) body() (io.Reader, string, error) {
 }
 
 func (r *IngressVerifyOwnershipRequest) url() string {
-	return fmt.Sprintf("/v2/ingresses/%s/actions/verify-ownership", url.PathEscape(r.IngressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/ingresses/%s/actions/verify-ownership", url.PathEscape(r.IngressID)),
+	}
+	return u.String()
 }
 
 func (r *IngressVerifyOwnershipRequest) query() url.Values {

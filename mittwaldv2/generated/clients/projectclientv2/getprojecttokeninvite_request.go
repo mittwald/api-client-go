@@ -40,7 +40,10 @@ func (r *GetProjectTokenInviteRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetProjectTokenInviteRequest) url() string {
-	return "/v2/project-token-invite"
+	u := url.URL{
+		Path: "/v2/project-token-invite",
+	}
+	return u.String()
 }
 
 func (r *GetProjectTokenInviteRequest) query() url.Values {

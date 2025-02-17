@@ -47,7 +47,10 @@ func (r *ChangeEmailRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ChangeEmailRequest) url() string {
-	return "/v2/users/self/credentials/email"
+	u := url.URL{
+		Path: "/v2/users/self/credentials/email",
+	}
+	return u.String()
 }
 
 func (r *ChangeEmailRequest) query() url.Values {

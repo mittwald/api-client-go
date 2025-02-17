@@ -51,7 +51,10 @@ func (r *CheckDomainTransferabilityRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CheckDomainTransferabilityRequest) url() string {
-	return "/v2/domain-transferable"
+	u := url.URL{
+		Path: "/v2/domain-transferable",
+	}
+	return u.String()
 }
 
 func (r *CheckDomainTransferabilityRequest) query() url.Values {

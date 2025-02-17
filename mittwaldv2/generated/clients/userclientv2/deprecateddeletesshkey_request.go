@@ -42,7 +42,10 @@ func (r *DeprecatedDeleteSSHKeyRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedDeleteSSHKeyRequest) url() string {
-	return fmt.Sprintf("/v2/signup/ssh/%s", url.PathEscape(r.SSHKeyID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/signup/ssh/%s", url.PathEscape(r.SSHKeyID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedDeleteSSHKeyRequest) query() url.Values {

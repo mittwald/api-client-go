@@ -44,7 +44,10 @@ func (r *CancelContractTariffChangeRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CancelContractTariffChangeRequest) url() string {
-	return fmt.Sprintf("/v2/contracts/%s/items/%s/tariff-change", url.PathEscape(r.ContractID), url.PathEscape(r.ContractItemID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/contracts/%s/items/%s/tariff-change", url.PathEscape(r.ContractID), url.PathEscape(r.ContractItemID)),
+	}
+	return u.String()
 }
 
 func (r *CancelContractTariffChangeRequest) query() url.Values {

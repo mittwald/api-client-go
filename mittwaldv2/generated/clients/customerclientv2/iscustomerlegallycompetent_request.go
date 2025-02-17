@@ -43,7 +43,10 @@ func (r *IsCustomerLegallyCompetentRequest) body() (io.Reader, string, error) {
 }
 
 func (r *IsCustomerLegallyCompetentRequest) url() string {
-	return fmt.Sprintf("/v2/customers/%s/legally-competent", url.PathEscape(r.CustomerID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/customers/%s/legally-competent", url.PathEscape(r.CustomerID)),
+	}
+	return u.String()
 }
 
 func (r *IsCustomerLegallyCompetentRequest) query() url.Values {

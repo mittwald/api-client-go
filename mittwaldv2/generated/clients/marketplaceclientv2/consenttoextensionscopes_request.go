@@ -49,7 +49,10 @@ func (r *ConsentToExtensionScopesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ConsentToExtensionScopesRequest) url() string {
-	return fmt.Sprintf("/v2/extension-instances/%s/scopes", url.PathEscape(r.ExtensionInstanceID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/extension-instances/%s/scopes", url.PathEscape(r.ExtensionInstanceID)),
+	}
+	return u.String()
 }
 
 func (r *ConsentToExtensionScopesRequest) query() url.Values {

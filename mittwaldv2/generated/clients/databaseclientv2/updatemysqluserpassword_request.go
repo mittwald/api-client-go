@@ -49,7 +49,10 @@ func (r *UpdateMysqlUserPasswordRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateMysqlUserPasswordRequest) url() string {
-	return fmt.Sprintf("/v2/mysql-users/%s/password", url.PathEscape(r.MysqlUserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mysql-users/%s/password", url.PathEscape(r.MysqlUserID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateMysqlUserPasswordRequest) query() url.Values {

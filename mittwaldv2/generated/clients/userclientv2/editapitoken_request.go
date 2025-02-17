@@ -48,7 +48,10 @@ func (r *EditAPITokenRequest) body() (io.Reader, string, error) {
 }
 
 func (r *EditAPITokenRequest) url() string {
-	return fmt.Sprintf("/v2/users/self/api-tokens/%s", url.PathEscape(r.APITokenID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/users/self/api-tokens/%s", url.PathEscape(r.APITokenID)),
+	}
+	return u.String()
 }
 
 func (r *EditAPITokenRequest) query() url.Values {

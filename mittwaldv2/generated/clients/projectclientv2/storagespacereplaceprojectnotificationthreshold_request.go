@@ -50,7 +50,10 @@ func (r *StoragespaceReplaceProjectNotificationThresholdRequest) body() (io.Read
 }
 
 func (r *StoragespaceReplaceProjectNotificationThresholdRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/storage-space-notification-threshold", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/storage-space-notification-threshold", url.PathEscape(r.ProjectID)),
+	}
+	return u.String()
 }
 
 func (r *StoragespaceReplaceProjectNotificationThresholdRequest) query() url.Values {

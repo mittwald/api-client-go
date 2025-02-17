@@ -49,7 +49,10 @@ func (r *ServicetokenAuthenticateServiceRequest) body() (io.Reader, string, erro
 }
 
 func (r *ServicetokenAuthenticateServiceRequest) url() string {
-	return fmt.Sprintf("/v2/services/%s/actions/authenticate", url.PathEscape(r.AccessKeyID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/services/%s/actions/authenticate", url.PathEscape(r.AccessKeyID)),
+	}
+	return u.String()
 }
 
 func (r *ServicetokenAuthenticateServiceRequest) query() url.Values {

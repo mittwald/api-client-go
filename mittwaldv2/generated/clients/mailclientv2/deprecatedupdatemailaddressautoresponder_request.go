@@ -53,7 +53,10 @@ func (r *DeprecatedUpdateMailAddressAutoresponderRequest) body() (io.Reader, str
 }
 
 func (r *DeprecatedUpdateMailAddressAutoresponderRequest) url() string {
-	return fmt.Sprintf("/v2/mail-addresses/%s/autoresponder", url.PathEscape(r.MailAddressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mail-addresses/%s/autoresponder", url.PathEscape(r.MailAddressID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedUpdateMailAddressAutoresponderRequest) query() url.Values {

@@ -49,7 +49,10 @@ func (r *InvoiceUpdateInvoiceSettingsRequest) body() (io.Reader, string, error) 
 }
 
 func (r *InvoiceUpdateInvoiceSettingsRequest) url() string {
-	return fmt.Sprintf("/v2/customers/%s/invoice-settings", url.PathEscape(r.CustomerID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/customers/%s/invoice-settings", url.PathEscape(r.CustomerID)),
+	}
+	return u.String()
 }
 
 func (r *InvoiceUpdateInvoiceSettingsRequest) query() url.Values {

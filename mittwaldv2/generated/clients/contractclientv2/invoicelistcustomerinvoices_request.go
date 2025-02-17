@@ -46,7 +46,11 @@ func (r *InvoiceListCustomerInvoicesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *InvoiceListCustomerInvoicesRequest) url() string {
-	return fmt.Sprintf("/v2/customers/%s/invoices", url.PathEscape(r.CustomerID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/customers/%s/invoices", url.PathEscape(r.CustomerID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *InvoiceListCustomerInvoicesRequest) query() url.Values {

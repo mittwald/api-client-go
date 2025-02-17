@@ -49,7 +49,10 @@ func (r *UpdatePersonalizedSettingsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdatePersonalizedSettingsRequest) url() string {
-	return fmt.Sprintf("/v2/users/%s/settings", url.PathEscape(r.UserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/users/%s/settings", url.PathEscape(r.UserID)),
+	}
+	return u.String()
 }
 
 func (r *UpdatePersonalizedSettingsRequest) query() url.Values {

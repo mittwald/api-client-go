@@ -52,7 +52,10 @@ func (r *DeprecatedLinkDatabaseRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedLinkDatabaseRequest) url() string {
-	return fmt.Sprintf("/v2/appinstallations/%s/databases", url.PathEscape(r.AppInstallationID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/appinstallations/%s/databases", url.PathEscape(r.AppInstallationID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedLinkDatabaseRequest) query() url.Values {

@@ -47,7 +47,10 @@ func (r *CreateOrderRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateOrderRequest) url() string {
-	return "/v2/orders"
+	u := url.URL{
+		Path: "/v2/orders",
+	}
+	return u.String()
 }
 
 func (r *CreateOrderRequest) query() url.Values {

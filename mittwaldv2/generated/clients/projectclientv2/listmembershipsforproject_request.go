@@ -44,7 +44,11 @@ func (r *ListMembershipsForProjectRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListMembershipsForProjectRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/memberships", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/projects/%s/memberships", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListMembershipsForProjectRequest) query() url.Values {

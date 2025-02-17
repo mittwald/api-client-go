@@ -43,7 +43,10 @@ func (r *PasswordValidationGetPasswordPolicyRequest) body() (io.Reader, string, 
 }
 
 func (r *PasswordValidationGetPasswordPolicyRequest) url() string {
-	return fmt.Sprintf("/v2/password-policies/%s", url.PathEscape(r.PasswordPolicy))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/password-policies/%s", url.PathEscape(r.PasswordPolicy)),
+	}
+	return u.String()
 }
 
 func (r *PasswordValidationGetPasswordPolicyRequest) query() url.Values {

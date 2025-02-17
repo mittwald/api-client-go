@@ -48,7 +48,10 @@ func (r *ConfirmPasswordResetRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ConfirmPasswordResetRequest) url() string {
-	return "/v2/users/self/credentials/password/confirm-reset"
+	u := url.URL{
+		Path: "/v2/users/self/credentials/password/confirm-reset",
+	}
+	return u.String()
 }
 
 func (r *ConfirmPasswordResetRequest) query() url.Values {

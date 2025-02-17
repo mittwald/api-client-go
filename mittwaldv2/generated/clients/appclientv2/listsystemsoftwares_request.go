@@ -44,7 +44,11 @@ func (r *ListSystemsoftwaresRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListSystemsoftwaresRequest) url() string {
-	return "/v2/system-softwares"
+	u := url.URL{
+		Path:     "/v2/system-softwares",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListSystemsoftwaresRequest) query() url.Values {

@@ -50,7 +50,10 @@ func (r *UpdateMailAddressForwardAddressesRequest) body() (io.Reader, string, er
 }
 
 func (r *UpdateMailAddressForwardAddressesRequest) url() string {
-	return fmt.Sprintf("/v2/mail-addresses/%s/forward-addresses", url.PathEscape(r.MailAddressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mail-addresses/%s/forward-addresses", url.PathEscape(r.MailAddressID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateMailAddressForwardAddressesRequest) query() url.Values {

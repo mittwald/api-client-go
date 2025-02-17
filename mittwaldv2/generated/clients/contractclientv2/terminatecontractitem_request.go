@@ -50,7 +50,10 @@ func (r *TerminateContractItemRequest) body() (io.Reader, string, error) {
 }
 
 func (r *TerminateContractItemRequest) url() string {
-	return fmt.Sprintf("/v2/contracts/%s/items/%s/termination", url.PathEscape(r.ContractID), url.PathEscape(r.ContractItemID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/contracts/%s/items/%s/termination", url.PathEscape(r.ContractID), url.PathEscape(r.ContractItemID)),
+	}
+	return u.String()
 }
 
 func (r *TerminateContractItemRequest) query() url.Values {

@@ -50,7 +50,10 @@ func (r *UpdateProjectMailSettingRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateProjectMailSettingRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/mail-settings/%s", url.PathEscape(r.ProjectID), url.PathEscape(string(r.MailSetting)))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/mail-settings/%s", url.PathEscape(r.ProjectID), url.PathEscape(string(r.MailSetting))),
+	}
+	return u.String()
 }
 
 func (r *UpdateProjectMailSettingRequest) query() url.Values {

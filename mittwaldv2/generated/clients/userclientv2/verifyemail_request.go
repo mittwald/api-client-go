@@ -47,7 +47,10 @@ func (r *VerifyEmailRequest) body() (io.Reader, string, error) {
 }
 
 func (r *VerifyEmailRequest) url() string {
-	return "/v2/users/self/credentials/email/actions/verify-email"
+	u := url.URL{
+		Path: "/v2/users/self/credentials/email/actions/verify-email",
+	}
+	return u.String()
 }
 
 func (r *VerifyEmailRequest) query() url.Values {

@@ -44,7 +44,11 @@ func (r *ListSFTPUsersRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListSFTPUsersRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/sftp-users", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/projects/%s/sftp-users", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListSFTPUsersRequest) query() url.Values {

@@ -51,7 +51,10 @@ func (r *ListIngressesCompatibleWithCertificateRequest) body() (io.Reader, strin
 }
 
 func (r *ListIngressesCompatibleWithCertificateRequest) url() string {
-	return "/v2/actions/list-ingresses-compatible-with-certificate"
+	u := url.URL{
+		Path: "/v2/actions/list-ingresses-compatible-with-certificate",
+	}
+	return u.String()
 }
 
 func (r *ListIngressesCompatibleWithCertificateRequest) query() url.Values {

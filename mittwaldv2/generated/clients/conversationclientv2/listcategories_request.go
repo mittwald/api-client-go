@@ -40,7 +40,10 @@ func (r *ListCategoriesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListCategoriesRequest) url() string {
-	return "/v2/conversation-categories"
+	u := url.URL{
+		Path: "/v2/conversation-categories",
+	}
+	return u.String()
 }
 
 func (r *ListCategoriesRequest) query() url.Values {

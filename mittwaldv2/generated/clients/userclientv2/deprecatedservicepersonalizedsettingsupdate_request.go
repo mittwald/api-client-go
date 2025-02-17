@@ -49,7 +49,10 @@ func (r *DeprecatedServicePersonalizedSettingsUpdateRequest) body() (io.Reader, 
 }
 
 func (r *DeprecatedServicePersonalizedSettingsUpdateRequest) url() string {
-	return "/v2/user/settings"
+	u := url.URL{
+		Path: "/v2/user/settings",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedServicePersonalizedSettingsUpdateRequest) query() url.Values {

@@ -42,7 +42,10 @@ func (r *GetFileUploadTokenRulesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetFileUploadTokenRulesRequest) url() string {
-	return fmt.Sprintf("/v2/file-upload-tokens/%s/rules", url.PathEscape(r.FileUploadToken))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/file-upload-tokens/%s/rules", url.PathEscape(r.FileUploadToken)),
+	}
+	return u.String()
 }
 
 func (r *GetFileUploadTokenRulesRequest) query() url.Values {

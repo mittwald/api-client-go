@@ -42,7 +42,10 @@ func (r *DeleteMysqlUserRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteMysqlUserRequest) url() string {
-	return fmt.Sprintf("/v2/mysql-users/%s", url.PathEscape(r.MysqlUserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mysql-users/%s", url.PathEscape(r.MysqlUserID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteMysqlUserRequest) query() url.Values {

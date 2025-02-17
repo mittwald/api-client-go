@@ -41,7 +41,10 @@ func (r *GetSystemsoftwareRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetSystemsoftwareRequest) url() string {
-	return fmt.Sprintf("/v2/system-softwares/%s", url.PathEscape(r.SystemSoftwareID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/system-softwares/%s", url.PathEscape(r.SystemSoftwareID)),
+	}
+	return u.String()
 }
 
 func (r *GetSystemsoftwareRequest) query() url.Values {

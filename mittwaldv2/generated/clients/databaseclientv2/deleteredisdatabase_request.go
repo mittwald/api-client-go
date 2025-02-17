@@ -42,7 +42,10 @@ func (r *DeleteRedisDatabaseRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteRedisDatabaseRequest) url() string {
-	return fmt.Sprintf("/v2/redis-databases/%s", url.PathEscape(r.RedisDatabaseID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/redis-databases/%s", url.PathEscape(r.RedisDatabaseID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteRedisDatabaseRequest) query() url.Values {

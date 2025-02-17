@@ -49,7 +49,10 @@ func (r *UpdateCronjobRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateCronjobRequest) url() string {
-	return fmt.Sprintf("/v2/cronjobs/%s", url.PathEscape(r.CronjobID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/cronjobs/%s", url.PathEscape(r.CronjobID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateCronjobRequest) query() url.Values {

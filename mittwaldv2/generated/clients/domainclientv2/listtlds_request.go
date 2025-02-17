@@ -41,7 +41,10 @@ func (r *ListTldsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListTldsRequest) url() string {
-	return "/v2/domain-tlds"
+	u := url.URL{
+		Path: "/v2/domain-tlds",
+	}
+	return u.String()
 }
 
 func (r *ListTldsRequest) query() url.Values {

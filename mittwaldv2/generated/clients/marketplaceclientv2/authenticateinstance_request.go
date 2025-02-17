@@ -49,7 +49,10 @@ func (r *AuthenticateInstanceRequest) body() (io.Reader, string, error) {
 }
 
 func (r *AuthenticateInstanceRequest) url() string {
-	return fmt.Sprintf("/v2/extension-instances/%s/tokens", url.PathEscape(r.ExtensionInstanceID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/extension-instances/%s/tokens", url.PathEscape(r.ExtensionInstanceID)),
+	}
+	return u.String()
 }
 
 func (r *AuthenticateInstanceRequest) query() url.Values {

@@ -45,7 +45,10 @@ func (r *ListTldContactSchemasRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListTldContactSchemasRequest) url() string {
-	return fmt.Sprintf("/v2/domain-tlds/%s/contact-schemas", url.PathEscape(r.Tld))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domain-tlds/%s/contact-schemas", url.PathEscape(r.Tld)),
+	}
+	return u.String()
 }
 
 func (r *ListTldContactSchemasRequest) query() url.Values {

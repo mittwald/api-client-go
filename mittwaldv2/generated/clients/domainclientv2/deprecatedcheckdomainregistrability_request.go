@@ -52,7 +52,10 @@ func (r *DeprecatedCheckDomainRegistrabilityRequest) body() (io.Reader, string, 
 }
 
 func (r *DeprecatedCheckDomainRegistrabilityRequest) url() string {
-	return "/v2/domains"
+	u := url.URL{
+		Path: "/v2/domains",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedCheckDomainRegistrabilityRequest) query() url.Values {

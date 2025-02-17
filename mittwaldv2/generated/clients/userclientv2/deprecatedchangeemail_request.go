@@ -48,7 +48,10 @@ func (r *DeprecatedChangeEmailRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedChangeEmailRequest) url() string {
-	return "/v2/signup/email"
+	u := url.URL{
+		Path: "/v2/signup/email",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedChangeEmailRequest) query() url.Values {

@@ -48,7 +48,10 @@ func (r *PreviewOrderRequest) body() (io.Reader, string, error) {
 }
 
 func (r *PreviewOrderRequest) url() string {
-	return "/v2/order-previews"
+	u := url.URL{
+		Path: "/v2/order-previews",
+	}
+	return u.String()
 }
 
 func (r *PreviewOrderRequest) query() url.Values {

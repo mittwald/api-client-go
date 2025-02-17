@@ -41,7 +41,11 @@ func (r *DeprecatedServiceFeedbackListRequest) body() (io.Reader, string, error)
 }
 
 func (r *DeprecatedServiceFeedbackListRequest) url() string {
-	return "/v2/user/feedback"
+	u := url.URL{
+		Path:     "/v2/user/feedback",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedServiceFeedbackListRequest) query() url.Values {

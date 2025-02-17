@@ -42,7 +42,10 @@ func (r *DeleteProjectBackupExportRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteProjectBackupExportRequest) url() string {
-	return fmt.Sprintf("/v2/project-backups/%s/export", url.PathEscape(r.ProjectBackupID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/project-backups/%s/export", url.PathEscape(r.ProjectBackupID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteProjectBackupExportRequest) query() url.Values {

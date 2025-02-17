@@ -42,7 +42,10 @@ func (r *GetCategoryRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetCategoryRequest) url() string {
-	return fmt.Sprintf("/v2/conversation-categories/%s", url.PathEscape(r.CategoryID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/conversation-categories/%s", url.PathEscape(r.CategoryID)),
+	}
+	return u.String()
 }
 
 func (r *GetCategoryRequest) query() url.Values {

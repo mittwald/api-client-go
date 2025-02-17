@@ -53,7 +53,10 @@ func (r *DeprecatedDeclareProcessChangeAuthcodeRequest) body() (io.Reader, strin
 }
 
 func (r *DeprecatedDeclareProcessChangeAuthcodeRequest) url() string {
-	return fmt.Sprintf("/v2/domains/%s/declarations/authcode", url.PathEscape(r.DomainID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domains/%s/declarations/authcode", url.PathEscape(r.DomainID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedDeclareProcessChangeAuthcodeRequest) query() url.Values {

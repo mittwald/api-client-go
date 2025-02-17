@@ -42,7 +42,11 @@ func (r *GetArticleRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetArticleRequest) url() string {
-	return fmt.Sprintf("/v2/articles/%s", url.PathEscape(r.ArticleID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/articles/%s", url.PathEscape(r.ArticleID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *GetArticleRequest) query() url.Values {

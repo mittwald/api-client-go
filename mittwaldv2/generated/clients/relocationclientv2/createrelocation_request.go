@@ -51,7 +51,10 @@ func (r *CreateRelocationRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateRelocationRequest) url() string {
-	return "/v2/relocation"
+	u := url.URL{
+		Path: "/v2/relocation",
+	}
+	return u.String()
 }
 
 func (r *CreateRelocationRequest) query() url.Values {

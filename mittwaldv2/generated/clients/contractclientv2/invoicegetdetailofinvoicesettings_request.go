@@ -43,7 +43,10 @@ func (r *InvoiceGetDetailOfInvoiceSettingsRequest) body() (io.Reader, string, er
 }
 
 func (r *InvoiceGetDetailOfInvoiceSettingsRequest) url() string {
-	return fmt.Sprintf("/v2/customers/%s/invoice-settings", url.PathEscape(r.CustomerID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/customers/%s/invoice-settings", url.PathEscape(r.CustomerID)),
+	}
+	return u.String()
 }
 
 func (r *InvoiceGetDetailOfInvoiceSettingsRequest) query() url.Values {

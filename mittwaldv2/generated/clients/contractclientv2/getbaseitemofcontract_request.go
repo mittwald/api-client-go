@@ -42,7 +42,10 @@ func (r *GetBaseItemOfContractRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetBaseItemOfContractRequest) url() string {
-	return fmt.Sprintf("/v2/contracts/%s/base-items", url.PathEscape(r.ContractID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/contracts/%s/base-items", url.PathEscape(r.ContractID)),
+	}
+	return u.String()
 }
 
 func (r *GetBaseItemOfContractRequest) query() url.Values {

@@ -45,7 +45,11 @@ func (r *GetMissingDependenciesForAppinstallationRequest) body() (io.Reader, str
 }
 
 func (r *GetMissingDependenciesForAppinstallationRequest) url() string {
-	return fmt.Sprintf("/v2/app-installations/%s/missing-dependencies", url.PathEscape(r.AppInstallationID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/app-installations/%s/missing-dependencies", url.PathEscape(r.AppInstallationID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *GetMissingDependenciesForAppinstallationRequest) query() url.Values {

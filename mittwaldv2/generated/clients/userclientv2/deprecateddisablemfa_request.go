@@ -49,7 +49,10 @@ func (r *DeprecatedDisableMFARequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedDisableMFARequest) url() string {
-	return "/v2/signup/mfa"
+	u := url.URL{
+		Path: "/v2/signup/mfa",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedDisableMFARequest) query() url.Values {

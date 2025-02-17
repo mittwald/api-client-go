@@ -41,7 +41,10 @@ func (r *DeleteAPITokenRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteAPITokenRequest) url() string {
-	return fmt.Sprintf("/v2/users/self/api-tokens/%s", url.PathEscape(r.APITokenID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/users/self/api-tokens/%s", url.PathEscape(r.APITokenID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteAPITokenRequest) query() url.Values {

@@ -45,7 +45,11 @@ func (r *ListPerformanceDataForProjectRequest) body() (io.Reader, string, error)
 }
 
 func (r *ListPerformanceDataForProjectRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/page-insights", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/projects/%s/page-insights", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListPerformanceDataForProjectRequest) query() url.Values {

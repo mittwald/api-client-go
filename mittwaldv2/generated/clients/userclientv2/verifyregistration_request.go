@@ -48,7 +48,10 @@ func (r *VerifyRegistrationRequest) body() (io.Reader, string, error) {
 }
 
 func (r *VerifyRegistrationRequest) url() string {
-	return "/v2/verify-registration"
+	u := url.URL{
+		Path: "/v2/verify-registration",
+	}
+	return u.String()
 }
 
 func (r *VerifyRegistrationRequest) query() url.Values {

@@ -49,7 +49,11 @@ func (r *ProjectFileSystemGetDirectoriesRequest) body() (io.Reader, string, erro
 }
 
 func (r *ProjectFileSystemGetDirectoriesRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/filesystem-directories", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/projects/%s/filesystem-directories", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ProjectFileSystemGetDirectoriesRequest) query() url.Values {

@@ -43,7 +43,10 @@ func (r *DeprecatedServiceUserGetRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedServiceUserGetRequest) url() string {
-	return fmt.Sprintf("/v2/user/%s", url.PathEscape(r.UserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/user/%s", url.PathEscape(r.UserID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedServiceUserGetRequest) query() url.Values {

@@ -48,7 +48,10 @@ func (r *ReplaceDatabaseRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ReplaceDatabaseRequest) url() string {
-	return fmt.Sprintf("/v2/app-installations/%s/database/replace", url.PathEscape(r.AppInstallationID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/app-installations/%s/database/replace", url.PathEscape(r.AppInstallationID)),
+	}
+	return u.String()
 }
 
 func (r *ReplaceDatabaseRequest) query() url.Values {

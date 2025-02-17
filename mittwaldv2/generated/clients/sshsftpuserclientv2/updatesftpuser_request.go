@@ -49,7 +49,10 @@ func (r *UpdateSFTPUserRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateSFTPUserRequest) url() string {
-	return fmt.Sprintf("/v2/sftp-users/%s", url.PathEscape(r.SFTPUserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/sftp-users/%s", url.PathEscape(r.SFTPUserID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateSFTPUserRequest) query() url.Values {

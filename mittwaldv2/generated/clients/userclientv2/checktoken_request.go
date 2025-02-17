@@ -47,7 +47,10 @@ func (r *CheckTokenRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CheckTokenRequest) url() string {
-	return "/v2/users/self/credentials/token"
+	u := url.URL{
+		Path: "/v2/users/self/credentials/token",
+	}
+	return u.String()
 }
 
 func (r *CheckTokenRequest) query() url.Values {

@@ -43,7 +43,10 @@ func (r *GetExecutionRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetExecutionRequest) url() string {
-	return fmt.Sprintf("/v2/cronjobs/%s/executions/%s", url.PathEscape(r.CronjobID), url.PathEscape(r.ExecutionID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/cronjobs/%s/executions/%s", url.PathEscape(r.CronjobID), url.PathEscape(r.ExecutionID)),
+	}
+	return u.String()
 }
 
 func (r *GetExecutionRequest) query() url.Values {

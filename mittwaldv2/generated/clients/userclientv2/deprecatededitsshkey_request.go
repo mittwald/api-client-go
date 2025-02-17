@@ -49,7 +49,10 @@ func (r *DeprecatedEditSSHKeyRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedEditSSHKeyRequest) url() string {
-	return fmt.Sprintf("/v2/signup/ssh/%s", url.PathEscape(r.SSHKeyID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/signup/ssh/%s", url.PathEscape(r.SSHKeyID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedEditSSHKeyRequest) query() url.Values {

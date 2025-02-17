@@ -42,7 +42,10 @@ func (r *GetProjectBackupScheduleRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetProjectBackupScheduleRequest) url() string {
-	return fmt.Sprintf("/v2/project-backup-schedules/%s", url.PathEscape(r.ProjectBackupScheduleID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/project-backup-schedules/%s", url.PathEscape(r.ProjectBackupScheduleID)),
+	}
+	return u.String()
 }
 
 func (r *GetProjectBackupScheduleRequest) query() url.Values {

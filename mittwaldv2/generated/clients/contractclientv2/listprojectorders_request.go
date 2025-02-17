@@ -53,7 +53,11 @@ func (r *ListProjectOrdersRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListProjectOrdersRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/orders", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/projects/%s/orders", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListProjectOrdersRequest) query() url.Values {

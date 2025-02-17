@@ -44,7 +44,11 @@ func (r *ListInvitesForCustomerRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListInvitesForCustomerRequest) url() string {
-	return fmt.Sprintf("/v2/customers/%s/invites", url.PathEscape(r.CustomerID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/customers/%s/invites", url.PathEscape(r.CustomerID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListInvitesForCustomerRequest) query() url.Values {

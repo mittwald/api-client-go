@@ -39,7 +39,10 @@ func (r *ListAPITokensRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListAPITokensRequest) url() string {
-	return "/v2/users/self/api-tokens"
+	u := url.URL{
+		Path: "/v2/users/self/api-tokens",
+	}
+	return u.String()
 }
 
 func (r *ListAPITokensRequest) query() url.Values {

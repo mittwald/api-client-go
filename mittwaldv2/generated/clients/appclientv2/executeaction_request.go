@@ -53,7 +53,10 @@ func (r *ExecuteActionRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ExecuteActionRequest) url() string {
-	return fmt.Sprintf("/v2/app-installations/%s/actions/%s", url.PathEscape(r.AppInstallationID), url.PathEscape(string(r.Action)))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/app-installations/%s/actions/%s", url.PathEscape(r.AppInstallationID), url.PathEscape(string(r.Action))),
+	}
+	return u.String()
 }
 
 func (r *ExecuteActionRequest) query() url.Values {

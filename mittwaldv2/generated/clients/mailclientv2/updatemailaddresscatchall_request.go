@@ -49,7 +49,10 @@ func (r *UpdateMailAddressCatchAllRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateMailAddressCatchAllRequest) url() string {
-	return fmt.Sprintf("/v2/mail-addresses/%s/catch-all", url.PathEscape(r.MailAddressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mail-addresses/%s/catch-all", url.PathEscape(r.MailAddressID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateMailAddressCatchAllRequest) query() url.Values {
