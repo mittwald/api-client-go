@@ -36,7 +36,7 @@ func (c *loggingClient) Do(request *http.Request) (*http.Response, error) {
 		l = l.With("req.body", string(body))
 	}
 
-	l.Debug("executing request")
+	l.DebugContext(request.Context(), "executing request")
 
 	response, err := c.inner.Do(request)
 
@@ -53,7 +53,7 @@ func (c *loggingClient) Do(request *http.Request) (*http.Response, error) {
 		}
 	}
 
-	l.Debug("received response")
+	l.DebugContext(request.Context(), "received response")
 
 	return response, err
 }
