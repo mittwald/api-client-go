@@ -34,7 +34,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          go install github.com/mittwald/api-client-go-builder/cmd/mittwald-go-client-builder@latest
+          GOPROXY=direct go install github.com/mittwald/api-client-go-builder/cmd/mittwald-go-client-builder@latest
           go install golang.org/x/tools/cmd/goimports@latest
 
       - name: Generate code for v2 API
