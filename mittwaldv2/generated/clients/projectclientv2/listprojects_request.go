@@ -46,7 +46,11 @@ func (r *ListProjectsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListProjectsRequest) url() string {
-	return "/v2/projects"
+	u := url.URL{
+		Path:     "/v2/projects",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListProjectsRequest) query() url.Values {

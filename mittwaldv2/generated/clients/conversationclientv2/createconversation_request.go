@@ -48,7 +48,10 @@ func (r *CreateConversationRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateConversationRequest) url() string {
-	return "/v2/conversations"
+	u := url.URL{
+		Path: "/v2/conversations",
+	}
+	return u.String()
 }
 
 func (r *CreateConversationRequest) query() url.Values {

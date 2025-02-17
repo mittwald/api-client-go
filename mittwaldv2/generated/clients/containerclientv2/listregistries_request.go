@@ -46,7 +46,11 @@ func (r *ListRegistriesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListRegistriesRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/registries", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/projects/%s/registries", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListRegistriesRequest) query() url.Values {

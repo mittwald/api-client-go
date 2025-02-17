@@ -42,7 +42,11 @@ func (r *ListMysqlCharsetsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListMysqlCharsetsRequest) url() string {
-	return "/v2/mysql-charsets"
+	u := url.URL{
+		Path:     "/v2/mysql-charsets",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListMysqlCharsetsRequest) query() url.Values {

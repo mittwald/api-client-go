@@ -45,7 +45,10 @@ func (r *CountUnreadNotificationsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CountUnreadNotificationsRequest) url() string {
-	return "/v2/notification-unread-counts"
+	u := url.URL{
+		Path: "/v2/notification-unread-counts",
+	}
+	return u.String()
 }
 
 func (r *CountUnreadNotificationsRequest) query() url.Values {

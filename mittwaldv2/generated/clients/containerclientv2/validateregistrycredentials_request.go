@@ -43,7 +43,10 @@ func (r *ValidateRegistryCredentialsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ValidateRegistryCredentialsRequest) url() string {
-	return fmt.Sprintf("/v2/registries/%s/actions/validate-credentials", url.PathEscape(r.RegistryID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/registries/%s/actions/validate-credentials", url.PathEscape(r.RegistryID)),
+	}
+	return u.String()
 }
 
 func (r *ValidateRegistryCredentialsRequest) query() url.Values {

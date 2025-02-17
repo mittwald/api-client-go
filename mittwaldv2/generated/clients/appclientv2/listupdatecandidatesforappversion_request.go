@@ -44,7 +44,10 @@ func (r *ListUpdateCandidatesForAppversionRequest) body() (io.Reader, string, er
 }
 
 func (r *ListUpdateCandidatesForAppversionRequest) url() string {
-	return fmt.Sprintf("/v2/apps/%s/versions/%s/update-candidates", url.PathEscape(r.AppID), url.PathEscape(r.BaseAppVersionID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/apps/%s/versions/%s/update-candidates", url.PathEscape(r.AppID), url.PathEscape(r.BaseAppVersionID)),
+	}
+	return u.String()
 }
 
 func (r *ListUpdateCandidatesForAppversionRequest) query() url.Values {

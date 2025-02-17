@@ -50,7 +50,10 @@ func (r *UpdateRecordSetRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateRecordSetRequest) url() string {
-	return fmt.Sprintf("/v2/dns-zones/%s/record-sets/%s", url.PathEscape(r.DNSZoneID), url.PathEscape(string(r.RecordSet)))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/dns-zones/%s/record-sets/%s", url.PathEscape(r.DNSZoneID), url.PathEscape(string(r.RecordSet))),
+	}
+	return u.String()
 }
 
 func (r *UpdateRecordSetRequest) query() url.Values {

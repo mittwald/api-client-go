@@ -48,7 +48,10 @@ func (r *CreateCustomerRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateCustomerRequest) url() string {
-	return "/v2/customers"
+	u := url.URL{
+		Path: "/v2/customers",
+	}
+	return u.String()
 }
 
 func (r *CreateCustomerRequest) query() url.Values {

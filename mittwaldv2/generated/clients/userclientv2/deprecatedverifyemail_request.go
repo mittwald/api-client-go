@@ -49,7 +49,10 @@ func (r *DeprecatedVerifyEmailRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedVerifyEmailRequest) url() string {
-	return "/v2/signup/email/verify"
+	u := url.URL{
+		Path: "/v2/signup/email/verify",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedVerifyEmailRequest) query() url.Values {

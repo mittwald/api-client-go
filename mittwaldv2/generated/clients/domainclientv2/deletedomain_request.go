@@ -44,7 +44,11 @@ func (r *DeleteDomainRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteDomainRequest) url() string {
-	return fmt.Sprintf("/v2/domains/%s", url.PathEscape(r.DomainID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/domains/%s", url.PathEscape(r.DomainID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *DeleteDomainRequest) query() url.Values {

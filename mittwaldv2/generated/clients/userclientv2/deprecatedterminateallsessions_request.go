@@ -42,7 +42,10 @@ func (r *DeprecatedTerminateAllSessionsRequest) body() (io.Reader, string, error
 }
 
 func (r *DeprecatedTerminateAllSessionsRequest) url() string {
-	return "/v2/signup/sessions"
+	u := url.URL{
+		Path: "/v2/signup/sessions",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedTerminateAllSessionsRequest) query() url.Values {

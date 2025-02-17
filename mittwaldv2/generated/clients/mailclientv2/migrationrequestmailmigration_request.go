@@ -48,7 +48,10 @@ func (r *MigrationRequestMailMigrationRequest) body() (io.Reader, string, error)
 }
 
 func (r *MigrationRequestMailMigrationRequest) url() string {
-	return "/v2/mail-migrations/actions/request"
+	u := url.URL{
+		Path: "/v2/mail-migrations/actions/request",
+	}
+	return u.String()
 }
 
 func (r *MigrationRequestMailMigrationRequest) query() url.Values {

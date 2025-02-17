@@ -44,7 +44,10 @@ func (r *GetExtensionInstanceForCustomerRequest) body() (io.Reader, string, erro
 }
 
 func (r *GetExtensionInstanceForCustomerRequest) url() string {
-	return fmt.Sprintf("/v2/customers/%s/extensions/%s", url.PathEscape(r.CustomerID), url.PathEscape(r.ExtensionID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/customers/%s/extensions/%s", url.PathEscape(r.CustomerID), url.PathEscape(r.ExtensionID)),
+	}
+	return u.String()
 }
 
 func (r *GetExtensionInstanceForCustomerRequest) query() url.Values {

@@ -42,7 +42,10 @@ func (r *GetAppversionRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetAppversionRequest) url() string {
-	return fmt.Sprintf("/v2/apps/%s/versions/%s", url.PathEscape(r.AppID), url.PathEscape(r.AppVersionID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/apps/%s/versions/%s", url.PathEscape(r.AppID), url.PathEscape(r.AppVersionID)),
+	}
+	return u.String()
 }
 
 func (r *GetAppversionRequest) query() url.Values {

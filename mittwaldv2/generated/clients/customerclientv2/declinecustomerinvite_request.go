@@ -49,7 +49,10 @@ func (r *DeclineCustomerInviteRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeclineCustomerInviteRequest) url() string {
-	return fmt.Sprintf("/v2/customer-invites/%s/actions/decline", url.PathEscape(r.CustomerInviteID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/customer-invites/%s/actions/decline", url.PathEscape(r.CustomerInviteID)),
+	}
+	return u.String()
 }
 
 func (r *DeclineCustomerInviteRequest) query() url.Values {

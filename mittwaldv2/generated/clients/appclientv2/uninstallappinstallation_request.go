@@ -42,7 +42,10 @@ func (r *UninstallAppinstallationRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UninstallAppinstallationRequest) url() string {
-	return fmt.Sprintf("/v2/app-installations/%s", url.PathEscape(r.AppInstallationID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/app-installations/%s", url.PathEscape(r.AppInstallationID)),
+	}
+	return u.String()
 }
 
 func (r *UninstallAppinstallationRequest) query() url.Values {

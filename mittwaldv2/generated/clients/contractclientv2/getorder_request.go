@@ -43,7 +43,10 @@ func (r *GetOrderRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetOrderRequest) url() string {
-	return fmt.Sprintf("/v2/orders/%s", url.PathEscape(r.OrderID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/orders/%s", url.PathEscape(r.OrderID)),
+	}
+	return u.String()
 }
 
 func (r *GetOrderRequest) query() url.Values {

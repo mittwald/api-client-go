@@ -53,7 +53,10 @@ func (r *DeprecatedUpdateMailAddressForwardAddressesRequest) body() (io.Reader, 
 }
 
 func (r *DeprecatedUpdateMailAddressForwardAddressesRequest) url() string {
-	return fmt.Sprintf("/v2/mail-addresses/%s/forward-addresses", url.PathEscape(r.MailAddressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mail-addresses/%s/forward-addresses", url.PathEscape(r.MailAddressID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedUpdateMailAddressForwardAddressesRequest) query() url.Values {

@@ -41,7 +41,11 @@ func (r *ListMysqlVersionsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListMysqlVersionsRequest) url() string {
-	return "/v2/mysql-versions"
+	u := url.URL{
+		Path:     "/v2/mysql-versions",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListMysqlVersionsRequest) query() url.Values {

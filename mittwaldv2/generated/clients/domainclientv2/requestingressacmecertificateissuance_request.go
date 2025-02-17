@@ -43,7 +43,10 @@ func (r *RequestIngressAcmeCertificateIssuanceRequest) body() (io.Reader, string
 }
 
 func (r *RequestIngressAcmeCertificateIssuanceRequest) url() string {
-	return fmt.Sprintf("/v2/ingresses/%s/actions/request-acme-certificate-issuance", url.PathEscape(r.IngressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/ingresses/%s/actions/request-acme-certificate-issuance", url.PathEscape(r.IngressID)),
+	}
+	return u.String()
 }
 
 func (r *RequestIngressAcmeCertificateIssuanceRequest) query() url.Values {

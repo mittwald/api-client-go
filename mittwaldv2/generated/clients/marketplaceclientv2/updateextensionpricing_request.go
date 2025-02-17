@@ -52,7 +52,10 @@ func (r *UpdateExtensionPricingRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateExtensionPricingRequest) url() string {
-	return fmt.Sprintf("/v2/contributors/%s/extension/%s/pricing", url.PathEscape(r.ContributorID), url.PathEscape(r.ExtensionID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/contributors/%s/extension/%s/pricing", url.PathEscape(r.ContributorID), url.PathEscape(r.ExtensionID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateExtensionPricingRequest) query() url.Values {

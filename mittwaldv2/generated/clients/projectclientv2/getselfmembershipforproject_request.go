@@ -43,7 +43,10 @@ func (r *GetSelfMembershipForProjectRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetSelfMembershipForProjectRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/memberships/self", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/memberships/self", url.PathEscape(r.ProjectID)),
+	}
+	return u.String()
 }
 
 func (r *GetSelfMembershipForProjectRequest) query() url.Values {

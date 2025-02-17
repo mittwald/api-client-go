@@ -42,7 +42,10 @@ func (r *DeleteCustomerInviteRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteCustomerInviteRequest) url() string {
-	return fmt.Sprintf("/v2/customer-invites/%s", url.PathEscape(r.CustomerInviteID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/customer-invites/%s", url.PathEscape(r.CustomerInviteID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteCustomerInviteRequest) query() url.Values {

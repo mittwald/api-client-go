@@ -53,7 +53,10 @@ func (r *DeprecatedUpdateDescriptionRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedUpdateDescriptionRequest) url() string {
-	return fmt.Sprintf("/v2/deliveryboxes/%s/description", url.PathEscape(r.ID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/deliveryboxes/%s/description", url.PathEscape(r.ID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedUpdateDescriptionRequest) query() url.Values {

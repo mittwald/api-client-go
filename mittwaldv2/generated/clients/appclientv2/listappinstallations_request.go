@@ -45,7 +45,11 @@ func (r *ListAppinstallationsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListAppinstallationsRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/app-installations", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/projects/%s/app-installations", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListAppinstallationsRequest) query() url.Values {

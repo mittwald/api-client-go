@@ -50,7 +50,10 @@ func (r *DeprecatedEditAPITokenRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedEditAPITokenRequest) url() string {
-	return fmt.Sprintf("/v2/signup/token/api/%s", url.PathEscape(r.APITokenID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/signup/token/api/%s", url.PathEscape(r.APITokenID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedEditAPITokenRequest) query() url.Values {

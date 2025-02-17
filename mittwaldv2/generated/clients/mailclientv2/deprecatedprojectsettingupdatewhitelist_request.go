@@ -53,7 +53,10 @@ func (r *DeprecatedProjectsettingUpdateWhitelistRequest) body() (io.Reader, stri
 }
 
 func (r *DeprecatedProjectsettingUpdateWhitelistRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/mailsettings/whitelist", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/mailsettings/whitelist", url.PathEscape(r.ProjectID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedProjectsettingUpdateWhitelistRequest) query() url.Values {

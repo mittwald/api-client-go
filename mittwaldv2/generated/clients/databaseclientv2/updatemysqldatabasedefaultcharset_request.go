@@ -50,7 +50,10 @@ func (r *UpdateMysqlDatabaseDefaultCharsetRequest) body() (io.Reader, string, er
 }
 
 func (r *UpdateMysqlDatabaseDefaultCharsetRequest) url() string {
-	return fmt.Sprintf("/v2/mysql-databases/%s/default-charset", url.PathEscape(r.MysqlDatabaseID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mysql-databases/%s/default-charset", url.PathEscape(r.MysqlDatabaseID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateMysqlDatabaseDefaultCharsetRequest) query() url.Values {

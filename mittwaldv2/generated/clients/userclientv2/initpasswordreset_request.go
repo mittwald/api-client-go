@@ -48,7 +48,10 @@ func (r *InitPasswordResetRequest) body() (io.Reader, string, error) {
 }
 
 func (r *InitPasswordResetRequest) url() string {
-	return "/v2/users/self/credentials/actions/init-password-reset"
+	u := url.URL{
+		Path: "/v2/users/self/credentials/actions/init-password-reset",
+	}
+	return u.String()
 }
 
 func (r *InitPasswordResetRequest) query() url.Values {

@@ -42,7 +42,10 @@ func (r *DeleteCronjobRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteCronjobRequest) url() string {
-	return fmt.Sprintf("/v2/cronjobs/%s", url.PathEscape(r.CronjobID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/cronjobs/%s", url.PathEscape(r.CronjobID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteCronjobRequest) query() url.Values {

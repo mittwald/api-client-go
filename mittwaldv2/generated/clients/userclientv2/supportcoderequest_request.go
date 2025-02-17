@@ -42,7 +42,11 @@ func (r *SupportCodeRequestRequest) body() (io.Reader, string, error) {
 }
 
 func (r *SupportCodeRequestRequest) url() string {
-	return "/v2/users/self/credentials/support-code"
+	u := url.URL{
+		Path:     "/v2/users/self/credentials/support-code",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *SupportCodeRequestRequest) query() url.Values {

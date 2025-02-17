@@ -39,7 +39,10 @@ func (r *CreateFileRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateFileRequest) url() string {
-	return "/v2/files"
+	u := url.URL{
+		Path: "/v2/files",
+	}
+	return u.String()
 }
 
 func (r *CreateFileRequest) query() url.Values {

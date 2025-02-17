@@ -47,7 +47,10 @@ func (r *LogoutRequest) body() (io.Reader, string, error) {
 }
 
 func (r *LogoutRequest) url() string {
-	return "/v2/logout"
+	u := url.URL{
+		Path: "/v2/logout",
+	}
+	return u.String()
 }
 
 func (r *LogoutRequest) query() url.Values {

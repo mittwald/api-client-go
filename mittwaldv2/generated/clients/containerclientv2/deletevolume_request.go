@@ -43,7 +43,10 @@ func (r *DeleteVolumeRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteVolumeRequest) url() string {
-	return fmt.Sprintf("/v2/stacks/%s/volumes/%s", url.PathEscape(r.StackID), url.PathEscape(r.VolumeID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/stacks/%s/volumes/%s", url.PathEscape(r.StackID), url.PathEscape(r.VolumeID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteVolumeRequest) query() url.Values {

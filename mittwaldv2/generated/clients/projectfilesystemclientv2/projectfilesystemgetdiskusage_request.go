@@ -43,7 +43,11 @@ func (r *ProjectFileSystemGetDiskUsageRequest) body() (io.Reader, string, error)
 }
 
 func (r *ProjectFileSystemGetDiskUsageRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/filesystem-disk-usage", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/projects/%s/filesystem-disk-usage", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ProjectFileSystemGetDiskUsageRequest) query() url.Values {

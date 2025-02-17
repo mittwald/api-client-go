@@ -45,7 +45,11 @@ func (r *ListCronjobsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListCronjobsRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/cronjobs", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/projects/%s/cronjobs", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListCronjobsRequest) query() url.Values {

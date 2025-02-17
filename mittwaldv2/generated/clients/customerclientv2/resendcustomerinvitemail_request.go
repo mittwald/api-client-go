@@ -49,7 +49,10 @@ func (r *ResendCustomerInviteMailRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ResendCustomerInviteMailRequest) url() string {
-	return fmt.Sprintf("/v2/customer-invites/%s/actions/resend", url.PathEscape(r.CustomerInviteID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/customer-invites/%s/actions/resend", url.PathEscape(r.CustomerInviteID)),
+	}
+	return u.String()
 }
 
 func (r *ResendCustomerInviteMailRequest) query() url.Values {

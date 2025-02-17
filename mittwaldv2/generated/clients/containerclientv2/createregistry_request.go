@@ -51,7 +51,10 @@ func (r *CreateRegistryRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateRegistryRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/registries", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/registries", url.PathEscape(r.ProjectID)),
+	}
+	return u.String()
 }
 
 func (r *CreateRegistryRequest) query() url.Values {

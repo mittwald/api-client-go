@@ -48,7 +48,10 @@ func (r *LinkDatabaseRequest) body() (io.Reader, string, error) {
 }
 
 func (r *LinkDatabaseRequest) url() string {
-	return fmt.Sprintf("/v2/app-installations/%s/database", url.PathEscape(r.AppInstallationID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/app-installations/%s/database", url.PathEscape(r.AppInstallationID)),
+	}
+	return u.String()
 }
 
 func (r *LinkDatabaseRequest) query() url.Values {

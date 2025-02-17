@@ -49,7 +49,10 @@ func (r *UpdateProjectMembershipRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateProjectMembershipRequest) url() string {
-	return fmt.Sprintf("/v2/project-memberships/%s", url.PathEscape(r.ProjectMembershipID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/project-memberships/%s", url.PathEscape(r.ProjectMembershipID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateProjectMembershipRequest) query() url.Values {

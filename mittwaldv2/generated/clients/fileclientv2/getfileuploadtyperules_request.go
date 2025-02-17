@@ -42,7 +42,10 @@ func (r *GetFileUploadTypeRulesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetFileUploadTypeRulesRequest) url() string {
-	return fmt.Sprintf("/v2/file-upload-types/%s/rules", url.PathEscape(string(r.FileUploadType)))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/file-upload-types/%s/rules", url.PathEscape(string(r.FileUploadType))),
+	}
+	return u.String()
 }
 
 func (r *GetFileUploadTypeRulesRequest) query() url.Values {

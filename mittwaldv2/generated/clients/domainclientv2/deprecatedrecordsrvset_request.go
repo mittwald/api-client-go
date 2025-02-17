@@ -52,7 +52,10 @@ func (r *DeprecatedRecordSrvSetRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedRecordSrvSetRequest) url() string {
-	return fmt.Sprintf("/v2/dns/zones/%s/recordset/srv", url.PathEscape(r.ZoneID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/dns/zones/%s/recordset/srv", url.PathEscape(r.ZoneID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedRecordSrvSetRequest) query() url.Values {

@@ -50,7 +50,10 @@ func (r *UpdateMysqlDatabaseDescriptionRequest) body() (io.Reader, string, error
 }
 
 func (r *UpdateMysqlDatabaseDescriptionRequest) url() string {
-	return fmt.Sprintf("/v2/mysql-databases/%s/description", url.PathEscape(r.MysqlDatabaseID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mysql-databases/%s/description", url.PathEscape(r.MysqlDatabaseID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateMysqlDatabaseDescriptionRequest) query() url.Values {

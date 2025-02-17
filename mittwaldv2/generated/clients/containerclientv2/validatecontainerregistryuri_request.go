@@ -49,7 +49,10 @@ func (r *ValidateContainerRegistryUriRequest) body() (io.Reader, string, error) 
 }
 
 func (r *ValidateContainerRegistryUriRequest) url() string {
-	return "/v2/actions/validate-container-registry-uri"
+	u := url.URL{
+		Path: "/v2/actions/validate-container-registry-uri",
+	}
+	return u.String()
 }
 
 func (r *ValidateContainerRegistryUriRequest) query() url.Values {

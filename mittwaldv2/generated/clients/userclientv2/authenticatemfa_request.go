@@ -47,7 +47,10 @@ func (r *AuthenticateMFARequest) body() (io.Reader, string, error) {
 }
 
 func (r *AuthenticateMFARequest) url() string {
-	return "/v2/authenticate-mfa"
+	u := url.URL{
+		Path: "/v2/authenticate-mfa",
+	}
+	return u.String()
 }
 
 func (r *AuthenticateMFARequest) query() url.Values {

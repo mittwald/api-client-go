@@ -49,7 +49,10 @@ func (r *UpdateDeliveryBoxDescriptionRequest) body() (io.Reader, string, error) 
 }
 
 func (r *UpdateDeliveryBoxDescriptionRequest) url() string {
-	return fmt.Sprintf("/v2/delivery-boxes/%s/description", url.PathEscape(r.DeliveryBoxID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/delivery-boxes/%s/description", url.PathEscape(r.DeliveryBoxID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateDeliveryBoxDescriptionRequest) query() url.Values {

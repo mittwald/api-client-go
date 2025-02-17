@@ -41,7 +41,10 @@ func (r *InvoiceDetailRequest) body() (io.Reader, string, error) {
 }
 
 func (r *InvoiceDetailRequest) url() string {
-	return fmt.Sprintf("/v2/invoices/%s", url.PathEscape(r.InvoiceID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/invoices/%s", url.PathEscape(r.InvoiceID)),
+	}
+	return u.String()
 }
 
 func (r *InvoiceDetailRequest) query() url.Values {

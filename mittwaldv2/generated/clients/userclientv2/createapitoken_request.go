@@ -47,7 +47,10 @@ func (r *CreateAPITokenRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateAPITokenRequest) url() string {
-	return "/v2/users/self/api-tokens"
+	u := url.URL{
+		Path: "/v2/users/self/api-tokens",
+	}
+	return u.String()
 }
 
 func (r *CreateAPITokenRequest) query() url.Values {

@@ -41,7 +41,10 @@ func (r *RetrieveStatusRequest) body() (io.Reader, string, error) {
 }
 
 func (r *RetrieveStatusRequest) url() string {
-	return fmt.Sprintf("/v2/app-installations/%s/status", url.PathEscape(r.AppInstallationID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/app-installations/%s/status", url.PathEscape(r.AppInstallationID)),
+	}
+	return u.String()
 }
 
 func (r *RetrieveStatusRequest) query() url.Values {

@@ -50,7 +50,10 @@ func (r *SetCertificateRequestCertificateRequest) body() (io.Reader, string, err
 }
 
 func (r *SetCertificateRequestCertificateRequest) url() string {
-	return fmt.Sprintf("/v2/certificate-requests/%s/certificate", url.PathEscape(r.CertificateRequestID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/certificate-requests/%s/certificate", url.PathEscape(r.CertificateRequestID)),
+	}
+	return u.String()
 }
 
 func (r *SetCertificateRequestCertificateRequest) query() url.Values {

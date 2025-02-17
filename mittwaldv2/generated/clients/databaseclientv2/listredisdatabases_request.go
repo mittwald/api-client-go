@@ -42,7 +42,10 @@ func (r *ListRedisDatabasesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListRedisDatabasesRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/redis-databases", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/redis-databases", url.PathEscape(r.ProjectID)),
+	}
+	return u.String()
 }
 
 func (r *ListRedisDatabasesRequest) query() url.Values {

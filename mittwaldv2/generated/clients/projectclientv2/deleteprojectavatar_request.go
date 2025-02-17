@@ -42,7 +42,10 @@ func (r *DeleteProjectAvatarRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteProjectAvatarRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/avatar", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/avatar", url.PathEscape(r.ProjectID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteProjectAvatarRequest) query() url.Values {

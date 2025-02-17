@@ -50,7 +50,10 @@ func (r *DeprecatedServicePhoneNumberAddRequest) body() (io.Reader, string, erro
 }
 
 func (r *DeprecatedServicePhoneNumberAddRequest) url() string {
-	return fmt.Sprintf("/v2/user/%s/phone", url.PathEscape(r.UserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/user/%s/phone", url.PathEscape(r.UserID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedServicePhoneNumberAddRequest) query() url.Values {

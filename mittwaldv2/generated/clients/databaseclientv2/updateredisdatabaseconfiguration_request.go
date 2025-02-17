@@ -50,7 +50,10 @@ func (r *UpdateRedisDatabaseConfigurationRequest) body() (io.Reader, string, err
 }
 
 func (r *UpdateRedisDatabaseConfigurationRequest) url() string {
-	return fmt.Sprintf("/v2/redis-databases/%s/configuration", url.PathEscape(r.RedisDatabaseID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/redis-databases/%s/configuration", url.PathEscape(r.RedisDatabaseID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateRedisDatabaseConfigurationRequest) query() url.Values {

@@ -43,7 +43,11 @@ func (r *GetPerformanceDataRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetPerformanceDataRequest) url() string {
-	return "/v2/page-insights"
+	u := url.URL{
+		Path:     "/v2/page-insights",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *GetPerformanceDataRequest) query() url.Values {

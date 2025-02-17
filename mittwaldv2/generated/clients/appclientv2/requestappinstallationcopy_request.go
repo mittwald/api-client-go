@@ -49,7 +49,10 @@ func (r *RequestAppinstallationCopyRequest) body() (io.Reader, string, error) {
 }
 
 func (r *RequestAppinstallationCopyRequest) url() string {
-	return fmt.Sprintf("/v2/app-installations/%s/actions/copy", url.PathEscape(r.AppInstallationID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/app-installations/%s/actions/copy", url.PathEscape(r.AppInstallationID)),
+	}
+	return u.String()
 }
 
 func (r *RequestAppinstallationCopyRequest) query() url.Values {

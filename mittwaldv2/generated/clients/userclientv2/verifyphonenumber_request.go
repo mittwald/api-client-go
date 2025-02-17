@@ -49,7 +49,10 @@ func (r *VerifyPhoneNumberRequest) body() (io.Reader, string, error) {
 }
 
 func (r *VerifyPhoneNumberRequest) url() string {
-	return fmt.Sprintf("/v2/users/%s/actions/verify-phone", url.PathEscape(r.UserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/users/%s/actions/verify-phone", url.PathEscape(r.UserID)),
+	}
+	return u.String()
 }
 
 func (r *VerifyPhoneNumberRequest) query() url.Values {

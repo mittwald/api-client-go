@@ -43,7 +43,11 @@ func (r *SuggestRequest) body() (io.Reader, string, error) {
 }
 
 func (r *SuggestRequest) url() string {
-	return "/v2/domain-suggestions"
+	u := url.URL{
+		Path:     "/v2/domain-suggestions",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *SuggestRequest) query() url.Values {

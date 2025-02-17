@@ -40,7 +40,10 @@ func (r *NewsletterGetInfoRequest) body() (io.Reader, string, error) {
 }
 
 func (r *NewsletterGetInfoRequest) url() string {
-	return "/v2/newsletter-subscriptions/self"
+	u := url.URL{
+		Path: "/v2/newsletter-subscriptions/self",
+	}
+	return u.String()
 }
 
 func (r *NewsletterGetInfoRequest) query() url.Values {

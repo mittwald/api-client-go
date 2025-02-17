@@ -42,7 +42,10 @@ func (r *RemovePhoneNumberRequest) body() (io.Reader, string, error) {
 }
 
 func (r *RemovePhoneNumberRequest) url() string {
-	return fmt.Sprintf("/v2/users/%s/phone", url.PathEscape(r.UserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/users/%s/phone", url.PathEscape(r.UserID)),
+	}
+	return u.String()
 }
 
 func (r *RemovePhoneNumberRequest) query() url.Values {

@@ -49,7 +49,10 @@ func (r *UpdateDomainProjectIDRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateDomainProjectIDRequest) url() string {
-	return fmt.Sprintf("/v2/domains/%s/project-id", url.PathEscape(r.DomainID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domains/%s/project-id", url.PathEscape(r.DomainID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateDomainProjectIDRequest) query() url.Values {

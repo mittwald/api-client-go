@@ -46,7 +46,11 @@ func (r *ListIngressesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListIngressesRequest) url() string {
-	return "/v2/ingresses"
+	u := url.URL{
+		Path:     "/v2/ingresses",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListIngressesRequest) query() url.Values {

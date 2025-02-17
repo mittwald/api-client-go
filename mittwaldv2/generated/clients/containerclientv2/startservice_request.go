@@ -43,7 +43,10 @@ func (r *StartServiceRequest) body() (io.Reader, string, error) {
 }
 
 func (r *StartServiceRequest) url() string {
-	return fmt.Sprintf("/v2/stacks/%s/services/%s/actions/start", url.PathEscape(r.StackID), url.PathEscape(r.ServiceID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/stacks/%s/services/%s/actions/start", url.PathEscape(r.StackID), url.PathEscape(r.ServiceID)),
+	}
+	return u.String()
 }
 
 func (r *StartServiceRequest) query() url.Values {

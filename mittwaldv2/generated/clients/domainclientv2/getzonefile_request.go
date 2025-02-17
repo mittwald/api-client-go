@@ -45,7 +45,10 @@ func (r *GetZoneFileRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetZoneFileRequest) url() string {
-	return fmt.Sprintf("/v2/dns-zones/%s/zone-file", url.PathEscape(r.DNSZoneID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/dns-zones/%s/zone-file", url.PathEscape(r.DNSZoneID)),
+	}
+	return u.String()
 }
 
 func (r *GetZoneFileRequest) query() url.Values {

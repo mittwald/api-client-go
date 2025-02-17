@@ -43,7 +43,10 @@ func (r *GetFileAccessTokenRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetFileAccessTokenRequest) url() string {
-	return fmt.Sprintf("/v2/conversations/%s/files/%s/access-token", url.PathEscape(r.ConversationID), url.PathEscape(r.FileID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/conversations/%s/files/%s/access-token", url.PathEscape(r.ConversationID), url.PathEscape(r.FileID)),
+	}
+	return u.String()
 }
 
 func (r *GetFileAccessTokenRequest) query() url.Values {

@@ -51,7 +51,10 @@ func (r *ReadAllNotificationsDeprecatedRequest) body() (io.Reader, string, error
 }
 
 func (r *ReadAllNotificationsDeprecatedRequest) url() string {
-	return "/v2/notifications/status"
+	u := url.URL{
+		Path: "/v2/notifications/status",
+	}
+	return u.String()
 }
 
 func (r *ReadAllNotificationsDeprecatedRequest) query() url.Values {

@@ -41,7 +41,10 @@ func (r *GetMailAddressRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetMailAddressRequest) url() string {
-	return fmt.Sprintf("/v2/mail-addresses/%s", url.PathEscape(r.MailAddressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mail-addresses/%s", url.PathEscape(r.MailAddressID)),
+	}
+	return u.String()
 }
 
 func (r *GetMailAddressRequest) query() url.Values {

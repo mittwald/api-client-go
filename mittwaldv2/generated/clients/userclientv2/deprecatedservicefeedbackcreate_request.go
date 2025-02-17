@@ -49,7 +49,10 @@ func (r *DeprecatedServiceFeedbackCreateRequest) body() (io.Reader, string, erro
 }
 
 func (r *DeprecatedServiceFeedbackCreateRequest) url() string {
-	return "/v2/user/feedback"
+	u := url.URL{
+		Path: "/v2/user/feedback",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedServiceFeedbackCreateRequest) query() url.Values {

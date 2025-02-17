@@ -43,7 +43,10 @@ func (r *DeprecatedDeleteAPITokenRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedDeleteAPITokenRequest) url() string {
-	return fmt.Sprintf("/v2/signup/token/api/%s", url.PathEscape(r.APITokenID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/signup/token/api/%s", url.PathEscape(r.APITokenID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedDeleteAPITokenRequest) query() url.Values {

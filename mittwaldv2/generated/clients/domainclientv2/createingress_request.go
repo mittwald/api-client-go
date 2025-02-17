@@ -48,7 +48,10 @@ func (r *CreateIngressRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateIngressRequest) url() string {
-	return "/v2/ingresses"
+	u := url.URL{
+		Path: "/v2/ingresses",
+	}
+	return u.String()
 }
 
 func (r *CreateIngressRequest) query() url.Values {

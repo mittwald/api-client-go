@@ -42,7 +42,10 @@ func (r *MigrationGetMigrationRequest) body() (io.Reader, string, error) {
 }
 
 func (r *MigrationGetMigrationRequest) url() string {
-	return fmt.Sprintf("/v2/mail-migrations/%s", url.PathEscape(r.MigrationID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mail-migrations/%s", url.PathEscape(r.MigrationID)),
+	}
+	return u.String()
 }
 
 func (r *MigrationGetMigrationRequest) query() url.Values {

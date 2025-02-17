@@ -42,7 +42,10 @@ func (r *CreateRetrievalKeyRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateRetrievalKeyRequest) url() string {
-	return fmt.Sprintf("/v2/extension-instances/%s/actions/create-access-token-retrieval-key", url.PathEscape(r.ExtensionInstanceID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/extension-instances/%s/actions/create-access-token-retrieval-key", url.PathEscape(r.ExtensionInstanceID)),
+	}
+	return u.String()
 }
 
 func (r *CreateRetrievalKeyRequest) query() url.Values {

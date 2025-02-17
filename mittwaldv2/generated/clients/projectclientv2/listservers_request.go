@@ -45,7 +45,11 @@ func (r *ListServersRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListServersRequest) url() string {
-	return "/v2/servers"
+	u := url.URL{
+		Path:     "/v2/servers",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListServersRequest) query() url.Values {

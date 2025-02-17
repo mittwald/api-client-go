@@ -49,7 +49,10 @@ func (r *CreateLegacyTariffChangeRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateLegacyTariffChangeRequest) url() string {
-	return "/v2/legacy-tariff-change"
+	u := url.URL{
+		Path: "/v2/legacy-tariff-change",
+	}
+	return u.String()
 }
 
 func (r *CreateLegacyTariffChangeRequest) query() url.Values {

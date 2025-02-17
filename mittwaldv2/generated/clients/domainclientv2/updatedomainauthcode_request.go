@@ -52,7 +52,10 @@ func (r *UpdateDomainAuthCodeRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateDomainAuthCodeRequest) url() string {
-	return fmt.Sprintf("/v2/domains/%s/auth-code", url.PathEscape(r.DomainID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domains/%s/auth-code", url.PathEscape(r.DomainID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateDomainAuthCodeRequest) query() url.Values {

@@ -42,7 +42,10 @@ func (r *GetDetailOfContractRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetDetailOfContractRequest) url() string {
-	return fmt.Sprintf("/v2/contracts/%s", url.PathEscape(r.ContractID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/contracts/%s", url.PathEscape(r.ContractID)),
+	}
+	return u.String()
 }
 
 func (r *GetDetailOfContractRequest) query() url.Values {

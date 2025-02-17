@@ -42,7 +42,10 @@ func (r *DeleteSFTPUserRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteSFTPUserRequest) url() string {
-	return fmt.Sprintf("/v2/sftp-users/%s", url.PathEscape(r.SFTPUserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/sftp-users/%s", url.PathEscape(r.SFTPUserID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteSFTPUserRequest) query() url.Values {

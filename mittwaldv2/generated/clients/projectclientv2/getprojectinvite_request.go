@@ -42,7 +42,10 @@ func (r *GetProjectInviteRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetProjectInviteRequest) url() string {
-	return fmt.Sprintf("/v2/project-invites/%s", url.PathEscape(r.ProjectInviteID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/project-invites/%s", url.PathEscape(r.ProjectInviteID)),
+	}
+	return u.String()
 }
 
 func (r *GetProjectInviteRequest) query() url.Values {

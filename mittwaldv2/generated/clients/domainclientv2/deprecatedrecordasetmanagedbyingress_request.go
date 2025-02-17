@@ -54,7 +54,10 @@ func (r *DeprecatedRecordASetManagedByIngressRequest) body() (io.Reader, string,
 }
 
 func (r *DeprecatedRecordASetManagedByIngressRequest) url() string {
-	return fmt.Sprintf("/v2/dns/zones/%s/recordset/acombined/managed/ingress", url.PathEscape(r.ZoneID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/dns/zones/%s/recordset/acombined/managed/ingress", url.PathEscape(r.ZoneID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedRecordASetManagedByIngressRequest) query() url.Values {

@@ -48,7 +48,10 @@ func (r *PostPollStatusRequest) body() (io.Reader, string, error) {
 }
 
 func (r *PostPollStatusRequest) url() string {
-	return fmt.Sprintf("/v2/poll-settings/%s", url.PathEscape(r.UserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/poll-settings/%s", url.PathEscape(r.UserID)),
+	}
+	return u.String()
 }
 
 func (r *PostPollStatusRequest) query() url.Values {

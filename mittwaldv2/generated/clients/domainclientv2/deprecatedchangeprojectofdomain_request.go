@@ -53,7 +53,10 @@ func (r *DeprecatedChangeProjectOfDomainRequest) body() (io.Reader, string, erro
 }
 
 func (r *DeprecatedChangeProjectOfDomainRequest) url() string {
-	return fmt.Sprintf("/v2/domains/%s/projectId", url.PathEscape(r.DomainID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domains/%s/projectId", url.PathEscape(r.DomainID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedChangeProjectOfDomainRequest) query() url.Values {

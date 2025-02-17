@@ -46,7 +46,11 @@ func (r *ListMailAddressesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListMailAddressesRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/mail-addresses", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/projects/%s/mail-addresses", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListMailAddressesRequest) query() url.Values {

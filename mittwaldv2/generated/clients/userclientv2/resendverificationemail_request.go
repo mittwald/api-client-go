@@ -48,7 +48,10 @@ func (r *ResendVerificationEmailRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ResendVerificationEmailRequest) url() string {
-	return "/v2/users/self/credentials/email/actions/resend-email"
+	u := url.URL{
+		Path: "/v2/users/self/credentials/email/actions/resend-email",
+	}
+	return u.String()
 }
 
 func (r *ResendVerificationEmailRequest) query() url.Values {

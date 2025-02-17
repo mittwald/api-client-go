@@ -50,7 +50,10 @@ func (r *DeprecatedResendVerificationEmailRequest) body() (io.Reader, string, er
 }
 
 func (r *DeprecatedResendVerificationEmailRequest) url() string {
-	return "/v2/signup/email/resend"
+	u := url.URL{
+		Path: "/v2/signup/email/resend",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedResendVerificationEmailRequest) query() url.Values {

@@ -42,7 +42,10 @@ func (r *DeleteMysqlDatabaseRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteMysqlDatabaseRequest) url() string {
-	return fmt.Sprintf("/v2/mysql-databases/%s", url.PathEscape(r.MysqlDatabaseID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mysql-databases/%s", url.PathEscape(r.MysqlDatabaseID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteMysqlDatabaseRequest) query() url.Values {

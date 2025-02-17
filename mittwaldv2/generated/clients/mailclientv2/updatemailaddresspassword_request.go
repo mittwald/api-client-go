@@ -49,7 +49,10 @@ func (r *UpdateMailAddressPasswordRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateMailAddressPasswordRequest) url() string {
-	return fmt.Sprintf("/v2/mail-addresses/%s/password", url.PathEscape(r.MailAddressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mail-addresses/%s/password", url.PathEscape(r.MailAddressID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateMailAddressPasswordRequest) query() url.Values {

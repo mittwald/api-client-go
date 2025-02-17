@@ -47,7 +47,10 @@ func (r *AuthenticateRequest) body() (io.Reader, string, error) {
 }
 
 func (r *AuthenticateRequest) url() string {
-	return "/v2/authenticate"
+	u := url.URL{
+		Path: "/v2/authenticate",
+	}
+	return u.String()
 }
 
 func (r *AuthenticateRequest) query() url.Values {

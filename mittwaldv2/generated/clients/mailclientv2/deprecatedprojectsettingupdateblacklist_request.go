@@ -53,7 +53,10 @@ func (r *DeprecatedProjectsettingUpdateBlacklistRequest) body() (io.Reader, stri
 }
 
 func (r *DeprecatedProjectsettingUpdateBlacklistRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/mailsettings/blacklist", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/mailsettings/blacklist", url.PathEscape(r.ProjectID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedProjectsettingUpdateBlacklistRequest) query() url.Values {

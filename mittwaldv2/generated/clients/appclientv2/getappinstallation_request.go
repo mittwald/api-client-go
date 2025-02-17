@@ -41,7 +41,10 @@ func (r *GetAppinstallationRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetAppinstallationRequest) url() string {
-	return fmt.Sprintf("/v2/app-installations/%s", url.PathEscape(r.AppInstallationID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/app-installations/%s", url.PathEscape(r.AppInstallationID)),
+	}
+	return u.String()
 }
 
 func (r *GetAppinstallationRequest) query() url.Values {

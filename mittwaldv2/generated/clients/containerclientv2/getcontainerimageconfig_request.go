@@ -45,7 +45,11 @@ func (r *GetContainerImageConfigRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetContainerImageConfigRequest) url() string {
-	return "/v2/container-image-config"
+	u := url.URL{
+		Path:     "/v2/container-image-config",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *GetContainerImageConfigRequest) query() url.Values {

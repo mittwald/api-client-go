@@ -51,7 +51,10 @@ func (r *VerificationVerifyCompanyRequest) body() (io.Reader, string, error) {
 }
 
 func (r *VerificationVerifyCompanyRequest) url() string {
-	return "/v2/actions/verify-company"
+	u := url.URL{
+		Path: "/v2/actions/verify-company",
+	}
+	return u.String()
 }
 
 func (r *VerificationVerifyCompanyRequest) query() url.Values {

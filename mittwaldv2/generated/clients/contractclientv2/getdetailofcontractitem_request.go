@@ -43,7 +43,10 @@ func (r *GetDetailOfContractItemRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetDetailOfContractItemRequest) url() string {
-	return fmt.Sprintf("/v2/contracts/%s/items/%s", url.PathEscape(r.ContractID), url.PathEscape(r.ContractItemID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/contracts/%s/items/%s", url.PathEscape(r.ContractID), url.PathEscape(r.ContractItemID)),
+	}
+	return u.String()
 }
 
 func (r *GetDetailOfContractItemRequest) query() url.Values {

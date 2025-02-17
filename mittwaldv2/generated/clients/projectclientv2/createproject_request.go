@@ -49,7 +49,10 @@ func (r *CreateProjectRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateProjectRequest) url() string {
-	return fmt.Sprintf("/v2/servers/%s/projects", url.PathEscape(r.ServerID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/servers/%s/projects", url.PathEscape(r.ServerID)),
+	}
+	return u.String()
 }
 
 func (r *CreateProjectRequest) query() url.Values {

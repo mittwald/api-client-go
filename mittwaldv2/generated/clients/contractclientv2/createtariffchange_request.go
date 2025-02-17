@@ -48,7 +48,10 @@ func (r *CreateTariffChangeRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateTariffChangeRequest) url() string {
-	return "/v2/tariff-changes"
+	u := url.URL{
+		Path: "/v2/tariff-changes",
+	}
+	return u.String()
 }
 
 func (r *CreateTariffChangeRequest) query() url.Values {

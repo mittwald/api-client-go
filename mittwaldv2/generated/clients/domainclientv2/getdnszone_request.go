@@ -41,7 +41,10 @@ func (r *GetDNSZoneRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetDNSZoneRequest) url() string {
-	return fmt.Sprintf("/v2/dns-zones/%s", url.PathEscape(r.DNSZoneID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/dns-zones/%s", url.PathEscape(r.DNSZoneID)),
+	}
+	return u.String()
 }
 
 func (r *GetDNSZoneRequest) query() url.Values {

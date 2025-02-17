@@ -45,7 +45,10 @@ func (r *ResendDomainEmailRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ResendDomainEmailRequest) url() string {
-	return fmt.Sprintf("/v2/domains/%s/actions/resend-email", url.PathEscape(r.DomainID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domains/%s/actions/resend-email", url.PathEscape(r.DomainID)),
+	}
+	return u.String()
 }
 
 func (r *ResendDomainEmailRequest) query() url.Values {

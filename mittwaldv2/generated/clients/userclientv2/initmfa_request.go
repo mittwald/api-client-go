@@ -48,7 +48,10 @@ func (r *InitMFARequest) body() (io.Reader, string, error) {
 }
 
 func (r *InitMFARequest) url() string {
-	return "/v2/users/self/credentials/init-mfa"
+	u := url.URL{
+		Path: "/v2/users/self/credentials/init-mfa",
+	}
+	return u.String()
 }
 
 func (r *InitMFARequest) query() url.Values {

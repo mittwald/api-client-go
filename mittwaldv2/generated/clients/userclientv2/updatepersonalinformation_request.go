@@ -49,7 +49,10 @@ func (r *UpdatePersonalInformationRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdatePersonalInformationRequest) url() string {
-	return fmt.Sprintf("/v2/users/%s", url.PathEscape(r.UserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/users/%s", url.PathEscape(r.UserID)),
+	}
+	return u.String()
 }
 
 func (r *UpdatePersonalInformationRequest) query() url.Values {

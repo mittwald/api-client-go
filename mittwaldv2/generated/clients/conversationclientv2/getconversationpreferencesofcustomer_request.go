@@ -43,7 +43,10 @@ func (r *GetConversationPreferencesOfCustomerRequest) body() (io.Reader, string,
 }
 
 func (r *GetConversationPreferencesOfCustomerRequest) url() string {
-	return fmt.Sprintf("/v2/customers/%s/conversation-preferences", url.PathEscape(r.CustomerID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/customers/%s/conversation-preferences", url.PathEscape(r.CustomerID)),
+	}
+	return u.String()
 }
 
 func (r *GetConversationPreferencesOfCustomerRequest) query() url.Values {

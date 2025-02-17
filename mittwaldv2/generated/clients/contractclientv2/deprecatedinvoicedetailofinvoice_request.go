@@ -45,7 +45,10 @@ func (r *DeprecatedInvoiceDetailOfInvoiceRequest) body() (io.Reader, string, err
 }
 
 func (r *DeprecatedInvoiceDetailOfInvoiceRequest) url() string {
-	return fmt.Sprintf("/v2/customers/%s/invoices/%s", url.PathEscape(r.CustomerID), url.PathEscape(r.InvoiceID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/customers/%s/invoices/%s", url.PathEscape(r.CustomerID), url.PathEscape(r.InvoiceID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedInvoiceDetailOfInvoiceRequest) query() url.Values {

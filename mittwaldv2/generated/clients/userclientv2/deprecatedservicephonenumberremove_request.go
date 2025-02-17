@@ -43,7 +43,10 @@ func (r *DeprecatedServicePhoneNumberRemoveRequest) body() (io.Reader, string, e
 }
 
 func (r *DeprecatedServicePhoneNumberRemoveRequest) url() string {
-	return fmt.Sprintf("/v2/user/%s/phone", url.PathEscape(r.UserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/user/%s/phone", url.PathEscape(r.UserID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedServicePhoneNumberRemoveRequest) query() url.Values {

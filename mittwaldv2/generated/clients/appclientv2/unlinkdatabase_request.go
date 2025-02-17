@@ -42,7 +42,10 @@ func (r *UnlinkDatabaseRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UnlinkDatabaseRequest) url() string {
-	return fmt.Sprintf("/v2/app-installations/%s/databases/%s", url.PathEscape(r.AppInstallationID), url.PathEscape(r.DatabaseID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/app-installations/%s/databases/%s", url.PathEscape(r.AppInstallationID), url.PathEscape(r.DatabaseID)),
+	}
+	return u.String()
 }
 
 func (r *UnlinkDatabaseRequest) query() url.Values {

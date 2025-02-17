@@ -49,7 +49,10 @@ func (r *DeprecatedInitPasswordResetRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedInitPasswordResetRequest) url() string {
-	return "/v2/signup/password/reset"
+	u := url.URL{
+		Path: "/v2/signup/password/reset",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedInitPasswordResetRequest) query() url.Values {

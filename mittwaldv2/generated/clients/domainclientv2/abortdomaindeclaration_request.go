@@ -44,7 +44,10 @@ func (r *AbortDomainDeclarationRequest) body() (io.Reader, string, error) {
 }
 
 func (r *AbortDomainDeclarationRequest) url() string {
-	return fmt.Sprintf("/v2/domains/%s/declaration", url.PathEscape(r.DomainID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domains/%s/declaration", url.PathEscape(r.DomainID)),
+	}
+	return u.String()
 }
 
 func (r *AbortDomainDeclarationRequest) query() url.Values {

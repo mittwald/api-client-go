@@ -52,7 +52,10 @@ func (r *DeprecatedDeclareNameserversRequest) body() (io.Reader, string, error) 
 }
 
 func (r *DeprecatedDeclareNameserversRequest) url() string {
-	return fmt.Sprintf("/v2/domains/%s/nameservers", url.PathEscape(r.DomainID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domains/%s/nameservers", url.PathEscape(r.DomainID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedDeclareNameserversRequest) query() url.Values {

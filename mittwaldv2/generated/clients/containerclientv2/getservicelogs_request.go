@@ -43,7 +43,10 @@ func (r *GetServiceLogsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetServiceLogsRequest) url() string {
-	return fmt.Sprintf("/v2/stacks/%s/services/%s/logs", url.PathEscape(r.StackID), url.PathEscape(r.ServiceID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/stacks/%s/services/%s/logs", url.PathEscape(r.StackID), url.PathEscape(r.ServiceID)),
+	}
+	return u.String()
 }
 
 func (r *GetServiceLogsRequest) query() url.Values {

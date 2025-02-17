@@ -42,7 +42,10 @@ func (r *DeprecatedServiceAvatarRemoveRequest) body() (io.Reader, string, error)
 }
 
 func (r *DeprecatedServiceAvatarRemoveRequest) url() string {
-	return fmt.Sprintf("/v2/user/%s/avatar", url.PathEscape(r.UserID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/user/%s/avatar", url.PathEscape(r.UserID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedServiceAvatarRemoveRequest) query() url.Values {

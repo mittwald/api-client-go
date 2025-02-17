@@ -53,7 +53,10 @@ func (r *DeprecatedUpdateMailAddressPasswordRequest) body() (io.Reader, string, 
 }
 
 func (r *DeprecatedUpdateMailAddressPasswordRequest) url() string {
-	return fmt.Sprintf("/v2/mail-addresses/%s/password", url.PathEscape(r.MailAddressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mail-addresses/%s/password", url.PathEscape(r.MailAddressID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedUpdateMailAddressPasswordRequest) query() url.Values {

@@ -42,7 +42,11 @@ func (r *ListFeedbackRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListFeedbackRequest) url() string {
-	return fmt.Sprintf("/v2/users/%s/feedback", url.PathEscape(r.UserID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/users/%s/feedback", url.PathEscape(r.UserID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListFeedbackRequest) query() url.Values {

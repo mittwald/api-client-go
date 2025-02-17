@@ -48,7 +48,11 @@ func (r *MigrationListMigrationsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *MigrationListMigrationsRequest) url() string {
-	return "/v2/mail-migrations"
+	u := url.URL{
+		Path:     "/v2/mail-migrations",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *MigrationListMigrationsRequest) query() url.Values {

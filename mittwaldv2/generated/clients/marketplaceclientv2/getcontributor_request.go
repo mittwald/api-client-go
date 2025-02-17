@@ -42,7 +42,10 @@ func (r *GetContributorRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetContributorRequest) url() string {
-	return fmt.Sprintf("/v2/contributors/%s", url.PathEscape(r.ContributorID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/contributors/%s", url.PathEscape(r.ContributorID)),
+	}
+	return u.String()
 }
 
 func (r *GetContributorRequest) query() url.Values {

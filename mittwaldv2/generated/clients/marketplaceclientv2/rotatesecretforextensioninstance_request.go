@@ -52,7 +52,10 @@ func (r *RotateSecretForExtensionInstanceRequest) body() (io.Reader, string, err
 }
 
 func (r *RotateSecretForExtensionInstanceRequest) url() string {
-	return fmt.Sprintf("/v2/contributors/%s/extensions/%s/extension-instances/%s/secret", url.PathEscape(r.ContributorID), url.PathEscape(r.ExtensionID), url.PathEscape(r.ExtensionInstanceID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/contributors/%s/extensions/%s/extension-instances/%s/secret", url.PathEscape(r.ContributorID), url.PathEscape(r.ExtensionID), url.PathEscape(r.ExtensionInstanceID)),
+	}
+	return u.String()
 }
 
 func (r *RotateSecretForExtensionInstanceRequest) query() url.Values {

@@ -42,7 +42,10 @@ func (r *GetRegistryRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetRegistryRequest) url() string {
-	return fmt.Sprintf("/v2/registries/%s", url.PathEscape(r.RegistryID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/registries/%s", url.PathEscape(r.RegistryID)),
+	}
+	return u.String()
 }
 
 func (r *GetRegistryRequest) query() url.Values {

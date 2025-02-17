@@ -51,7 +51,10 @@ func (r *CreateMysqlUserRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateMysqlUserRequest) url() string {
-	return fmt.Sprintf("/v2/mysql-databases/%s/users", url.PathEscape(r.MysqlDatabaseID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mysql-databases/%s/users", url.PathEscape(r.MysqlDatabaseID)),
+	}
+	return u.String()
 }
 
 func (r *CreateMysqlUserRequest) query() url.Values {

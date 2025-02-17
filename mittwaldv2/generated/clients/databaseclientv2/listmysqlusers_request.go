@@ -42,7 +42,10 @@ func (r *ListMysqlUsersRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListMysqlUsersRequest) url() string {
-	return fmt.Sprintf("/v2/mysql-databases/%s/users", url.PathEscape(r.MysqlDatabaseID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mysql-databases/%s/users", url.PathEscape(r.MysqlDatabaseID)),
+	}
+	return u.String()
 }
 
 func (r *ListMysqlUsersRequest) query() url.Values {

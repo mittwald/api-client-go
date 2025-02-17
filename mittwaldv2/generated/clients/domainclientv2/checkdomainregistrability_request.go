@@ -50,7 +50,10 @@ func (r *CheckDomainRegistrabilityRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CheckDomainRegistrabilityRequest) url() string {
-	return "/v2/domain-registrable"
+	u := url.URL{
+		Path: "/v2/domain-registrable",
+	}
+	return u.String()
 }
 
 func (r *CheckDomainRegistrabilityRequest) query() url.Values {

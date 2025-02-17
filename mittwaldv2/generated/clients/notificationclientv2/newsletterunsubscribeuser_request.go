@@ -40,7 +40,10 @@ func (r *NewsletterUnsubscribeUserRequest) body() (io.Reader, string, error) {
 }
 
 func (r *NewsletterUnsubscribeUserRequest) url() string {
-	return "/v2/newsletter-subscriptions/self"
+	u := url.URL{
+		Path: "/v2/newsletter-subscriptions/self",
+	}
+	return u.String()
 }
 
 func (r *NewsletterUnsubscribeUserRequest) query() url.Values {

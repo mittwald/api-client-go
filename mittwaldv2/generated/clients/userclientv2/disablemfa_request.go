@@ -47,7 +47,10 @@ func (r *DisableMFARequest) body() (io.Reader, string, error) {
 }
 
 func (r *DisableMFARequest) url() string {
-	return "/v2/users/self/credentials/mfa"
+	u := url.URL{
+		Path: "/v2/users/self/credentials/mfa",
+	}
+	return u.String()
 }
 
 func (r *DisableMFARequest) query() url.Values {

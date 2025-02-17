@@ -42,7 +42,10 @@ func (r *GetStackRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetStackRequest) url() string {
-	return fmt.Sprintf("/v2/stacks/%s", url.PathEscape(r.StackID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/stacks/%s", url.PathEscape(r.StackID)),
+	}
+	return u.String()
 }
 
 func (r *GetStackRequest) query() url.Values {

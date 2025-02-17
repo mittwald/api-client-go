@@ -48,7 +48,10 @@ func (r *DeprecatedUpdateAccountRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedUpdateAccountRequest) url() string {
-	return "/v2/signup/profile"
+	u := url.URL{
+		Path: "/v2/signup/profile",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedUpdateAccountRequest) query() url.Values {

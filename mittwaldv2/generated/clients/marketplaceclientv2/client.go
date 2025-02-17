@@ -14,6 +14,10 @@ import (
 )
 
 type Client interface {
+	GetLoginLink(
+		ctx context.Context,
+		req GetLoginLinkRequest,
+	) (*GetLoginLinkResponse, *http.Response, error)
 	RotateSecretForExtensionInstance(
 		ctx context.Context,
 		req RotateSecretForExtensionInstanceRequest,
@@ -94,6 +98,10 @@ type Client interface {
 		ctx context.Context,
 		req ListOwnExtensionsRequest,
 	) (*[]marketplacev2.OwnExtension, *http.Response, error)
+	UpdateExtensionInstanceContract(
+		ctx context.Context,
+		req UpdateExtensionInstanceContractRequest,
+	) (*UpdateExtensionInstanceContractResponse, *http.Response, error)
 	UpdateExtensionPricing(
 		ctx context.Context,
 		req UpdateExtensionPricingRequest,
@@ -105,6 +113,35 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Get the Stripe Dashboard Link for a Contributor.
+//
+// Get the Stripe Dashboard Link for a Contributor.
+func (c *clientImpl) GetLoginLink(
+	ctx context.Context,
+	req GetLoginLinkRequest,
+) (*GetLoginLinkResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GetLoginLinkResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Rotate the secret for an extension instance.
@@ -643,6 +680,35 @@ func (c *clientImpl) ListOwnExtensions(
 	}
 
 	var response []marketplacev2.OwnExtension
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update or Create Contract for existing Extension Instances.
+//
+// Call to update Contract for existing Extension Instances. For example to accept a new Pricing.
+func (c *clientImpl) UpdateExtensionInstanceContract(
+	ctx context.Context,
+	req UpdateExtensionInstanceContractRequest,
+) (*UpdateExtensionInstanceContractResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response UpdateExtensionInstanceContractResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

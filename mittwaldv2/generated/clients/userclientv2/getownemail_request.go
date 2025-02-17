@@ -39,7 +39,10 @@ func (r *GetOwnEmailRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetOwnEmailRequest) url() string {
-	return "/v2/users/self/credentials/email"
+	u := url.URL{
+		Path: "/v2/users/self/credentials/email",
+	}
+	return u.String()
 }
 
 func (r *GetOwnEmailRequest) query() url.Values {

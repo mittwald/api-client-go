@@ -49,7 +49,10 @@ func (r *ReadNotificationRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ReadNotificationRequest) url() string {
-	return fmt.Sprintf("/v2/notifications/%s/status", url.PathEscape(r.NotificationID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/notifications/%s/status", url.PathEscape(r.NotificationID)),
+	}
+	return u.String()
 }
 
 func (r *ReadNotificationRequest) query() url.Values {

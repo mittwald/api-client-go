@@ -53,7 +53,10 @@ func (r *DeprecatedRecordMxSetManagedRequest) body() (io.Reader, string, error) 
 }
 
 func (r *DeprecatedRecordMxSetManagedRequest) url() string {
-	return fmt.Sprintf("/v2/dns/zones/%s/recordset/mx/managed", url.PathEscape(r.ZoneID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/dns/zones/%s/recordset/mx/managed", url.PathEscape(r.ZoneID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedRecordMxSetManagedRequest) query() url.Values {

@@ -49,7 +49,10 @@ func (r *MigrationCheckMigrationIsPossibleRequest) body() (io.Reader, string, er
 }
 
 func (r *MigrationCheckMigrationIsPossibleRequest) url() string {
-	return "/v2/mail-migrations/actions/possibility-check"
+	u := url.URL{
+		Path: "/v2/mail-migrations/actions/possibility-check",
+	}
+	return u.String()
 }
 
 func (r *MigrationCheckMigrationIsPossibleRequest) query() url.Values {

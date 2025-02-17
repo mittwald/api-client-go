@@ -39,7 +39,10 @@ func (r *GetMFAStatusRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetMFAStatusRequest) url() string {
-	return "/v2/users/self/credentials/mfa"
+	u := url.URL{
+		Path: "/v2/users/self/credentials/mfa",
+	}
+	return u.String()
 }
 
 func (r *GetMFAStatusRequest) query() url.Values {

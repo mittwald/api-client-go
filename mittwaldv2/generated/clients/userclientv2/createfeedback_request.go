@@ -47,7 +47,10 @@ func (r *CreateFeedbackRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CreateFeedbackRequest) url() string {
-	return "/v2/users/self/feedback"
+	u := url.URL{
+		Path: "/v2/users/self/feedback",
+	}
+	return u.String()
 }
 
 func (r *CreateFeedbackRequest) query() url.Values {

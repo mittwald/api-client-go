@@ -52,7 +52,10 @@ func (r *DeprecatedDeclareProcessChangeHandlesRequest) body() (io.Reader, string
 }
 
 func (r *DeprecatedDeclareProcessChangeHandlesRequest) url() string {
-	return fmt.Sprintf("/v2/domains/%s/declarations/handles", url.PathEscape(r.DomainID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domains/%s/declarations/handles", url.PathEscape(r.DomainID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedDeclareProcessChangeHandlesRequest) query() url.Values {

@@ -44,7 +44,11 @@ func (r *GetInstalledSystemsoftwareForAppinstallationRequest) body() (io.Reader,
 }
 
 func (r *GetInstalledSystemsoftwareForAppinstallationRequest) url() string {
-	return fmt.Sprintf("/v2/app-installations/%s/systemSoftware", url.PathEscape(r.AppInstallationID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/app-installations/%s/systemSoftware", url.PathEscape(r.AppInstallationID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *GetInstalledSystemsoftwareForAppinstallationRequest) query() url.Values {

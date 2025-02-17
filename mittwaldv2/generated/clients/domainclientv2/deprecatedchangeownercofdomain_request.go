@@ -53,7 +53,10 @@ func (r *DeprecatedChangeOwnercOfDomainRequest) body() (io.Reader, string, error
 }
 
 func (r *DeprecatedChangeOwnercOfDomainRequest) url() string {
-	return fmt.Sprintf("/v2/domains/%s/handles/ownerc", url.PathEscape(r.DomainID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/domains/%s/handles/ownerc", url.PathEscape(r.DomainID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedChangeOwnercOfDomainRequest) query() url.Values {

@@ -47,7 +47,10 @@ func (r *RefreshSessionRequest) body() (io.Reader, string, error) {
 }
 
 func (r *RefreshSessionRequest) url() string {
-	return "/v2/users/self/sessions"
+	u := url.URL{
+		Path: "/v2/users/self/sessions",
+	}
+	return u.String()
 }
 
 func (r *RefreshSessionRequest) query() url.Values {

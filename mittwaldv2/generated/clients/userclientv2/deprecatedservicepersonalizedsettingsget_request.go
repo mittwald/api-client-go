@@ -41,7 +41,10 @@ func (r *DeprecatedServicePersonalizedSettingsGetRequest) body() (io.Reader, str
 }
 
 func (r *DeprecatedServicePersonalizedSettingsGetRequest) url() string {
-	return "/v2/user/settings"
+	u := url.URL{
+		Path: "/v2/user/settings",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedServicePersonalizedSettingsGetRequest) query() url.Values {

@@ -42,7 +42,10 @@ func (r *DeleteDeliveryBoxRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteDeliveryBoxRequest) url() string {
-	return fmt.Sprintf("/v2/delivery-boxes/%s", url.PathEscape(r.DeliveryBoxID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/delivery-boxes/%s", url.PathEscape(r.DeliveryBoxID)),
+	}
+	return u.String()
 }
 
 func (r *DeleteDeliveryBoxRequest) query() url.Values {

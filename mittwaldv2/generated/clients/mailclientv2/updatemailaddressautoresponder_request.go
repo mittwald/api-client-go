@@ -50,7 +50,10 @@ func (r *UpdateMailAddressAutoresponderRequest) body() (io.Reader, string, error
 }
 
 func (r *UpdateMailAddressAutoresponderRequest) url() string {
-	return fmt.Sprintf("/v2/mail-addresses/%s/autoresponder", url.PathEscape(r.MailAddressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mail-addresses/%s/autoresponder", url.PathEscape(r.MailAddressID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateMailAddressAutoresponderRequest) query() url.Values {

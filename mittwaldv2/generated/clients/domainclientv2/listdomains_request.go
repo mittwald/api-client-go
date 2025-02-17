@@ -45,7 +45,11 @@ func (r *ListDomainsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListDomainsRequest) url() string {
-	return "/v2/domains"
+	u := url.URL{
+		Path:     "/v2/domains",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListDomainsRequest) query() url.Values {

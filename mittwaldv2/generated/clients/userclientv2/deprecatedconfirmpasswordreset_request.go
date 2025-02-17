@@ -50,7 +50,10 @@ func (r *DeprecatedConfirmPasswordResetRequest) body() (io.Reader, string, error
 }
 
 func (r *DeprecatedConfirmPasswordResetRequest) url() string {
-	return "/v2/signup/password/reset/confirm"
+	u := url.URL{
+		Path: "/v2/signup/password/reset/confirm",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedConfirmPasswordResetRequest) query() url.Values {

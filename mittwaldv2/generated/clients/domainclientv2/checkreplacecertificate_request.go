@@ -52,7 +52,10 @@ func (r *CheckReplaceCertificateRequest) body() (io.Reader, string, error) {
 }
 
 func (r *CheckReplaceCertificateRequest) url() string {
-	return fmt.Sprintf("/v2/certificates/%s/actions/check-replace-certificate", url.PathEscape(r.CertificateID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/certificates/%s/actions/check-replace-certificate", url.PathEscape(r.CertificateID)),
+	}
+	return u.String()
 }
 
 func (r *CheckReplaceCertificateRequest) query() url.Values {

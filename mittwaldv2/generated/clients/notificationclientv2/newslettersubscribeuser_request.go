@@ -48,7 +48,10 @@ func (r *NewsletterSubscribeUserRequest) body() (io.Reader, string, error) {
 }
 
 func (r *NewsletterSubscribeUserRequest) url() string {
-	return "/v2/newsletter-subscriptions"
+	u := url.URL{
+		Path: "/v2/newsletter-subscriptions",
+	}
+	return u.String()
 }
 
 func (r *NewsletterSubscribeUserRequest) query() url.Values {

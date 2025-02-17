@@ -48,7 +48,10 @@ func (r *DeprecatedGetOwnAccountRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedGetOwnAccountRequest) url() string {
-	return "/v2/users/self/personal-information"
+	u := url.URL{
+		Path: "/v2/users/self/personal-information",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedGetOwnAccountRequest) query() url.Values {

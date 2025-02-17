@@ -44,7 +44,10 @@ func (r *DeprecatedGetFileTypeRulesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedGetFileTypeRulesRequest) url() string {
-	return fmt.Sprintf("/v2/file-type-rules/%s", url.PathEscape(string(r.Name)))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/file-type-rules/%s", url.PathEscape(string(r.Name))),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedGetFileTypeRulesRequest) query() url.Values {

@@ -43,7 +43,10 @@ func (r *GetDetailOfContractByCertificateRequest) body() (io.Reader, string, err
 }
 
 func (r *GetDetailOfContractByCertificateRequest) url() string {
-	return fmt.Sprintf("/v2/certificates/%s/contract", url.PathEscape(r.CertificateID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/certificates/%s/contract", url.PathEscape(r.CertificateID)),
+	}
+	return u.String()
 }
 
 func (r *GetDetailOfContractByCertificateRequest) query() url.Values {

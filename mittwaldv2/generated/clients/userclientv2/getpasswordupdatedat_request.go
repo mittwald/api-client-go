@@ -48,7 +48,10 @@ func (r *GetPasswordUpdatedAtRequest) body() (io.Reader, string, error) {
 }
 
 func (r *GetPasswordUpdatedAtRequest) url() string {
-	return "/v2/users/self/credentials/password-updated-at"
+	u := url.URL{
+		Path: "/v2/users/self/credentials/password-updated-at",
+	}
+	return u.String()
 }
 
 func (r *GetPasswordUpdatedAtRequest) query() url.Values {

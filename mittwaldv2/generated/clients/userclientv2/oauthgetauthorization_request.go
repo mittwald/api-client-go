@@ -55,7 +55,11 @@ func (r *OauthGetAuthorizationRequest) body() (io.Reader, string, error) {
 }
 
 func (r *OauthGetAuthorizationRequest) url() string {
-	return "/v2/oauth2/authorize"
+	u := url.URL{
+		Path:     "/v2/oauth2/authorize",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *OauthGetAuthorizationRequest) query() url.Values {

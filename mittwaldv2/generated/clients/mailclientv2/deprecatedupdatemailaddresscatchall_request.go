@@ -53,7 +53,10 @@ func (r *DeprecatedUpdateMailAddressCatchallRequest) body() (io.Reader, string, 
 }
 
 func (r *DeprecatedUpdateMailAddressCatchallRequest) url() string {
-	return fmt.Sprintf("/v2/mail-addresses/%s/catchall", url.PathEscape(r.MailAddressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mail-addresses/%s/catchall", url.PathEscape(r.MailAddressID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedUpdateMailAddressCatchallRequest) query() url.Values {

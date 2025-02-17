@@ -50,7 +50,11 @@ func (r *ListArticlesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListArticlesRequest) url() string {
-	return "/v2/articles"
+	u := url.URL{
+		Path:     "/v2/articles",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListArticlesRequest) query() url.Values {

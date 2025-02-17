@@ -48,7 +48,10 @@ func (r *DeprecatedServiceIssueNewRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedServiceIssueNewRequest) url() string {
-	return "/v2/user/issues"
+	u := url.URL{
+		Path: "/v2/user/issues",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedServiceIssueNewRequest) query() url.Values {

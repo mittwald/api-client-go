@@ -53,7 +53,10 @@ func (r *DeprecatedUpdateMailAddressSpamProtectionRequest) body() (io.Reader, st
 }
 
 func (r *DeprecatedUpdateMailAddressSpamProtectionRequest) url() string {
-	return fmt.Sprintf("/v2/mail-addresses/%s/spam-protection", url.PathEscape(r.MailAddressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/mail-addresses/%s/spam-protection", url.PathEscape(r.MailAddressID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedUpdateMailAddressSpamProtectionRequest) query() url.Values {

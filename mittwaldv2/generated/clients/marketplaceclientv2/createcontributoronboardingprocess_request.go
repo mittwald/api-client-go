@@ -52,7 +52,10 @@ func (r *CreateContributorOnboardingProcessRequest) body() (io.Reader, string, e
 }
 
 func (r *CreateContributorOnboardingProcessRequest) url() string {
-	return fmt.Sprintf("/v2/contributors/%s/onboarding-process", url.PathEscape(r.ContributorID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/contributors/%s/onboarding-process", url.PathEscape(r.ContributorID)),
+	}
+	return u.String()
 }
 
 func (r *CreateContributorOnboardingProcessRequest) query() url.Values {

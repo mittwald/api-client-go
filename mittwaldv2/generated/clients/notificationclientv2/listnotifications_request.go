@@ -45,7 +45,11 @@ func (r *ListNotificationsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ListNotificationsRequest) url() string {
-	return "/v2/notifications"
+	u := url.URL{
+		Path:     "/v2/notifications",
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ListNotificationsRequest) query() url.Values {

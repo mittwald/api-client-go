@@ -43,7 +43,11 @@ func (r *ProjectFileSystemListFilesRequest) body() (io.Reader, string, error) {
 }
 
 func (r *ProjectFileSystemListFilesRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/filesystem-files", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path:     fmt.Sprintf("/v2/projects/%s/filesystem-files", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
+	}
+	return u.String()
 }
 
 func (r *ProjectFileSystemListFilesRequest) query() url.Values {

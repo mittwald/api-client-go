@@ -47,7 +47,10 @@ func (r *DeleteUserRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeleteUserRequest) url() string {
-	return "/v2/users/self"
+	u := url.URL{
+		Path: "/v2/users/self",
+	}
+	return u.String()
 }
 
 func (r *DeleteUserRequest) query() url.Values {

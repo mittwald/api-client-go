@@ -51,7 +51,10 @@ func (r *UpdateIngressPathsRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateIngressPathsRequest) url() string {
-	return fmt.Sprintf("/v2/ingresses/%s/paths", url.PathEscape(r.IngressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/ingresses/%s/paths", url.PathEscape(r.IngressID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateIngressPathsRequest) query() url.Values {

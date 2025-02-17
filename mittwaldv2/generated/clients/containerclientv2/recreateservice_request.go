@@ -43,7 +43,10 @@ func (r *RecreateServiceRequest) body() (io.Reader, string, error) {
 }
 
 func (r *RecreateServiceRequest) url() string {
-	return fmt.Sprintf("/v2/stacks/%s/services/%s/actions/recreate", url.PathEscape(r.StackID), url.PathEscape(r.ServiceID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/stacks/%s/services/%s/actions/recreate", url.PathEscape(r.StackID), url.PathEscape(r.ServiceID)),
+	}
+	return u.String()
 }
 
 func (r *RecreateServiceRequest) query() url.Values {

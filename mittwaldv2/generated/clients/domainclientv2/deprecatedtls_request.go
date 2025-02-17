@@ -52,7 +52,10 @@ func (r *DeprecatedTLSRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedTLSRequest) url() string {
-	return fmt.Sprintf("/v2/ingresses/%s/tls", url.PathEscape(r.IngressID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/ingresses/%s/tls", url.PathEscape(r.IngressID)),
+	}
+	return u.String()
 }
 
 func (r *DeprecatedTLSRequest) query() url.Values {

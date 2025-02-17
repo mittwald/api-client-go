@@ -49,7 +49,10 @@ func (r *RequestAvatarUploadRequest) body() (io.Reader, string, error) {
 }
 
 func (r *RequestAvatarUploadRequest) url() string {
-	return fmt.Sprintf("/v2/customers/%s/avatar", url.PathEscape(r.CustomerID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/customers/%s/avatar", url.PathEscape(r.CustomerID)),
+	}
+	return u.String()
 }
 
 func (r *RequestAvatarUploadRequest) query() url.Values {

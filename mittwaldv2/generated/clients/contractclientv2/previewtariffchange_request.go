@@ -48,7 +48,10 @@ func (r *PreviewTariffChangeRequest) body() (io.Reader, string, error) {
 }
 
 func (r *PreviewTariffChangeRequest) url() string {
-	return "/v2/tariff-change-previews"
+	u := url.URL{
+		Path: "/v2/tariff-change-previews",
+	}
+	return u.String()
 }
 
 func (r *PreviewTariffChangeRequest) query() url.Values {

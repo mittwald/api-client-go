@@ -40,7 +40,10 @@ func (r *DeprecatedServiceUserGetOwnRequest) body() (io.Reader, string, error) {
 }
 
 func (r *DeprecatedServiceUserGetOwnRequest) url() string {
-	return "/v2/user"
+	u := url.URL{
+		Path: "/v2/user",
+	}
+	return u.String()
 }
 
 func (r *DeprecatedServiceUserGetOwnRequest) query() url.Values {

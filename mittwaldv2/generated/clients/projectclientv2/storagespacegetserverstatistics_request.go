@@ -42,7 +42,10 @@ func (r *StoragespaceGetServerStatisticsRequest) body() (io.Reader, string, erro
 }
 
 func (r *StoragespaceGetServerStatisticsRequest) url() string {
-	return fmt.Sprintf("/v2/servers/%s/storage-space-statistics", url.PathEscape(r.ServerID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/servers/%s/storage-space-statistics", url.PathEscape(r.ServerID)),
+	}
+	return u.String()
 }
 
 func (r *StoragespaceGetServerStatisticsRequest) query() url.Values {

@@ -49,7 +49,10 @@ func (r *UpdateProjectDescriptionRequest) body() (io.Reader, string, error) {
 }
 
 func (r *UpdateProjectDescriptionRequest) url() string {
-	return fmt.Sprintf("/v2/projects/%s/description", url.PathEscape(r.ProjectID))
+	u := url.URL{
+		Path: fmt.Sprintf("/v2/projects/%s/description", url.PathEscape(r.ProjectID)),
+	}
+	return u.String()
 }
 
 func (r *UpdateProjectDescriptionRequest) query() url.Values {
