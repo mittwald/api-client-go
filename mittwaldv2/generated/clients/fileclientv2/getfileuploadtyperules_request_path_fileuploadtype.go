@@ -9,16 +9,20 @@ import "fmt"
 // type: "string"
 // enum:
 //    - "avatar"
+//    - "extensionAssetImage"
+//    - "extensionAssetVideo"
 //    - "conversation"
 // example: "avatar"
 
 type GetFileUploadTypeRulesRequestPathFileUploadType string
 
 const GetFileUploadTypeRulesRequestPathFileUploadTypeAvatar GetFileUploadTypeRulesRequestPathFileUploadType = "avatar"
+const GetFileUploadTypeRulesRequestPathFileUploadTypeExtensionAssetImage GetFileUploadTypeRulesRequestPathFileUploadType = "extensionAssetImage"
+const GetFileUploadTypeRulesRequestPathFileUploadTypeExtensionAssetVideo GetFileUploadTypeRulesRequestPathFileUploadType = "extensionAssetVideo"
 const GetFileUploadTypeRulesRequestPathFileUploadTypeConversation GetFileUploadTypeRulesRequestPathFileUploadType = "conversation"
 
 func (e GetFileUploadTypeRulesRequestPathFileUploadType) Validate() error {
-	if e == GetFileUploadTypeRulesRequestPathFileUploadTypeAvatar || e == GetFileUploadTypeRulesRequestPathFileUploadTypeConversation {
+	if e == GetFileUploadTypeRulesRequestPathFileUploadTypeAvatar || e == GetFileUploadTypeRulesRequestPathFileUploadTypeExtensionAssetImage || e == GetFileUploadTypeRulesRequestPathFileUploadTypeExtensionAssetVideo || e == GetFileUploadTypeRulesRequestPathFileUploadTypeConversation {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

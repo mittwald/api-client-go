@@ -17,6 +17,8 @@ import (
 //
 // Leave a Customer.
 //
+// Deprecated by `DELETE /v2/customer-memberships/{customerMembershipId}`.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/customer/deprecated-customer-leave-customer
 type DeprecatedLeaveCustomerRequest struct {

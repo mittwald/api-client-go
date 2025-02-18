@@ -17,6 +17,8 @@ import (
 //
 // Leave a Project.
 //
+// Deprecated by `DELETE /v2/project-memberships/{projectMembershipId}`.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/project/deprecated-project-leave-project
 type DeprecatedLeaveProjectRequest struct {
