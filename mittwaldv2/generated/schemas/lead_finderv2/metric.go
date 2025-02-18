@@ -7,7 +7,9 @@ package lead_finderv2
 // type: "object"
 // properties:
 //    "category":
-//        type: "number"
+//        type: "string"
+//    "name":
+//        type: "string"
 //    "score":
 //        type: "number"
 //    "unit":
@@ -16,9 +18,11 @@ package lead_finderv2
 //        type: "number"
 // required:
 //    - "category"
+//    - "name"
 
 type Metric struct {
-	Category float64  `json:"category"`
+	Category string   `json:"category"`
+	Name     string   `json:"name"`
 	Score    *float64 `json:"score,omitempty"`
 	Unit     *string  `json:"unit,omitempty"`
 	Value    *float64 `json:"value,omitempty"`

@@ -154,6 +154,8 @@ func NewClient(client httpclient.RequestRunner) Client {
 }
 
 // Leave a Project.
+//
+// Deprecated by `DELETE /v2/project-memberships/{projectMembershipId}`.
 func (c *clientImpl) DeprecatedLeaveProject(
 	ctx context.Context,
 	req DeprecatedLeaveProjectRequest,

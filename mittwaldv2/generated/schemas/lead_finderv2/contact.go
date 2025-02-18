@@ -15,9 +15,6 @@ import (
 //    "address": {"$ref": "#/components/schemas/de.mittwald.v1.commons.Address"}
 //    "company":
 //        type: "string"
-//    "emailAddress":
-//        type: "string"
-//        format: "email"
 //    "phoneNumbers":
 //        type: "array"
 //        items:
@@ -29,7 +26,6 @@ import (
 type Contact struct {
 	Address      commonsv2.Address `json:"address"`
 	Company      string            `json:"company"`
-	EmailAddress *string           `json:"emailAddress,omitempty"`
 	PhoneNumbers []string          `json:"phoneNumbers,omitempty"`
 }
 

@@ -14,7 +14,7 @@ import (
 var _ = Describe("Metric", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"category\":3.14,\"score\":3.14,\"unit\":\"string\",\"value\":3.14}")
+			exampleJSON := []byte("{\"category\":\"string\",\"name\":\"string\",\"score\":3.14,\"unit\":\"string\",\"value\":3.14}")
 
 			sut := lead_finderv2.Metric{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

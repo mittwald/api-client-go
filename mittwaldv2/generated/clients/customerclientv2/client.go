@@ -776,6 +776,8 @@ func (c *clientImpl) ResendCustomerInviteMail(
 }
 
 // Leave a Customer.
+//
+// Deprecated by `DELETE /v2/customer-memberships/{customerMembershipId}`.
 func (c *clientImpl) DeprecatedLeaveCustomer(
 	ctx context.Context,
 	req DeprecatedLeaveCustomerRequest,
