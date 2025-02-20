@@ -8,23 +8,30 @@ package lead_finderv2
 // properties:
 //    "accessibility":
 //        type: "number"
+//        maximum: 1
+//        minimum: 0
+//        format: "float"
 //    "bestPractice":
 //        type: "number"
+//        maximum: 1
+//        minimum: 0
+//        format: "float"
 //    "performance":
 //        type: "number"
+//        maximum: 1
+//        minimum: 0
+//        format: "float"
 //    "seo":
 //        type: "number"
-// required:
-//    - "performance"
-//    - "bestPractice"
-//    - "accessibility"
-//    - "seo"
+//        maximum: 1
+//        minimum: 0
+//        format: "float"
 
 type Lighthouse struct {
-	Accessibility float64 `json:"accessibility"`
-	BestPractice  float64 `json:"bestPractice"`
-	Performance   float64 `json:"performance"`
-	Seo           float64 `json:"seo"`
+	Accessibility *float64 `json:"accessibility,omitempty"`
+	BestPractice  *float64 `json:"bestPractice,omitempty"`
+	Performance   *float64 `json:"performance,omitempty"`
+	Seo           *float64 `json:"seo,omitempty"`
 }
 
 func (o *Lighthouse) Validate() error {

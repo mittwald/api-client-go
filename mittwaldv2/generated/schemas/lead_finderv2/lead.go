@@ -24,6 +24,9 @@ import (
 //    "metrics": {"$ref": "#/components/schemas/de.mittwald.v1.lead-finder.BasicMetrics"}
 //    "score":
 //        type: "number"
+//        maximum: 1
+//        minimum: 0
+//        format: "float"
 //    "screenshot":
 //        type: "string"
 //    "technologies":

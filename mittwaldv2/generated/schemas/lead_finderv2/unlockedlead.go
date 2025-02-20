@@ -32,6 +32,9 @@ import (
 //        format: "date-time"
 //    "score":
 //        type: "number"
+//        maximum: 1
+//        minimum: 0
+//        format: "float"
 //    "screenshot":
 //        type: "string"
 //    "socialMedia":

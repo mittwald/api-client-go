@@ -10,21 +10,22 @@ import "fmt"
 // properties:
 //    "co2":
 //        type: "number"
+//        maximum: 1
+//        minimum: 0
+//        format: "float"
 //    "desktop": {"$ref": "#/components/schemas/de.mittwald.v1.lead-finder.Lighthouse"}
 //    "mobile": {"$ref": "#/components/schemas/de.mittwald.v1.lead-finder.Lighthouse"}
 //    "timeToFirstByteMs":
 //        type: "number"
 // required:
-//    - "timeToFirstByteMs"
-//    - "co2"
 //    - "desktop"
 //    - "mobile"
 
 type BasicMetrics struct {
-	Co2               float64    `json:"co2"`
+	Co2               *float64   `json:"co2,omitempty"`
 	Desktop           Lighthouse `json:"desktop"`
 	Mobile            Lighthouse `json:"mobile"`
-	TimeToFirstByteMs float64    `json:"timeToFirstByteMs"`
+	TimeToFirstByteMs *float64   `json:"timeToFirstByteMs,omitempty"`
 }
 
 func (o *BasicMetrics) Validate() error {

@@ -14,7 +14,7 @@ import (
 var _ = Describe("DetailMetrics", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"additionalMetrics\":{\"string\":{\"category\":\"string\",\"name\":\"string\",\"score\":null,\"unit\":null,\"value\":null}},\"basic\":{\"co2\":3.14,\"desktop\":{\"accessibility\":3.14,\"bestPractice\":3.14,\"performance\":3.14,\"seo\":3.14},\"mobile\":{\"accessibility\":3.14,\"bestPractice\":3.14,\"performance\":3.14,\"seo\":3.14},\"timeToFirstByteMs\":3.14}}")
+			exampleJSON := []byte("{\"additionalMetrics\":{\"string\":{\"category\":\"string\",\"name\":\"string\",\"score\":null,\"unit\":null,\"value\":null}},\"basic\":{\"co2\":3.14,\"desktop\":{\"accessibility\":null,\"bestPractice\":null,\"performance\":null,\"seo\":null},\"mobile\":{\"accessibility\":null,\"bestPractice\":null,\"performance\":null,\"seo\":null},\"timeToFirstByteMs\":3.14}}")
 
 			sut := lead_finderv2.DetailMetrics{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
