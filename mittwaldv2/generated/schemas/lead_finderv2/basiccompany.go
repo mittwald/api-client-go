@@ -15,16 +15,13 @@ package lead_finderv2
 //    "salesVolume":
 //        type: "number"
 // required:
-//    - "employeeCount"
-//    - "foundingYear"
-//    - "salesVolume"
 //    - "city"
 
 type BasicCompany struct {
-	City          string  `json:"city"`
-	EmployeeCount float64 `json:"employeeCount"`
-	FoundingYear  float64 `json:"foundingYear"`
-	SalesVolume   float64 `json:"salesVolume"`
+	City          string   `json:"city"`
+	EmployeeCount *float64 `json:"employeeCount,omitempty"`
+	FoundingYear  *float64 `json:"foundingYear,omitempty"`
+	SalesVolume   *float64 `json:"salesVolume,omitempty"`
 }
 
 func (o *BasicCompany) Validate() error {
