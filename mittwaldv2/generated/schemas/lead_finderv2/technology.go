@@ -12,11 +12,10 @@ package lead_finderv2
 //        type: "string"
 // required:
 //    - "name"
-//    - "version"
 
 type Technology struct {
-	Name    string `json:"name"`
-	Version string `json:"version"`
+	Name    string  `json:"name"`
+	Version *string `json:"version,omitempty"`
 }
 
 func (o *Technology) Validate() error {
