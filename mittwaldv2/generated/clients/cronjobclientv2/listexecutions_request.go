@@ -5,6 +5,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strconv"
 	"time"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/cronjobv2"
@@ -28,7 +29,7 @@ type ListExecutionsRequest struct {
 	Since           *time.Time
 	Until           *time.Time
 	Status          *string
-	TriggeredByUser *string
+	TriggeredByUser *bool
 	SortOrder       *cronjobv2.CronjobExecutionSortOrder
 }
 
@@ -81,7 +82,7 @@ func (r *ListExecutionsRequest) query() url.Values {
 		q.Set("status", *r.Status)
 	}
 	if r.TriggeredByUser != nil {
-		q.Set("triggeredByUser", *r.TriggeredByUser)
+		q.Set("triggeredByUser", strconv.FormatBool(*r.TriggeredByUser))
 	}
 	if r.SortOrder != nil {
 		q.Set("sortOrder", string(*r.SortOrder))
