@@ -40,7 +40,7 @@ import "fmt"
 //        type: "array"
 //        items:
 //            type: "string"
-//        example: ["data:/var/lib/mysql"]
+//        example: ["data:/var/lib/mysql:ro"]
 
 type ServiceRequest struct {
 	Command     []string          `json:"command,omitempty"`

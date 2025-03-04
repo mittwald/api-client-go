@@ -9,12 +9,11 @@ package marketplacev2
 //    "amountOfInstances":
 //        type: "integer"
 //        minimum: 0
+//        description: "The amout of instances for this extension. Accurate for the Contributor. Publicly rounded to the next lower hundred."
 //        example: 42
-// required:
-//    - "amountOfInstances"
 
 type ExtensionStatistics struct {
-	AmountOfInstances int64 `json:"amountOfInstances"`
+	AmountOfInstances *int64 `json:"amountOfInstances,omitempty"`
 }
 
 func (o *ExtensionStatistics) Validate() error {

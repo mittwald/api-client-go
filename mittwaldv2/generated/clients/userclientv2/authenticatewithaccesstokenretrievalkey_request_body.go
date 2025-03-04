@@ -16,7 +16,6 @@ package userclientv2
 // required:
 //    - "userId"
 //    - "accessTokenRetrievalKey"
-//    - "refreshToken"
 // description: AuthenticateWithAccessTokenRetrievalKeyRequestBody models the JSON body of a 'user-authenticate-with-access-token-retrieval-key' request
 
 // AuthenticateWithAccessTokenRetrievalKeyRequestBody models the JSON body of a 'user-authenticate-with-access-token-retrieval-key' request

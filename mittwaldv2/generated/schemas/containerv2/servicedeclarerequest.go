@@ -43,7 +43,7 @@ import (
 //        type: "array"
 //        items:
 //            type: "string"
-//        example: ["data:/var/lib/mysql"]
+//        example: ["data:/var/lib/mysql:ro"]
 // required:
 //    - "description"
 //    - "image"

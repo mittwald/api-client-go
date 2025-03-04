@@ -33,7 +33,7 @@ type Client interface {
 	ConsentToExtensionScopes(
 		ctx context.Context,
 		req ConsentToExtensionScopesRequest,
-	) (*any, *http.Response, error)
+	) (*http.Response, error)
 	CreateContributorOnboardingProcess(
 		ctx context.Context,
 		req CreateContributorOnboardingProcessRequest,
@@ -235,27 +235,23 @@ func (c *clientImpl) AuthenticateInstance(
 func (c *clientImpl) ConsentToExtensionScopes(
 	ctx context.Context,
 	req ConsentToExtensionScopesRequest,
-) (*any, *http.Response, error) {
+) (*http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
 	if err != nil {
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
 	if httpRes.StatusCode >= 400 {
 		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
-	var response any
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
+	return httpRes, nil
 }
 
 // Create the OnboardingProcess of a Contributor.
