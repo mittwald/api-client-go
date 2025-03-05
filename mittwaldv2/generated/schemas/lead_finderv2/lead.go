@@ -22,7 +22,7 @@ import (
 //        type: "string"
 //    "mainTechnology": {"$ref": "#/components/schemas/de.mittwald.v1.lead-finder.Technology"}
 //    "metrics": {"$ref": "#/components/schemas/de.mittwald.v1.lead-finder.BasicMetrics"}
-//    "score":
+//    "potential":
 //        type: "number"
 //        maximum: 1
 //        minimum: 0
@@ -34,7 +34,7 @@ import (
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.lead-finder.Technology"}
 // required:
 //    - "leadId"
-//    - "score"
+//    - "potential"
 //    - "screenshot"
 //    - "company"
 //    - "metrics"
@@ -49,7 +49,7 @@ type Lead struct {
 	LeadId         string       `json:"leadId"`
 	MainTechnology *Technology  `json:"mainTechnology,omitempty"`
 	Metrics        BasicMetrics `json:"metrics"`
-	Score          float64      `json:"score"`
+	Potential      float64      `json:"potential"`
 	Screenshot     string       `json:"screenshot"`
 	Technologies   []Technology `json:"technologies"`
 }

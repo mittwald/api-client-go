@@ -27,14 +27,14 @@ import (
 //        type: "string"
 //    "mainTechnology": {"$ref": "#/components/schemas/de.mittwald.v1.lead-finder.Technology"}
 //    "metrics": {"$ref": "#/components/schemas/de.mittwald.v1.lead-finder.DetailMetrics"}
-//    "reservedUntil":
-//        type: "string"
-//        format: "date-time"
-//    "score":
+//    "potential":
 //        type: "number"
 //        maximum: 1
 //        minimum: 0
 //        format: "float"
+//    "reservedUntil":
+//        type: "string"
+//        format: "date-time"
 //    "screenshot":
 //        type: "string"
 //    "socialMedia":
@@ -48,7 +48,7 @@ import (
 //        format: "date-time"
 // required:
 //    - "leadId"
-//    - "score"
+//    - "potential"
 //    - "screenshot"
 //    - "company"
 //    - "metrics"
@@ -71,8 +71,8 @@ type UnlockedLead struct {
 	LeadId         string        `json:"leadId"`
 	MainTechnology *Technology   `json:"mainTechnology,omitempty"`
 	Metrics        DetailMetrics `json:"metrics"`
+	Potential      float64       `json:"potential"`
 	ReservedUntil  *time.Time    `json:"reservedUntil,omitempty"`
-	Score          float64       `json:"score"`
 	Screenshot     string        `json:"screenshot"`
 	SocialMedia    []SocialMedia `json:"socialMedia"`
 	Technologies   []Technology  `json:"technologies"`

@@ -14,7 +14,7 @@ import (
 var _ = Describe("Lead", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"businessFields\":[\"string\"],\"company\":{\"city\":\"string\",\"employeeCount\":3.14,\"foundingYear\":3.14,\"salesVolume\":3.14},\"description\":\"string\",\"leadId\":\"string\",\"mainTechnology\":{\"name\":\"string\",\"version\":\"string\"},\"metrics\":{\"co2\":3.14,\"desktop\":{\"accessibility\":null,\"bestPractice\":null,\"performance\":null,\"seo\":null},\"mobile\":{\"accessibility\":null,\"bestPractice\":null,\"performance\":null,\"seo\":null},\"timeToFirstByteMs\":3.14},\"score\":3.14,\"screenshot\":\"string\",\"technologies\":[{\"name\":\"string\",\"version\":\"string\"}]}")
+			exampleJSON := []byte("{\"businessFields\":[\"string\"],\"company\":{\"city\":\"string\",\"employeeCount\":3.14,\"foundingYear\":3.14,\"salesVolume\":3.14},\"description\":\"string\",\"leadId\":\"string\",\"mainTechnology\":{\"name\":\"string\",\"version\":\"string\"},\"metrics\":{\"co2\":3.14,\"desktop\":{\"accessibility\":null,\"bestPractice\":null,\"performance\":null,\"seo\":null},\"mobile\":{\"accessibility\":null,\"bestPractice\":null,\"performance\":null,\"seo\":null},\"timeToFirstByteMs\":3.14},\"potential\":3.14,\"screenshot\":\"string\",\"technologies\":[{\"name\":\"string\",\"version\":\"string\"}]}")
 
 			sut := lead_finderv2.Lead{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
