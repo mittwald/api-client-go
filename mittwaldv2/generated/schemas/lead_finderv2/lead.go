@@ -18,6 +18,8 @@ import (
 //    "company": {"$ref": "#/components/schemas/de.mittwald.v1.lead-finder.BasicCompany"}
 //    "description":
 //        type: "string"
+//    "globalUnlockedCount":
+//        type: "number"
 //    "leadId":
 //        type: "string"
 //    "mainTechnology": {"$ref": "#/components/schemas/de.mittwald.v1.lead-finder.Technology"}
@@ -41,17 +43,19 @@ import (
 //    - "businessFields"
 //    - "description"
 //    - "technologies"
+//    - "globalUnlockedCount"
 
 type Lead struct {
-	BusinessFields []string     `json:"businessFields"`
-	Company        BasicCompany `json:"company"`
-	Description    string       `json:"description"`
-	LeadId         string       `json:"leadId"`
-	MainTechnology *Technology  `json:"mainTechnology,omitempty"`
-	Metrics        BasicMetrics `json:"metrics"`
-	Potential      float64      `json:"potential"`
-	Screenshot     string       `json:"screenshot"`
-	Technologies   []Technology `json:"technologies"`
+	BusinessFields      []string     `json:"businessFields"`
+	Company             BasicCompany `json:"company"`
+	Description         string       `json:"description"`
+	GlobalUnlockedCount float64      `json:"globalUnlockedCount"`
+	LeadId              string       `json:"leadId"`
+	MainTechnology      *Technology  `json:"mainTechnology,omitempty"`
+	Metrics             BasicMetrics `json:"metrics"`
+	Potential           float64      `json:"potential"`
+	Screenshot          string       `json:"screenshot"`
+	Technologies        []Technology `json:"technologies"`
 }
 
 func (o *Lead) Validate() error {

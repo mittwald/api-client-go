@@ -22,6 +22,8 @@ import (
 //        type: "string"
 //    "domain":
 //        type: "string"
+//    "globalUnlockedCount":
+//        type: "number"
 //    "hoster": {"$ref": "#/components/schemas/de.mittwald.v1.lead-finder.Hoster"}
 //    "leadId":
 //        type: "string"
@@ -60,23 +62,25 @@ import (
 //    - "contact"
 //    - "hoster"
 //    - "unlockedAt"
+//    - "globalUnlockedCount"
 
 type UnlockedLead struct {
-	BusinessFields []string      `json:"businessFields"`
-	Company        any           `json:"company"`
-	Contact        Contact       `json:"contact"`
-	Description    string        `json:"description"`
-	Domain         string        `json:"domain"`
-	Hoster         Hoster        `json:"hoster"`
-	LeadId         string        `json:"leadId"`
-	MainTechnology *Technology   `json:"mainTechnology,omitempty"`
-	Metrics        DetailMetrics `json:"metrics"`
-	Potential      float64       `json:"potential"`
-	ReservedUntil  *time.Time    `json:"reservedUntil,omitempty"`
-	Screenshot     string        `json:"screenshot"`
-	SocialMedia    []SocialMedia `json:"socialMedia"`
-	Technologies   []Technology  `json:"technologies"`
-	UnlockedAt     time.Time     `json:"unlockedAt"`
+	BusinessFields      []string      `json:"businessFields"`
+	Company             any           `json:"company"`
+	Contact             Contact       `json:"contact"`
+	Description         string        `json:"description"`
+	Domain              string        `json:"domain"`
+	GlobalUnlockedCount float64       `json:"globalUnlockedCount"`
+	Hoster              Hoster        `json:"hoster"`
+	LeadId              string        `json:"leadId"`
+	MainTechnology      *Technology   `json:"mainTechnology,omitempty"`
+	Metrics             DetailMetrics `json:"metrics"`
+	Potential           float64       `json:"potential"`
+	ReservedUntil       *time.Time    `json:"reservedUntil,omitempty"`
+	Screenshot          string        `json:"screenshot"`
+	SocialMedia         []SocialMedia `json:"socialMedia"`
+	Technologies        []Technology  `json:"technologies"`
+	UnlockedAt          time.Time     `json:"unlockedAt"`
 }
 
 func (o *UnlockedLead) Validate() error {
