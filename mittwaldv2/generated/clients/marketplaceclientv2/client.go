@@ -74,6 +74,14 @@ type Client interface {
 		ctx context.Context,
 		req GetExtensionRequest,
 	) (*marketplacev2.Extension, *http.Response, error)
+	GetOwnExtension(
+		ctx context.Context,
+		req GetOwnExtensionRequest,
+	) (*marketplacev2.OwnExtension, *http.Response, error)
+	PatchExtension(
+		ctx context.Context,
+		req PatchExtensionRequest,
+	) (*marketplacev2.OwnExtension, *http.Response, error)
 	GetPublicKey(
 		ctx context.Context,
 		req GetPublicKeyRequest,
@@ -90,6 +98,10 @@ type Client interface {
 		ctx context.Context,
 		req ListOwnExtensionsRequest,
 	) (*[]marketplacev2.OwnExtension, *http.Response, error)
+	RegisterExtension(
+		ctx context.Context,
+		req RegisterExtensionRequest,
+	) (*RegisterExtensionResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -500,6 +512,60 @@ func (c *clientImpl) GetExtension(
 	return &response, httpRes, nil
 }
 
+// Get Extension of own contributor.
+func (c *clientImpl) GetOwnExtension(
+	ctx context.Context,
+	req GetOwnExtensionRequest,
+) (*marketplacev2.OwnExtension, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.OwnExtension
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Patch Extension.
+func (c *clientImpl) PatchExtension(
+	ctx context.Context,
+	req PatchExtensionRequest,
+) (*marketplacev2.OwnExtension, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.OwnExtension
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Get the public key to verify the webhook signature.
 func (c *clientImpl) GetPublicKey(
 	ctx context.Context,
@@ -602,6 +668,33 @@ func (c *clientImpl) ListOwnExtensions(
 	}
 
 	var response []marketplacev2.OwnExtension
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Register an Extension.
+func (c *clientImpl) RegisterExtension(
+	ctx context.Context,
+	req RegisterExtensionRequest,
+) (*RegisterExtensionResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RegisterExtensionResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

@@ -64,6 +64,9 @@ import (
 //        type: "array"
 //        items:
 //            type: "string"
+//    "secrets":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExtensionSecret"}
 //    "state":
 //        type: "string"
 //        enum:
@@ -93,6 +96,7 @@ import (
 //    - "verified"
 //    - "verificationRequested"
 //    - "functional"
+//    - "secrets"
 
 type OwnExtension struct {
 	Assets                []ExtensionAsset              `json:"assets"`
@@ -114,6 +118,7 @@ type OwnExtension struct {
 	Published             bool                          `json:"published"`
 	RequestedChanges      *OwnExtensionRequestedChanges `json:"requestedChanges,omitempty"`
 	Scopes                []string                      `json:"scopes,omitempty"`
+	Secrets               []ExtensionSecret             `json:"secrets"`
 	State                 *OwnExtensionState            `json:"state,omitempty"`
 	Statistics            ExtensionStatistics           `json:"statistics"`
 	SubTitle              *SubTitle                     `json:"subTitle,omitempty"`
@@ -215,6 +220,19 @@ func (o *OwnExtension) Validate() error {
 		return nil
 	}(); err != nil {
 		return fmt.Errorf("invalid property scopes: %w", err)
+	}
+	if o.Secrets == nil {
+		return errors.New("property secrets is required, but not set")
+	}
+	if err := func() error {
+		for i := range o.Secrets {
+			if err := o.Secrets[i].Validate(); err != nil {
+				return fmt.Errorf("item %d is invalid %w", i, err)
+			}
+		}
+		return nil
+	}(); err != nil {
+		return fmt.Errorf("invalid property secrets: %w", err)
 	}
 	if err := func() error {
 		if o.State == nil {
