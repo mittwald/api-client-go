@@ -14,6 +14,14 @@ import (
 )
 
 type Client interface {
+	GetCustomerBillingPortalLink(
+		ctx context.Context,
+		req GetCustomerBillingPortalLinkRequest,
+	) (*GetCustomerBillingPortalLinkResponse, *http.Response, error)
+	GetLoginLink(
+		ctx context.Context,
+		req GetLoginLinkRequest,
+	) (*GetLoginLinkResponse, *http.Response, error)
 	RotateSecretForExtensionInstance(
 		ctx context.Context,
 		req RotateSecretForExtensionInstanceRequest,
@@ -26,6 +34,10 @@ type Client interface {
 		ctx context.Context,
 		req ConsentToExtensionScopesRequest,
 	) (*http.Response, error)
+	CreateContributorOnboardingProcess(
+		ctx context.Context,
+		req CreateContributorOnboardingProcessRequest,
+	) (*CreateContributorOnboardingProcessResponse, *http.Response, error)
 	ListExtensionInstances(
 		ctx context.Context,
 		req ListExtensionInstancesRequest,
@@ -102,6 +114,14 @@ type Client interface {
 		ctx context.Context,
 		req RegisterExtensionRequest,
 	) (*RegisterExtensionResponse, *http.Response, error)
+	UpdateExtensionInstanceContract(
+		ctx context.Context,
+		req UpdateExtensionInstanceContractRequest,
+	) (*UpdateExtensionInstanceContractResponse, *http.Response, error)
+	UpdateExtensionPricing(
+		ctx context.Context,
+		req UpdateExtensionPricingRequest,
+	) (*UpdateExtensionPricingResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -109,6 +129,64 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Get the Stripe Billing Portal Link for a Customer
+//
+// Get the Stripe Billing Portal Link for a Customer.
+func (c *clientImpl) GetCustomerBillingPortalLink(
+	ctx context.Context,
+	req GetCustomerBillingPortalLinkRequest,
+) (*GetCustomerBillingPortalLinkResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GetCustomerBillingPortalLinkResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get the Stripe Dashboard Link for a Contributor.
+//
+// Get the Stripe Dashboard Link for a Contributor.
+func (c *clientImpl) GetLoginLink(
+	ctx context.Context,
+	req GetLoginLinkRequest,
+) (*GetLoginLinkResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GetLoginLinkResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Rotate the secret for an extension instance.
@@ -186,6 +264,35 @@ func (c *clientImpl) ConsentToExtensionScopes(
 	}
 
 	return httpRes, nil
+}
+
+// Create the OnboardingProcess of a Contributor.
+//
+// The OnboardingProcess is needed to publish paid extensions.
+func (c *clientImpl) CreateContributorOnboardingProcess(
+	ctx context.Context,
+	req CreateContributorOnboardingProcessRequest,
+) (*CreateContributorOnboardingProcessResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CreateContributorOnboardingProcessResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // List ExtensionInstances.
@@ -695,6 +802,64 @@ func (c *clientImpl) RegisterExtension(
 	}
 
 	var response RegisterExtensionResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update or Create Contract for existing Extension Instances.
+//
+// Call to update Contract for existing Extension Instances. For example to accept a new Pricing.
+func (c *clientImpl) UpdateExtensionInstanceContract(
+	ctx context.Context,
+	req UpdateExtensionInstanceContractRequest,
+) (*UpdateExtensionInstanceContractResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response UpdateExtensionInstanceContractResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Creates or Updates Pricing for an Extension.
+//
+// The Pricing is needed to publish paid extensions.
+func (c *clientImpl) UpdateExtensionPricing(
+	ctx context.Context,
+	req UpdateExtensionPricingRequest,
+) (*UpdateExtensionPricingResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response UpdateExtensionPricingResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

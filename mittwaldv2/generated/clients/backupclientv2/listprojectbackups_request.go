@@ -24,6 +24,9 @@ type ListProjectBackupsRequest struct {
 	ProjectID       string
 	WithExportsOnly *bool
 	SortOrder       *backupv2.BackupSortOrder
+	Limit           *int64
+	Skip            *int64
+	Page            *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -61,6 +64,15 @@ func (r *ListProjectBackupsRequest) query() url.Values {
 	}
 	if r.SortOrder != nil {
 		q.Set("sortOrder", string(*r.SortOrder))
+	}
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
 	return q
 }
