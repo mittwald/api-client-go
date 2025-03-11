@@ -22,9 +22,12 @@ func New(ctx context.Context, opts ...ClientOption) (generatedv2.Client, error) 
 	var runner httpclient.RequestRunner = http.DefaultClient
 	var err error
 
+	// caution, this is counter-intuitive: since the options are basically a chain of wrappers around the actual
+	// request runner, they run inside-out and the options added _last_ will be applied _first_. This is why the default
+	// options need to come last.
 	allOpts := append(
-		defaultOpts[:],
-		opts...,
+		opts,
+		defaultOpts[:]...,
 	)
 
 	for _, o := range allOpts {

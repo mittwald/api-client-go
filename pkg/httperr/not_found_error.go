@@ -12,5 +12,8 @@ type ErrNotFound struct {
 }
 
 func (e *ErrNotFound) Error() string {
+	if e == nil || e.Response == nil {
+		return "resource not found: <nil>"
+	}
 	return fmt.Sprintf("resource not found: %s", e.Response.Request.URL)
 }

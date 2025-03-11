@@ -12,5 +12,8 @@ type ErrPermissionDenied struct {
 }
 
 func (e *ErrPermissionDenied) Error() string {
+	if e == nil || e.Response == nil {
+		return "permission to resource denied: <nil>"
+	}
 	return fmt.Sprintf("permission to resource denied: %s", e.Response.Request.URL)
 }

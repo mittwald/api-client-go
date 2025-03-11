@@ -12,5 +12,8 @@ type ErrUnexpectedResponse struct {
 }
 
 func (e *ErrUnexpectedResponse) Error() string {
+	if e == nil || e.Response == nil {
+		return "unexpected http response: <nil>"
+	}
 	return fmt.Sprintf("unexpected http response %d", e.Response.StatusCode)
 }
