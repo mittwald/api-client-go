@@ -17,6 +17,7 @@ import "fmt"
 //    "fileName":
 //        type: "string"
 //        example: "myFile.png"
+//        deprecated: true
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -28,7 +29,6 @@ import "fmt"
 //        example: 0
 // required:
 //    - "id"
-//    - "fileName"
 //    - "index"
 //    - "assetType"
 // description: "The following assets are the media that are associated with the extension and will be shown in extension details page."
@@ -36,7 +36,7 @@ import "fmt"
 // The following assets are the media that are associated with the extension and will be shown in extension details page.
 type ExtensionAsset struct {
 	AssetType ExtensionAssetAssetType `json:"assetType"`
-	FileName  string                  `json:"fileName"`
+	FileName  *string                 `json:"fileName,omitempty"`
 	Id        string                  `json:"id"`
 	Index     int64                   `json:"index"`
 }
