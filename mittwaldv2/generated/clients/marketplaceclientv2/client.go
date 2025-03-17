@@ -106,6 +106,14 @@ type Client interface {
 		ctx context.Context,
 		req RegisterExtensionRequest,
 	) (*RegisterExtensionResponse, *http.Response, error)
+	RequestExtensionVerification(
+		ctx context.Context,
+		req RequestExtensionVerificationRequest,
+	) (*RequestExtensionVerificationResponse, *http.Response, error)
+	SetExtensionPublishedState(
+		ctx context.Context,
+		req SetExtensionPublishedStateRequest,
+	) (*SetExtensionPublishedStateResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -726,6 +734,60 @@ func (c *clientImpl) RegisterExtension(
 	}
 
 	var response RegisterExtensionResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Start the verification process of an Extension.
+func (c *clientImpl) RequestExtensionVerification(
+	ctx context.Context,
+	req RequestExtensionVerificationRequest,
+) (*RequestExtensionVerificationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestExtensionVerificationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Publish or withdraw an Extension.
+func (c *clientImpl) SetExtensionPublishedState(
+	ctx context.Context,
+	req SetExtensionPublishedStateRequest,
+) (*SetExtensionPublishedStateResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response SetExtensionPublishedStateResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

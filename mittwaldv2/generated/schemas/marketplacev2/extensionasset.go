@@ -24,9 +24,8 @@ import "fmt"
 //        description: "The asset ID and reference ID to its file. Retrieve the file with this id on `/v2/files/{id}"
 //    "index":
 //        type: "integer"
-//        maximum: 3
-//        minimum: 0
-//        example: 0
+//        description: "The index of the asset. Does not have to be successive. Can be used to order the assets."
+//        example: 1
 // required:
 //    - "id"
 //    - "index"
