@@ -90,6 +90,10 @@ type Client interface {
 		ctx context.Context,
 		req ListUpdateCandidatesForAppversionRequest,
 	) (*[]appv2.AppVersion, *http.Response, error)
+	ReconcileDetectedApps(
+		ctx context.Context,
+		req ReconcileDetectedAppsRequest,
+	) (*http.Response, error)
 	ReplaceDatabase(
 		ctx context.Context,
 		req ReplaceDatabaseRequest,
@@ -618,6 +622,29 @@ func (c *clientImpl) ListUpdateCandidatesForAppversion(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Reconcile detected apps to appInstallations of a project.
+func (c *clientImpl) ReconcileDetectedApps(
+	ctx context.Context,
+	req ReconcileDetectedAppsRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // Replace a MySQL Database with another MySQL Database.

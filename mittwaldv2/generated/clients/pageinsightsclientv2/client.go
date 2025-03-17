@@ -8,11 +8,40 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/healthcheckv2"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
 	"github.com/mittwald/api-client-go/pkg/httperr"
 )
 
 type Client interface {
+	ListHealthchecks(
+		ctx context.Context,
+		req ListHealthchecksRequest,
+	) (*[]healthcheckv2.ListItem, *http.Response, error)
+	CreateHealthcheck(
+		ctx context.Context,
+		req CreateHealthcheckRequest,
+	) (*healthcheckv2.HealthCheck, *http.Response, error)
+	GetHealthcheck(
+		ctx context.Context,
+		req GetHealthcheckRequest,
+	) (*healthcheckv2.HealthCheck, *http.Response, error)
+	DeleteHealthcheck(
+		ctx context.Context,
+		req DeleteHealthcheckRequest,
+	) (*http.Response, error)
+	FullUpdateHealthcheck(
+		ctx context.Context,
+		req FullUpdateHealthcheckRequest,
+	) (*healthcheckv2.HealthCheck, *http.Response, error)
+	GetHealthcheckData(
+		ctx context.Context,
+		req GetHealthcheckDataRequest,
+	) (*healthcheckv2.HealthCheckData, *http.Response, error)
+	GetHealthcheckSummary(
+		ctx context.Context,
+		req GetHealthcheckSummaryRequest,
+	) (*healthcheckv2.HealthCheckSummary, *http.Response, error)
 	GetPerformanceData(
 		ctx context.Context,
 		req GetPerformanceDataRequest,
@@ -36,6 +65,194 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// List all available health checks.
+func (c *clientImpl) ListHealthchecks(
+	ctx context.Context,
+	req ListHealthchecksRequest,
+) (*[]healthcheckv2.ListItem, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []healthcheckv2.ListItem
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create a new health check.
+func (c *clientImpl) CreateHealthcheck(
+	ctx context.Context,
+	req CreateHealthcheckRequest,
+) (*healthcheckv2.HealthCheck, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response healthcheckv2.HealthCheck
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get the health check object.
+func (c *clientImpl) GetHealthcheck(
+	ctx context.Context,
+	req GetHealthcheckRequest,
+) (*healthcheckv2.HealthCheck, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response healthcheckv2.HealthCheck
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete a health check.
+func (c *clientImpl) DeleteHealthcheck(
+	ctx context.Context,
+	req DeleteHealthcheckRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Change up an existing health check.
+func (c *clientImpl) FullUpdateHealthcheck(
+	ctx context.Context,
+	req FullUpdateHealthcheckRequest,
+) (*healthcheckv2.HealthCheck, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response healthcheckv2.HealthCheck
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get the raw, non-summarized health check results.
+func (c *clientImpl) GetHealthcheckData(
+	ctx context.Context,
+	req GetHealthcheckDataRequest,
+) (*healthcheckv2.HealthCheckData, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response healthcheckv2.HealthCheckData
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get a short summary with some key metrics.
+//
+// The response time is the duration of the health check requests.
+// The success rate indicates how many requests were successful in percentage terms.
+func (c *clientImpl) GetHealthcheckSummary(
+	ctx context.Context,
+	req GetHealthcheckSummaryRequest,
+) (*healthcheckv2.HealthCheckSummary, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response healthcheckv2.HealthCheckSummary
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Get detailed performance data for a given domain and path.

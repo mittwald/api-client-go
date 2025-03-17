@@ -14,7 +14,7 @@ import (
 var _ = Describe("ExtensionAsset", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"assetType\":\"image\",\"fileName\":\"myFile.png\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"index\":0}")
+			exampleJSON := []byte("{\"assetType\":\"image\",\"fileName\":\"myFile.png\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"index\":1}")
 
 			sut := marketplacev2.ExtensionAsset{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

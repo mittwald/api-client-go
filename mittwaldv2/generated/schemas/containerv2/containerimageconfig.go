@@ -32,6 +32,10 @@ import "fmt"
 //        type: "boolean"
 //        description: "Whether the image config has ai generated data."
 //        example: true
+//    "isAiAvailable":
+//        type: "boolean"
+//        description: "Whether ai generation is available for the image reference."
+//        example: true
 //    "isUserRoot":
 //        type: "boolean"
 //        description: "Whether the container user is root."
@@ -57,6 +61,7 @@ import "fmt"
 //    - "userId"
 //    - "isUserRoot"
 //    - "hasAiGeneratedData"
+//    - "isAiAvailable"
 
 type ContainerImageConfig struct {
 	Command            []string                          `json:"command,omitempty"`
@@ -64,6 +69,7 @@ type ContainerImageConfig struct {
 	Env                []ContainerImageConfigEnv         `json:"env,omitempty"`
 	ExposedPorts       []ContainerImageConfigExposedPort `json:"exposedPorts,omitempty"`
 	HasAiGeneratedData bool                              `json:"hasAiGeneratedData"`
+	IsAiAvailable      bool                              `json:"isAiAvailable"`
 	IsUserRoot         bool                              `json:"isUserRoot"`
 	OverwritingUser    *int64                            `json:"overwritingUser,omitempty"`
 	User               string                            `json:"user"`
