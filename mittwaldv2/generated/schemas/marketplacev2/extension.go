@@ -88,6 +88,7 @@ import (
 //    - "blocked"
 //    - "assets"
 //    - "statistics"
+//    - "logoRefId"
 
 type Extension struct {
 	Assets               []ExtensionAsset      `json:"assets"`
@@ -102,7 +103,7 @@ type Extension struct {
 	FrontendComponents   []ExternalComponent   `json:"frontendComponents,omitempty"`
 	FrontendFragments    map[string]any        `json:"frontendFragments,omitempty"`
 	Id                   string                `json:"id"`
-	LogoRefId            *string               `json:"logoRefId,omitempty"`
+	LogoRefId            string                `json:"logoRefId"`
 	Name                 string                `json:"name"`
 	Published            bool                  `json:"published"`
 	Scopes               []string              `json:"scopes"`

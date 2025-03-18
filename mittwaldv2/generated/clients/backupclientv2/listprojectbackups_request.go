@@ -22,6 +22,7 @@ import (
 // https://developer.mittwald.de/docs/v2/reference/backup/backup-list-project-backups
 type ListProjectBackupsRequest struct {
 	ProjectID       string
+	SearchTerm      *string
 	WithExportsOnly *bool
 	SortOrder       *backupv2.BackupSortOrder
 	Limit           *int64
@@ -59,6 +60,9 @@ func (r *ListProjectBackupsRequest) url() string {
 
 func (r *ListProjectBackupsRequest) query() url.Values {
 	q := make(url.Values)
+	if r.SearchTerm != nil {
+		q.Set("searchTerm", *r.SearchTerm)
+	}
 	if r.WithExportsOnly != nil {
 		q.Set("withExportsOnly", strconv.FormatBool(*r.WithExportsOnly))
 	}
