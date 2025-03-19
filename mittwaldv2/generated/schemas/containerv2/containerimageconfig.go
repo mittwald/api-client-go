@@ -42,15 +42,16 @@ import "fmt"
 //        example: false
 //    "overwritingUser":
 //        type: "integer"
-//        description: "If set, this user will be used to run the container."
+//        description: "Deprecated, user will never be overwritten."
 //        example: 1000
+//        deprecated: true
 //    "user":
 //        type: "string"
-//        description: "The user the container image is running with, if overwritingUser is not set."
+//        description: "The user the container image is running with."
 //        example: "mysql"
 //    "userId":
 //        type: "integer"
-//        description: "The user id the container image is running with, if overwritingUser is not set."
+//        description: "The user id the container image is running with."
 //        example: 0
 //    "volumes":
 //        type: "array"
