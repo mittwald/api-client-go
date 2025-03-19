@@ -106,10 +106,22 @@ type Client interface {
 		ctx context.Context,
 		req RegisterExtensionRequest,
 	) (*RegisterExtensionResponse, *http.Response, error)
+	RemoveAsset(
+		ctx context.Context,
+		req RemoveAssetRequest,
+	) (*http.Response, error)
+	RequestAssetUpload(
+		ctx context.Context,
+		req RequestAssetUploadRequest,
+	) (*RequestAssetUploadResponse, *http.Response, error)
 	RequestExtensionVerification(
 		ctx context.Context,
 		req RequestExtensionVerificationRequest,
 	) (*RequestExtensionVerificationResponse, *http.Response, error)
+	RequestLogoUpload(
+		ctx context.Context,
+		req RequestLogoUploadRequest,
+	) (*RequestLogoUploadResponse, *http.Response, error)
 	SetExtensionPublishedState(
 		ctx context.Context,
 		req SetExtensionPublishedStateRequest,
@@ -740,6 +752,56 @@ func (c *clientImpl) RegisterExtension(
 	return &response, httpRes, nil
 }
 
+// Remove an asset of an extension.
+func (c *clientImpl) RemoveAsset(
+	ctx context.Context,
+	req RemoveAssetRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Add an asset to an extension.
+func (c *clientImpl) RequestAssetUpload(
+	ctx context.Context,
+	req RequestAssetUploadRequest,
+) (*RequestAssetUploadResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestAssetUploadResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Start the verification process of an Extension.
 func (c *clientImpl) RequestExtensionVerification(
 	ctx context.Context,
@@ -761,6 +823,33 @@ func (c *clientImpl) RequestExtensionVerification(
 	}
 
 	var response RequestExtensionVerificationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Add a logo to an extension.
+func (c *clientImpl) RequestLogoUpload(
+	ctx context.Context,
+	req RequestLogoUploadRequest,
+) (*RequestLogoUploadResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestLogoUploadResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

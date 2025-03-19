@@ -19,6 +19,10 @@ import (
 //    "externalFrontend":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent"}
+//        deprecated: true
+//    "externalFrontends":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent"}
 //    "frontendFragments":
 //        type: "object"
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.FrontendFragment"}
@@ -45,6 +49,7 @@ type RegisterExtensionRequestBody struct {
 	Description          *string                             `json:"description,omitempty"`
 	DetailedDescriptions *marketplacev2.DetailedDescriptions `json:"detailedDescriptions,omitempty"`
 	ExternalFrontend     []marketplacev2.ExternalComponent   `json:"externalFrontend,omitempty"`
+	ExternalFrontends    []marketplacev2.ExternalComponent   `json:"externalFrontends,omitempty"`
 	FrontendFragments    map[string]any                      `json:"frontendFragments,omitempty"`
 	Name                 string                              `json:"name"`
 	Scopes               []string                            `json:"scopes,omitempty"`
@@ -85,6 +90,21 @@ func (o *RegisterExtensionRequestBody) Validate() error {
 		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property externalFrontend: %w", err)
+	}
+	if err := func() error {
+		if o.ExternalFrontends == nil {
+			return nil
+		}
+		return func() error {
+			for i := range o.ExternalFrontends {
+				if err := o.ExternalFrontends[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}()
+	}(); err != nil {
+		return fmt.Errorf("invalid property externalFrontends: %w", err)
 	}
 	if err := func() error {
 		if o.Scopes == nil {
