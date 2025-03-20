@@ -33,10 +33,18 @@ import (
 //    "executingUserRoles":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.customer.Role"}
+//    "flags":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.customer.CustomerFlag"}
 //    "isBanned":
 //        type: "boolean"
 //    "isInDefaultOfPayment":
 //        type: "boolean"
+//    "levelOfUndeliverableDunningNotice":
+//        type: "string"
+//        enum:
+//            - "first"
+//            - "second"
 //    "memberCount":
 //        type: "integer"
 //        minimum: 0
@@ -64,21 +72,23 @@ import (
 //    - "projectCount"
 
 type Customer struct {
-	ActiveSuspension     *CustomerActiveSuspension     `json:"activeSuspension,omitempty"`
-	AvatarRefId          *string                       `json:"avatarRefId,omitempty"`
-	CategoryId           *string                       `json:"categoryId,omitempty"`
-	CreationDate         time.Time                     `json:"creationDate"`
-	CustomerId           string                        `json:"customerId"`
-	CustomerNumber       string                        `json:"customerNumber"`
-	ExecutingUserRoles   []Role                        `json:"executingUserRoles,omitempty"`
-	IsBanned             *bool                         `json:"isBanned,omitempty"`
-	IsInDefaultOfPayment *bool                         `json:"isInDefaultOfPayment,omitempty"`
-	MemberCount          int64                         `json:"memberCount"`
-	Name                 string                        `json:"name"`
-	Owner                *Contact                      `json:"owner,omitempty"`
-	ProjectCount         int64                         `json:"projectCount"`
-	VatId                *string                       `json:"vatId,omitempty"`
-	VatIdValidationState *CustomerVatIDValidationState `json:"vatIdValidationState,omitempty"`
+	ActiveSuspension                  *CustomerActiveSuspension                  `json:"activeSuspension,omitempty"`
+	AvatarRefId                       *string                                    `json:"avatarRefId,omitempty"`
+	CategoryId                        *string                                    `json:"categoryId,omitempty"`
+	CreationDate                      time.Time                                  `json:"creationDate"`
+	CustomerId                        string                                     `json:"customerId"`
+	CustomerNumber                    string                                     `json:"customerNumber"`
+	ExecutingUserRoles                []Role                                     `json:"executingUserRoles,omitempty"`
+	Flags                             []CustomerFlag                             `json:"flags,omitempty"`
+	IsBanned                          *bool                                      `json:"isBanned,omitempty"`
+	IsInDefaultOfPayment              *bool                                      `json:"isInDefaultOfPayment,omitempty"`
+	LevelOfUndeliverableDunningNotice *CustomerLevelOfUndeliverableDunningNotice `json:"levelOfUndeliverableDunningNotice,omitempty"`
+	MemberCount                       int64                                      `json:"memberCount"`
+	Name                              string                                     `json:"name"`
+	Owner                             *Contact                                   `json:"owner,omitempty"`
+	ProjectCount                      int64                                      `json:"projectCount"`
+	VatId                             *string                                    `json:"vatId,omitempty"`
+	VatIdValidationState              *CustomerVatIDValidationState              `json:"vatIdValidationState,omitempty"`
 }
 
 func (o *Customer) Validate() error {
@@ -104,6 +114,29 @@ func (o *Customer) Validate() error {
 		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property executingUserRoles: %w", err)
+	}
+	if err := func() error {
+		if o.Flags == nil {
+			return nil
+		}
+		return func() error {
+			for i := range o.Flags {
+				if err := o.Flags[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}()
+	}(); err != nil {
+		return fmt.Errorf("invalid property flags: %w", err)
+	}
+	if err := func() error {
+		if o.LevelOfUndeliverableDunningNotice == nil {
+			return nil
+		}
+		return o.LevelOfUndeliverableDunningNotice.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property levelOfUndeliverableDunningNotice: %w", err)
 	}
 	if err := func() error {
 		if o.Owner == nil {
