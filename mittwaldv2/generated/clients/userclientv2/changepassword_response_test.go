@@ -14,7 +14,7 @@ import (
 var _ = Describe("ChangePasswordResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal into AlternativeChangePasswordOKResponse", func() {
-			exampleJSON := []byte("{\"expires\":\"2006-01-02T15:04:05Z\",\"refreshToken\":\"string\",\"token\":\"string\"}")
+			exampleJSON := []byte("{\"expires\":\"2006-01-02T15:04:05Z\",\"token\":\"string\"}")
 
 			sut := userclientv2.ChangePasswordResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

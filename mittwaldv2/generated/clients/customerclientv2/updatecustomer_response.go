@@ -12,6 +12,7 @@ package customerclientv2
 //        type: "string"
 //    "name":
 //        type: "string"
+//        maxLength: 80
 // required:
 //    - "customerId"
 //    - "name"
