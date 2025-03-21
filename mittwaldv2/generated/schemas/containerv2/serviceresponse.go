@@ -22,6 +22,9 @@ import "fmt"
 //    "serviceName":
 //        type: "string"
 //        example: "mysql-db"
+//    "shortId":
+//        type: "string"
+//        example: "c-12e4u6"
 //    "stackId":
 //        type: "string"
 //        format: "uuid"
@@ -35,6 +38,7 @@ import "fmt"
 //    - "pendingState"
 //    - "deployedState"
 //    - "status"
+//    - "shortId"
 
 type ServiceResponse struct {
 	DeployedState ServiceState  `json:"deployedState"`
@@ -43,6 +47,7 @@ type ServiceResponse struct {
 	PendingState  ServiceState  `json:"pendingState"`
 	ProjectId     string        `json:"projectId"`
 	ServiceName   string        `json:"serviceName"`
+	ShortId       string        `json:"shortId"`
 	StackId       string        `json:"stackId"`
 	Status        ServiceStatus `json:"status"`
 }
