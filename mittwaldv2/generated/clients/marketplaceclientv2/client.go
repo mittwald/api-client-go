@@ -58,6 +58,18 @@ type Client interface {
 		ctx context.Context,
 		req DeleteExtensionInstanceRequest,
 	) (*any, *http.Response, error)
+	GetOwnExtension(
+		ctx context.Context,
+		req GetOwnExtensionRequest,
+	) (*marketplacev2.OwnExtension, *http.Response, error)
+	DeleteExtension(
+		ctx context.Context,
+		req DeleteExtensionRequest,
+	) (*http.Response, error)
+	PatchExtension(
+		ctx context.Context,
+		req PatchExtensionRequest,
+	) (*marketplacev2.OwnExtension, *http.Response, error)
 	DisableExtensionInstance(
 		ctx context.Context,
 		req DisableExtensionInstanceRequest,
@@ -90,14 +102,6 @@ type Client interface {
 		ctx context.Context,
 		req GetExtensionRequest,
 	) (*marketplacev2.Extension, *http.Response, error)
-	GetOwnExtension(
-		ctx context.Context,
-		req GetOwnExtensionRequest,
-	) (*marketplacev2.OwnExtension, *http.Response, error)
-	PatchExtension(
-		ctx context.Context,
-		req PatchExtensionRequest,
-	) (*marketplacev2.OwnExtension, *http.Response, error)
 	GetPublicKey(
 		ctx context.Context,
 		req GetPublicKeyRequest,
@@ -454,6 +458,85 @@ func (c *clientImpl) DeleteExtensionInstance(
 	return &response, httpRes, nil
 }
 
+// Get Extension of own contributor.
+func (c *clientImpl) GetOwnExtension(
+	ctx context.Context,
+	req GetOwnExtensionRequest,
+) (*marketplacev2.OwnExtension, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.OwnExtension
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete an extension.
+//
+// This action deletes all ExtensionInstances and afterwards the Extension itself.
+func (c *clientImpl) DeleteExtension(
+	ctx context.Context,
+	req DeleteExtensionRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Patch Extension.
+func (c *clientImpl) PatchExtension(
+	ctx context.Context,
+	req PatchExtensionRequest,
+) (*marketplacev2.OwnExtension, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.OwnExtension
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Disable an ExtensionInstance.
 func (c *clientImpl) DisableExtensionInstance(
 	ctx context.Context,
@@ -664,60 +747,6 @@ func (c *clientImpl) GetExtension(
 	}
 
 	var response marketplacev2.Extension
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get Extension of own contributor.
-func (c *clientImpl) GetOwnExtension(
-	ctx context.Context,
-	req GetOwnExtensionRequest,
-) (*marketplacev2.OwnExtension, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response marketplacev2.OwnExtension
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Patch Extension.
-func (c *clientImpl) PatchExtension(
-	ctx context.Context,
-	req PatchExtensionRequest,
-) (*marketplacev2.OwnExtension, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response marketplacev2.OwnExtension
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

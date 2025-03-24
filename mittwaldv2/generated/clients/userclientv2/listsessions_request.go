@@ -1,6 +1,7 @@
 package userclientv2
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -16,6 +17,9 @@ import (
 //
 // [1]: https://developer.mittwald.de/docs/v2/reference/user/user-list-sessions
 type ListSessionsRequest struct {
+	Limit *int64
+	Skip  *int64
+	Page  *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -40,11 +44,22 @@ func (r *ListSessionsRequest) body() (io.Reader, string, error) {
 
 func (r *ListSessionsRequest) url() string {
 	u := url.URL{
-		Path: "/v2/users/self/sessions",
+		Path:     "/v2/users/self/sessions",
+		RawQuery: r.query().Encode(),
 	}
 	return u.String()
 }
 
 func (r *ListSessionsRequest) query() url.Values {
-	return nil
+	q := make(url.Values)
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
+	}
+	return q
 }
