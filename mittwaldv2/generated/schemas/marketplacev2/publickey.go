@@ -10,9 +10,12 @@ package marketplacev2
 //        type: "string"
 //        example: "Ed25519"
 //    "key":
-//        type: "string"
-//        format: "byte"
-//        description: "base64 encoded public key"
+//        anyOf:
+//            - type: "string"
+//              format: "byte"
+//              description: "raw base64 public key"
+//            - type: "string"
+//              description: "SPKI, ASN.1 DER serialized, PEM encoded public key"
 //    "serial":
 //        type: "string"
 //        format: "uuid"
@@ -23,7 +26,7 @@ package marketplacev2
 
 type PublicKey struct {
 	Algorithm string `json:"algorithm"`
-	Key       string `json:"key"`
+	Key       any    `json:"key"`
 	Serial    string `json:"serial"`
 }
 

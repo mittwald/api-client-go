@@ -18,7 +18,9 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/marketplace/extension-get-public-key
 type GetPublicKeyRequest struct {
-	Serial string
+	Serial  string
+	Purpose *GetPublicKeyRequestQueryPurpose
+	Format  *GetPublicKeyRequestQueryFormat
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -43,11 +45,19 @@ func (r *GetPublicKeyRequest) body() (io.Reader, string, error) {
 
 func (r *GetPublicKeyRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/webhook-public-keys/%s", url.PathEscape(r.Serial)),
+		Path:     fmt.Sprintf("/v2/public-keys/%s", url.PathEscape(r.Serial)),
+		RawQuery: r.query().Encode(),
 	}
 	return u.String()
 }
 
 func (r *GetPublicKeyRequest) query() url.Values {
-	return nil
+	q := make(url.Values)
+	if r.Purpose != nil {
+		q.Set("purpose", string(*r.Purpose))
+	}
+	if r.Format != nil {
+		q.Set("format", string(*r.Format))
+	}
+	return q
 }
