@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("GenerateSessionKeyResponse", func() {
+var _ = Describe("AuthenticateWithSessionTokenResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"sessionKeyJwt\":\"string\"}")
+			exampleJSON := []byte("{\"expiry\":\"2006-01-02T15:04:05Z\",\"publicToken\":\"string\"}")
 
-			sut := marketplaceclientv2.GenerateSessionKeyResponse{}
+			sut := marketplaceclientv2.AuthenticateWithSessionTokenResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

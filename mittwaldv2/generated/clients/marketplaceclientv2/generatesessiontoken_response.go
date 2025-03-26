@@ -6,13 +6,15 @@ package marketplaceclientv2
 //This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "sessionKeyJwt":
+//    "sessionToken":
 //        type: "string"
+// required:
+//    - "sessionToken"
 
-type GenerateSessionKeyResponse struct {
-	SessionKeyJwt *string `json:"sessionKeyJwt,omitempty"`
+type GenerateSessionTokenResponse struct {
+	SessionToken string `json:"sessionToken"`
 }
 
-func (o *GenerateSessionKeyResponse) Validate() error {
+func (o *GenerateSessionTokenResponse) Validate() error {
 	return nil
 }

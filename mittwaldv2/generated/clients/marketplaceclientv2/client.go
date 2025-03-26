@@ -22,6 +22,10 @@ type Client interface {
 		ctx context.Context,
 		req AuthenticateInstanceRequest,
 	) (*AuthenticateInstanceResponse, *http.Response, error)
+	AuthenticateWithSessionToken(
+		ctx context.Context,
+		req AuthenticateWithSessionTokenRequest,
+	) (*AuthenticateWithSessionTokenResponse, *http.Response, error)
 	ConsentToExtensionScopes(
 		ctx context.Context,
 		req ConsentToExtensionScopesRequest,
@@ -46,6 +50,18 @@ type Client interface {
 		ctx context.Context,
 		req DeleteExtensionInstanceRequest,
 	) (*any, *http.Response, error)
+	GetOwnExtension(
+		ctx context.Context,
+		req GetOwnExtensionRequest,
+	) (*marketplacev2.OwnExtension, *http.Response, error)
+	DeleteExtension(
+		ctx context.Context,
+		req DeleteExtensionRequest,
+	) (*http.Response, error)
+	PatchExtension(
+		ctx context.Context,
+		req PatchExtensionRequest,
+	) (*marketplacev2.OwnExtension, *http.Response, error)
 	DisableExtensionInstance(
 		ctx context.Context,
 		req DisableExtensionInstanceRequest,
@@ -58,10 +74,10 @@ type Client interface {
 		ctx context.Context,
 		req EnableExtensionInstanceRequest,
 	) (*any, *http.Response, error)
-	GenerateSessionKey(
+	GenerateSessionToken(
 		ctx context.Context,
-		req GenerateSessionKeyRequest,
-	) (*GenerateSessionKeyResponse, *http.Response, error)
+		req GenerateSessionTokenRequest,
+	) (*GenerateSessionTokenResponse, *http.Response, error)
 	GetContributor(
 		ctx context.Context,
 		req GetContributorRequest,
@@ -78,14 +94,6 @@ type Client interface {
 		ctx context.Context,
 		req GetExtensionRequest,
 	) (*marketplacev2.Extension, *http.Response, error)
-	GetOwnExtension(
-		ctx context.Context,
-		req GetOwnExtensionRequest,
-	) (*marketplacev2.OwnExtension, *http.Response, error)
-	PatchExtension(
-		ctx context.Context,
-		req PatchExtensionRequest,
-	) (*marketplacev2.OwnExtension, *http.Response, error)
 	GetPublicKey(
 		ctx context.Context,
 		req GetPublicKeyRequest,
@@ -183,6 +191,33 @@ func (c *clientImpl) AuthenticateInstance(
 	}
 
 	var response AuthenticateInstanceResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Authenticate your external application using the extensionInstanceSecret.
+func (c *clientImpl) AuthenticateWithSessionToken(
+	ctx context.Context,
+	req AuthenticateWithSessionTokenRequest,
+) (*AuthenticateWithSessionTokenResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response AuthenticateWithSessionTokenResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -347,6 +382,85 @@ func (c *clientImpl) DeleteExtensionInstance(
 	return &response, httpRes, nil
 }
 
+// Get Extension of own contributor.
+func (c *clientImpl) GetOwnExtension(
+	ctx context.Context,
+	req GetOwnExtensionRequest,
+) (*marketplacev2.OwnExtension, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.OwnExtension
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete an extension.
+//
+// This action deletes all ExtensionInstances and afterwards the Extension itself.
+func (c *clientImpl) DeleteExtension(
+	ctx context.Context,
+	req DeleteExtensionRequest,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Patch Extension.
+func (c *clientImpl) PatchExtension(
+	ctx context.Context,
+	req PatchExtensionRequest,
+) (*marketplacev2.OwnExtension, *http.Response, error) {
+	httpReq, err := req.BuildRequest()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.OwnExtension
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Disable an ExtensionInstance.
 func (c *clientImpl) DisableExtensionInstance(
 	ctx context.Context,
@@ -428,11 +542,11 @@ func (c *clientImpl) EnableExtensionInstance(
 	return &response, httpRes, nil
 }
 
-// Generate a session key to transmit it to the extensions frontend fragment.
-func (c *clientImpl) GenerateSessionKey(
+// Generate a session token to transmit it to the extensions frontend fragment.
+func (c *clientImpl) GenerateSessionToken(
 	ctx context.Context,
-	req GenerateSessionKeyRequest,
-) (*GenerateSessionKeyResponse, *http.Response, error) {
+	req GenerateSessionTokenRequest,
+) (*GenerateSessionTokenResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest()
 	if err != nil {
 		return nil, nil, err
@@ -448,7 +562,7 @@ func (c *clientImpl) GenerateSessionKey(
 		return nil, httpRes, err
 	}
 
-	var response GenerateSessionKeyResponse
+	var response GenerateSessionTokenResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -557,60 +671,6 @@ func (c *clientImpl) GetExtension(
 	}
 
 	var response marketplacev2.Extension
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get Extension of own contributor.
-func (c *clientImpl) GetOwnExtension(
-	ctx context.Context,
-	req GetOwnExtensionRequest,
-) (*marketplacev2.OwnExtension, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response marketplacev2.OwnExtension
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Patch Extension.
-func (c *clientImpl) PatchExtension(
-	ctx context.Context,
-	req PatchExtensionRequest,
-) (*marketplacev2.OwnExtension, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response marketplacev2.OwnExtension
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
