@@ -17,42 +17,52 @@ type Client interface {
 	AbortExecution(
 		ctx context.Context,
 		req AbortExecutionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ListCronjobs(
 		ctx context.Context,
 		req ListCronjobsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]cronjobv2.Cronjob, *http.Response, error)
 	CreateCronjob(
 		ctx context.Context,
 		req CreateCronjobRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateCronjobResponse, *http.Response, error)
 	ListExecutions(
 		ctx context.Context,
 		req ListExecutionsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]cronjobv2.CronjobExecution, *http.Response, error)
 	CreateExecution(
 		ctx context.Context,
 		req CreateExecutionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateExecutionResponse, *http.Response, error)
 	GetCronjob(
 		ctx context.Context,
 		req GetCronjobRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*cronjobv2.Cronjob, *http.Response, error)
 	DeleteCronjob(
 		ctx context.Context,
 		req DeleteCronjobRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateCronjob(
 		ctx context.Context,
 		req UpdateCronjobRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetExecution(
 		ctx context.Context,
 		req GetExecutionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*cronjobv2.CronjobExecution, *http.Response, error)
 	UpdateCronjobAppID(
 		ctx context.Context,
 		req UpdateCronjobAppIDRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
 type clientImpl struct {
@@ -67,8 +77,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) AbortExecution(
 	ctx context.Context,
 	req AbortExecutionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -90,8 +101,9 @@ func (c *clientImpl) AbortExecution(
 func (c *clientImpl) ListCronjobs(
 	ctx context.Context,
 	req ListCronjobsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]cronjobv2.Cronjob, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -117,8 +129,9 @@ func (c *clientImpl) ListCronjobs(
 func (c *clientImpl) CreateCronjob(
 	ctx context.Context,
 	req CreateCronjobRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateCronjobResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -144,8 +157,9 @@ func (c *clientImpl) CreateCronjob(
 func (c *clientImpl) ListExecutions(
 	ctx context.Context,
 	req ListExecutionsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]cronjobv2.CronjobExecution, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -171,8 +185,9 @@ func (c *clientImpl) ListExecutions(
 func (c *clientImpl) CreateExecution(
 	ctx context.Context,
 	req CreateExecutionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateExecutionResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -198,8 +213,9 @@ func (c *clientImpl) CreateExecution(
 func (c *clientImpl) GetCronjob(
 	ctx context.Context,
 	req GetCronjobRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*cronjobv2.Cronjob, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -225,8 +241,9 @@ func (c *clientImpl) GetCronjob(
 func (c *clientImpl) DeleteCronjob(
 	ctx context.Context,
 	req DeleteCronjobRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -248,8 +265,9 @@ func (c *clientImpl) DeleteCronjob(
 func (c *clientImpl) UpdateCronjob(
 	ctx context.Context,
 	req UpdateCronjobRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -271,8 +289,9 @@ func (c *clientImpl) UpdateCronjob(
 func (c *clientImpl) GetExecution(
 	ctx context.Context,
 	req GetExecutionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*cronjobv2.CronjobExecution, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -298,8 +317,9 @@ func (c *clientImpl) GetExecution(
 func (c *clientImpl) UpdateCronjobAppID(
 	ctx context.Context,
 	req UpdateCronjobAppIDRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -17,142 +17,177 @@ type Client interface {
 	GetCustomerBillingPortalLink(
 		ctx context.Context,
 		req GetCustomerBillingPortalLinkRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*GetCustomerBillingPortalLinkResponse, *http.Response, error)
 	GetLoginLink(
 		ctx context.Context,
 		req GetLoginLinkRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*GetLoginLinkResponse, *http.Response, error)
 	RotateSecretForExtensionInstance(
 		ctx context.Context,
 		req RotateSecretForExtensionInstanceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*RotateSecretForExtensionInstanceResponse, *http.Response, error)
 	AuthenticateInstance(
 		ctx context.Context,
 		req AuthenticateInstanceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*AuthenticateInstanceResponse, *http.Response, error)
 	AuthenticateWithSessionToken(
 		ctx context.Context,
 		req AuthenticateWithSessionTokenRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*AuthenticateWithSessionTokenResponse, *http.Response, error)
 	ConsentToExtensionScopes(
 		ctx context.Context,
 		req ConsentToExtensionScopesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	CreateContributorOnboardingProcess(
 		ctx context.Context,
 		req CreateContributorOnboardingProcessRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateContributorOnboardingProcessResponse, *http.Response, error)
 	ListExtensionInstances(
 		ctx context.Context,
 		req ListExtensionInstancesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]marketplacev2.ExtensionInstance, *http.Response, error)
 	CreateExtensionInstance(
 		ctx context.Context,
 		req CreateExtensionInstanceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateExtensionInstanceResponse, *http.Response, error)
 	CreateRetrievalKey(
 		ctx context.Context,
 		req CreateRetrievalKeyRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateRetrievalKeyResponse, *http.Response, error)
 	GetExtensionInstance(
 		ctx context.Context,
 		req GetExtensionInstanceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*marketplacev2.ExtensionInstance, *http.Response, error)
 	DeleteExtensionInstance(
 		ctx context.Context,
 		req DeleteExtensionInstanceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*any, *http.Response, error)
 	GetOwnExtension(
 		ctx context.Context,
 		req GetOwnExtensionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*marketplacev2.OwnExtension, *http.Response, error)
 	DeleteExtension(
 		ctx context.Context,
 		req DeleteExtensionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	PatchExtension(
 		ctx context.Context,
 		req PatchExtensionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*marketplacev2.OwnExtension, *http.Response, error)
 	DisableExtensionInstance(
 		ctx context.Context,
 		req DisableExtensionInstanceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*any, *http.Response, error)
 	DryRunWebhook(
 		ctx context.Context,
 		req DryRunWebhookRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DryRunWebhookResponse, *http.Response, error)
 	EnableExtensionInstance(
 		ctx context.Context,
 		req EnableExtensionInstanceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*any, *http.Response, error)
 	GenerateSessionToken(
 		ctx context.Context,
 		req GenerateSessionTokenRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*GenerateSessionTokenResponse, *http.Response, error)
 	GetContributor(
 		ctx context.Context,
 		req GetContributorRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*marketplacev2.Contributor, *http.Response, error)
 	GetExtensionInstanceForCustomer(
 		ctx context.Context,
 		req GetExtensionInstanceForCustomerRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*marketplacev2.ExtensionInstance, *http.Response, error)
 	GetExtensionInstanceForProject(
 		ctx context.Context,
 		req GetExtensionInstanceForProjectRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*marketplacev2.ExtensionInstance, *http.Response, error)
 	GetExtension(
 		ctx context.Context,
 		req GetExtensionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*marketplacev2.Extension, *http.Response, error)
 	GetPublicKey(
 		ctx context.Context,
 		req GetPublicKeyRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*marketplacev2.PublicKey, *http.Response, error)
 	ListContributors(
 		ctx context.Context,
 		req ListContributorsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]marketplacev2.Contributor, *http.Response, error)
 	ListExtensions(
 		ctx context.Context,
 		req ListExtensionsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]marketplacev2.Extension, *http.Response, error)
 	ListOwnExtensions(
 		ctx context.Context,
 		req ListOwnExtensionsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]marketplacev2.OwnExtension, *http.Response, error)
 	RegisterExtension(
 		ctx context.Context,
 		req RegisterExtensionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*RegisterExtensionResponse, *http.Response, error)
 	RemoveAsset(
 		ctx context.Context,
 		req RemoveAssetRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	RequestAssetUpload(
 		ctx context.Context,
 		req RequestAssetUploadRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*RequestAssetUploadResponse, *http.Response, error)
 	RequestExtensionVerification(
 		ctx context.Context,
 		req RequestExtensionVerificationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*RequestExtensionVerificationResponse, *http.Response, error)
 	RequestLogoUpload(
 		ctx context.Context,
 		req RequestLogoUploadRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*RequestLogoUploadResponse, *http.Response, error)
 	SetExtensionPublishedState(
 		ctx context.Context,
 		req SetExtensionPublishedStateRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*SetExtensionPublishedStateResponse, *http.Response, error)
 	UpdateExtensionInstanceContract(
 		ctx context.Context,
 		req UpdateExtensionInstanceContractRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*UpdateExtensionInstanceContractResponse, *http.Response, error)
 	UpdateExtensionPricing(
 		ctx context.Context,
 		req UpdateExtensionPricingRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*UpdateExtensionPricingResponse, *http.Response, error)
 }
 type clientImpl struct {
@@ -169,8 +204,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) GetCustomerBillingPortalLink(
 	ctx context.Context,
 	req GetCustomerBillingPortalLinkRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*GetCustomerBillingPortalLinkResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -198,8 +234,9 @@ func (c *clientImpl) GetCustomerBillingPortalLink(
 func (c *clientImpl) GetLoginLink(
 	ctx context.Context,
 	req GetLoginLinkRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*GetLoginLinkResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -225,8 +262,9 @@ func (c *clientImpl) GetLoginLink(
 func (c *clientImpl) RotateSecretForExtensionInstance(
 	ctx context.Context,
 	req RotateSecretForExtensionInstanceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*RotateSecretForExtensionInstanceResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -252,8 +290,9 @@ func (c *clientImpl) RotateSecretForExtensionInstance(
 func (c *clientImpl) AuthenticateInstance(
 	ctx context.Context,
 	req AuthenticateInstanceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*AuthenticateInstanceResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -279,8 +318,9 @@ func (c *clientImpl) AuthenticateInstance(
 func (c *clientImpl) AuthenticateWithSessionToken(
 	ctx context.Context,
 	req AuthenticateWithSessionTokenRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*AuthenticateWithSessionTokenResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -306,8 +346,9 @@ func (c *clientImpl) AuthenticateWithSessionToken(
 func (c *clientImpl) ConsentToExtensionScopes(
 	ctx context.Context,
 	req ConsentToExtensionScopesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -331,8 +372,9 @@ func (c *clientImpl) ConsentToExtensionScopes(
 func (c *clientImpl) CreateContributorOnboardingProcess(
 	ctx context.Context,
 	req CreateContributorOnboardingProcessRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateContributorOnboardingProcessResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -358,8 +400,9 @@ func (c *clientImpl) CreateContributorOnboardingProcess(
 func (c *clientImpl) ListExtensionInstances(
 	ctx context.Context,
 	req ListExtensionInstancesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]marketplacev2.ExtensionInstance, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -385,8 +428,9 @@ func (c *clientImpl) ListExtensionInstances(
 func (c *clientImpl) CreateExtensionInstance(
 	ctx context.Context,
 	req CreateExtensionInstanceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateExtensionInstanceResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -412,8 +456,9 @@ func (c *clientImpl) CreateExtensionInstance(
 func (c *clientImpl) CreateRetrievalKey(
 	ctx context.Context,
 	req CreateRetrievalKeyRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateRetrievalKeyResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -439,8 +484,9 @@ func (c *clientImpl) CreateRetrievalKey(
 func (c *clientImpl) GetExtensionInstance(
 	ctx context.Context,
 	req GetExtensionInstanceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*marketplacev2.ExtensionInstance, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -466,8 +512,9 @@ func (c *clientImpl) GetExtensionInstance(
 func (c *clientImpl) DeleteExtensionInstance(
 	ctx context.Context,
 	req DeleteExtensionInstanceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*any, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -493,8 +540,9 @@ func (c *clientImpl) DeleteExtensionInstance(
 func (c *clientImpl) GetOwnExtension(
 	ctx context.Context,
 	req GetOwnExtensionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*marketplacev2.OwnExtension, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -522,8 +570,9 @@ func (c *clientImpl) GetOwnExtension(
 func (c *clientImpl) DeleteExtension(
 	ctx context.Context,
 	req DeleteExtensionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -545,8 +594,9 @@ func (c *clientImpl) DeleteExtension(
 func (c *clientImpl) PatchExtension(
 	ctx context.Context,
 	req PatchExtensionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*marketplacev2.OwnExtension, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -572,8 +622,9 @@ func (c *clientImpl) PatchExtension(
 func (c *clientImpl) DisableExtensionInstance(
 	ctx context.Context,
 	req DisableExtensionInstanceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*any, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -599,8 +650,9 @@ func (c *clientImpl) DisableExtensionInstance(
 func (c *clientImpl) DryRunWebhook(
 	ctx context.Context,
 	req DryRunWebhookRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DryRunWebhookResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -626,8 +678,9 @@ func (c *clientImpl) DryRunWebhook(
 func (c *clientImpl) EnableExtensionInstance(
 	ctx context.Context,
 	req EnableExtensionInstanceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*any, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -653,8 +706,9 @@ func (c *clientImpl) EnableExtensionInstance(
 func (c *clientImpl) GenerateSessionToken(
 	ctx context.Context,
 	req GenerateSessionTokenRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*GenerateSessionTokenResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -680,8 +734,9 @@ func (c *clientImpl) GenerateSessionToken(
 func (c *clientImpl) GetContributor(
 	ctx context.Context,
 	req GetContributorRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*marketplacev2.Contributor, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -707,8 +762,9 @@ func (c *clientImpl) GetContributor(
 func (c *clientImpl) GetExtensionInstanceForCustomer(
 	ctx context.Context,
 	req GetExtensionInstanceForCustomerRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*marketplacev2.ExtensionInstance, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -734,8 +790,9 @@ func (c *clientImpl) GetExtensionInstanceForCustomer(
 func (c *clientImpl) GetExtensionInstanceForProject(
 	ctx context.Context,
 	req GetExtensionInstanceForProjectRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*marketplacev2.ExtensionInstance, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -761,8 +818,9 @@ func (c *clientImpl) GetExtensionInstanceForProject(
 func (c *clientImpl) GetExtension(
 	ctx context.Context,
 	req GetExtensionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*marketplacev2.Extension, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -788,8 +846,9 @@ func (c *clientImpl) GetExtension(
 func (c *clientImpl) GetPublicKey(
 	ctx context.Context,
 	req GetPublicKeyRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*marketplacev2.PublicKey, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -815,8 +874,9 @@ func (c *clientImpl) GetPublicKey(
 func (c *clientImpl) ListContributors(
 	ctx context.Context,
 	req ListContributorsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]marketplacev2.Contributor, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -842,8 +902,9 @@ func (c *clientImpl) ListContributors(
 func (c *clientImpl) ListExtensions(
 	ctx context.Context,
 	req ListExtensionsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]marketplacev2.Extension, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -869,8 +930,9 @@ func (c *clientImpl) ListExtensions(
 func (c *clientImpl) ListOwnExtensions(
 	ctx context.Context,
 	req ListOwnExtensionsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]marketplacev2.OwnExtension, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -896,8 +958,9 @@ func (c *clientImpl) ListOwnExtensions(
 func (c *clientImpl) RegisterExtension(
 	ctx context.Context,
 	req RegisterExtensionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*RegisterExtensionResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -923,8 +986,9 @@ func (c *clientImpl) RegisterExtension(
 func (c *clientImpl) RemoveAsset(
 	ctx context.Context,
 	req RemoveAssetRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -946,8 +1010,9 @@ func (c *clientImpl) RemoveAsset(
 func (c *clientImpl) RequestAssetUpload(
 	ctx context.Context,
 	req RequestAssetUploadRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*RequestAssetUploadResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -973,8 +1038,9 @@ func (c *clientImpl) RequestAssetUpload(
 func (c *clientImpl) RequestExtensionVerification(
 	ctx context.Context,
 	req RequestExtensionVerificationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*RequestExtensionVerificationResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1000,8 +1066,9 @@ func (c *clientImpl) RequestExtensionVerification(
 func (c *clientImpl) RequestLogoUpload(
 	ctx context.Context,
 	req RequestLogoUploadRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*RequestLogoUploadResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1027,8 +1094,9 @@ func (c *clientImpl) RequestLogoUpload(
 func (c *clientImpl) SetExtensionPublishedState(
 	ctx context.Context,
 	req SetExtensionPublishedStateRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*SetExtensionPublishedStateResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1056,8 +1124,9 @@ func (c *clientImpl) SetExtensionPublishedState(
 func (c *clientImpl) UpdateExtensionInstanceContract(
 	ctx context.Context,
 	req UpdateExtensionInstanceContractRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*UpdateExtensionInstanceContractResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1085,8 +1154,9 @@ func (c *clientImpl) UpdateExtensionInstanceContract(
 func (c *clientImpl) UpdateExtensionPricing(
 	ctx context.Context,
 	req UpdateExtensionPricingRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*UpdateExtensionPricingResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}

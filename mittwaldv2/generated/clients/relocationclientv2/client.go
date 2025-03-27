@@ -16,10 +16,12 @@ type Client interface {
 	CreateLegacyTariffChange(
 		ctx context.Context,
 		req CreateLegacyTariffChangeRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateLegacyTariffChangeResponse, *http.Response, error)
 	CreateRelocation(
 		ctx context.Context,
 		req CreateRelocationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
 type clientImpl struct {
@@ -34,8 +36,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) CreateLegacyTariffChange(
 	ctx context.Context,
 	req CreateLegacyTariffChangeRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateLegacyTariffChangeResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -63,8 +66,9 @@ func (c *clientImpl) CreateLegacyTariffChange(
 func (c *clientImpl) CreateRelocation(
 	ctx context.Context,
 	req CreateRelocationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}

@@ -19,330 +19,412 @@ type Client interface {
 	DeprecatedChangeEmail(
 		ctx context.Context,
 		req DeprecatedChangeEmailRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedConfirmPasswordReset(
 		ctx context.Context,
 		req DeprecatedConfirmPasswordResetRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedCreateIssue(
 		ctx context.Context,
 		req DeprecatedCreateIssueRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedCreateIssueResponse, *http.Response, error)
 	DeprecatedEditAPIToken(
 		ctx context.Context,
 		req DeprecatedEditAPITokenRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedDeleteAPIToken(
 		ctx context.Context,
 		req DeprecatedDeleteAPITokenRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedEditSSHKey(
 		ctx context.Context,
 		req DeprecatedEditSSHKeyRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedDeleteSSHKey(
 		ctx context.Context,
 		req DeprecatedDeleteSSHKeyRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedDisableMFA(
 		ctx context.Context,
 		req DeprecatedDisableMFARequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedDisableMFAResponse, *http.Response, error)
 	DeprecatedGetOwnAccount(
 		ctx context.Context,
 		req DeprecatedGetOwnAccountRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*signupv2.Account, *http.Response, error)
 	UpdateAccount(
 		ctx context.Context,
 		req UpdateAccountRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedInitPasswordReset(
 		ctx context.Context,
 		req DeprecatedInitPasswordResetRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedLogout(
 		ctx context.Context,
 		req DeprecatedLogoutRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedResendVerificationEmail(
 		ctx context.Context,
 		req DeprecatedResendVerificationEmailRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedServiceAvatarRequestUpload(
 		ctx context.Context,
 		req DeprecatedServiceAvatarRequestUploadRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedServiceAvatarRequestUploadResponse, *http.Response, error)
 	DeprecatedServiceAvatarRemove(
 		ctx context.Context,
 		req DeprecatedServiceAvatarRemoveRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedServiceFeedbackList(
 		ctx context.Context,
 		req DeprecatedServiceFeedbackListRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]userv2.UserFeedback, *http.Response, error)
 	DeprecatedServiceFeedbackCreate(
 		ctx context.Context,
 		req DeprecatedServiceFeedbackCreateRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedServiceFeedbackCreateResponse, *http.Response, error)
 	DeprecatedServiceIssueNew(
 		ctx context.Context,
 		req DeprecatedServiceIssueNewRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedServiceUserGet(
 		ctx context.Context,
 		req DeprecatedServiceUserGetRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*userv2.User, *http.Response, error)
 	DeprecatedServicePersonalInformationUpdate(
 		ctx context.Context,
 		req DeprecatedServicePersonalInformationUpdateRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedServicePersonalizedSettingsGet(
 		ctx context.Context,
 		req DeprecatedServicePersonalizedSettingsGetRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedServicePersonalizedSettingsGetResponse, *http.Response, error)
 	DeprecatedServicePersonalizedSettingsUpdate(
 		ctx context.Context,
 		req DeprecatedServicePersonalizedSettingsUpdateRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedServicePhoneNumberAdd(
 		ctx context.Context,
 		req DeprecatedServicePhoneNumberAddRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedServicePhoneNumberRemove(
 		ctx context.Context,
 		req DeprecatedServicePhoneNumberRemoveRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedServicePhoneNumberVerify(
 		ctx context.Context,
 		req DeprecatedServicePhoneNumberVerifyRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedServiceUserGetOwn(
 		ctx context.Context,
 		req DeprecatedServiceUserGetOwnRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*userv2.User, *http.Response, error)
 	DeprecatedTerminateAllSessions(
 		ctx context.Context,
 		req DeprecatedTerminateAllSessionsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedTerminateSession(
 		ctx context.Context,
 		req DeprecatedTerminateSessionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedUpdateAccount(
 		ctx context.Context,
 		req DeprecatedUpdateAccountRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedVerifyEmail(
 		ctx context.Context,
 		req DeprecatedVerifyEmailRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	AddPhoneNumber(
 		ctx context.Context,
 		req AddPhoneNumberRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	RemovePhoneNumber(
 		ctx context.Context,
 		req RemovePhoneNumberRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	AuthenticateMFA(
 		ctx context.Context,
 		req AuthenticateMFARequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*AuthenticateMFAResponse, *http.Response, error)
 	Authenticate(
 		ctx context.Context,
 		req AuthenticateRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*AuthenticateResponse, *http.Response, error)
 	AuthenticateWithAccessTokenRetrievalKey(
 		ctx context.Context,
 		req AuthenticateWithAccessTokenRetrievalKeyRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*AuthenticateWithAccessTokenRetrievalKeyResponse, *http.Response, error)
 	GetOwnEmail(
 		ctx context.Context,
 		req GetOwnEmailRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*GetOwnEmailResponse, *http.Response, error)
 	ChangeEmail(
 		ctx context.Context,
 		req ChangeEmailRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ChangePassword(
 		ctx context.Context,
 		req ChangePasswordRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*ChangePasswordResponse, *http.Response, error)
 	CheckToken(
 		ctx context.Context,
 		req CheckTokenRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CheckTokenResponse, *http.Response, error)
 	GetMFAStatus(
 		ctx context.Context,
 		req GetMFAStatusRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*GetMFAStatusResponse, *http.Response, error)
 	ResetRecoverycodes(
 		ctx context.Context,
 		req ResetRecoverycodesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*ResetRecoverycodesResponse, *http.Response, error)
 	ConfirmMFA(
 		ctx context.Context,
 		req ConfirmMFARequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*ConfirmMFAResponse, *http.Response, error)
 	DisableMFA(
 		ctx context.Context,
 		req DisableMFARequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ConfirmPasswordReset(
 		ctx context.Context,
 		req ConfirmPasswordResetRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ListAPITokens(
 		ctx context.Context,
 		req ListAPITokensRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]signupv2.ApiToken, *http.Response, error)
 	CreateAPIToken(
 		ctx context.Context,
 		req CreateAPITokenRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateAPITokenResponse, *http.Response, error)
 	CreateFeedback(
 		ctx context.Context,
 		req CreateFeedbackRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateFeedbackResponse, *http.Response, error)
 	ListSSHKeys(
 		ctx context.Context,
 		req ListSSHKeysRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*ListSSHKeysResponse, *http.Response, error)
 	CreateSSHKey(
 		ctx context.Context,
 		req CreateSSHKeyRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateSSHKeyResponse, *http.Response, error)
 	GetAPIToken(
 		ctx context.Context,
 		req GetAPITokenRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*signupv2.ApiToken, *http.Response, error)
 	EditAPIToken(
 		ctx context.Context,
 		req EditAPITokenRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeleteAPIToken(
 		ctx context.Context,
 		req DeleteAPITokenRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetSSHKey(
 		ctx context.Context,
 		req GetSSHKeyRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*GetSSHKeyResponse, *http.Response, error)
 	EditSSHKey(
 		ctx context.Context,
 		req EditSSHKeyRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeleteSSHKey(
 		ctx context.Context,
 		req DeleteSSHKeyRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeleteUser(
 		ctx context.Context,
 		req DeleteUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*any, *http.Response, error)
 	GetPasswordUpdatedAt(
 		ctx context.Context,
 		req GetPasswordUpdatedAtRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*GetPasswordUpdatedAtResponse, *http.Response, error)
 	GetPersonalizedSettings(
 		ctx context.Context,
 		req GetPersonalizedSettingsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*GetPersonalizedSettingsResponse, *http.Response, error)
 	UpdatePersonalizedSettings(
 		ctx context.Context,
 		req UpdatePersonalizedSettingsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetPollStatus(
 		ctx context.Context,
 		req GetPollStatusRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*pollv2.UserPollSettings, *http.Response, error)
 	PostPollStatus(
 		ctx context.Context,
 		req PostPollStatusRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*pollv2.UserPollSettings, *http.Response, error)
 	GetSession(
 		ctx context.Context,
 		req GetSessionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*signupv2.UserSession, *http.Response, error)
 	TerminateSession(
 		ctx context.Context,
 		req TerminateSessionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetUser(
 		ctx context.Context,
 		req GetUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*userv2.User, *http.Response, error)
 	UpdatePersonalInformation(
 		ctx context.Context,
 		req UpdatePersonalInformationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	InitMFA(
 		ctx context.Context,
 		req InitMFARequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*InitMFAResponse, *http.Response, error)
 	InitPasswordReset(
 		ctx context.Context,
 		req InitPasswordResetRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*InitPasswordResetResponse, *http.Response, error)
 	ListFeedback(
 		ctx context.Context,
 		req ListFeedbackRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]userv2.UserFeedback, *http.Response, error)
 	ListSessions(
 		ctx context.Context,
 		req ListSessionsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]signupv2.UserSession, *http.Response, error)
 	RefreshSession(
 		ctx context.Context,
 		req RefreshSessionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*RefreshSessionResponse, *http.Response, error)
 	TerminateAllSessions(
 		ctx context.Context,
 		req TerminateAllSessionsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	Logout(
 		ctx context.Context,
 		req LogoutRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	OauthGetAuthorization(
 		ctx context.Context,
 		req OauthGetAuthorizationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	OauthRetrieveAccessToken(
 		ctx context.Context,
 		req OauthRetrieveAccessTokenRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*OauthRetrieveAccessTokenResponse, *http.Response, error)
 	Register(
 		ctx context.Context,
 		req RegisterRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*RegisterResponse, *http.Response, error)
 	RequestAvatarUpload(
 		ctx context.Context,
 		req RequestAvatarUploadRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*RequestAvatarUploadResponse, *http.Response, error)
 	RemoveAvatar(
 		ctx context.Context,
 		req RemoveAvatarRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ResendVerificationEmail(
 		ctx context.Context,
 		req ResendVerificationEmailRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	SupportCodeRequest(
 		ctx context.Context,
 		req SupportCodeRequestRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*SupportCodeRequestResponse, *http.Response, error)
 	VerifyEmail(
 		ctx context.Context,
 		req VerifyEmailRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	VerifyPhoneNumber(
 		ctx context.Context,
 		req VerifyPhoneNumberRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	VerifyRegistration(
 		ctx context.Context,
 		req VerifyRegistrationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*VerifyRegistrationResponse, *http.Response, error)
 }
 type clientImpl struct {
@@ -357,8 +439,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) DeprecatedChangeEmail(
 	ctx context.Context,
 	req DeprecatedChangeEmailRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -380,8 +463,9 @@ func (c *clientImpl) DeprecatedChangeEmail(
 func (c *clientImpl) DeprecatedConfirmPasswordReset(
 	ctx context.Context,
 	req DeprecatedConfirmPasswordResetRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -403,8 +487,9 @@ func (c *clientImpl) DeprecatedConfirmPasswordReset(
 func (c *clientImpl) DeprecatedCreateIssue(
 	ctx context.Context,
 	req DeprecatedCreateIssueRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeprecatedCreateIssueResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -430,8 +515,9 @@ func (c *clientImpl) DeprecatedCreateIssue(
 func (c *clientImpl) DeprecatedEditAPIToken(
 	ctx context.Context,
 	req DeprecatedEditAPITokenRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -453,8 +539,9 @@ func (c *clientImpl) DeprecatedEditAPIToken(
 func (c *clientImpl) DeprecatedDeleteAPIToken(
 	ctx context.Context,
 	req DeprecatedDeleteAPITokenRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -476,8 +563,9 @@ func (c *clientImpl) DeprecatedDeleteAPIToken(
 func (c *clientImpl) DeprecatedEditSSHKey(
 	ctx context.Context,
 	req DeprecatedEditSSHKeyRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -499,8 +587,9 @@ func (c *clientImpl) DeprecatedEditSSHKey(
 func (c *clientImpl) DeprecatedDeleteSSHKey(
 	ctx context.Context,
 	req DeprecatedDeleteSSHKeyRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -522,8 +611,9 @@ func (c *clientImpl) DeprecatedDeleteSSHKey(
 func (c *clientImpl) DeprecatedDisableMFA(
 	ctx context.Context,
 	req DeprecatedDisableMFARequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeprecatedDisableMFAResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -549,8 +639,9 @@ func (c *clientImpl) DeprecatedDisableMFA(
 func (c *clientImpl) DeprecatedGetOwnAccount(
 	ctx context.Context,
 	req DeprecatedGetOwnAccountRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*signupv2.Account, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -576,8 +667,9 @@ func (c *clientImpl) DeprecatedGetOwnAccount(
 func (c *clientImpl) UpdateAccount(
 	ctx context.Context,
 	req UpdateAccountRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -600,8 +692,9 @@ func (c *clientImpl) UpdateAccount(
 func (c *clientImpl) DeprecatedInitPasswordReset(
 	ctx context.Context,
 	req DeprecatedInitPasswordResetRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -623,8 +716,9 @@ func (c *clientImpl) DeprecatedInitPasswordReset(
 func (c *clientImpl) DeprecatedLogout(
 	ctx context.Context,
 	req DeprecatedLogoutRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -647,8 +741,9 @@ func (c *clientImpl) DeprecatedLogout(
 func (c *clientImpl) DeprecatedResendVerificationEmail(
 	ctx context.Context,
 	req DeprecatedResendVerificationEmailRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -670,8 +765,9 @@ func (c *clientImpl) DeprecatedResendVerificationEmail(
 func (c *clientImpl) DeprecatedServiceAvatarRequestUpload(
 	ctx context.Context,
 	req DeprecatedServiceAvatarRequestUploadRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeprecatedServiceAvatarRequestUploadResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -697,8 +793,9 @@ func (c *clientImpl) DeprecatedServiceAvatarRequestUpload(
 func (c *clientImpl) DeprecatedServiceAvatarRemove(
 	ctx context.Context,
 	req DeprecatedServiceAvatarRemoveRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -720,8 +817,9 @@ func (c *clientImpl) DeprecatedServiceAvatarRemove(
 func (c *clientImpl) DeprecatedServiceFeedbackList(
 	ctx context.Context,
 	req DeprecatedServiceFeedbackListRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]userv2.UserFeedback, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -747,8 +845,9 @@ func (c *clientImpl) DeprecatedServiceFeedbackList(
 func (c *clientImpl) DeprecatedServiceFeedbackCreate(
 	ctx context.Context,
 	req DeprecatedServiceFeedbackCreateRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeprecatedServiceFeedbackCreateResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -774,8 +873,9 @@ func (c *clientImpl) DeprecatedServiceFeedbackCreate(
 func (c *clientImpl) DeprecatedServiceIssueNew(
 	ctx context.Context,
 	req DeprecatedServiceIssueNewRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -797,8 +897,9 @@ func (c *clientImpl) DeprecatedServiceIssueNew(
 func (c *clientImpl) DeprecatedServiceUserGet(
 	ctx context.Context,
 	req DeprecatedServiceUserGetRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*userv2.User, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -824,8 +925,9 @@ func (c *clientImpl) DeprecatedServiceUserGet(
 func (c *clientImpl) DeprecatedServicePersonalInformationUpdate(
 	ctx context.Context,
 	req DeprecatedServicePersonalInformationUpdateRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -847,8 +949,9 @@ func (c *clientImpl) DeprecatedServicePersonalInformationUpdate(
 func (c *clientImpl) DeprecatedServicePersonalizedSettingsGet(
 	ctx context.Context,
 	req DeprecatedServicePersonalizedSettingsGetRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeprecatedServicePersonalizedSettingsGetResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -874,8 +977,9 @@ func (c *clientImpl) DeprecatedServicePersonalizedSettingsGet(
 func (c *clientImpl) DeprecatedServicePersonalizedSettingsUpdate(
 	ctx context.Context,
 	req DeprecatedServicePersonalizedSettingsUpdateRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -897,8 +1001,9 @@ func (c *clientImpl) DeprecatedServicePersonalizedSettingsUpdate(
 func (c *clientImpl) DeprecatedServicePhoneNumberAdd(
 	ctx context.Context,
 	req DeprecatedServicePhoneNumberAddRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -920,8 +1025,9 @@ func (c *clientImpl) DeprecatedServicePhoneNumberAdd(
 func (c *clientImpl) DeprecatedServicePhoneNumberRemove(
 	ctx context.Context,
 	req DeprecatedServicePhoneNumberRemoveRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -943,8 +1049,9 @@ func (c *clientImpl) DeprecatedServicePhoneNumberRemove(
 func (c *clientImpl) DeprecatedServicePhoneNumberVerify(
 	ctx context.Context,
 	req DeprecatedServicePhoneNumberVerifyRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -966,8 +1073,9 @@ func (c *clientImpl) DeprecatedServicePhoneNumberVerify(
 func (c *clientImpl) DeprecatedServiceUserGetOwn(
 	ctx context.Context,
 	req DeprecatedServiceUserGetOwnRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*userv2.User, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -993,8 +1101,9 @@ func (c *clientImpl) DeprecatedServiceUserGetOwn(
 func (c *clientImpl) DeprecatedTerminateAllSessions(
 	ctx context.Context,
 	req DeprecatedTerminateAllSessionsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1016,8 +1125,9 @@ func (c *clientImpl) DeprecatedTerminateAllSessions(
 func (c *clientImpl) DeprecatedTerminateSession(
 	ctx context.Context,
 	req DeprecatedTerminateSessionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1039,8 +1149,9 @@ func (c *clientImpl) DeprecatedTerminateSession(
 func (c *clientImpl) DeprecatedUpdateAccount(
 	ctx context.Context,
 	req DeprecatedUpdateAccountRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1062,8 +1173,9 @@ func (c *clientImpl) DeprecatedUpdateAccount(
 func (c *clientImpl) DeprecatedVerifyEmail(
 	ctx context.Context,
 	req DeprecatedVerifyEmailRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1085,8 +1197,9 @@ func (c *clientImpl) DeprecatedVerifyEmail(
 func (c *clientImpl) AddPhoneNumber(
 	ctx context.Context,
 	req AddPhoneNumberRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1108,8 +1221,9 @@ func (c *clientImpl) AddPhoneNumber(
 func (c *clientImpl) RemovePhoneNumber(
 	ctx context.Context,
 	req RemovePhoneNumberRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1131,8 +1245,9 @@ func (c *clientImpl) RemovePhoneNumber(
 func (c *clientImpl) AuthenticateMFA(
 	ctx context.Context,
 	req AuthenticateMFARequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*AuthenticateMFAResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1158,8 +1273,9 @@ func (c *clientImpl) AuthenticateMFA(
 func (c *clientImpl) Authenticate(
 	ctx context.Context,
 	req AuthenticateRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*AuthenticateResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1185,8 +1301,9 @@ func (c *clientImpl) Authenticate(
 func (c *clientImpl) AuthenticateWithAccessTokenRetrievalKey(
 	ctx context.Context,
 	req AuthenticateWithAccessTokenRetrievalKeyRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*AuthenticateWithAccessTokenRetrievalKeyResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1212,8 +1329,9 @@ func (c *clientImpl) AuthenticateWithAccessTokenRetrievalKey(
 func (c *clientImpl) GetOwnEmail(
 	ctx context.Context,
 	req GetOwnEmailRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*GetOwnEmailResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1239,8 +1357,9 @@ func (c *clientImpl) GetOwnEmail(
 func (c *clientImpl) ChangeEmail(
 	ctx context.Context,
 	req ChangeEmailRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1262,8 +1381,9 @@ func (c *clientImpl) ChangeEmail(
 func (c *clientImpl) ChangePassword(
 	ctx context.Context,
 	req ChangePasswordRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*ChangePasswordResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1289,8 +1409,9 @@ func (c *clientImpl) ChangePassword(
 func (c *clientImpl) CheckToken(
 	ctx context.Context,
 	req CheckTokenRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CheckTokenResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1316,8 +1437,9 @@ func (c *clientImpl) CheckToken(
 func (c *clientImpl) GetMFAStatus(
 	ctx context.Context,
 	req GetMFAStatusRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*GetMFAStatusResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1343,8 +1465,9 @@ func (c *clientImpl) GetMFAStatus(
 func (c *clientImpl) ResetRecoverycodes(
 	ctx context.Context,
 	req ResetRecoverycodesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*ResetRecoverycodesResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1370,8 +1493,9 @@ func (c *clientImpl) ResetRecoverycodes(
 func (c *clientImpl) ConfirmMFA(
 	ctx context.Context,
 	req ConfirmMFARequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*ConfirmMFAResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1397,8 +1521,9 @@ func (c *clientImpl) ConfirmMFA(
 func (c *clientImpl) DisableMFA(
 	ctx context.Context,
 	req DisableMFARequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1420,8 +1545,9 @@ func (c *clientImpl) DisableMFA(
 func (c *clientImpl) ConfirmPasswordReset(
 	ctx context.Context,
 	req ConfirmPasswordResetRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1443,8 +1569,9 @@ func (c *clientImpl) ConfirmPasswordReset(
 func (c *clientImpl) ListAPITokens(
 	ctx context.Context,
 	req ListAPITokensRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]signupv2.ApiToken, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1470,8 +1597,9 @@ func (c *clientImpl) ListAPITokens(
 func (c *clientImpl) CreateAPIToken(
 	ctx context.Context,
 	req CreateAPITokenRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateAPITokenResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1497,8 +1625,9 @@ func (c *clientImpl) CreateAPIToken(
 func (c *clientImpl) CreateFeedback(
 	ctx context.Context,
 	req CreateFeedbackRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateFeedbackResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1524,8 +1653,9 @@ func (c *clientImpl) CreateFeedback(
 func (c *clientImpl) ListSSHKeys(
 	ctx context.Context,
 	req ListSSHKeysRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*ListSSHKeysResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1551,8 +1681,9 @@ func (c *clientImpl) ListSSHKeys(
 func (c *clientImpl) CreateSSHKey(
 	ctx context.Context,
 	req CreateSSHKeyRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateSSHKeyResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1578,8 +1709,9 @@ func (c *clientImpl) CreateSSHKey(
 func (c *clientImpl) GetAPIToken(
 	ctx context.Context,
 	req GetAPITokenRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*signupv2.ApiToken, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1605,8 +1737,9 @@ func (c *clientImpl) GetAPIToken(
 func (c *clientImpl) EditAPIToken(
 	ctx context.Context,
 	req EditAPITokenRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1628,8 +1761,9 @@ func (c *clientImpl) EditAPIToken(
 func (c *clientImpl) DeleteAPIToken(
 	ctx context.Context,
 	req DeleteAPITokenRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1651,8 +1785,9 @@ func (c *clientImpl) DeleteAPIToken(
 func (c *clientImpl) GetSSHKey(
 	ctx context.Context,
 	req GetSSHKeyRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*GetSSHKeyResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1678,8 +1813,9 @@ func (c *clientImpl) GetSSHKey(
 func (c *clientImpl) EditSSHKey(
 	ctx context.Context,
 	req EditSSHKeyRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1701,8 +1837,9 @@ func (c *clientImpl) EditSSHKey(
 func (c *clientImpl) DeleteSSHKey(
 	ctx context.Context,
 	req DeleteSSHKeyRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1724,8 +1861,9 @@ func (c *clientImpl) DeleteSSHKey(
 func (c *clientImpl) DeleteUser(
 	ctx context.Context,
 	req DeleteUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*any, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1751,8 +1889,9 @@ func (c *clientImpl) DeleteUser(
 func (c *clientImpl) GetPasswordUpdatedAt(
 	ctx context.Context,
 	req GetPasswordUpdatedAtRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*GetPasswordUpdatedAtResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1778,8 +1917,9 @@ func (c *clientImpl) GetPasswordUpdatedAt(
 func (c *clientImpl) GetPersonalizedSettings(
 	ctx context.Context,
 	req GetPersonalizedSettingsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*GetPersonalizedSettingsResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1805,8 +1945,9 @@ func (c *clientImpl) GetPersonalizedSettings(
 func (c *clientImpl) UpdatePersonalizedSettings(
 	ctx context.Context,
 	req UpdatePersonalizedSettingsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1828,8 +1969,9 @@ func (c *clientImpl) UpdatePersonalizedSettings(
 func (c *clientImpl) GetPollStatus(
 	ctx context.Context,
 	req GetPollStatusRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*pollv2.UserPollSettings, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1855,8 +1997,9 @@ func (c *clientImpl) GetPollStatus(
 func (c *clientImpl) PostPollStatus(
 	ctx context.Context,
 	req PostPollStatusRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*pollv2.UserPollSettings, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1882,8 +2025,9 @@ func (c *clientImpl) PostPollStatus(
 func (c *clientImpl) GetSession(
 	ctx context.Context,
 	req GetSessionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*signupv2.UserSession, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1909,8 +2053,9 @@ func (c *clientImpl) GetSession(
 func (c *clientImpl) TerminateSession(
 	ctx context.Context,
 	req TerminateSessionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1932,8 +2077,9 @@ func (c *clientImpl) TerminateSession(
 func (c *clientImpl) GetUser(
 	ctx context.Context,
 	req GetUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*userv2.User, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1959,8 +2105,9 @@ func (c *clientImpl) GetUser(
 func (c *clientImpl) UpdatePersonalInformation(
 	ctx context.Context,
 	req UpdatePersonalInformationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1982,8 +2129,9 @@ func (c *clientImpl) UpdatePersonalInformation(
 func (c *clientImpl) InitMFA(
 	ctx context.Context,
 	req InitMFARequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*InitMFAResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -2009,8 +2157,9 @@ func (c *clientImpl) InitMFA(
 func (c *clientImpl) InitPasswordReset(
 	ctx context.Context,
 	req InitPasswordResetRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*InitPasswordResetResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -2036,8 +2185,9 @@ func (c *clientImpl) InitPasswordReset(
 func (c *clientImpl) ListFeedback(
 	ctx context.Context,
 	req ListFeedbackRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]userv2.UserFeedback, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -2063,8 +2213,9 @@ func (c *clientImpl) ListFeedback(
 func (c *clientImpl) ListSessions(
 	ctx context.Context,
 	req ListSessionsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]signupv2.UserSession, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -2090,8 +2241,9 @@ func (c *clientImpl) ListSessions(
 func (c *clientImpl) RefreshSession(
 	ctx context.Context,
 	req RefreshSessionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*RefreshSessionResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -2117,8 +2269,9 @@ func (c *clientImpl) RefreshSession(
 func (c *clientImpl) TerminateAllSessions(
 	ctx context.Context,
 	req TerminateAllSessionsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -2140,8 +2293,9 @@ func (c *clientImpl) TerminateAllSessions(
 func (c *clientImpl) Logout(
 	ctx context.Context,
 	req LogoutRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -2168,8 +2322,9 @@ func (c *clientImpl) Logout(
 func (c *clientImpl) OauthGetAuthorization(
 	ctx context.Context,
 	req OauthGetAuthorizationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -2194,8 +2349,9 @@ func (c *clientImpl) OauthGetAuthorization(
 func (c *clientImpl) OauthRetrieveAccessToken(
 	ctx context.Context,
 	req OauthRetrieveAccessTokenRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*OauthRetrieveAccessTokenResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -2221,8 +2377,9 @@ func (c *clientImpl) OauthRetrieveAccessToken(
 func (c *clientImpl) Register(
 	ctx context.Context,
 	req RegisterRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*RegisterResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -2248,8 +2405,9 @@ func (c *clientImpl) Register(
 func (c *clientImpl) RequestAvatarUpload(
 	ctx context.Context,
 	req RequestAvatarUploadRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*RequestAvatarUploadResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -2275,8 +2433,9 @@ func (c *clientImpl) RequestAvatarUpload(
 func (c *clientImpl) RemoveAvatar(
 	ctx context.Context,
 	req RemoveAvatarRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -2298,8 +2457,9 @@ func (c *clientImpl) RemoveAvatar(
 func (c *clientImpl) ResendVerificationEmail(
 	ctx context.Context,
 	req ResendVerificationEmailRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -2321,8 +2481,9 @@ func (c *clientImpl) ResendVerificationEmail(
 func (c *clientImpl) SupportCodeRequest(
 	ctx context.Context,
 	req SupportCodeRequestRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*SupportCodeRequestResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -2348,8 +2509,9 @@ func (c *clientImpl) SupportCodeRequest(
 func (c *clientImpl) VerifyEmail(
 	ctx context.Context,
 	req VerifyEmailRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -2371,8 +2533,9 @@ func (c *clientImpl) VerifyEmail(
 func (c *clientImpl) VerifyPhoneNumber(
 	ctx context.Context,
 	req VerifyPhoneNumberRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -2394,8 +2557,9 @@ func (c *clientImpl) VerifyPhoneNumber(
 func (c *clientImpl) VerifyRegistration(
 	ctx context.Context,
 	req VerifyRegistrationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*VerifyRegistrationResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}

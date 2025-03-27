@@ -17,34 +17,42 @@ type Client interface {
 	DeprecatedGetFileTokenRules(
 		ctx context.Context,
 		req DeprecatedGetFileTokenRulesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*filev2.FileUploadRules, *http.Response, error)
 	DeprecatedGetFileTypeRules(
 		ctx context.Context,
 		req DeprecatedGetFileTypeRulesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*filev2.FileUploadRules, *http.Response, error)
 	CreateFile(
 		ctx context.Context,
 		req CreateFileRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*filev2.FileMeta, *http.Response, error)
 	GetFileMeta(
 		ctx context.Context,
 		req GetFileMetaRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*filev2.FileMeta, *http.Response, error)
 	GetFileUploadTokenRules(
 		ctx context.Context,
 		req GetFileUploadTokenRulesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*filev2.FileUploadRules, *http.Response, error)
 	GetFileUploadTypeRules(
 		ctx context.Context,
 		req GetFileUploadTypeRulesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*filev2.FileUploadRules, *http.Response, error)
 	GetFile(
 		ctx context.Context,
 		req GetFileRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetFileWithName(
 		ctx context.Context,
 		req GetFileWithNameRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
 type clientImpl struct {
@@ -61,8 +69,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) DeprecatedGetFileTokenRules(
 	ctx context.Context,
 	req DeprecatedGetFileTokenRulesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*filev2.FileUploadRules, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -90,8 +99,9 @@ func (c *clientImpl) DeprecatedGetFileTokenRules(
 func (c *clientImpl) DeprecatedGetFileTypeRules(
 	ctx context.Context,
 	req DeprecatedGetFileTypeRulesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*filev2.FileUploadRules, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -117,8 +127,9 @@ func (c *clientImpl) DeprecatedGetFileTypeRules(
 func (c *clientImpl) CreateFile(
 	ctx context.Context,
 	req CreateFileRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*filev2.FileMeta, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -144,8 +155,9 @@ func (c *clientImpl) CreateFile(
 func (c *clientImpl) GetFileMeta(
 	ctx context.Context,
 	req GetFileMetaRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*filev2.FileMeta, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -171,8 +183,9 @@ func (c *clientImpl) GetFileMeta(
 func (c *clientImpl) GetFileUploadTokenRules(
 	ctx context.Context,
 	req GetFileUploadTokenRulesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*filev2.FileUploadRules, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -198,8 +211,9 @@ func (c *clientImpl) GetFileUploadTokenRules(
 func (c *clientImpl) GetFileUploadTypeRules(
 	ctx context.Context,
 	req GetFileUploadTypeRulesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*filev2.FileUploadRules, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -225,8 +239,9 @@ func (c *clientImpl) GetFileUploadTypeRules(
 func (c *clientImpl) GetFile(
 	ctx context.Context,
 	req GetFileRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -248,8 +263,9 @@ func (c *clientImpl) GetFile(
 func (c *clientImpl) GetFileWithName(
 	ctx context.Context,
 	req GetFileWithNameRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}

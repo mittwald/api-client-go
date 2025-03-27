@@ -18,142 +18,177 @@ type Client interface {
 	DeprecatedUpdateDescription(
 		ctx context.Context,
 		req DeprecatedUpdateDescriptionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedUpdatePassword(
 		ctx context.Context,
 		req DeprecatedUpdatePasswordRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedMailaddressUpdateAddress(
 		ctx context.Context,
 		req DeprecatedMailaddressUpdateAddressRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedProjectsettingUpdateBlacklist(
 		ctx context.Context,
 		req DeprecatedProjectsettingUpdateBlacklistRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedProjectsettingUpdateWhitelist(
 		ctx context.Context,
 		req DeprecatedProjectsettingUpdateWhitelistRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedUpdateMailAddressAutoresponder(
 		ctx context.Context,
 		req DeprecatedUpdateMailAddressAutoresponderRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateMailAddressAutoresponder(
 		ctx context.Context,
 		req UpdateMailAddressAutoresponderRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedUpdateMailAddressCatchall(
 		ctx context.Context,
 		req DeprecatedUpdateMailAddressCatchallRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedUpdateMailAddressForwardAddresses(
 		ctx context.Context,
 		req DeprecatedUpdateMailAddressForwardAddressesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateMailAddressForwardAddresses(
 		ctx context.Context,
 		req UpdateMailAddressForwardAddressesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedUpdateMailAddressPassword(
 		ctx context.Context,
 		req DeprecatedUpdateMailAddressPasswordRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateMailAddressPassword(
 		ctx context.Context,
 		req UpdateMailAddressPasswordRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedUpdateMailAddressQuota(
 		ctx context.Context,
 		req DeprecatedUpdateMailAddressQuotaRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateMailAddressQuota(
 		ctx context.Context,
 		req UpdateMailAddressQuotaRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedUpdateMailAddressSpamProtection(
 		ctx context.Context,
 		req DeprecatedUpdateMailAddressSpamProtectionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateMailAddressSpamProtection(
 		ctx context.Context,
 		req UpdateMailAddressSpamProtectionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedUpdateProjectMailSetting(
 		ctx context.Context,
 		req DeprecatedUpdateProjectMailSettingRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ListDeliveryBoxes(
 		ctx context.Context,
 		req ListDeliveryBoxesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]mailv2.Deliverybox, *http.Response, error)
 	CreateDeliverybox(
 		ctx context.Context,
 		req CreateDeliveryboxRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateDeliveryboxResponse, *http.Response, error)
 	ListMailAddresses(
 		ctx context.Context,
 		req ListMailAddressesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]mailv2.MailAddress, *http.Response, error)
 	CreateMailAddress(
 		ctx context.Context,
 		req CreateMailAddressRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateMailAddressResponse, *http.Response, error)
 	GetDeliveryBox(
 		ctx context.Context,
 		req GetDeliveryBoxRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*mailv2.Deliverybox, *http.Response, error)
 	DeleteDeliveryBox(
 		ctx context.Context,
 		req DeleteDeliveryBoxRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetMailAddress(
 		ctx context.Context,
 		req GetMailAddressRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*mailv2.MailAddress, *http.Response, error)
 	DeleteMailAddress(
 		ctx context.Context,
 		req DeleteMailAddressRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ListProjectMailSettings(
 		ctx context.Context,
 		req ListProjectMailSettingsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*ListProjectMailSettingsResponse, *http.Response, error)
 	MigrationCheckMigrationIsPossible(
 		ctx context.Context,
 		req MigrationCheckMigrationIsPossibleRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*mailmigrationv2.CheckMigrationIsPossibleErrorResponse, *http.Response, error)
 	MigrationGetMigration(
 		ctx context.Context,
 		req MigrationGetMigrationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*mailmigrationv2.Migration, *http.Response, error)
 	MigrationListMigrations(
 		ctx context.Context,
 		req MigrationListMigrationsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]mailmigrationv2.Migration, *http.Response, error)
 	MigrationRequestMailMigration(
 		ctx context.Context,
 		req MigrationRequestMailMigrationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateDeliveryBoxDescription(
 		ctx context.Context,
 		req UpdateDeliveryBoxDescriptionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateDeliveryBoxPassword(
 		ctx context.Context,
 		req UpdateDeliveryBoxPasswordRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateMailAddressAddress(
 		ctx context.Context,
 		req UpdateMailAddressAddressRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateMailAddressCatchAll(
 		ctx context.Context,
 		req UpdateMailAddressCatchAllRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateProjectMailSetting(
 		ctx context.Context,
 		req UpdateProjectMailSettingRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
 type clientImpl struct {
@@ -170,8 +205,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) DeprecatedUpdateDescription(
 	ctx context.Context,
 	req DeprecatedUpdateDescriptionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -195,8 +231,9 @@ func (c *clientImpl) DeprecatedUpdateDescription(
 func (c *clientImpl) DeprecatedUpdatePassword(
 	ctx context.Context,
 	req DeprecatedUpdatePasswordRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -220,8 +257,9 @@ func (c *clientImpl) DeprecatedUpdatePassword(
 func (c *clientImpl) DeprecatedMailaddressUpdateAddress(
 	ctx context.Context,
 	req DeprecatedMailaddressUpdateAddressRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -245,8 +283,9 @@ func (c *clientImpl) DeprecatedMailaddressUpdateAddress(
 func (c *clientImpl) DeprecatedProjectsettingUpdateBlacklist(
 	ctx context.Context,
 	req DeprecatedProjectsettingUpdateBlacklistRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -270,8 +309,9 @@ func (c *clientImpl) DeprecatedProjectsettingUpdateBlacklist(
 func (c *clientImpl) DeprecatedProjectsettingUpdateWhitelist(
 	ctx context.Context,
 	req DeprecatedProjectsettingUpdateWhitelistRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -295,8 +335,9 @@ func (c *clientImpl) DeprecatedProjectsettingUpdateWhitelist(
 func (c *clientImpl) DeprecatedUpdateMailAddressAutoresponder(
 	ctx context.Context,
 	req DeprecatedUpdateMailAddressAutoresponderRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -318,8 +359,9 @@ func (c *clientImpl) DeprecatedUpdateMailAddressAutoresponder(
 func (c *clientImpl) UpdateMailAddressAutoresponder(
 	ctx context.Context,
 	req UpdateMailAddressAutoresponderRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -343,8 +385,9 @@ func (c *clientImpl) UpdateMailAddressAutoresponder(
 func (c *clientImpl) DeprecatedUpdateMailAddressCatchall(
 	ctx context.Context,
 	req DeprecatedUpdateMailAddressCatchallRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -368,8 +411,9 @@ func (c *clientImpl) DeprecatedUpdateMailAddressCatchall(
 func (c *clientImpl) DeprecatedUpdateMailAddressForwardAddresses(
 	ctx context.Context,
 	req DeprecatedUpdateMailAddressForwardAddressesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -391,8 +435,9 @@ func (c *clientImpl) DeprecatedUpdateMailAddressForwardAddresses(
 func (c *clientImpl) UpdateMailAddressForwardAddresses(
 	ctx context.Context,
 	req UpdateMailAddressForwardAddressesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -416,8 +461,9 @@ func (c *clientImpl) UpdateMailAddressForwardAddresses(
 func (c *clientImpl) DeprecatedUpdateMailAddressPassword(
 	ctx context.Context,
 	req DeprecatedUpdateMailAddressPasswordRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -439,8 +485,9 @@ func (c *clientImpl) DeprecatedUpdateMailAddressPassword(
 func (c *clientImpl) UpdateMailAddressPassword(
 	ctx context.Context,
 	req UpdateMailAddressPasswordRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -464,8 +511,9 @@ func (c *clientImpl) UpdateMailAddressPassword(
 func (c *clientImpl) DeprecatedUpdateMailAddressQuota(
 	ctx context.Context,
 	req DeprecatedUpdateMailAddressQuotaRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -487,8 +535,9 @@ func (c *clientImpl) DeprecatedUpdateMailAddressQuota(
 func (c *clientImpl) UpdateMailAddressQuota(
 	ctx context.Context,
 	req UpdateMailAddressQuotaRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -512,8 +561,9 @@ func (c *clientImpl) UpdateMailAddressQuota(
 func (c *clientImpl) DeprecatedUpdateMailAddressSpamProtection(
 	ctx context.Context,
 	req DeprecatedUpdateMailAddressSpamProtectionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -535,8 +585,9 @@ func (c *clientImpl) DeprecatedUpdateMailAddressSpamProtection(
 func (c *clientImpl) UpdateMailAddressSpamProtection(
 	ctx context.Context,
 	req UpdateMailAddressSpamProtectionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -560,8 +611,9 @@ func (c *clientImpl) UpdateMailAddressSpamProtection(
 func (c *clientImpl) DeprecatedUpdateProjectMailSetting(
 	ctx context.Context,
 	req DeprecatedUpdateProjectMailSettingRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -583,8 +635,9 @@ func (c *clientImpl) DeprecatedUpdateProjectMailSetting(
 func (c *clientImpl) ListDeliveryBoxes(
 	ctx context.Context,
 	req ListDeliveryBoxesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]mailv2.Deliverybox, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -610,8 +663,9 @@ func (c *clientImpl) ListDeliveryBoxes(
 func (c *clientImpl) CreateDeliverybox(
 	ctx context.Context,
 	req CreateDeliveryboxRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateDeliveryboxResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -637,8 +691,9 @@ func (c *clientImpl) CreateDeliverybox(
 func (c *clientImpl) ListMailAddresses(
 	ctx context.Context,
 	req ListMailAddressesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]mailv2.MailAddress, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -664,8 +719,9 @@ func (c *clientImpl) ListMailAddresses(
 func (c *clientImpl) CreateMailAddress(
 	ctx context.Context,
 	req CreateMailAddressRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateMailAddressResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -691,8 +747,9 @@ func (c *clientImpl) CreateMailAddress(
 func (c *clientImpl) GetDeliveryBox(
 	ctx context.Context,
 	req GetDeliveryBoxRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*mailv2.Deliverybox, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -718,8 +775,9 @@ func (c *clientImpl) GetDeliveryBox(
 func (c *clientImpl) DeleteDeliveryBox(
 	ctx context.Context,
 	req DeleteDeliveryBoxRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -741,8 +799,9 @@ func (c *clientImpl) DeleteDeliveryBox(
 func (c *clientImpl) GetMailAddress(
 	ctx context.Context,
 	req GetMailAddressRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*mailv2.MailAddress, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -768,8 +827,9 @@ func (c *clientImpl) GetMailAddress(
 func (c *clientImpl) DeleteMailAddress(
 	ctx context.Context,
 	req DeleteMailAddressRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -791,8 +851,9 @@ func (c *clientImpl) DeleteMailAddress(
 func (c *clientImpl) ListProjectMailSettings(
 	ctx context.Context,
 	req ListProjectMailSettingsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*ListProjectMailSettingsResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -818,8 +879,9 @@ func (c *clientImpl) ListProjectMailSettings(
 func (c *clientImpl) MigrationCheckMigrationIsPossible(
 	ctx context.Context,
 	req MigrationCheckMigrationIsPossibleRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*mailmigrationv2.CheckMigrationIsPossibleErrorResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -845,8 +907,9 @@ func (c *clientImpl) MigrationCheckMigrationIsPossible(
 func (c *clientImpl) MigrationGetMigration(
 	ctx context.Context,
 	req MigrationGetMigrationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*mailmigrationv2.Migration, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -875,8 +938,9 @@ func (c *clientImpl) MigrationGetMigration(
 func (c *clientImpl) MigrationListMigrations(
 	ctx context.Context,
 	req MigrationListMigrationsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]mailmigrationv2.Migration, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -902,8 +966,9 @@ func (c *clientImpl) MigrationListMigrations(
 func (c *clientImpl) MigrationRequestMailMigration(
 	ctx context.Context,
 	req MigrationRequestMailMigrationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -925,8 +990,9 @@ func (c *clientImpl) MigrationRequestMailMigration(
 func (c *clientImpl) UpdateDeliveryBoxDescription(
 	ctx context.Context,
 	req UpdateDeliveryBoxDescriptionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -948,8 +1014,9 @@ func (c *clientImpl) UpdateDeliveryBoxDescription(
 func (c *clientImpl) UpdateDeliveryBoxPassword(
 	ctx context.Context,
 	req UpdateDeliveryBoxPasswordRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -971,8 +1038,9 @@ func (c *clientImpl) UpdateDeliveryBoxPassword(
 func (c *clientImpl) UpdateMailAddressAddress(
 	ctx context.Context,
 	req UpdateMailAddressAddressRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -994,8 +1062,9 @@ func (c *clientImpl) UpdateMailAddressAddress(
 func (c *clientImpl) UpdateMailAddressCatchAll(
 	ctx context.Context,
 	req UpdateMailAddressCatchAllRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1017,8 +1086,9 @@ func (c *clientImpl) UpdateMailAddressCatchAll(
 func (c *clientImpl) UpdateProjectMailSetting(
 	ctx context.Context,
 	req UpdateProjectMailSettingRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}

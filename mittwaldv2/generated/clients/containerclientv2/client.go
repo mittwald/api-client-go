@@ -17,90 +17,112 @@ type Client interface {
 	ListRegistries(
 		ctx context.Context,
 		req ListRegistriesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]containerv2.Registry, *http.Response, error)
 	CreateRegistry(
 		ctx context.Context,
 		req CreateRegistryRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.Registry, *http.Response, error)
 	GetStack(
 		ctx context.Context,
 		req GetStackRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.StackResponse, *http.Response, error)
 	DeclareStack(
 		ctx context.Context,
 		req DeclareStackRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.StackResponse, *http.Response, error)
 	UpdateStack(
 		ctx context.Context,
 		req UpdateStackRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.StackResponse, *http.Response, error)
 	GetRegistry(
 		ctx context.Context,
 		req GetRegistryRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.Registry, *http.Response, error)
 	DeleteRegistry(
 		ctx context.Context,
 		req DeleteRegistryRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateRegistry(
 		ctx context.Context,
 		req UpdateRegistryRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetVolume(
 		ctx context.Context,
 		req GetVolumeRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.VolumeResponse, *http.Response, error)
 	DeleteVolume(
 		ctx context.Context,
 		req DeleteVolumeRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetContainerImageConfig(
 		ctx context.Context,
 		req GetContainerImageConfigRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.ContainerImageConfig, *http.Response, error)
 	GetServiceLogs(
 		ctx context.Context,
 		req GetServiceLogsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetService(
 		ctx context.Context,
 		req GetServiceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.ServiceResponse, *http.Response, error)
 	ListServices(
 		ctx context.Context,
 		req ListServicesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]containerv2.ServiceResponse, *http.Response, error)
 	ListStacks(
 		ctx context.Context,
 		req ListStacksRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]containerv2.StackResponse, *http.Response, error)
 	ListVolumes(
 		ctx context.Context,
 		req ListVolumesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]containerv2.VolumeResponse, *http.Response, error)
 	RecreateService(
 		ctx context.Context,
 		req RecreateServiceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	RestartService(
 		ctx context.Context,
 		req RestartServiceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	StartService(
 		ctx context.Context,
 		req StartServiceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	StopService(
 		ctx context.Context,
 		req StopServiceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ValidateContainerRegistryUri(
 		ctx context.Context,
 		req ValidateContainerRegistryUriRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*ValidateContainerRegistryUriResponse, *http.Response, error)
 	ValidateRegistryCredentials(
 		ctx context.Context,
 		req ValidateRegistryCredentialsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*ValidateRegistryCredentialsResponse, *http.Response, error)
 }
 type clientImpl struct {
@@ -115,8 +137,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) ListRegistries(
 	ctx context.Context,
 	req ListRegistriesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]containerv2.Registry, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -142,8 +165,9 @@ func (c *clientImpl) ListRegistries(
 func (c *clientImpl) CreateRegistry(
 	ctx context.Context,
 	req CreateRegistryRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*containerv2.Registry, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -169,8 +193,9 @@ func (c *clientImpl) CreateRegistry(
 func (c *clientImpl) GetStack(
 	ctx context.Context,
 	req GetStackRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*containerv2.StackResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -196,8 +221,9 @@ func (c *clientImpl) GetStack(
 func (c *clientImpl) DeclareStack(
 	ctx context.Context,
 	req DeclareStackRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*containerv2.StackResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -223,8 +249,9 @@ func (c *clientImpl) DeclareStack(
 func (c *clientImpl) UpdateStack(
 	ctx context.Context,
 	req UpdateStackRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*containerv2.StackResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -250,8 +277,9 @@ func (c *clientImpl) UpdateStack(
 func (c *clientImpl) GetRegistry(
 	ctx context.Context,
 	req GetRegistryRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*containerv2.Registry, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -277,8 +305,9 @@ func (c *clientImpl) GetRegistry(
 func (c *clientImpl) DeleteRegistry(
 	ctx context.Context,
 	req DeleteRegistryRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -300,8 +329,9 @@ func (c *clientImpl) DeleteRegistry(
 func (c *clientImpl) UpdateRegistry(
 	ctx context.Context,
 	req UpdateRegistryRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -323,8 +353,9 @@ func (c *clientImpl) UpdateRegistry(
 func (c *clientImpl) GetVolume(
 	ctx context.Context,
 	req GetVolumeRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*containerv2.VolumeResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -350,8 +381,9 @@ func (c *clientImpl) GetVolume(
 func (c *clientImpl) DeleteVolume(
 	ctx context.Context,
 	req DeleteVolumeRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -373,8 +405,9 @@ func (c *clientImpl) DeleteVolume(
 func (c *clientImpl) GetContainerImageConfig(
 	ctx context.Context,
 	req GetContainerImageConfigRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*containerv2.ContainerImageConfig, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -400,8 +433,9 @@ func (c *clientImpl) GetContainerImageConfig(
 func (c *clientImpl) GetServiceLogs(
 	ctx context.Context,
 	req GetServiceLogsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -423,8 +457,9 @@ func (c *clientImpl) GetServiceLogs(
 func (c *clientImpl) GetService(
 	ctx context.Context,
 	req GetServiceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*containerv2.ServiceResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -450,8 +485,9 @@ func (c *clientImpl) GetService(
 func (c *clientImpl) ListServices(
 	ctx context.Context,
 	req ListServicesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]containerv2.ServiceResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -477,8 +513,9 @@ func (c *clientImpl) ListServices(
 func (c *clientImpl) ListStacks(
 	ctx context.Context,
 	req ListStacksRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]containerv2.StackResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -504,8 +541,9 @@ func (c *clientImpl) ListStacks(
 func (c *clientImpl) ListVolumes(
 	ctx context.Context,
 	req ListVolumesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]containerv2.VolumeResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -531,8 +569,9 @@ func (c *clientImpl) ListVolumes(
 func (c *clientImpl) RecreateService(
 	ctx context.Context,
 	req RecreateServiceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -554,8 +593,9 @@ func (c *clientImpl) RecreateService(
 func (c *clientImpl) RestartService(
 	ctx context.Context,
 	req RestartServiceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -577,8 +617,9 @@ func (c *clientImpl) RestartService(
 func (c *clientImpl) StartService(
 	ctx context.Context,
 	req StartServiceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -600,8 +641,9 @@ func (c *clientImpl) StartService(
 func (c *clientImpl) StopService(
 	ctx context.Context,
 	req StopServiceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -623,8 +665,9 @@ func (c *clientImpl) StopService(
 func (c *clientImpl) ValidateContainerRegistryUri(
 	ctx context.Context,
 	req ValidateContainerRegistryUriRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*ValidateContainerRegistryUriResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -650,8 +693,9 @@ func (c *clientImpl) ValidateContainerRegistryUri(
 func (c *clientImpl) ValidateRegistryCredentials(
 	ctx context.Context,
 	req ValidateRegistryCredentialsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*ValidateRegistryCredentialsResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}

@@ -17,50 +17,62 @@ type Client interface {
 	CreateProjectBackupExport(
 		ctx context.Context,
 		req CreateProjectBackupExportRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeleteProjectBackupExport(
 		ctx context.Context,
 		req DeleteProjectBackupExportRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ListProjectBackupSchedules(
 		ctx context.Context,
 		req ListProjectBackupSchedulesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]backupv2.ProjectBackupSchedule, *http.Response, error)
 	CreateProjectBackupSchedule(
 		ctx context.Context,
 		req CreateProjectBackupScheduleRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*backupv2.ProjectBackupSchedule, *http.Response, error)
 	ListProjectBackups(
 		ctx context.Context,
 		req ListProjectBackupsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]backupv2.ProjectBackup, *http.Response, error)
 	CreateProjectBackup(
 		ctx context.Context,
 		req CreateProjectBackupRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*backupv2.ProjectBackup, *http.Response, error)
 	GetProjectBackupSchedule(
 		ctx context.Context,
 		req GetProjectBackupScheduleRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*backupv2.ProjectBackupSchedule, *http.Response, error)
 	DeleteProjectBackupSchedule(
 		ctx context.Context,
 		req DeleteProjectBackupScheduleRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateProjectBackupSchedule(
 		ctx context.Context,
 		req UpdateProjectBackupScheduleRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetProjectBackup(
 		ctx context.Context,
 		req GetProjectBackupRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*backupv2.ProjectBackup, *http.Response, error)
 	DeleteProjectBackup(
 		ctx context.Context,
 		req DeleteProjectBackupRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateProjectBackupDescription(
 		ctx context.Context,
 		req UpdateProjectBackupDescriptionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
 type clientImpl struct {
@@ -75,8 +87,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) CreateProjectBackupExport(
 	ctx context.Context,
 	req CreateProjectBackupExportRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -98,8 +111,9 @@ func (c *clientImpl) CreateProjectBackupExport(
 func (c *clientImpl) DeleteProjectBackupExport(
 	ctx context.Context,
 	req DeleteProjectBackupExportRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -121,8 +135,9 @@ func (c *clientImpl) DeleteProjectBackupExport(
 func (c *clientImpl) ListProjectBackupSchedules(
 	ctx context.Context,
 	req ListProjectBackupSchedulesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]backupv2.ProjectBackupSchedule, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -148,8 +163,9 @@ func (c *clientImpl) ListProjectBackupSchedules(
 func (c *clientImpl) CreateProjectBackupSchedule(
 	ctx context.Context,
 	req CreateProjectBackupScheduleRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*backupv2.ProjectBackupSchedule, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -175,8 +191,9 @@ func (c *clientImpl) CreateProjectBackupSchedule(
 func (c *clientImpl) ListProjectBackups(
 	ctx context.Context,
 	req ListProjectBackupsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]backupv2.ProjectBackup, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -202,8 +219,9 @@ func (c *clientImpl) ListProjectBackups(
 func (c *clientImpl) CreateProjectBackup(
 	ctx context.Context,
 	req CreateProjectBackupRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*backupv2.ProjectBackup, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -229,8 +247,9 @@ func (c *clientImpl) CreateProjectBackup(
 func (c *clientImpl) GetProjectBackupSchedule(
 	ctx context.Context,
 	req GetProjectBackupScheduleRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*backupv2.ProjectBackupSchedule, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -256,8 +275,9 @@ func (c *clientImpl) GetProjectBackupSchedule(
 func (c *clientImpl) DeleteProjectBackupSchedule(
 	ctx context.Context,
 	req DeleteProjectBackupScheduleRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -279,8 +299,9 @@ func (c *clientImpl) DeleteProjectBackupSchedule(
 func (c *clientImpl) UpdateProjectBackupSchedule(
 	ctx context.Context,
 	req UpdateProjectBackupScheduleRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -302,8 +323,9 @@ func (c *clientImpl) UpdateProjectBackupSchedule(
 func (c *clientImpl) GetProjectBackup(
 	ctx context.Context,
 	req GetProjectBackupRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*backupv2.ProjectBackup, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -329,8 +351,9 @@ func (c *clientImpl) GetProjectBackup(
 func (c *clientImpl) DeleteProjectBackup(
 	ctx context.Context,
 	req DeleteProjectBackupRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -352,8 +375,9 @@ func (c *clientImpl) DeleteProjectBackup(
 func (c *clientImpl) UpdateProjectBackupDescription(
 	ctx context.Context,
 	req UpdateProjectBackupDescriptionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}

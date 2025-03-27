@@ -16,10 +16,12 @@ type Client interface {
 	VerificationVerifyAddress(
 		ctx context.Context,
 		req VerificationVerifyAddressRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*VerificationVerifyAddressResponse, *http.Response, error)
 	VerificationVerifyCompany(
 		ctx context.Context,
 		req VerificationVerifyCompanyRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*VerificationVerifyCompanyResponse, *http.Response, error)
 }
 type clientImpl struct {
@@ -36,8 +38,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) VerificationVerifyAddress(
 	ctx context.Context,
 	req VerificationVerifyAddressRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*VerificationVerifyAddressResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -65,8 +68,9 @@ func (c *clientImpl) VerificationVerifyAddress(
 func (c *clientImpl) VerificationVerifyCompany(
 	ctx context.Context,
 	req VerificationVerifyCompanyRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*VerificationVerifyCompanyResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}

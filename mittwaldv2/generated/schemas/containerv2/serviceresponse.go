@@ -15,6 +15,9 @@ import "fmt"
 //    "id":
 //        type: "string"
 //        format: "uuid"
+//    "message":
+//        type: "string"
+//        example: "Container ready"
 //    "pendingState": {"$ref": "#/components/schemas/de.mittwald.v1.container.ServiceState"}
 //    "projectId":
 //        type: "string"
@@ -44,6 +47,7 @@ type ServiceResponse struct {
 	DeployedState ServiceState  `json:"deployedState"`
 	Description   string        `json:"description"`
 	Id            string        `json:"id"`
+	Message       *string       `json:"message,omitempty"`
 	PendingState  ServiceState  `json:"pendingState"`
 	ProjectId     string        `json:"projectId"`
 	ServiceName   string        `json:"serviceName"`

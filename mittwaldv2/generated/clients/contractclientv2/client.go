@@ -19,114 +19,142 @@ type Client interface {
 	TerminateContractItem(
 		ctx context.Context,
 		req TerminateContractItemRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*TerminateContractItemResponse, *http.Response, error)
 	CancelContractItemTermination(
 		ctx context.Context,
 		req CancelContractItemTerminationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CancelContractItemTerminationResponse, *http.Response, error)
 	CancelContractTariffChange(
 		ctx context.Context,
 		req CancelContractTariffChangeRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CancelContractTariffChangeResponse, *http.Response, error)
 	TerminateContract(
 		ctx context.Context,
 		req TerminateContractRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*TerminateContractResponse, *http.Response, error)
 	CancelContractTermination(
 		ctx context.Context,
 		req CancelContractTerminationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CancelContractTerminationResponse, *http.Response, error)
 	GetBaseItemOfContract(
 		ctx context.Context,
 		req GetBaseItemOfContractRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*contractv2.ContractItem, *http.Response, error)
 	GetDetailOfContractByCertificate(
 		ctx context.Context,
 		req GetDetailOfContractByCertificateRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*contractv2.Contract, *http.Response, error)
 	GetDetailOfContractByDomain(
 		ctx context.Context,
 		req GetDetailOfContractByDomainRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*contractv2.Contract, *http.Response, error)
 	GetDetailOfContractByProject(
 		ctx context.Context,
 		req GetDetailOfContractByProjectRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*contractv2.Contract, *http.Response, error)
 	GetDetailOfContractByServer(
 		ctx context.Context,
 		req GetDetailOfContractByServerRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*contractv2.Contract, *http.Response, error)
 	GetDetailOfContractItem(
 		ctx context.Context,
 		req GetDetailOfContractItemRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*contractv2.ContractItem, *http.Response, error)
 	GetDetailOfContract(
 		ctx context.Context,
 		req GetDetailOfContractRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*contractv2.Contract, *http.Response, error)
 	GetNextTerminationDateForItem(
 		ctx context.Context,
 		req GetNextTerminationDateForItemRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*GetNextTerminationDateForItemResponse, *http.Response, error)
 	ListContracts(
 		ctx context.Context,
 		req ListContractsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]contractv2.Contract, *http.Response, error)
 	DeprecatedInvoiceDetailOfInvoice(
 		ctx context.Context,
 		req DeprecatedInvoiceDetailOfInvoiceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*invoicev2.Invoice, *http.Response, error)
 	InvoiceDetail(
 		ctx context.Context,
 		req InvoiceDetailRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*invoicev2.Invoice, *http.Response, error)
 	InvoiceGetDetailOfInvoiceSettings(
 		ctx context.Context,
 		req InvoiceGetDetailOfInvoiceSettingsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*invoicev2.InvoiceSettings, *http.Response, error)
 	InvoiceUpdateInvoiceSettings(
 		ctx context.Context,
 		req InvoiceUpdateInvoiceSettingsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*invoicev2.InvoiceSettings, *http.Response, error)
 	InvoiceGetFileAccessToken(
 		ctx context.Context,
 		req InvoiceGetFileAccessTokenRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*InvoiceGetFileAccessTokenResponse, *http.Response, error)
 	InvoiceListCustomerInvoices(
 		ctx context.Context,
 		req InvoiceListCustomerInvoicesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]invoicev2.Invoice, *http.Response, error)
 	ListOrders(
 		ctx context.Context,
 		req ListOrdersRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]orderv2.CustomerOrder, *http.Response, error)
 	CreateOrder(
 		ctx context.Context,
 		req CreateOrderRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateOrderResponse, *http.Response, error)
 	CreateTariffChange(
 		ctx context.Context,
 		req CreateTariffChangeRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateTariffChangeResponse, *http.Response, error)
 	GetOrder(
 		ctx context.Context,
 		req GetOrderRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*orderv2.CustomerOrder, *http.Response, error)
 	ListCustomerOrders(
 		ctx context.Context,
 		req ListCustomerOrdersRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]orderv2.CustomerOrder, *http.Response, error)
 	ListProjectOrders(
 		ctx context.Context,
 		req ListProjectOrdersRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]orderv2.CustomerOrder, *http.Response, error)
 	PreviewOrder(
 		ctx context.Context,
 		req PreviewOrderRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*PreviewOrderResponse, *http.Response, error)
 	PreviewTariffChange(
 		ctx context.Context,
 		req PreviewTariffChangeRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*PreviewTariffChangeResponse, *http.Response, error)
 }
 type clientImpl struct {
@@ -141,8 +169,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) TerminateContractItem(
 	ctx context.Context,
 	req TerminateContractItemRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*TerminateContractItemResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -168,8 +197,9 @@ func (c *clientImpl) TerminateContractItem(
 func (c *clientImpl) CancelContractItemTermination(
 	ctx context.Context,
 	req CancelContractItemTerminationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CancelContractItemTerminationResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -195,8 +225,9 @@ func (c *clientImpl) CancelContractItemTermination(
 func (c *clientImpl) CancelContractTariffChange(
 	ctx context.Context,
 	req CancelContractTariffChangeRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CancelContractTariffChangeResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -222,8 +253,9 @@ func (c *clientImpl) CancelContractTariffChange(
 func (c *clientImpl) TerminateContract(
 	ctx context.Context,
 	req TerminateContractRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*TerminateContractResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -249,8 +281,9 @@ func (c *clientImpl) TerminateContract(
 func (c *clientImpl) CancelContractTermination(
 	ctx context.Context,
 	req CancelContractTerminationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CancelContractTerminationResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -276,8 +309,9 @@ func (c *clientImpl) CancelContractTermination(
 func (c *clientImpl) GetBaseItemOfContract(
 	ctx context.Context,
 	req GetBaseItemOfContractRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*contractv2.ContractItem, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -303,8 +337,9 @@ func (c *clientImpl) GetBaseItemOfContract(
 func (c *clientImpl) GetDetailOfContractByCertificate(
 	ctx context.Context,
 	req GetDetailOfContractByCertificateRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*contractv2.Contract, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -330,8 +365,9 @@ func (c *clientImpl) GetDetailOfContractByCertificate(
 func (c *clientImpl) GetDetailOfContractByDomain(
 	ctx context.Context,
 	req GetDetailOfContractByDomainRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*contractv2.Contract, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -357,8 +393,9 @@ func (c *clientImpl) GetDetailOfContractByDomain(
 func (c *clientImpl) GetDetailOfContractByProject(
 	ctx context.Context,
 	req GetDetailOfContractByProjectRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*contractv2.Contract, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -384,8 +421,9 @@ func (c *clientImpl) GetDetailOfContractByProject(
 func (c *clientImpl) GetDetailOfContractByServer(
 	ctx context.Context,
 	req GetDetailOfContractByServerRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*contractv2.Contract, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -411,8 +449,9 @@ func (c *clientImpl) GetDetailOfContractByServer(
 func (c *clientImpl) GetDetailOfContractItem(
 	ctx context.Context,
 	req GetDetailOfContractItemRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*contractv2.ContractItem, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -438,8 +477,9 @@ func (c *clientImpl) GetDetailOfContractItem(
 func (c *clientImpl) GetDetailOfContract(
 	ctx context.Context,
 	req GetDetailOfContractRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*contractv2.Contract, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -465,8 +505,9 @@ func (c *clientImpl) GetDetailOfContract(
 func (c *clientImpl) GetNextTerminationDateForItem(
 	ctx context.Context,
 	req GetNextTerminationDateForItemRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*GetNextTerminationDateForItemResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -492,8 +533,9 @@ func (c *clientImpl) GetNextTerminationDateForItem(
 func (c *clientImpl) ListContracts(
 	ctx context.Context,
 	req ListContractsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]contractv2.Contract, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -521,8 +563,9 @@ func (c *clientImpl) ListContracts(
 func (c *clientImpl) DeprecatedInvoiceDetailOfInvoice(
 	ctx context.Context,
 	req DeprecatedInvoiceDetailOfInvoiceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*invoicev2.Invoice, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -548,8 +591,9 @@ func (c *clientImpl) DeprecatedInvoiceDetailOfInvoice(
 func (c *clientImpl) InvoiceDetail(
 	ctx context.Context,
 	req InvoiceDetailRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*invoicev2.Invoice, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -575,8 +619,9 @@ func (c *clientImpl) InvoiceDetail(
 func (c *clientImpl) InvoiceGetDetailOfInvoiceSettings(
 	ctx context.Context,
 	req InvoiceGetDetailOfInvoiceSettingsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*invoicev2.InvoiceSettings, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -602,8 +647,9 @@ func (c *clientImpl) InvoiceGetDetailOfInvoiceSettings(
 func (c *clientImpl) InvoiceUpdateInvoiceSettings(
 	ctx context.Context,
 	req InvoiceUpdateInvoiceSettingsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*invoicev2.InvoiceSettings, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -629,8 +675,9 @@ func (c *clientImpl) InvoiceUpdateInvoiceSettings(
 func (c *clientImpl) InvoiceGetFileAccessToken(
 	ctx context.Context,
 	req InvoiceGetFileAccessTokenRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*InvoiceGetFileAccessTokenResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -656,8 +703,9 @@ func (c *clientImpl) InvoiceGetFileAccessToken(
 func (c *clientImpl) InvoiceListCustomerInvoices(
 	ctx context.Context,
 	req InvoiceListCustomerInvoicesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]invoicev2.Invoice, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -685,8 +733,9 @@ func (c *clientImpl) InvoiceListCustomerInvoices(
 func (c *clientImpl) ListOrders(
 	ctx context.Context,
 	req ListOrdersRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]orderv2.CustomerOrder, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -712,8 +761,9 @@ func (c *clientImpl) ListOrders(
 func (c *clientImpl) CreateOrder(
 	ctx context.Context,
 	req CreateOrderRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateOrderResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -739,8 +789,9 @@ func (c *clientImpl) CreateOrder(
 func (c *clientImpl) CreateTariffChange(
 	ctx context.Context,
 	req CreateTariffChangeRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateTariffChangeResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -768,8 +819,9 @@ func (c *clientImpl) CreateTariffChange(
 func (c *clientImpl) GetOrder(
 	ctx context.Context,
 	req GetOrderRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*orderv2.CustomerOrder, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -797,8 +849,9 @@ func (c *clientImpl) GetOrder(
 func (c *clientImpl) ListCustomerOrders(
 	ctx context.Context,
 	req ListCustomerOrdersRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]orderv2.CustomerOrder, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -826,8 +879,9 @@ func (c *clientImpl) ListCustomerOrders(
 func (c *clientImpl) ListProjectOrders(
 	ctx context.Context,
 	req ListProjectOrdersRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]orderv2.CustomerOrder, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -853,8 +907,9 @@ func (c *clientImpl) ListProjectOrders(
 func (c *clientImpl) PreviewOrder(
 	ctx context.Context,
 	req PreviewOrderRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*PreviewOrderResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -880,8 +935,9 @@ func (c *clientImpl) PreviewOrder(
 func (c *clientImpl) PreviewTariffChange(
 	ctx context.Context,
 	req PreviewTariffChangeRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*PreviewTariffChangeResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
