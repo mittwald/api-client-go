@@ -16,14 +16,17 @@ type Client interface {
 	ServicetokenAuthenticateService(
 		ctx context.Context,
 		req ServicetokenAuthenticateServiceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*ServicetokenAuthenticateServiceResponse, *http.Response, error)
 	VerificationVerifyAddress(
 		ctx context.Context,
 		req VerificationVerifyAddressRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*VerificationVerifyAddressResponse, *http.Response, error)
 	VerificationVerifyCompany(
 		ctx context.Context,
 		req VerificationVerifyCompanyRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*VerificationVerifyCompanyResponse, *http.Response, error)
 }
 type clientImpl struct {
@@ -38,8 +41,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) ServicetokenAuthenticateService(
 	ctx context.Context,
 	req ServicetokenAuthenticateServiceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*ServicetokenAuthenticateServiceResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -67,8 +71,9 @@ func (c *clientImpl) ServicetokenAuthenticateService(
 func (c *clientImpl) VerificationVerifyAddress(
 	ctx context.Context,
 	req VerificationVerifyAddressRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*VerificationVerifyAddressResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -96,8 +101,9 @@ func (c *clientImpl) VerificationVerifyAddress(
 func (c *clientImpl) VerificationVerifyCompany(
 	ctx context.Context,
 	req VerificationVerifyCompanyRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*VerificationVerifyCompanyResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}

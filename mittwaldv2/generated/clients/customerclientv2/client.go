@@ -18,106 +18,132 @@ type Client interface {
 	AcceptCustomerInvite(
 		ctx context.Context,
 		req AcceptCustomerInviteRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ListInvitesForCustomer(
 		ctx context.Context,
 		req ListInvitesForCustomerRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]membershipv2.CustomerInvite, *http.Response, error)
 	CreateCustomerInvite(
 		ctx context.Context,
 		req CreateCustomerInviteRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*membershipv2.CustomerInvite, *http.Response, error)
 	ListCustomers(
 		ctx context.Context,
 		req ListCustomersRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]customerv2.Customer, *http.Response, error)
 	CreateCustomer(
 		ctx context.Context,
 		req CreateCustomerRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateCustomerResponse, *http.Response, error)
 	CreateRecommendationSuggestion(
 		ctx context.Context,
 		req CreateRecommendationSuggestionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateRecommendationSuggestionResponse, *http.Response, error)
 	GetWallet(
 		ctx context.Context,
 		req GetWalletRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*GetWalletResponse, *http.Response, error)
 	CreateWallet(
 		ctx context.Context,
 		req CreateWalletRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateWalletResponse, *http.Response, error)
 	DeclineCustomerInvite(
 		ctx context.Context,
 		req DeclineCustomerInviteRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetCustomerInvite(
 		ctx context.Context,
 		req GetCustomerInviteRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*membershipv2.CustomerInvite, *http.Response, error)
 	DeleteCustomerInvite(
 		ctx context.Context,
 		req DeleteCustomerInviteRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetCustomerMembership(
 		ctx context.Context,
 		req GetCustomerMembershipRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*membershipv2.CustomerMembership, *http.Response, error)
 	DeleteCustomerMembership(
 		ctx context.Context,
 		req DeleteCustomerMembershipRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateCustomerMembership(
 		ctx context.Context,
 		req UpdateCustomerMembershipRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetCustomer(
 		ctx context.Context,
 		req GetCustomerRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*customerv2.Customer, *http.Response, error)
 	UpdateCustomer(
 		ctx context.Context,
 		req UpdateCustomerRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*UpdateCustomerResponse, *http.Response, error)
 	DeleteCustomer(
 		ctx context.Context,
 		req DeleteCustomerRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeleteCustomerResponse, *http.Response, error)
 	GetCustomerTokenInvite(
 		ctx context.Context,
 		req GetCustomerTokenInviteRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*membershipv2.CustomerInvite, *http.Response, error)
 	IsCustomerLegallyCompetent(
 		ctx context.Context,
 		req IsCustomerLegallyCompetentRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*IsCustomerLegallyCompetentResponse, *http.Response, error)
 	ListCustomerInvites(
 		ctx context.Context,
 		req ListCustomerInvitesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]membershipv2.CustomerInvite, *http.Response, error)
 	ListCustomerMemberships(
 		ctx context.Context,
 		req ListCustomerMembershipsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]membershipv2.CustomerMembership, *http.Response, error)
 	ListMembershipsForCustomer(
 		ctx context.Context,
 		req ListMembershipsForCustomerRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]membershipv2.CustomerMembership, *http.Response, error)
 	RequestAvatarUpload(
 		ctx context.Context,
 		req RequestAvatarUploadRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*RequestAvatarUploadResponse, *http.Response, error)
 	RemoveAvatar(
 		ctx context.Context,
 		req RemoveAvatarRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ResendCustomerInviteMail(
 		ctx context.Context,
 		req ResendCustomerInviteMailRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedLeaveCustomer(
 		ctx context.Context,
 		req DeprecatedLeaveCustomerRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
 type clientImpl struct {
@@ -132,8 +158,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) AcceptCustomerInvite(
 	ctx context.Context,
 	req AcceptCustomerInviteRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -155,8 +182,9 @@ func (c *clientImpl) AcceptCustomerInvite(
 func (c *clientImpl) ListInvitesForCustomer(
 	ctx context.Context,
 	req ListInvitesForCustomerRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]membershipv2.CustomerInvite, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -182,8 +210,9 @@ func (c *clientImpl) ListInvitesForCustomer(
 func (c *clientImpl) CreateCustomerInvite(
 	ctx context.Context,
 	req CreateCustomerInviteRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*membershipv2.CustomerInvite, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -209,8 +238,9 @@ func (c *clientImpl) CreateCustomerInvite(
 func (c *clientImpl) ListCustomers(
 	ctx context.Context,
 	req ListCustomersRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]customerv2.Customer, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -236,8 +266,9 @@ func (c *clientImpl) ListCustomers(
 func (c *clientImpl) CreateCustomer(
 	ctx context.Context,
 	req CreateCustomerRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateCustomerResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -263,8 +294,9 @@ func (c *clientImpl) CreateCustomer(
 func (c *clientImpl) CreateRecommendationSuggestion(
 	ctx context.Context,
 	req CreateRecommendationSuggestionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateRecommendationSuggestionResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -290,8 +322,9 @@ func (c *clientImpl) CreateRecommendationSuggestion(
 func (c *clientImpl) GetWallet(
 	ctx context.Context,
 	req GetWalletRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*GetWalletResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -317,8 +350,9 @@ func (c *clientImpl) GetWallet(
 func (c *clientImpl) CreateWallet(
 	ctx context.Context,
 	req CreateWalletRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateWalletResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -344,8 +378,9 @@ func (c *clientImpl) CreateWallet(
 func (c *clientImpl) DeclineCustomerInvite(
 	ctx context.Context,
 	req DeclineCustomerInviteRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -367,8 +402,9 @@ func (c *clientImpl) DeclineCustomerInvite(
 func (c *clientImpl) GetCustomerInvite(
 	ctx context.Context,
 	req GetCustomerInviteRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*membershipv2.CustomerInvite, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -394,8 +430,9 @@ func (c *clientImpl) GetCustomerInvite(
 func (c *clientImpl) DeleteCustomerInvite(
 	ctx context.Context,
 	req DeleteCustomerInviteRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -417,8 +454,9 @@ func (c *clientImpl) DeleteCustomerInvite(
 func (c *clientImpl) GetCustomerMembership(
 	ctx context.Context,
 	req GetCustomerMembershipRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*membershipv2.CustomerMembership, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -444,8 +482,9 @@ func (c *clientImpl) GetCustomerMembership(
 func (c *clientImpl) DeleteCustomerMembership(
 	ctx context.Context,
 	req DeleteCustomerMembershipRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -467,8 +506,9 @@ func (c *clientImpl) DeleteCustomerMembership(
 func (c *clientImpl) UpdateCustomerMembership(
 	ctx context.Context,
 	req UpdateCustomerMembershipRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -490,8 +530,9 @@ func (c *clientImpl) UpdateCustomerMembership(
 func (c *clientImpl) GetCustomer(
 	ctx context.Context,
 	req GetCustomerRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*customerv2.Customer, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -517,8 +558,9 @@ func (c *clientImpl) GetCustomer(
 func (c *clientImpl) UpdateCustomer(
 	ctx context.Context,
 	req UpdateCustomerRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*UpdateCustomerResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -544,8 +586,9 @@ func (c *clientImpl) UpdateCustomer(
 func (c *clientImpl) DeleteCustomer(
 	ctx context.Context,
 	req DeleteCustomerRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeleteCustomerResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -571,8 +614,9 @@ func (c *clientImpl) DeleteCustomer(
 func (c *clientImpl) GetCustomerTokenInvite(
 	ctx context.Context,
 	req GetCustomerTokenInviteRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*membershipv2.CustomerInvite, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -598,8 +642,9 @@ func (c *clientImpl) GetCustomerTokenInvite(
 func (c *clientImpl) IsCustomerLegallyCompetent(
 	ctx context.Context,
 	req IsCustomerLegallyCompetentRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*IsCustomerLegallyCompetentResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -625,8 +670,9 @@ func (c *clientImpl) IsCustomerLegallyCompetent(
 func (c *clientImpl) ListCustomerInvites(
 	ctx context.Context,
 	req ListCustomerInvitesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]membershipv2.CustomerInvite, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -652,8 +698,9 @@ func (c *clientImpl) ListCustomerInvites(
 func (c *clientImpl) ListCustomerMemberships(
 	ctx context.Context,
 	req ListCustomerMembershipsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]membershipv2.CustomerMembership, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -679,8 +726,9 @@ func (c *clientImpl) ListCustomerMemberships(
 func (c *clientImpl) ListMembershipsForCustomer(
 	ctx context.Context,
 	req ListMembershipsForCustomerRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]membershipv2.CustomerMembership, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -706,8 +754,9 @@ func (c *clientImpl) ListMembershipsForCustomer(
 func (c *clientImpl) RequestAvatarUpload(
 	ctx context.Context,
 	req RequestAvatarUploadRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*RequestAvatarUploadResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -733,8 +782,9 @@ func (c *clientImpl) RequestAvatarUpload(
 func (c *clientImpl) RemoveAvatar(
 	ctx context.Context,
 	req RemoveAvatarRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -756,8 +806,9 @@ func (c *clientImpl) RemoveAvatar(
 func (c *clientImpl) ResendCustomerInviteMail(
 	ctx context.Context,
 	req ResendCustomerInviteMailRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -781,8 +832,9 @@ func (c *clientImpl) ResendCustomerInviteMail(
 func (c *clientImpl) DeprecatedLeaveCustomer(
 	ctx context.Context,
 	req DeprecatedLeaveCustomerRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}

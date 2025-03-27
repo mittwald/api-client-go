@@ -17,10 +17,12 @@ type Client interface {
 	GetArticle(
 		ctx context.Context,
 		req GetArticleRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*articlev2.ReadableArticle, *http.Response, error)
 	ListArticles(
 		ctx context.Context,
 		req ListArticlesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]articlev2.ReadableArticle, *http.Response, error)
 }
 type clientImpl struct {
@@ -35,8 +37,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) GetArticle(
 	ctx context.Context,
 	req GetArticleRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*articlev2.ReadableArticle, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -62,8 +65,9 @@ func (c *clientImpl) GetArticle(
 func (c *clientImpl) ListArticles(
 	ctx context.Context,
 	req ListArticlesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]articlev2.ReadableArticle, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}

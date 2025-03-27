@@ -17,22 +17,27 @@ type Client interface {
 	ProjectFileSystemGetDirectories(
 		ctx context.Context,
 		req ProjectFileSystemGetDirectoriesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*projectv2.FilesystemDirectoryListing, *http.Response, error)
 	ProjectFileSystemGetDiskUsage(
 		ctx context.Context,
 		req ProjectFileSystemGetDiskUsageRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*projectv2.FilesystemUsagesDisk, *http.Response, error)
 	ProjectFileSystemGetFileContent(
 		ctx context.Context,
 		req ProjectFileSystemGetFileContentRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ProjectFileSystemGetJwt(
 		ctx context.Context,
 		req ProjectFileSystemGetJwtRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*projectv2.FsApiJwt, *http.Response, error)
 	ProjectFileSystemListFiles(
 		ctx context.Context,
 		req ProjectFileSystemListFilesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*projectv2.FilesystemDirectoryListing, *http.Response, error)
 }
 type clientImpl struct {
@@ -47,8 +52,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) ProjectFileSystemGetDirectories(
 	ctx context.Context,
 	req ProjectFileSystemGetDirectoriesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*projectv2.FilesystemDirectoryListing, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -74,8 +80,9 @@ func (c *clientImpl) ProjectFileSystemGetDirectories(
 func (c *clientImpl) ProjectFileSystemGetDiskUsage(
 	ctx context.Context,
 	req ProjectFileSystemGetDiskUsageRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*projectv2.FilesystemUsagesDisk, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -101,8 +108,9 @@ func (c *clientImpl) ProjectFileSystemGetDiskUsage(
 func (c *clientImpl) ProjectFileSystemGetFileContent(
 	ctx context.Context,
 	req ProjectFileSystemGetFileContentRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -124,8 +132,9 @@ func (c *clientImpl) ProjectFileSystemGetFileContent(
 func (c *clientImpl) ProjectFileSystemGetJwt(
 	ctx context.Context,
 	req ProjectFileSystemGetJwtRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*projectv2.FsApiJwt, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -151,8 +160,9 @@ func (c *clientImpl) ProjectFileSystemGetJwt(
 func (c *clientImpl) ProjectFileSystemListFiles(
 	ctx context.Context,
 	req ProjectFileSystemListFilesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*projectv2.FilesystemDirectoryListing, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}

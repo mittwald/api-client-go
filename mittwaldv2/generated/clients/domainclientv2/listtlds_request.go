@@ -22,7 +22,7 @@ type ListTldsRequest struct {
 
 // BuildRequest builds an *http.Request instance from this request that may be used
 // with any regular *http.Client instance.
-func (r *ListTldsRequest) BuildRequest() (*http.Request, error) {
+func (r *ListTldsRequest) BuildRequest(reqEditors ...func(req *http.Request) error) (*http.Request, error) {
 	body, contentType, err := r.body()
 	if err != nil {
 		return nil, err
@@ -33,6 +33,11 @@ func (r *ListTldsRequest) BuildRequest() (*http.Request, error) {
 		return nil, err
 	}
 	req.Header.Set("Content-Type", contentType)
+	for _, editor := range reqEditors {
+		if err := editor(req); err != nil {
+			return nil, err
+		}
+	}
 	return req, nil
 }
 

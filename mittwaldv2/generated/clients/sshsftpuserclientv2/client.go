@@ -17,42 +17,52 @@ type Client interface {
 	ListSFTPUsers(
 		ctx context.Context,
 		req ListSFTPUsersRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]sshuserv2.SftpUser, *http.Response, error)
 	CreateSFTPUser(
 		ctx context.Context,
 		req CreateSFTPUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*sshuserv2.SftpUser, *http.Response, error)
 	GetSFTPUser(
 		ctx context.Context,
 		req GetSFTPUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*sshuserv2.SftpUser, *http.Response, error)
 	DeleteSFTPUser(
 		ctx context.Context,
 		req DeleteSFTPUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateSFTPUser(
 		ctx context.Context,
 		req UpdateSFTPUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ListSSHUsers(
 		ctx context.Context,
 		req ListSSHUsersRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]sshuserv2.SshUser, *http.Response, error)
 	CreateSSHUser(
 		ctx context.Context,
 		req CreateSSHUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*sshuserv2.SshUser, *http.Response, error)
 	GetSSHUser(
 		ctx context.Context,
 		req GetSSHUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*sshuserv2.SshUser, *http.Response, error)
 	DeleteSSHUser(
 		ctx context.Context,
 		req DeleteSSHUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateSSHUser(
 		ctx context.Context,
 		req UpdateSSHUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
 type clientImpl struct {
@@ -67,8 +77,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) ListSFTPUsers(
 	ctx context.Context,
 	req ListSFTPUsersRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]sshuserv2.SftpUser, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -94,8 +105,9 @@ func (c *clientImpl) ListSFTPUsers(
 func (c *clientImpl) CreateSFTPUser(
 	ctx context.Context,
 	req CreateSFTPUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*sshuserv2.SftpUser, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -121,8 +133,9 @@ func (c *clientImpl) CreateSFTPUser(
 func (c *clientImpl) GetSFTPUser(
 	ctx context.Context,
 	req GetSFTPUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*sshuserv2.SftpUser, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -148,8 +161,9 @@ func (c *clientImpl) GetSFTPUser(
 func (c *clientImpl) DeleteSFTPUser(
 	ctx context.Context,
 	req DeleteSFTPUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -171,8 +185,9 @@ func (c *clientImpl) DeleteSFTPUser(
 func (c *clientImpl) UpdateSFTPUser(
 	ctx context.Context,
 	req UpdateSFTPUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -194,8 +209,9 @@ func (c *clientImpl) UpdateSFTPUser(
 func (c *clientImpl) ListSSHUsers(
 	ctx context.Context,
 	req ListSSHUsersRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]sshuserv2.SshUser, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -221,8 +237,9 @@ func (c *clientImpl) ListSSHUsers(
 func (c *clientImpl) CreateSSHUser(
 	ctx context.Context,
 	req CreateSSHUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*sshuserv2.SshUser, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -248,8 +265,9 @@ func (c *clientImpl) CreateSSHUser(
 func (c *clientImpl) GetSSHUser(
 	ctx context.Context,
 	req GetSSHUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*sshuserv2.SshUser, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -275,8 +293,9 @@ func (c *clientImpl) GetSSHUser(
 func (c *clientImpl) DeleteSSHUser(
 	ctx context.Context,
 	req DeleteSSHUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -298,8 +317,9 @@ func (c *clientImpl) DeleteSSHUser(
 func (c *clientImpl) UpdateSSHUser(
 	ctx context.Context,
 	req UpdateSSHUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}

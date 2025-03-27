@@ -17,34 +17,42 @@ type Client interface {
 	NewsletterSubscribeUser(
 		ctx context.Context,
 		req NewsletterSubscribeUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*NewsletterSubscribeUserResponse, *http.Response, error)
 	NewsletterGetInfo(
 		ctx context.Context,
 		req NewsletterGetInfoRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*NewsletterGetInfoResponse, *http.Response, error)
 	NewsletterUnsubscribeUser(
 		ctx context.Context,
 		req NewsletterUnsubscribeUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	CountUnreadNotifications(
 		ctx context.Context,
 		req CountUnreadNotificationsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CountUnreadNotificationsResponse, *http.Response, error)
 	ListNotifications(
 		ctx context.Context,
 		req ListNotificationsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]messagingv2.Notification, *http.Response, error)
 	ReadAllNotificationsDeprecated(
 		ctx context.Context,
 		req ReadAllNotificationsDeprecatedRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*ReadAllNotificationsDeprecatedResponse, *http.Response, error)
 	ReadAllNotifications(
 		ctx context.Context,
 		req ReadAllNotificationsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*ReadAllNotificationsResponse, *http.Response, error)
 	ReadNotification(
 		ctx context.Context,
 		req ReadNotificationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*ReadNotificationResponse, *http.Response, error)
 }
 type clientImpl struct {
@@ -59,8 +67,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) NewsletterSubscribeUser(
 	ctx context.Context,
 	req NewsletterSubscribeUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*NewsletterSubscribeUserResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -86,8 +95,9 @@ func (c *clientImpl) NewsletterSubscribeUser(
 func (c *clientImpl) NewsletterGetInfo(
 	ctx context.Context,
 	req NewsletterGetInfoRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*NewsletterGetInfoResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -113,8 +123,9 @@ func (c *clientImpl) NewsletterGetInfo(
 func (c *clientImpl) NewsletterUnsubscribeUser(
 	ctx context.Context,
 	req NewsletterUnsubscribeUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -139,8 +150,9 @@ func (c *clientImpl) NewsletterUnsubscribeUser(
 func (c *clientImpl) CountUnreadNotifications(
 	ctx context.Context,
 	req CountUnreadNotificationsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CountUnreadNotificationsResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -166,8 +178,9 @@ func (c *clientImpl) CountUnreadNotifications(
 func (c *clientImpl) ListNotifications(
 	ctx context.Context,
 	req ListNotificationsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]messagingv2.Notification, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -195,8 +208,9 @@ func (c *clientImpl) ListNotifications(
 func (c *clientImpl) ReadAllNotificationsDeprecated(
 	ctx context.Context,
 	req ReadAllNotificationsDeprecatedRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*ReadAllNotificationsDeprecatedResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -224,8 +238,9 @@ func (c *clientImpl) ReadAllNotificationsDeprecated(
 func (c *clientImpl) ReadAllNotifications(
 	ctx context.Context,
 	req ReadAllNotificationsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*ReadAllNotificationsResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -251,8 +266,9 @@ func (c *clientImpl) ReadAllNotifications(
 func (c *clientImpl) ReadNotification(
 	ctx context.Context,
 	req ReadNotificationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*ReadNotificationResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}

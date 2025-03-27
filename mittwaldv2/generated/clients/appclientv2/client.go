@@ -17,102 +17,127 @@ type Client interface {
 	ExecuteAction(
 		ctx context.Context,
 		req ExecuteActionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetApp(
 		ctx context.Context,
 		req GetAppRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*appv2.App, *http.Response, error)
 	GetAppinstallation(
 		ctx context.Context,
 		req GetAppinstallationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*appv2.AppInstallation, *http.Response, error)
 	UninstallAppinstallation(
 		ctx context.Context,
 		req UninstallAppinstallationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	PatchAppinstallation(
 		ctx context.Context,
 		req PatchAppinstallationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetAppversion(
 		ctx context.Context,
 		req GetAppversionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*appv2.AppVersion, *http.Response, error)
 	GetInstalledSystemsoftwareForAppinstallation(
 		ctx context.Context,
 		req GetInstalledSystemsoftwareForAppinstallationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]appv2.SystemSoftware, *http.Response, error)
 	GetMissingDependenciesForAppinstallation(
 		ctx context.Context,
 		req GetMissingDependenciesForAppinstallationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*GetMissingDependenciesForAppinstallationResponse, *http.Response, error)
 	GetSystemsoftware(
 		ctx context.Context,
 		req GetSystemsoftwareRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*appv2.SystemSoftware, *http.Response, error)
 	GetSystemsoftwareversion(
 		ctx context.Context,
 		req GetSystemsoftwareversionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*appv2.SystemSoftwareVersion, *http.Response, error)
 	LinkDatabase(
 		ctx context.Context,
 		req LinkDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ListAppinstallationsForUser(
 		ctx context.Context,
 		req ListAppinstallationsForUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]appv2.AppInstallation, *http.Response, error)
 	ListAppinstallations(
 		ctx context.Context,
 		req ListAppinstallationsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]appv2.AppInstallation, *http.Response, error)
 	RequestAppinstallation(
 		ctx context.Context,
 		req RequestAppinstallationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*RequestAppinstallationResponse, *http.Response, error)
 	ListApps(
 		ctx context.Context,
 		req ListAppsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]appv2.App, *http.Response, error)
 	ListAppversions(
 		ctx context.Context,
 		req ListAppversionsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]appv2.AppVersion, *http.Response, error)
 	ListSystemsoftwares(
 		ctx context.Context,
 		req ListSystemsoftwaresRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]appv2.SystemSoftware, *http.Response, error)
 	ListSystemsoftwareversions(
 		ctx context.Context,
 		req ListSystemsoftwareversionsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]appv2.SystemSoftwareVersion, *http.Response, error)
 	ListUpdateCandidatesForAppversion(
 		ctx context.Context,
 		req ListUpdateCandidatesForAppversionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]appv2.AppVersion, *http.Response, error)
 	ReplaceDatabase(
 		ctx context.Context,
 		req ReplaceDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	RequestAppinstallationCopy(
 		ctx context.Context,
 		req RequestAppinstallationCopyRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*RequestAppinstallationCopyResponse, *http.Response, error)
 	RetrieveStatus(
 		ctx context.Context,
 		req RetrieveStatusRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*appv2.AppInstallationStatus, *http.Response, error)
 	UnlinkDatabase(
 		ctx context.Context,
 		req UnlinkDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	SetDatabaseUsers(
 		ctx context.Context,
 		req SetDatabaseUsersRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedLinkDatabase(
 		ctx context.Context,
 		req DeprecatedLinkDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
 type clientImpl struct {
@@ -127,8 +152,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) ExecuteAction(
 	ctx context.Context,
 	req ExecuteActionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -150,8 +176,9 @@ func (c *clientImpl) ExecuteAction(
 func (c *clientImpl) GetApp(
 	ctx context.Context,
 	req GetAppRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*appv2.App, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -177,8 +204,9 @@ func (c *clientImpl) GetApp(
 func (c *clientImpl) GetAppinstallation(
 	ctx context.Context,
 	req GetAppinstallationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*appv2.AppInstallation, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -204,8 +232,9 @@ func (c *clientImpl) GetAppinstallation(
 func (c *clientImpl) UninstallAppinstallation(
 	ctx context.Context,
 	req UninstallAppinstallationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -227,8 +256,9 @@ func (c *clientImpl) UninstallAppinstallation(
 func (c *clientImpl) PatchAppinstallation(
 	ctx context.Context,
 	req PatchAppinstallationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -250,8 +280,9 @@ func (c *clientImpl) PatchAppinstallation(
 func (c *clientImpl) GetAppversion(
 	ctx context.Context,
 	req GetAppversionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*appv2.AppVersion, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -277,8 +308,9 @@ func (c *clientImpl) GetAppversion(
 func (c *clientImpl) GetInstalledSystemsoftwareForAppinstallation(
 	ctx context.Context,
 	req GetInstalledSystemsoftwareForAppinstallationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]appv2.SystemSoftware, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -304,8 +336,9 @@ func (c *clientImpl) GetInstalledSystemsoftwareForAppinstallation(
 func (c *clientImpl) GetMissingDependenciesForAppinstallation(
 	ctx context.Context,
 	req GetMissingDependenciesForAppinstallationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*GetMissingDependenciesForAppinstallationResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -331,8 +364,9 @@ func (c *clientImpl) GetMissingDependenciesForAppinstallation(
 func (c *clientImpl) GetSystemsoftware(
 	ctx context.Context,
 	req GetSystemsoftwareRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*appv2.SystemSoftware, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -358,8 +392,9 @@ func (c *clientImpl) GetSystemsoftware(
 func (c *clientImpl) GetSystemsoftwareversion(
 	ctx context.Context,
 	req GetSystemsoftwareversionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*appv2.SystemSoftwareVersion, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -385,8 +420,9 @@ func (c *clientImpl) GetSystemsoftwareversion(
 func (c *clientImpl) LinkDatabase(
 	ctx context.Context,
 	req LinkDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -408,8 +444,9 @@ func (c *clientImpl) LinkDatabase(
 func (c *clientImpl) ListAppinstallationsForUser(
 	ctx context.Context,
 	req ListAppinstallationsForUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]appv2.AppInstallation, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -435,8 +472,9 @@ func (c *clientImpl) ListAppinstallationsForUser(
 func (c *clientImpl) ListAppinstallations(
 	ctx context.Context,
 	req ListAppinstallationsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]appv2.AppInstallation, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -462,8 +500,9 @@ func (c *clientImpl) ListAppinstallations(
 func (c *clientImpl) RequestAppinstallation(
 	ctx context.Context,
 	req RequestAppinstallationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*RequestAppinstallationResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -489,8 +528,9 @@ func (c *clientImpl) RequestAppinstallation(
 func (c *clientImpl) ListApps(
 	ctx context.Context,
 	req ListAppsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]appv2.App, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -516,8 +556,9 @@ func (c *clientImpl) ListApps(
 func (c *clientImpl) ListAppversions(
 	ctx context.Context,
 	req ListAppversionsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]appv2.AppVersion, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -543,8 +584,9 @@ func (c *clientImpl) ListAppversions(
 func (c *clientImpl) ListSystemsoftwares(
 	ctx context.Context,
 	req ListSystemsoftwaresRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]appv2.SystemSoftware, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -570,8 +612,9 @@ func (c *clientImpl) ListSystemsoftwares(
 func (c *clientImpl) ListSystemsoftwareversions(
 	ctx context.Context,
 	req ListSystemsoftwareversionsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]appv2.SystemSoftwareVersion, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -597,8 +640,9 @@ func (c *clientImpl) ListSystemsoftwareversions(
 func (c *clientImpl) ListUpdateCandidatesForAppversion(
 	ctx context.Context,
 	req ListUpdateCandidatesForAppversionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]appv2.AppVersion, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -624,8 +668,9 @@ func (c *clientImpl) ListUpdateCandidatesForAppversion(
 func (c *clientImpl) ReplaceDatabase(
 	ctx context.Context,
 	req ReplaceDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -647,8 +692,9 @@ func (c *clientImpl) ReplaceDatabase(
 func (c *clientImpl) RequestAppinstallationCopy(
 	ctx context.Context,
 	req RequestAppinstallationCopyRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*RequestAppinstallationCopyResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -674,8 +720,9 @@ func (c *clientImpl) RequestAppinstallationCopy(
 func (c *clientImpl) RetrieveStatus(
 	ctx context.Context,
 	req RetrieveStatusRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*appv2.AppInstallationStatus, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -701,8 +748,9 @@ func (c *clientImpl) RetrieveStatus(
 func (c *clientImpl) UnlinkDatabase(
 	ctx context.Context,
 	req UnlinkDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -724,8 +772,9 @@ func (c *clientImpl) UnlinkDatabase(
 func (c *clientImpl) SetDatabaseUsers(
 	ctx context.Context,
 	req SetDatabaseUsersRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -749,8 +798,9 @@ func (c *clientImpl) SetDatabaseUsers(
 func (c *clientImpl) DeprecatedLinkDatabase(
 	ctx context.Context,
 	req DeprecatedLinkDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}

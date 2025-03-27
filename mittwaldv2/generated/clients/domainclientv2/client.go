@@ -20,238 +20,297 @@ type Client interface {
 	DeprecatedRecordASetCustom(
 		ctx context.Context,
 		req DeprecatedRecordASetCustomRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedRecordASetManagedByIngress(
 		ctx context.Context,
 		req DeprecatedRecordASetManagedByIngressRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedRecordASetManagedByIngressResponse, *http.Response, error)
 	DeprecatedRecordCnameSet(
 		ctx context.Context,
 		req DeprecatedRecordCnameSetRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedRecordMxSetCustom(
 		ctx context.Context,
 		req DeprecatedRecordMxSetCustomRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedRecordMxSetManaged(
 		ctx context.Context,
 		req DeprecatedRecordMxSetManagedRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedRecordSrvSet(
 		ctx context.Context,
 		req DeprecatedRecordSrvSetRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedRecordTxtSet(
 		ctx context.Context,
 		req DeprecatedRecordTxtSetRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedChangeOwnercOfDomain(
 		ctx context.Context,
 		req DeprecatedChangeOwnercOfDomainRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedChangeOwnercOfDomainResponse, *http.Response, error)
 	DeprecatedChangeProjectOfDomain(
 		ctx context.Context,
 		req DeprecatedChangeProjectOfDomainRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ListDomains(
 		ctx context.Context,
 		req ListDomainsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]domainv2.Domain, *http.Response, error)
 	DeprecatedCheckDomainRegistrability(
 		ctx context.Context,
 		req DeprecatedCheckDomainRegistrabilityRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedCheckDomainRegistrabilityResponse, *http.Response, error)
 	DeprecatedDeclareNameservers(
 		ctx context.Context,
 		req DeprecatedDeclareNameserversRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateDomainNameservers(
 		ctx context.Context,
 		req UpdateDomainNameserversRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedDeclareProcessChangeAuthcode(
 		ctx context.Context,
 		req DeprecatedDeclareProcessChangeAuthcodeRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedDeclareProcessChangeAuthcodeResponse, *http.Response, error)
 	DeprecatedDeclareProcessChangeHandles(
 		ctx context.Context,
 		req DeprecatedDeclareProcessChangeHandlesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedDeclareProcessChangeHandlesResponse, *http.Response, error)
 	DeprecatedGetHandleFields(
 		ctx context.Context,
 		req DeprecatedGetHandleFieldsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedGetHandleFieldsResponse, *http.Response, error)
 	DeprecatedGetScreenshotForDomain(
 		ctx context.Context,
 		req DeprecatedGetScreenshotForDomainRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedGetScreenshotForDomainResponse, *http.Response, error)
 	DeprecatedListDomains(
 		ctx context.Context,
 		req DeprecatedListDomainsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]domainv2.Domain, *http.Response, error)
 	DeprecatedListIngresses(
 		ctx context.Context,
 		req DeprecatedListIngressesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]ingressv2.IngressDeprecated, *http.Response, error)
 	DeprecatedPaths(
 		ctx context.Context,
 		req DeprecatedPathsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateIngressPaths(
 		ctx context.Context,
 		req UpdateIngressPathsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedTLS(
 		ctx context.Context,
 		req DeprecatedTLSRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedTLSResponse, *http.Response, error)
 	UpdateIngressTLS(
 		ctx context.Context,
 		req UpdateIngressTLSRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*UpdateIngressTLSResponse, *http.Response, error)
 	CreateDNSZone(
 		ctx context.Context,
 		req CreateDNSZoneRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateDNSZoneResponse, *http.Response, error)
 	GetDNSZone(
 		ctx context.Context,
 		req GetDNSZoneRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*dnsv2.Zone, *http.Response, error)
 	DeleteDNSZone(
 		ctx context.Context,
 		req DeleteDNSZoneRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ListDNSZones(
 		ctx context.Context,
 		req ListDNSZonesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]dnsv2.Zone, *http.Response, error)
 	SetRecordSetManaged(
 		ctx context.Context,
 		req SetRecordSetManagedRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*SetRecordSetManagedResponse, *http.Response, error)
 	UpdateRecordSet(
 		ctx context.Context,
 		req UpdateRecordSetRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	AbortDomainDeclaration(
 		ctx context.Context,
 		req AbortDomainDeclarationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	CheckDomainRegistrability(
 		ctx context.Context,
 		req CheckDomainRegistrabilityRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CheckDomainRegistrabilityResponse, *http.Response, error)
 	CheckDomainTransferability(
 		ctx context.Context,
 		req CheckDomainTransferabilityRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CheckDomainTransferabilityResponse, *http.Response, error)
 	CreateDomainAuthCode(
 		ctx context.Context,
 		req CreateDomainAuthCodeRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateDomainAuthCodeResponse, *http.Response, error)
 	GetDomain(
 		ctx context.Context,
 		req GetDomainRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*domainv2.Domain, *http.Response, error)
 	DeleteDomain(
 		ctx context.Context,
 		req DeleteDomainRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*DeleteDomainResponse, *http.Response, error)
 	GetLatestScreenshot(
 		ctx context.Context,
 		req GetLatestScreenshotRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*GetLatestScreenshotResponse, *http.Response, error)
 	ListTldContactSchemas(
 		ctx context.Context,
 		req ListTldContactSchemasRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*ListTldContactSchemasResponse, *http.Response, error)
 	ListTlds(
 		ctx context.Context,
 		req ListTldsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]domainv2.TopLevel, *http.Response, error)
 	ResendDomainEmail(
 		ctx context.Context,
 		req ResendDomainEmailRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	Suggest(
 		ctx context.Context,
 		req SuggestRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*domainv2.SuggestedDomains, *http.Response, error)
 	UpdateDomainAuthCode(
 		ctx context.Context,
 		req UpdateDomainAuthCodeRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*UpdateDomainAuthCodeResponse, *http.Response, error)
 	UpdateDomainContact(
 		ctx context.Context,
 		req UpdateDomainContactRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*UpdateDomainContactResponse, *http.Response, error)
 	UpdateDomainProjectID(
 		ctx context.Context,
 		req UpdateDomainProjectIDRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ListIngresses(
 		ctx context.Context,
 		req ListIngressesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]ingressv2.Ingress, *http.Response, error)
 	CreateIngress(
 		ctx context.Context,
 		req CreateIngressRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateIngressResponse, *http.Response, error)
 	GetIngress(
 		ctx context.Context,
 		req GetIngressRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*ingressv2.Ingress, *http.Response, error)
 	DeleteIngress(
 		ctx context.Context,
 		req DeleteIngressRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	IngressVerifyOwnership(
 		ctx context.Context,
 		req IngressVerifyOwnershipRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*IngressVerifyOwnershipResponse, *http.Response, error)
 	ListIngressesCompatibleWithCertificate(
 		ctx context.Context,
 		req ListIngressesCompatibleWithCertificateRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]ingressv2.Ingress, *http.Response, error)
 	RequestIngressAcmeCertificateIssuance(
 		ctx context.Context,
 		req RequestIngressAcmeCertificateIssuanceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	CheckReplaceCertificate(
 		ctx context.Context,
 		req CheckReplaceCertificateRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*sslv2.CheckReplaceCertificateResponse, *http.Response, error)
 	ListCertificateRequests(
 		ctx context.Context,
 		req ListCertificateRequestsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]sslv2.CertificateRequest, *http.Response, error)
 	CreateCertificateRequest(
 		ctx context.Context,
 		req CreateCertificateRequestRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*sslv2.CertificateRequestCreateResponse, *http.Response, error)
 	DeleteCertificateRequest(
 		ctx context.Context,
 		req DeleteCertificateRequestRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeleteCertificate(
 		ctx context.Context,
 		req DeleteCertificateRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetCertificateRequest(
 		ctx context.Context,
 		req GetCertificateRequestRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*sslv2.CertificateRequest, *http.Response, error)
 	GetCertificate(
 		ctx context.Context,
 		req GetCertificateRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*sslv2.Certificate, *http.Response, error)
 	ReplaceCertificate(
 		ctx context.Context,
 		req ReplaceCertificateRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ListCertificates(
 		ctx context.Context,
 		req ListCertificatesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]sslv2.Certificate, *http.Response, error)
 }
 type clientImpl struct {
@@ -268,8 +327,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) DeprecatedRecordASetCustom(
 	ctx context.Context,
 	req DeprecatedRecordASetCustomRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -293,8 +353,9 @@ func (c *clientImpl) DeprecatedRecordASetCustom(
 func (c *clientImpl) DeprecatedRecordASetManagedByIngress(
 	ctx context.Context,
 	req DeprecatedRecordASetManagedByIngressRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeprecatedRecordASetManagedByIngressResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -322,8 +383,9 @@ func (c *clientImpl) DeprecatedRecordASetManagedByIngress(
 func (c *clientImpl) DeprecatedRecordCnameSet(
 	ctx context.Context,
 	req DeprecatedRecordCnameSetRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -347,8 +409,9 @@ func (c *clientImpl) DeprecatedRecordCnameSet(
 func (c *clientImpl) DeprecatedRecordMxSetCustom(
 	ctx context.Context,
 	req DeprecatedRecordMxSetCustomRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -372,8 +435,9 @@ func (c *clientImpl) DeprecatedRecordMxSetCustom(
 func (c *clientImpl) DeprecatedRecordMxSetManaged(
 	ctx context.Context,
 	req DeprecatedRecordMxSetManagedRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -397,8 +461,9 @@ func (c *clientImpl) DeprecatedRecordMxSetManaged(
 func (c *clientImpl) DeprecatedRecordSrvSet(
 	ctx context.Context,
 	req DeprecatedRecordSrvSetRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -422,8 +487,9 @@ func (c *clientImpl) DeprecatedRecordSrvSet(
 func (c *clientImpl) DeprecatedRecordTxtSet(
 	ctx context.Context,
 	req DeprecatedRecordTxtSetRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -447,8 +513,9 @@ func (c *clientImpl) DeprecatedRecordTxtSet(
 func (c *clientImpl) DeprecatedChangeOwnercOfDomain(
 	ctx context.Context,
 	req DeprecatedChangeOwnercOfDomainRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeprecatedChangeOwnercOfDomainResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -476,8 +543,9 @@ func (c *clientImpl) DeprecatedChangeOwnercOfDomain(
 func (c *clientImpl) DeprecatedChangeProjectOfDomain(
 	ctx context.Context,
 	req DeprecatedChangeProjectOfDomainRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -499,8 +567,9 @@ func (c *clientImpl) DeprecatedChangeProjectOfDomain(
 func (c *clientImpl) ListDomains(
 	ctx context.Context,
 	req ListDomainsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]domainv2.Domain, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -528,8 +597,9 @@ func (c *clientImpl) ListDomains(
 func (c *clientImpl) DeprecatedCheckDomainRegistrability(
 	ctx context.Context,
 	req DeprecatedCheckDomainRegistrabilityRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeprecatedCheckDomainRegistrabilityResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -557,8 +627,9 @@ func (c *clientImpl) DeprecatedCheckDomainRegistrability(
 func (c *clientImpl) DeprecatedDeclareNameservers(
 	ctx context.Context,
 	req DeprecatedDeclareNameserversRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -580,8 +651,9 @@ func (c *clientImpl) DeprecatedDeclareNameservers(
 func (c *clientImpl) UpdateDomainNameservers(
 	ctx context.Context,
 	req UpdateDomainNameserversRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -605,8 +677,9 @@ func (c *clientImpl) UpdateDomainNameservers(
 func (c *clientImpl) DeprecatedDeclareProcessChangeAuthcode(
 	ctx context.Context,
 	req DeprecatedDeclareProcessChangeAuthcodeRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeprecatedDeclareProcessChangeAuthcodeResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -634,8 +707,9 @@ func (c *clientImpl) DeprecatedDeclareProcessChangeAuthcode(
 func (c *clientImpl) DeprecatedDeclareProcessChangeHandles(
 	ctx context.Context,
 	req DeprecatedDeclareProcessChangeHandlesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeprecatedDeclareProcessChangeHandlesResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -663,8 +737,9 @@ func (c *clientImpl) DeprecatedDeclareProcessChangeHandles(
 func (c *clientImpl) DeprecatedGetHandleFields(
 	ctx context.Context,
 	req DeprecatedGetHandleFieldsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeprecatedGetHandleFieldsResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -690,8 +765,9 @@ func (c *clientImpl) DeprecatedGetHandleFields(
 func (c *clientImpl) DeprecatedGetScreenshotForDomain(
 	ctx context.Context,
 	req DeprecatedGetScreenshotForDomainRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeprecatedGetScreenshotForDomainResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -719,8 +795,9 @@ func (c *clientImpl) DeprecatedGetScreenshotForDomain(
 func (c *clientImpl) DeprecatedListDomains(
 	ctx context.Context,
 	req DeprecatedListDomainsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]domainv2.Domain, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -748,8 +825,9 @@ func (c *clientImpl) DeprecatedListDomains(
 func (c *clientImpl) DeprecatedListIngresses(
 	ctx context.Context,
 	req DeprecatedListIngressesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]ingressv2.IngressDeprecated, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -777,8 +855,9 @@ func (c *clientImpl) DeprecatedListIngresses(
 func (c *clientImpl) DeprecatedPaths(
 	ctx context.Context,
 	req DeprecatedPathsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -800,8 +879,9 @@ func (c *clientImpl) DeprecatedPaths(
 func (c *clientImpl) UpdateIngressPaths(
 	ctx context.Context,
 	req UpdateIngressPathsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -825,8 +905,9 @@ func (c *clientImpl) UpdateIngressPaths(
 func (c *clientImpl) DeprecatedTLS(
 	ctx context.Context,
 	req DeprecatedTLSRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeprecatedTLSResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -852,8 +933,9 @@ func (c *clientImpl) DeprecatedTLS(
 func (c *clientImpl) UpdateIngressTLS(
 	ctx context.Context,
 	req UpdateIngressTLSRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*UpdateIngressTLSResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -879,8 +961,9 @@ func (c *clientImpl) UpdateIngressTLS(
 func (c *clientImpl) CreateDNSZone(
 	ctx context.Context,
 	req CreateDNSZoneRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateDNSZoneResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -906,8 +989,9 @@ func (c *clientImpl) CreateDNSZone(
 func (c *clientImpl) GetDNSZone(
 	ctx context.Context,
 	req GetDNSZoneRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*dnsv2.Zone, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -933,8 +1017,9 @@ func (c *clientImpl) GetDNSZone(
 func (c *clientImpl) DeleteDNSZone(
 	ctx context.Context,
 	req DeleteDNSZoneRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -956,8 +1041,9 @@ func (c *clientImpl) DeleteDNSZone(
 func (c *clientImpl) ListDNSZones(
 	ctx context.Context,
 	req ListDNSZonesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]dnsv2.Zone, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -983,8 +1069,9 @@ func (c *clientImpl) ListDNSZones(
 func (c *clientImpl) SetRecordSetManaged(
 	ctx context.Context,
 	req SetRecordSetManagedRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*SetRecordSetManagedResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1010,8 +1097,9 @@ func (c *clientImpl) SetRecordSetManaged(
 func (c *clientImpl) UpdateRecordSet(
 	ctx context.Context,
 	req UpdateRecordSetRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1035,8 +1123,9 @@ func (c *clientImpl) UpdateRecordSet(
 func (c *clientImpl) AbortDomainDeclaration(
 	ctx context.Context,
 	req AbortDomainDeclarationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1060,8 +1149,9 @@ func (c *clientImpl) AbortDomainDeclaration(
 func (c *clientImpl) CheckDomainRegistrability(
 	ctx context.Context,
 	req CheckDomainRegistrabilityRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CheckDomainRegistrabilityResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1089,8 +1179,9 @@ func (c *clientImpl) CheckDomainRegistrability(
 func (c *clientImpl) CheckDomainTransferability(
 	ctx context.Context,
 	req CheckDomainTransferabilityRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CheckDomainTransferabilityResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1116,8 +1207,9 @@ func (c *clientImpl) CheckDomainTransferability(
 func (c *clientImpl) CreateDomainAuthCode(
 	ctx context.Context,
 	req CreateDomainAuthCodeRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateDomainAuthCodeResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1143,8 +1235,9 @@ func (c *clientImpl) CreateDomainAuthCode(
 func (c *clientImpl) GetDomain(
 	ctx context.Context,
 	req GetDomainRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*domainv2.Domain, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1170,8 +1263,9 @@ func (c *clientImpl) GetDomain(
 func (c *clientImpl) DeleteDomain(
 	ctx context.Context,
 	req DeleteDomainRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*DeleteDomainResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1197,8 +1291,9 @@ func (c *clientImpl) DeleteDomain(
 func (c *clientImpl) GetLatestScreenshot(
 	ctx context.Context,
 	req GetLatestScreenshotRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*GetLatestScreenshotResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1226,8 +1321,9 @@ func (c *clientImpl) GetLatestScreenshot(
 func (c *clientImpl) ListTldContactSchemas(
 	ctx context.Context,
 	req ListTldContactSchemasRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*ListTldContactSchemasResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1255,8 +1351,9 @@ func (c *clientImpl) ListTldContactSchemas(
 func (c *clientImpl) ListTlds(
 	ctx context.Context,
 	req ListTldsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]domainv2.TopLevel, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1284,8 +1381,9 @@ func (c *clientImpl) ListTlds(
 func (c *clientImpl) ResendDomainEmail(
 	ctx context.Context,
 	req ResendDomainEmailRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1307,8 +1405,9 @@ func (c *clientImpl) ResendDomainEmail(
 func (c *clientImpl) Suggest(
 	ctx context.Context,
 	req SuggestRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*domainv2.SuggestedDomains, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1336,8 +1435,9 @@ func (c *clientImpl) Suggest(
 func (c *clientImpl) UpdateDomainAuthCode(
 	ctx context.Context,
 	req UpdateDomainAuthCodeRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*UpdateDomainAuthCodeResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1363,8 +1463,9 @@ func (c *clientImpl) UpdateDomainAuthCode(
 func (c *clientImpl) UpdateDomainContact(
 	ctx context.Context,
 	req UpdateDomainContactRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*UpdateDomainContactResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1390,8 +1491,9 @@ func (c *clientImpl) UpdateDomainContact(
 func (c *clientImpl) UpdateDomainProjectID(
 	ctx context.Context,
 	req UpdateDomainProjectIDRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1413,8 +1515,9 @@ func (c *clientImpl) UpdateDomainProjectID(
 func (c *clientImpl) ListIngresses(
 	ctx context.Context,
 	req ListIngressesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]ingressv2.Ingress, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1440,8 +1543,9 @@ func (c *clientImpl) ListIngresses(
 func (c *clientImpl) CreateIngress(
 	ctx context.Context,
 	req CreateIngressRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateIngressResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1467,8 +1571,9 @@ func (c *clientImpl) CreateIngress(
 func (c *clientImpl) GetIngress(
 	ctx context.Context,
 	req GetIngressRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*ingressv2.Ingress, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1494,8 +1599,9 @@ func (c *clientImpl) GetIngress(
 func (c *clientImpl) DeleteIngress(
 	ctx context.Context,
 	req DeleteIngressRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1517,8 +1623,9 @@ func (c *clientImpl) DeleteIngress(
 func (c *clientImpl) IngressVerifyOwnership(
 	ctx context.Context,
 	req IngressVerifyOwnershipRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*IngressVerifyOwnershipResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1546,8 +1653,9 @@ func (c *clientImpl) IngressVerifyOwnership(
 func (c *clientImpl) ListIngressesCompatibleWithCertificate(
 	ctx context.Context,
 	req ListIngressesCompatibleWithCertificateRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]ingressv2.Ingress, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1573,8 +1681,9 @@ func (c *clientImpl) ListIngressesCompatibleWithCertificate(
 func (c *clientImpl) RequestIngressAcmeCertificateIssuance(
 	ctx context.Context,
 	req RequestIngressAcmeCertificateIssuanceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1598,8 +1707,9 @@ func (c *clientImpl) RequestIngressAcmeCertificateIssuance(
 func (c *clientImpl) CheckReplaceCertificate(
 	ctx context.Context,
 	req CheckReplaceCertificateRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*sslv2.CheckReplaceCertificateResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1625,8 +1735,9 @@ func (c *clientImpl) CheckReplaceCertificate(
 func (c *clientImpl) ListCertificateRequests(
 	ctx context.Context,
 	req ListCertificateRequestsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]sslv2.CertificateRequest, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1652,8 +1763,9 @@ func (c *clientImpl) ListCertificateRequests(
 func (c *clientImpl) CreateCertificateRequest(
 	ctx context.Context,
 	req CreateCertificateRequestRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*sslv2.CertificateRequestCreateResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1679,8 +1791,9 @@ func (c *clientImpl) CreateCertificateRequest(
 func (c *clientImpl) DeleteCertificateRequest(
 	ctx context.Context,
 	req DeleteCertificateRequestRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1702,8 +1815,9 @@ func (c *clientImpl) DeleteCertificateRequest(
 func (c *clientImpl) DeleteCertificate(
 	ctx context.Context,
 	req DeleteCertificateRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1725,8 +1839,9 @@ func (c *clientImpl) DeleteCertificate(
 func (c *clientImpl) GetCertificateRequest(
 	ctx context.Context,
 	req GetCertificateRequestRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*sslv2.CertificateRequest, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1752,8 +1867,9 @@ func (c *clientImpl) GetCertificateRequest(
 func (c *clientImpl) GetCertificate(
 	ctx context.Context,
 	req GetCertificateRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*sslv2.Certificate, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -1779,8 +1895,9 @@ func (c *clientImpl) GetCertificate(
 func (c *clientImpl) ReplaceCertificate(
 	ctx context.Context,
 	req ReplaceCertificateRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -1802,8 +1919,9 @@ func (c *clientImpl) ReplaceCertificate(
 func (c *clientImpl) ListCertificates(
 	ctx context.Context,
 	req ListCertificatesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]sslv2.Certificate, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}

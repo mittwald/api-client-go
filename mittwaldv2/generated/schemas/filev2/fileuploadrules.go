@@ -19,6 +19,9 @@ import (
 //    "fileTypes":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.file.FileType"}
+//    "maxNameLength":
+//        type: "integer"
+//        example: 80
 //    "maxSizeInBytes":
 //        type: "integer"
 //        example: 1000000
@@ -64,10 +67,12 @@ import (
 //    - "mimeTypes"
 //    - "fileTypes"
 //    - "extensions"
+//    - "maxNameLength"
 
 type FileUploadRules struct {
 	Extensions     []string                   `json:"extensions"`
 	FileTypes      []FileType                 `json:"fileTypes"`
+	MaxNameLength  int64                      `json:"maxNameLength"`
 	MaxSizeInBytes int64                      `json:"maxSizeInBytes"`
 	MaxSizeInKB    int64                      `json:"maxSizeInKB"`
 	MaxSizeInKb    int64                      `json:"maxSizeInKb"`

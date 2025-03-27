@@ -17,98 +17,122 @@ type Client interface {
 	ListMysqlDatabases(
 		ctx context.Context,
 		req ListMysqlDatabasesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]databasev2.MySqlDatabase, *http.Response, error)
 	CreateMysqlDatabase(
 		ctx context.Context,
 		req CreateMysqlDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateMysqlDatabaseResponse, *http.Response, error)
 	ListMysqlUsers(
 		ctx context.Context,
 		req ListMysqlUsersRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]databasev2.MySqlUser, *http.Response, error)
 	CreateMysqlUser(
 		ctx context.Context,
 		req CreateMysqlUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateMysqlUserResponse, *http.Response, error)
 	ListRedisDatabases(
 		ctx context.Context,
 		req ListRedisDatabasesRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]databasev2.RedisDatabase, *http.Response, error)
 	CreateRedisDatabase(
 		ctx context.Context,
 		req CreateRedisDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*CreateRedisDatabaseResponse, *http.Response, error)
 	GetMysqlDatabase(
 		ctx context.Context,
 		req GetMysqlDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*databasev2.MySqlDatabase, *http.Response, error)
 	DeleteMysqlDatabase(
 		ctx context.Context,
 		req DeleteMysqlDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetMysqlUser(
 		ctx context.Context,
 		req GetMysqlUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*databasev2.MySqlUser, *http.Response, error)
 	UpdateMysqlUser(
 		ctx context.Context,
 		req UpdateMysqlUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeleteMysqlUser(
 		ctx context.Context,
 		req DeleteMysqlUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetRedisDatabase(
 		ctx context.Context,
 		req GetRedisDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*databasev2.RedisDatabase, *http.Response, error)
 	DeleteRedisDatabase(
 		ctx context.Context,
 		req DeleteRedisDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DisableMysqlUser(
 		ctx context.Context,
 		req DisableMysqlUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	EnableMysqlUser(
 		ctx context.Context,
 		req EnableMysqlUserRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetMysqlUserPhpMyAdminURL(
 		ctx context.Context,
 		req GetMysqlUserPhpMyAdminURLRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*databasev2.PhpMyAdminURL, *http.Response, error)
 	ListMysqlCharsets(
 		ctx context.Context,
 		req ListMysqlCharsetsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]databasev2.MySqlCharacterSettings, *http.Response, error)
 	ListMysqlVersions(
 		ctx context.Context,
 		req ListMysqlVersionsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]databasev2.MySqlVersion, *http.Response, error)
 	ListRedisVersions(
 		ctx context.Context,
 		req ListRedisVersionsRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]databasev2.RedisVersion, *http.Response, error)
 	UpdateMysqlDatabaseDefaultCharset(
 		ctx context.Context,
 		req UpdateMysqlDatabaseDefaultCharsetRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateMysqlDatabaseDescription(
 		ctx context.Context,
 		req UpdateMysqlDatabaseDescriptionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateMysqlUserPassword(
 		ctx context.Context,
 		req UpdateMysqlUserPasswordRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateRedisDatabaseConfiguration(
 		ctx context.Context,
 		req UpdateRedisDatabaseConfigurationRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateRedisDatabaseDescription(
 		ctx context.Context,
 		req UpdateRedisDatabaseDescriptionRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
 type clientImpl struct {
@@ -123,8 +147,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) ListMysqlDatabases(
 	ctx context.Context,
 	req ListMysqlDatabasesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]databasev2.MySqlDatabase, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -150,8 +175,9 @@ func (c *clientImpl) ListMysqlDatabases(
 func (c *clientImpl) CreateMysqlDatabase(
 	ctx context.Context,
 	req CreateMysqlDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateMysqlDatabaseResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -177,8 +203,9 @@ func (c *clientImpl) CreateMysqlDatabase(
 func (c *clientImpl) ListMysqlUsers(
 	ctx context.Context,
 	req ListMysqlUsersRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]databasev2.MySqlUser, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -204,8 +231,9 @@ func (c *clientImpl) ListMysqlUsers(
 func (c *clientImpl) CreateMysqlUser(
 	ctx context.Context,
 	req CreateMysqlUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateMysqlUserResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -231,8 +259,9 @@ func (c *clientImpl) CreateMysqlUser(
 func (c *clientImpl) ListRedisDatabases(
 	ctx context.Context,
 	req ListRedisDatabasesRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]databasev2.RedisDatabase, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -258,8 +287,9 @@ func (c *clientImpl) ListRedisDatabases(
 func (c *clientImpl) CreateRedisDatabase(
 	ctx context.Context,
 	req CreateRedisDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*CreateRedisDatabaseResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -285,8 +315,9 @@ func (c *clientImpl) CreateRedisDatabase(
 func (c *clientImpl) GetMysqlDatabase(
 	ctx context.Context,
 	req GetMysqlDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*databasev2.MySqlDatabase, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -312,8 +343,9 @@ func (c *clientImpl) GetMysqlDatabase(
 func (c *clientImpl) DeleteMysqlDatabase(
 	ctx context.Context,
 	req DeleteMysqlDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -335,8 +367,9 @@ func (c *clientImpl) DeleteMysqlDatabase(
 func (c *clientImpl) GetMysqlUser(
 	ctx context.Context,
 	req GetMysqlUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*databasev2.MySqlUser, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -362,8 +395,9 @@ func (c *clientImpl) GetMysqlUser(
 func (c *clientImpl) UpdateMysqlUser(
 	ctx context.Context,
 	req UpdateMysqlUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -385,8 +419,9 @@ func (c *clientImpl) UpdateMysqlUser(
 func (c *clientImpl) DeleteMysqlUser(
 	ctx context.Context,
 	req DeleteMysqlUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -408,8 +443,9 @@ func (c *clientImpl) DeleteMysqlUser(
 func (c *clientImpl) GetRedisDatabase(
 	ctx context.Context,
 	req GetRedisDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*databasev2.RedisDatabase, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -435,8 +471,9 @@ func (c *clientImpl) GetRedisDatabase(
 func (c *clientImpl) DeleteRedisDatabase(
 	ctx context.Context,
 	req DeleteRedisDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -458,8 +495,9 @@ func (c *clientImpl) DeleteRedisDatabase(
 func (c *clientImpl) DisableMysqlUser(
 	ctx context.Context,
 	req DisableMysqlUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -481,8 +519,9 @@ func (c *clientImpl) DisableMysqlUser(
 func (c *clientImpl) EnableMysqlUser(
 	ctx context.Context,
 	req EnableMysqlUserRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -504,8 +543,9 @@ func (c *clientImpl) EnableMysqlUser(
 func (c *clientImpl) GetMysqlUserPhpMyAdminURL(
 	ctx context.Context,
 	req GetMysqlUserPhpMyAdminURLRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*databasev2.PhpMyAdminURL, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -531,8 +571,9 @@ func (c *clientImpl) GetMysqlUserPhpMyAdminURL(
 func (c *clientImpl) ListMysqlCharsets(
 	ctx context.Context,
 	req ListMysqlCharsetsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]databasev2.MySqlCharacterSettings, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -558,8 +599,9 @@ func (c *clientImpl) ListMysqlCharsets(
 func (c *clientImpl) ListMysqlVersions(
 	ctx context.Context,
 	req ListMysqlVersionsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]databasev2.MySqlVersion, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -585,8 +627,9 @@ func (c *clientImpl) ListMysqlVersions(
 func (c *clientImpl) ListRedisVersions(
 	ctx context.Context,
 	req ListRedisVersionsRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]databasev2.RedisVersion, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -612,8 +655,9 @@ func (c *clientImpl) ListRedisVersions(
 func (c *clientImpl) UpdateMysqlDatabaseDefaultCharset(
 	ctx context.Context,
 	req UpdateMysqlDatabaseDefaultCharsetRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -635,8 +679,9 @@ func (c *clientImpl) UpdateMysqlDatabaseDefaultCharset(
 func (c *clientImpl) UpdateMysqlDatabaseDescription(
 	ctx context.Context,
 	req UpdateMysqlDatabaseDescriptionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -658,8 +703,9 @@ func (c *clientImpl) UpdateMysqlDatabaseDescription(
 func (c *clientImpl) UpdateMysqlUserPassword(
 	ctx context.Context,
 	req UpdateMysqlUserPasswordRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -681,8 +727,9 @@ func (c *clientImpl) UpdateMysqlUserPassword(
 func (c *clientImpl) UpdateRedisDatabaseConfiguration(
 	ctx context.Context,
 	req UpdateRedisDatabaseConfigurationRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -704,8 +751,9 @@ func (c *clientImpl) UpdateRedisDatabaseConfiguration(
 func (c *clientImpl) UpdateRedisDatabaseDescription(
 	ctx context.Context,
 	req UpdateRedisDatabaseDescriptionRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, err
 	}

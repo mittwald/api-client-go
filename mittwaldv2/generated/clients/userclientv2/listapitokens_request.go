@@ -1,6 +1,7 @@
 package userclientv2
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -16,11 +17,14 @@ import (
 //
 // [1]: https://developer.mittwald.de/docs/v2/reference/user/user-list-api-tokens
 type ListAPITokensRequest struct {
+	Limit *int64
+	Skip  *int64
+	Page  *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
 // with any regular *http.Client instance.
-func (r *ListAPITokensRequest) BuildRequest() (*http.Request, error) {
+func (r *ListAPITokensRequest) BuildRequest(reqEditors ...func(req *http.Request) error) (*http.Request, error) {
 	body, contentType, err := r.body()
 	if err != nil {
 		return nil, err
@@ -31,6 +35,11 @@ func (r *ListAPITokensRequest) BuildRequest() (*http.Request, error) {
 		return nil, err
 	}
 	req.Header.Set("Content-Type", contentType)
+	for _, editor := range reqEditors {
+		if err := editor(req); err != nil {
+			return nil, err
+		}
+	}
 	return req, nil
 }
 
@@ -40,11 +49,22 @@ func (r *ListAPITokensRequest) body() (io.Reader, string, error) {
 
 func (r *ListAPITokensRequest) url() string {
 	u := url.URL{
-		Path: "/v2/users/self/api-tokens",
+		Path:     "/v2/users/self/api-tokens",
+		RawQuery: r.query().Encode(),
 	}
 	return u.String()
 }
 
 func (r *ListAPITokensRequest) query() url.Values {
-	return nil
+	q := make(url.Values)
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
+	}
+	return q
 }

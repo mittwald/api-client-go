@@ -16,18 +16,22 @@ type Client interface {
 	GetPerformanceData(
 		ctx context.Context,
 		req GetPerformanceDataRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*GetPerformanceDataResponse, *http.Response, error)
 	GetStraceData(
 		ctx context.Context,
 		req GetStraceDataRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*GetStraceDataResponse, *http.Response, error)
 	ListPerformanceDataForProject(
 		ctx context.Context,
 		req ListPerformanceDataForProjectRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*[]ListPerformanceDataForProjectResponseItem, *http.Response, error)
 	ScheduleStrace(
 		ctx context.Context,
 		req ScheduleStraceRequest,
+		reqEditors ...func(req *http.Request) error,
 	) (*ScheduleStraceResponse, *http.Response, error)
 }
 type clientImpl struct {
@@ -42,8 +46,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) GetPerformanceData(
 	ctx context.Context,
 	req GetPerformanceDataRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*GetPerformanceDataResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -69,8 +74,9 @@ func (c *clientImpl) GetPerformanceData(
 func (c *clientImpl) GetStraceData(
 	ctx context.Context,
 	req GetStraceDataRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*GetStraceDataResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -96,8 +102,9 @@ func (c *clientImpl) GetStraceData(
 func (c *clientImpl) ListPerformanceDataForProject(
 	ctx context.Context,
 	req ListPerformanceDataForProjectRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*[]ListPerformanceDataForProjectResponseItem, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -123,8 +130,9 @@ func (c *clientImpl) ListPerformanceDataForProject(
 func (c *clientImpl) ScheduleStrace(
 	ctx context.Context,
 	req ScheduleStraceRequest,
+	reqEditors ...func(req *http.Request) error,
 ) (*ScheduleStraceResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest()
+	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
 	}
