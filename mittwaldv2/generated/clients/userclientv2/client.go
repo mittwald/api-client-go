@@ -484,6 +484,8 @@ func (c *clientImpl) DeprecatedConfirmPasswordReset(
 }
 
 // Create a new issue.
+//
+// was replaced by /v2/users/self/feedback.
 func (c *clientImpl) DeprecatedCreateIssue(
 	ctx context.Context,
 	req DeprecatedCreateIssueRequest,
@@ -762,6 +764,8 @@ func (c *clientImpl) DeprecatedResendVerificationEmail(
 }
 
 // Request a new avatar upload
+//
+// Use /v2/users/{userId}/avatar instead.
 func (c *clientImpl) DeprecatedServiceAvatarRequestUpload(
 	ctx context.Context,
 	req DeprecatedServiceAvatarRequestUploadRequest,
@@ -790,6 +794,8 @@ func (c *clientImpl) DeprecatedServiceAvatarRequestUpload(
 }
 
 // Remove Avatar
+//
+// Use /v2/users/{userId}/avatar instead.
 func (c *clientImpl) DeprecatedServiceAvatarRemove(
 	ctx context.Context,
 	req DeprecatedServiceAvatarRemoveRequest,
@@ -814,6 +820,8 @@ func (c *clientImpl) DeprecatedServiceAvatarRemove(
 }
 
 // Returns your submitted feedback
+//
+// Use /v2/users/{userId}/feedback instead.
 func (c *clientImpl) DeprecatedServiceFeedbackList(
 	ctx context.Context,
 	req DeprecatedServiceFeedbackListRequest,
@@ -842,6 +850,8 @@ func (c *clientImpl) DeprecatedServiceFeedbackList(
 }
 
 // Submit user feedback
+//
+// Use /v2/users/self/feedback instead.
 func (c *clientImpl) DeprecatedServiceFeedbackCreate(
 	ctx context.Context,
 	req DeprecatedServiceFeedbackCreateRequest,
@@ -870,6 +880,8 @@ func (c *clientImpl) DeprecatedServiceFeedbackCreate(
 }
 
 // create a new issue
+//
+// was replaced by /v2/users/self/feedback.
 func (c *clientImpl) DeprecatedServiceIssueNew(
 	ctx context.Context,
 	req DeprecatedServiceIssueNewRequest,
@@ -894,6 +906,8 @@ func (c *clientImpl) DeprecatedServiceIssueNew(
 }
 
 // Get profile information for the specified user if the user is related to the executing user
+//
+// Use /v2/users/{userId} instead.
 func (c *clientImpl) DeprecatedServiceUserGet(
 	ctx context.Context,
 	req DeprecatedServiceUserGetRequest,
@@ -922,6 +936,8 @@ func (c *clientImpl) DeprecatedServiceUserGet(
 }
 
 // Change your personal information
+//
+// Use /v2/users/{userId} instead.
 func (c *clientImpl) DeprecatedServicePersonalInformationUpdate(
 	ctx context.Context,
 	req DeprecatedServicePersonalInformationUpdateRequest,
@@ -946,6 +962,8 @@ func (c *clientImpl) DeprecatedServicePersonalInformationUpdate(
 }
 
 // Get personalized settings for the user executing the request
+//
+// Use /v2/users/{userId}/settings instead.
 func (c *clientImpl) DeprecatedServicePersonalizedSettingsGet(
 	ctx context.Context,
 	req DeprecatedServicePersonalizedSettingsGetRequest,
@@ -974,6 +992,8 @@ func (c *clientImpl) DeprecatedServicePersonalizedSettingsGet(
 }
 
 // update personalized settings
+//
+// Use /v2/users/{userId}/settings instead.
 func (c *clientImpl) DeprecatedServicePersonalizedSettingsUpdate(
 	ctx context.Context,
 	req DeprecatedServicePersonalizedSettingsUpdateRequest,
@@ -998,6 +1018,8 @@ func (c *clientImpl) DeprecatedServicePersonalizedSettingsUpdate(
 }
 
 // Add phone number and init verification process
+//
+// use /v2/users/{userId}/phone instead.
 func (c *clientImpl) DeprecatedServicePhoneNumberAdd(
 	ctx context.Context,
 	req DeprecatedServicePhoneNumberAddRequest,
@@ -1022,6 +1044,8 @@ func (c *clientImpl) DeprecatedServicePhoneNumberAdd(
 }
 
 // remove your PhoneNumber
+//
+// Use /v2/users/{userId}/phone instead.
 func (c *clientImpl) DeprecatedServicePhoneNumberRemove(
 	ctx context.Context,
 	req DeprecatedServicePhoneNumberRemoveRequest,
@@ -1046,6 +1070,8 @@ func (c *clientImpl) DeprecatedServicePhoneNumberRemove(
 }
 
 // Verify phone number
+//
+// Instead, use /v2/users/{userId}/actions/verify-phone or alternatively /v2/users/{userId}/phone/verify.
 func (c *clientImpl) DeprecatedServicePhoneNumberVerify(
 	ctx context.Context,
 	req DeprecatedServicePhoneNumberVerifyRequest,
@@ -1070,6 +1096,8 @@ func (c *clientImpl) DeprecatedServicePhoneNumberVerify(
 }
 
 // Get profile information for the executing user
+//
+// Use /v2/users/{userId} instead.
 func (c *clientImpl) DeprecatedServiceUserGetOwn(
 	ctx context.Context,
 	req DeprecatedServiceUserGetOwnRequest,

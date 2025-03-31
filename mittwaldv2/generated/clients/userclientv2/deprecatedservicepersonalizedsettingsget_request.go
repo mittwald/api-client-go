@@ -15,6 +15,8 @@ import (
 //
 // # Get personalized settings for the user executing the request
 //
+// Use /v2/users/{userId}/settings instead.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/user/deprecated-user-service-personalized-settings-get
 type DeprecatedServicePersonalizedSettingsGetRequest struct {

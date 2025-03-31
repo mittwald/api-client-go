@@ -14,6 +14,8 @@ import (
 //
 // # Returns your submitted feedback
 //
+// Use /v2/users/{userId}/feedback instead.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/user/deprecated-user-service-feedback-list
 type DeprecatedServiceFeedbackListRequest struct {

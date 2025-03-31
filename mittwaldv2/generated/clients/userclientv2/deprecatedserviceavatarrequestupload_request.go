@@ -18,6 +18,8 @@ import (
 //
 // # Request a new avatar upload
 //
+// Use /v2/users/{userId}/avatar instead.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/user/deprecated-user-service-avatar-request-upload
 type DeprecatedServiceAvatarRequestUploadRequest struct {

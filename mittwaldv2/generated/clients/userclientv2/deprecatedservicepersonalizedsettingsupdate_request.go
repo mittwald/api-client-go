@@ -18,6 +18,8 @@ import (
 //
 // update personalized settings
 //
+// Use /v2/users/{userId}/settings instead.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/user/deprecated-user-service-personalized-settings-update
 type DeprecatedServicePersonalizedSettingsUpdateRequest struct {

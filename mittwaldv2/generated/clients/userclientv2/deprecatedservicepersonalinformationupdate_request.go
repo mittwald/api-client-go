@@ -18,6 +18,8 @@ import (
 //
 // # Change your personal information
 //
+// Use /v2/users/{userId} instead.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/user/deprecated-user-service-personal-information-update
 type DeprecatedServicePersonalInformationUpdateRequest struct {
