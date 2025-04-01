@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateIngressRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"hostname\":\"string\",\"paths\":[{\"path\":\"string\",\"target\":{\"directory\":\"string\"}}],\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{\"hostname\":\"string\",\"paths\":[{\"path\":\"string\",\"target\":{\"url\":\"string\"}}],\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
 
 			sut := domainclientv2.CreateIngressRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

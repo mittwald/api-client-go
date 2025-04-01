@@ -29,6 +29,11 @@ type Client interface {
 		req AuthenticateWithSessionTokenRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*AuthenticateWithSessionTokenResponse, *http.Response, error)
+	ChangeContext(
+		ctx context.Context,
+		req ChangeContextRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*ChangeContextResponse, *http.Response, error)
 	ConsentToExtensionScopes(
 		ctx context.Context,
 		req ConsentToExtensionScopesRequest,
@@ -144,6 +149,16 @@ type Client interface {
 		req RemoveAssetRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	RequestLogoUpload(
+		ctx context.Context,
+		req RequestLogoUploadRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*RequestLogoUploadResponse, *http.Response, error)
+	RemoveLogo(
+		ctx context.Context,
+		req RemoveLogoRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	RequestAssetUpload(
 		ctx context.Context,
 		req RequestAssetUploadRequest,
@@ -154,11 +169,6 @@ type Client interface {
 		req RequestExtensionVerificationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*RequestExtensionVerificationResponse, *http.Response, error)
-	RequestLogoUpload(
-		ctx context.Context,
-		req RequestLogoUploadRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*RequestLogoUploadResponse, *http.Response, error)
 	SetExtensionPublishedState(
 		ctx context.Context,
 		req SetExtensionPublishedStateRequest,
@@ -251,6 +261,34 @@ func (c *clientImpl) AuthenticateWithSessionToken(
 	}
 
 	var response AuthenticateWithSessionTokenResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Change the context of an Extension.
+func (c *clientImpl) ChangeContext(
+	ctx context.Context,
+	req ChangeContextRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*ChangeContextResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response ChangeContextResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -891,6 +929,58 @@ func (c *clientImpl) RemoveAsset(
 	return httpRes, nil
 }
 
+// Add a logo to an extension.
+func (c *clientImpl) RequestLogoUpload(
+	ctx context.Context,
+	req RequestLogoUploadRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RequestLogoUploadResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestLogoUploadResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Remove the logo of an extension.
+func (c *clientImpl) RemoveLogo(
+	ctx context.Context,
+	req RemoveLogoRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Add an asset to an extension.
 func (c *clientImpl) RequestAssetUpload(
 	ctx context.Context,
@@ -941,34 +1031,6 @@ func (c *clientImpl) RequestExtensionVerification(
 	}
 
 	var response RequestExtensionVerificationResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Add a logo to an extension.
-func (c *clientImpl) RequestLogoUpload(
-	ctx context.Context,
-	req RequestLogoUploadRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*RequestLogoUploadResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response RequestLogoUploadResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

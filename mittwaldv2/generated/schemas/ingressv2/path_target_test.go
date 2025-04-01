@@ -13,14 +13,6 @@ import (
 
 var _ = Describe("PathTarget", func() {
 	When("unmarshaling from JSON", func() {
-		It("should unmarshal into AlternativeTargetDirectory", func() {
-			exampleJSON := []byte("{\"directory\":\"string\"}")
-
-			sut := ingressv2.PathTarget{}
-			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
-			Expect(sut.Validate()).To(Succeed())
-			Expect(sut.AlternativeTargetDirectory).NotTo(BeNil())
-		})
 		It("should unmarshal into AlternativeTargetUrl", func() {
 			exampleJSON := []byte("{\"url\":\"string\"}")
 

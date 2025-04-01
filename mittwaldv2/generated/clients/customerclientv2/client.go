@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/agencyprofilev2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/customerv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/membershipv2"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
@@ -145,6 +146,21 @@ type Client interface {
 		req DeprecatedLeaveCustomerRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetOpenAgencyVerification(
+		ctx context.Context,
+		req GetOpenAgencyVerificationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*agencyprofilev2.VerificationRequest, *http.Response, error)
+	CreateAgencyVerification(
+		ctx context.Context,
+		req CreateAgencyVerificationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CreateAgencyVerificationResponse, *http.Response, error)
+	AbortAgencyVerification(
+		ctx context.Context,
+		req AbortAgencyVerificationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*AbortAgencyVerificationResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -850,4 +866,88 @@ func (c *clientImpl) DeprecatedLeaveCustomer(
 	}
 
 	return httpRes, nil
+}
+
+// Gets the status of a agency verification request..
+func (c *clientImpl) GetOpenAgencyVerification(
+	ctx context.Context,
+	req GetOpenAgencyVerificationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*agencyprofilev2.VerificationRequest, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response agencyprofilev2.VerificationRequest
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Creates a new agency verification request. Only one active verification can be active at the same time.
+func (c *clientImpl) CreateAgencyVerification(
+	ctx context.Context,
+	req CreateAgencyVerificationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CreateAgencyVerificationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CreateAgencyVerificationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Abort an open agency verification process
+func (c *clientImpl) AbortAgencyVerification(
+	ctx context.Context,
+	req AbortAgencyVerificationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*AbortAgencyVerificationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response AbortAgencyVerificationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }

@@ -14,7 +14,7 @@ import (
 var _ = Describe("IngressDeprecated", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"dnsValidationErrors\":[\"ERROR_UNSPECIFIED\"],\"hostname\":\"string\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"ips\":{\"v4\":[\"string\"]},\"isDefault\":true,\"isDomain\":true,\"isEnabled\":true,\"ownership\":{\"txtRecord\":\"string\",\"verified\":true},\"paths\":[{\"path\":\"string\",\"target\":{\"directory\":\"string\"}}],\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"tls\":{\"acme\":true}}")
+			exampleJSON := []byte("{\"dnsValidationErrors\":[\"ERROR_UNSPECIFIED\"],\"hostname\":\"string\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"ips\":{\"v4\":[\"string\"]},\"isDefault\":true,\"isDomain\":true,\"isEnabled\":true,\"ownership\":{\"txtRecord\":\"string\",\"verified\":true},\"paths\":[{\"path\":\"string\",\"target\":{\"url\":\"string\"}}],\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"tls\":{\"acme\":true}}")
 
 			sut := ingressv2.IngressDeprecated{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

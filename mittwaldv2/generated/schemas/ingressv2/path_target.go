@@ -12,14 +12,12 @@ import (
 
 //This data type was generated from the following JSON schema:
 // oneOf:
-//    - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TargetDirectory"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TargetUrl"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TargetInstallation"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TargetUseDefaultPage"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TargetContainer"}
 
 type PathTarget struct {
-	AlternativeTargetDirectory      *TargetDirectory
 	AlternativeTargetUrl            *TargetUrl
 	AlternativeTargetInstallation   *TargetInstallation
 	AlternativeTargetUseDefaultPage *TargetUseDefaultPage
@@ -27,9 +25,6 @@ type PathTarget struct {
 }
 
 func (a *PathTarget) MarshalJSON() ([]byte, error) {
-	if a.AlternativeTargetDirectory != nil {
-		return json.Marshal(a.AlternativeTargetDirectory)
-	}
 	if a.AlternativeTargetUrl != nil {
 		return json.Marshal(a.AlternativeTargetUrl)
 	}
@@ -50,16 +45,6 @@ func (a *PathTarget) UnmarshalJSON(input []byte) error {
 	decodedAtLeastOnce := false
 	dec := json.NewDecoder(reader)
 	dec.DisallowUnknownFields()
-
-	reader.Reset(input)
-	var alternativeTargetDirectory TargetDirectory
-	if err := dec.Decode(&alternativeTargetDirectory); err == nil {
-		//subtype: *generator.ReferenceType
-		if vErr := alternativeTargetDirectory.Validate(); vErr == nil {
-			a.AlternativeTargetDirectory = &alternativeTargetDirectory
-			decodedAtLeastOnce = true
-		}
-	}
 
 	reader.Reset(input)
 	var alternativeTargetUrl TargetUrl
@@ -108,9 +93,6 @@ func (a *PathTarget) UnmarshalJSON(input []byte) error {
 }
 
 func (a *PathTarget) Validate() error {
-	if a.AlternativeTargetDirectory != nil {
-		return a.AlternativeTargetDirectory.Validate()
-	}
 	if a.AlternativeTargetUrl != nil {
 		return a.AlternativeTargetUrl.Validate()
 	}
