@@ -18,6 +18,8 @@ import (
 //
 // # Submit user feedback
 //
+// Use /v2/users/self/feedback instead.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/user/deprecated-user-service-feedback-create
 type DeprecatedServiceFeedbackCreateRequest struct {

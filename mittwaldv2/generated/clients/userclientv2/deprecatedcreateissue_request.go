@@ -17,6 +17,8 @@ import (
 //
 // Create a new issue.
 //
+// was replaced by /v2/users/self/feedback.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/user/deprecated-user-create-issue
 type DeprecatedCreateIssueRequest struct {

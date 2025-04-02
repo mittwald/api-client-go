@@ -14,6 +14,8 @@ import (
 //
 // # Get profile information for the executing user
 //
+// Use /v2/users/{userId} instead.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/user/deprecated-user-service-user-get-own
 type DeprecatedServiceUserGetOwnRequest struct {

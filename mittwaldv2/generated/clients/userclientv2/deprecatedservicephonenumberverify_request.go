@@ -18,6 +18,9 @@ import (
 //
 // # Verify phone number
 //
+// Instead, use /v2/users/{userId}/actions/verify-phone or alternatively
+// /v2/users/{userId}/phone/verify.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/user/deprecated-user-service-phone-number-verify
 type DeprecatedServicePhoneNumberVerifyRequest struct {

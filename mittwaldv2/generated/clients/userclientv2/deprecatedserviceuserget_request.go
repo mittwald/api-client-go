@@ -16,6 +16,8 @@ import (
 // Get profile information for the specified user if the user is related to the
 // executing user
 //
+// Use /v2/users/{userId} instead.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/user/deprecated-user-service-user-get
 type DeprecatedServiceUserGetRequest struct {

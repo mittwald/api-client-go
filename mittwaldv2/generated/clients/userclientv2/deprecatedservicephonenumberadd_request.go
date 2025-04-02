@@ -18,6 +18,8 @@ import (
 //
 // # Add phone number and init verification process
 //
+// use /v2/users/{userId}/phone instead.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/user/deprecated-user-service-phone-number-add
 type DeprecatedServicePhoneNumberAddRequest struct {
