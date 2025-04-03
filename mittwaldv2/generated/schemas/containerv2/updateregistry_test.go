@@ -14,7 +14,7 @@ import (
 var _ = Describe("UpdateRegistry", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"credentials\":null,\"description\":\"DockerHub\",\"uri\":\"index.docker.io\"}")
+			exampleJSON := []byte("{\"credentials\":{\"password\":\"password\",\"username\":\"username\"},\"description\":\"DockerHub\",\"uri\":\"index.docker.io\"}")
 
 			sut := containerv2.UpdateRegistry{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
