@@ -14,7 +14,7 @@ import (
 var _ = Describe("Path", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"path\":\"string\",\"target\":{\"directory\":\"string\"}}")
+			exampleJSON := []byte("{\"path\":\"string\",\"target\":{\"url\":\"string\"}}")
 
 			sut := ingressv2.Path{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

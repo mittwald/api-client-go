@@ -24,6 +24,16 @@ type Client interface {
 		req GetLoginLinkRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*GetLoginLinkResponse, *http.Response, error)
+	ListIncomingInvoices(
+		ctx context.Context,
+		req ListIncomingInvoicesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]ListIncomingInvoicesResponseItem, *http.Response, error)
+	ListOnbehalfInvoices(
+		ctx context.Context,
+		req ListOnbehalfInvoicesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]ListOnbehalfInvoicesResponseItem, *http.Response, error)
 	RotateSecretForExtensionInstance(
 		ctx context.Context,
 		req RotateSecretForExtensionInstanceRequest,
@@ -189,6 +199,11 @@ type Client interface {
 		req SetExtensionPublishedStateRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*SetExtensionPublishedStateResponse, *http.Response, error)
+	StartExtensionCheckout(
+		ctx context.Context,
+		req StartExtensionCheckoutRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*StartExtensionCheckoutResponse, *http.Response, error)
 	UpdateExtensionInstanceContract(
 		ctx context.Context,
 		req UpdateExtensionInstanceContractRequest,
@@ -262,6 +277,64 @@ func (c *clientImpl) GetLoginLink(
 	}
 
 	var response GetLoginLinkResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List incoming Invoices of a Contributor.
+func (c *clientImpl) ListIncomingInvoices(
+	ctx context.Context,
+	req ListIncomingInvoicesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]ListIncomingInvoicesResponseItem, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []ListIncomingInvoicesResponseItem
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List all invoices on behalf of a contributor.
+//
+// List all invoices on behalf of a contributor.
+func (c *clientImpl) ListOnbehalfInvoices(
+	ctx context.Context,
+	req ListOnbehalfInvoicesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]ListOnbehalfInvoicesResponseItem, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []ListOnbehalfInvoicesResponseItem
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -1174,6 +1247,34 @@ func (c *clientImpl) SetExtensionPublishedState(
 	}
 
 	var response SetExtensionPublishedStateResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Start a checkout process for an extension.
+func (c *clientImpl) StartExtensionCheckout(
+	ctx context.Context,
+	req StartExtensionCheckoutRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*StartExtensionCheckoutResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response StartExtensionCheckoutResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

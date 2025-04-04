@@ -12,7 +12,6 @@ import "fmt"
 //        type: "string"
 //    "target":
 //        oneOf:
-//            - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TargetDirectory"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TargetUrl"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TargetInstallation"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TargetUseDefaultPage"}

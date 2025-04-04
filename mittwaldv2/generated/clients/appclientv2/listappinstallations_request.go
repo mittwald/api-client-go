@@ -18,13 +18,10 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/app/app-list-appinstallations
 type ListAppinstallationsRequest struct {
-	ProjectID   string
-	AppIDs      []string
-	SearchTerm  *string
-	PhpVersions []string
-	Limit       *int64
-	Skip        *int64
-	Page        *int64
+	ProjectID string
+	Limit     *int64
+	Skip      *int64
+	Page      *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -62,15 +59,6 @@ func (r *ListAppinstallationsRequest) url() string {
 
 func (r *ListAppinstallationsRequest) query() url.Values {
 	q := make(url.Values)
-	for _, val := range r.AppIDs {
-		q.Add("appIds", val)
-	}
-	if r.SearchTerm != nil {
-		q.Set("searchTerm", *r.SearchTerm)
-	}
-	for _, val := range r.PhpVersions {
-		q.Add("phpVersions", val)
-	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
 	}
