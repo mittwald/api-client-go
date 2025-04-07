@@ -14,7 +14,7 @@ import (
 var _ = Describe("ServiceState", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"command\":[\"string\"],\"entrypoint\":[\"string\"],\"envs\":{\"string\":\"string\"},\"image\":\"string\",\"ports\":[\"string\"],\"volumes\":[\"string\"]}")
+			exampleJSON := []byte("{\"command\":[\"string\"],\"entrypoint\":[\"string\"],\"envs\":{\"string\":\"string\"},\"image\":\"string\",\"imageDigest\":\"string\",\"ports\":[\"string\"],\"volumes\":[\"string\"]}")
 
 			sut := containerv2.ServiceState{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

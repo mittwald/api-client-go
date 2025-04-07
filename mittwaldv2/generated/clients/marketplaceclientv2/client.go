@@ -34,6 +34,11 @@ type Client interface {
 		req ListOnbehalfInvoicesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]ListOnbehalfInvoicesResponseItem, *http.Response, error)
+	ReceiptGetFileAccessToken(
+		ctx context.Context,
+		req ReceiptGetFileAccessTokenRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*ReceiptGetFileAccessTokenResponse, *http.Response, error)
 	RotateSecretForExtensionInstance(
 		ctx context.Context,
 		req RotateSecretForExtensionInstanceRequest,
@@ -335,6 +340,34 @@ func (c *clientImpl) ListOnbehalfInvoices(
 	}
 
 	var response []ListOnbehalfInvoicesResponseItem
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Request an Access Token for the Incoming Invoice file.
+func (c *clientImpl) ReceiptGetFileAccessToken(
+	ctx context.Context,
+	req ReceiptGetFileAccessTokenRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*ReceiptGetFileAccessTokenResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response ReceiptGetFileAccessTokenResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

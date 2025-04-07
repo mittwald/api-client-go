@@ -94,6 +94,11 @@ type Client interface {
 		req ListVolumesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]containerv2.VolumeResponse, *http.Response, error)
+	PullImageForService(
+		ctx context.Context,
+		req PullImageForServiceRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	RecreateService(
 		ctx context.Context,
 		req RecreateServiceRequest,
@@ -124,11 +129,6 @@ type Client interface {
 		req ValidateRegistryCredentialsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*ValidateRegistryCredentialsResponse, *http.Response, error)
-	PullImageForService(
-		ctx context.Context,
-		req PullImageForServiceRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -570,6 +570,30 @@ func (c *clientImpl) ListVolumes(
 	return &response, httpRes, nil
 }
 
+// Pulls the latest version of the Service's image and recreates the Service.
+func (c *clientImpl) PullImageForService(
+	ctx context.Context,
+	req PullImageForServiceRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Recreate a Service.
 func (c *clientImpl) RecreateService(
 	ctx context.Context,
@@ -720,28 +744,4 @@ func (c *clientImpl) ValidateRegistryCredentials(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Pulls the latest version oof the Service's image and recreates the Service.
-func (c *clientImpl) PullImageForService(
-	ctx context.Context,
-	req PullImageForServiceRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }

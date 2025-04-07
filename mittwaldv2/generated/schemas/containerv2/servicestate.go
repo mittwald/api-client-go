@@ -22,6 +22,8 @@ import "fmt"
 //            type: "string"
 //    "image":
 //        type: "string"
+//    "imageDigest":
+//        type: "string"
 //    "ports":
 //        type: "array"
 //        items:
@@ -34,12 +36,13 @@ import "fmt"
 //    - "image"
 
 type ServiceState struct {
-	Command    []string          `json:"command,omitempty"`
-	Entrypoint []string          `json:"entrypoint,omitempty"`
-	Envs       map[string]string `json:"envs,omitempty"`
-	Image      string            `json:"image"`
-	Ports      []string          `json:"ports,omitempty"`
-	Volumes    []string          `json:"volumes,omitempty"`
+	Command     []string          `json:"command,omitempty"`
+	Entrypoint  []string          `json:"entrypoint,omitempty"`
+	Envs        map[string]string `json:"envs,omitempty"`
+	Image       string            `json:"image"`
+	ImageDigest *string           `json:"imageDigest,omitempty"`
+	Ports       []string          `json:"ports,omitempty"`
+	Volumes     []string          `json:"volumes,omitempty"`
 }
 
 func (o *ServiceState) Validate() error {

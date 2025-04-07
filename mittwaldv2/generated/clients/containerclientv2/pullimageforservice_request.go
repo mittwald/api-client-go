@@ -13,7 +13,7 @@ import (
 // PullImageForServiceRequest models a request for the
 // 'container-pull-image-for-service' operation. See [1] for more information.
 //
-// Pulls the latest version oof the Service's image and recreates the Service.
+// Pulls the latest version of the Service's image and recreates the Service.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/container/container-pull-image-for-service
