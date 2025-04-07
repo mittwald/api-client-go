@@ -239,7 +239,7 @@ func (c *clientImpl) AuthenticateInstance(
 	return &response, httpRes, nil
 }
 
-// Authenticate your external application using the extensionInstanceSecret.
+// Authenticate your external application using a session token and an extension secret
 func (c *clientImpl) AuthenticateWithSessionToken(
 	ctx context.Context,
 	req AuthenticateWithSessionTokenRequest,

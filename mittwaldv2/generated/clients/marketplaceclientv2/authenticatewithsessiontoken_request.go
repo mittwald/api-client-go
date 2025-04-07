@@ -16,7 +16,8 @@ import (
 // 'extension-authenticate-with-session-token' operation. See [1] for more
 // information.
 //
-// Authenticate your external application using the extensionInstanceSecret.
+// Authenticate your external application using a session token and an extension
+// secret
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/marketplace/extension-authenticate-with-session-token
