@@ -36,6 +36,8 @@ import (
 //    "flags":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.customer.CustomerFlag"}
+//    "isAllowedToPlaceOrders":
+//        type: "boolean"
 //    "isBanned":
 //        type: "boolean"
 //    "isInDefaultOfPayment":
@@ -80,6 +82,7 @@ type Customer struct {
 	CustomerNumber                    string                                     `json:"customerNumber"`
 	ExecutingUserRoles                []Role                                     `json:"executingUserRoles,omitempty"`
 	Flags                             []CustomerFlag                             `json:"flags,omitempty"`
+	IsAllowedToPlaceOrders            *bool                                      `json:"isAllowedToPlaceOrders,omitempty"`
 	IsBanned                          *bool                                      `json:"isBanned,omitempty"`
 	IsInDefaultOfPayment              *bool                                      `json:"isInDefaultOfPayment,omitempty"`
 	LevelOfUndeliverableDunningNotice *CustomerLevelOfUndeliverableDunningNotice `json:"levelOfUndeliverableDunningNotice,omitempty"`
