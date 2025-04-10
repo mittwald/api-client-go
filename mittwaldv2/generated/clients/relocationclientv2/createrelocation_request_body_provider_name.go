@@ -74,3 +74,13 @@ func (a *CreateRelocationRequestBodyProviderName) Validate() error {
 	}
 	return errors.New("no alternative set")
 }
+
+func (a CreateRelocationRequestBodyProviderName) String() string {
+	if a.AlternativeCreateRelocationRequestBodyProviderNameAlternative1 != nil {
+		return *a.AlternativeCreateRelocationRequestBodyProviderNameAlternative1
+	}
+	if a.AlternativeCreateRelocationRequestBodyProviderNameAlternative2 != nil {
+		return string(*a.AlternativeCreateRelocationRequestBodyProviderNameAlternative2)
+	}
+	return "null"
+}

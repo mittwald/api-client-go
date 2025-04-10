@@ -69,3 +69,13 @@ func (a *CreateRelocationRequestBodyUserID) Validate() error {
 	}
 	return errors.New("no alternative set")
 }
+
+func (a CreateRelocationRequestBodyUserID) String() string {
+	if a.AlternativeCreateRelocationRequestBodyUserIDAlternative1 != nil {
+		return *a.AlternativeCreateRelocationRequestBodyUserIDAlternative1
+	}
+	if a.AlternativeCreateRelocationRequestBodyUserIDAlternative2 != nil {
+		return *a.AlternativeCreateRelocationRequestBodyUserIDAlternative2
+	}
+	return "null"
+}

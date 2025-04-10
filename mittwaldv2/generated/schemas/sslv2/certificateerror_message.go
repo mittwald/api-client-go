@@ -413,3 +413,61 @@ func (a *CertificateErrorMessage) Validate() error {
 	}
 	return errors.New("no alternative set")
 }
+
+func (a CertificateErrorMessage) String() string {
+	if a.AlternativeCertificateErrorMessageAlternative1 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative1)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative2 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative2)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative3 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative3)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative4 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative4)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative5 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative5)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative6 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative6)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative7 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative7)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative8 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative8)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative9 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative9)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative10 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative10)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative11 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative11)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative12 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative12)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative13 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative13)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative14 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative14)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative15 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative15)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative16 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative16)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative17 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative17)
+	}
+	if a.AlternativeCertificateErrorMessageAlternative18 != nil {
+		return string(*a.AlternativeCertificateErrorMessageAlternative18)
+	}
+	return "null"
+}
