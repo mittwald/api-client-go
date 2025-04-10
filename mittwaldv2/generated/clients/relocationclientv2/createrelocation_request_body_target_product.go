@@ -78,3 +78,13 @@ func (a *CreateRelocationRequestBodyTargetProduct) Validate() error {
 	}
 	return errors.New("no alternative set")
 }
+
+func (a CreateRelocationRequestBodyTargetProduct) String() string {
+	if a.AlternativeCreateRelocationRequestBodyTargetProductAlternative1 != nil {
+		return *a.AlternativeCreateRelocationRequestBodyTargetProductAlternative1
+	}
+	if a.AlternativeCreateRelocationRequestBodyTargetProductAlternative2 != nil {
+		return string(*a.AlternativeCreateRelocationRequestBodyTargetProductAlternative2)
+	}
+	return "null"
+}
