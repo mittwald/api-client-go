@@ -14,6 +14,11 @@ import (
 )
 
 type Client interface {
+	GetBillingInformation(
+		ctx context.Context,
+		req GetBillingInformationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*GetBillingInformationResponse, *http.Response, error)
 	GetCustomerBillingPortalLink(
 		ctx context.Context,
 		req GetCustomerBillingPortalLinkRequest,
@@ -226,6 +231,34 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Get Contributor Billing Information.
+func (c *clientImpl) GetBillingInformation(
+	ctx context.Context,
+	req GetBillingInformationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*GetBillingInformationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GetBillingInformationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Get the Stripe Billing Portal Link for a Customer

@@ -48,6 +48,9 @@ import (
 //        description: "This is the FileId of the Logo. Retrieve the file with this id on `/v2/files/{logoRefId}`."
 //    "name":
 //        type: "string"
+//    "pricing":
+//        oneOf:
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricingStrategy"}
 //    "published":
 //        type: "boolean"
 //    "requestedChanges":
@@ -115,6 +118,7 @@ type OwnExtension struct {
 	Id                    string                        `json:"id"`
 	LogoRefId             *string                       `json:"logoRefId,omitempty"`
 	Name                  string                        `json:"name"`
+	Pricing               *OwnExtensionPricing          `json:"pricing,omitempty"`
 	Published             bool                          `json:"published"`
 	RequestedChanges      *OwnExtensionRequestedChanges `json:"requestedChanges,omitempty"`
 	Scopes                []string                      `json:"scopes,omitempty"`
@@ -204,6 +208,14 @@ func (o *OwnExtension) Validate() error {
 		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property frontendComponents: %w", err)
+	}
+	if err := func() error {
+		if o.Pricing == nil {
+			return nil
+		}
+		return o.Pricing.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property pricing: %w", err)
 	}
 	if err := func() error {
 		if o.RequestedChanges == nil {
