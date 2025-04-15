@@ -59,6 +59,16 @@ type Client interface {
 		req AuthenticateWithSessionTokenRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*AuthenticateWithSessionTokenResponse, *http.Response, error)
+	ScheduleExtensionTermination(
+		ctx context.Context,
+		req ScheduleExtensionTerminationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*ScheduleExtensionTerminationResponse, *http.Response, error)
+	CancelExtensionTermination(
+		ctx context.Context,
+		req CancelExtensionTerminationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CancelExtensionTerminationResponse, *http.Response, error)
 	ChangeContext(
 		ctx context.Context,
 		req ChangeContextRequest,
@@ -491,6 +501,62 @@ func (c *clientImpl) AuthenticateWithSessionToken(
 	return &response, httpRes, nil
 }
 
+// Schedule an Extension Instance Termination for the next possible date.
+func (c *clientImpl) ScheduleExtensionTermination(
+	ctx context.Context,
+	req ScheduleExtensionTerminationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*ScheduleExtensionTerminationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response ScheduleExtensionTerminationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Cancel an Extension Instance Termination.
+func (c *clientImpl) CancelExtensionTermination(
+	ctx context.Context,
+	req CancelExtensionTerminationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CancelExtensionTerminationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CancelExtensionTerminationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Change the context of an Extension.
 func (c *clientImpl) ChangeContext(
 	ctx context.Context,
@@ -685,7 +751,7 @@ func (c *clientImpl) GetExtensionInstance(
 	return &response, httpRes, nil
 }
 
-// Delete an ExtensionInstance.
+// Delete a free ExtensionInstance. If the Extension is chargable the contract must be terminated instead.
 func (c *clientImpl) DeleteExtensionInstance(
 	ctx context.Context,
 	req DeleteExtensionInstanceRequest,

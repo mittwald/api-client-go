@@ -13,7 +13,8 @@ import (
 // DeleteExtensionInstanceRequest models a request for the
 // 'extension-delete-extension-instance' operation. See [1] for more information.
 //
-// Delete an ExtensionInstance.
+// Delete a free ExtensionInstance. If the Extension is chargable the contract must
+// be terminated instead.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/marketplace/extension-delete-extension-instance
