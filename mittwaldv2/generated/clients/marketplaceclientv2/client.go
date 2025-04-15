@@ -431,7 +431,7 @@ func (c *clientImpl) GetExtensionInstance(
 	return &response, httpRes, nil
 }
 
-// Delete an ExtensionInstance.
+// Delete a free ExtensionInstance. If the Extension is chargable the contract must be terminated instead.
 func (c *clientImpl) DeleteExtensionInstance(
 	ctx context.Context,
 	req DeleteExtensionInstanceRequest,

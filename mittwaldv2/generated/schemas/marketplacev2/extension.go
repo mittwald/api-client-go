@@ -50,6 +50,9 @@ import (
 //    "name":
 //        type: "string"
 //        example: "MyPingExtension"
+//    "pricing":
+//        oneOf:
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricingStrategy"}
 //    "published":
 //        type: "boolean"
 //        description: "Whether the extension has been published by the contributor."
@@ -105,6 +108,7 @@ type Extension struct {
 	Id                   string                `json:"id"`
 	LogoRefId            string                `json:"logoRefId"`
 	Name                 string                `json:"name"`
+	Pricing              *ExtensionPricing     `json:"pricing,omitempty"`
 	Published            bool                  `json:"published"`
 	Scopes               []string              `json:"scopes"`
 	State                ExtensionState        `json:"state"`
@@ -176,6 +180,14 @@ func (o *Extension) Validate() error {
 		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property frontendComponents: %w", err)
+	}
+	if err := func() error {
+		if o.Pricing == nil {
+			return nil
+		}
+		return o.Pricing.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property pricing: %w", err)
 	}
 	if o.Scopes == nil {
 		return errors.New("property scopes is required, but not set")
