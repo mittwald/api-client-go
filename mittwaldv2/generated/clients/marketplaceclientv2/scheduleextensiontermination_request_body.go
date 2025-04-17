@@ -5,10 +5,15 @@ package marketplaceclientv2
 
 // This data type was generated from the following JSON schema:
 // type: "object"
+// properties:
+//    "instantTermination":
+//        type: "boolean"
+//        description: "If set, the Extension Instance will be removed as fast as possible. No credit will be given."
 // description: ScheduleExtensionTerminationRequestBody models the JSON body of a 'extension-schedule-extension-termination' request
 
 // ScheduleExtensionTerminationRequestBody models the JSON body of a 'extension-schedule-extension-termination' request
 type ScheduleExtensionTerminationRequestBody struct {
+	InstantTermination *bool `json:"instantTermination,omitempty"`
 }
 
 func (o *ScheduleExtensionTerminationRequestBody) Validate() error {

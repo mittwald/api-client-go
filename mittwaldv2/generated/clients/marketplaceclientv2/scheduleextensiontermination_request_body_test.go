@@ -14,7 +14,7 @@ import (
 var _ = Describe("ScheduleExtensionTerminationRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{}")
+			exampleJSON := []byte("{\"instantTermination\":true}")
 
 			sut := marketplaceclientv2.ScheduleExtensionTerminationRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -8,6 +8,7 @@ package marketplaceclientv2
 // properties:
 //    "checkoutUrl":
 //        type: "string"
+//        description: "If left empty the new Pricing was already applied without external checkout."
 
 type UpdateExtensionInstanceContractResponse struct {
 	CheckoutUrl *string `json:"checkoutUrl,omitempty"`
