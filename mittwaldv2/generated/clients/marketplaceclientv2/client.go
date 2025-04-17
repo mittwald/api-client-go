@@ -103,7 +103,7 @@ type Client interface {
 		ctx context.Context,
 		req GetContributorRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*marketplacev2.Contributor, *http.Response, error)
+	) (*any, *http.Response, error)
 	GetExtensionInstanceForCustomer(
 		ctx context.Context,
 		req GetExtensionInstanceForCustomerRequest,
@@ -658,7 +658,7 @@ func (c *clientImpl) GetContributor(
 	ctx context.Context,
 	req GetContributorRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*marketplacev2.Contributor, *http.Response, error) {
+) (*any, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -674,7 +674,7 @@ func (c *clientImpl) GetContributor(
 		return nil, httpRes, err
 	}
 
-	var response marketplacev2.Contributor
+	var response any
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
