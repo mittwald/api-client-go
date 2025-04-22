@@ -13,20 +13,17 @@ import "fmt"
 //        enum:
 //            - "onlyDomestic"
 //        description: "You can restrict your customers to certain countries."
+// required:
+//    - "shippingCountryRestriction"
 // description: CreateContributorOnboardingProcessRequestBody models the JSON body of a 'extension-create-contributor-onboarding-process' request
 
 // CreateContributorOnboardingProcessRequestBody models the JSON body of a 'extension-create-contributor-onboarding-process' request
 type CreateContributorOnboardingProcessRequestBody struct {
-	ShippingCountryRestriction *CreateContributorOnboardingProcessRequestBodyShippingCountryRestriction `json:"shippingCountryRestriction,omitempty"`
+	ShippingCountryRestriction CreateContributorOnboardingProcessRequestBodyShippingCountryRestriction `json:"shippingCountryRestriction"`
 }
 
 func (o *CreateContributorOnboardingProcessRequestBody) Validate() error {
-	if err := func() error {
-		if o.ShippingCountryRestriction == nil {
-			return nil
-		}
-		return o.ShippingCountryRestriction.Validate()
-	}(); err != nil {
+	if err := o.ShippingCountryRestriction.Validate(); err != nil {
 		return fmt.Errorf("invalid property shippingCountryRestriction: %w", err)
 	}
 	return nil
