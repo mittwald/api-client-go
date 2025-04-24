@@ -8,7 +8,6 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "string"
 // enum:
-//    - "NEW"
 //    - "AUTOTEST_INIT"
 //    - "MANUAL_VERIFICATION"
 //    - "REJECTED"
@@ -16,14 +15,13 @@ import "fmt"
 
 type ProfileRequestStatus string
 
-const ProfileRequestStatusNEW ProfileRequestStatus = "NEW"
 const ProfileRequestStatusAUTOTESTINIT ProfileRequestStatus = "AUTOTEST_INIT"
 const ProfileRequestStatusMANUALVERIFICATION ProfileRequestStatus = "MANUAL_VERIFICATION"
 const ProfileRequestStatusREJECTED ProfileRequestStatus = "REJECTED"
 const ProfileRequestStatusAPPROVED ProfileRequestStatus = "APPROVED"
 
 func (e ProfileRequestStatus) Validate() error {
-	if e == ProfileRequestStatusNEW || e == ProfileRequestStatusAUTOTESTINIT || e == ProfileRequestStatusMANUALVERIFICATION || e == ProfileRequestStatusREJECTED || e == ProfileRequestStatusAPPROVED {
+	if e == ProfileRequestStatusAUTOTESTINIT || e == ProfileRequestStatusMANUALVERIFICATION || e == ProfileRequestStatusREJECTED || e == ProfileRequestStatusAPPROVED {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

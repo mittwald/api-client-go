@@ -27,7 +27,6 @@ import (
 //    "status":
 //        type: "string"
 //        enum:
-//            - "NEW"
 //            - "AUTOTEST_INIT"
 //            - "MANUAL_VERIFICATION"
 //            - "REJECTED"

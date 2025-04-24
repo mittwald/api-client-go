@@ -14,7 +14,7 @@ import (
 var _ = Describe("ProfileRequest", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"createdOn\":\"2006-01-02T15:04:05Z\",\"customerId\":\"string\",\"domain\":\"string\",\"profileId\":\"string\",\"requestedBy\":{\"userId\":\"string\"},\"resultOn\":\"2006-01-02T15:04:05Z\",\"status\":\"NEW\"}")
+			exampleJSON := []byte("{\"createdOn\":\"2006-01-02T15:04:05Z\",\"customerId\":\"string\",\"domain\":\"string\",\"profileId\":\"string\",\"requestedBy\":{\"userId\":\"string\"},\"resultOn\":\"2006-01-02T15:04:05Z\",\"status\":\"AUTOTEST_INIT\"}")
 
 			sut := lead_finderv2.ProfileRequest{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
