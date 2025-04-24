@@ -26,6 +26,14 @@ import (
 //    "creationDate":
 //        type: "string"
 //        format: "date-time"
+//    "customerBanReason":
+//        type: "string"
+//        enum:
+//            - "fake_suspicion"
+//            - "dishonest_intentions"
+//            - "repeated_late_payments"
+//            - "revoke"
+//            - "unspecified"
 //    "customerId":
 //        type: "string"
 //    "customerNumber":
@@ -78,6 +86,7 @@ type Customer struct {
 	AvatarRefId                       *string                                    `json:"avatarRefId,omitempty"`
 	CategoryId                        *string                                    `json:"categoryId,omitempty"`
 	CreationDate                      time.Time                                  `json:"creationDate"`
+	CustomerBanReason                 *CustomerCustomerBanReason                 `json:"customerBanReason,omitempty"`
 	CustomerId                        string                                     `json:"customerId"`
 	CustomerNumber                    string                                     `json:"customerNumber"`
 	ExecutingUserRoles                []Role                                     `json:"executingUserRoles,omitempty"`
@@ -102,6 +111,14 @@ func (o *Customer) Validate() error {
 		return o.ActiveSuspension.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property activeSuspension: %w", err)
+	}
+	if err := func() error {
+		if o.CustomerBanReason == nil {
+			return nil
+		}
+		return o.CustomerBanReason.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property customerBanReason: %w", err)
 	}
 	if err := func() error {
 		if o.ExecutingUserRoles == nil {

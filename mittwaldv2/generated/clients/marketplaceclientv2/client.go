@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/extensionv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/marketplacev2"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
 	"github.com/mittwald/api-client-go/pkg/httperr"
@@ -149,6 +150,16 @@ type Client interface {
 		req GetContributorRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*any, *http.Response, error)
+	GetExtensionInstanceContract(
+		ctx context.Context,
+		req GetExtensionInstanceContractRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*extensionv2.ExtensionInstanceContract, *http.Response, error)
+	UpdateExtensionInstanceContract(
+		ctx context.Context,
+		req UpdateExtensionInstanceContractRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*UpdateExtensionInstanceContractResponse, *http.Response, error)
 	GetExtensionInstanceForCustomer(
 		ctx context.Context,
 		req GetExtensionInstanceForCustomerRequest,
@@ -163,7 +174,7 @@ type Client interface {
 		ctx context.Context,
 		req GetExtensionRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*marketplacev2.Extension, *http.Response, error)
+	) (*any, *http.Response, error)
 	GetPublicKey(
 		ctx context.Context,
 		req GetPublicKeyRequest,
@@ -224,11 +235,6 @@ type Client interface {
 		req StartExtensionCheckoutRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*StartExtensionCheckoutResponse, *http.Response, error)
-	UpdateExtensionInstanceContract(
-		ctx context.Context,
-		req UpdateExtensionInstanceContractRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*UpdateExtensionInstanceContractResponse, *http.Response, error)
 	UpdateExtensionPricing(
 		ctx context.Context,
 		req UpdateExtensionPricingRequest,
@@ -1001,6 +1007,64 @@ func (c *clientImpl) GetContributor(
 	return &response, httpRes, nil
 }
 
+// Get the Contract Strategy of an Extension Instance
+func (c *clientImpl) GetExtensionInstanceContract(
+	ctx context.Context,
+	req GetExtensionInstanceContractRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*extensionv2.ExtensionInstanceContract, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response extensionv2.ExtensionInstanceContract
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update or Create Contract for existing Extension Instances.
+//
+// Call to update Contract for existing Extension Instances. For example to accept a new Pricing.
+func (c *clientImpl) UpdateExtensionInstanceContract(
+	ctx context.Context,
+	req UpdateExtensionInstanceContractRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*UpdateExtensionInstanceContractResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response UpdateExtensionInstanceContractResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Get the ExtensionInstance of a specific customer and extension, if existing.
 func (c *clientImpl) GetExtensionInstanceForCustomer(
 	ctx context.Context,
@@ -1062,7 +1126,7 @@ func (c *clientImpl) GetExtension(
 	ctx context.Context,
 	req GetExtensionRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*marketplacev2.Extension, *http.Response, error) {
+) (*any, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -1078,7 +1142,7 @@ func (c *clientImpl) GetExtension(
 		return nil, httpRes, err
 	}
 
-	var response marketplacev2.Extension
+	var response any
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -1407,36 +1471,6 @@ func (c *clientImpl) StartExtensionCheckout(
 	}
 
 	var response StartExtensionCheckoutResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Update or Create Contract for existing Extension Instances.
-//
-// Call to update Contract for existing Extension Instances. For example to accept a new Pricing.
-func (c *clientImpl) UpdateExtensionInstanceContract(
-	ctx context.Context,
-	req UpdateExtensionInstanceContractRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*UpdateExtensionInstanceContractResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response UpdateExtensionInstanceContractResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

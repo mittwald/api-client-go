@@ -14,7 +14,7 @@ import (
 var _ = Describe("Contributor", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"customerId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"description\":\"string\",\"email\":\"string\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"logoRefId\":\"string\",\"name\":\"string\",\"phone\":\"string\",\"state\":\"enabled\",\"supportInformation\":{\"email\":\"a.lovelace@example.com\",\"phone\":\"string\"},\"url\":\"string\"}")
+			exampleJSON := []byte("{\"customerId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"description\":\"string\",\"descriptions\":{\"de\":\"Ich bin ein Contributor\",\"en\":\"I am a contributor\"},\"email\":\"string\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"logoRefId\":\"string\",\"name\":\"string\",\"phone\":\"string\",\"state\":\"enabled\",\"supportInformation\":{\"email\":\"a.lovelace@example.com\",\"phone\":\"string\"},\"url\":\"string\"}")
 
 			sut := marketplacev2.Contributor{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
