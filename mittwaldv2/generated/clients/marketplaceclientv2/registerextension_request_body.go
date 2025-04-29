@@ -38,7 +38,12 @@ import (
 //        type: "array"
 //        items:
 //            type: "string"
-//    "webhookURLs": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls"}
+//    "webhookURLs":
+//        allOf:
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls"}
+//            - type: "object"
+//              deprecated: true
+//    "webhookUrls": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls"}
 // required:
 //    - "name"
 // description: RegisterExtensionRequestBody models the JSON body of a 'extension-register-extension' request
@@ -56,7 +61,8 @@ type RegisterExtensionRequestBody struct {
 	SubTitle             *marketplacev2.SubTitle             `json:"subTitle,omitempty"`
 	Support              *marketplacev2.SupportMeta          `json:"support,omitempty"`
 	Tags                 []string                            `json:"tags,omitempty"`
-	WebhookURLs          *marketplacev2.WebhookUrls          `json:"webhookURLs,omitempty"`
+	WebhookURLs          *any                                `json:"webhookURLs,omitempty"`
+	WebhookUrls          *marketplacev2.WebhookUrls          `json:"webhookUrls,omitempty"`
 }
 
 func (o *RegisterExtensionRequestBody) Validate() error {
@@ -139,12 +145,12 @@ func (o *RegisterExtensionRequestBody) Validate() error {
 		return fmt.Errorf("invalid property tags: %w", err)
 	}
 	if err := func() error {
-		if o.WebhookURLs == nil {
+		if o.WebhookUrls == nil {
 			return nil
 		}
-		return o.WebhookURLs.Validate()
+		return o.WebhookUrls.Validate()
 	}(); err != nil {
-		return fmt.Errorf("invalid property webhookURLs: %w", err)
+		return fmt.Errorf("invalid property webhookUrls: %w", err)
 	}
 	return nil
 }

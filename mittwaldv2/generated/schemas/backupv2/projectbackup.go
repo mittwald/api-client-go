@@ -32,6 +32,9 @@ import (
 //    "projectId":
 //        type: "string"
 //        format: "uuid"
+//    "requestedAt":
+//        type: "string"
+//        format: "date-time"
 //    "status":
 //        type: "string"
 //        example: "Completed"
@@ -40,6 +43,7 @@ import (
 //    - "projectId"
 //    - "status"
 //    - "deletable"
+//    - "requestedAt"
 
 type ProjectBackup struct {
 	CreatedAt   *time.Time           `json:"createdAt,omitempty"`
@@ -50,6 +54,7 @@ type ProjectBackup struct {
 	Id          string               `json:"id"`
 	ParentId    *string              `json:"parentId,omitempty"`
 	ProjectId   string               `json:"projectId"`
+	RequestedAt time.Time            `json:"requestedAt"`
 	Status      string               `json:"status"`
 }
 

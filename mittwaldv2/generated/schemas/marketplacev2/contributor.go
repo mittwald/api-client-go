@@ -20,6 +20,7 @@ import "fmt"
 //    "id":
 //        type: "string"
 //        format: "uuid"
+//    "imprint": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ContributorImprint"}
 //    "logoRefId":
 //        type: "string"
 //    "name":
@@ -44,6 +45,7 @@ type Contributor struct {
 	Descriptions       *LocalizedDescription `json:"descriptions,omitempty"`
 	Email              *string               `json:"email,omitempty"`
 	Id                 string                `json:"id"`
+	Imprint            *ContributorImprint   `json:"imprint,omitempty"`
 	LogoRefId          *string               `json:"logoRefId,omitempty"`
 	Name               string                `json:"name"`
 	Phone              *string               `json:"phone,omitempty"`
@@ -60,6 +62,14 @@ func (o *Contributor) Validate() error {
 		return o.Descriptions.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property descriptions: %w", err)
+	}
+	if err := func() error {
+		if o.Imprint == nil {
+			return nil
+		}
+		return o.Imprint.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property imprint: %w", err)
 	}
 	if err := o.State.Validate(); err != nil {
 		return fmt.Errorf("invalid property state: %w", err)

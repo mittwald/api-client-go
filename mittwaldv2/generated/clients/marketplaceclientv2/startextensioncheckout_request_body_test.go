@@ -13,12 +13,21 @@ import (
 
 var _ = Describe("StartExtensionCheckoutRequestBody", func() {
 	When("unmarshaling from JSON", func() {
-		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"consentedScopes\":[\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"],\"customerId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+		It("should unmarshal into AlternativeStartExtensionCheckoutRequestBodyAlternative1", func() {
+			exampleJSON := []byte("{\"consentedScopes\":[\"string\"],\"customerId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
 
 			sut := marketplaceclientv2.StartExtensionCheckoutRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
+			Expect(sut.AlternativeStartExtensionCheckoutRequestBodyAlternative1).NotTo(BeNil())
+		})
+		It("should unmarshal into AlternativeStartExtensionCheckoutRequestBodyAlternative2", func() {
+			exampleJSON := []byte("{\"consentedScopes\":[\"string\"],\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+
+			sut := marketplaceclientv2.StartExtensionCheckoutRequestBody{}
+			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
+			Expect(sut.Validate()).To(Succeed())
+			Expect(sut.AlternativeStartExtensionCheckoutRequestBodyAlternative2).NotTo(BeNil())
 		})
 	})
 })

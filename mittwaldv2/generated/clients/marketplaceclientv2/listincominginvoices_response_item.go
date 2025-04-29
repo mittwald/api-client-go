@@ -33,7 +33,7 @@ import (
 //        format: "uuid"
 //    "invoiceNumber":
 //        type: "string"
-//        example: "PG1234567"
+//        example: "RG1234567"
 //    "pdfId":
 //        type: "string"
 //        format: "uuid"
