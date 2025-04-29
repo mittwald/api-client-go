@@ -56,7 +56,7 @@ import (
 //    "published":
 //        type: "boolean"
 //        enum:
-//            - true
+//            - false
 //        description: "Whether the extension has been published by the contributor."
 //    "scopes":
 //        type: "array"
@@ -80,12 +80,8 @@ import (
 // required:
 //    - "id"
 //    - "contributorId"
-//    - "support"
 //    - "state"
-//    - "published"
 //    - "name"
-//    - "subTitle"
-//    - "description"
 //    - "tags"
 //    - "context"
 //    - "scopes"
@@ -93,34 +89,33 @@ import (
 //    - "blocked"
 //    - "assets"
 //    - "statistics"
-//    - "logoRefId"
 
-type Extension struct {
-	Assets               []ExtensionAsset      `json:"assets"`
-	Blocked              bool                  `json:"blocked"`
-	Context              Context               `json:"context"`
-	ContributorId        string                `json:"contributorId"`
-	Deprecation          *ExtensionDeprecation `json:"deprecation,omitempty"`
-	Description          string                `json:"description"`
-	DetailedDescriptions *DetailedDescriptions `json:"detailedDescriptions,omitempty"`
-	Disabled             bool                  `json:"disabled"`
-	ExternalFrontends    []ExternalComponent   `json:"externalFrontends,omitempty"`
-	FrontendComponents   []ExternalComponent   `json:"frontendComponents,omitempty"`
-	FrontendFragments    map[string]any        `json:"frontendFragments,omitempty"`
-	Id                   string                `json:"id"`
-	LogoRefId            string                `json:"logoRefId"`
-	Name                 string                `json:"name"`
-	Pricing              *ExtensionPricing     `json:"pricing,omitempty"`
-	Published            bool                  `json:"published"`
-	Scopes               []string              `json:"scopes"`
-	State                ExtensionState        `json:"state"`
-	Statistics           ExtensionStatistics   `json:"statistics"`
-	SubTitle             SubTitle              `json:"subTitle"`
-	Support              SupportMeta           `json:"support"`
-	Tags                 []string              `json:"tags"`
+type UnpublishedExtension struct {
+	Assets               []ExtensionAsset             `json:"assets"`
+	Blocked              bool                         `json:"blocked"`
+	Context              Context                      `json:"context"`
+	ContributorId        string                       `json:"contributorId"`
+	Deprecation          *ExtensionDeprecation        `json:"deprecation,omitempty"`
+	Description          *string                      `json:"description,omitempty"`
+	DetailedDescriptions *DetailedDescriptions        `json:"detailedDescriptions,omitempty"`
+	Disabled             bool                         `json:"disabled"`
+	ExternalFrontends    []ExternalComponent          `json:"externalFrontends,omitempty"`
+	FrontendComponents   []ExternalComponent          `json:"frontendComponents,omitempty"`
+	FrontendFragments    map[string]any               `json:"frontendFragments,omitempty"`
+	Id                   string                       `json:"id"`
+	LogoRefId            *string                      `json:"logoRefId,omitempty"`
+	Name                 string                       `json:"name"`
+	Pricing              *UnpublishedExtensionPricing `json:"pricing,omitempty"`
+	Published            *bool                        `json:"published,omitempty"`
+	Scopes               []string                     `json:"scopes"`
+	State                UnpublishedExtensionState    `json:"state"`
+	Statistics           ExtensionStatistics          `json:"statistics"`
+	SubTitle             *SubTitle                    `json:"subTitle,omitempty"`
+	Support              *SupportMeta                 `json:"support,omitempty"`
+	Tags                 []string                     `json:"tags"`
 }
 
-func (o *Extension) Validate() error {
+func (o *UnpublishedExtension) Validate() error {
 	if o.Assets == nil {
 		return errors.New("property assets is required, but not set")
 	}
@@ -200,10 +195,20 @@ func (o *Extension) Validate() error {
 	if err := o.Statistics.Validate(); err != nil {
 		return fmt.Errorf("invalid property statistics: %w", err)
 	}
-	if err := o.SubTitle.Validate(); err != nil {
+	if err := func() error {
+		if o.SubTitle == nil {
+			return nil
+		}
+		return o.SubTitle.Validate()
+	}(); err != nil {
 		return fmt.Errorf("invalid property subTitle: %w", err)
 	}
-	if err := o.Support.Validate(); err != nil {
+	if err := func() error {
+		if o.Support == nil {
+			return nil
+		}
+		return o.Support.Validate()
+	}(); err != nil {
 		return fmt.Errorf("invalid property support: %w", err)
 	}
 	if o.Tags == nil {

@@ -13,12 +13,14 @@ import "fmt"
 //        format: "uuid"
 //    "description":
 //        type: "string"
+//    "descriptions": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.LocalizedDescription"}
 //    "email":
 //        type: "string"
 //        deprecated: true
 //    "id":
 //        type: "string"
 //        format: "uuid"
+//    "imprint": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ContributorImprint"}
 //    "logoRefId":
 //        type: "string"
 //    "name":
@@ -38,19 +40,37 @@ import "fmt"
 //    - "supportInformation"
 
 type Contributor struct {
-	CustomerId         string           `json:"customerId"`
-	Description        *string          `json:"description,omitempty"`
-	Email              *string          `json:"email,omitempty"`
-	Id                 string           `json:"id"`
-	LogoRefId          *string          `json:"logoRefId,omitempty"`
-	Name               string           `json:"name"`
-	Phone              *string          `json:"phone,omitempty"`
-	State              ContributorState `json:"state"`
-	SupportInformation SupportMeta      `json:"supportInformation"`
-	Url                *string          `json:"url,omitempty"`
+	CustomerId         string                `json:"customerId"`
+	Description        *string               `json:"description,omitempty"`
+	Descriptions       *LocalizedDescription `json:"descriptions,omitempty"`
+	Email              *string               `json:"email,omitempty"`
+	Id                 string                `json:"id"`
+	Imprint            *ContributorImprint   `json:"imprint,omitempty"`
+	LogoRefId          *string               `json:"logoRefId,omitempty"`
+	Name               string                `json:"name"`
+	Phone              *string               `json:"phone,omitempty"`
+	State              ContributorState      `json:"state"`
+	SupportInformation SupportMeta           `json:"supportInformation"`
+	Url                *string               `json:"url,omitempty"`
 }
 
 func (o *Contributor) Validate() error {
+	if err := func() error {
+		if o.Descriptions == nil {
+			return nil
+		}
+		return o.Descriptions.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property descriptions: %w", err)
+	}
+	if err := func() error {
+		if o.Imprint == nil {
+			return nil
+		}
+		return o.Imprint.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property imprint: %w", err)
+	}
 	if err := o.State.Validate(); err != nil {
 		return fmt.Errorf("invalid property state: %w", err)
 	}

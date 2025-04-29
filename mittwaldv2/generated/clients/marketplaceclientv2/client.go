@@ -118,7 +118,7 @@ type Client interface {
 		ctx context.Context,
 		req GetExtensionRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*marketplacev2.Extension, *http.Response, error)
+	) (*any, *http.Response, error)
 	GetPublicKey(
 		ctx context.Context,
 		req GetPublicKeyRequest,
@@ -742,7 +742,7 @@ func (c *clientImpl) GetExtension(
 	ctx context.Context,
 	req GetExtensionRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*marketplacev2.Extension, *http.Response, error) {
+) (*any, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -758,7 +758,7 @@ func (c *clientImpl) GetExtension(
 		return nil, httpRes, err
 	}
 
-	var response marketplacev2.Extension
+	var response any
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
