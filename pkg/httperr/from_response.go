@@ -1,6 +1,8 @@
 package httperr
 
-import "net/http"
+import (
+	"net/http"
+)
 
 // ErrFromResponse maps an HTTP response (with an error status code) to a (more
 // or less) specific error type.
@@ -10,6 +12,11 @@ func ErrFromResponse(res *http.Response) error {
 		return &ErrNotFound{Response: res}
 	case http.StatusForbidden:
 		return &ErrPermissionDenied{Response: res}
+	case http.StatusBadRequest:
+		if validationError, isValidationError := IsValidationErrorResponse(res); isValidationError {
+			return &ErrValidation{Response: res, ValidationError: validationError}
+		}
+		return &ErrBadRequest{Response: res}
 	default:
 		return &ErrUnexpectedResponse{Response: res}
 	}

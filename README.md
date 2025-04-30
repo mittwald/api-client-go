@@ -30,6 +30,8 @@ import "github.com/mittwald/api-client-go/mittwaldv2"
 
 ## Usage
 
+### Initialization and authentication
+
 Use the `mittwaldv2.New` function to instantiate a new client:
 
 ```go
@@ -58,6 +60,26 @@ Other options include:
 
 Have a look at our [API introduction][api-getting-started] for more information
 on how to obtain an API token and how to get started with the API.
+
+### Error handling
+
+Each API call returns a response object and an error. The response object contains the HTTP status code and the response body, which can be used to check for errors.
+
+Some error conditions are also mapped to specific Go error types that you can check for:
+
+- `httperr.ErrValidation` for validation errors
+- `httperr.ErrBadRequest` for 400 errors (except for validation errors)
+- `httperr.ErrNotFound` for 404 errors
+- `httperr.ErrPermissionDenied` for 403 errors
+
+Use `errors.As` to check for these errors:
+
+```go
+projects, res, err := client.Projects().ListProjects(ctx, req)
+if validationError := new(httperr.ErrValidation); errors.As(err, &validationError) {
+	// ...
+}
+```
 
 ## Example
 
