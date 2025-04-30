@@ -30,9 +30,6 @@ import (
 //                format: "date-time"
 //        required:
 //            - "active"
-//    "availableBackups":
-//        type: "array"
-//        items: {"$ref": "#/components/schemas/de.mittwald.v1.mail.MailAddressBackup"}
 //    "forwardAddresses":
 //        type: "array"
 //        items:
@@ -42,8 +39,6 @@ import (
 //        type: "string"
 //        format: "uuid"
 //    "isArchived":
-//        type: "boolean"
-//    "isBackupInProgress":
 //        type: "boolean"
 //    "isCatchAll":
 //        type: "boolean"
@@ -121,38 +116,21 @@ import (
 //    - "isArchived"
 
 type MailAddress struct {
-	Address            string                   `json:"address"`
-	AutoResponder      MailAddressAutoResponder `json:"autoResponder"`
-	AvailableBackups   []MailAddressBackup      `json:"availableBackups,omitempty"`
-	ForwardAddresses   []string                 `json:"forwardAddresses"`
-	Id                 string                   `json:"id"`
-	IsArchived         bool                     `json:"isArchived"`
-	IsBackupInProgress *bool                    `json:"isBackupInProgress,omitempty"`
-	IsCatchAll         bool                     `json:"isCatchAll"`
-	Mailbox            *MailAddressMailbox      `json:"mailbox,omitempty"`
-	ProjectId          string                   `json:"projectId"`
-	ReceivingDisabled  bool                     `json:"receivingDisabled"`
-	UpdatedAt          time.Time                `json:"updatedAt"`
+	Address           string                   `json:"address"`
+	AutoResponder     MailAddressAutoResponder `json:"autoResponder"`
+	ForwardAddresses  []string                 `json:"forwardAddresses"`
+	Id                string                   `json:"id"`
+	IsArchived        bool                     `json:"isArchived"`
+	IsCatchAll        bool                     `json:"isCatchAll"`
+	Mailbox           *MailAddressMailbox      `json:"mailbox,omitempty"`
+	ProjectId         string                   `json:"projectId"`
+	ReceivingDisabled bool                     `json:"receivingDisabled"`
+	UpdatedAt         time.Time                `json:"updatedAt"`
 }
 
 func (o *MailAddress) Validate() error {
 	if err := o.AutoResponder.Validate(); err != nil {
 		return fmt.Errorf("invalid property autoResponder: %w", err)
-	}
-	if err := func() error {
-		if o.AvailableBackups == nil {
-			return nil
-		}
-		return func() error {
-			for i := range o.AvailableBackups {
-				if err := o.AvailableBackups[i].Validate(); err != nil {
-					return fmt.Errorf("item %d is invalid %w", i, err)
-				}
-			}
-			return nil
-		}()
-	}(); err != nil {
-		return fmt.Errorf("invalid property availableBackups: %w", err)
 	}
 	if o.ForwardAddresses == nil {
 		return errors.New("property forwardAddresses is required, but not set")
