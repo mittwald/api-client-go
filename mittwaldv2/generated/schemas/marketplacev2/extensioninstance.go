@@ -26,6 +26,7 @@ import (
 //            - "id"
 //            - "domain"
 //            - "aggregate"
+//    "chargeability": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExtensionInstanceChargeability"}
 //    "consentedScopes":
 //        type: "array"
 //        items:
@@ -59,6 +60,7 @@ import (
 
 type ExtensionInstance struct {
 	AggregateReference  ExtensionInstanceAggregateReference `json:"aggregateReference"`
+	Chargeability       *ExtensionInstanceChargeability     `json:"chargeability,omitempty"`
 	ConsentedScopes     []string                            `json:"consentedScopes"`
 	CreatedAt           *time.Time                          `json:"createdAt,omitempty"`
 	Disabled            bool                                `json:"disabled"`
@@ -71,6 +73,14 @@ type ExtensionInstance struct {
 func (o *ExtensionInstance) Validate() error {
 	if err := o.AggregateReference.Validate(); err != nil {
 		return fmt.Errorf("invalid property aggregateReference: %w", err)
+	}
+	if err := func() error {
+		if o.Chargeability == nil {
+			return nil
+		}
+		return o.Chargeability.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property chargeability: %w", err)
 	}
 	if o.ConsentedScopes == nil {
 		return errors.New("property consentedScopes is required, but not set")
