@@ -11,15 +11,17 @@ import "fmt"
 //    - "pending"
 //    - "ready"
 //    - "unready"
+//    - "suspended"
 
 type ServerStatus string
 
 const ServerStatusPending ServerStatus = "pending"
 const ServerStatusReady ServerStatus = "ready"
 const ServerStatusUnready ServerStatus = "unready"
+const ServerStatusSuspended ServerStatus = "suspended"
 
 func (e ServerStatus) Validate() error {
-	if e == ServerStatusPending || e == ServerStatusReady || e == ServerStatusUnready {
+	if e == ServerStatusPending || e == ServerStatusReady || e == ServerStatusUnready || e == ServerStatusSuspended {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
