@@ -19,12 +19,15 @@ import "time"
 //        type: "string"
 //    "totalGross":
 //        type: "number"
+//    "totalNet":
+//        type: "number"
 //    "webLink":
 //        type: "string"
 // required:
 //    - "invoiceId"
 //    - "invoiceNumber"
 //    - "invoiceDate"
+//    - "totalNet"
 //    - "totalGross"
 //    - "webLink"
 //    - "pdfLink"
@@ -35,6 +38,7 @@ type ListOnbehalfInvoicesResponseItem struct {
 	InvoiceNumber string    `json:"invoiceNumber"`
 	PdfLink       string    `json:"pdfLink"`
 	TotalGross    float64   `json:"totalGross"`
+	TotalNet      float64   `json:"totalNet"`
 	WebLink       string    `json:"webLink"`
 }
 
