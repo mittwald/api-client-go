@@ -11,6 +11,9 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "avatarRef":
+//        type: "string"
+//        description: "Avatar file reference id of the user."
 //    "email":
 //        type: "string"
 //        format: "email"
@@ -19,6 +22,9 @@ import (
 //        type: "string"
 //        format: "date-time"
 //        description: "Time the ProjectMembership should expire at."
+//    "firstName":
+//        type: "string"
+//        description: "First name of the user."
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -30,6 +36,9 @@ import (
 //        type: "string"
 //        format: "uuid"
 //        description: "ID of the ProjectInvite the membership was created from."
+//    "lastName":
+//        type: "string"
+//        description: "Last name of the user."
 //    "memberSince":
 //        type: "string"
 //        format: "date-time"
@@ -54,13 +63,18 @@ import (
 //    - "inherited"
 //    - "email"
 //    - "mfa"
+//    - "firstName"
+//    - "lastName"
 
 type ProjectMembership struct {
+	AvatarRef   *string      `json:"avatarRef,omitempty"`
 	Email       string       `json:"email"`
 	ExpiresAt   *time.Time   `json:"expiresAt,omitempty"`
+	FirstName   string       `json:"firstName"`
 	Id          string       `json:"id"`
 	Inherited   bool         `json:"inherited"`
 	InviteId    *string      `json:"inviteId,omitempty"`
+	LastName    string       `json:"lastName"`
 	MemberSince *time.Time   `json:"memberSince,omitempty"`
 	Mfa         bool         `json:"mfa"`
 	ProjectId   string       `json:"projectId"`

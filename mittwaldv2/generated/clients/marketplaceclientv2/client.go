@@ -240,6 +240,16 @@ type Client interface {
 		req UpdateExtensionPricingRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*UpdateExtensionPricingResponse, *http.Response, error)
+	Extension(
+		ctx context.Context,
+		req ExtensionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*ExtensionResponse, *http.Response, error)
+	CustomerUpdatePaymentMethod(
+		ctx context.Context,
+		req CustomerUpdatePaymentMethodRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CustomerUpdatePaymentMethodResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1501,6 +1511,62 @@ func (c *clientImpl) UpdateExtensionPricing(
 	}
 
 	var response UpdateExtensionPricingResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Order Extension with saved payment method
+func (c *clientImpl) Extension(
+	ctx context.Context,
+	req ExtensionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*ExtensionResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response ExtensionResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get the link to update the marketplace payment method
+func (c *clientImpl) CustomerUpdatePaymentMethod(
+	ctx context.Context,
+	req CustomerUpdatePaymentMethodRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CustomerUpdatePaymentMethodResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CustomerUpdatePaymentMethodResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
