@@ -926,7 +926,7 @@ func (c *clientImpl) UpdateMailAddressAddress(
 	return httpRes, nil
 }
 
-// Update the catchall of a MailAddress.
+// Update the catch-all of a MailAddress.
 func (c *clientImpl) UpdateMailAddressCatchAll(
 	ctx context.Context,
 	req UpdateMailAddressCatchAllRequest,

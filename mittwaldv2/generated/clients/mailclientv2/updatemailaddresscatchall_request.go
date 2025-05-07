@@ -15,7 +15,7 @@ import (
 // UpdateMailAddressCatchAllRequest models a request for the
 // 'mail-update-mail-address-catch-all' operation. See [1] for more information.
 //
-// Update the catchall of a MailAddress.
+// Update the catch-all of a MailAddress.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/mail/mail-update-mail-address-catch-all
