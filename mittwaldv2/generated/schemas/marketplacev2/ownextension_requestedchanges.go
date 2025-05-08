@@ -13,13 +13,17 @@ import "fmt"
 //        type: "array"
 //        items:
 //            type: "string"
-//    "webhookUrls": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls"}
+//    "webhookUrls":
+//        oneOf:
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls"}
+//            - type: "object"
+//              additionalProperties: false
 // additionalProperties: false
 
 type OwnExtensionRequestedChanges struct {
-	Context     *Context     `json:"context,omitempty"`
-	Scopes      []string     `json:"scopes,omitempty"`
-	WebhookUrls *WebhookUrls `json:"webhookUrls,omitempty"`
+	Context     *Context                                 `json:"context,omitempty"`
+	Scopes      []string                                 `json:"scopes,omitempty"`
+	WebhookUrls *OwnExtensionRequestedChangesWebhookURLs `json:"webhookUrls,omitempty"`
 }
 
 func (o *OwnExtensionRequestedChanges) Validate() error {

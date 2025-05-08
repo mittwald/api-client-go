@@ -61,7 +61,11 @@ import (
 //                type: "array"
 //                items:
 //                    type: "string"
-//            "webhookUrls": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls"}
+//            "webhookUrls":
+//                oneOf:
+//                    - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls"}
+//                    - type: "object"
+//                      additionalProperties: false
 //        additionalProperties: false
 //    "scopes":
 //        type: "array"
