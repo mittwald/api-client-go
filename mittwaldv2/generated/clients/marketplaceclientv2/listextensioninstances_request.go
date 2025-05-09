@@ -20,11 +20,14 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/marketplace/extension-list-extension-instances
 type ListExtensionInstancesRequest struct {
-	Limit     *int64
-	Skip      *int64
-	Page      *int64
-	Context   marketplacev2.Context
-	ContextID string
+	Context     *marketplacev2.Context
+	ContextID   *string
+	ExtensionID *string
+	Limit       *int64
+	Skip        *int64
+	Page        *int64
+	Sort        []ListExtensionInstancesRequestQuerySortItem
+	Order       []ListExtensionInstancesRequestQueryOrderItem
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -62,6 +65,15 @@ func (r *ListExtensionInstancesRequest) url() string {
 
 func (r *ListExtensionInstancesRequest) query() url.Values {
 	q := make(url.Values)
+	if r.Context != nil {
+		q.Set("context", string(*r.Context))
+	}
+	if r.ContextID != nil {
+		q.Set("contextId", *r.ContextID)
+	}
+	if r.ExtensionID != nil {
+		q.Set("extensionId", *r.ExtensionID)
+	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
 	}
@@ -71,7 +83,11 @@ func (r *ListExtensionInstancesRequest) query() url.Values {
 	if r.Page != nil {
 		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
-	q.Set("context", string(r.Context))
-	q.Set("contextId", r.ContextID)
+	for _, val := range r.Sort {
+		q.Add("sort", string(val))
+	}
+	for _, val := range r.Order {
+		q.Add("order", string(val))
+	}
 	return q
 }

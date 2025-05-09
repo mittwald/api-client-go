@@ -1,6 +1,8 @@
 package marketplaceclientv2
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -19,6 +21,7 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/marketplace/marketplace-customer-update-payment-method
 type CustomerUpdatePaymentMethodRequest struct {
+	Body       CustomerUpdatePaymentMethodRequestBody
 	CustomerID string
 }
 
@@ -44,7 +47,11 @@ func (r *CustomerUpdatePaymentMethodRequest) BuildRequest(reqEditors ...func(req
 }
 
 func (r *CustomerUpdatePaymentMethodRequest) body() (io.Reader, string, error) {
-	return nil, "", nil
+	out, err := json.Marshal(&r.Body)
+	if err != nil {
+		return nil, "", fmt.Errorf("error while marshalling JSON: %w", err)
+	}
+	return bytes.NewReader(out), "application/json", nil
 }
 
 func (r *CustomerUpdatePaymentMethodRequest) url() string {

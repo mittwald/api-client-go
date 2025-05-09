@@ -200,6 +200,11 @@ type Client interface {
 		req RegisterExtensionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*RegisterExtensionResponse, *http.Response, error)
+	Extension(
+		ctx context.Context,
+		req ExtensionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*ExtensionResponse, *http.Response, error)
 	RemoveAsset(
 		ctx context.Context,
 		req RemoveAssetRequest,
@@ -240,11 +245,11 @@ type Client interface {
 		req UpdateExtensionPricingRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*UpdateExtensionPricingResponse, *http.Response, error)
-	Extension(
+	CustomerGetPaymentMethod(
 		ctx context.Context,
-		req ExtensionRequest,
+		req CustomerGetPaymentMethodRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*ExtensionResponse, *http.Response, error)
+	) (*CustomerGetPaymentMethodResponse, *http.Response, error)
 	CustomerUpdatePaymentMethod(
 		ctx context.Context,
 		req CustomerUpdatePaymentMethodRequest,
@@ -1299,6 +1304,34 @@ func (c *clientImpl) RegisterExtension(
 	return &response, httpRes, nil
 }
 
+// Order Extension with saved payment method
+func (c *clientImpl) Extension(
+	ctx context.Context,
+	req ExtensionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*ExtensionResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response ExtensionResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Remove an asset of an extension.
 func (c *clientImpl) RemoveAsset(
 	ctx context.Context,
@@ -1517,12 +1550,12 @@ func (c *clientImpl) UpdateExtensionPricing(
 	return &response, httpRes, nil
 }
 
-// Order Extension with saved payment method
-func (c *clientImpl) Extension(
+// Get payment method details
+func (c *clientImpl) CustomerGetPaymentMethod(
 	ctx context.Context,
-	req ExtensionRequest,
+	req CustomerGetPaymentMethodRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*ExtensionResponse, *http.Response, error) {
+) (*CustomerGetPaymentMethodResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -1538,7 +1571,7 @@ func (c *clientImpl) Extension(
 		return nil, httpRes, err
 	}
 
-	var response ExtensionResponse
+	var response CustomerGetPaymentMethodResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
