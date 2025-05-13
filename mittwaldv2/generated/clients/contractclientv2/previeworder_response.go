@@ -17,11 +17,13 @@ import (
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.HostingOrderPreviewResponse"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.DomainOrderPreviewResponse"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.ExternalCertificateOrderPreviewResponse"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.order.LeadFyndrOrderPreviewResponse"}
 
 type PreviewOrderResponse struct {
 	AlternativeHostingOrderPreviewResponse             *orderv2.HostingOrderPreviewResponse
 	AlternativeDomainOrderPreviewResponse              *orderv2.DomainOrderPreviewResponse
 	AlternativeExternalCertificateOrderPreviewResponse *orderv2.ExternalCertificateOrderPreviewResponse
+	AlternativeLeadFyndrOrderPreviewResponse           *orderv2.LeadFyndrOrderPreviewResponse
 }
 
 func (a *PreviewOrderResponse) MarshalJSON() ([]byte, error) {
@@ -33,6 +35,9 @@ func (a *PreviewOrderResponse) MarshalJSON() ([]byte, error) {
 	}
 	if a.AlternativeExternalCertificateOrderPreviewResponse != nil {
 		return json.Marshal(a.AlternativeExternalCertificateOrderPreviewResponse)
+	}
+	if a.AlternativeLeadFyndrOrderPreviewResponse != nil {
+		return json.Marshal(a.AlternativeLeadFyndrOrderPreviewResponse)
 	}
 	return []byte("null"), nil
 }
@@ -73,6 +78,16 @@ func (a *PreviewOrderResponse) UnmarshalJSON(input []byte) error {
 		}
 	}
 
+	reader.Reset(input)
+	var alternativeLeadFyndrOrderPreviewResponse orderv2.LeadFyndrOrderPreviewResponse
+	if err := dec.Decode(&alternativeLeadFyndrOrderPreviewResponse); err == nil {
+		//subtype: *generator.ReferenceType
+		if vErr := alternativeLeadFyndrOrderPreviewResponse.Validate(); vErr == nil {
+			a.AlternativeLeadFyndrOrderPreviewResponse = &alternativeLeadFyndrOrderPreviewResponse
+			decodedAtLeastOnce = true
+		}
+	}
+
 	if !decodedAtLeastOnce {
 		return fmt.Errorf("could not unmarshal into any alternative for type %T", a)
 	}
@@ -88,6 +103,9 @@ func (a *PreviewOrderResponse) Validate() error {
 	}
 	if a.AlternativeExternalCertificateOrderPreviewResponse != nil {
 		return a.AlternativeExternalCertificateOrderPreviewResponse.Validate()
+	}
+	if a.AlternativeLeadFyndrOrderPreviewResponse != nil {
+		return a.AlternativeLeadFyndrOrderPreviewResponse.Validate()
 	}
 	return errors.New("no alternative set")
 }

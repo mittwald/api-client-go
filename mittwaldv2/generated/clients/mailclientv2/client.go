@@ -165,6 +165,11 @@ type Client interface {
 		req MigrationRequestMailMigrationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	RequestMailAddressBackup(
+		ctx context.Context,
+		req RequestMailAddressBackupRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	UpdateDeliveryBoxDescription(
 		ctx context.Context,
 		req UpdateDeliveryBoxDescriptionRequest,
@@ -966,6 +971,30 @@ func (c *clientImpl) MigrationListMigrations(
 func (c *clientImpl) MigrationRequestMailMigration(
 	ctx context.Context,
 	req MigrationRequestMailMigrationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Request to restore a backup for a MailAddress
+func (c *clientImpl) RequestMailAddressBackup(
+	ctx context.Context,
+	req RequestMailAddressBackupRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

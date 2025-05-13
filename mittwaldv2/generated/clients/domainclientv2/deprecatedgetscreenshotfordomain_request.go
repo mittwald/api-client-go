@@ -18,6 +18,8 @@ import (
 //
 // Get File Service Reference for a Screenshot of a domain.
 //
+// Deprecated by `GET /v2/domains/{domainId}/latest-screenshot`.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/domain/deprecated-domain-get-screenshot-for-domain
 type DeprecatedGetScreenshotForDomainRequest struct {

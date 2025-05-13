@@ -11,6 +11,7 @@ package marketplacev2
 //        minLength: 1
 // required:
 //    - "url"
+// nullable: true
 
 type WebhookUrl struct {
 	Url string `json:"url"`

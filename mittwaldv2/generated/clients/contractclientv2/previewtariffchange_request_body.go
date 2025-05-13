@@ -12,11 +12,13 @@ import "fmt"
 //        oneOf:
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.ProjectHostingTariffChange"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.ServerTariffChange"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.order.LeadFyndrTariffChange"}
 //    "tariffChangeType":
 //        type: "string"
 //        enum:
 //            - "projectHosting"
 //            - "server"
+//            - "leadFyndr"
 // description: PreviewTariffChangeRequestBody models the JSON body of a 'order-preview-tariff-change' request
 
 // PreviewTariffChangeRequestBody models the JSON body of a 'order-preview-tariff-change' request

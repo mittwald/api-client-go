@@ -12,6 +12,7 @@ import "fmt"
 //    - "projectHosting"
 //    - "server"
 //    - "externalCertificate"
+//    - "leadFyndr"
 
 type PreviewOrderRequestBodyOrderType string
 
@@ -19,9 +20,10 @@ const PreviewOrderRequestBodyOrderTypeDomain PreviewOrderRequestBodyOrderType = 
 const PreviewOrderRequestBodyOrderTypeProjectHosting PreviewOrderRequestBodyOrderType = "projectHosting"
 const PreviewOrderRequestBodyOrderTypeServer PreviewOrderRequestBodyOrderType = "server"
 const PreviewOrderRequestBodyOrderTypeExternalCertificate PreviewOrderRequestBodyOrderType = "externalCertificate"
+const PreviewOrderRequestBodyOrderTypeLeadFyndr PreviewOrderRequestBodyOrderType = "leadFyndr"
 
 func (e PreviewOrderRequestBodyOrderType) Validate() error {
-	if e == PreviewOrderRequestBodyOrderTypeDomain || e == PreviewOrderRequestBodyOrderTypeProjectHosting || e == PreviewOrderRequestBodyOrderTypeServer || e == PreviewOrderRequestBodyOrderTypeExternalCertificate {
+	if e == PreviewOrderRequestBodyOrderTypeDomain || e == PreviewOrderRequestBodyOrderTypeProjectHosting || e == PreviewOrderRequestBodyOrderTypeServer || e == PreviewOrderRequestBodyOrderTypeExternalCertificate || e == PreviewOrderRequestBodyOrderTypeLeadFyndr {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

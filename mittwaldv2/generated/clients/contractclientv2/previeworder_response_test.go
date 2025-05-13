@@ -37,5 +37,13 @@ var _ = Describe("PreviewOrderResponse", func() {
 			Expect(sut.Validate()).To(Succeed())
 			Expect(sut.AlternativeExternalCertificateOrderPreviewResponse).NotTo(BeNil())
 		})
+		It("should unmarshal into AlternativeLeadFyndrOrderPreviewResponse", func() {
+			exampleJSON := []byte("{\"recurringPrice\":7900}")
+
+			sut := contractclientv2.PreviewOrderResponse{}
+			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
+			Expect(sut.Validate()).To(Succeed())
+			Expect(sut.AlternativeLeadFyndrOrderPreviewResponse).NotTo(BeNil())
+		})
 	})
 })

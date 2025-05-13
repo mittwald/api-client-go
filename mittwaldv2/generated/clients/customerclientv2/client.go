@@ -9,6 +9,7 @@ import (
 	"net/http"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/customerv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/lead_finderv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/membershipv2"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
 	"github.com/mittwald/api-client-go/pkg/httperr"
@@ -105,6 +106,16 @@ type Client interface {
 		req GetCustomerTokenInviteRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*membershipv2.CustomerInvite, *http.Response, error)
+	GetLeadFyndrProfileRequest(
+		ctx context.Context,
+		req GetLeadFyndrProfileRequestRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*lead_finderv2.ProfileRequest, *http.Response, error)
+	GetLeadFyndrProfile(
+		ctx context.Context,
+		req GetLeadFyndrProfileRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*lead_finderv2.Profile, *http.Response, error)
 	IsCustomerLegallyCompetent(
 		ctx context.Context,
 		req IsCustomerLegallyCompetentRequest,
@@ -632,6 +643,62 @@ func (c *clientImpl) GetCustomerTokenInvite(
 	}
 
 	var response membershipv2.CustomerInvite
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get your LeadFyndr request.
+func (c *clientImpl) GetLeadFyndrProfileRequest(
+	ctx context.Context,
+	req GetLeadFyndrProfileRequestRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*lead_finderv2.ProfileRequest, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response lead_finderv2.ProfileRequest
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get your LeadFyndr profile.
+func (c *clientImpl) GetLeadFyndrProfile(
+	ctx context.Context,
+	req GetLeadFyndrProfileRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*lead_finderv2.Profile, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response lead_finderv2.Profile
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

@@ -767,6 +767,8 @@ func (c *clientImpl) DeprecatedGetHandleFields(
 }
 
 // Get File Service Reference for a Screenshot of a domain.
+//
+// Deprecated by `GET /v2/domains/{domainId}/latest-screenshot`.
 func (c *clientImpl) DeprecatedGetScreenshotForDomain(
 	ctx context.Context,
 	req DeprecatedGetScreenshotForDomainRequest,

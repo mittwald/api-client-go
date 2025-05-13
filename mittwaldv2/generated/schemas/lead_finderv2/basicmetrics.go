@@ -15,7 +15,6 @@ import "fmt"
 //        format: "float"
 //    "contentLoaded":
 //        type: "number"
-//        maximum: 1
 //        minimum: 0
 //        format: "float"
 //    "desktop": {"$ref": "#/components/schemas/de.mittwald.v1.lead-finder.Lighthouse"}

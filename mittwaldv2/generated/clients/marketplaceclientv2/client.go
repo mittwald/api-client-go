@@ -140,6 +140,11 @@ type Client interface {
 		req EnableExtensionInstanceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*any, *http.Response, error)
+	GenerateExtensionSecret(
+		ctx context.Context,
+		req GenerateExtensionSecretRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*GenerateExtensionSecretResponse, *http.Response, error)
 	GenerateSessionToken(
 		ctx context.Context,
 		req GenerateSessionTokenRequest,
@@ -180,6 +185,11 @@ type Client interface {
 		req GetPublicKeyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*marketplacev2.PublicKey, *http.Response, error)
+	InvalidateExtensionSecret(
+		ctx context.Context,
+		req InvalidateExtensionSecretRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	ListContributors(
 		ctx context.Context,
 		req ListContributorsRequest,
@@ -200,6 +210,11 @@ type Client interface {
 		req RegisterExtensionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*RegisterExtensionResponse, *http.Response, error)
+	ListScopes(
+		ctx context.Context,
+		req ListScopesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]string, *http.Response, error)
 	Extension(
 		ctx context.Context,
 		req ExtensionRequest,
@@ -966,6 +981,38 @@ func (c *clientImpl) EnableExtensionInstance(
 	return &response, httpRes, nil
 }
 
+// Generate an Extension secret for the given Extension.
+//
+// This generates a new Extension secret for the given Extension.
+// If an Extension secret existed previously, it will deprecate the existing secret.
+// This means, it will be invalidated after approximately one day.
+func (c *clientImpl) GenerateExtensionSecret(
+	ctx context.Context,
+	req GenerateExtensionSecretRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*GenerateExtensionSecretResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GenerateExtensionSecretResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Generate a session token to transmit it to the extensions frontend fragment.
 func (c *clientImpl) GenerateSessionToken(
 	ctx context.Context,
@@ -1192,6 +1239,30 @@ func (c *clientImpl) GetPublicKey(
 	return &response, httpRes, nil
 }
 
+// Invalidate the given Extension secret immediately.
+func (c *clientImpl) InvalidateExtensionSecret(
+	ctx context.Context,
+	req InvalidateExtensionSecretRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // List Contributors.
 func (c *clientImpl) ListContributors(
 	ctx context.Context,
@@ -1298,6 +1369,34 @@ func (c *clientImpl) RegisterExtension(
 	}
 
 	var response RegisterExtensionResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Scopes.
+func (c *clientImpl) ListScopes(
+	ctx context.Context,
+	req ListScopesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]string, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []string
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
