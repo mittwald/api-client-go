@@ -1,8 +1,6 @@
 package customerclientv2
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -22,7 +20,6 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/customer/deprecated-customer-leave-customer
 type DeprecatedLeaveCustomerRequest struct {
-	Body       any
 	CustomerID string
 }
 
@@ -48,11 +45,7 @@ func (r *DeprecatedLeaveCustomerRequest) BuildRequest(reqEditors ...func(req *ht
 }
 
 func (r *DeprecatedLeaveCustomerRequest) body() (io.Reader, string, error) {
-	out, err := json.Marshal(&r.Body)
-	if err != nil {
-		return nil, "", fmt.Errorf("error while marshalling JSON: %w", err)
-	}
-	return bytes.NewReader(out), "application/json", nil
+	return nil, "", nil
 }
 
 func (r *DeprecatedLeaveCustomerRequest) url() string {

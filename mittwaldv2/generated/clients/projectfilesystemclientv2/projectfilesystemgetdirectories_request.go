@@ -22,7 +22,7 @@ type ProjectFileSystemGetDirectoriesRequest struct {
 	ProjectID  string
 	Directory  *string
 	Name       *string
-	Maxdepth   *int64
+	MaxDepth   *int64
 	Type       []string
 	Executable *bool
 	Hidden     *bool
@@ -69,8 +69,8 @@ func (r *ProjectFileSystemGetDirectoriesRequest) query() url.Values {
 	if r.Name != nil {
 		q.Set("name", *r.Name)
 	}
-	if r.Maxdepth != nil {
-		q.Set("max_depth", fmt.Sprintf("%d", *r.Maxdepth))
+	if r.MaxDepth != nil {
+		q.Set("max_depth", fmt.Sprintf("%d", *r.MaxDepth))
 	}
 	for _, val := range r.Type {
 		q.Add("type", val)

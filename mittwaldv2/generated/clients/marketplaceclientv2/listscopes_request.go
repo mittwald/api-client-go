@@ -46,7 +46,7 @@ func (r *ListScopesRequest) body() (io.Reader, string, error) {
 
 func (r *ListScopesRequest) url() string {
 	u := url.URL{
-		Path: "/v2/marketplace/scopes",
+		Path: "/v2/scopes",
 	}
 	return u.String()
 }

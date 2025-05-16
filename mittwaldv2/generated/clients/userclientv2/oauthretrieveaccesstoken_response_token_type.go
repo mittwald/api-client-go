@@ -13,12 +13,12 @@ import "fmt"
 
 // The type of the token issued as described in
 // [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749#section-7.1).
-type OauthRetrieveAccessTokenResponseTokentype string
+type OauthRetrieveAccessTokenResponseTokenType string
 
-const OauthRetrieveAccessTokenResponseTokentypeBearer OauthRetrieveAccessTokenResponseTokentype = "bearer"
+const OauthRetrieveAccessTokenResponseTokenTypeBearer OauthRetrieveAccessTokenResponseTokenType = "bearer"
 
-func (e OauthRetrieveAccessTokenResponseTokentype) Validate() error {
-	if e == OauthRetrieveAccessTokenResponseTokentypeBearer {
+func (e OauthRetrieveAccessTokenResponseTokenType) Validate() error {
+	if e == OauthRetrieveAccessTokenResponseTokenTypeBearer {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

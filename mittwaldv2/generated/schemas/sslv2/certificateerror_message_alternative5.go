@@ -14,10 +14,10 @@ import "fmt"
 // The certificate is not authorized to sign.
 type CertificateErrorMessageAlternative5 string
 
-const CertificateErrorMessageAlternative5Certificatenotauthorizedtosign CertificateErrorMessageAlternative5 = "certificate_not_authorized_to_sign"
+const CertificateErrorMessageAlternative5CertificateNotAuthorizedToSign CertificateErrorMessageAlternative5 = "certificate_not_authorized_to_sign"
 
 func (e CertificateErrorMessageAlternative5) Validate() error {
-	if e == CertificateErrorMessageAlternative5Certificatenotauthorizedtosign {
+	if e == CertificateErrorMessageAlternative5CertificateNotAuthorizedToSign {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

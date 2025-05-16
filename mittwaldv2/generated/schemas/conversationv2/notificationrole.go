@@ -17,15 +17,15 @@ import "fmt"
 
 type NotificationRole string
 
-const NotificationRoleCustomerowner NotificationRole = "customer_owner"
-const NotificationRoleCustomeraccountant NotificationRole = "customer_accountant"
-const NotificationRoleCustomermember NotificationRole = "customer_member"
-const NotificationRoleProjectowner NotificationRole = "project_owner"
-const NotificationRoleProjectemailadmin NotificationRole = "project_emailadmin"
-const NotificationRoleProjectexternal NotificationRole = "project_external"
+const NotificationRoleCustomerOwner NotificationRole = "customer_owner"
+const NotificationRoleCustomerAccountant NotificationRole = "customer_accountant"
+const NotificationRoleCustomerMember NotificationRole = "customer_member"
+const NotificationRoleProjectOwner NotificationRole = "project_owner"
+const NotificationRoleProjectEmailadmin NotificationRole = "project_emailadmin"
+const NotificationRoleProjectExternal NotificationRole = "project_external"
 
 func (e NotificationRole) Validate() error {
-	if e == NotificationRoleCustomerowner || e == NotificationRoleCustomeraccountant || e == NotificationRoleCustomermember || e == NotificationRoleProjectowner || e == NotificationRoleProjectemailadmin || e == NotificationRoleProjectexternal {
+	if e == NotificationRoleCustomerOwner || e == NotificationRoleCustomerAccountant || e == NotificationRoleCustomerMember || e == NotificationRoleProjectOwner || e == NotificationRoleProjectEmailadmin || e == NotificationRoleProjectExternal {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

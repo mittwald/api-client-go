@@ -18,12 +18,12 @@ type ReadableArticleOrderable string
 
 const ReadableArticleOrderableForbidden ReadableArticleOrderable = "forbidden"
 const ReadableArticleOrderableInternal ReadableArticleOrderable = "internal"
-const ReadableArticleOrderableBetatesting ReadableArticleOrderable = "beta_testing"
+const ReadableArticleOrderableBetaTesting ReadableArticleOrderable = "beta_testing"
 const ReadableArticleOrderableFull ReadableArticleOrderable = "full"
 const ReadableArticleOrderableDeprecated ReadableArticleOrderable = "deprecated"
 
 func (e ReadableArticleOrderable) Validate() error {
-	if e == ReadableArticleOrderableForbidden || e == ReadableArticleOrderableInternal || e == ReadableArticleOrderableBetatesting || e == ReadableArticleOrderableFull || e == ReadableArticleOrderableDeprecated {
+	if e == ReadableArticleOrderableForbidden || e == ReadableArticleOrderableInternal || e == ReadableArticleOrderableBetaTesting || e == ReadableArticleOrderableFull || e == ReadableArticleOrderableDeprecated {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

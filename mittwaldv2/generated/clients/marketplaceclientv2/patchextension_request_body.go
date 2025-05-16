@@ -12,6 +12,12 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "assets":
+//        type: "array"
+//        items:
+//            type: "string"
+//            format: "uuid"
+//        description: "Used to patch asset order."
 //    "deprecation": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExtensionDeprecation"}
 //    "description":
 //        type: "string"
@@ -39,6 +45,7 @@ import (
 
 // PatchExtensionRequestBody models the JSON body of a 'extension-patch-extension' request
 type PatchExtensionRequestBody struct {
+	Assets               []string                            `json:"assets,omitempty"`
 	Deprecation          *marketplacev2.ExtensionDeprecation `json:"deprecation,omitempty"`
 	Description          *string                             `json:"description,omitempty"`
 	DetailedDescriptions *marketplacev2.DetailedDescriptions `json:"detailedDescriptions,omitempty"`
@@ -53,6 +60,14 @@ type PatchExtensionRequestBody struct {
 }
 
 func (o *PatchExtensionRequestBody) Validate() error {
+	if err := func() error {
+		if o.Assets == nil {
+			return nil
+		}
+		return nil
+	}(); err != nil {
+		return fmt.Errorf("invalid property assets: %w", err)
+	}
 	if err := func() error {
 		if o.Deprecation == nil {
 			return nil

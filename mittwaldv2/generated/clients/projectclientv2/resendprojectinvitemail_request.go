@@ -1,8 +1,6 @@
 package projectclientv2
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -20,7 +18,6 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/project/project-resend-project-invite-mail
 type ResendProjectInviteMailRequest struct {
-	Body            any
 	ProjectInviteID string
 }
 
@@ -46,11 +43,7 @@ func (r *ResendProjectInviteMailRequest) BuildRequest(reqEditors ...func(req *ht
 }
 
 func (r *ResendProjectInviteMailRequest) body() (io.Reader, string, error) {
-	out, err := json.Marshal(&r.Body)
-	if err != nil {
-		return nil, "", fmt.Errorf("error while marshalling JSON: %w", err)
-	}
-	return bytes.NewReader(out), "application/json", nil
+	return nil, "", nil
 }
 
 func (r *ResendProjectInviteMailRequest) url() string {

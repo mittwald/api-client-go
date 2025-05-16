@@ -1,8 +1,6 @@
 package projectclientv2
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -22,7 +20,6 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/project/deprecated-project-leave-project
 type DeprecatedLeaveProjectRequest struct {
-	Body      any
 	ProjectID string
 }
 
@@ -48,11 +45,7 @@ func (r *DeprecatedLeaveProjectRequest) BuildRequest(reqEditors ...func(req *htt
 }
 
 func (r *DeprecatedLeaveProjectRequest) body() (io.Reader, string, error) {
-	out, err := json.Marshal(&r.Body)
-	if err != nil {
-		return nil, "", fmt.Errorf("error while marshalling JSON: %w", err)
-	}
-	return bytes.NewReader(out), "application/json", nil
+	return nil, "", nil
 }
 
 func (r *DeprecatedLeaveProjectRequest) url() string {

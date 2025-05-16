@@ -14,10 +14,10 @@ import "fmt"
 // An error occurred while parsing the certificate.
 type CertificateErrorMessageAlternative3 string
 
-const CertificateErrorMessageAlternative3Certificateparsingfailed CertificateErrorMessageAlternative3 = "certificate_parsing_failed"
+const CertificateErrorMessageAlternative3CertificateParsingFailed CertificateErrorMessageAlternative3 = "certificate_parsing_failed"
 
 func (e CertificateErrorMessageAlternative3) Validate() error {
-	if e == CertificateErrorMessageAlternative3Certificateparsingfailed {
+	if e == CertificateErrorMessageAlternative3CertificateParsingFailed {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

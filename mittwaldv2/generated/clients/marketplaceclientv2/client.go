@@ -20,6 +20,11 @@ type Client interface {
 		req GetBillingInformationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*GetBillingInformationResponse, *http.Response, error)
+	UpdateBillingInformation(
+		ctx context.Context,
+		req UpdateBillingInformationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*UpdateBillingInformationResponse, *http.Response, error)
 	GetCustomerBillingPortalLink(
 		ctx context.Context,
 		req GetCustomerBillingPortalLinkRequest,
@@ -214,7 +219,7 @@ type Client interface {
 		ctx context.Context,
 		req ListScopesRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*[]string, *http.Response, error)
+	) (*[]ListScopesResponseItem, *http.Response, error)
 	Extension(
 		ctx context.Context,
 		req ExtensionRequest,
@@ -301,6 +306,34 @@ func (c *clientImpl) GetBillingInformation(
 	}
 
 	var response GetBillingInformationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update Contributor Billing Information.
+func (c *clientImpl) UpdateBillingInformation(
+	ctx context.Context,
+	req UpdateBillingInformationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*UpdateBillingInformationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response UpdateBillingInformationResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -1380,7 +1413,7 @@ func (c *clientImpl) ListScopes(
 	ctx context.Context,
 	req ListScopesRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*[]string, *http.Response, error) {
+) (*[]ListScopesResponseItem, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -1396,7 +1429,7 @@ func (c *clientImpl) ListScopes(
 		return nil, httpRes, err
 	}
 
-	var response []string
+	var response []ListScopesResponseItem
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

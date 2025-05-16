@@ -1,8 +1,6 @@
 package cronjobclientv2
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -20,7 +18,6 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/cronjob/cronjob-abort-execution
 type AbortExecutionRequest struct {
-	Body        any
 	CronjobID   string
 	ExecutionID string
 }
@@ -47,11 +44,7 @@ func (r *AbortExecutionRequest) BuildRequest(reqEditors ...func(req *http.Reques
 }
 
 func (r *AbortExecutionRequest) body() (io.Reader, string, error) {
-	out, err := json.Marshal(&r.Body)
-	if err != nil {
-		return nil, "", fmt.Errorf("error while marshalling JSON: %w", err)
-	}
-	return bytes.NewReader(out), "application/json", nil
+	return nil, "", nil
 }
 
 func (r *AbortExecutionRequest) url() string {

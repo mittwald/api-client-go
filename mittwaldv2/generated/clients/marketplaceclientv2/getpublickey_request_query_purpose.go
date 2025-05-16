@@ -16,10 +16,10 @@ import "fmt"
 type GetPublicKeyRequestQueryPurpose string
 
 const GetPublicKeyRequestQueryPurposeWebhook GetPublicKeyRequestQueryPurpose = "webhook"
-const GetPublicKeyRequestQueryPurposeSessiontoken GetPublicKeyRequestQueryPurpose = "session_token"
+const GetPublicKeyRequestQueryPurposeSessionToken GetPublicKeyRequestQueryPurpose = "session_token"
 
 func (e GetPublicKeyRequestQueryPurpose) Validate() error {
-	if e == GetPublicKeyRequestQueryPurposeWebhook || e == GetPublicKeyRequestQueryPurposeSessiontoken {
+	if e == GetPublicKeyRequestQueryPurposeWebhook || e == GetPublicKeyRequestQueryPurposeSessionToken {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

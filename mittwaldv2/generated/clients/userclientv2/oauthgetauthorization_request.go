@@ -23,15 +23,15 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/user/user-oauth-get-authorization
 type OauthGetAuthorizationRequest struct {
-	Grantconsent        *bool
-	Granttype           *OauthGetAuthorizationRequestQueryGranttype
-	Responsetype        OauthGetAuthorizationRequestQueryResponsetype
-	Clientid            string
-	Redirecturi         *string
+	GrantConsent        *bool
+	GrantType           *OauthGetAuthorizationRequestQueryGrantType
+	ResponseType        OauthGetAuthorizationRequestQueryResponseType
+	ClientID            string
+	RedirectUri         *string
 	Scope               *string
 	State               *string
-	Codechallenge       *string
-	Codechallengemethod *OauthGetAuthorizationRequestQueryCodechallengemethod
+	CodeChallenge       *string
+	CodeChallengeMethod *OauthGetAuthorizationRequestQueryCodeChallengeMethod
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -69,16 +69,16 @@ func (r *OauthGetAuthorizationRequest) url() string {
 
 func (r *OauthGetAuthorizationRequest) query() url.Values {
 	q := make(url.Values)
-	if r.Grantconsent != nil {
-		q.Set("grant_consent", strconv.FormatBool(*r.Grantconsent))
+	if r.GrantConsent != nil {
+		q.Set("grant_consent", strconv.FormatBool(*r.GrantConsent))
 	}
-	if r.Granttype != nil {
-		q.Set("grant_type", string(*r.Granttype))
+	if r.GrantType != nil {
+		q.Set("grant_type", string(*r.GrantType))
 	}
-	q.Set("response_type", string(r.Responsetype))
-	q.Set("client_id", r.Clientid)
-	if r.Redirecturi != nil {
-		q.Set("redirect_uri", *r.Redirecturi)
+	q.Set("response_type", string(r.ResponseType))
+	q.Set("client_id", r.ClientID)
+	if r.RedirectUri != nil {
+		q.Set("redirect_uri", *r.RedirectUri)
 	}
 	if r.Scope != nil {
 		q.Set("scope", *r.Scope)
@@ -86,11 +86,11 @@ func (r *OauthGetAuthorizationRequest) query() url.Values {
 	if r.State != nil {
 		q.Set("state", *r.State)
 	}
-	if r.Codechallenge != nil {
-		q.Set("code_challenge", *r.Codechallenge)
+	if r.CodeChallenge != nil {
+		q.Set("code_challenge", *r.CodeChallenge)
 	}
-	if r.Codechallengemethod != nil {
-		q.Set("code_challenge_method", string(*r.Codechallengemethod))
+	if r.CodeChallengeMethod != nil {
+		q.Set("code_challenge_method", string(*r.CodeChallengeMethod))
 	}
 	return q
 }

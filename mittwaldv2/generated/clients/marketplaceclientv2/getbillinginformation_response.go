@@ -11,16 +11,22 @@ import "fmt"
 //    "contributorId":
 //        type: "string"
 //        format: "uuid"
+//    "invoiceFooter":
+//        type: "string"
 //    "onboardingStatus":
 //        type: "string"
 //        enum:
 //            - "NOT_STARTED"
 //            - "STARTED"
 //            - "SUCCESSFUL"
+//    "stripeAccountId":
+//        type: "string"
 
 type GetBillingInformationResponse struct {
 	ContributorId    *string                                        `json:"contributorId,omitempty"`
+	InvoiceFooter    *string                                        `json:"invoiceFooter,omitempty"`
 	OnboardingStatus *GetBillingInformationResponseOnboardingStatus `json:"onboardingStatus,omitempty"`
+	StripeAccountId  *string                                        `json:"stripeAccountId,omitempty"`
 }
 
 func (o *GetBillingInformationResponse) Validate() error {

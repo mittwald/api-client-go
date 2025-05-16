@@ -20,10 +20,10 @@ const ArticleTemplateTypeMiscellaneous ArticleTemplateType = "miscellaneous"
 const ArticleTemplateTypeBase ArticleTemplateType = "base"
 const ArticleTemplateTypeAdditional ArticleTemplateType = "additional"
 const ArticleTemplateTypeModifier ArticleTemplateType = "modifier"
-const ArticleTemplateTypeSetupfee ArticleTemplateType = "setup_fee"
+const ArticleTemplateTypeSetupFee ArticleTemplateType = "setup_fee"
 
 func (e ArticleTemplateType) Validate() error {
-	if e == ArticleTemplateTypeMiscellaneous || e == ArticleTemplateTypeBase || e == ArticleTemplateTypeAdditional || e == ArticleTemplateTypeModifier || e == ArticleTemplateTypeSetupfee {
+	if e == ArticleTemplateTypeMiscellaneous || e == ArticleTemplateTypeBase || e == ArticleTemplateTypeAdditional || e == ArticleTemplateTypeModifier || e == ArticleTemplateTypeSetupFee {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
