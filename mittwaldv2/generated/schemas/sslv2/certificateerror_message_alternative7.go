@@ -14,10 +14,10 @@ import "fmt"
 // The Certificate Authority (CA) is not authorized for this name.
 type CertificateErrorMessageAlternative7 string
 
-const CertificateErrorMessageAlternative7Canotauthorizedforthisname CertificateErrorMessageAlternative7 = "ca_not_authorized_for_this_name"
+const CertificateErrorMessageAlternative7CaNotAuthorizedForThisName CertificateErrorMessageAlternative7 = "ca_not_authorized_for_this_name"
 
 func (e CertificateErrorMessageAlternative7) Validate() error {
-	if e == CertificateErrorMessageAlternative7Canotauthorizedforthisname {
+	if e == CertificateErrorMessageAlternative7CaNotAuthorizedForThisName {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

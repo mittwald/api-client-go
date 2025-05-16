@@ -1,8 +1,6 @@
 package customerclientv2
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -20,7 +18,6 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/customer/customer-resend-customer-invite-mail
 type ResendCustomerInviteMailRequest struct {
-	Body             any
 	CustomerInviteID string
 }
 
@@ -46,11 +43,7 @@ func (r *ResendCustomerInviteMailRequest) BuildRequest(reqEditors ...func(req *h
 }
 
 func (r *ResendCustomerInviteMailRequest) body() (io.Reader, string, error) {
-	out, err := json.Marshal(&r.Body)
-	if err != nil {
-		return nil, "", fmt.Errorf("error while marshalling JSON: %w", err)
-	}
-	return bytes.NewReader(out), "application/json", nil
+	return nil, "", nil
 }
 
 func (r *ResendCustomerInviteMailRequest) url() string {

@@ -14,10 +14,10 @@ import "fmt"
 // The private key is not RSA.
 type CertificateErrorMessageAlternative15 string
 
-const CertificateErrorMessageAlternative15Privatekeynotrsa CertificateErrorMessageAlternative15 = "private_key_not_rsa"
+const CertificateErrorMessageAlternative15PrivateKeyNotRsa CertificateErrorMessageAlternative15 = "private_key_not_rsa"
 
 func (e CertificateErrorMessageAlternative15) Validate() error {
-	if e == CertificateErrorMessageAlternative15Privatekeynotrsa {
+	if e == CertificateErrorMessageAlternative15PrivateKeyNotRsa {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

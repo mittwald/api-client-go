@@ -14,10 +14,10 @@ import "fmt"
 // The private key is encrypted.
 type CertificateErrorMessageAlternative14 string
 
-const CertificateErrorMessageAlternative14Privatekeyencrypted CertificateErrorMessageAlternative14 = "private_key_encrypted"
+const CertificateErrorMessageAlternative14PrivateKeyEncrypted CertificateErrorMessageAlternative14 = "private_key_encrypted"
 
 func (e CertificateErrorMessageAlternative14) Validate() error {
-	if e == CertificateErrorMessageAlternative14Privatekeyencrypted {
+	if e == CertificateErrorMessageAlternative14PrivateKeyEncrypted {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

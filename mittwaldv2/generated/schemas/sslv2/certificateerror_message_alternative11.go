@@ -14,10 +14,10 @@ import "fmt"
 // Failed to read the private key.
 type CertificateErrorMessageAlternative11 string
 
-const CertificateErrorMessageAlternative11Privatekeyreadfailed CertificateErrorMessageAlternative11 = "private_key_read_failed"
+const CertificateErrorMessageAlternative11PrivateKeyReadFailed CertificateErrorMessageAlternative11 = "private_key_read_failed"
 
 func (e CertificateErrorMessageAlternative11) Validate() error {
-	if e == CertificateErrorMessageAlternative11Privatekeyreadfailed {
+	if e == CertificateErrorMessageAlternative11PrivateKeyReadFailed {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

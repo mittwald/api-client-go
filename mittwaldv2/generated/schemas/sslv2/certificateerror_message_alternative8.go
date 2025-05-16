@@ -14,10 +14,10 @@ import "fmt"
 // There are too many intermediate certificates.
 type CertificateErrorMessageAlternative8 string
 
-const CertificateErrorMessageAlternative8Toomanyintermediates CertificateErrorMessageAlternative8 = "too_many_intermediates"
+const CertificateErrorMessageAlternative8TooManyIntermediates CertificateErrorMessageAlternative8 = "too_many_intermediates"
 
 func (e CertificateErrorMessageAlternative8) Validate() error {
-	if e == CertificateErrorMessageAlternative8Toomanyintermediates {
+	if e == CertificateErrorMessageAlternative8TooManyIntermediates {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

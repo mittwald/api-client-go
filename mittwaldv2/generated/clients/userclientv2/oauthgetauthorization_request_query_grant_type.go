@@ -10,12 +10,12 @@ import "fmt"
 // enum:
 //    - "authorization_code"
 
-type OauthGetAuthorizationRequestQueryGranttype string
+type OauthGetAuthorizationRequestQueryGrantType string
 
-const OauthGetAuthorizationRequestQueryGranttypeAuthorizationcode OauthGetAuthorizationRequestQueryGranttype = "authorization_code"
+const OauthGetAuthorizationRequestQueryGrantTypeAuthorizationCode OauthGetAuthorizationRequestQueryGrantType = "authorization_code"
 
-func (e OauthGetAuthorizationRequestQueryGranttype) Validate() error {
-	if e == OauthGetAuthorizationRequestQueryGranttypeAuthorizationcode {
+func (e OauthGetAuthorizationRequestQueryGrantType) Validate() error {
+	if e == OauthGetAuthorizationRequestQueryGrantTypeAuthorizationCode {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

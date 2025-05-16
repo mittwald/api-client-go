@@ -14,10 +14,10 @@ import "fmt"
 // The certificate has expired.
 type CertificateErrorMessageAlternative6 string
 
-const CertificateErrorMessageAlternative6Certificateexpired CertificateErrorMessageAlternative6 = "certificate_expired"
+const CertificateErrorMessageAlternative6CertificateExpired CertificateErrorMessageAlternative6 = "certificate_expired"
 
 func (e CertificateErrorMessageAlternative6) Validate() error {
-	if e == CertificateErrorMessageAlternative6Certificateexpired {
+	if e == CertificateErrorMessageAlternative6CertificateExpired {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

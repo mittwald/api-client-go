@@ -1,8 +1,6 @@
 package appclientv2
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -21,7 +19,6 @@ import (
 //
 // [1]: https://developer.mittwald.de/docs/v2/reference/app/app-execute-action
 type ExecuteActionRequest struct {
-	Body              ExecuteActionRequestBody
 	AppInstallationID string
 	// An Action is a string that describes a runtime concerning action which can be
 	// executed on an AppInstallation or an  App  can be capable of.
@@ -50,11 +47,7 @@ func (r *ExecuteActionRequest) BuildRequest(reqEditors ...func(req *http.Request
 }
 
 func (r *ExecuteActionRequest) body() (io.Reader, string, error) {
-	out, err := json.Marshal(&r.Body)
-	if err != nil {
-		return nil, "", fmt.Errorf("error while marshalling JSON: %w", err)
-	}
-	return bytes.NewReader(out), "application/json", nil
+	return nil, "", nil
 }
 
 func (r *ExecuteActionRequest) url() string {

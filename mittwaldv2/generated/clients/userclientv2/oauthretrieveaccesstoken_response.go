@@ -36,7 +36,7 @@ type OauthRetrieveAccessTokenResponse struct {
 	Expires_in    int64                                     `json:"expires_in"`
 	Refresh_token string                                    `json:"refresh_token"`
 	Scope         *string                                   `json:"scope,omitempty"`
-	Token_type    OauthRetrieveAccessTokenResponseTokentype `json:"token_type"`
+	Token_type    OauthRetrieveAccessTokenResponseTokenType `json:"token_type"`
 }
 
 func (o *OauthRetrieveAccessTokenResponse) Validate() error {

@@ -14,10 +14,10 @@ import "fmt"
 // The certificate is signed by an unknown authority.
 type CertificateErrorMessageAlternative10 string
 
-const CertificateErrorMessageAlternative10Unknownauthority CertificateErrorMessageAlternative10 = "unknown_authority"
+const CertificateErrorMessageAlternative10UnknownAuthority CertificateErrorMessageAlternative10 = "unknown_authority"
 
 func (e CertificateErrorMessageAlternative10) Validate() error {
-	if e == CertificateErrorMessageAlternative10Unknownauthority {
+	if e == CertificateErrorMessageAlternative10UnknownAuthority {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

@@ -14,10 +14,10 @@ import "fmt"
 // An error occurred while parsing the private key.
 type CertificateErrorMessageAlternative13 string
 
-const CertificateErrorMessageAlternative13Privatekeyparsefailed CertificateErrorMessageAlternative13 = "private_key_parse_failed"
+const CertificateErrorMessageAlternative13PrivateKeyParseFailed CertificateErrorMessageAlternative13 = "private_key_parse_failed"
 
 func (e CertificateErrorMessageAlternative13) Validate() error {
-	if e == CertificateErrorMessageAlternative13Privatekeyparsefailed {
+	if e == CertificateErrorMessageAlternative13PrivateKeyParseFailed {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

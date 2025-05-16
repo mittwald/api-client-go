@@ -14,10 +14,10 @@ import "fmt"
 // The certificate is self-signed.
 type CertificateErrorMessageAlternative4 string
 
-const CertificateErrorMessageAlternative4Certificateselfsigned CertificateErrorMessageAlternative4 = "certificate_self_signed"
+const CertificateErrorMessageAlternative4CertificateSelfSigned CertificateErrorMessageAlternative4 = "certificate_self_signed"
 
 func (e CertificateErrorMessageAlternative4) Validate() error {
-	if e == CertificateErrorMessageAlternative4Certificateselfsigned {
+	if e == CertificateErrorMessageAlternative4CertificateSelfSigned {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

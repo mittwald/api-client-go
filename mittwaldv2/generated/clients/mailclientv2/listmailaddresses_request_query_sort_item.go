@@ -17,15 +17,15 @@ import "fmt"
 
 type ListMailAddressesRequestQuerySortItem string
 
-const ListMailAddressesRequestQuerySortItemAddressdomain ListMailAddressesRequestQuerySortItem = "address.domain"
-const ListMailAddressesRequestQuerySortItemAddresslocal ListMailAddressesRequestQuerySortItem = "address.local"
+const ListMailAddressesRequestQuerySortItemAddressDomain ListMailAddressesRequestQuerySortItem = "address.domain"
+const ListMailAddressesRequestQuerySortItemAddressLocal ListMailAddressesRequestQuerySortItem = "address.local"
 const ListMailAddressesRequestQuerySortItemUpdatedAt ListMailAddressesRequestQuerySortItem = "updatedAt"
 const ListMailAddressesRequestQuerySortItemProjectID ListMailAddressesRequestQuerySortItem = "projectId"
-const ListMailAddressesRequestQuerySortItemMailboxquota ListMailAddressesRequestQuerySortItem = "mailbox.quota"
-const ListMailAddressesRequestQuerySortItemMailboxname ListMailAddressesRequestQuerySortItem = "mailbox.name"
+const ListMailAddressesRequestQuerySortItemMailboxQuota ListMailAddressesRequestQuerySortItem = "mailbox.quota"
+const ListMailAddressesRequestQuerySortItemMailboxName ListMailAddressesRequestQuerySortItem = "mailbox.name"
 
 func (e ListMailAddressesRequestQuerySortItem) Validate() error {
-	if e == ListMailAddressesRequestQuerySortItemAddressdomain || e == ListMailAddressesRequestQuerySortItemAddresslocal || e == ListMailAddressesRequestQuerySortItemUpdatedAt || e == ListMailAddressesRequestQuerySortItemProjectID || e == ListMailAddressesRequestQuerySortItemMailboxquota || e == ListMailAddressesRequestQuerySortItemMailboxname {
+	if e == ListMailAddressesRequestQuerySortItemAddressDomain || e == ListMailAddressesRequestQuerySortItemAddressLocal || e == ListMailAddressesRequestQuerySortItemUpdatedAt || e == ListMailAddressesRequestQuerySortItemProjectID || e == ListMailAddressesRequestQuerySortItemMailboxQuota || e == ListMailAddressesRequestQuerySortItemMailboxName {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

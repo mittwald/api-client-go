@@ -1,8 +1,6 @@
 package databaseclientv2
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -20,7 +18,6 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/database/database-enable-mysql-user
 type EnableMysqlUserRequest struct {
-	Body        any
 	MysqlUserID string
 }
 
@@ -46,11 +43,7 @@ func (r *EnableMysqlUserRequest) BuildRequest(reqEditors ...func(req *http.Reque
 }
 
 func (r *EnableMysqlUserRequest) body() (io.Reader, string, error) {
-	out, err := json.Marshal(&r.Body)
-	if err != nil {
-		return nil, "", fmt.Errorf("error while marshalling JSON: %w", err)
-	}
-	return bytes.NewReader(out), "application/json", nil
+	return nil, "", nil
 }
 
 func (r *EnableMysqlUserRequest) url() string {

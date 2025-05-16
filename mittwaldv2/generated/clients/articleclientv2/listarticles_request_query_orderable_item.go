@@ -18,12 +18,12 @@ type ListArticlesRequestQueryOrderableItem string
 
 const ListArticlesRequestQueryOrderableItemForbidden ListArticlesRequestQueryOrderableItem = "forbidden"
 const ListArticlesRequestQueryOrderableItemInternal ListArticlesRequestQueryOrderableItem = "internal"
-const ListArticlesRequestQueryOrderableItemBetatesting ListArticlesRequestQueryOrderableItem = "beta_testing"
+const ListArticlesRequestQueryOrderableItemBetaTesting ListArticlesRequestQueryOrderableItem = "beta_testing"
 const ListArticlesRequestQueryOrderableItemFull ListArticlesRequestQueryOrderableItem = "full"
 const ListArticlesRequestQueryOrderableItemDeprecated ListArticlesRequestQueryOrderableItem = "deprecated"
 
 func (e ListArticlesRequestQueryOrderableItem) Validate() error {
-	if e == ListArticlesRequestQueryOrderableItemForbidden || e == ListArticlesRequestQueryOrderableItemInternal || e == ListArticlesRequestQueryOrderableItemBetatesting || e == ListArticlesRequestQueryOrderableItemFull || e == ListArticlesRequestQueryOrderableItemDeprecated {
+	if e == ListArticlesRequestQueryOrderableItemForbidden || e == ListArticlesRequestQueryOrderableItemInternal || e == ListArticlesRequestQueryOrderableItemBetaTesting || e == ListArticlesRequestQueryOrderableItemFull || e == ListArticlesRequestQueryOrderableItemDeprecated {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

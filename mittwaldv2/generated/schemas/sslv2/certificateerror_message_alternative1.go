@@ -14,10 +14,10 @@ import "fmt"
 // Failed to read the certificate.
 type CertificateErrorMessageAlternative1 string
 
-const CertificateErrorMessageAlternative1Certificatereadfailed CertificateErrorMessageAlternative1 = "certificate_read_failed"
+const CertificateErrorMessageAlternative1CertificateReadFailed CertificateErrorMessageAlternative1 = "certificate_read_failed"
 
 func (e CertificateErrorMessageAlternative1) Validate() error {
-	if e == CertificateErrorMessageAlternative1Certificatereadfailed {
+	if e == CertificateErrorMessageAlternative1CertificateReadFailed {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

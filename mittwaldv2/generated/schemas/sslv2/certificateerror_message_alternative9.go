@@ -14,10 +14,10 @@ import "fmt"
 // The certificate's usage is incompatible.
 type CertificateErrorMessageAlternative9 string
 
-const CertificateErrorMessageAlternative9Incompatibleusage CertificateErrorMessageAlternative9 = "incompatible_usage"
+const CertificateErrorMessageAlternative9IncompatibleUsage CertificateErrorMessageAlternative9 = "incompatible_usage"
 
 func (e CertificateErrorMessageAlternative9) Validate() error {
-	if e == CertificateErrorMessageAlternative9Incompatibleusage {
+	if e == CertificateErrorMessageAlternative9IncompatibleUsage {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

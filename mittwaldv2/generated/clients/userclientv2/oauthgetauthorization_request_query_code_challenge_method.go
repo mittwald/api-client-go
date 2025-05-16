@@ -10,12 +10,12 @@ import "fmt"
 // enum:
 //    - "S256"
 
-type OauthGetAuthorizationRequestQueryCodechallengemethod string
+type OauthGetAuthorizationRequestQueryCodeChallengeMethod string
 
-const OauthGetAuthorizationRequestQueryCodechallengemethodS256 OauthGetAuthorizationRequestQueryCodechallengemethod = "S256"
+const OauthGetAuthorizationRequestQueryCodeChallengeMethodS256 OauthGetAuthorizationRequestQueryCodeChallengeMethod = "S256"
 
-func (e OauthGetAuthorizationRequestQueryCodechallengemethod) Validate() error {
-	if e == OauthGetAuthorizationRequestQueryCodechallengemethodS256 {
+func (e OauthGetAuthorizationRequestQueryCodeChallengeMethod) Validate() error {
+	if e == OauthGetAuthorizationRequestQueryCodeChallengeMethodS256 {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

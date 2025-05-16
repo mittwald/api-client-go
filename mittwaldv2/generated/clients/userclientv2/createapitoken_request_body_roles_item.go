@@ -13,11 +13,11 @@ import "fmt"
 
 type CreateAPITokenRequestBodyRolesItem string
 
-const CreateAPITokenRequestBodyRolesItemAPIread CreateAPITokenRequestBodyRolesItem = "api_read"
-const CreateAPITokenRequestBodyRolesItemAPIwrite CreateAPITokenRequestBodyRolesItem = "api_write"
+const CreateAPITokenRequestBodyRolesItemAPIRead CreateAPITokenRequestBodyRolesItem = "api_read"
+const CreateAPITokenRequestBodyRolesItemAPIWrite CreateAPITokenRequestBodyRolesItem = "api_write"
 
 func (e CreateAPITokenRequestBodyRolesItem) Validate() error {
-	if e == CreateAPITokenRequestBodyRolesItemAPIread || e == CreateAPITokenRequestBodyRolesItemAPIwrite {
+	if e == CreateAPITokenRequestBodyRolesItemAPIRead || e == CreateAPITokenRequestBodyRolesItemAPIWrite {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

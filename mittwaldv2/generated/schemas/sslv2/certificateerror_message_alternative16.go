@@ -14,10 +14,10 @@ import "fmt"
 // The private key does not match the certificate.
 type CertificateErrorMessageAlternative16 string
 
-const CertificateErrorMessageAlternative16Privatekeymismatch CertificateErrorMessageAlternative16 = "private_key_mismatch"
+const CertificateErrorMessageAlternative16PrivateKeyMismatch CertificateErrorMessageAlternative16 = "private_key_mismatch"
 
 func (e CertificateErrorMessageAlternative16) Validate() error {
-	if e == CertificateErrorMessageAlternative16Privatekeymismatch {
+	if e == CertificateErrorMessageAlternative16PrivateKeyMismatch {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

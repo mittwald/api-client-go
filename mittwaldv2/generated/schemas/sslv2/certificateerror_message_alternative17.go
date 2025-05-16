@@ -14,10 +14,10 @@ import "fmt"
 // An unknown error occurred related to Cloudflare.
 type CertificateErrorMessageAlternative17 string
 
-const CertificateErrorMessageAlternative17Unknowncloudflareerror CertificateErrorMessageAlternative17 = "unknown_cloudflare_error"
+const CertificateErrorMessageAlternative17UnknownCloudflareError CertificateErrorMessageAlternative17 = "unknown_cloudflare_error"
 
 func (e CertificateErrorMessageAlternative17) Validate() error {
-	if e == CertificateErrorMessageAlternative17Unknowncloudflareerror {
+	if e == CertificateErrorMessageAlternative17UnknownCloudflareError {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
