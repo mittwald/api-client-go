@@ -154,6 +154,11 @@ type Client interface {
 		req RegisterExtensionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*RegisterExtensionResponse, *http.Response, error)
+	ListScopes(
+		ctx context.Context,
+		req ListScopesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]ListScopesResponseItem, *http.Response, error)
 	RemoveAsset(
 		ctx context.Context,
 		req RemoveAssetRequest,
@@ -965,6 +970,34 @@ func (c *clientImpl) RegisterExtension(
 	}
 
 	var response RegisterExtensionResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Scopes.
+func (c *clientImpl) ListScopes(
+	ctx context.Context,
+	req ListScopesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]ListScopesResponseItem, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []ListScopesResponseItem
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
