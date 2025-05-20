@@ -20,6 +20,9 @@ import (
 type ListServicesRequest struct {
 	ProjectID string
 	StackID   *string
+	Limit     *int64
+	Skip      *int64
+	Page      *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -59,6 +62,15 @@ func (r *ListServicesRequest) query() url.Values {
 	q := make(url.Values)
 	if r.StackID != nil {
 		q.Set("stackId", *r.StackID)
+	}
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
 	return q
 }

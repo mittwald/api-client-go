@@ -9,17 +9,19 @@ import "fmt"
 // type: "string"
 // enum:
 //    - "notStarted"
+//    - "pending"
 //    - "active"
 //    - "terminationPending"
 
 type SubscriptionBasedContractStatus string
 
 const SubscriptionBasedContractStatusNotStarted SubscriptionBasedContractStatus = "notStarted"
+const SubscriptionBasedContractStatusPending SubscriptionBasedContractStatus = "pending"
 const SubscriptionBasedContractStatusActive SubscriptionBasedContractStatus = "active"
 const SubscriptionBasedContractStatusTerminationPending SubscriptionBasedContractStatus = "terminationPending"
 
 func (e SubscriptionBasedContractStatus) Validate() error {
-	if e == SubscriptionBasedContractStatusNotStarted || e == SubscriptionBasedContractStatusActive || e == SubscriptionBasedContractStatusTerminationPending {
+	if e == SubscriptionBasedContractStatusNotStarted || e == SubscriptionBasedContractStatusPending || e == SubscriptionBasedContractStatusActive || e == SubscriptionBasedContractStatusTerminationPending {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

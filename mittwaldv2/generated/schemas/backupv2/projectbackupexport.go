@@ -30,6 +30,8 @@ import (
 //            - "Completed"
 //            - "Expired"
 //        example: "Completed"
+//    "sha256Checksum":
+//        type: "string"
 //    "withPassword":
 //        type: "boolean"
 // required:
@@ -37,11 +39,12 @@ import (
 //    - "withPassword"
 
 type ProjectBackupExport struct {
-	DownloadURL  *string                   `json:"downloadURL,omitempty"`
-	ExpiresAt    *time.Time                `json:"expiresAt,omitempty"`
-	Format       string                    `json:"format"`
-	Phase        *ProjectBackupExportPhase `json:"phase,omitempty"`
-	WithPassword bool                      `json:"withPassword"`
+	DownloadURL    *string                   `json:"downloadURL,omitempty"`
+	ExpiresAt      *time.Time                `json:"expiresAt,omitempty"`
+	Format         string                    `json:"format"`
+	Phase          *ProjectBackupExportPhase `json:"phase,omitempty"`
+	Sha256Checksum *string                   `json:"sha256Checksum,omitempty"`
+	WithPassword   bool                      `json:"withPassword"`
 }
 
 func (o *ProjectBackupExport) Validate() error {
