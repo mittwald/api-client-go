@@ -20,6 +20,7 @@ import (
 //        type: "string"
 //        enum:
 //            - "notStarted"
+//            - "pending"
 //            - "active"
 //            - "terminationPending"
 //    "terminationTargetDate":
