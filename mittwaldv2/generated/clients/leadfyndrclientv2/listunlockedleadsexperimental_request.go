@@ -28,6 +28,7 @@ type ListUnlockedLeadsExperimentalRequest struct {
 	SalesVolumeMin             *int64
 	SalesVolumeMax             *int64
 	Technologies               []string
+	BusinessFields             []string
 	BasicTimeToFirstByteMsMin  *float64
 	BasicTimeToFirstByteMsMax  *float64
 	BasicDesktopPerformanceMin *float64
@@ -97,6 +98,9 @@ func (r *ListUnlockedLeadsExperimentalRequest) query() url.Values {
 	}
 	for _, val := range r.Technologies {
 		q.Add("technologies", val)
+	}
+	for _, val := range r.BusinessFields {
+		q.Add("businessFields", val)
 	}
 	if r.BasicTimeToFirstByteMsMin != nil {
 		q.Set("basic:timeToFirstByteMs:min", fmt.Sprintf("%f", *r.BasicTimeToFirstByteMsMin))
