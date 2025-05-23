@@ -275,6 +275,16 @@ type Client interface {
 		req CustomerUpdatePaymentMethodRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CustomerUpdatePaymentMethodResponse, *http.Response, error)
+	GetCustomerExtensionInstanceOrders(
+		ctx context.Context,
+		req GetCustomerExtensionInstanceOrdersRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]GetCustomerExtensionInstanceOrdersResponseItem, *http.Response, error)
+	GetProjectExtensionInstanceOrders(
+		ctx context.Context,
+		req GetProjectExtensionInstanceOrdersRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]GetProjectExtensionInstanceOrdersResponseItem, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1732,6 +1742,62 @@ func (c *clientImpl) CustomerUpdatePaymentMethod(
 	}
 
 	var response CustomerUpdatePaymentMethodResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get all open extension orders for given customer
+func (c *clientImpl) GetCustomerExtensionInstanceOrders(
+	ctx context.Context,
+	req GetCustomerExtensionInstanceOrdersRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]GetCustomerExtensionInstanceOrdersResponseItem, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []GetCustomerExtensionInstanceOrdersResponseItem
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get all open extension orders for given project
+func (c *clientImpl) GetProjectExtensionInstanceOrders(
+	ctx context.Context,
+	req GetProjectExtensionInstanceOrdersRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]GetProjectExtensionInstanceOrdersResponseItem, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []GetProjectExtensionInstanceOrdersResponseItem
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
