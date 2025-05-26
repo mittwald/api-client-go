@@ -12,7 +12,7 @@ package marketplaceclientv2
 //        default: true
 //    "reason":
 //        type: "string"
-//        description: "When setting withdrawing an extension a reason is required."
+//        description: "When withdrawing an extension a reason is required."
 // required:
 //    - "published"
 // description: SetExtensionPublishedStateRequestBody models the JSON body of a 'extension-set-extension-published-state' request

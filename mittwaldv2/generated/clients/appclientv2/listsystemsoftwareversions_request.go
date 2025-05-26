@@ -51,7 +51,7 @@ func (r *ListSystemsoftwareversionsRequest) body() (io.Reader, string, error) {
 
 func (r *ListSystemsoftwareversionsRequest) url() string {
 	u := url.URL{
-		Path:     fmt.Sprintf("/v2/system-software/%s/versions", url.PathEscape(r.SystemSoftwareID)),
+		Path:     fmt.Sprintf("/v2/system-softwares/%s/versions", url.PathEscape(r.SystemSoftwareID)),
 		RawQuery: r.query().Encode(),
 	}
 	return u.String()
