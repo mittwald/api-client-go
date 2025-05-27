@@ -10,14 +10,16 @@ import "fmt"
 // enum:
 //    - "projectHosting"
 //    - "server"
+//    - "leadFyndr"
 
 type CreateTariffChangeRequestBodyTariffChangeType string
 
 const CreateTariffChangeRequestBodyTariffChangeTypeProjectHosting CreateTariffChangeRequestBodyTariffChangeType = "projectHosting"
 const CreateTariffChangeRequestBodyTariffChangeTypeServer CreateTariffChangeRequestBodyTariffChangeType = "server"
+const CreateTariffChangeRequestBodyTariffChangeTypeLeadFyndr CreateTariffChangeRequestBodyTariffChangeType = "leadFyndr"
 
 func (e CreateTariffChangeRequestBodyTariffChangeType) Validate() error {
-	if e == CreateTariffChangeRequestBodyTariffChangeTypeProjectHosting || e == CreateTariffChangeRequestBodyTariffChangeTypeServer {
+	if e == CreateTariffChangeRequestBodyTariffChangeTypeProjectHosting || e == CreateTariffChangeRequestBodyTariffChangeTypeServer || e == CreateTariffChangeRequestBodyTariffChangeTypeLeadFyndr {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

@@ -18,12 +18,14 @@ import (
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.ServerOrder"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.DomainOrder"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.ExternalCertificateOrder"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.order.LeadFyndrOrder"}
 
 type CreateOrderRequestBodyOrderData struct {
 	AlternativeProjectHostingOrder      *orderv2.ProjectHostingOrder
 	AlternativeServerOrder              *orderv2.ServerOrder
 	AlternativeDomainOrder              *orderv2.DomainOrder
 	AlternativeExternalCertificateOrder *orderv2.ExternalCertificateOrder
+	AlternativeLeadFyndrOrder           *orderv2.LeadFyndrOrder
 }
 
 func (a *CreateOrderRequestBodyOrderData) MarshalJSON() ([]byte, error) {
@@ -38,6 +40,9 @@ func (a *CreateOrderRequestBodyOrderData) MarshalJSON() ([]byte, error) {
 	}
 	if a.AlternativeExternalCertificateOrder != nil {
 		return json.Marshal(a.AlternativeExternalCertificateOrder)
+	}
+	if a.AlternativeLeadFyndrOrder != nil {
+		return json.Marshal(a.AlternativeLeadFyndrOrder)
 	}
 	return []byte("null"), nil
 }
@@ -88,6 +93,16 @@ func (a *CreateOrderRequestBodyOrderData) UnmarshalJSON(input []byte) error {
 		}
 	}
 
+	reader.Reset(input)
+	var alternativeLeadFyndrOrder orderv2.LeadFyndrOrder
+	if err := dec.Decode(&alternativeLeadFyndrOrder); err == nil {
+		//subtype: *generator.ReferenceType
+		if vErr := alternativeLeadFyndrOrder.Validate(); vErr == nil {
+			a.AlternativeLeadFyndrOrder = &alternativeLeadFyndrOrder
+			decodedAtLeastOnce = true
+		}
+	}
+
 	if !decodedAtLeastOnce {
 		return fmt.Errorf("could not unmarshal into any alternative for type %T", a)
 	}
@@ -106,6 +121,9 @@ func (a *CreateOrderRequestBodyOrderData) Validate() error {
 	}
 	if a.AlternativeExternalCertificateOrder != nil {
 		return a.AlternativeExternalCertificateOrder.Validate()
+	}
+	if a.AlternativeLeadFyndrOrder != nil {
+		return a.AlternativeLeadFyndrOrder.Validate()
 	}
 	return errors.New("no alternative set")
 }

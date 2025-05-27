@@ -16,10 +16,12 @@ import (
 // oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.ProjectHostingTariffChange"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.ServerTariffChange"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.order.LeadFyndrTariffChange"}
 
 type CreateTariffChangeRequestBodyTariffChangeData struct {
 	AlternativeProjectHostingTariffChange *orderv2.ProjectHostingTariffChange
 	AlternativeServerTariffChange         *orderv2.ServerTariffChange
+	AlternativeLeadFyndrTariffChange      *orderv2.LeadFyndrTariffChange
 }
 
 func (a *CreateTariffChangeRequestBodyTariffChangeData) MarshalJSON() ([]byte, error) {
@@ -28,6 +30,9 @@ func (a *CreateTariffChangeRequestBodyTariffChangeData) MarshalJSON() ([]byte, e
 	}
 	if a.AlternativeServerTariffChange != nil {
 		return json.Marshal(a.AlternativeServerTariffChange)
+	}
+	if a.AlternativeLeadFyndrTariffChange != nil {
+		return json.Marshal(a.AlternativeLeadFyndrTariffChange)
 	}
 	return []byte("null"), nil
 }
@@ -58,6 +63,16 @@ func (a *CreateTariffChangeRequestBodyTariffChangeData) UnmarshalJSON(input []by
 		}
 	}
 
+	reader.Reset(input)
+	var alternativeLeadFyndrTariffChange orderv2.LeadFyndrTariffChange
+	if err := dec.Decode(&alternativeLeadFyndrTariffChange); err == nil {
+		//subtype: *generator.ReferenceType
+		if vErr := alternativeLeadFyndrTariffChange.Validate(); vErr == nil {
+			a.AlternativeLeadFyndrTariffChange = &alternativeLeadFyndrTariffChange
+			decodedAtLeastOnce = true
+		}
+	}
+
 	if !decodedAtLeastOnce {
 		return fmt.Errorf("could not unmarshal into any alternative for type %T", a)
 	}
@@ -70,6 +85,9 @@ func (a *CreateTariffChangeRequestBodyTariffChangeData) Validate() error {
 	}
 	if a.AlternativeServerTariffChange != nil {
 		return a.AlternativeServerTariffChange.Validate()
+	}
+	if a.AlternativeLeadFyndrTariffChange != nil {
+		return a.AlternativeLeadFyndrTariffChange.Validate()
 	}
 	return errors.New("no alternative set")
 }
