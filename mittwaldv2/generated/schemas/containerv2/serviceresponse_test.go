@@ -14,7 +14,7 @@ import (
 var _ = Describe("ServiceResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"deployedState\":{\"command\":[\"string\"],\"entrypoint\":[\"string\"],\"envs\":{\"string\":\"string\"},\"image\":\"string\",\"imageDigest\":\"string\",\"ports\":[\"string\"],\"volumes\":[\"string\"]},\"description\":\"MySQL DB\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"message\":\"Container ready\",\"pendingState\":{\"command\":[\"string\"],\"entrypoint\":[\"string\"],\"envs\":{\"string\":\"string\"},\"image\":\"string\",\"imageDigest\":\"string\",\"ports\":[\"string\"],\"volumes\":[\"string\"]},\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"serviceName\":\"mysql-db\",\"shortId\":\"c-12e4u6\",\"stackId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"status\":\"running\"}")
+			exampleJSON := []byte("{\"deployedState\":{\"command\":[\"string\"],\"entrypoint\":[\"string\"],\"envs\":{\"string\":\"string\"},\"image\":\"string\",\"imageDigest\":\"string\",\"ports\":[\"string\"],\"volumes\":[\"string\"]},\"description\":\"MySQL DB\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"message\":\"Container ready\",\"pendingState\":{\"command\":[\"string\"],\"entrypoint\":[\"string\"],\"envs\":{\"string\":\"string\"},\"image\":\"string\",\"imageDigest\":\"string\",\"ports\":[\"string\"],\"volumes\":[\"string\"]},\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"serviceName\":\"mysql-db\",\"shortId\":\"c-12e4u6\",\"stackId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"status\":\"running\",\"statusSetAt\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := containerv2.ServiceResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

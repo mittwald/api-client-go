@@ -56,11 +56,6 @@ type Client interface {
 		req GetDetailOfContractByDomainRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*contractv2.Contract, *http.Response, error)
-	GetDetailOfContractByLeadFyndr(
-		ctx context.Context,
-		req GetDetailOfContractByLeadFyndrRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*contractv2.Contract, *http.Response, error)
 	GetDetailOfContractByProject(
 		ctx context.Context,
 		req GetDetailOfContractByProjectRequest,
@@ -161,6 +156,11 @@ type Client interface {
 		req PreviewTariffChangeRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*PreviewTariffChangeResponse, *http.Response, error)
+	GetDetailOfContractByLeadFyndr(
+		ctx context.Context,
+		req GetDetailOfContractByLeadFyndrRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*contractv2.Contract, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -370,34 +370,6 @@ func (c *clientImpl) GetDetailOfContractByCertificate(
 func (c *clientImpl) GetDetailOfContractByDomain(
 	ctx context.Context,
 	req GetDetailOfContractByDomainRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*contractv2.Contract, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response contractv2.Contract
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Return the Contract for the given LeadFyndrProfile.
-func (c *clientImpl) GetDetailOfContractByLeadFyndr(
-	ctx context.Context,
-	req GetDetailOfContractByLeadFyndrRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*contractv2.Contract, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -986,6 +958,34 @@ func (c *clientImpl) PreviewTariffChange(
 	}
 
 	var response PreviewTariffChangeResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Return the Contract for the given LeadFyndrProfile.
+func (c *clientImpl) GetDetailOfContractByLeadFyndr(
+	ctx context.Context,
+	req GetDetailOfContractByLeadFyndrRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*contractv2.Contract, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response contractv2.Contract
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
