@@ -14,7 +14,7 @@ import (
 var _ = Describe("ProjectBackupExport", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"downloadURL\":\"string\",\"expiresAt\":\"2006-01-02T15:04:05Z\",\"format\":\"tar\",\"phase\":\"\",\"withPassword\":true}")
+			exampleJSON := []byte("{\"downloadURL\":\"string\",\"expiresAt\":\"2006-01-02T15:04:05Z\",\"format\":\"tar\",\"phase\":\"\",\"sha256Checksum\":\"string\",\"withPassword\":true}")
 
 			sut := backupv2.ProjectBackupExport{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

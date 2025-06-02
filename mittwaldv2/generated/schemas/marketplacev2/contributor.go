@@ -17,6 +17,8 @@ import "fmt"
 //    "email":
 //        type: "string"
 //        deprecated: true
+//    "homepage":
+//        type: "string"
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -44,6 +46,7 @@ type Contributor struct {
 	Description        *string               `json:"description,omitempty"`
 	Descriptions       *LocalizedDescription `json:"descriptions,omitempty"`
 	Email              *string               `json:"email,omitempty"`
+	Homepage           *string               `json:"homepage,omitempty"`
 	Id                 string                `json:"id"`
 	Imprint            *ContributorImprint   `json:"imprint,omitempty"`
 	LogoRefId          *string               `json:"logoRefId,omitempty"`
