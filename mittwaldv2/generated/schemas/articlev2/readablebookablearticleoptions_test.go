@@ -14,7 +14,7 @@ import (
 var _ = Describe("ReadableBookableArticleOptions", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"articleId\":\"PS23-BASIC-0001\",\"info\":{\"articleName\":\"proSpace lite\",\"articleTemplateName\":\"proSpace\",\"fromArticleTemplate\":true},\"maxArticleCount\":10}")
+			exampleJSON := []byte("{\"articleId\":\"WH25-0001\",\"info\":{\"articleName\":\"proSpace lite\",\"articleTemplateName\":\"proSpace\",\"fromArticleTemplate\":true},\"maxArticleCount\":10}")
 
 			sut := articlev2.ReadableBookableArticleOptions{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

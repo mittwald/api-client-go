@@ -11,7 +11,7 @@ import "fmt"
 //    "articleId":
 //        type: "string"
 //        minLength: 1
-//        example: "PS23-BASIC-0001"
+//        example: "WH25-0001"
 //    "info":
 //        type: "object"
 //        properties:

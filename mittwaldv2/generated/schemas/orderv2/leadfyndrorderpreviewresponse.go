@@ -6,14 +6,14 @@ package orderv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "recurringPrice":
+//    "totalPrice":
 //        type: "number"
 //        example: 7900
 // required:
-//    - "recurringPrice"
+//    - "totalPrice"
 
 type LeadFyndrOrderPreviewResponse struct {
-	RecurringPrice float64 `json:"recurringPrice"`
+	TotalPrice float64 `json:"totalPrice"`
 }
 
 func (o *LeadFyndrOrderPreviewResponse) Validate() error {

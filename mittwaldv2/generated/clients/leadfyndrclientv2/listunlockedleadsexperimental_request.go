@@ -29,6 +29,9 @@ type ListUnlockedLeadsExperimentalRequest struct {
 	SalesVolumeMax             *int64
 	Technologies               []string
 	BusinessFields             []string
+	LocationCity               *string
+	LocationPostCode           *string
+	LocationRadiusInKm         *float64
 	BasicTimeToFirstByteMsMin  *float64
 	BasicTimeToFirstByteMsMax  *float64
 	BasicDesktopPerformanceMin *float64
@@ -39,8 +42,8 @@ type ListUnlockedLeadsExperimentalRequest struct {
 	Limit                      *int64
 	Skip                       *int64
 	Page                       *int64
-	Sort                       []ListUnlockedLeadsExperimentalRequestQuerySortItem
-	Order                      []ListUnlockedLeadsExperimentalRequestQueryOrderItem
+	Sort                       *ListUnlockedLeadsExperimentalRequestQuerySort
+	Order                      *ListUnlockedLeadsExperimentalRequestQueryOrder
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -102,6 +105,15 @@ func (r *ListUnlockedLeadsExperimentalRequest) query() url.Values {
 	for _, val := range r.BusinessFields {
 		q.Add("businessFields", val)
 	}
+	if r.LocationCity != nil {
+		q.Set("locationCity", *r.LocationCity)
+	}
+	if r.LocationPostCode != nil {
+		q.Set("locationPostCode", *r.LocationPostCode)
+	}
+	if r.LocationRadiusInKm != nil {
+		q.Set("locationRadiusInKm", fmt.Sprintf("%f", *r.LocationRadiusInKm))
+	}
 	if r.BasicTimeToFirstByteMsMin != nil {
 		q.Set("basic:timeToFirstByteMs:min", fmt.Sprintf("%f", *r.BasicTimeToFirstByteMsMin))
 	}
@@ -132,11 +144,11 @@ func (r *ListUnlockedLeadsExperimentalRequest) query() url.Values {
 	if r.Page != nil {
 		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
-	for _, val := range r.Sort {
-		q.Add("sort", string(val))
+	if r.Sort != nil {
+		q.Set("sort", string(*r.Sort))
 	}
-	for _, val := range r.Order {
-		q.Add("order", string(val))
+	if r.Order != nil {
+		q.Set("order", string(*r.Order))
 	}
 	return q
 }

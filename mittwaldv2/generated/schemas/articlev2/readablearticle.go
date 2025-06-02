@@ -14,7 +14,7 @@ import "fmt"
 //    "articleId":
 //        type: "string"
 //        minLength: 3
-//        example: "PS23-BASIC-0001"
+//        example: "WH25-0001"
 //    "attributes":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.article.ArticleAttributes"}
