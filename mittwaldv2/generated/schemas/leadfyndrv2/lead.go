@@ -19,8 +19,6 @@ import (
 //    "company": {"$ref": "#/components/schemas/de.mittwald.v1.leadfyndr.BasicCompany"}
 //    "description":
 //        type: "string"
-//    "globalUnlockedCount":
-//        type: "number"
 //    "hoster":
 //        type: "object"
 //        properties:
@@ -30,6 +28,10 @@ import (
 //                    type: "string"
 //        required:
 //            - "server"
+//    "languages":
+//        type: "array"
+//        items:
+//            type: "string"
 //    "leadId":
 //        type: "string"
 //    "mainTechnology": {"$ref": "#/components/schemas/de.mittwald.v1.leadfyndr.Technology"}
@@ -57,21 +59,21 @@ import (
 //    - "description"
 //    - "technologies"
 //    - "hoster"
-//    - "globalUnlockedCount"
+//    - "languages"
 
 type Lead struct {
-	BusinessFields      []string     `json:"businessFields"`
-	Company             BasicCompany `json:"company"`
-	Description         string       `json:"description"`
-	GlobalUnlockedCount float64      `json:"globalUnlockedCount"`
-	Hoster              LeadHoster   `json:"hoster"`
-	LeadId              string       `json:"leadId"`
-	MainTechnology      *Technology  `json:"mainTechnology,omitempty"`
-	Metrics             BasicMetrics `json:"metrics"`
-	Potential           float64      `json:"potential"`
-	ScannedAt           *time.Time   `json:"scannedAt,omitempty"`
-	Screenshot          string       `json:"screenshot"`
-	Technologies        []Technology `json:"technologies"`
+	BusinessFields []string     `json:"businessFields"`
+	Company        BasicCompany `json:"company"`
+	Description    string       `json:"description"`
+	Hoster         LeadHoster   `json:"hoster"`
+	Languages      []string     `json:"languages"`
+	LeadId         string       `json:"leadId"`
+	MainTechnology *Technology  `json:"mainTechnology,omitempty"`
+	Metrics        BasicMetrics `json:"metrics"`
+	Potential      float64      `json:"potential"`
+	ScannedAt      *time.Time   `json:"scannedAt,omitempty"`
+	Screenshot     string       `json:"screenshot"`
+	Technologies   []Technology `json:"technologies"`
 }
 
 func (o *Lead) Validate() error {
@@ -83,6 +85,9 @@ func (o *Lead) Validate() error {
 	}
 	if err := o.Hoster.Validate(); err != nil {
 		return fmt.Errorf("invalid property hoster: %w", err)
+	}
+	if o.Languages == nil {
+		return errors.New("property languages is required, but not set")
 	}
 	if err := func() error {
 		if o.MainTechnology == nil {

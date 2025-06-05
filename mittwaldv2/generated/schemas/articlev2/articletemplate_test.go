@@ -14,7 +14,7 @@ import (
 var _ = Describe("ArticleTemplate", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"additionalArticles\":[{\"articleId\":\"PS23-BASIC-0001\",\"info\":null,\"maxArticleCount\":null}],\"addons\":[{\"hidden\":null,\"key\":\"string\",\"type\":null,\"value\":\"string\",\"valueMergeType\":null}],\"attributes\":[{\"customerEditable\":null,\"key\":\"cpu\",\"mergeType\":null,\"readonly\":null,\"required\":null,\"unit\":null,\"value\":null}],\"description\":\"Space-Storage\",\"id\":\"054e27e4-d3ed-4ffc-a472-fbb74a6a2ec1\",\"isManagedByDomain\":true,\"isRecurring\":true,\"modifierArticles\":[{\"articleId\":\"string\",\"info\":null,\"maxArticleCount\":3.14}],\"name\":\"Speicher für Space-Server aller Art\",\"type\":\"miscellaneous\"}")
+			exampleJSON := []byte("{\"additionalArticles\":[{\"articleId\":\"WH25-0001\",\"info\":null,\"maxArticleCount\":null}],\"addons\":[{\"hidden\":null,\"key\":\"string\",\"type\":null,\"value\":\"string\",\"valueMergeType\":null}],\"attributes\":[{\"customerEditable\":null,\"key\":\"cpu\",\"mergeType\":null,\"readonly\":null,\"required\":null,\"unit\":null,\"value\":null}],\"description\":\"Space-Storage\",\"id\":\"054e27e4-d3ed-4ffc-a472-fbb74a6a2ec1\",\"isManagedByDomain\":true,\"isRecurring\":true,\"modifierArticles\":[{\"articleId\":\"string\",\"info\":null,\"maxArticleCount\":3.14}],\"name\":\"Speicher für Hosting aller Art\",\"type\":\"miscellaneous\"}")
 
 			sut := articlev2.ArticleTemplate{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

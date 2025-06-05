@@ -12,6 +12,8 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "actualUrl":
+//        type: "string"
 //    "businessFields":
 //        type: "array"
 //        items:
@@ -22,9 +24,11 @@ import (
 //        type: "string"
 //    "domain":
 //        type: "string"
-//    "globalUnlockedCount":
-//        type: "number"
 //    "hoster": {"$ref": "#/components/schemas/de.mittwald.v1.leadfyndr.Hoster"}
+//    "languages":
+//        type: "array"
+//        items:
+//            type: "string"
 //    "leadId":
 //        type: "string"
 //    "mainTechnology": {"$ref": "#/components/schemas/de.mittwald.v1.leadfyndr.Technology"}
@@ -61,30 +65,32 @@ import (
 //    - "description"
 //    - "technologies"
 //    - "domain"
+//    - "actualUrl"
 //    - "socialMedia"
 //    - "contact"
 //    - "hoster"
 //    - "unlockedAt"
-//    - "globalUnlockedCount"
+//    - "languages"
 
 type UnlockedLead struct {
-	BusinessFields      []string      `json:"businessFields"`
-	Company             any           `json:"company"`
-	Contact             Contact       `json:"contact"`
-	Description         string        `json:"description"`
-	Domain              string        `json:"domain"`
-	GlobalUnlockedCount float64       `json:"globalUnlockedCount"`
-	Hoster              Hoster        `json:"hoster"`
-	LeadId              string        `json:"leadId"`
-	MainTechnology      *Technology   `json:"mainTechnology,omitempty"`
-	Metrics             DetailMetrics `json:"metrics"`
-	Potential           float64       `json:"potential"`
-	ReservedAt          *time.Time    `json:"reservedAt,omitempty"`
-	ScannedAt           *time.Time    `json:"scannedAt,omitempty"`
-	Screenshot          string        `json:"screenshot"`
-	SocialMedia         []SocialMedia `json:"socialMedia"`
-	Technologies        []Technology  `json:"technologies"`
-	UnlockedAt          time.Time     `json:"unlockedAt"`
+	ActualUrl      string        `json:"actualUrl"`
+	BusinessFields []string      `json:"businessFields"`
+	Company        any           `json:"company"`
+	Contact        Contact       `json:"contact"`
+	Description    string        `json:"description"`
+	Domain         string        `json:"domain"`
+	Hoster         Hoster        `json:"hoster"`
+	Languages      []string      `json:"languages"`
+	LeadId         string        `json:"leadId"`
+	MainTechnology *Technology   `json:"mainTechnology,omitempty"`
+	Metrics        DetailMetrics `json:"metrics"`
+	Potential      float64       `json:"potential"`
+	ReservedAt     *time.Time    `json:"reservedAt,omitempty"`
+	ScannedAt      *time.Time    `json:"scannedAt,omitempty"`
+	Screenshot     string        `json:"screenshot"`
+	SocialMedia    []SocialMedia `json:"socialMedia"`
+	Technologies   []Technology  `json:"technologies"`
+	UnlockedAt     time.Time     `json:"unlockedAt"`
 }
 
 func (o *UnlockedLead) Validate() error {
@@ -96,6 +102,9 @@ func (o *UnlockedLead) Validate() error {
 	}
 	if err := o.Hoster.Validate(); err != nil {
 		return fmt.Errorf("invalid property hoster: %w", err)
+	}
+	if o.Languages == nil {
+		return errors.New("property languages is required, but not set")
 	}
 	if err := func() error {
 		if o.MainTechnology == nil {

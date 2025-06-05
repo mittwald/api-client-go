@@ -34,7 +34,7 @@ import "fmt"
 //    "name":
 //        type: "string"
 //        minLength: 3
-//        example: "Speicher für Space-Server aller Art"
+//        example: "Speicher für Hosting aller Art"
 //    "type":
 //        type: "string"
 //        enum:
