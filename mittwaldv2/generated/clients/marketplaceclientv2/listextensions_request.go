@@ -20,10 +20,11 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/marketplace/extension-list-extensions
 type ListExtensionsRequest struct {
-	Context *marketplacev2.Context
-	Limit   *int64
-	Skip    *int64
-	Page    *int64
+	Context    *marketplacev2.Context
+	SearchTerm *string
+	Limit      *int64
+	Skip       *int64
+	Page       *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -63,6 +64,9 @@ func (r *ListExtensionsRequest) query() url.Values {
 	q := make(url.Values)
 	if r.Context != nil {
 		q.Set("context", string(*r.Context))
+	}
+	if r.SearchTerm != nil {
+		q.Set("searchTerm", *r.SearchTerm)
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))

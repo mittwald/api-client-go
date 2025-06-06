@@ -31,6 +31,10 @@ import (
 //        type: "array"
 //        items:
 //            type: "string"
+//    "contributorId":
+//        type: "string"
+//    "contributorName":
+//        type: "string"
 //    "createdAt":
 //        type: "string"
 //        format: "date-time"
@@ -40,6 +44,9 @@ import (
 //    "extensionId":
 //        type: "string"
 //        format: "uuid"
+//    "extensionName":
+//        type: "string"
+//    "extensionSubTitle": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SubTitle"}
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -57,14 +64,20 @@ import (
 //    - "pendingRemoval"
 //    - "consentedScopes"
 //    - "aggregateReference"
+//    - "extensionName"
+//    - "contributorName"
 
 type ExtensionInstance struct {
 	AggregateReference  ExtensionInstanceAggregateReference `json:"aggregateReference"`
 	Chargeability       *ExtensionInstanceChargeability     `json:"chargeability,omitempty"`
 	ConsentedScopes     []string                            `json:"consentedScopes"`
+	ContributorId       *string                             `json:"contributorId,omitempty"`
+	ContributorName     string                              `json:"contributorName"`
 	CreatedAt           *time.Time                          `json:"createdAt,omitempty"`
 	Disabled            bool                                `json:"disabled"`
 	ExtensionId         string                              `json:"extensionId"`
+	ExtensionName       string                              `json:"extensionName"`
+	ExtensionSubTitle   *SubTitle                           `json:"extensionSubTitle,omitempty"`
 	Id                  string                              `json:"id"`
 	PendingInstallation bool                                `json:"pendingInstallation"`
 	PendingRemoval      bool                                `json:"pendingRemoval"`
@@ -84,6 +97,14 @@ func (o *ExtensionInstance) Validate() error {
 	}
 	if o.ConsentedScopes == nil {
 		return errors.New("property consentedScopes is required, but not set")
+	}
+	if err := func() error {
+		if o.ExtensionSubTitle == nil {
+			return nil
+		}
+		return o.ExtensionSubTitle.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property extensionSubTitle: %w", err)
 	}
 	return nil
 }

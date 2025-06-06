@@ -22,6 +22,7 @@ type ListServersRequest struct {
 	Limit      *int64
 	Page       *int64
 	Skip       *int64
+	SearchTerm *string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -70,6 +71,9 @@ func (r *ListServersRequest) query() url.Values {
 	}
 	if r.Skip != nil {
 		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.SearchTerm != nil {
+		q.Set("searchTerm", *r.SearchTerm)
 	}
 	return q
 }

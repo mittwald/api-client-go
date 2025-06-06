@@ -167,6 +167,16 @@ type Client interface {
 		req DeprecatedVerifyEmailRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	PasswordValidationGetPasswordPolicy(
+		ctx context.Context,
+		req PasswordValidationGetPasswordPolicyRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*policyv2.Policy, *http.Response, error)
+	PasswordValidationGetPasswordPolicyV2Deprecated(
+		ctx context.Context,
+		req PasswordValidationGetPasswordPolicyV2DeprecatedRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*policyv2.Policy, *http.Response, error)
 	AddPhoneNumber(
 		ctx context.Context,
 		req AddPhoneNumberRequest,
@@ -427,16 +437,6 @@ type Client interface {
 		req VerifyRegistrationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*VerifyRegistrationResponse, *http.Response, error)
-	PasswordValidationGetPasswordPolicy(
-		ctx context.Context,
-		req PasswordValidationGetPasswordPolicyRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*policyv2.Policy, *http.Response, error)
-	PasswordValidationGetPasswordPolicyV2Deprecated(
-		ctx context.Context,
-		req PasswordValidationGetPasswordPolicyV2DeprecatedRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*policyv2.Policy, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1230,6 +1230,62 @@ func (c *clientImpl) DeprecatedVerifyEmail(
 	}
 
 	return httpRes, nil
+}
+
+// Get a PasswordPolicy.
+func (c *clientImpl) PasswordValidationGetPasswordPolicy(
+	ctx context.Context,
+	req PasswordValidationGetPasswordPolicyRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*policyv2.Policy, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response policyv2.Policy
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get a password policy.
+func (c *clientImpl) PasswordValidationGetPasswordPolicyV2Deprecated(
+	ctx context.Context,
+	req PasswordValidationGetPasswordPolicyV2DeprecatedRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*policyv2.Policy, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response policyv2.Policy
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Add phone number and start verification process.
@@ -2614,62 +2670,6 @@ func (c *clientImpl) VerifyRegistration(
 	}
 
 	var response VerifyRegistrationResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a PasswordPolicy.
-func (c *clientImpl) PasswordValidationGetPasswordPolicy(
-	ctx context.Context,
-	req PasswordValidationGetPasswordPolicyRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*policyv2.Policy, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response policyv2.Policy
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a password policy.
-func (c *clientImpl) PasswordValidationGetPasswordPolicyV2Deprecated(
-	ctx context.Context,
-	req PasswordValidationGetPasswordPolicyV2DeprecatedRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*policyv2.Policy, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response policyv2.Policy
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
