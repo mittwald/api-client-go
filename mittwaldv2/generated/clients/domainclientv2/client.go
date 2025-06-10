@@ -317,6 +317,11 @@ type Client interface {
 		req SetCertificateRequestCertificateRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetZoneFile(
+		ctx context.Context,
+		req GetZoneFileRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1954,6 +1959,32 @@ func (c *clientImpl) ListCertificates(
 func (c *clientImpl) SetCertificateRequestCertificate(
 	ctx context.Context,
 	req SetCertificateRequestCertificateRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Get a zone file for a DNSZone.
+//
+// Returns a BIND-compliant DNS zone file per RFC 1035 for the specified dnsZoneId, including all sub zone information. Entering the dnsZoneId of a sub zone will result in an error.
+func (c *clientImpl) GetZoneFile(
+	ctx context.Context,
+	req GetZoneFileRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

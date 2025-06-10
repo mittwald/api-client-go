@@ -24,11 +24,6 @@ type Client interface {
 		req ProjectFileSystemGetDiskUsageRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*projectv2.FilesystemUsagesDisk, *http.Response, error)
-	ProjectFileSystemGetFileContent(
-		ctx context.Context,
-		req ProjectFileSystemGetFileContentRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	ProjectFileSystemGetJwt(
 		ctx context.Context,
 		req ProjectFileSystemGetJwtRequest,
@@ -39,6 +34,11 @@ type Client interface {
 		req ProjectFileSystemListFilesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*projectv2.FilesystemDirectoryListing, *http.Response, error)
+	ProjectFileSystemGetFileContent(
+		ctx context.Context,
+		req ProjectFileSystemGetFileContentRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -104,30 +104,6 @@ func (c *clientImpl) ProjectFileSystemGetDiskUsage(
 	return &response, httpRes, nil
 }
 
-// Get a Project file's content.
-func (c *clientImpl) ProjectFileSystemGetFileContent(
-	ctx context.Context,
-	req ProjectFileSystemGetFileContentRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Get a Project's file/filesystem authorization token.
 func (c *clientImpl) ProjectFileSystemGetJwt(
 	ctx context.Context,
@@ -182,4 +158,28 @@ func (c *clientImpl) ProjectFileSystemListFiles(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Get a Project file's content.
+func (c *clientImpl) ProjectFileSystemGetFileContent(
+	ctx context.Context,
+	req ProjectFileSystemGetFileContentRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }

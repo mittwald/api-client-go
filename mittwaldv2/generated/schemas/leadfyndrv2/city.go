@@ -10,6 +10,8 @@ package leadfyndrv2
 //        type: "string"
 //    "country":
 //        type: "string"
+//    "county":
+//        type: "string"
 //    "postCode":
 //        type: "string"
 // required:
@@ -18,9 +20,10 @@ package leadfyndrv2
 //    - "city"
 
 type City struct {
-	City     string `json:"city"`
-	Country  string `json:"country"`
-	PostCode string `json:"postCode"`
+	City     string  `json:"city"`
+	Country  string  `json:"country"`
+	County   *string `json:"county,omitempty"`
+	PostCode string  `json:"postCode"`
 }
 
 func (o *City) Validate() error {
