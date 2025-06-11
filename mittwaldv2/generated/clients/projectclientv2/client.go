@@ -36,9 +36,24 @@ type Client interface {
 		req CreateProjectInviteRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*membershipv2.ProjectInvite, *http.Response, error)
+	CreateProject(
+		ctx context.Context,
+		req CreateProjectRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CreateProjectResponse, *http.Response, error)
 	DeclineProjectInvite(
 		ctx context.Context,
 		req DeclineProjectInviteRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	RequestProjectAvatarUpload(
+		ctx context.Context,
+		req RequestProjectAvatarUploadRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*RequestProjectAvatarUploadResponse, *http.Response, error)
+	DeleteProjectAvatar(
+		ctx context.Context,
+		req DeleteProjectAvatarRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetProjectInvite(
@@ -66,6 +81,26 @@ type Client interface {
 		req UpdateProjectMembershipRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetProject(
+		ctx context.Context,
+		req GetProjectRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*projectv2.Project, *http.Response, error)
+	DeleteProject(
+		ctx context.Context,
+		req DeleteProjectRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	RequestServerAvatarUpload(
+		ctx context.Context,
+		req RequestServerAvatarUploadRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*RequestServerAvatarUploadResponse, *http.Response, error)
+	DeleteServerAvatar(
+		ctx context.Context,
+		req DeleteServerAvatarRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	GetProjectTokenInvite(
 		ctx context.Context,
 		req GetProjectTokenInviteRequest,
@@ -76,6 +111,11 @@ type Client interface {
 		req GetSelfMembershipForProjectRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*membershipv2.ProjectMembership, *http.Response, error)
+	GetServer(
+		ctx context.Context,
+		req GetServerRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*projectv2.Server, *http.Response, error)
 	ListMembershipsForProject(
 		ctx context.Context,
 		req ListMembershipsForProjectRequest,
@@ -91,9 +131,29 @@ type Client interface {
 		req ListProjectMembershipsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]membershipv2.ProjectMembership, *http.Response, error)
+	ListProjects(
+		ctx context.Context,
+		req ListProjectsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]ListProjectsResponseItem, *http.Response, error)
+	ListServers(
+		ctx context.Context,
+		req ListServersRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]projectv2.Server, *http.Response, error)
 	ResendProjectInviteMail(
 		ctx context.Context,
 		req ResendProjectInviteMailRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	UpdateProjectDescription(
+		ctx context.Context,
+		req UpdateProjectDescriptionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	UpdateServerDescription(
+		ctx context.Context,
+		req UpdateServerDescriptionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	StoragespaceGetProjectStatistics(
@@ -116,66 +176,6 @@ type Client interface {
 		req StoragespaceReplaceServerNotificationThresholdRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	RequestProjectAvatarUpload(
-		ctx context.Context,
-		req RequestProjectAvatarUploadRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*RequestProjectAvatarUploadResponse, *http.Response, error)
-	DeleteProjectAvatar(
-		ctx context.Context,
-		req DeleteProjectAvatarRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	RequestServerAvatarUpload(
-		ctx context.Context,
-		req RequestServerAvatarUploadRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*RequestServerAvatarUploadResponse, *http.Response, error)
-	DeleteServerAvatar(
-		ctx context.Context,
-		req DeleteServerAvatarRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	UpdateProjectDescription(
-		ctx context.Context,
-		req UpdateProjectDescriptionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	CreateProject(
-		ctx context.Context,
-		req CreateProjectRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*CreateProjectResponse, *http.Response, error)
-	GetServer(
-		ctx context.Context,
-		req GetServerRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*projectv2.Server, *http.Response, error)
-	GetProject(
-		ctx context.Context,
-		req GetProjectRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*projectv2.Project, *http.Response, error)
-	DeleteProject(
-		ctx context.Context,
-		req DeleteProjectRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	UpdateServerDescription(
-		ctx context.Context,
-		req UpdateServerDescriptionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	ListServers(
-		ctx context.Context,
-		req ListServersRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]projectv2.Server, *http.Response, error)
-	ListProjects(
-		ctx context.Context,
-		req ListProjectsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]ListProjectsResponseItem, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -291,10 +291,90 @@ func (c *clientImpl) CreateProjectInvite(
 	return &response, httpRes, nil
 }
 
+// Create a Project belonging to a Server.
+func (c *clientImpl) CreateProject(
+	ctx context.Context,
+	req CreateProjectRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CreateProjectResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CreateProjectResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Decline a ProjectInvite.
 func (c *clientImpl) DeclineProjectInvite(
 	ctx context.Context,
 	req DeclineProjectInviteRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Request a Project avatar upload.
+func (c *clientImpl) RequestProjectAvatarUpload(
+	ctx context.Context,
+	req RequestProjectAvatarUploadRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RequestProjectAvatarUploadResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestProjectAvatarUploadResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete a Project's avatar.
+func (c *clientImpl) DeleteProjectAvatar(
+	ctx context.Context,
+	req DeleteProjectAvatarRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -443,6 +523,110 @@ func (c *clientImpl) UpdateProjectMembership(
 	return httpRes, nil
 }
 
+// Get a Project.
+func (c *clientImpl) GetProject(
+	ctx context.Context,
+	req GetProjectRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*projectv2.Project, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response projectv2.Project
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete a Project.
+func (c *clientImpl) DeleteProject(
+	ctx context.Context,
+	req DeleteProjectRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Request a Server avatar upload.
+func (c *clientImpl) RequestServerAvatarUpload(
+	ctx context.Context,
+	req RequestServerAvatarUploadRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RequestServerAvatarUploadResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestServerAvatarUploadResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete a Server's avatar.
+func (c *clientImpl) DeleteServerAvatar(
+	ctx context.Context,
+	req DeleteServerAvatarRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Get a ProjectInvite by token.
 func (c *clientImpl) GetProjectTokenInvite(
 	ctx context.Context,
@@ -493,6 +677,34 @@ func (c *clientImpl) GetSelfMembershipForProject(
 	}
 
 	var response membershipv2.ProjectMembership
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get a Server.
+func (c *clientImpl) GetServer(
+	ctx context.Context,
+	req GetServerRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*projectv2.Server, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response projectv2.Server
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -583,10 +795,114 @@ func (c *clientImpl) ListProjectMemberships(
 	return &response, httpRes, nil
 }
 
+// List Projects belonging to the executing user.
+func (c *clientImpl) ListProjects(
+	ctx context.Context,
+	req ListProjectsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]ListProjectsResponseItem, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []ListProjectsResponseItem
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Servers belonging to the executing user.
+func (c *clientImpl) ListServers(
+	ctx context.Context,
+	req ListServersRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]projectv2.Server, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []projectv2.Server
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Resend the mail for a ProjectInvite.
 func (c *clientImpl) ResendProjectInviteMail(
 	ctx context.Context,
 	req ResendProjectInviteMailRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a Project's description.
+func (c *clientImpl) UpdateProjectDescription(
+	ctx context.Context,
+	req UpdateProjectDescriptionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a Servers's description.
+func (c *clientImpl) UpdateServerDescription(
+	ctx context.Context,
+	req UpdateServerDescriptionRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -709,320 +1025,4 @@ func (c *clientImpl) StoragespaceReplaceServerNotificationThreshold(
 	}
 
 	return httpRes, nil
-}
-
-// Request a Project avatar upload.
-func (c *clientImpl) RequestProjectAvatarUpload(
-	ctx context.Context,
-	req RequestProjectAvatarUploadRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*RequestProjectAvatarUploadResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response RequestProjectAvatarUploadResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Delete a Project's avatar.
-func (c *clientImpl) DeleteProjectAvatar(
-	ctx context.Context,
-	req DeleteProjectAvatarRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Request a Server avatar upload.
-func (c *clientImpl) RequestServerAvatarUpload(
-	ctx context.Context,
-	req RequestServerAvatarUploadRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*RequestServerAvatarUploadResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response RequestServerAvatarUploadResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Delete a Server's avatar.
-func (c *clientImpl) DeleteServerAvatar(
-	ctx context.Context,
-	req DeleteServerAvatarRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update a Project's description.
-func (c *clientImpl) UpdateProjectDescription(
-	ctx context.Context,
-	req UpdateProjectDescriptionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Create a Project belonging to a Server.
-func (c *clientImpl) CreateProject(
-	ctx context.Context,
-	req CreateProjectRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*CreateProjectResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response CreateProjectResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a Server.
-func (c *clientImpl) GetServer(
-	ctx context.Context,
-	req GetServerRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*projectv2.Server, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response projectv2.Server
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a Project.
-func (c *clientImpl) GetProject(
-	ctx context.Context,
-	req GetProjectRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*projectv2.Project, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response projectv2.Project
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Delete a Project.
-func (c *clientImpl) DeleteProject(
-	ctx context.Context,
-	req DeleteProjectRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update a Servers's description.
-func (c *clientImpl) UpdateServerDescription(
-	ctx context.Context,
-	req UpdateServerDescriptionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// List Servers belonging to the executing user.
-func (c *clientImpl) ListServers(
-	ctx context.Context,
-	req ListServersRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]projectv2.Server, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []projectv2.Server
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List Projects belonging to the executing user.
-func (c *clientImpl) ListProjects(
-	ctx context.Context,
-	req ListProjectsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]ListProjectsResponseItem, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []ListProjectsResponseItem
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }

@@ -28,8 +28,6 @@ import (
 //                    type: "string"
 //        required:
 //            - "server"
-//    "isActive":
-//        type: "boolean"
 //    "languages":
 //        type: "array"
 //        items:
@@ -62,14 +60,12 @@ import (
 //    - "technologies"
 //    - "hoster"
 //    - "languages"
-//    - "isActive"
 
 type Lead struct {
 	BusinessFields []string     `json:"businessFields"`
 	Company        BasicCompany `json:"company"`
 	Description    string       `json:"description"`
 	Hoster         LeadHoster   `json:"hoster"`
-	IsActive       bool         `json:"isActive"`
 	Languages      []string     `json:"languages"`
 	LeadId         string       `json:"leadId"`
 	MainTechnology *Technology  `json:"mainTechnology,omitempty"`
