@@ -6,7 +6,7 @@ package leadfyndrv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "city":
+//    "county":
 //        type: "string"
 //    "employeeCount":
 //        type: "integer"
@@ -17,10 +17,10 @@ package leadfyndrv2
 //        type: "integer"
 //        format: "int64"
 // required:
-//    - "city"
+//    - "county"
 
 type BasicCompany struct {
-	City          string   `json:"city"`
+	County        string   `json:"county"`
 	EmployeeCount *int64   `json:"employeeCount,omitempty"`
 	FoundingYear  *float64 `json:"foundingYear,omitempty"`
 	SalesVolume   *int64   `json:"salesVolume,omitempty"`

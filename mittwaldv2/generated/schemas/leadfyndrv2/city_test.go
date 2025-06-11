@@ -14,7 +14,7 @@ import (
 var _ = Describe("City", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"city\":\"string\",\"country\":\"string\",\"postCode\":\"string\"}")
+			exampleJSON := []byte("{\"city\":\"string\",\"country\":\"string\",\"county\":\"string\",\"postCode\":\"string\"}")
 
 			sut := leadfyndrv2.City{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

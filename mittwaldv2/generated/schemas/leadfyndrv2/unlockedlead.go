@@ -38,6 +38,8 @@ import (
 //        maximum: 1
 //        minimum: 0
 //        format: "float"
+//    "reservationAllowed":
+//        type: "boolean"
 //    "reservedAt":
 //        type: "string"
 //        format: "date-time"
@@ -73,24 +75,25 @@ import (
 //    - "languages"
 
 type UnlockedLead struct {
-	ActualUrl      string        `json:"actualUrl"`
-	BusinessFields []string      `json:"businessFields"`
-	Company        any           `json:"company"`
-	Contact        Contact       `json:"contact"`
-	Description    string        `json:"description"`
-	Domain         string        `json:"domain"`
-	Hoster         Hoster        `json:"hoster"`
-	Languages      []string      `json:"languages"`
-	LeadId         string        `json:"leadId"`
-	MainTechnology *Technology   `json:"mainTechnology,omitempty"`
-	Metrics        DetailMetrics `json:"metrics"`
-	Potential      float64       `json:"potential"`
-	ReservedAt     *time.Time    `json:"reservedAt,omitempty"`
-	ScannedAt      *time.Time    `json:"scannedAt,omitempty"`
-	Screenshot     string        `json:"screenshot"`
-	SocialMedia    []SocialMedia `json:"socialMedia"`
-	Technologies   []Technology  `json:"technologies"`
-	UnlockedAt     time.Time     `json:"unlockedAt"`
+	ActualUrl          string        `json:"actualUrl"`
+	BusinessFields     []string      `json:"businessFields"`
+	Company            any           `json:"company"`
+	Contact            Contact       `json:"contact"`
+	Description        string        `json:"description"`
+	Domain             string        `json:"domain"`
+	Hoster             Hoster        `json:"hoster"`
+	Languages          []string      `json:"languages"`
+	LeadId             string        `json:"leadId"`
+	MainTechnology     *Technology   `json:"mainTechnology,omitempty"`
+	Metrics            DetailMetrics `json:"metrics"`
+	Potential          float64       `json:"potential"`
+	ReservationAllowed *bool         `json:"reservationAllowed,omitempty"`
+	ReservedAt         *time.Time    `json:"reservedAt,omitempty"`
+	ScannedAt          *time.Time    `json:"scannedAt,omitempty"`
+	Screenshot         string        `json:"screenshot"`
+	SocialMedia        []SocialMedia `json:"socialMedia"`
+	Technologies       []Technology  `json:"technologies"`
+	UnlockedAt         time.Time     `json:"unlockedAt"`
 }
 
 func (o *UnlockedLead) Validate() error {
