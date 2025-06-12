@@ -14,7 +14,7 @@ import (
 var _ = Describe("VolumeResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"name\":\"string\",\"orphaned\":true,\"stackId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"storageUsageInBytes\":42,\"storageUsageInBytesSetAt\":\"2006-01-02T15:04:05Z\"}")
+			exampleJSON := []byte("{\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"linkedServices\":[\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"],\"name\":\"string\",\"orphaned\":true,\"stackId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"storageUsageInBytes\":42,\"storageUsageInBytesSetAt\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := containerv2.VolumeResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

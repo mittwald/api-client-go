@@ -121,6 +121,26 @@ type Client interface {
 		req InvoiceListCustomerInvoicesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]invoicev2.Invoice, *http.Response, error)
+	PreviewTariffChange(
+		ctx context.Context,
+		req PreviewTariffChangeRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*PreviewTariffChangeResponse, *http.Response, error)
+	ListCustomerOrders(
+		ctx context.Context,
+		req ListCustomerOrdersRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]orderv2.CustomerOrder, *http.Response, error)
+	ListProjectOrders(
+		ctx context.Context,
+		req ListProjectOrdersRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]orderv2.CustomerOrder, *http.Response, error)
+	GetOrder(
+		ctx context.Context,
+		req GetOrderRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*orderv2.CustomerOrder, *http.Response, error)
 	ListOrders(
 		ctx context.Context,
 		req ListOrdersRequest,
@@ -136,31 +156,11 @@ type Client interface {
 		req CreateTariffChangeRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CreateTariffChangeResponse, *http.Response, error)
-	GetOrder(
-		ctx context.Context,
-		req GetOrderRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*orderv2.CustomerOrder, *http.Response, error)
-	ListCustomerOrders(
-		ctx context.Context,
-		req ListCustomerOrdersRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]orderv2.CustomerOrder, *http.Response, error)
-	ListProjectOrders(
-		ctx context.Context,
-		req ListProjectOrdersRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]orderv2.CustomerOrder, *http.Response, error)
 	PreviewOrder(
 		ctx context.Context,
 		req PreviewOrderRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*any, *http.Response, error)
-	PreviewTariffChange(
-		ctx context.Context,
-		req PreviewTariffChangeRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*PreviewTariffChangeResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -760,6 +760,124 @@ func (c *clientImpl) InvoiceListCustomerInvoices(
 	return &response, httpRes, nil
 }
 
+// Preview TariffChange.
+func (c *clientImpl) PreviewTariffChange(
+	ctx context.Context,
+	req PreviewTariffChangeRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*PreviewTariffChangeResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response PreviewTariffChangeResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get list of Orders of a Customer.
+//
+// The list of Orders of a Customer the User has access to, can be filtered by orderStatus, articleTemplate and count.
+func (c *clientImpl) ListCustomerOrders(
+	ctx context.Context,
+	req ListCustomerOrdersRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]orderv2.CustomerOrder, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []orderv2.CustomerOrder
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get list of Orders of a Project.
+//
+// The list of Order of a Project the User has access to, can be filtered by orderStatus, articleTemplate and count.
+func (c *clientImpl) ListProjectOrders(
+	ctx context.Context,
+	req ListProjectOrdersRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]orderv2.CustomerOrder, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []orderv2.CustomerOrder
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get Order for Customer.
+//
+// Get details of a single Order, User must have access to the Order/Customer.
+func (c *clientImpl) GetOrder(
+	ctx context.Context,
+	req GetOrderRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*orderv2.CustomerOrder, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response orderv2.CustomerOrder
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Get list of Orders.
 //
 // The list of Orders the User has access to.
@@ -846,96 +964,6 @@ func (c *clientImpl) CreateTariffChange(
 	return &response, httpRes, nil
 }
 
-// Get Order for Customer.
-//
-// Get details of a single Order, User must have access to the Order/Customer.
-func (c *clientImpl) GetOrder(
-	ctx context.Context,
-	req GetOrderRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*orderv2.CustomerOrder, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response orderv2.CustomerOrder
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get list of Orders of a Customer.
-//
-// The list of Orders of a Customer the User has access to, can be filtered by orderStatus, articleTemplate and count.
-func (c *clientImpl) ListCustomerOrders(
-	ctx context.Context,
-	req ListCustomerOrdersRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]orderv2.CustomerOrder, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []orderv2.CustomerOrder
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get list of Orders of a Project.
-//
-// The list of Order of a Project the User has access to, can be filtered by orderStatus, articleTemplate and count.
-func (c *clientImpl) ListProjectOrders(
-	ctx context.Context,
-	req ListProjectOrdersRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]orderv2.CustomerOrder, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []orderv2.CustomerOrder
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
 // Preview Order.
 func (c *clientImpl) PreviewOrder(
 	ctx context.Context,
@@ -958,34 +986,6 @@ func (c *clientImpl) PreviewOrder(
 	}
 
 	var response any
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Preview TariffChange.
-func (c *clientImpl) PreviewTariffChange(
-	ctx context.Context,
-	req PreviewTariffChangeRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*PreviewTariffChangeResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response PreviewTariffChangeResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

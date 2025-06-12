@@ -130,6 +130,11 @@ type Client interface {
 		req DeprecatedLeaveCustomerRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	CreateRecommendationSuggestion(
+		ctx context.Context,
+		req CreateRecommendationSuggestionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CreateRecommendationSuggestionResponse, *http.Response, error)
 	GetWallet(
 		ctx context.Context,
 		req GetWalletRequest,
@@ -140,11 +145,6 @@ type Client interface {
 		req CreateWalletRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CreateWalletResponse, *http.Response, error)
-	CreateRecommendationSuggestion(
-		ctx context.Context,
-		req CreateRecommendationSuggestionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*CreateRecommendationSuggestionResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -768,6 +768,34 @@ func (c *clientImpl) DeprecatedLeaveCustomer(
 	return httpRes, nil
 }
 
+// Lets us know your idea for our recommendation programm.
+func (c *clientImpl) CreateRecommendationSuggestion(
+	ctx context.Context,
+	req CreateRecommendationSuggestionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CreateRecommendationSuggestionResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CreateRecommendationSuggestionResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Gets the Wallet of the Customer.
 func (c *clientImpl) GetWallet(
 	ctx context.Context,
@@ -818,34 +846,6 @@ func (c *clientImpl) CreateWallet(
 	}
 
 	var response CreateWalletResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Lets us know your idea for our recommendation programm.
-func (c *clientImpl) CreateRecommendationSuggestion(
-	ctx context.Context,
-	req CreateRecommendationSuggestionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*CreateRecommendationSuggestionResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response CreateRecommendationSuggestionResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
