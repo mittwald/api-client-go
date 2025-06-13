@@ -8,6 +8,9 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "nextUnlockRenewalDate":
+//        type: "string"
+//        format: "date"
 //    "reservation":
 //        type: "object"
 //        properties:
@@ -45,8 +48,9 @@ import "fmt"
 //    - "reservation"
 
 type TariffOptions struct {
-	Reservation TariffOptionsReservation `json:"reservation"`
-	Unlocked    TariffOptionsUnlocked    `json:"unlocked"`
+	NextUnlockRenewalDate *string                  `json:"nextUnlockRenewalDate,omitempty"`
+	Reservation           TariffOptionsReservation `json:"reservation"`
+	Unlocked              TariffOptionsUnlocked    `json:"unlocked"`
 }
 
 func (o *TariffOptions) Validate() error {
