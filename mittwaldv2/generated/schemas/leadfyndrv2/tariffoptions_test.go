@@ -14,7 +14,7 @@ import (
 var _ = Describe("TariffOptions", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"reservation\":{\"available\":3.14,\"tariffLimit\":3.14,\"used\":3.14},\"unlocked\":{\"available\":3.14,\"tariffLimit\":3.14,\"used\":3.14}}")
+			exampleJSON := []byte("{\"nextUnlockRenewalDate\":\"string\",\"reservation\":{\"available\":3.14,\"tariffLimit\":3.14,\"used\":3.14},\"unlocked\":{\"available\":3.14,\"tariffLimit\":3.14,\"used\":3.14}}")
 
 			sut := leadfyndrv2.TariffOptions{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
