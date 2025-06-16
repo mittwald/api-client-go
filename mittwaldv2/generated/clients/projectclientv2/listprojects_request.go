@@ -20,6 +20,7 @@ import (
 type ListProjectsRequest struct {
 	CustomerID *string
 	ServerID   *string
+	SearchTerm *string
 	Limit      *int64
 	Skip       *int64
 	Page       *int64
@@ -65,6 +66,9 @@ func (r *ListProjectsRequest) query() url.Values {
 	}
 	if r.ServerID != nil {
 		q.Set("serverId", *r.ServerID)
+	}
+	if r.SearchTerm != nil {
+		q.Set("searchTerm", *r.SearchTerm)
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
