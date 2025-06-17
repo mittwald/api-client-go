@@ -23,6 +23,7 @@ type ListExtensionInstancesRequest struct {
 	Context     *marketplacev2.Context
 	ContextID   *string
 	ExtensionID *string
+	SearchTerm  *string
 	Limit       *int64
 	Skip        *int64
 	Page        *int64
@@ -73,6 +74,9 @@ func (r *ListExtensionInstancesRequest) query() url.Values {
 	}
 	if r.ExtensionID != nil {
 		q.Set("extensionId", *r.ExtensionID)
+	}
+	if r.SearchTerm != nil {
+		q.Set("searchTerm", *r.SearchTerm)
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
