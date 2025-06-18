@@ -13,6 +13,11 @@ import (
 )
 
 type Client interface {
+	VerificationDetectPhishingEmail(
+		ctx context.Context,
+		req VerificationDetectPhishingEmailRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*VerificationDetectPhishingEmailResponse, *http.Response, error)
 	VerificationVerifyAddress(
 		ctx context.Context,
 		req VerificationVerifyAddressRequest,
@@ -30,6 +35,36 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Check if an email is from mittwald.
+//
+// Parses the eml-file of an email to check if it is a phishing mail or a valid email from mittwald. In some cases we can't confirm the validity of an email.
+func (c *clientImpl) VerificationDetectPhishingEmail(
+	ctx context.Context,
+	req VerificationDetectPhishingEmailRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*VerificationDetectPhishingEmailResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response VerificationDetectPhishingEmailResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Check if an address exists.
