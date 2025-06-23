@@ -9,17 +9,17 @@ import "fmt"
 // type: "string"
 // enum:
 //    - "IS_MITTWALD"
-//    - "NOT_MITTWALD"
+//    - "IS_NOT_MITTWALD"
 //    - "COULD_BE_MITTWALD"
 
 type EmailOrigin string
 
 const EmailOriginISMITTWALD EmailOrigin = "IS_MITTWALD"
-const EmailOriginNOTMITTWALD EmailOrigin = "NOT_MITTWALD"
+const EmailOriginISNOTMITTWALD EmailOrigin = "IS_NOT_MITTWALD"
 const EmailOriginCOULDBEMITTWALD EmailOrigin = "COULD_BE_MITTWALD"
 
 func (e EmailOrigin) Validate() error {
-	if e == EmailOriginISMITTWALD || e == EmailOriginNOTMITTWALD || e == EmailOriginCOULDBEMITTWALD {
+	if e == EmailOriginISMITTWALD || e == EmailOriginISNOTMITTWALD || e == EmailOriginCOULDBEMITTWALD {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

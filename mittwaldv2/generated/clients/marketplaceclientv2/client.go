@@ -285,6 +285,11 @@ type Client interface {
 		req CustomerUpdatePaymentMethodRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CustomerUpdatePaymentMethodResponse, *http.Response, error)
+	VerifyExtensionInternal(
+		ctx context.Context,
+		req VerifyExtensionInternalRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1802,4 +1807,28 @@ func (c *clientImpl) CustomerUpdatePaymentMethod(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Verify an Extension.
+func (c *clientImpl) VerifyExtensionInternal(
+	ctx context.Context,
+	req VerifyExtensionInternalRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
