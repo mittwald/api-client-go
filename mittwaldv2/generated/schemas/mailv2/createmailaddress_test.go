@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateMailAddress", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"address\":\"string\",\"isCatchAll\":true,\"mailbox\":{\"enableSpamProtection\":true,\"password\":\"string\",\"quotaInBytes\":2147483648}}")
+			exampleJSON := []byte("{\"address\":\"string\",\"forwardAddresses\":[\"string\"],\"isCatchAll\":true,\"mailbox\":{\"enableSpamProtection\":true,\"password\":\"string\",\"quotaInBytes\":2147483648}}")
 
 			sut := mailv2.CreateMailAddress{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
