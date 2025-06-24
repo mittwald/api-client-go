@@ -22,7 +22,7 @@ var _ = Describe("CreateMailAddressRequestBody", func() {
 			Expect(sut.AlternativeCreateForwardAddress).NotTo(BeNil())
 		})
 		It("should unmarshal into AlternativeCreateMailAddress", func() {
-			exampleJSON := []byte("{\"address\":\"string\",\"isCatchAll\":true,\"mailbox\":{\"enableSpamProtection\":true,\"password\":\"string\",\"quotaInBytes\":2147483648}}")
+			exampleJSON := []byte("{\"address\":\"string\",\"forwardAddresses\":[\"string\"],\"isCatchAll\":true,\"mailbox\":{\"enableSpamProtection\":true,\"password\":\"string\",\"quotaInBytes\":2147483648}}")
 
 			sut := mailclientv2.CreateMailAddressRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

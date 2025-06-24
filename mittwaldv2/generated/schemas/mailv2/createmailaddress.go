@@ -11,6 +11,11 @@ import "fmt"
 //    "address":
 //        type: "string"
 //        format: "idn-email"
+//    "forwardAddresses":
+//        type: "array"
+//        items:
+//            type: "string"
+//            format: "idn-email"
 //    "isCatchAll":
 //        type: "boolean"
 //    "mailbox":
@@ -35,12 +40,21 @@ import "fmt"
 //    - "isCatchAll"
 
 type CreateMailAddress struct {
-	Address    string                   `json:"address"`
-	IsCatchAll bool                     `json:"isCatchAll"`
-	Mailbox    CreateMailAddressMailbox `json:"mailbox"`
+	Address          string                   `json:"address"`
+	ForwardAddresses []string                 `json:"forwardAddresses,omitempty"`
+	IsCatchAll       bool                     `json:"isCatchAll"`
+	Mailbox          CreateMailAddressMailbox `json:"mailbox"`
 }
 
 func (o *CreateMailAddress) Validate() error {
+	if err := func() error {
+		if o.ForwardAddresses == nil {
+			return nil
+		}
+		return nil
+	}(); err != nil {
+		return fmt.Errorf("invalid property forwardAddresses: %w", err)
+	}
 	if err := o.Mailbox.Validate(); err != nil {
 		return fmt.Errorf("invalid property mailbox: %w", err)
 	}
