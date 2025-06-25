@@ -19,6 +19,7 @@ import "time"
 //        example: "mysql-xyz"
 //    "usageInBytes":
 //        type: "integer"
+//        format: "int64"
 //        example: 1000
 //    "usageInBytesSetAt":
 //        type: "string"

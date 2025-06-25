@@ -10,8 +10,10 @@ package projectv2
 //        type: "string"
 //    "totalBytes":
 //        type: "integer"
+//        format: "int64"
 //    "usedBytes":
 //        type: "integer"
+//        format: "int64"
 
 type FilesystemUsagesDisk struct {
 	Path       *string `json:"path,omitempty"`

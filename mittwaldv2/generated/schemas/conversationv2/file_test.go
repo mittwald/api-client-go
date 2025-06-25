@@ -29,5 +29,13 @@ var _ = Describe("File", func() {
 			Expect(sut.Validate()).To(Succeed())
 			Expect(sut.AlternativeUploadedFile).NotTo(BeNil())
 		})
+		It("should unmarshal into AlternativeDeletedFile", func() {
+			exampleJSON := []byte("{\"deletionDate\":\"2006-01-02T15:04:05Z\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"name\":\"string\",\"status\":\"deleted\",\"type\":\"string\"}")
+
+			sut := conversationv2.File{}
+			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
+			Expect(sut.Validate()).To(Succeed())
+			Expect(sut.AlternativeDeletedFile).NotTo(BeNil())
+		})
 	})
 })

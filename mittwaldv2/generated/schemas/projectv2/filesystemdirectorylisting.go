@@ -25,6 +25,7 @@ import "fmt"
 //        type: "string"
 //    "size":
 //        type: "integer"
+//        format: "int64"
 //    "target":
 //        type: "string"
 // required:

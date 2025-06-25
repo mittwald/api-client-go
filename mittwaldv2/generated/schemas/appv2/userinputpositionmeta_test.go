@@ -14,7 +14,7 @@ import (
 var _ = Describe("UserInputPositionMeta", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"index\":3.14,\"section\":\"string\",\"step\":\"string\"}")
+			exampleJSON := []byte("{\"index\":42,\"section\":\"string\",\"step\":\"string\"}")
 
 			sut := appv2.UserInputPositionMeta{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

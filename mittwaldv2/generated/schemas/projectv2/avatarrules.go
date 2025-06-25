@@ -13,6 +13,7 @@ import (
 // properties:
 //    "maxSizeInKB":
 //        type: "integer"
+//        format: "int64"
 //        example: 3000
 //    "mimeTypes":
 //        type: "array"
@@ -30,15 +31,19 @@ import (
 //                        properties:
 //                            "height":
 //                                type: "integer"
+//                                format: "int64"
 //                            "width":
 //                                type: "integer"
+//                                format: "int64"
 //                    "min":
 //                        type: "object"
 //                        properties:
 //                            "height":
 //                                type: "integer"
+//                                format: "int64"
 //                            "width":
 //                                type: "integer"
+//                                format: "int64"
 // required:
 //    - "mimeTypes"
 //    - "maxSizeInKB"

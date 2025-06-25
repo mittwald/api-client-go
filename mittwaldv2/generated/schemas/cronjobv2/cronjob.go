@@ -46,7 +46,7 @@ import (
 //        type: "string"
 //        example: "cron-bd26li"
 //    "timeout":
-//        type: "number"
+//        type: "integer"
 //        maximum: 86400
 //        minimum: 1
 //    "updatedAt":
@@ -77,7 +77,7 @@ type Cronjob struct {
 	NextExecutionTime *time.Time         `json:"nextExecutionTime,omitempty"`
 	ProjectId         *string            `json:"projectId,omitempty"`
 	ShortId           string             `json:"shortId"`
-	Timeout           float64            `json:"timeout"`
+	Timeout           int64              `json:"timeout"`
 	UpdatedAt         time.Time          `json:"updatedAt"`
 }
 

@@ -13,6 +13,7 @@ import "time"
 //        example: false
 //    "limitInBytes":
 //        type: "integer"
+//        format: "int64"
 //        example: 100000
 //    "notificationThresholdUsedAsLimit":
 //        type: "boolean"
@@ -20,6 +21,7 @@ import "time"
 //        example: false
 //    "totalExceedanceInBytes":
 //        type: "integer"
+//        format: "int64"
 //        example: 10
 //    "totalExceedanceInBytesSetAt":
 //        type: "string"
@@ -27,12 +29,14 @@ import "time"
 //        example: "2023-12-22T13:46:52.000Z"
 //    "totalFreeInBytes":
 //        type: "integer"
+//        format: "int64"
 //        example: 99000
 //    "totalFreeInPercentage":
 //        type: "number"
 //        example: 90
 //    "totalUsageInBytes":
 //        type: "integer"
+//        format: "int64"
 //        example: 1000
 //    "totalUsageInPercentage":
 //        type: "number"

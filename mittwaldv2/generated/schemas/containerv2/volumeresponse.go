@@ -29,6 +29,7 @@ import (
 //        format: "uuid"
 //    "storageUsageInBytes":
 //        type: "integer"
+//        format: "int64"
 //    "storageUsageInBytesSetAt":
 //        type: "string"
 //        format: "date-time"

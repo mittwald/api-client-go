@@ -24,7 +24,7 @@ import "fmt"
 //        type: "string"
 //        example: "*/5 * * * *"
 //    "timeout":
-//        type: "number"
+//        type: "integer"
 //        maximum: 86400
 //        minimum: 1
 // description: UpdateCronjobRequestBody models the JSON body of a 'cronjob-update-cronjob' request
@@ -36,7 +36,7 @@ type UpdateCronjobRequestBody struct {
 	Destination *UpdateCronjobRequestBodyDestination `json:"destination,omitempty"`
 	Email       *string                              `json:"email,omitempty"`
 	Interval    *string                              `json:"interval,omitempty"`
-	Timeout     *float64                             `json:"timeout,omitempty"`
+	Timeout     *int64                               `json:"timeout,omitempty"`
 }
 
 func (o *UpdateCronjobRequestBody) Validate() error {

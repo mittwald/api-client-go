@@ -8,12 +8,38 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/extensionv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/marketplacev2"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
 	"github.com/mittwald/api-client-go/pkg/httperr"
 )
 
 type Client interface {
+	GetBillingInformation(
+		ctx context.Context,
+		req GetBillingInformationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*GetBillingInformationResponse, *http.Response, error)
+	UpdateBillingInformation(
+		ctx context.Context,
+		req UpdateBillingInformationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*UpdateBillingInformationResponse, *http.Response, error)
+	GetCustomerBillingPortalLink(
+		ctx context.Context,
+		req GetCustomerBillingPortalLinkRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*GetCustomerBillingPortalLinkResponse, *http.Response, error)
+	GetLoginLink(
+		ctx context.Context,
+		req GetLoginLinkRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*GetLoginLinkResponse, *http.Response, error)
+	ListOnbehalfInvoices(
+		ctx context.Context,
+		req ListOnbehalfInvoicesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]ListOnbehalfInvoicesResponseItem, *http.Response, error)
 	RotateSecretForExtensionInstance(
 		ctx context.Context,
 		req RotateSecretForExtensionInstanceRequest,
@@ -29,6 +55,16 @@ type Client interface {
 		req AuthenticateWithSessionTokenRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*AuthenticateWithSessionTokenResponse, *http.Response, error)
+	ScheduleExtensionTermination(
+		ctx context.Context,
+		req ScheduleExtensionTerminationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*ScheduleExtensionTerminationResponse, *http.Response, error)
+	CancelExtensionTermination(
+		ctx context.Context,
+		req CancelExtensionTerminationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CancelExtensionTerminationResponse, *http.Response, error)
 	ChangeContext(
 		ctx context.Context,
 		req ChangeContextRequest,
@@ -39,6 +75,11 @@ type Client interface {
 		req ConsentToExtensionScopesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	CreateContributorOnboardingProcess(
+		ctx context.Context,
+		req CreateContributorOnboardingProcessRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CreateContributorOnboardingProcessResponse, *http.Response, error)
 	ListExtensionInstances(
 		ctx context.Context,
 		req ListExtensionInstancesRequest,
@@ -109,6 +150,21 @@ type Client interface {
 		req GetContributorRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*any, *http.Response, error)
+	GetCustomerExtensionInstanceOrders(
+		ctx context.Context,
+		req GetCustomerExtensionInstanceOrdersRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]GetCustomerExtensionInstanceOrdersResponseItem, *http.Response, error)
+	GetExtensionInstanceContract(
+		ctx context.Context,
+		req GetExtensionInstanceContractRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*extensionv2.ExtensionInstanceContract, *http.Response, error)
+	UpdateExtensionInstanceContract(
+		ctx context.Context,
+		req UpdateExtensionInstanceContractRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*UpdateExtensionInstanceContractResponse, *http.Response, error)
 	GetExtensionInstanceForCustomer(
 		ctx context.Context,
 		req GetExtensionInstanceForCustomerRequest,
@@ -124,6 +180,11 @@ type Client interface {
 		req GetExtensionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*any, *http.Response, error)
+	GetProjectExtensionInstanceOrders(
+		ctx context.Context,
+		req GetProjectExtensionInstanceOrdersRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]GetProjectExtensionInstanceOrdersResponseItem, *http.Response, error)
 	GetPublicKey(
 		ctx context.Context,
 		req GetPublicKeyRequest,
@@ -159,6 +220,11 @@ type Client interface {
 		req ListScopesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]ListScopesResponseItem, *http.Response, error)
+	Extension(
+		ctx context.Context,
+		req ExtensionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*ExtensionResponse, *http.Response, error)
 	RemoveAsset(
 		ctx context.Context,
 		req RemoveAssetRequest,
@@ -189,6 +255,26 @@ type Client interface {
 		req SetExtensionPublishedStateRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*SetExtensionPublishedStateResponse, *http.Response, error)
+	StartExtensionCheckout(
+		ctx context.Context,
+		req StartExtensionCheckoutRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*StartExtensionCheckoutResponse, *http.Response, error)
+	UpdateExtensionPricing(
+		ctx context.Context,
+		req UpdateExtensionPricingRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*UpdateExtensionPricingResponse, *http.Response, error)
+	CustomerGetPaymentMethod(
+		ctx context.Context,
+		req CustomerGetPaymentMethodRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CustomerGetPaymentMethodResponse, *http.Response, error)
+	CustomerUpdatePaymentMethod(
+		ctx context.Context,
+		req CustomerUpdatePaymentMethodRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CustomerUpdatePaymentMethodResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -196,6 +282,152 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Get Contributor Billing Information.
+func (c *clientImpl) GetBillingInformation(
+	ctx context.Context,
+	req GetBillingInformationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*GetBillingInformationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GetBillingInformationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update Contributor Billing Information.
+func (c *clientImpl) UpdateBillingInformation(
+	ctx context.Context,
+	req UpdateBillingInformationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*UpdateBillingInformationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response UpdateBillingInformationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get the Stripe Billing Portal Link for a Customer
+//
+// Get the Stripe Billing Portal Link for a Customer.
+func (c *clientImpl) GetCustomerBillingPortalLink(
+	ctx context.Context,
+	req GetCustomerBillingPortalLinkRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*GetCustomerBillingPortalLinkResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GetCustomerBillingPortalLinkResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get the Stripe Dashboard Link for a Contributor.
+//
+// Get the Stripe Dashboard Link for a Contributor.
+func (c *clientImpl) GetLoginLink(
+	ctx context.Context,
+	req GetLoginLinkRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*GetLoginLinkResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GetLoginLinkResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List all invoices on behalf of a contributor.
+//
+// List all invoices on behalf of a contributor.
+func (c *clientImpl) ListOnbehalfInvoices(
+	ctx context.Context,
+	req ListOnbehalfInvoicesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]ListOnbehalfInvoicesResponseItem, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []ListOnbehalfInvoicesResponseItem
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Rotate the secret for an extension instance.
@@ -282,6 +514,62 @@ func (c *clientImpl) AuthenticateWithSessionToken(
 	return &response, httpRes, nil
 }
 
+// Schedule an Extension Instance Termination for the next possible date.
+func (c *clientImpl) ScheduleExtensionTermination(
+	ctx context.Context,
+	req ScheduleExtensionTerminationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*ScheduleExtensionTerminationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response ScheduleExtensionTerminationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Cancel an Extension Instance Termination.
+func (c *clientImpl) CancelExtensionTermination(
+	ctx context.Context,
+	req CancelExtensionTerminationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CancelExtensionTerminationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CancelExtensionTerminationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Change the context of an Extension.
 func (c *clientImpl) ChangeContext(
 	ctx context.Context,
@@ -332,6 +620,36 @@ func (c *clientImpl) ConsentToExtensionScopes(
 	}
 
 	return httpRes, nil
+}
+
+// Create the OnboardingProcess of a Contributor.
+//
+// The OnboardingProcess is needed to publish paid extensions.
+func (c *clientImpl) CreateContributorOnboardingProcess(
+	ctx context.Context,
+	req CreateContributorOnboardingProcessRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CreateContributorOnboardingProcessResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CreateContributorOnboardingProcessResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // List ExtensionInstances.
@@ -728,6 +1046,92 @@ func (c *clientImpl) GetContributor(
 	return &response, httpRes, nil
 }
 
+// Get all open extension orders for given customer
+func (c *clientImpl) GetCustomerExtensionInstanceOrders(
+	ctx context.Context,
+	req GetCustomerExtensionInstanceOrdersRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]GetCustomerExtensionInstanceOrdersResponseItem, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []GetCustomerExtensionInstanceOrdersResponseItem
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get the Contract Strategy of an Extension Instance
+func (c *clientImpl) GetExtensionInstanceContract(
+	ctx context.Context,
+	req GetExtensionInstanceContractRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*extensionv2.ExtensionInstanceContract, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response extensionv2.ExtensionInstanceContract
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update or Create Contract for existing Extension Instances.
+//
+// Call to update Contract for existing Extension Instances. For example to accept a new Pricing.
+func (c *clientImpl) UpdateExtensionInstanceContract(
+	ctx context.Context,
+	req UpdateExtensionInstanceContractRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*UpdateExtensionInstanceContractResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response UpdateExtensionInstanceContractResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Get the ExtensionInstance of a specific customer and extension, if existing.
 func (c *clientImpl) GetExtensionInstanceForCustomer(
 	ctx context.Context,
@@ -806,6 +1210,34 @@ func (c *clientImpl) GetExtension(
 	}
 
 	var response any
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get all open extension orders for given project
+func (c *clientImpl) GetProjectExtensionInstanceOrders(
+	ctx context.Context,
+	req GetProjectExtensionInstanceOrdersRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]GetProjectExtensionInstanceOrdersResponseItem, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []GetProjectExtensionInstanceOrdersResponseItem
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -1004,6 +1436,34 @@ func (c *clientImpl) ListScopes(
 	return &response, httpRes, nil
 }
 
+// Order Extension with saved payment method
+func (c *clientImpl) Extension(
+	ctx context.Context,
+	req ExtensionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*ExtensionResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response ExtensionResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Remove an asset of an extension.
 func (c *clientImpl) RemoveAsset(
 	ctx context.Context,
@@ -1158,6 +1618,120 @@ func (c *clientImpl) SetExtensionPublishedState(
 	}
 
 	var response SetExtensionPublishedStateResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Start a checkout process for an extension.
+func (c *clientImpl) StartExtensionCheckout(
+	ctx context.Context,
+	req StartExtensionCheckoutRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*StartExtensionCheckoutResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response StartExtensionCheckoutResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Creates or Updates Pricing for an Extension.
+//
+// The Pricing is needed to publish paid extensions.
+func (c *clientImpl) UpdateExtensionPricing(
+	ctx context.Context,
+	req UpdateExtensionPricingRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*UpdateExtensionPricingResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response UpdateExtensionPricingResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get payment method details
+func (c *clientImpl) CustomerGetPaymentMethod(
+	ctx context.Context,
+	req CustomerGetPaymentMethodRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CustomerGetPaymentMethodResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CustomerGetPaymentMethodResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get the link to update the marketplace payment method
+func (c *clientImpl) CustomerUpdatePaymentMethod(
+	ctx context.Context,
+	req CustomerUpdatePaymentMethodRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CustomerUpdatePaymentMethodResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CustomerUpdatePaymentMethodResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

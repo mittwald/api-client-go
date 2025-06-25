@@ -16,15 +16,19 @@ import "fmt"
 //                properties:
 //                    "height":
 //                        type: "integer"
+//                        format: "int64"
 //                    "width":
 //                        type: "integer"
+//                        format: "int64"
 //            "min":
 //                type: "object"
 //                properties:
 //                    "height":
 //                        type: "integer"
+//                        format: "int64"
 //                    "width":
 //                        type: "integer"
+//                        format: "int64"
 
 type FileUploadRulesProperties struct {
 	ImageDimensions *FileUploadRulesPropertiesImageDimensions `json:"imageDimensions,omitempty"`

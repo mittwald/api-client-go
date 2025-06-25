@@ -8,8 +8,10 @@ package filev2
 // properties:
 //    "height":
 //        type: "integer"
+//        format: "int64"
 //    "width":
 //        type: "integer"
+//        format: "int64"
 
 type FileUploadRulesPropertiesImageDimensionsMax struct {
 	Height *int64 `json:"height,omitempty"`

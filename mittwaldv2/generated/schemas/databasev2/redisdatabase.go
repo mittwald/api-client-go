@@ -41,6 +41,7 @@ import (
 //        format: "date-time"
 //    "storageUsageInBytes":
 //        type: "integer"
+//        format: "int64"
 //    "storageUsageInBytesSetAt":
 //        type: "string"
 //        format: "date-time"

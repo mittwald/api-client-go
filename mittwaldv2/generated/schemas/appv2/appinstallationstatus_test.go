@@ -14,7 +14,7 @@ import (
 var _ = Describe("AppInstallationStatus", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"lastExitCode\":3.14,\"logFileLocation\":\"string\",\"state\":\"running\",\"uptimeSeconds\":3.14}")
+			exampleJSON := []byte("{\"lastExitCode\":42,\"logFileLocation\":\"string\",\"state\":\"running\",\"uptimeSeconds\":3.14}")
 
 			sut := appv2.AppInstallationStatus{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

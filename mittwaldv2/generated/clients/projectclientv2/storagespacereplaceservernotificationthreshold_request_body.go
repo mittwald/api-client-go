@@ -7,6 +7,7 @@ package projectclientv2
 // properties:
 //    "notificationThresholdInBytes":
 //        type: "integer"
+//        format: "int64"
 //        nullable: true
 //        example: 10000
 // description: StoragespaceReplaceServerNotificationThresholdRequestBody models the JSON body of a 'storagespace-replace-server-notification-threshold' request

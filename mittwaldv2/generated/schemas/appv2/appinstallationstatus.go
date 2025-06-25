@@ -9,7 +9,7 @@ import "fmt"
 // type: "object"
 // properties:
 //    "lastExitCode":
-//        type: "number"
+//        type: "integer"
 //    "logFileLocation":
 //        type: "string"
 //    "state":
@@ -20,6 +20,7 @@ import "fmt"
 //            - "exited"
 //    "uptimeSeconds":
 //        type: "number"
+//        format: "double"
 // required:
 //    - "state"
 //    - "logFileLocation"
@@ -27,7 +28,7 @@ import "fmt"
 
 // AppInstallationStatus describes the overall runtime status of an AppInstallation.
 type AppInstallationStatus struct {
-	LastExitCode    *float64                   `json:"lastExitCode,omitempty"`
+	LastExitCode    *int64                     `json:"lastExitCode,omitempty"`
 	LogFileLocation string                     `json:"logFileLocation"`
 	State           AppInstallationStatusState `json:"state"`
 	UptimeSeconds   *float64                   `json:"uptimeSeconds,omitempty"`
