@@ -14,7 +14,7 @@ import (
 var _ = Describe("ScreenshotSettings", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"dataType\":\"jpeg\",\"delay\":3.14,\"height\":3.14,\"quality\":3.14,\"width\":3.14}")
+			exampleJSON := []byte("{\"dataType\":\"jpeg\",\"delay\":42,\"height\":42,\"quality\":42,\"width\":42}")
 
 			sut := screenshotv2.ScreenshotSettings{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

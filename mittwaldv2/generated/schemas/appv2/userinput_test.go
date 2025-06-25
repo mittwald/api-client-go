@@ -14,7 +14,7 @@ import (
 var _ = Describe("UserInput", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"dataSource\":\"string\",\"dataType\":\"text\",\"defaultValue\":\"string\",\"format\":\"email\",\"lifecycleConstraint\":\"installation\",\"name\":\"string\",\"positionMeta\":{\"index\":3.14,\"section\":\"string\",\"step\":\"string\"},\"required\":true,\"validationSchema\":\"string\"}")
+			exampleJSON := []byte("{\"dataSource\":\"string\",\"dataType\":\"text\",\"defaultValue\":\"string\",\"format\":\"email\",\"lifecycleConstraint\":\"installation\",\"name\":\"string\",\"positionMeta\":{\"index\":42,\"section\":\"string\",\"step\":\"string\"},\"required\":true,\"validationSchema\":\"string\"}")
 
 			sut := appv2.UserInput{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -14,7 +14,7 @@ import (
 var _ = Describe("VisitorSpec", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"storage\":\"string\",\"visitors\":3.14}")
+			exampleJSON := []byte("{\"storage\":\"string\",\"visitors\":42}")
 
 			sut := projectv2.VisitorSpec{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

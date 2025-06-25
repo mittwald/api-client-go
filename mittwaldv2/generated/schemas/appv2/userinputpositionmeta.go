@@ -7,7 +7,7 @@ package appv2
 // type: "object"
 // properties:
 //    "index":
-//        type: "number"
+//        type: "integer"
 //    "section":
 //        type: "string"
 //    "step":
@@ -16,9 +16,9 @@ package appv2
 
 // UserInputPositionMeta is a utility information, helping to position the UserInput properly on the frontend.
 type UserInputPositionMeta struct {
-	Index   *float64 `json:"index,omitempty"`
-	Section *string  `json:"section,omitempty"`
-	Step    *string  `json:"step,omitempty"`
+	Index   *int64  `json:"index,omitempty"`
+	Section *string `json:"section,omitempty"`
+	Step    *string `json:"step,omitempty"`
 }
 
 func (o *UserInputPositionMeta) Validate() error {

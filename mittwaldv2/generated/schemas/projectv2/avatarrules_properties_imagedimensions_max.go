@@ -8,8 +8,10 @@ package projectv2
 // properties:
 //    "height":
 //        type: "integer"
+//        format: "int64"
 //    "width":
 //        type: "integer"
+//        format: "int64"
 
 type AvatarRulesPropertiesImageDimensionsMax struct {
 	Height *int64 `json:"height,omitempty"`

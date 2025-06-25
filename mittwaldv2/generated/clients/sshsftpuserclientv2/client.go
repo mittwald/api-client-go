@@ -14,16 +14,6 @@ import (
 )
 
 type Client interface {
-	ListSFTPUsers(
-		ctx context.Context,
-		req ListSFTPUsersRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]sshuserv2.SftpUser, *http.Response, error)
-	CreateSFTPUser(
-		ctx context.Context,
-		req CreateSFTPUserRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*sshuserv2.SftpUser, *http.Response, error)
 	GetSFTPUser(
 		ctx context.Context,
 		req GetSFTPUserRequest,
@@ -49,6 +39,16 @@ type Client interface {
 		req CreateSSHUserRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*sshuserv2.SshUser, *http.Response, error)
+	ListSFTPUsers(
+		ctx context.Context,
+		req ListSFTPUsersRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]sshuserv2.SftpUser, *http.Response, error)
+	CreateSFTPUser(
+		ctx context.Context,
+		req CreateSFTPUserRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*sshuserv2.SftpUser, *http.Response, error)
 	GetSSHUser(
 		ctx context.Context,
 		req GetSSHUserRequest,
@@ -71,62 +71,6 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
-}
-
-// Get all SFTPUsers for a Project.
-func (c *clientImpl) ListSFTPUsers(
-	ctx context.Context,
-	req ListSFTPUsersRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]sshuserv2.SftpUser, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []sshuserv2.SftpUser
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Create an SFTPUser for a Project.
-func (c *clientImpl) CreateSFTPUser(
-	ctx context.Context,
-	req CreateSFTPUserRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*sshuserv2.SftpUser, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response sshuserv2.SftpUser
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
 
 // Get an SFTPUser.
@@ -255,6 +199,62 @@ func (c *clientImpl) CreateSSHUser(
 	}
 
 	var response sshuserv2.SshUser
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get all SFTPUsers for a Project.
+func (c *clientImpl) ListSFTPUsers(
+	ctx context.Context,
+	req ListSFTPUsersRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]sshuserv2.SftpUser, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []sshuserv2.SftpUser
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create an SFTPUser for a Project.
+func (c *clientImpl) CreateSFTPUser(
+	ctx context.Context,
+	req CreateSFTPUserRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*sshuserv2.SftpUser, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response sshuserv2.SftpUser
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

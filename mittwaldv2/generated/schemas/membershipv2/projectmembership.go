@@ -13,6 +13,7 @@ import (
 // properties:
 //    "avatarRef":
 //        type: "string"
+//        format: "uuid"
 //        description: "Avatar file reference id of the user."
 //    "email":
 //        type: "string"

@@ -9,14 +9,15 @@ package projectv2
 //    "storage":
 //        type: "string"
 //    "visitors":
-//        type: "number"
+//        type: "integer"
+//        format: "int64"
 // required:
 //    - "visitors"
 //    - "storage"
 
 type VisitorSpec struct {
-	Storage  string  `json:"storage"`
-	Visitors float64 `json:"visitors"`
+	Storage  string `json:"storage"`
+	Visitors int64  `json:"visitors"`
 }
 
 func (o *VisitorSpec) Validate() error {

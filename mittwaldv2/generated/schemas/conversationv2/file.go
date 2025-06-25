@@ -14,10 +14,12 @@ import (
 // oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.conversation.RequestedFile"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.conversation.UploadedFile"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.conversation.DeletedFile"}
 
 type File struct {
 	AlternativeRequestedFile *RequestedFile
 	AlternativeUploadedFile  *UploadedFile
+	AlternativeDeletedFile   *DeletedFile
 }
 
 func (a *File) MarshalJSON() ([]byte, error) {
@@ -26,6 +28,9 @@ func (a *File) MarshalJSON() ([]byte, error) {
 	}
 	if a.AlternativeUploadedFile != nil {
 		return json.Marshal(a.AlternativeUploadedFile)
+	}
+	if a.AlternativeDeletedFile != nil {
+		return json.Marshal(a.AlternativeDeletedFile)
 	}
 	return []byte("null"), nil
 }
@@ -56,6 +61,16 @@ func (a *File) UnmarshalJSON(input []byte) error {
 		}
 	}
 
+	reader.Reset(input)
+	var alternativeDeletedFile DeletedFile
+	if err := dec.Decode(&alternativeDeletedFile); err == nil {
+		//subtype: *generator.ReferenceType
+		if vErr := alternativeDeletedFile.Validate(); vErr == nil {
+			a.AlternativeDeletedFile = &alternativeDeletedFile
+			decodedAtLeastOnce = true
+		}
+	}
+
 	if !decodedAtLeastOnce {
 		return fmt.Errorf("could not unmarshal into any alternative for type %T", a)
 	}
@@ -68,6 +83,9 @@ func (a *File) Validate() error {
 	}
 	if a.AlternativeUploadedFile != nil {
 		return a.AlternativeUploadedFile.Validate()
+	}
+	if a.AlternativeDeletedFile != nil {
+		return a.AlternativeDeletedFile.Validate()
 	}
 	return errors.New("no alternative set")
 }

@@ -25,6 +25,7 @@ import "fmt"
 //        example: "p-zkl8tr"
 //    "notificationThresholdInBytes":
 //        type: "integer"
+//        format: "int64"
 //        example: 10000
 //    "statisticCategories":
 //        type: "array"

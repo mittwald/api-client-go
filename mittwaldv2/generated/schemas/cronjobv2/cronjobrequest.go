@@ -27,7 +27,7 @@ import "fmt"
 //        type: "string"
 //        example: "*/5 * * * *"
 //    "timeout":
-//        type: "number"
+//        type: "integer"
 //        maximum: 86400
 //        minimum: 1
 // required:
@@ -45,7 +45,7 @@ type CronjobRequest struct {
 	Destination CronjobRequestDestination `json:"destination"`
 	Email       *string                   `json:"email,omitempty"`
 	Interval    string                    `json:"interval"`
-	Timeout     float64                   `json:"timeout"`
+	Timeout     int64                     `json:"timeout"`
 }
 
 func (o *CronjobRequest) Validate() error {

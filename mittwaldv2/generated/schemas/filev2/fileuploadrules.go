@@ -24,14 +24,17 @@ import (
 //        example: 80
 //    "maxSizeInBytes":
 //        type: "integer"
+//        format: "int64"
 //        example: 1000000
 //    "maxSizeInKB":
 //        type: "integer"
+//        format: "int64"
 //        description: "deprecated, see maxSizeInBytes"
 //        example: 1000
 //        deprecated: true
 //    "maxSizeInKb":
 //        type: "integer"
+//        format: "int64"
 //        description: "deprecated, see maxSizeInBytes"
 //        example: 1000
 //        deprecated: true
@@ -51,15 +54,19 @@ import (
 //                        properties:
 //                            "height":
 //                                type: "integer"
+//                                format: "int64"
 //                            "width":
 //                                type: "integer"
+//                                format: "int64"
 //                    "min":
 //                        type: "object"
 //                        properties:
 //                            "height":
 //                                type: "integer"
+//                                format: "int64"
 //                            "width":
 //                                type: "integer"
+//                                format: "int64"
 // required:
 //    - "maxSizeInBytes"
 //    - "maxSizeInKB"

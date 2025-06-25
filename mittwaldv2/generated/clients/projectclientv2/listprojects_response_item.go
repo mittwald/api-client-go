@@ -15,6 +15,7 @@ import (
 // properties:
 //    "backupStorageUsageInBytes":
 //        type: "integer"
+//        format: "int64"
 //    "backupStorageUsageInBytesSetAt":
 //        type: "string"
 //        format: "date-time"
@@ -60,6 +61,7 @@ import (
 //        format: "date-time"
 //    "webStorageUsageInBytes":
 //        type: "integer"
+//        format: "int64"
 //    "webStorageUsageInBytesSetAt":
 //        type: "string"
 //        format: "date-time"

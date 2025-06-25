@@ -14,7 +14,7 @@ import (
 var _ = Describe("CustomerMembership", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"customerId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"email\":\"string\",\"expiresAt\":\"2006-01-02T15:04:05Z\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"inviteId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"memberSince\":\"2006-01-02T15:04:05Z\",\"mfa\":true,\"role\":\"notset\",\"userId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{\"avatarRef\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"customerId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"email\":\"string\",\"expiresAt\":\"2006-01-02T15:04:05Z\",\"firstName\":\"string\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"inviteId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"lastName\":\"string\",\"memberSince\":\"2006-01-02T15:04:05Z\",\"mfa\":true,\"role\":\"notset\",\"userId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
 
 			sut := membershipv2.CustomerMembership{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

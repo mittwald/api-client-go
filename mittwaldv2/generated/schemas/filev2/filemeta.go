@@ -26,6 +26,7 @@ package filev2
 //        example: "me.jpeg"
 //    "sizeInBytes":
 //        type: "integer"
+//        format: "int64"
 //        example: 300
 //    "type":
 //        type: "string"

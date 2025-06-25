@@ -15,6 +15,7 @@ import "fmt"
 //        uniqueItems: true
 //    "totalUsageInBytes":
 //        type: "integer"
+//        format: "int64"
 //        example: 1000
 // required:
 //    - "kind"

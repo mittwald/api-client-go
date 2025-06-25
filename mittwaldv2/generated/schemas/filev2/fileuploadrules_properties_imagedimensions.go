@@ -13,15 +13,19 @@ import "fmt"
 //        properties:
 //            "height":
 //                type: "integer"
+//                format: "int64"
 //            "width":
 //                type: "integer"
+//                format: "int64"
 //    "min":
 //        type: "object"
 //        properties:
 //            "height":
 //                type: "integer"
+//                format: "int64"
 //            "width":
 //                type: "integer"
+//                format: "int64"
 
 type FileUploadRulesPropertiesImageDimensions struct {
 	Max *FileUploadRulesPropertiesImageDimensionsMax `json:"max,omitempty"`

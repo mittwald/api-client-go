@@ -14,7 +14,7 @@ import (
 var _ = Describe("UpdateCronjobRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"active\":true,\"description\":\"i am a cronjob\",\"destination\":{\"url\":\"https://mydomain.com\"},\"email\":\"string\",\"interval\":\"*/5 * * * *\",\"timeout\":3.14}")
+			exampleJSON := []byte("{\"active\":true,\"description\":\"i am a cronjob\",\"destination\":{\"url\":\"https://mydomain.com\"},\"email\":\"string\",\"interval\":\"*/5 * * * *\",\"timeout\":42}")
 
 			sut := cronjobclientv2.UpdateCronjobRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

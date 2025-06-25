@@ -1,9 +1,6 @@
 package domainclientv2
 
 import (
-	"bytes"
-	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -20,8 +17,7 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/domain/domain-get-latest-screenshot
 type GetLatestScreenshotRequest struct {
-	Body     GetLatestScreenshotRequestBody
-	DomainID string
+	DomainName string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -46,20 +42,19 @@ func (r *GetLatestScreenshotRequest) BuildRequest(reqEditors ...func(req *http.R
 }
 
 func (r *GetLatestScreenshotRequest) body() (io.Reader, string, error) {
-	out, err := json.Marshal(&r.Body)
-	if err != nil {
-		return nil, "", fmt.Errorf("error while marshalling JSON: %w", err)
-	}
-	return bytes.NewReader(out), "application/json", nil
+	return nil, "", nil
 }
 
 func (r *GetLatestScreenshotRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/domains/%s/latest-screenshot", url.PathEscape(r.DomainID)),
+		Path:     "/v2/domains/latest-screenshot",
+		RawQuery: r.query().Encode(),
 	}
 	return u.String()
 }
 
 func (r *GetLatestScreenshotRequest) query() url.Values {
-	return nil
+	q := make(url.Values)
+	q.Set("domainName", r.DomainName)
+	return q
 }
