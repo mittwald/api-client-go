@@ -12,7 +12,6 @@ import (
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/databaseclientv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/domainclientv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/fileclientv2"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/leadfyndrclientv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/mailclientv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/marketplaceclientv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/miscclientv2"
@@ -51,7 +50,6 @@ type Client interface {
 	Relocation() relocationclientv2.Client
 	Marketplace() marketplaceclientv2.Client
 	Misc() miscclientv2.Client
-	LeadFyndr() leadfyndrclientv2.Client
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -143,8 +141,4 @@ func (c *clientImpl) Marketplace() marketplaceclientv2.Client {
 
 func (c *clientImpl) Misc() miscclientv2.Client {
 	return miscclientv2.NewClient(c.client)
-}
-
-func (c *clientImpl) LeadFyndr() leadfyndrclientv2.Client {
-	return leadfyndrclientv2.NewClient(c.client)
 }
