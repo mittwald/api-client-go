@@ -11,6 +11,10 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "avatarRef":
+//        type: "string"
+//        format: "uuid"
+//        description: "Avatar file reference id of the user."
 //    "customerId":
 //        type: "string"
 //        format: "uuid"
@@ -23,6 +27,9 @@ import (
 //        type: "string"
 //        format: "date-time"
 //        description: "Time the CustomerMembership should expire at."
+//    "firstName":
+//        type: "string"
+//        description: "First name of the user."
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -31,6 +38,9 @@ import (
 //        type: "string"
 //        format: "uuid"
 //        description: "ID of the CustomerInvite the membership was created from."
+//    "lastName":
+//        type: "string"
+//        description: "Last name of the user."
 //    "memberSince":
 //        type: "string"
 //        format: "date-time"
@@ -50,13 +60,18 @@ import (
 //    - "role"
 //    - "email"
 //    - "mfa"
+//    - "firstName"
+//    - "lastName"
 
 type CustomerMembership struct {
+	AvatarRef   *string       `json:"avatarRef,omitempty"`
 	CustomerId  string        `json:"customerId"`
 	Email       string        `json:"email"`
 	ExpiresAt   *time.Time    `json:"expiresAt,omitempty"`
+	FirstName   string        `json:"firstName"`
 	Id          string        `json:"id"`
 	InviteId    *string       `json:"inviteId,omitempty"`
+	LastName    string        `json:"lastName"`
 	MemberSince *time.Time    `json:"memberSince,omitempty"`
 	Mfa         bool          `json:"mfa"`
 	Role        CustomerRoles `json:"role"`
