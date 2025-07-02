@@ -12,15 +12,19 @@ package llmlocksmithv2
 //        type: "string"
 //    "name":
 //        type: "string"
+//    "termsOfServiceLink":
+//        type: "string"
 // required:
 //    - "name"
 //    - "displayName"
 //    - "docLink"
+//    - "termsOfServiceLink"
 
 type Model struct {
-	DisplayName string `json:"displayName"`
-	DocLink     string `json:"docLink"`
-	Name        string `json:"name"`
+	DisplayName        string `json:"displayName"`
+	DocLink            string `json:"docLink"`
+	Name               string `json:"name"`
+	TermsOfServiceLink string `json:"termsOfServiceLink"`
 }
 
 func (o *Model) Validate() error {
