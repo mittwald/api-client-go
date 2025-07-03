@@ -14,6 +14,8 @@ import "fmt"
 //    - "projectId"
 //    - "mailbox.quota"
 //    - "mailbox.name"
+//    - "mailbox.storageInBytes.current"
+//    - "mailbox.storageInBytes.limit"
 
 type ListMailAddressesRequestQuerySortItem string
 
@@ -23,9 +25,11 @@ const ListMailAddressesRequestQuerySortItemUpdatedAt ListMailAddressesRequestQue
 const ListMailAddressesRequestQuerySortItemProjectID ListMailAddressesRequestQuerySortItem = "projectId"
 const ListMailAddressesRequestQuerySortItemMailboxQuota ListMailAddressesRequestQuerySortItem = "mailbox.quota"
 const ListMailAddressesRequestQuerySortItemMailboxName ListMailAddressesRequestQuerySortItem = "mailbox.name"
+const ListMailAddressesRequestQuerySortItemMailboxStorageInBytesCurrent ListMailAddressesRequestQuerySortItem = "mailbox.storageInBytes.current"
+const ListMailAddressesRequestQuerySortItemMailboxStorageInBytesLimit ListMailAddressesRequestQuerySortItem = "mailbox.storageInBytes.limit"
 
 func (e ListMailAddressesRequestQuerySortItem) Validate() error {
-	if e == ListMailAddressesRequestQuerySortItemAddressDomain || e == ListMailAddressesRequestQuerySortItemAddressLocal || e == ListMailAddressesRequestQuerySortItemUpdatedAt || e == ListMailAddressesRequestQuerySortItemProjectID || e == ListMailAddressesRequestQuerySortItemMailboxQuota || e == ListMailAddressesRequestQuerySortItemMailboxName {
+	if e == ListMailAddressesRequestQuerySortItemAddressDomain || e == ListMailAddressesRequestQuerySortItemAddressLocal || e == ListMailAddressesRequestQuerySortItemUpdatedAt || e == ListMailAddressesRequestQuerySortItemProjectID || e == ListMailAddressesRequestQuerySortItemMailboxQuota || e == ListMailAddressesRequestQuerySortItemMailboxName || e == ListMailAddressesRequestQuerySortItemMailboxStorageInBytesCurrent || e == ListMailAddressesRequestQuerySortItemMailboxStorageInBytesLimit {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
