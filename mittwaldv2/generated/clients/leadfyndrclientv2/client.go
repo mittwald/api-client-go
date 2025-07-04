@@ -14,56 +14,6 @@ import (
 )
 
 type Client interface {
-	GetCities(
-		ctx context.Context,
-		req GetCitiesRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]leadfyndrv2.City, *http.Response, error)
-	ReserveUnlockedLead(
-		ctx context.Context,
-		req ReserveUnlockedLeadRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*ReserveUnlockedLeadResponse, *http.Response, error)
-	RemoveUnlockedLeadReservation(
-		ctx context.Context,
-		req RemoveUnlockedLeadReservationRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*RemoveUnlockedLeadReservationResponse, *http.Response, error)
-	GetLead(
-		ctx context.Context,
-		req GetLeadRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*leadfyndrv2.Lead, *http.Response, error)
-	ListLeads(
-		ctx context.Context,
-		req ListLeadsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*ListLeadsResponse, *http.Response, error)
-	GetUnlockedLead(
-		ctx context.Context,
-		req GetUnlockedLeadRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*leadfyndrv2.UnlockedLead, *http.Response, error)
-	UnlockLead(
-		ctx context.Context,
-		req UnlockLeadRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*UnlockLeadResponse, *http.Response, error)
-	ListUnlockedLeads(
-		ctx context.Context,
-		req ListUnlockedLeadsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*ListUnlockedLeadsResponse, *http.Response, error)
-	GetLeadFyndrProfileTariffOptions(
-		ctx context.Context,
-		req GetLeadFyndrProfileTariffOptionsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*leadfyndrv2.TariffOptions, *http.Response, error)
-	GetLeadFyndrProfile(
-		ctx context.Context,
-		req GetLeadFyndrProfileRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*any, *http.Response, error)
 	GetLeadFyndrProfileRequest(
 		ctx context.Context,
 		req GetLeadFyndrProfileRequestRequest,
@@ -74,6 +24,56 @@ type Client interface {
 		req CreateLeadFyndrAccessRequestRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CreateLeadFyndrAccessRequestResponse, *http.Response, error)
+	GetCities(
+		ctx context.Context,
+		req GetCitiesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]leadfyndrv2.City, *http.Response, error)
+	GetLeadFyndrProfileTariffOptions(
+		ctx context.Context,
+		req GetLeadFyndrProfileTariffOptionsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*leadfyndrv2.TariffOptions, *http.Response, error)
+	GetLeadFyndrProfile(
+		ctx context.Context,
+		req GetLeadFyndrProfileRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*any, *http.Response, error)
+	GetLead(
+		ctx context.Context,
+		req GetLeadRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*leadfyndrv2.Lead, *http.Response, error)
+	GetUnlockedLead(
+		ctx context.Context,
+		req GetUnlockedLeadRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*leadfyndrv2.UnlockedLead, *http.Response, error)
+	UnlockLead(
+		ctx context.Context,
+		req UnlockLeadRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*UnlockLeadResponse, *http.Response, error)
+	ListLeads(
+		ctx context.Context,
+		req ListLeadsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*ListLeadsResponse, *http.Response, error)
+	ListUnlockedLeads(
+		ctx context.Context,
+		req ListUnlockedLeadsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*ListUnlockedLeadsResponse, *http.Response, error)
+	ReserveUnlockedLead(
+		ctx context.Context,
+		req ReserveUnlockedLeadRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*ReserveUnlockedLeadResponse, *http.Response, error)
+	RemoveUnlockedLeadReservation(
+		ctx context.Context,
+		req RemoveUnlockedLeadReservationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*RemoveUnlockedLeadReservationResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -81,6 +81,62 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Get your LeadFyndr request.
+func (c *clientImpl) GetLeadFyndrProfileRequest(
+	ctx context.Context,
+	req GetLeadFyndrProfileRequestRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*leadfyndrv2.ProfileRequest, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response leadfyndrv2.ProfileRequest
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create a new access request for LeadFyndr.
+func (c *clientImpl) CreateLeadFyndrAccessRequest(
+	ctx context.Context,
+	req CreateLeadFyndrAccessRequestRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CreateLeadFyndrAccessRequestResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CreateLeadFyndrAccessRequestResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Get cities in DACH.
@@ -105,202 +161,6 @@ func (c *clientImpl) GetCities(
 	}
 
 	var response []leadfyndrv2.City
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Reserve a unlocked lead for the given customerId.
-func (c *clientImpl) ReserveUnlockedLead(
-	ctx context.Context,
-	req ReserveUnlockedLeadRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*ReserveUnlockedLeadResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response ReserveUnlockedLeadResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Removes a reservation on a unlocked lead for the given customerId.
-func (c *clientImpl) RemoveUnlockedLeadReservation(
-	ctx context.Context,
-	req RemoveUnlockedLeadReservationRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*RemoveUnlockedLeadReservationResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response RemoveUnlockedLeadReservationResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a simple lead. Use the unlocked route for more detail leads.
-func (c *clientImpl) GetLead(
-	ctx context.Context,
-	req GetLeadRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*leadfyndrv2.Lead, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response leadfyndrv2.Lead
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get all leads. Use the unlocked routes for more lead details.
-func (c *clientImpl) ListLeads(
-	ctx context.Context,
-	req ListLeadsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*ListLeadsResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response ListLeadsResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a detail of a unlocked lead. Organisation can unlock leads.
-func (c *clientImpl) GetUnlockedLead(
-	ctx context.Context,
-	req GetUnlockedLeadRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*leadfyndrv2.UnlockedLead, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response leadfyndrv2.UnlockedLead
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Unlock a lead for the given customerId.
-func (c *clientImpl) UnlockLead(
-	ctx context.Context,
-	req UnlockLeadRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*UnlockLeadResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response UnlockLeadResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get all unlocked leads. Organisation can unlock leads.
-func (c *clientImpl) ListUnlockedLeads(
-	ctx context.Context,
-	req ListUnlockedLeadsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*ListUnlockedLeadsResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response ListUnlockedLeadsResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -363,12 +223,12 @@ func (c *clientImpl) GetLeadFyndrProfile(
 	return &response, httpRes, nil
 }
 
-// Get your LeadFyndr request.
-func (c *clientImpl) GetLeadFyndrProfileRequest(
+// Get a simple lead. Use the unlocked route for more detail leads.
+func (c *clientImpl) GetLead(
 	ctx context.Context,
-	req GetLeadFyndrProfileRequestRequest,
+	req GetLeadRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*leadfyndrv2.ProfileRequest, *http.Response, error) {
+) (*leadfyndrv2.Lead, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -384,19 +244,19 @@ func (c *clientImpl) GetLeadFyndrProfileRequest(
 		return nil, httpRes, err
 	}
 
-	var response leadfyndrv2.ProfileRequest
+	var response leadfyndrv2.Lead
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
 }
 
-// Create a new access request for LeadFyndr.
-func (c *clientImpl) CreateLeadFyndrAccessRequest(
+// Get a detail of a unlocked lead. Organisation can unlock leads.
+func (c *clientImpl) GetUnlockedLead(
 	ctx context.Context,
-	req CreateLeadFyndrAccessRequestRequest,
+	req GetUnlockedLeadRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*CreateLeadFyndrAccessRequestResponse, *http.Response, error) {
+) (*leadfyndrv2.UnlockedLead, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -412,7 +272,147 @@ func (c *clientImpl) CreateLeadFyndrAccessRequest(
 		return nil, httpRes, err
 	}
 
-	var response CreateLeadFyndrAccessRequestResponse
+	var response leadfyndrv2.UnlockedLead
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Unlock a lead for the given customerId.
+func (c *clientImpl) UnlockLead(
+	ctx context.Context,
+	req UnlockLeadRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*UnlockLeadResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response UnlockLeadResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get all leads. Use the unlocked routes for more lead details.
+func (c *clientImpl) ListLeads(
+	ctx context.Context,
+	req ListLeadsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*ListLeadsResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response ListLeadsResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get all unlocked leads. Organisation can unlock leads.
+func (c *clientImpl) ListUnlockedLeads(
+	ctx context.Context,
+	req ListUnlockedLeadsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*ListUnlockedLeadsResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response ListUnlockedLeadsResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Reserve a unlocked lead for the given customerId.
+func (c *clientImpl) ReserveUnlockedLead(
+	ctx context.Context,
+	req ReserveUnlockedLeadRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*ReserveUnlockedLeadResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response ReserveUnlockedLeadResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Removes a reservation on a unlocked lead for the given customerId.
+func (c *clientImpl) RemoveUnlockedLeadReservation(
+	ctx context.Context,
+	req RemoveUnlockedLeadReservationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RemoveUnlockedLeadReservationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RemoveUnlockedLeadReservationResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
