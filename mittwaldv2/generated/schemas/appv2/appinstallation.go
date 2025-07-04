@@ -34,6 +34,9 @@ import (
 //    "linkedDatabases":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.app.LinkedDatabase"}
+//    "lockedBy":
+//        type: "object"
+//        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.app.LockPurpose"}
 //    "processes":
 //        type: "array"
 //        items:
@@ -79,6 +82,7 @@ type AppInstallation struct {
 	Id                 string                    `json:"id"`
 	InstallationPath   string                    `json:"installationPath"`
 	LinkedDatabases    []LinkedDatabase          `json:"linkedDatabases,omitempty"`
+	LockedBy           map[string]LockPurpose    `json:"lockedBy,omitempty"`
 	Processes          []string                  `json:"processes,omitempty"`
 	ProjectId          *string                   `json:"projectId,omitempty"`
 	ScreenshotId       *string                   `json:"screenshotId,omitempty"`
