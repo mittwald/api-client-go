@@ -42,6 +42,8 @@ import (
 //        items:
 //            type: "string"
 //            format: "uuid"
+//        description: "Unused, will be removed in the future."
+//        deprecated: true
 //    "projectId":
 //        type: "string"
 //        format: "uuid"
