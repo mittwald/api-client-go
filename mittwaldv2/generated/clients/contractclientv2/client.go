@@ -81,11 +81,6 @@ type Client interface {
 		req GetDetailOfContractRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*contractv2.Contract, *http.Response, error)
-	GetNextTerminationDateForItem(
-		ctx context.Context,
-		req GetNextTerminationDateForItemRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*GetNextTerminationDateForItemResponse, *http.Response, error)
 	ListContracts(
 		ctx context.Context,
 		req ListContractsRequest,
@@ -161,6 +156,11 @@ type Client interface {
 		req PreviewTariffChangeRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*PreviewTariffChangeResponse, *http.Response, error)
+	DeprecatedGetNextTerminationDateForItem(
+		ctx context.Context,
+		req DeprecatedGetNextTerminationDateForItemRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*DeprecatedGetNextTerminationDateForItemResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -528,34 +528,6 @@ func (c *clientImpl) GetDetailOfContract(
 	}
 
 	var response contractv2.Contract
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Return the next TerminationDate for the ContractItem with the given ID.
-func (c *clientImpl) GetNextTerminationDateForItem(
-	ctx context.Context,
-	req GetNextTerminationDateForItemRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*GetNextTerminationDateForItemResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response GetNextTerminationDateForItemResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -986,6 +958,36 @@ func (c *clientImpl) PreviewTariffChange(
 	}
 
 	var response PreviewTariffChangeResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Return the next TerminationDate for the ContractItem with the given ID.
+//
+// This route is deprecated. Use GET /v2/contracts/{contractId}/items/{contractItemId} instead.
+func (c *clientImpl) DeprecatedGetNextTerminationDateForItem(
+	ctx context.Context,
+	req DeprecatedGetNextTerminationDateForItemRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*DeprecatedGetNextTerminationDateForItemResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response DeprecatedGetNextTerminationDateForItemResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

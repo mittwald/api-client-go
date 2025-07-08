@@ -17,11 +17,11 @@ import "time"
 //    - "contractItemId"
 //    - "nextTerminationDate"
 
-type GetNextTerminationDateForItemResponse struct {
+type DeprecatedGetNextTerminationDateForItemResponse struct {
 	ContractItemId      string    `json:"contractItemId"`
 	NextTerminationDate time.Time `json:"nextTerminationDate"`
 }
 
-func (o *GetNextTerminationDateForItemResponse) Validate() error {
+func (o *DeprecatedGetNextTerminationDateForItemResponse) Validate() error {
 	return nil
 }
