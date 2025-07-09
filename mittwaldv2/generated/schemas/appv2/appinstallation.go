@@ -37,13 +37,6 @@ import (
 //    "lockedBy":
 //        type: "object"
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.app.LockPurpose"}
-//    "processes":
-//        type: "array"
-//        items:
-//            type: "string"
-//            format: "uuid"
-//        description: "Unused, will be removed in the future."
-//        deprecated: true
 //    "projectId":
 //        type: "string"
 //        format: "uuid"
@@ -85,7 +78,6 @@ type AppInstallation struct {
 	InstallationPath   string                    `json:"installationPath"`
 	LinkedDatabases    []LinkedDatabase          `json:"linkedDatabases,omitempty"`
 	LockedBy           map[string]LockPurpose    `json:"lockedBy,omitempty"`
-	Processes          []string                  `json:"processes,omitempty"`
 	ProjectId          *string                   `json:"projectId,omitempty"`
 	ScreenshotId       *string                   `json:"screenshotId,omitempty"`
 	ScreenshotRef      *string                   `json:"screenshotRef,omitempty"`
@@ -113,14 +105,6 @@ func (o *AppInstallation) Validate() error {
 		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property linkedDatabases: %w", err)
-	}
-	if err := func() error {
-		if o.Processes == nil {
-			return nil
-		}
-		return nil
-	}(); err != nil {
-		return fmt.Errorf("invalid property processes: %w", err)
 	}
 	if err := func() error {
 		if o.SystemSoftware == nil {

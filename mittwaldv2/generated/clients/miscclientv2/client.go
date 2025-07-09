@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/verificationv2"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
 	"github.com/mittwald/api-client-go/pkg/httperr"
 )
@@ -17,7 +18,7 @@ type Client interface {
 		ctx context.Context,
 		req VerificationDetectPhishingEmailRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*VerificationDetectPhishingEmailResponse, *http.Response, error)
+	) (*verificationv2.EmailDetectPhishingMailResponse, *http.Response, error)
 	VerificationVerifyAddress(
 		ctx context.Context,
 		req VerificationVerifyAddressRequest,
@@ -44,7 +45,7 @@ func (c *clientImpl) VerificationDetectPhishingEmail(
 	ctx context.Context,
 	req VerificationDetectPhishingEmailRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*VerificationDetectPhishingEmailResponse, *http.Response, error) {
+) (*verificationv2.EmailDetectPhishingMailResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -60,7 +61,7 @@ func (c *clientImpl) VerificationDetectPhishingEmail(
 		return nil, httpRes, err
 	}
 
-	var response VerificationDetectPhishingEmailResponse
+	var response verificationv2.EmailDetectPhishingMailResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

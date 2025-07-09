@@ -23,6 +23,8 @@ type InvoiceListCustomerInvoicesRequest struct {
 	Limit        *int64
 	Skip         *int64
 	Page         *int64
+	Sort         []InvoiceListCustomerInvoicesRequestQuerySortItem
+	Order        []InvoiceListCustomerInvoicesRequestQueryOrderItem
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -71,6 +73,12 @@ func (r *InvoiceListCustomerInvoicesRequest) query() url.Values {
 	}
 	if r.Page != nil {
 		q.Set("page", fmt.Sprintf("%d", *r.Page))
+	}
+	for _, val := range r.Sort {
+		q.Add("sort", string(val))
+	}
+	for _, val := range r.Order {
+		q.Add("order", string(val))
 	}
 	return q
 }
