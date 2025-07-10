@@ -35,6 +35,11 @@ type Client interface {
 		req GetLoginLinkRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*GetLoginLinkResponse, *http.Response, error)
+	ListContractPartnersOfContributor(
+		ctx context.Context,
+		req ListContractPartnersOfContributorRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]marketplacev2.ContractPartner, *http.Response, error)
 	ListOnbehalfInvoices(
 		ctx context.Context,
 		req ListOnbehalfInvoicesRequest,
@@ -394,6 +399,34 @@ func (c *clientImpl) GetLoginLink(
 	}
 
 	var response GetLoginLinkResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List ContractPartners of the contributor.
+func (c *clientImpl) ListContractPartnersOfContributor(
+	ctx context.Context,
+	req ListContractPartnersOfContributorRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]marketplacev2.ContractPartner, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []marketplacev2.ContractPartner
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
