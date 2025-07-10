@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/llmlocksmithv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/membershipv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/projectv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/storagespacev2"
@@ -26,6 +27,16 @@ type Client interface {
 		req AcceptProjectInviteRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetLlmLicencesExperimental(
+		ctx context.Context,
+		req GetLlmLicencesExperimentalRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]llmlocksmithv2.Licence, *http.Response, error)
+	CreateLlmBetaLicenceExperimental(
+		ctx context.Context,
+		req CreateLlmBetaLicenceExperimentalRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*llmlocksmithv2.Licence, *http.Response, error)
 	ListInvitesForProject(
 		ctx context.Context,
 		req ListInvitesForProjectRequest,
@@ -101,6 +112,16 @@ type Client interface {
 		req DeleteServerAvatarRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetLlmLicenceExperimental(
+		ctx context.Context,
+		req GetLlmLicenceExperimentalRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*llmlocksmithv2.Licence, *http.Response, error)
+	UpdateLlmLicenceExperimental(
+		ctx context.Context,
+		req UpdateLlmLicenceExperimentalRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*llmlocksmithv2.Licence, *http.Response, error)
 	GetProjectTokenInvite(
 		ctx context.Context,
 		req GetProjectTokenInviteRequest,
@@ -233,6 +254,64 @@ func (c *clientImpl) AcceptProjectInvite(
 	}
 
 	return httpRes, nil
+}
+
+// Get a list of already created llm licences.
+func (c *clientImpl) GetLlmLicencesExperimental(
+	ctx context.Context,
+	req GetLlmLicencesExperimentalRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]llmlocksmithv2.Licence, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []llmlocksmithv2.Licence
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Creates a new llm beta Licence for a project. Will be purged on end of beta.
+//
+// Deprecated route which will be removed on end of beta. Please do not use for production.
+func (c *clientImpl) CreateLlmBetaLicenceExperimental(
+	ctx context.Context,
+	req CreateLlmBetaLicenceExperimentalRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*llmlocksmithv2.Licence, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response llmlocksmithv2.Licence
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // List Invites belonging to a Project.
@@ -625,6 +704,62 @@ func (c *clientImpl) DeleteServerAvatar(
 	}
 
 	return httpRes, nil
+}
+
+// Get a licence of a project.
+func (c *clientImpl) GetLlmLicenceExperimental(
+	ctx context.Context,
+	req GetLlmLicenceExperimentalRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*llmlocksmithv2.Licence, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response llmlocksmithv2.Licence
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update a llm Licence for a project.
+func (c *clientImpl) UpdateLlmLicenceExperimental(
+	ctx context.Context,
+	req UpdateLlmLicenceExperimentalRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*llmlocksmithv2.Licence, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response llmlocksmithv2.Licence
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Get a ProjectInvite by token.
