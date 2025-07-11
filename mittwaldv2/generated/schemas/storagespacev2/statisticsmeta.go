@@ -11,6 +11,16 @@ import "time"
 //    "isExceeding":
 //        type: "boolean"
 //        example: false
+//    "latestTotalExceedanceInBytes":
+//        type: "integer"
+//        format: "int64"
+//        description: "The latest total exceedance in bytes. It is retained as a historical record of the most recent exceedance and does not reset once set."
+//        example: 10
+//    "latestTotalExceedanceInBytesSetAt":
+//        type: "string"
+//        format: "date-time"
+//        description: "The latest total exceedance date. It is retained as a historical record of the most recent exceedance and does not reset once set."
+//        example: "2023-12-22T13:46:52.000Z"
 //    "limitInBytes":
 //        type: "integer"
 //        format: "int64"
@@ -45,15 +55,17 @@ import "time"
 //    - "totalUsageInBytes"
 
 type StatisticsMeta struct {
-	IsExceeding                      *bool      `json:"isExceeding,omitempty"`
-	LimitInBytes                     *int64     `json:"limitInBytes,omitempty"`
-	NotificationThresholdUsedAsLimit *bool      `json:"notificationThresholdUsedAsLimit,omitempty"`
-	TotalExceedanceInBytes           *int64     `json:"totalExceedanceInBytes,omitempty"`
-	TotalExceedanceInBytesSetAt      *time.Time `json:"totalExceedanceInBytesSetAt,omitempty"`
-	TotalFreeInBytes                 *int64     `json:"totalFreeInBytes,omitempty"`
-	TotalFreeInPercentage            *float64   `json:"totalFreeInPercentage,omitempty"`
-	TotalUsageInBytes                int64      `json:"totalUsageInBytes"`
-	TotalUsageInPercentage           *float64   `json:"totalUsageInPercentage,omitempty"`
+	IsExceeding                       *bool      `json:"isExceeding,omitempty"`
+	LatestTotalExceedanceInBytes      *int64     `json:"latestTotalExceedanceInBytes,omitempty"`
+	LatestTotalExceedanceInBytesSetAt *time.Time `json:"latestTotalExceedanceInBytesSetAt,omitempty"`
+	LimitInBytes                      *int64     `json:"limitInBytes,omitempty"`
+	NotificationThresholdUsedAsLimit  *bool      `json:"notificationThresholdUsedAsLimit,omitempty"`
+	TotalExceedanceInBytes            *int64     `json:"totalExceedanceInBytes,omitempty"`
+	TotalExceedanceInBytesSetAt       *time.Time `json:"totalExceedanceInBytesSetAt,omitempty"`
+	TotalFreeInBytes                  *int64     `json:"totalFreeInBytes,omitempty"`
+	TotalFreeInPercentage             *float64   `json:"totalFreeInPercentage,omitempty"`
+	TotalUsageInBytes                 int64      `json:"totalUsageInBytes"`
+	TotalUsageInPercentage            *float64   `json:"totalUsageInPercentage,omitempty"`
 }
 
 func (o *StatisticsMeta) Validate() error {
