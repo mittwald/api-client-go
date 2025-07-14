@@ -6,13 +6,16 @@ package containerclientv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "reason":
+//        type: "string"
 //    "valid":
 //        type: "boolean"
 // required:
 //    - "valid"
 
 type ValidateContainerRegistryUriResponse struct {
-	Valid bool `json:"valid"`
+	Reason *string `json:"reason,omitempty"`
+	Valid  bool    `json:"valid"`
 }
 
 func (o *ValidateContainerRegistryUriResponse) Validate() error {

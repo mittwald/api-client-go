@@ -14,7 +14,7 @@ import (
 var _ = Describe("ValidateContainerRegistryUriResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"valid\":true}")
+			exampleJSON := []byte("{\"reason\":\"string\",\"valid\":true}")
 
 			sut := containerclientv2.ValidateContainerRegistryUriResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
