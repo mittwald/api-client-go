@@ -13,6 +13,7 @@ import "fmt"
 //    - "accounting"
 //    - "cloudHosting"
 //    - "customerService"
+//    - "productManagement"
 //    - "generic"
 
 type Department string
@@ -22,10 +23,11 @@ const DepartmentMail Department = "mail"
 const DepartmentAccounting Department = "accounting"
 const DepartmentCloudHosting Department = "cloudHosting"
 const DepartmentCustomerService Department = "customerService"
+const DepartmentProductManagement Department = "productManagement"
 const DepartmentGeneric Department = "generic"
 
 func (e Department) Validate() error {
-	if e == DepartmentDevelopment || e == DepartmentMail || e == DepartmentAccounting || e == DepartmentCloudHosting || e == DepartmentCustomerService || e == DepartmentGeneric {
+	if e == DepartmentDevelopment || e == DepartmentMail || e == DepartmentAccounting || e == DepartmentCloudHosting || e == DepartmentCustomerService || e == DepartmentProductManagement || e == DepartmentGeneric {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
