@@ -40,6 +40,8 @@ import (
 //        format: "uuid"
 //    "isArchived":
 //        type: "boolean"
+//    "isBackupInProgress":
+//        type: "boolean"
 //    "isCatchAll":
 //        type: "boolean"
 //    "mailbox":
@@ -114,18 +116,20 @@ import (
 //    - "updatedAt"
 //    - "autoResponder"
 //    - "isArchived"
+//    - "isBackupInProgress"
 
 type MailAddress struct {
-	Address           string                   `json:"address"`
-	AutoResponder     MailAddressAutoResponder `json:"autoResponder"`
-	ForwardAddresses  []string                 `json:"forwardAddresses"`
-	Id                string                   `json:"id"`
-	IsArchived        bool                     `json:"isArchived"`
-	IsCatchAll        bool                     `json:"isCatchAll"`
-	Mailbox           *MailAddressMailbox      `json:"mailbox,omitempty"`
-	ProjectId         string                   `json:"projectId"`
-	ReceivingDisabled bool                     `json:"receivingDisabled"`
-	UpdatedAt         time.Time                `json:"updatedAt"`
+	Address            string                   `json:"address"`
+	AutoResponder      MailAddressAutoResponder `json:"autoResponder"`
+	ForwardAddresses   []string                 `json:"forwardAddresses"`
+	Id                 string                   `json:"id"`
+	IsArchived         bool                     `json:"isArchived"`
+	IsBackupInProgress bool                     `json:"isBackupInProgress"`
+	IsCatchAll         bool                     `json:"isCatchAll"`
+	Mailbox            *MailAddressMailbox      `json:"mailbox,omitempty"`
+	ProjectId          string                   `json:"projectId"`
+	ReceivingDisabled  bool                     `json:"receivingDisabled"`
+	UpdatedAt          time.Time                `json:"updatedAt"`
 }
 
 func (o *MailAddress) Validate() error {

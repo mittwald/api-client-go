@@ -5,6 +5,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strconv"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/marketplacev2"
 )
@@ -20,11 +21,12 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/marketplace/extension-list-extensions
 type ListExtensionsRequest struct {
-	Context    *marketplacev2.Context
-	SearchTerm *string
-	Limit      *int64
-	Skip       *int64
-	Page       *int64
+	Context        *marketplacev2.Context
+	SearchTerm     *string
+	HideDeprecated *bool
+	Limit          *int64
+	Skip           *int64
+	Page           *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -67,6 +69,9 @@ func (r *ListExtensionsRequest) query() url.Values {
 	}
 	if r.SearchTerm != nil {
 		q.Set("searchTerm", *r.SearchTerm)
+	}
+	if r.HideDeprecated != nil {
+		q.Set("hideDeprecated", strconv.FormatBool(*r.HideDeprecated))
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
