@@ -108,6 +108,22 @@ import (
 //        - "id"
 //        - "aggregate"
 //        - "domain"
+//    - type: "object"
+//      properties:
+//        "aggregate":
+//            type: "string"
+//            enum:
+//                - "container"
+//        "domain":
+//            type: "string"
+//            enum:
+//                - "container"
+//        "id":
+//            type: "string"
+//      required:
+//        - "id"
+//        - "aggregate"
+//        - "domain"
 
 type RelatedAggregateReference struct {
 	AlternativeRelatedAggregateReferenceAlternative1 *RelatedAggregateReferenceAlternative1
@@ -116,6 +132,7 @@ type RelatedAggregateReference struct {
 	AlternativeRelatedAggregateReferenceAlternative4 *RelatedAggregateReferenceAlternative4
 	AlternativeRelatedAggregateReferenceAlternative5 *RelatedAggregateReferenceAlternative5
 	AlternativeRelatedAggregateReferenceAlternative6 *RelatedAggregateReferenceAlternative6
+	AlternativeRelatedAggregateReferenceAlternative7 *RelatedAggregateReferenceAlternative7
 }
 
 func (a *RelatedAggregateReference) MarshalJSON() ([]byte, error) {
@@ -136,6 +153,9 @@ func (a *RelatedAggregateReference) MarshalJSON() ([]byte, error) {
 	}
 	if a.AlternativeRelatedAggregateReferenceAlternative6 != nil {
 		return json.Marshal(a.AlternativeRelatedAggregateReferenceAlternative6)
+	}
+	if a.AlternativeRelatedAggregateReferenceAlternative7 != nil {
+		return json.Marshal(a.AlternativeRelatedAggregateReferenceAlternative7)
 	}
 	return []byte("null"), nil
 }
@@ -206,6 +226,16 @@ func (a *RelatedAggregateReference) UnmarshalJSON(input []byte) error {
 		}
 	}
 
+	reader.Reset(input)
+	var alternativeRelatedAggregateReferenceAlternative7 RelatedAggregateReferenceAlternative7
+	if err := dec.Decode(&alternativeRelatedAggregateReferenceAlternative7); err == nil {
+		//subtype: *generator.ObjectType
+		if vErr := alternativeRelatedAggregateReferenceAlternative7.Validate(); vErr == nil {
+			a.AlternativeRelatedAggregateReferenceAlternative7 = &alternativeRelatedAggregateReferenceAlternative7
+			decodedAtLeastOnce = true
+		}
+	}
+
 	if !decodedAtLeastOnce {
 		return fmt.Errorf("could not unmarshal into any alternative for type %T", a)
 	}
@@ -230,6 +260,9 @@ func (a *RelatedAggregateReference) Validate() error {
 	}
 	if a.AlternativeRelatedAggregateReferenceAlternative6 != nil {
 		return a.AlternativeRelatedAggregateReferenceAlternative6.Validate()
+	}
+	if a.AlternativeRelatedAggregateReferenceAlternative7 != nil {
+		return a.AlternativeRelatedAggregateReferenceAlternative7.Validate()
 	}
 	return errors.New("no alternative set")
 }
