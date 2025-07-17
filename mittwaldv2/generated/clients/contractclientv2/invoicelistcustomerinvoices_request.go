@@ -20,6 +20,7 @@ import (
 type InvoiceListCustomerInvoicesRequest struct {
 	CustomerID   string
 	InvoiceTypes []InvoiceListCustomerInvoicesRequestQueryInvoiceTypesItem
+	Search       *string
 	Limit        *int64
 	Skip         *int64
 	Page         *int64
@@ -64,6 +65,9 @@ func (r *InvoiceListCustomerInvoicesRequest) query() url.Values {
 	q := make(url.Values)
 	for _, val := range r.InvoiceTypes {
 		q.Add("invoiceTypes", string(val))
+	}
+	if r.Search != nil {
+		q.Set("search", *r.Search)
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))

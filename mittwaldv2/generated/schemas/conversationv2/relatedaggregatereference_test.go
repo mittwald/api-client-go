@@ -61,5 +61,13 @@ var _ = Describe("RelatedAggregateReference", func() {
 			Expect(sut.Validate()).To(Succeed())
 			Expect(sut.AlternativeRelatedAggregateReferenceAlternative6).NotTo(BeNil())
 		})
+		It("should unmarshal into AlternativeRelatedAggregateReferenceAlternative7", func() {
+			exampleJSON := []byte("{\"aggregate\":\"container\",\"domain\":\"container\",\"id\":\"string\"}")
+
+			sut := conversationv2.RelatedAggregateReference{}
+			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
+			Expect(sut.Validate()).To(Succeed())
+			Expect(sut.AlternativeRelatedAggregateReferenceAlternative7).NotTo(BeNil())
+		})
 	})
 })
