@@ -8,16 +8,16 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "string"
 // enum:
-//    - "DESC"
-//    - "ASC"
+//    - "descriptionAsc"
+//    - "descriptionDesc"
 
 type ServiceSortOrder string
 
-const ServiceSortOrderDESC ServiceSortOrder = "DESC"
-const ServiceSortOrderASC ServiceSortOrder = "ASC"
+const ServiceSortOrderDescriptionAsc ServiceSortOrder = "descriptionAsc"
+const ServiceSortOrderDescriptionDesc ServiceSortOrder = "descriptionDesc"
 
 func (e ServiceSortOrder) Validate() error {
-	if e == ServiceSortOrderDESC || e == ServiceSortOrderASC {
+	if e == ServiceSortOrderDescriptionAsc || e == ServiceSortOrderDescriptionDesc {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

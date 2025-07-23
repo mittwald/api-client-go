@@ -14,7 +14,7 @@ import (
 var _ = Describe("StatisticsMeta", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"isExceeding\":false,\"latestTotalExceedanceInBytes\":10,\"latestTotalExceedanceInBytesSetAt\":\"2023-12-22T13:46:52.000Z\",\"limitInBytes\":100000,\"notificationThresholdUsedAsLimit\":false,\"totalExceedanceInBytes\":10,\"totalExceedanceInBytesSetAt\":\"2023-12-22T13:46:52.000Z\",\"totalFreeInBytes\":99000,\"totalFreeInPercentage\":90,\"totalUsageInBytes\":1000,\"totalUsageInPercentage\":10}")
+			exampleJSON := []byte("{\"isExceeding\":false,\"lastTotalExceedanceInBytes\":10,\"lastTotalExceedanceInBytesSetAt\":\"2023-12-22T13:46:52.000Z\",\"limitInBytes\":100000,\"notificationThresholdUsedAsLimit\":false,\"totalExceedanceInBytes\":10,\"totalExceedanceInBytesSetAt\":\"2023-12-22T13:46:52.000Z\",\"totalFreeInBytes\":99000,\"totalFreeInPercentage\":90,\"totalUsageInBytes\":1000,\"totalUsageInPercentage\":10}")
 
 			sut := storagespacev2.StatisticsMeta{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

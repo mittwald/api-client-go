@@ -50,9 +50,6 @@ import (
 //        format: "date-time"
 //    "enabled":
 //        type: "boolean"
-//    "features":
-//        type: "array"
-//        items: {"$ref": "#/components/schemas/de.mittwald.v1.project.ProjectFeature"}
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -123,7 +120,6 @@ type Project struct {
 	DisableReason                  *DisableReason                   `json:"disableReason,omitempty"`
 	DisabledAt                     *time.Time                       `json:"disabledAt,omitempty"`
 	Enabled                        bool                             `json:"enabled"`
-	Features                       []ProjectFeature                 `json:"features,omitempty"`
 	Id                             string                           `json:"id"`
 	ImageRefId                     *string                          `json:"imageRefId,omitempty"`
 	IsReady                        bool                             `json:"isReady"`
@@ -151,21 +147,6 @@ func (o *Project) Validate() error {
 		return o.DisableReason.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property disableReason: %w", err)
-	}
-	if err := func() error {
-		if o.Features == nil {
-			return nil
-		}
-		return func() error {
-			for i := range o.Features {
-				if err := o.Features[i].Validate(); err != nil {
-					return fmt.Errorf("item %d is invalid %w", i, err)
-				}
-			}
-			return nil
-		}()
-	}(); err != nil {
-		return fmt.Errorf("invalid property features: %w", err)
 	}
 	if err := o.Readiness.Validate(); err != nil {
 		return fmt.Errorf("invalid property readiness: %w", err)

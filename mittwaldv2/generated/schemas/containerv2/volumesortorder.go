@@ -8,20 +8,20 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "string"
 // enum:
-//    - "NAME_DESC"
-//    - "NAME_ASC"
-//    - "STORAGE_DESC"
-//    - "STORAGE_ASC"
+//    - "nameAsc"
+//    - "nameDesc"
+//    - "storageAsc"
+//    - "storageDesc"
 
 type VolumeSortOrder string
 
-const VolumeSortOrderNAMEDESC VolumeSortOrder = "NAME_DESC"
-const VolumeSortOrderNAMEASC VolumeSortOrder = "NAME_ASC"
-const VolumeSortOrderSTORAGEDESC VolumeSortOrder = "STORAGE_DESC"
-const VolumeSortOrderSTORAGEASC VolumeSortOrder = "STORAGE_ASC"
+const VolumeSortOrderNameAsc VolumeSortOrder = "nameAsc"
+const VolumeSortOrderNameDesc VolumeSortOrder = "nameDesc"
+const VolumeSortOrderStorageAsc VolumeSortOrder = "storageAsc"
+const VolumeSortOrderStorageDesc VolumeSortOrder = "storageDesc"
 
 func (e VolumeSortOrder) Validate() error {
-	if e == VolumeSortOrderNAMEDESC || e == VolumeSortOrderNAMEASC || e == VolumeSortOrderSTORAGEDESC || e == VolumeSortOrderSTORAGEASC {
+	if e == VolumeSortOrderNameAsc || e == VolumeSortOrderNameDesc || e == VolumeSortOrderStorageAsc || e == VolumeSortOrderStorageDesc {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

@@ -23,8 +23,8 @@ import (
 type ListServicesRequest struct {
 	ProjectID        string
 	StackID          *string
-	HasStatus        *containerv2.ServiceStatus
-	RecreateRequired *bool
+	Status           *containerv2.ServiceStatus
+	RequiresRecreate *bool
 	SearchTerm       *string
 	SortOrder        *containerv2.ServiceSortOrder
 	Limit            *int64
@@ -70,11 +70,11 @@ func (r *ListServicesRequest) query() url.Values {
 	if r.StackID != nil {
 		q.Set("stackId", *r.StackID)
 	}
-	if r.HasStatus != nil {
-		q.Set("hasStatus", string(*r.HasStatus))
+	if r.Status != nil {
+		q.Set("status", string(*r.Status))
 	}
-	if r.RecreateRequired != nil {
-		q.Set("recreateRequired", strconv.FormatBool(*r.RecreateRequired))
+	if r.RequiresRecreate != nil {
+		q.Set("requiresRecreate", strconv.FormatBool(*r.RequiresRecreate))
 	}
 	if r.SearchTerm != nil {
 		q.Set("searchTerm", *r.SearchTerm)
