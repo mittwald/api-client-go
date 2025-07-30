@@ -140,11 +140,6 @@ type Client interface {
 		req DeleteMailAddressRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	ListBackupsForMailAddress(
-		ctx context.Context,
-		req ListBackupsForMailAddressRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]mailv2.MailAddressBackup, *http.Response, error)
 	ListProjectMailSettings(
 		ctx context.Context,
 		req ListProjectMailSettingsRequest,
@@ -168,11 +163,6 @@ type Client interface {
 	MigrationRequestMailMigration(
 		ctx context.Context,
 		req MigrationRequestMailMigrationRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	RecoverMailAddressEmails(
-		ctx context.Context,
-		req RecoverMailAddressEmailsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateDeliveryBoxDescription(
@@ -857,34 +847,6 @@ func (c *clientImpl) DeleteMailAddress(
 	return httpRes, nil
 }
 
-// List backups belonging to a MailAddress.
-func (c *clientImpl) ListBackupsForMailAddress(
-	ctx context.Context,
-	req ListBackupsForMailAddressRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]mailv2.MailAddressBackup, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []mailv2.MailAddressBackup
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
 // List mail settings of a Project.
 func (c *clientImpl) ListProjectMailSettings(
 	ctx context.Context,
@@ -1004,30 +966,6 @@ func (c *clientImpl) MigrationListMigrations(
 func (c *clientImpl) MigrationRequestMailMigration(
 	ctx context.Context,
 	req MigrationRequestMailMigrationRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Recover emails for a MailAddress from a backup.
-func (c *clientImpl) RecoverMailAddressEmails(
-	ctx context.Context,
-	req RecoverMailAddressEmailsRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
