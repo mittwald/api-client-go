@@ -59,6 +59,7 @@ import (
 // required:
 //    - "id"
 //    - "extensionId"
+//    - "contributorId"
 //    - "disabled"
 //    - "pendingInstallation"
 //    - "pendingRemoval"
@@ -71,7 +72,7 @@ type ExtensionInstance struct {
 	AggregateReference  ExtensionInstanceAggregateReference `json:"aggregateReference"`
 	Chargeability       *ExtensionInstanceChargeability     `json:"chargeability,omitempty"`
 	ConsentedScopes     []string                            `json:"consentedScopes"`
-	ContributorId       *string                             `json:"contributorId,omitempty"`
+	ContributorId       string                              `json:"contributorId"`
 	ContributorName     string                              `json:"contributorName"`
 	CreatedAt           *time.Time                          `json:"createdAt,omitempty"`
 	Disabled            bool                                `json:"disabled"`
