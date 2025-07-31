@@ -18,10 +18,11 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/notification/notifications-list-notifications
 type ListNotificationsRequest struct {
-	Status *ListNotificationsRequestQueryStatus
-	Limit  *int64
-	Skip   *int64
-	Page   *int64
+	Status   *ListNotificationsRequestQueryStatus
+	Severity []ListNotificationsRequestQuerySeverityItem
+	Limit    *int64
+	Skip     *int64
+	Page     *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -61,6 +62,9 @@ func (r *ListNotificationsRequest) query() url.Values {
 	q := make(url.Values)
 	if r.Status != nil {
 		q.Set("status", string(*r.Status))
+	}
+	for _, val := range r.Severity {
+		q.Add("severity", string(val))
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))

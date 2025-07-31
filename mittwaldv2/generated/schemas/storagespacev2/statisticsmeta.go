@@ -11,10 +11,15 @@ import "time"
 //    "isExceeding":
 //        type: "boolean"
 //        example: false
+//    "lastExceedanceLimitInBytes":
+//        type: "integer"
+//        format: "int64"
+//        description: "The last exceedance limit in bytes during the exceedance time, therefore can differ from the current limit. It is retained as a historical record of the most recent exceedance and does not reset once set."
+//        example: 10
 //    "lastTotalExceedanceInBytes":
 //        type: "integer"
 //        format: "int64"
-//        description: "The last total exceedance in bytes. It is retained as a historical record of the most recent exceedance and does not reset once set."
+//        description: "The last total exceedance in bytes related to the limit during the exceedance time, see lastExceedanceLimitInBytes. It is retained as a historical record of the most recent exceedance and does not reset once set."
 //        example: 10
 //    "lastTotalExceedanceInBytesSetAt":
 //        type: "string"
@@ -58,6 +63,7 @@ import "time"
 
 type StatisticsMeta struct {
 	IsExceeding                      *bool      `json:"isExceeding,omitempty"`
+	LastExceedanceLimitInBytes       *int64     `json:"lastExceedanceLimitInBytes,omitempty"`
 	LastTotalExceedanceInBytes       *int64     `json:"lastTotalExceedanceInBytes,omitempty"`
 	LastTotalExceedanceInBytesSetAt  *time.Time `json:"lastTotalExceedanceInBytesSetAt,omitempty"`
 	LimitInBytes                     *int64     `json:"limitInBytes,omitempty"`
