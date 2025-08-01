@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("DeclareStackRequestBody", func() {
+var _ = Describe("PullImageForServiceRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"services\":{\"string\":{\"command\":null,\"description\":null,\"entrypoint\":null,\"environment\":null,\"envs\":null,\"image\":\"mysql\",\"ports\":null,\"recreate\":null,\"volumes\":null}},\"volumes\":{\"string\":{\"name\":\"mysql-volume\"}}}")
+			exampleJSON := []byte("{\"skipRecreate\":true}")
 
-			sut := containerclientv2.DeclareStackRequestBody{}
+			sut := containerclientv2.PullImageForServiceRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

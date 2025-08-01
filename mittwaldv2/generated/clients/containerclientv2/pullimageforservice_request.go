@@ -1,6 +1,8 @@
 package containerclientv2
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -13,11 +15,13 @@ import (
 // PullImageForServiceRequest models a request for the
 // 'container-pull-image-for-service' operation. See [1] for more information.
 //
-// Pulls the latest version of the Service's image and recreates the Service.
+// Pulls the latest version of the Service's image and optionally recreates the
+// Service.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/container/container-pull-image-for-service
 type PullImageForServiceRequest struct {
+	Body      PullImageForServiceRequestBody
 	StackID   string
 	ServiceID string
 }
@@ -44,7 +48,11 @@ func (r *PullImageForServiceRequest) BuildRequest(reqEditors ...func(req *http.R
 }
 
 func (r *PullImageForServiceRequest) body() (io.Reader, string, error) {
-	return nil, "", nil
+	out, err := json.Marshal(&r.Body)
+	if err != nil {
+		return nil, "", fmt.Errorf("error while marshalling JSON: %w", err)
+	}
+	return bytes.NewReader(out), "application/json", nil
 }
 
 func (r *PullImageForServiceRequest) url() string {

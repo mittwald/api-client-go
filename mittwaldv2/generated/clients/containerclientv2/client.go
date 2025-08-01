@@ -570,7 +570,7 @@ func (c *clientImpl) ListVolumes(
 	return &response, httpRes, nil
 }
 
-// Pulls the latest version of the Service's image and recreates the Service.
+// Pulls the latest version of the Service's image and optionally recreates the Service.
 func (c *clientImpl) PullImageForService(
 	ctx context.Context,
 	req PullImageForServiceRequest,

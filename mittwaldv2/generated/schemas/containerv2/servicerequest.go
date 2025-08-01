@@ -23,11 +23,18 @@ import "fmt"
 //            type: "string"
 //        description: "Defaults to image config on empty"
 //        example: ["docker-entrypoint.sh"]
-//    "envs":
+//    "environment":
 //        type: "object"
 //        additionalProperties:
 //            type: "string"
 //        example: {"MYSQL_DATABASE": "my_db", "MYSQL_PASSWORD": "my_password", "MYSQL_ROOT_PASSWORD": "my_root_password", "MYSQL_USER": "my_user"}
+//    "envs":
+//        type: "object"
+//        additionalProperties:
+//            type: "string"
+//        description: "Deprecated by 'environment'. This field will be removed in a future version."
+//        example: {"MYSQL_DATABASE": "my_db", "MYSQL_PASSWORD": "my_password", "MYSQL_ROOT_PASSWORD": "my_root_password", "MYSQL_USER": "my_user"}
+//        deprecated: true
 //    "image":
 //        type: "string"
 //        example: "mysql"
@@ -46,6 +53,7 @@ type ServiceRequest struct {
 	Command     []string          `json:"command,omitempty"`
 	Description *string           `json:"description,omitempty"`
 	Entrypoint  []string          `json:"entrypoint,omitempty"`
+	Environment map[string]string `json:"environment,omitempty"`
 	Envs        map[string]string `json:"envs,omitempty"`
 	Image       *string           `json:"image,omitempty"`
 	Ports       []string          `json:"ports,omitempty"`

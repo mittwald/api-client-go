@@ -14,7 +14,7 @@ import (
 var _ = Describe("ServiceRequest", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"command\":[\"string\"],\"description\":\"MySQL DB\",\"entrypoint\":[\"string\"],\"envs\":{\"MYSQL_DATABASE\":\"my_db\",\"MYSQL_PASSWORD\":\"my_password\",\"MYSQL_ROOT_PASSWORD\":\"my_root_password\",\"MYSQL_USER\":\"my_user\"},\"image\":\"mysql\",\"ports\":[\"string\"],\"volumes\":[\"string\"]}")
+			exampleJSON := []byte("{\"command\":[\"string\"],\"description\":\"MySQL DB\",\"entrypoint\":[\"string\"],\"environment\":{\"MYSQL_DATABASE\":\"my_db\",\"MYSQL_PASSWORD\":\"my_password\",\"MYSQL_ROOT_PASSWORD\":\"my_root_password\",\"MYSQL_USER\":\"my_user\"},\"envs\":{\"MYSQL_DATABASE\":\"my_db\",\"MYSQL_PASSWORD\":\"my_password\",\"MYSQL_ROOT_PASSWORD\":\"my_root_password\",\"MYSQL_USER\":\"my_user\"},\"image\":\"mysql\",\"ports\":[\"string\"],\"volumes\":[\"string\"]}")
 
 			sut := containerv2.ServiceRequest{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
