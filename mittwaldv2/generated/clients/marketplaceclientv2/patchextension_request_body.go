@@ -21,13 +21,18 @@ import (
 //    "deprecation": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExtensionDeprecation"}
 //    "description":
 //        type: "string"
-//    "detailedDescriptions": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions"}
+//    "detailedDescriptions":
+//        allOf:
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions"}
+//        nullable: true
 //    "externalFrontends":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent"}
+//        nullable: true
 //    "frontendFragments":
 //        type: "object"
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.FrontendFragment"}
+//        nullable: true
 //    "name":
 //        type: "string"
 //    "scopes":
@@ -40,23 +45,26 @@ import (
 //        type: "array"
 //        items:
 //            type: "string"
-//    "webhookUrls": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls"}
+//    "webhookUrls":
+//        allOf:
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.WebhookUrls"}
+//        nullable: true
 // description: PatchExtensionRequestBody models the JSON body of a 'extension-patch-extension' request
 
 // PatchExtensionRequestBody models the JSON body of a 'extension-patch-extension' request
 type PatchExtensionRequestBody struct {
-	Assets               []string                            `json:"assets,omitempty"`
-	Deprecation          *marketplacev2.ExtensionDeprecation `json:"deprecation,omitempty"`
-	Description          *string                             `json:"description,omitempty"`
-	DetailedDescriptions *marketplacev2.DetailedDescriptions `json:"detailedDescriptions,omitempty"`
-	ExternalFrontends    []marketplacev2.ExternalComponent   `json:"externalFrontends,omitempty"`
-	FrontendFragments    map[string]any                      `json:"frontendFragments,omitempty"`
-	Name                 *string                             `json:"name,omitempty"`
-	Scopes               []string                            `json:"scopes,omitempty"`
-	SubTitle             *marketplacev2.SubTitle             `json:"subTitle,omitempty"`
-	Support              *marketplacev2.SupportMeta          `json:"support,omitempty"`
-	Tags                 []string                            `json:"tags,omitempty"`
-	WebhookUrls          *marketplacev2.WebhookUrls          `json:"webhookUrls,omitempty"`
+	Assets               []string                                       `json:"assets,omitempty"`
+	Deprecation          *marketplacev2.ExtensionDeprecation            `json:"deprecation,omitempty"`
+	Description          *string                                        `json:"description,omitempty"`
+	DetailedDescriptions *PatchExtensionRequestBodyDetailedDescriptions `json:"detailedDescriptions,omitempty"`
+	ExternalFrontends    []marketplacev2.ExternalComponent              `json:"externalFrontends,omitempty"`
+	FrontendFragments    map[string]any                                 `json:"frontendFragments,omitempty"`
+	Name                 *string                                        `json:"name,omitempty"`
+	Scopes               []string                                       `json:"scopes,omitempty"`
+	SubTitle             *marketplacev2.SubTitle                        `json:"subTitle,omitempty"`
+	Support              *marketplacev2.SupportMeta                     `json:"support,omitempty"`
+	Tags                 []string                                       `json:"tags,omitempty"`
+	WebhookUrls          *PatchExtensionRequestBodyWebhookURLs          `json:"webhookUrls,omitempty"`
 }
 
 func (o *PatchExtensionRequestBody) Validate() error {
@@ -80,7 +88,12 @@ func (o *PatchExtensionRequestBody) Validate() error {
 		if o.DetailedDescriptions == nil {
 			return nil
 		}
-		return o.DetailedDescriptions.Validate()
+		return func() error {
+			if o.DetailedDescriptions == nil {
+				return nil
+			}
+			return o.DetailedDescriptions.Validate()
+		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property detailedDescriptions: %w", err)
 	}
@@ -135,7 +148,12 @@ func (o *PatchExtensionRequestBody) Validate() error {
 		if o.WebhookUrls == nil {
 			return nil
 		}
-		return o.WebhookUrls.Validate()
+		return func() error {
+			if o.WebhookUrls == nil {
+				return nil
+			}
+			return o.WebhookUrls.Validate()
+		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property webhookUrls: %w", err)
 	}
