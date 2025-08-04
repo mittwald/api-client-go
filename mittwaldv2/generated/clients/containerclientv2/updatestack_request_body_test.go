@@ -14,7 +14,7 @@ import (
 var _ = Describe("UpdateStackRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"services\":{\"string\":{\"command\":null,\"description\":null,\"entrypoint\":null,\"envs\":null,\"image\":null,\"ports\":null,\"volumes\":null}},\"volumes\":{\"string\":{\"name\":null}}}")
+			exampleJSON := []byte("{\"services\":{\"string\":{\"command\":null,\"description\":null,\"entrypoint\":null,\"environment\":null,\"envs\":null,\"image\":null,\"ports\":null,\"volumes\":null}},\"volumes\":{\"string\":{\"name\":null}}}")
 
 			sut := containerclientv2.UpdateStackRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
