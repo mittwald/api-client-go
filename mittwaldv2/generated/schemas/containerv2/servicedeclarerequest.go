@@ -43,10 +43,6 @@ import "fmt"
 //        items:
 //            type: "string"
 //        example: ["3306:3306/tcp"]
-//    "recreate":
-//        type: "boolean"
-//        description: "Whether to recreate the Service."
-//        example: true
 //    "volumes":
 //        type: "array"
 //        items:
@@ -63,7 +59,6 @@ type ServiceDeclareRequest struct {
 	Envs        map[string]string `json:"envs,omitempty"`
 	Image       string            `json:"image"`
 	Ports       []string          `json:"ports,omitempty"`
-	Recreate    *bool             `json:"recreate,omitempty"`
 	Volumes     []string          `json:"volumes,omitempty"`
 }
 
