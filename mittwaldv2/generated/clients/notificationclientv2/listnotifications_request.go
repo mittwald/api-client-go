@@ -20,6 +20,8 @@ import (
 type ListNotificationsRequest struct {
 	Status   *ListNotificationsRequestQueryStatus
 	Severity []ListNotificationsRequestQuerySeverityItem
+	Type     []string
+	TypeNot  []string
 	Limit    *int64
 	Skip     *int64
 	Page     *int64
@@ -65,6 +67,12 @@ func (r *ListNotificationsRequest) query() url.Values {
 	}
 	for _, val := range r.Severity {
 		q.Add("severity", string(val))
+	}
+	for _, val := range r.Type {
+		q.Add("type", val)
+	}
+	for _, val := range r.TypeNot {
+		q.Add("type-not", val)
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
