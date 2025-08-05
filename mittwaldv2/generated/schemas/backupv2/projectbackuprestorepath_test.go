@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("ProjectBackupRestorePaths", func() {
+var _ = Describe("ProjectBackupRestorePath", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"clearTargetPath\":true,\"determinedSourcePath\":\"string\",\"determinedTargetPath\":\"string\",\"phase\":\"running\",\"sourcePath\":\"/data-p-shortId-userdata/p-shortId/web\",\"targetPath\":\"/home/p-shortid/html\"}")
+			exampleJSON := []byte("{\"clearTargetPath\":true,\"sourcePath\":\"/data-p-shortId-userdata/p-shortId/web\",\"targetPath\":\"/home/p-shortid/html\"}")
 
-			sut := backupv2.ProjectBackupRestorePaths{}
+			sut := backupv2.ProjectBackupRestorePath{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

@@ -35,7 +35,7 @@ import (
 //    "requestedAt":
 //        type: "string"
 //        format: "date-time"
-//    "restorePaths": {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePaths"}
+//    "restorePath": {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePathResponse"}
 //    "status":
 //        type: "string"
 //        example: "Completed"
@@ -47,17 +47,17 @@ import (
 //    - "requestedAt"
 
 type ProjectBackup struct {
-	CreatedAt    *time.Time                 `json:"createdAt,omitempty"`
-	Deletable    bool                       `json:"deletable"`
-	Description  *string                    `json:"description,omitempty"`
-	ExpiresAt    *time.Time                 `json:"expiresAt,omitempty"`
-	Export       *ProjectBackupExport       `json:"export,omitempty"`
-	Id           string                     `json:"id"`
-	ParentId     *string                    `json:"parentId,omitempty"`
-	ProjectId    string                     `json:"projectId"`
-	RequestedAt  time.Time                  `json:"requestedAt"`
-	RestorePaths *ProjectBackupRestorePaths `json:"restorePaths,omitempty"`
-	Status       string                     `json:"status"`
+	CreatedAt   *time.Time                        `json:"createdAt,omitempty"`
+	Deletable   bool                              `json:"deletable"`
+	Description *string                           `json:"description,omitempty"`
+	ExpiresAt   *time.Time                        `json:"expiresAt,omitempty"`
+	Export      *ProjectBackupExport              `json:"export,omitempty"`
+	Id          string                            `json:"id"`
+	ParentId    *string                           `json:"parentId,omitempty"`
+	ProjectId   string                            `json:"projectId"`
+	RequestedAt time.Time                         `json:"requestedAt"`
+	RestorePath *ProjectBackupRestorePathResponse `json:"restorePath,omitempty"`
+	Status      string                            `json:"status"`
 }
 
 func (o *ProjectBackup) Validate() error {
@@ -70,12 +70,12 @@ func (o *ProjectBackup) Validate() error {
 		return fmt.Errorf("invalid property export: %w", err)
 	}
 	if err := func() error {
-		if o.RestorePaths == nil {
+		if o.RestorePath == nil {
 			return nil
 		}
-		return o.RestorePaths.Validate()
+		return o.RestorePath.Validate()
 	}(); err != nil {
-		return fmt.Errorf("invalid property restorePaths: %w", err)
+		return fmt.Errorf("invalid property restorePath: %w", err)
 	}
 	return nil
 }

@@ -69,9 +69,9 @@ type Client interface {
 		req DeleteProjectBackupRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	RequestProjectBackupRestorePaths(
+	RequestProjectBackupRestorePath(
 		ctx context.Context,
-		req RequestProjectBackupRestorePathsRequest,
+		req RequestProjectBackupRestorePathRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateProjectBackupDescription(
@@ -376,10 +376,10 @@ func (c *clientImpl) DeleteProjectBackup(
 	return httpRes, nil
 }
 
-// Restore a ProjectBackup's paths.
-func (c *clientImpl) RequestProjectBackupRestorePaths(
+// Restore a ProjectBackup's path.
+func (c *clientImpl) RequestProjectBackupRestorePath(
 	ctx context.Context,
-	req RequestProjectBackupRestorePathsRequest,
+	req RequestProjectBackupRestorePathRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
