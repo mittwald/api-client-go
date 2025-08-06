@@ -19,8 +19,7 @@ import (
 // [1]: https://developer.mittwald.de/docs/v2/reference/domain/domain-delete-domain
 type DeleteDomainRequest struct {
 	DomainID string
-	// Only for .de Domains.
-	Transit *bool
+	Transit  *bool
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used

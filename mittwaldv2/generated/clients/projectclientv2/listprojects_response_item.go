@@ -1,6 +1,7 @@
 package projectclientv2
 
 import (
+	"errors"
 	"fmt"
 	"time"
 
@@ -42,6 +43,8 @@ import (
 //    "features":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.project.ProjectFeature"}
+//        description: "deprecated by property supportedFeatures"
+//        deprecated: true
 //    "id":
 //        type: "string"
 //    "imageRefId":
@@ -62,6 +65,9 @@ import (
 //    "statusSetAt":
 //        type: "string"
 //        format: "date-time"
+//    "supportedFeatures":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.project.ProjectFeature"}
 //    "webStorageUsageInBytes":
 //        type: "integer"
 //        format: "int64"
@@ -84,6 +90,7 @@ import (
 //    - "webStorageUsageInBytesSetAt"
 //    - "backupStorageUsageInBytes"
 //    - "backupStorageUsageInBytesSetAt"
+//    - "supportedFeatures"
 
 type ListProjectsResponseItem struct {
 	BackupStorageUsageInBytes      int64                                      `json:"backupStorageUsageInBytes"`
@@ -105,6 +112,7 @@ type ListProjectsResponseItem struct {
 	ShortId                        string                                     `json:"shortId"`
 	Status                         projectv2.ProjectStatus                    `json:"status"`
 	StatusSetAt                    time.Time                                  `json:"statusSetAt"`
+	SupportedFeatures              []projectv2.ProjectFeature                 `json:"supportedFeatures"`
 	WebStorageUsageInBytes         int64                                      `json:"webStorageUsageInBytes"`
 	WebStorageUsageInBytesSetAt    time.Time                                  `json:"webStorageUsageInBytesSetAt"`
 }
@@ -141,6 +149,19 @@ func (o *ListProjectsResponseItem) Validate() error {
 	}
 	if err := o.Status.Validate(); err != nil {
 		return fmt.Errorf("invalid property status: %w", err)
+	}
+	if o.SupportedFeatures == nil {
+		return errors.New("property supportedFeatures is required, but not set")
+	}
+	if err := func() error {
+		for i := range o.SupportedFeatures {
+			if err := o.SupportedFeatures[i].Validate(); err != nil {
+				return fmt.Errorf("item %d is invalid %w", i, err)
+			}
+		}
+		return nil
+	}(); err != nil {
+		return fmt.Errorf("invalid property supportedFeatures: %w", err)
 	}
 	return nil
 }
