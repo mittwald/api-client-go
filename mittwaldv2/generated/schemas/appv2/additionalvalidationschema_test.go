@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("UserInput", func() {
+var _ = Describe("AdditionalValidationSchema", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"additionalValidationSchema\":{\"kind\":\"password-rule\",\"schema\":\"string\"},\"dataSource\":\"string\",\"dataType\":\"text\",\"defaultValue\":\"string\",\"format\":\"email\",\"lifecycleConstraint\":\"installation\",\"name\":\"string\",\"positionMeta\":{\"index\":42,\"section\":\"string\",\"step\":\"string\"},\"required\":true,\"validationSchema\":\"string\"}")
+			exampleJSON := []byte("{\"kind\":\"password-rule\",\"schema\":\"string\"}")
 
-			sut := appv2.UserInput{}
+			sut := appv2.AdditionalValidationSchema{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

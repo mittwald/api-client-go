@@ -1,6 +1,7 @@
 package appv2
 
 import (
+	"errors"
 	"fmt"
 	"time"
 )
@@ -64,6 +65,11 @@ import (
 //    - "installationPath"
 //    - "disabled"
 //    - "createdAt"
+//    - "projectId"
+//    - "systemSoftware"
+//    - "userInputs"
+//    - "updatePolicy"
+//    - "linkedDatabases"
 // description: "An AppInstallation is a concrete manifestation of an App in a specific AppVersion."
 
 // An AppInstallation is a concrete manifestation of an App in a specific AppVersion.
@@ -76,71 +82,60 @@ type AppInstallation struct {
 	Disabled           bool                      `json:"disabled"`
 	Id                 string                    `json:"id"`
 	InstallationPath   string                    `json:"installationPath"`
-	LinkedDatabases    []LinkedDatabase          `json:"linkedDatabases,omitempty"`
+	LinkedDatabases    []LinkedDatabase          `json:"linkedDatabases"`
 	LockedBy           map[string]LockPurpose    `json:"lockedBy,omitempty"`
-	ProjectId          *string                   `json:"projectId,omitempty"`
+	ProjectId          string                    `json:"projectId"`
 	ScreenshotId       *string                   `json:"screenshotId,omitempty"`
 	ScreenshotRef      *string                   `json:"screenshotRef,omitempty"`
 	ShortId            string                    `json:"shortId"`
-	SystemSoftware     []InstalledSystemSoftware `json:"systemSoftware,omitempty"`
-	UpdatePolicy       *AppUpdatePolicy          `json:"updatePolicy,omitempty"`
-	UserInputs         []SavedUserInput          `json:"userInputs,omitempty"`
+	SystemSoftware     []InstalledSystemSoftware `json:"systemSoftware"`
+	UpdatePolicy       AppUpdatePolicy           `json:"updatePolicy"`
+	UserInputs         []SavedUserInput          `json:"userInputs"`
 }
 
 func (o *AppInstallation) Validate() error {
 	if err := o.AppVersion.Validate(); err != nil {
 		return fmt.Errorf("invalid property appVersion: %w", err)
 	}
+	if o.LinkedDatabases == nil {
+		return errors.New("property linkedDatabases is required, but not set")
+	}
 	if err := func() error {
-		if o.LinkedDatabases == nil {
-			return nil
-		}
-		return func() error {
-			for i := range o.LinkedDatabases {
-				if err := o.LinkedDatabases[i].Validate(); err != nil {
-					return fmt.Errorf("item %d is invalid %w", i, err)
-				}
+		for i := range o.LinkedDatabases {
+			if err := o.LinkedDatabases[i].Validate(); err != nil {
+				return fmt.Errorf("item %d is invalid %w", i, err)
 			}
-			return nil
-		}()
+		}
+		return nil
 	}(); err != nil {
 		return fmt.Errorf("invalid property linkedDatabases: %w", err)
 	}
+	if o.SystemSoftware == nil {
+		return errors.New("property systemSoftware is required, but not set")
+	}
 	if err := func() error {
-		if o.SystemSoftware == nil {
-			return nil
-		}
-		return func() error {
-			for i := range o.SystemSoftware {
-				if err := o.SystemSoftware[i].Validate(); err != nil {
-					return fmt.Errorf("item %d is invalid %w", i, err)
-				}
+		for i := range o.SystemSoftware {
+			if err := o.SystemSoftware[i].Validate(); err != nil {
+				return fmt.Errorf("item %d is invalid %w", i, err)
 			}
-			return nil
-		}()
+		}
+		return nil
 	}(); err != nil {
 		return fmt.Errorf("invalid property systemSoftware: %w", err)
 	}
-	if err := func() error {
-		if o.UpdatePolicy == nil {
-			return nil
-		}
-		return o.UpdatePolicy.Validate()
-	}(); err != nil {
+	if err := o.UpdatePolicy.Validate(); err != nil {
 		return fmt.Errorf("invalid property updatePolicy: %w", err)
 	}
+	if o.UserInputs == nil {
+		return errors.New("property userInputs is required, but not set")
+	}
 	if err := func() error {
-		if o.UserInputs == nil {
-			return nil
-		}
-		return func() error {
-			for i := range o.UserInputs {
-				if err := o.UserInputs[i].Validate(); err != nil {
-					return fmt.Errorf("item %d is invalid %w", i, err)
-				}
+		for i := range o.UserInputs {
+			if err := o.UserInputs[i].Validate(); err != nil {
+				return fmt.Errorf("item %d is invalid %w", i, err)
 			}
-			return nil
-		}()
+		}
+		return nil
 	}(); err != nil {
 		return fmt.Errorf("invalid property userInputs: %w", err)
 	}

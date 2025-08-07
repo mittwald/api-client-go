@@ -69,14 +69,14 @@ type Client interface {
 		req DeleteProjectBackupRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	UpdateProjectBackupDescription(
-		ctx context.Context,
-		req UpdateProjectBackupDescriptionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	RequestProjectBackupRestorePath(
 		ctx context.Context,
 		req RequestProjectBackupRestorePathRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	UpdateProjectBackupDescription(
+		ctx context.Context,
+		req UpdateProjectBackupDescriptionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -376,10 +376,10 @@ func (c *clientImpl) DeleteProjectBackup(
 	return httpRes, nil
 }
 
-// Change the description of a ProjectBackup.
-func (c *clientImpl) UpdateProjectBackupDescription(
+// Restore a ProjectBackup's path.
+func (c *clientImpl) RequestProjectBackupRestorePath(
 	ctx context.Context,
-	req UpdateProjectBackupDescriptionRequest,
+	req RequestProjectBackupRestorePathRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -400,10 +400,10 @@ func (c *clientImpl) UpdateProjectBackupDescription(
 	return httpRes, nil
 }
 
-// Restore a ProjectBackup's path.
-func (c *clientImpl) RequestProjectBackupRestorePath(
+// Change the description of a ProjectBackup.
+func (c *clientImpl) UpdateProjectBackupDescription(
 	ctx context.Context,
-	req RequestProjectBackupRestorePathRequest,
+	req UpdateProjectBackupDescriptionRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

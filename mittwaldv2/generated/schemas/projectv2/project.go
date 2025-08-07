@@ -53,7 +53,7 @@ import (
 //    "features":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.project.ProjectFeature"}
-//        description: "deprecated by property supportedFeatures"
+//        description: "Deprecated by 'supportedFeatures'."
 //        deprecated: true
 //    "id":
 //        type: "string"

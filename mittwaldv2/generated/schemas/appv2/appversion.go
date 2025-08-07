@@ -11,6 +11,8 @@ import "fmt"
 //    "appId":
 //        type: "string"
 //        format: "uuid"
+//    "backendPathTemplate":
+//        type: "string"
 //    "breakingNote": {"$ref": "#/components/schemas/de.mittwald.v1.app.BreakingNote"}
 //    "databases":
 //        type: "array"
@@ -49,6 +51,7 @@ import "fmt"
 // An AppVersion is an officially supported version of an App, containing the necessary and recommended configuration und dependencies.
 type AppVersion struct {
 	AppId                      string                     `json:"appId"`
+	BackendPathTemplate        *string                    `json:"backendPathTemplate,omitempty"`
 	BreakingNote               *BreakingNote              `json:"breakingNote,omitempty"`
 	Databases                  []DatabaseDependency       `json:"databases,omitempty"`
 	DocRoot                    string                     `json:"docRoot"`

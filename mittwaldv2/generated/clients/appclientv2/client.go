@@ -14,9 +14,14 @@ import (
 )
 
 type Client interface {
-	ExecuteAction(
+	ListSystemsoftwareversions(
 		ctx context.Context,
-		req ExecuteActionRequest,
+		req ListSystemsoftwareversionsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]appv2.SystemSoftwareVersion, *http.Response, error)
+	LinkDatabase(
+		ctx context.Context,
+		req LinkDatabaseRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetApp(
@@ -24,6 +29,36 @@ type Client interface {
 		req GetAppRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*appv2.App, *http.Response, error)
+	DeprecatedLinkDatabase(
+		ctx context.Context,
+		req DeprecatedLinkDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	ExecuteAction(
+		ctx context.Context,
+		req ExecuteActionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	UnlinkDatabase(
+		ctx context.Context,
+		req UnlinkDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	ReplaceDatabase(
+		ctx context.Context,
+		req ReplaceDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	GetMissingDependenciesForAppinstallation(
+		ctx context.Context,
+		req GetMissingDependenciesForAppinstallationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*GetMissingDependenciesForAppinstallationResponse, *http.Response, error)
+	ListApps(
+		ctx context.Context,
+		req ListAppsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]appv2.App, *http.Response, error)
 	GetAppinstallation(
 		ctx context.Context,
 		req GetAppinstallationRequest,
@@ -39,41 +74,36 @@ type Client interface {
 		req PatchAppinstallationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	GetAppversion(
-		ctx context.Context,
-		req GetAppversionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*appv2.AppVersion, *http.Response, error)
-	GetInstalledSystemsoftwareForAppinstallation(
-		ctx context.Context,
-		req GetInstalledSystemsoftwareForAppinstallationRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]appv2.SystemSoftware, *http.Response, error)
-	GetMissingDependenciesForAppinstallation(
-		ctx context.Context,
-		req GetMissingDependenciesForAppinstallationRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*GetMissingDependenciesForAppinstallationResponse, *http.Response, error)
-	GetSystemsoftware(
-		ctx context.Context,
-		req GetSystemsoftwareRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*appv2.SystemSoftware, *http.Response, error)
-	GetSystemsoftwareversion(
-		ctx context.Context,
-		req GetSystemsoftwareversionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*appv2.SystemSoftwareVersion, *http.Response, error)
-	LinkDatabase(
-		ctx context.Context,
-		req LinkDatabaseRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	ListAppinstallationsForUser(
 		ctx context.Context,
 		req ListAppinstallationsForUserRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]appv2.AppInstallation, *http.Response, error)
+	RequestAppinstallationCopy(
+		ctx context.Context,
+		req RequestAppinstallationCopyRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*RequestAppinstallationCopyResponse, *http.Response, error)
+	ListSystemsoftwares(
+		ctx context.Context,
+		req ListSystemsoftwaresRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]appv2.SystemSoftware, *http.Response, error)
+	SetDatabaseUsers(
+		ctx context.Context,
+		req SetDatabaseUsersRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	RetrieveStatus(
+		ctx context.Context,
+		req RetrieveStatusRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*appv2.AppInstallationStatus, *http.Response, error)
+	ListAppversions(
+		ctx context.Context,
+		req ListAppversionsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]appv2.AppVersion, *http.Response, error)
 	ListAppinstallations(
 		ctx context.Context,
 		req ListAppinstallationsRequest,
@@ -84,61 +114,31 @@ type Client interface {
 		req RequestAppinstallationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*RequestAppinstallationResponse, *http.Response, error)
-	ListApps(
+	GetSystemsoftware(
 		ctx context.Context,
-		req ListAppsRequest,
+		req GetSystemsoftwareRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*[]appv2.App, *http.Response, error)
-	ListAppversions(
+	) (*appv2.SystemSoftware, *http.Response, error)
+	GetInstalledSystemsoftwareForAppinstallation(
 		ctx context.Context,
-		req ListAppversionsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]appv2.AppVersion, *http.Response, error)
-	ListSystemsoftwares(
-		ctx context.Context,
-		req ListSystemsoftwaresRequest,
+		req GetInstalledSystemsoftwareForAppinstallationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]appv2.SystemSoftware, *http.Response, error)
-	ListSystemsoftwareversions(
+	GetSystemsoftwareversion(
 		ctx context.Context,
-		req ListSystemsoftwareversionsRequest,
+		req GetSystemsoftwareversionRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*[]appv2.SystemSoftwareVersion, *http.Response, error)
+	) (*appv2.SystemSoftwareVersion, *http.Response, error)
 	ListUpdateCandidatesForAppversion(
 		ctx context.Context,
 		req ListUpdateCandidatesForAppversionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]appv2.AppVersion, *http.Response, error)
-	ReplaceDatabase(
+	GetAppversion(
 		ctx context.Context,
-		req ReplaceDatabaseRequest,
+		req GetAppversionRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	RequestAppinstallationCopy(
-		ctx context.Context,
-		req RequestAppinstallationCopyRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*RequestAppinstallationCopyResponse, *http.Response, error)
-	RetrieveStatus(
-		ctx context.Context,
-		req RetrieveStatusRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*appv2.AppInstallationStatus, *http.Response, error)
-	SetDatabaseUsers(
-		ctx context.Context,
-		req SetDatabaseUsersRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	UnlinkDatabase(
-		ctx context.Context,
-		req UnlinkDatabaseRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	DeprecatedLinkDatabase(
-		ctx context.Context,
-		req DeprecatedLinkDatabaseRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
+	) (*appv2.AppVersion, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -148,10 +148,38 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
-// Trigger a runtime action belonging to an AppInstallation.
-func (c *clientImpl) ExecuteAction(
+// List SystemSoftwareVersions belonging to a SystemSoftware.
+func (c *clientImpl) ListSystemsoftwareversions(
 	ctx context.Context,
-	req ExecuteActionRequest,
+	req ListSystemsoftwareversionsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]appv2.SystemSoftwareVersion, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []appv2.SystemSoftwareVersion
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create linkage between an AppInstallation and a MySQLDatabase.
+func (c *clientImpl) LinkDatabase(
+	ctx context.Context,
+	req LinkDatabaseRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -194,6 +222,160 @@ func (c *clientImpl) GetApp(
 	}
 
 	var response appv2.App
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create linkage between an AppInstallation and a MySql-Database.
+//
+// This route is deprecated. Use PATCH /v2/app-installations/{appInstallationId}/database instead.
+func (c *clientImpl) DeprecatedLinkDatabase(
+	ctx context.Context,
+	req DeprecatedLinkDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Trigger a runtime action belonging to an AppInstallation.
+func (c *clientImpl) ExecuteAction(
+	ctx context.Context,
+	req ExecuteActionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Remove linkage between an AppInstallation and a Database.
+func (c *clientImpl) UnlinkDatabase(
+	ctx context.Context,
+	req UnlinkDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Replace a MySQL Database with another MySQL Database.
+func (c *clientImpl) ReplaceDatabase(
+	ctx context.Context,
+	req ReplaceDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Get the missing requirements of an appInstallation for a specific target AppVersion.
+func (c *clientImpl) GetMissingDependenciesForAppinstallation(
+	ctx context.Context,
+	req GetMissingDependenciesForAppinstallationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*GetMissingDependenciesForAppinstallationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GetMissingDependenciesForAppinstallationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Apps.
+func (c *clientImpl) ListApps(
+	ctx context.Context,
+	req ListAppsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]appv2.App, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []appv2.App
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -276,12 +458,12 @@ func (c *clientImpl) PatchAppinstallation(
 	return httpRes, nil
 }
 
-// Get an AppVersion.
-func (c *clientImpl) GetAppversion(
+// List AppInstallations that a user has access to.
+func (c *clientImpl) ListAppinstallationsForUser(
 	ctx context.Context,
-	req GetAppversionRequest,
+	req ListAppinstallationsForUserRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*appv2.AppVersion, *http.Response, error) {
+) (*[]appv2.AppInstallation, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -297,17 +479,45 @@ func (c *clientImpl) GetAppversion(
 		return nil, httpRes, err
 	}
 
-	var response appv2.AppVersion
+	var response []appv2.AppInstallation
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
 }
 
-// Get the installed `SystemSoftware' for a specific `AppInstallation`.
-func (c *clientImpl) GetInstalledSystemsoftwareForAppinstallation(
+// Request a copy of an AppInstallation.
+func (c *clientImpl) RequestAppinstallationCopy(
 	ctx context.Context,
-	req GetInstalledSystemsoftwareForAppinstallationRequest,
+	req RequestAppinstallationCopyRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RequestAppinstallationCopyResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestAppinstallationCopyResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List SystemSoftwares.
+func (c *clientImpl) ListSystemsoftwares(
+	ctx context.Context,
+	req ListSystemsoftwaresRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*[]appv2.SystemSoftware, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -332,94 +542,10 @@ func (c *clientImpl) GetInstalledSystemsoftwareForAppinstallation(
 	return &response, httpRes, nil
 }
 
-// Get the missing requirements of an appInstallation for a specific target AppVersion.
-func (c *clientImpl) GetMissingDependenciesForAppinstallation(
+// Create linkage between an AppInstallation and DatabaseUsers.
+func (c *clientImpl) SetDatabaseUsers(
 	ctx context.Context,
-	req GetMissingDependenciesForAppinstallationRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*GetMissingDependenciesForAppinstallationResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response GetMissingDependenciesForAppinstallationResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a SystemSoftware.
-func (c *clientImpl) GetSystemsoftware(
-	ctx context.Context,
-	req GetSystemsoftwareRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*appv2.SystemSoftware, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response appv2.SystemSoftware
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a SystemSoftwareVersion.
-func (c *clientImpl) GetSystemsoftwareversion(
-	ctx context.Context,
-	req GetSystemsoftwareversionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*appv2.SystemSoftwareVersion, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response appv2.SystemSoftwareVersion
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Create linkage between an AppInstallation and a MySQLDatabase.
-func (c *clientImpl) LinkDatabase(
-	ctx context.Context,
-	req LinkDatabaseRequest,
+	req SetDatabaseUsersRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -440,12 +566,12 @@ func (c *clientImpl) LinkDatabase(
 	return httpRes, nil
 }
 
-// List AppInstallations that a user has access to.
-func (c *clientImpl) ListAppinstallationsForUser(
+// Get runtime status belonging to an AppInstallation.
+func (c *clientImpl) RetrieveStatus(
 	ctx context.Context,
-	req ListAppinstallationsForUserRequest,
+	req RetrieveStatusRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*[]appv2.AppInstallation, *http.Response, error) {
+) (*appv2.AppInstallationStatus, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -461,7 +587,35 @@ func (c *clientImpl) ListAppinstallationsForUser(
 		return nil, httpRes, err
 	}
 
-	var response []appv2.AppInstallation
+	var response appv2.AppInstallationStatus
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List AppVersions belonging to an App.
+func (c *clientImpl) ListAppversions(
+	ctx context.Context,
+	req ListAppversionsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]appv2.AppVersion, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []appv2.AppVersion
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -524,12 +678,12 @@ func (c *clientImpl) RequestAppinstallation(
 	return &response, httpRes, nil
 }
 
-// List Apps.
-func (c *clientImpl) ListApps(
+// Get a SystemSoftware.
+func (c *clientImpl) GetSystemsoftware(
 	ctx context.Context,
-	req ListAppsRequest,
+	req GetSystemsoftwareRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*[]appv2.App, *http.Response, error) {
+) (*appv2.SystemSoftware, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -545,45 +699,17 @@ func (c *clientImpl) ListApps(
 		return nil, httpRes, err
 	}
 
-	var response []appv2.App
+	var response appv2.SystemSoftware
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
 }
 
-// List AppVersions belonging to an App.
-func (c *clientImpl) ListAppversions(
+// Get the installed `SystemSoftware' for a specific `AppInstallation`.
+func (c *clientImpl) GetInstalledSystemsoftwareForAppinstallation(
 	ctx context.Context,
-	req ListAppversionsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]appv2.AppVersion, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []appv2.AppVersion
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List SystemSoftwares.
-func (c *clientImpl) ListSystemsoftwares(
-	ctx context.Context,
-	req ListSystemsoftwaresRequest,
+	req GetInstalledSystemsoftwareForAppinstallationRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*[]appv2.SystemSoftware, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -608,12 +734,12 @@ func (c *clientImpl) ListSystemsoftwares(
 	return &response, httpRes, nil
 }
 
-// List SystemSoftwareVersions belonging to a SystemSoftware.
-func (c *clientImpl) ListSystemsoftwareversions(
+// Get a SystemSoftwareVersion.
+func (c *clientImpl) GetSystemsoftwareversion(
 	ctx context.Context,
-	req ListSystemsoftwareversionsRequest,
+	req GetSystemsoftwareversionRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*[]appv2.SystemSoftwareVersion, *http.Response, error) {
+) (*appv2.SystemSoftwareVersion, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -629,7 +755,7 @@ func (c *clientImpl) ListSystemsoftwareversions(
 		return nil, httpRes, err
 	}
 
-	var response []appv2.SystemSoftwareVersion
+	var response appv2.SystemSoftwareVersion
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -664,36 +790,12 @@ func (c *clientImpl) ListUpdateCandidatesForAppversion(
 	return &response, httpRes, nil
 }
 
-// Replace a MySQL Database with another MySQL Database.
-func (c *clientImpl) ReplaceDatabase(
+// Get an AppVersion.
+func (c *clientImpl) GetAppversion(
 	ctx context.Context,
-	req ReplaceDatabaseRequest,
+	req GetAppversionRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Request a copy of an AppInstallation.
-func (c *clientImpl) RequestAppinstallationCopy(
-	ctx context.Context,
-	req RequestAppinstallationCopyRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*RequestAppinstallationCopyResponse, *http.Response, error) {
+) (*appv2.AppVersion, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -709,111 +811,9 @@ func (c *clientImpl) RequestAppinstallationCopy(
 		return nil, httpRes, err
 	}
 
-	var response RequestAppinstallationCopyResponse
+	var response appv2.AppVersion
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Get runtime status belonging to an AppInstallation.
-func (c *clientImpl) RetrieveStatus(
-	ctx context.Context,
-	req RetrieveStatusRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*appv2.AppInstallationStatus, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response appv2.AppInstallationStatus
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Create linkage between an AppInstallation and DatabaseUsers.
-func (c *clientImpl) SetDatabaseUsers(
-	ctx context.Context,
-	req SetDatabaseUsersRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Remove linkage between an AppInstallation and a Database.
-func (c *clientImpl) UnlinkDatabase(
-	ctx context.Context,
-	req UnlinkDatabaseRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Create linkage between an AppInstallation and a MySql-Database.
-//
-// This route is deprecated. Use PATCH /v2/app-installations/{appInstallationId}/database instead.
-func (c *clientImpl) DeprecatedLinkDatabase(
-	ctx context.Context,
-	req DeprecatedLinkDatabaseRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
