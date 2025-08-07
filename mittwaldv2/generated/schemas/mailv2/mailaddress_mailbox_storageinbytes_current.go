@@ -13,6 +13,7 @@ import "time"
 //        format: "date-time"
 //    "value":
 //        type: "number"
+//        format: "int64"
 // required:
 //    - "value"
 //    - "updatedAt"

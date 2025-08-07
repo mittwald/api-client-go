@@ -13,6 +13,7 @@ package mailv2
 //    "quotaInBytes":
 //        type: "number"
 //        minimum: -1
+//        format: "int64"
 //        description: "2 GB"
 //        example: 2147483648
 // required:
