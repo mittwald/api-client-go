@@ -14,7 +14,7 @@ import (
 var _ = Describe("ExtensionInstanceContract", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal into AlternativeSubscriptionBasedContract", func() {
-			exampleJSON := []byte("{\"interactionDeadline\":\"2006-01-02T15:04:05Z\",\"interactionRequired\":true,\"status\":\"notStarted\",\"terminationTargetDate\":\"2006-01-02T15:04:05Z\"}")
+			exampleJSON := []byte("{\"currentPrice\":999,\"interactionDeadline\":\"2006-01-02T15:04:05Z\",\"interactionRequired\":true,\"status\":\"notStarted\",\"terminationTargetDate\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := extensionv2.ExtensionInstanceContract{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

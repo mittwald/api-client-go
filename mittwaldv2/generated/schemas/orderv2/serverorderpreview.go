@@ -11,13 +11,16 @@ package orderv2
 //        example: "f3435305-fd26-470e-9f21-43d9be7e67e7"
 //    "description":
 //        type: "string"
-//        example: "My first project"
+//        example: "My first server"
 //    "diskspaceInGiB":
 //        type: "number"
 //        example: 100
 //    "machineType":
 //        type: "string"
 //        example: "shared.xlarge"
+//    "promotionCode":
+//        type: "string"
+//        example: "123456"
 // required:
 //    - "machineType"
 //    - "diskspaceInGiB"
@@ -27,6 +30,7 @@ type ServerOrderPreview struct {
 	Description    *string `json:"description,omitempty"`
 	DiskspaceInGiB float64 `json:"diskspaceInGiB"`
 	MachineType    string  `json:"machineType"`
+	PromotionCode  *string `json:"promotionCode,omitempty"`
 }
 
 func (o *ServerOrderPreview) Validate() error {

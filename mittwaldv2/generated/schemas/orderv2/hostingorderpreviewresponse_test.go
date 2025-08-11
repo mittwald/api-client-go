@@ -14,7 +14,7 @@ import (
 var _ = Describe("HostingOrderPreviewResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"machineTypePrice\":500,\"storagePrice\":1000,\"totalPrice\":1500}")
+			exampleJSON := []byte("{\"machineTypePrice\":500,\"possibleFreeTrialDays\":10,\"storagePrice\":1000,\"totalPrice\":1500}")
 
 			sut := orderv2.HostingOrderPreviewResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

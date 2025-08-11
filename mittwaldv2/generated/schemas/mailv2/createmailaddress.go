@@ -26,7 +26,7 @@ import "fmt"
 //            "password":
 //                type: "string"
 //            "quotaInBytes":
-//                type: "number"
+//                type: "integer"
 //                minimum: -1
 //                format: "int64"
 //                description: "2 GB"

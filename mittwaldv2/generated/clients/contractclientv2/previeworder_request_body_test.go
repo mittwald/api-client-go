@@ -14,7 +14,7 @@ import (
 var _ = Describe("PreviewOrderRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"orderData\":{\"customerId\":\"string\",\"description\":\"My first project\",\"diskspaceInGiB\":20,\"spec\":{\"machineType\":\"prospace.2cpu.4gb\"}},\"orderType\":\"domain\"}")
+			exampleJSON := []byte("{\"orderData\":{\"customerId\":\"string\",\"description\":\"My first project\",\"diskspaceInGiB\":20,\"promotionCode\":\"123456\",\"spec\":{\"machineType\":\"prospace.2cpu.4gb\"}},\"orderType\":\"domain\"}")
 
 			sut := contractclientv2.PreviewOrderRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -9,6 +9,9 @@ package orderv2
 //    "machineTypePrice":
 //        type: "number"
 //        example: 500
+//    "possibleFreeTrialDays":
+//        type: "number"
+//        example: 10
 //    "storagePrice":
 //        type: "number"
 //        example: 1000
@@ -21,9 +24,10 @@ package orderv2
 //    - "machineTypePrice"
 
 type HostingOrderPreviewResponse struct {
-	MachineTypePrice float64 `json:"machineTypePrice"`
-	StoragePrice     float64 `json:"storagePrice"`
-	TotalPrice       float64 `json:"totalPrice"`
+	MachineTypePrice      float64  `json:"machineTypePrice"`
+	PossibleFreeTrialDays *float64 `json:"possibleFreeTrialDays,omitempty"`
+	StoragePrice          float64  `json:"storagePrice"`
+	TotalPrice            float64  `json:"totalPrice"`
 }
 
 func (o *HostingOrderPreviewResponse) Validate() error {

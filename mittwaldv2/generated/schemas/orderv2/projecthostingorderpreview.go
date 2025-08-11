@@ -16,6 +16,9 @@ import "fmt"
 //    "diskspaceInGiB":
 //        type: "number"
 //        example: 20
+//    "promotionCode":
+//        type: "string"
+//        example: "123456"
 //    "spec":
 //        oneOf:
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.MachineTypeSpec"}
@@ -28,6 +31,7 @@ type ProjectHostingOrderPreview struct {
 	CustomerId     *string                        `json:"customerId,omitempty"`
 	Description    *string                        `json:"description,omitempty"`
 	DiskspaceInGiB float64                        `json:"diskspaceInGiB"`
+	PromotionCode  *string                        `json:"promotionCode,omitempty"`
 	Spec           ProjectHostingOrderPreviewSpec `json:"spec"`
 }
 
