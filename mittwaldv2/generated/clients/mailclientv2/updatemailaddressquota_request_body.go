@@ -6,7 +6,7 @@ package mailclientv2
 // This data type was generated from the following JSON schema:
 // properties:
 //    "quotaInBytes":
-//        type: "number"
+//        type: "integer"
 //        minimum: -1
 //        format: "int64"
 //        description: "2 GB"
@@ -17,7 +17,7 @@ package mailclientv2
 
 // UpdateMailAddressQuotaRequestBody models the JSON body of a 'mail-update-mail-address-quota' request
 type UpdateMailAddressQuotaRequestBody struct {
-	QuotaInBytes float64 `json:"quotaInBytes"`
+	QuotaInBytes int64 `json:"quotaInBytes"`
 }
 
 func (o *UpdateMailAddressQuotaRequestBody) Validate() error {

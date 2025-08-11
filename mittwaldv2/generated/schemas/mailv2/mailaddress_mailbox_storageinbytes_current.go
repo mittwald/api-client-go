@@ -12,7 +12,7 @@ import "time"
 //        type: "string"
 //        format: "date-time"
 //    "value":
-//        type: "number"
+//        type: "integer"
 //        format: "int64"
 // required:
 //    - "value"
@@ -20,7 +20,7 @@ import "time"
 
 type MailAddressMailboxStorageInBytesCurrent struct {
 	UpdatedAt time.Time `json:"updatedAt"`
-	Value     float64   `json:"value"`
+	Value     int64     `json:"value"`
 }
 
 func (o *MailAddressMailboxStorageInBytesCurrent) Validate() error {
