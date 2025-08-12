@@ -83,7 +83,16 @@ import (
 //        description: "deprecated"
 //    "statistics": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExtensionStatistics"}
 //    "subTitle": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SubTitle"}
-//    "support": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SupportMeta"}
+//    "support":
+//        allOf:
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SupportMeta"}
+//            - type: "object"
+//              properties:
+//                "inherited":
+//                    type: "boolean"
+//                    description: "Whether the support information is inherited from the contributor."
+//              required:
+//                - "inherited"
 //    "tags":
 //        type: "array"
 //        items:
@@ -130,7 +139,7 @@ type OwnExtension struct {
 	State                 *OwnExtensionState            `json:"state,omitempty"`
 	Statistics            ExtensionStatistics           `json:"statistics"`
 	SubTitle              *SubTitle                     `json:"subTitle,omitempty"`
-	Support               *SupportMeta                  `json:"support,omitempty"`
+	Support               *any                          `json:"support,omitempty"`
 	Tags                  []string                      `json:"tags,omitempty"`
 	VerificationRequested bool                          `json:"verificationRequested"`
 	Verified              bool                          `json:"verified"`
@@ -268,14 +277,6 @@ func (o *OwnExtension) Validate() error {
 		return o.SubTitle.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property subTitle: %w", err)
-	}
-	if err := func() error {
-		if o.Support == nil {
-			return nil
-		}
-		return o.Support.Validate()
-	}(); err != nil {
-		return fmt.Errorf("invalid property support: %w", err)
 	}
 	if err := func() error {
 		if o.Tags == nil {

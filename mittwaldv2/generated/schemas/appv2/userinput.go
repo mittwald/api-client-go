@@ -8,7 +8,6 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "additionalValidationSchema": {"$ref": "#/components/schemas/de.mittwald.v1.app.AdditionalValidationSchema", "description": "Additional validation schemas, such as password rules"}
 //    "dataSource":
 //        type: "string"
 //        description: "Optional field to tell the frontend, which data to put into the select."
@@ -35,27 +34,18 @@ import "fmt"
 
 // A UserInput is a description of an information which cannot be determined or estimated by mittwald, but has to be given by the person who is requesting an AppInstallation or SystemSoftware.
 type UserInput struct {
-	AdditionalValidationSchema *AdditionalValidationSchema `json:"additionalValidationSchema,omitempty"`
-	DataSource                 *string                     `json:"dataSource,omitempty"`
-	DataType                   UserInputDataType           `json:"dataType"`
-	DefaultValue               *string                     `json:"defaultValue,omitempty"`
-	Format                     *UserInputFormat            `json:"format,omitempty"`
-	LifecycleConstraint        AppInstallationLifecycle    `json:"lifecycleConstraint"`
-	Name                       string                      `json:"name"`
-	PositionMeta               *UserInputPositionMeta      `json:"positionMeta,omitempty"`
-	Required                   bool                        `json:"required"`
-	ValidationSchema           string                      `json:"validationSchema"`
+	DataSource          *string                  `json:"dataSource,omitempty"`
+	DataType            UserInputDataType        `json:"dataType"`
+	DefaultValue        *string                  `json:"defaultValue,omitempty"`
+	Format              *UserInputFormat         `json:"format,omitempty"`
+	LifecycleConstraint AppInstallationLifecycle `json:"lifecycleConstraint"`
+	Name                string                   `json:"name"`
+	PositionMeta        *UserInputPositionMeta   `json:"positionMeta,omitempty"`
+	Required            bool                     `json:"required"`
+	ValidationSchema    string                   `json:"validationSchema"`
 }
 
 func (o *UserInput) Validate() error {
-	if err := func() error {
-		if o.AdditionalValidationSchema == nil {
-			return nil
-		}
-		return o.AdditionalValidationSchema.Validate()
-	}(); err != nil {
-		return fmt.Errorf("invalid property additionalValidationSchema: %w", err)
-	}
 	if err := o.DataType.Validate(); err != nil {
 		return fmt.Errorf("invalid property dataType: %w", err)
 	}
