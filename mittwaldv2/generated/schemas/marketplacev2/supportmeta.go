@@ -8,6 +8,7 @@ package marketplacev2
 // properties:
 //    "email":
 //        type: "string"
+//        format: "email"
 //        example: "a.lovelace@example.com"
 //    "phone":
 //        type: "string"

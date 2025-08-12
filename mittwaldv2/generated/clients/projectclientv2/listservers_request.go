@@ -19,10 +19,12 @@ import (
 // https://developer.mittwald.de/docs/v2/reference/project/project-list-servers
 type ListServersRequest struct {
 	CustomerID *string
-	Limit      *int64
-	Page       *int64
-	Skip       *int64
 	SearchTerm *string
+	Limit      *int64
+	Skip       *int64
+	Page       *int64
+	Sort       *ListServersRequestQuerySort
+	Order      *ListServersRequestQueryOrder
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -63,17 +65,23 @@ func (r *ListServersRequest) query() url.Values {
 	if r.CustomerID != nil {
 		q.Set("customerId", *r.CustomerID)
 	}
+	if r.SearchTerm != nil {
+		q.Set("searchTerm", *r.SearchTerm)
+	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
-	}
-	if r.Page != nil {
-		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
 	if r.Skip != nil {
 		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
 	}
-	if r.SearchTerm != nil {
-		q.Set("searchTerm", *r.SearchTerm)
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
+	}
+	if r.Sort != nil {
+		q.Set("sort", string(*r.Sort))
+	}
+	if r.Order != nil {
+		q.Set("order", string(*r.Order))
 	}
 	return q
 }

@@ -11,6 +11,7 @@ import "fmt"
 //    - "avatar"
 //    - "extensionAssetImage"
 //    - "extensionAssetVideo"
+//    - "anchorIcon"
 //    - "conversation"
 // example: "avatar"
 
@@ -19,10 +20,11 @@ type GetFileUploadTypeRulesRequestPathFileUploadType string
 const GetFileUploadTypeRulesRequestPathFileUploadTypeAvatar GetFileUploadTypeRulesRequestPathFileUploadType = "avatar"
 const GetFileUploadTypeRulesRequestPathFileUploadTypeExtensionAssetImage GetFileUploadTypeRulesRequestPathFileUploadType = "extensionAssetImage"
 const GetFileUploadTypeRulesRequestPathFileUploadTypeExtensionAssetVideo GetFileUploadTypeRulesRequestPathFileUploadType = "extensionAssetVideo"
+const GetFileUploadTypeRulesRequestPathFileUploadTypeAnchorIcon GetFileUploadTypeRulesRequestPathFileUploadType = "anchorIcon"
 const GetFileUploadTypeRulesRequestPathFileUploadTypeConversation GetFileUploadTypeRulesRequestPathFileUploadType = "conversation"
 
 func (e GetFileUploadTypeRulesRequestPathFileUploadType) Validate() error {
-	if e == GetFileUploadTypeRulesRequestPathFileUploadTypeAvatar || e == GetFileUploadTypeRulesRequestPathFileUploadTypeExtensionAssetImage || e == GetFileUploadTypeRulesRequestPathFileUploadTypeExtensionAssetVideo || e == GetFileUploadTypeRulesRequestPathFileUploadTypeConversation {
+	if e == GetFileUploadTypeRulesRequestPathFileUploadTypeAvatar || e == GetFileUploadTypeRulesRequestPathFileUploadTypeExtensionAssetImage || e == GetFileUploadTypeRulesRequestPathFileUploadTypeExtensionAssetVideo || e == GetFileUploadTypeRulesRequestPathFileUploadTypeAnchorIcon || e == GetFileUploadTypeRulesRequestPathFileUploadTypeConversation {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

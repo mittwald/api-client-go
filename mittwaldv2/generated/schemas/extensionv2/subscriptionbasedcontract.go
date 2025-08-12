@@ -11,6 +11,10 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "currentPrice":
+//        type: "integer"
+//        description: "monthly price in Euro Cent"
+//        example: 999
 //    "interactionDeadline":
 //        type: "string"
 //        format: "date-time"
@@ -33,6 +37,7 @@ import (
 
 // A strategy for Contracts that will be paid periodically.
 type SubscriptionBasedContract struct {
+	CurrentPrice          *int64                          `json:"currentPrice,omitempty"`
 	InteractionDeadline   *time.Time                      `json:"interactionDeadline,omitempty"`
 	InteractionRequired   bool                            `json:"interactionRequired"`
 	Status                SubscriptionBasedContractStatus `json:"status"`
