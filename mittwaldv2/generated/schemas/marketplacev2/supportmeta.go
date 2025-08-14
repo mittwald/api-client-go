@@ -12,9 +12,11 @@ package marketplacev2
 //        example: "a.lovelace@example.com"
 //    "phone":
 //        type: "string"
+// required:
+//    - "email"
 
 type SupportMeta struct {
-	Email *string `json:"email,omitempty"`
+	Email string  `json:"email"`
 	Phone *string `json:"phone,omitempty"`
 }
 
