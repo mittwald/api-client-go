@@ -18,6 +18,10 @@ func ErrFromResponse(res *http.Response) error {
 		}
 		return &ErrBadRequest{Response: res}
 	default:
+		if defaultError, isDefaultError := IsDefaultErrorResponse(res); isDefaultError {
+			return &ErrDefault{Response: res, DefaultError: defaultError}
+		}
+
 		return &ErrUnexpectedResponse{Response: res}
 	}
 }
