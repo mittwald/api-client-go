@@ -6,9 +6,8 @@ package mailclientv2
 // This data type was generated from the following JSON schema:
 // properties:
 //    "quotaInBytes":
-//        type: "integer"
+//        type: "number"
 //        minimum: -1
-//        format: "int64"
 //        description: "2 GB"
 //        example: 2147483648
 // required:
@@ -17,7 +16,7 @@ package mailclientv2
 
 // DeprecatedUpdateMailAddressQuotaRequestBody models the JSON body of a 'deprecated-mail-update-mail-address-quota' request
 type DeprecatedUpdateMailAddressQuotaRequestBody struct {
-	QuotaInBytes int64 `json:"quotaInBytes"`
+	QuotaInBytes float64 `json:"quotaInBytes"`
 }
 
 func (o *DeprecatedUpdateMailAddressQuotaRequestBody) Validate() error {

@@ -11,9 +11,8 @@ package mailv2
 //    "password":
 //        type: "string"
 //    "quotaInBytes":
-//        type: "integer"
+//        type: "number"
 //        minimum: -1
-//        format: "int64"
 //        description: "2 GB"
 //        example: 2147483648
 // required:
@@ -22,9 +21,9 @@ package mailv2
 //    - "enableSpamProtection"
 
 type CreateMailAddressMailbox struct {
-	EnableSpamProtection bool   `json:"enableSpamProtection"`
-	Password             string `json:"password"`
-	QuotaInBytes         int64  `json:"quotaInBytes"`
+	EnableSpamProtection bool    `json:"enableSpamProtection"`
+	Password             string  `json:"password"`
+	QuotaInBytes         float64 `json:"quotaInBytes"`
 }
 
 func (o *CreateMailAddressMailbox) Validate() error {
