@@ -9,15 +9,17 @@ import "fmt"
 // type: "string"
 // enum:
 //    - "createdAt"
-//    - "exensionId"
+//    - "extensionId"
+//    - "extensionName"
 
 type ListExtensionInstancesRequestQuerySortItem string
 
 const ListExtensionInstancesRequestQuerySortItemCreatedAt ListExtensionInstancesRequestQuerySortItem = "createdAt"
-const ListExtensionInstancesRequestQuerySortItemExensionID ListExtensionInstancesRequestQuerySortItem = "exensionId"
+const ListExtensionInstancesRequestQuerySortItemExtensionID ListExtensionInstancesRequestQuerySortItem = "extensionId"
+const ListExtensionInstancesRequestQuerySortItemExtensionName ListExtensionInstancesRequestQuerySortItem = "extensionName"
 
 func (e ListExtensionInstancesRequestQuerySortItem) Validate() error {
-	if e == ListExtensionInstancesRequestQuerySortItemCreatedAt || e == ListExtensionInstancesRequestQuerySortItemExensionID {
+	if e == ListExtensionInstancesRequestQuerySortItemCreatedAt || e == ListExtensionInstancesRequestQuerySortItemExtensionID || e == ListExtensionInstancesRequestQuerySortItemExtensionName {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
