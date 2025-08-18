@@ -13,6 +13,7 @@ import "fmt"
 //        type: "string"
 //    "quotaInBytes":
 //        type: "integer"
+//        format: "int64"
 //    "spamProtection": {"$ref": "#/components/schemas/de.mittwald.v1.mailmigration.SpamProtection"}
 // required:
 //    - "name"
