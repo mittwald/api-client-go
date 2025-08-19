@@ -14,6 +14,10 @@ func IsDefaultErrorResponse(res *http.Response) (*commonsv2.Error, bool) {
 	if err := json.NewDecoder(res.Body).Decode(&target); err != nil {
 		return nil, false
 	}
+	
+	if target.Type == "" || target.Message == "" {
+		return nil, false
+	}
 
 	return &target, true
 }
