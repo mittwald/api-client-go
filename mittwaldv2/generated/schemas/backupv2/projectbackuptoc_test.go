@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("ProjectBackupRestorePathResponse", func() {
+var _ = Describe("ProjectBackupTOC", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"clearTargetPath\":true,\"determinedSourcePath\":\"string\",\"determinedTargetPath\":\"string\",\"phase\":\"running\",\"sourcePath\":\"string\",\"targetPath\":\"string\"}")
+			exampleJSON := []byte("{\"absolutePath\":\"string\",\"isDirectory\":true,\"isExecutable\":true,\"isFile\":true,\"isSymlink\":true,\"items\":[{\"absolutePath\":\"string\",\"isDirectory\":null,\"isExecutable\":null,\"isFile\":null,\"isSymlink\":null,\"items\":null,\"name\":\"string\",\"size\":42,\"target\":null}],\"name\":\"string\",\"size\":42,\"target\":\"string\"}")
 
-			sut := backupv2.ProjectBackupRestorePathResponse{}
+			sut := backupv2.ProjectBackupTOC{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

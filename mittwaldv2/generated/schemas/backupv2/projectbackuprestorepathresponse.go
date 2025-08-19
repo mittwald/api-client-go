@@ -10,7 +10,6 @@ import "fmt"
 // properties:
 //    "clearTargetPath":
 //        type: "boolean"
-//        description: "Whether to clear the target path before restoring. If true, existing files in the target path will be deleted before the restore. If false, existing files will be kept and may be overwritten if they exist in the backup."
 //        default: false
 //    "determinedSourcePath":
 //        type: "string"
@@ -19,29 +18,24 @@ import "fmt"
 //    "phase": {"$ref": "#/components/schemas/de.mittwald.v1.backup.RestorePathPhase"}
 //    "sourcePath":
 //        type: "string"
-//        description: "Source path within the backup to restore from. If not set, it will be determined as '/home/p-shortid/html' as it's originally sourced from there."
-//        example: "/data-p-shortId-userdata/p-shortId/web"
 //    "targetPath":
 //        type: "string"
-//        description: "Target path where the backup should be restored to. If not set, equaled source path with adjusted path mapping. The target path will be determined to equal the origin source, e.g. '/data-p-shortid-userdata/p-shortid/web' will be determined as '/home/p-shortid/html' as it's originally sourced from there."
-//        example: "/home/p-shortid/html"
+// required:
+//    - "determinedSourcePath"
+//    - "determinedTargetPath"
+//    - "phase"
 
 type ProjectBackupRestorePathResponse struct {
-	ClearTargetPath      *bool             `json:"clearTargetPath,omitempty"`
-	DeterminedSourcePath *string           `json:"determinedSourcePath,omitempty"`
-	DeterminedTargetPath *string           `json:"determinedTargetPath,omitempty"`
-	Phase                *RestorePathPhase `json:"phase,omitempty"`
-	SourcePath           *string           `json:"sourcePath,omitempty"`
-	TargetPath           *string           `json:"targetPath,omitempty"`
+	ClearTargetPath      *bool            `json:"clearTargetPath,omitempty"`
+	DeterminedSourcePath string           `json:"determinedSourcePath"`
+	DeterminedTargetPath string           `json:"determinedTargetPath"`
+	Phase                RestorePathPhase `json:"phase"`
+	SourcePath           *string          `json:"sourcePath,omitempty"`
+	TargetPath           *string          `json:"targetPath,omitempty"`
 }
 
 func (o *ProjectBackupRestorePathResponse) Validate() error {
-	if err := func() error {
-		if o.Phase == nil {
-			return nil
-		}
-		return o.Phase.Validate()
-	}(); err != nil {
+	if err := o.Phase.Validate(); err != nil {
 		return fmt.Errorf("invalid property phase: %w", err)
 	}
 	return nil

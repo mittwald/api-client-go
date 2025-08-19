@@ -69,6 +69,11 @@ type Client interface {
 		req DeleteProjectBackupRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetProjectBackupToc(
+		ctx context.Context,
+		req GetProjectBackupTocRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*backupv2.ProjectBackupTOC, *http.Response, error)
 	RequestProjectBackupRestorePath(
 		ctx context.Context,
 		req RequestProjectBackupRestorePathRequest,
@@ -374,6 +379,34 @@ func (c *clientImpl) DeleteProjectBackup(
 	}
 
 	return httpRes, nil
+}
+
+// Get table of contents for a Project Backup.
+func (c *clientImpl) GetProjectBackupToc(
+	ctx context.Context,
+	req GetProjectBackupTocRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*backupv2.ProjectBackupTOC, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response backupv2.ProjectBackupTOC
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Restore a ProjectBackup's path.
