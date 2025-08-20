@@ -14,7 +14,7 @@ import (
 var _ = Describe("Licence", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"containerMeta\":{\"containerId\":\"string\",\"ingressId\":\"string\",\"stackId\":\"string\",\"status\":\"created\"},\"customerId\":\"string\",\"licenceId\":\"string\",\"licenceKey\":\"string\",\"models\":[\"string\"],\"name\":\"string\",\"projectId\":\"string\",\"rateLimit\":3.14}")
+			exampleJSON := []byte("{\"blocked\":{\"executingUserId\":\"string\",\"reason\":\"string\",\"timestamp\":\"2006-01-02T15:04:05Z\"},\"containerMeta\":{\"containerId\":\"string\",\"errorMessage\":\"string\",\"ingressId\":\"string\",\"stackId\":\"string\",\"status\":\"created\"},\"customerId\":\"string\",\"licenceId\":\"string\",\"licenceKey\":\"string\",\"models\":[\"string\"],\"name\":\"string\",\"projectId\":\"string\",\"rateLimit\":3.14}")
 
 			sut := llmlocksmithv2.Licence{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -14,7 +14,7 @@ import (
 var _ = Describe("ContainerMeta", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"containerId\":\"string\",\"ingressId\":\"string\",\"stackId\":\"string\",\"status\":\"created\"}")
+			exampleJSON := []byte("{\"containerId\":\"string\",\"errorMessage\":\"string\",\"ingressId\":\"string\",\"stackId\":\"string\",\"status\":\"created\"}")
 
 			sut := llmlocksmithv2.ContainerMeta{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

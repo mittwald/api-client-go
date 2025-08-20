@@ -15,7 +15,6 @@ import "fmt"
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.DomainOrderPreview"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.ExternalCertificateOrderPreview"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.LeadFyndrOrderPreview"}
-//            - {"$ref": "#/components/schemas/de.mittwald.v1.order.MailArchiveOrderPreview"}
 //    "orderType":
 //        type: "string"
 //        enum:
@@ -24,7 +23,6 @@ import "fmt"
 //            - "server"
 //            - "externalCertificate"
 //            - "leadFyndr"
-//            - "mailArchive"
 // description: PreviewOrderRequestBody models the JSON body of a 'order-preview-order' request
 
 // PreviewOrderRequestBody models the JSON body of a 'order-preview-order' request

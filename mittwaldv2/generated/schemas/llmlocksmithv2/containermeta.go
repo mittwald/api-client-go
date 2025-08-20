@@ -10,6 +10,8 @@ import "fmt"
 // properties:
 //    "containerId":
 //        type: "string"
+//    "errorMessage":
+//        type: "string"
 //    "ingressId":
 //        type: "string"
 //    "stackId":
@@ -19,14 +21,16 @@ import "fmt"
 //        enum:
 //            - "created"
 //            - "requested"
+//            - "failed"
 // required:
 //    - "status"
 
 type ContainerMeta struct {
-	ContainerId *string             `json:"containerId,omitempty"`
-	IngressId   *string             `json:"ingressId,omitempty"`
-	StackId     *string             `json:"stackId,omitempty"`
-	Status      ContainerMetaStatus `json:"status"`
+	ContainerId  *string             `json:"containerId,omitempty"`
+	ErrorMessage *string             `json:"errorMessage,omitempty"`
+	IngressId    *string             `json:"ingressId,omitempty"`
+	StackId      *string             `json:"stackId,omitempty"`
+	Status       ContainerMetaStatus `json:"status"`
 }
 
 func (o *ContainerMeta) Validate() error {
