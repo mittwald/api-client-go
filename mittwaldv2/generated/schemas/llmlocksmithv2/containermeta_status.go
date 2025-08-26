@@ -10,14 +10,16 @@ import "fmt"
 // enum:
 //    - "created"
 //    - "requested"
+//    - "failed"
 
 type ContainerMetaStatus string
 
 const ContainerMetaStatusCreated ContainerMetaStatus = "created"
 const ContainerMetaStatusRequested ContainerMetaStatus = "requested"
+const ContainerMetaStatusFailed ContainerMetaStatus = "failed"
 
 func (e ContainerMetaStatus) Validate() error {
-	if e == ContainerMetaStatusCreated || e == ContainerMetaStatusRequested {
+	if e == ContainerMetaStatusCreated || e == ContainerMetaStatusRequested || e == ContainerMetaStatusFailed {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

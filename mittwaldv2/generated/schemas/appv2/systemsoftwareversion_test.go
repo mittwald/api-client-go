@@ -14,7 +14,7 @@ import (
 var _ = Describe("SystemSoftwareVersion", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"expiryDate\":\"2006-01-02T15:04:05Z\",\"externalVersion\":\"string\",\"fee\":{\"price\":3.14},\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"internalVersion\":\"string\",\"recommended\":true,\"systemSoftwareDependencies\":[{\"systemSoftwareId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"versionRange\":\"string\"}],\"userInputs\":[{\"dataSource\":null,\"dataType\":\"text\",\"defaultValue\":null,\"format\":null,\"lifecycleConstraint\":\"installation\",\"name\":\"string\",\"positionMeta\":null,\"required\":true,\"validationSchema\":\"string\"}]}")
+			exampleJSON := []byte("{\"expiryDate\":\"2006-01-02T15:04:05Z\",\"externalVersion\":\"string\",\"fee\":{\"price\":3.14},\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"internalVersion\":\"string\",\"recommended\":true,\"systemSoftwareDependencies\":[{\"systemSoftwareId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"versionRange\":\"string\"}],\"userInputs\":[{\"additionalValidationSchema\":null,\"dataSource\":null,\"dataType\":\"text\",\"defaultValue\":null,\"format\":null,\"lifecycleConstraint\":\"installation\",\"name\":\"string\",\"positionMeta\":null,\"required\":true,\"validationSchema\":\"string\"}]}")
 
 			sut := appv2.SystemSoftwareVersion{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

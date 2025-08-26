@@ -19,6 +19,11 @@ import (
 // https://developer.mittwald.de/docs/v2/reference/marketplace/contributor-list-incoming-invoices
 type ListIncomingInvoicesRequest struct {
 	ContributorID string
+	Limit         *int64
+	Skip          *int64
+	Page          *int64
+	Sort          []ListIncomingInvoicesRequestQuerySortItem
+	Order         []ListIncomingInvoicesRequestQueryOrderItem
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -48,11 +53,28 @@ func (r *ListIncomingInvoicesRequest) body() (io.Reader, string, error) {
 
 func (r *ListIncomingInvoicesRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/contributors/%s/invoices/incoming", url.PathEscape(r.ContributorID)),
+		Path:     fmt.Sprintf("/v2/contributors/%s/invoices/incoming", url.PathEscape(r.ContributorID)),
+		RawQuery: r.query().Encode(),
 	}
 	return u.String()
 }
 
 func (r *ListIncomingInvoicesRequest) query() url.Values {
-	return nil
+	q := make(url.Values)
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
+	}
+	for _, val := range r.Sort {
+		q.Add("sort", string(val))
+	}
+	for _, val := range r.Order {
+		q.Add("order", string(val))
+	}
+	return q
 }

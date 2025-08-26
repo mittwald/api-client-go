@@ -14,6 +14,10 @@ import (
 //    "containerMeta": {"$ref": "#/components/schemas/de.mittwald.v1.llmlocksmith.ContainerMeta"}
 //    "customerId":
 //        type: "string"
+//    "isBlocked":
+//        type: "boolean"
+//        description: "Indicates whether the licence is blocked."
+//        default: false
 //    "licenceId":
 //        type: "string"
 //    "licenceKey":
@@ -34,10 +38,12 @@ import (
 //    - "models"
 //    - "name"
 //    - "rateLimit"
+//    - "isBlocked"
 
 type Licence struct {
 	ContainerMeta *ContainerMeta `json:"containerMeta,omitempty"`
 	CustomerId    *string        `json:"customerId,omitempty"`
+	IsBlocked     bool           `json:"isBlocked"`
 	LicenceId     string         `json:"licenceId"`
 	LicenceKey    string         `json:"licenceKey"`
 	Models        []string       `json:"models"`
