@@ -61,6 +61,11 @@ type Client interface {
 		req GetDetailOfContractByLeadFyndrRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*contractv2.Contract, *http.Response, error)
+	GetDetailOfContractByMailAddress(
+		ctx context.Context,
+		req GetDetailOfContractByMailAddressRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*contractv2.Contract, *http.Response, error)
 	GetDetailOfContractByProject(
 		ctx context.Context,
 		req GetDetailOfContractByProjectRequest,
@@ -398,6 +403,34 @@ func (c *clientImpl) GetDetailOfContractByDomain(
 func (c *clientImpl) GetDetailOfContractByLeadFyndr(
 	ctx context.Context,
 	req GetDetailOfContractByLeadFyndrRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*contractv2.Contract, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response contractv2.Contract
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Return the Contract for the given Mail Address.
+func (c *clientImpl) GetDetailOfContractByMailAddress(
+	ctx context.Context,
+	req GetDetailOfContractByMailAddressRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*contractv2.Contract, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

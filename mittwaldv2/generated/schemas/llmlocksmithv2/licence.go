@@ -11,22 +11,13 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "blocked":
-//        type: "object"
-//        properties:
-//            "executingUserId":
-//                type: "string"
-//            "reason":
-//                type: "string"
-//            "timestamp":
-//                type: "string"
-//                format: "date-time"
-//        required:
-//            - "reason"
-//            - "timestamp"
 //    "containerMeta": {"$ref": "#/components/schemas/de.mittwald.v1.llmlocksmith.ContainerMeta"}
 //    "customerId":
 //        type: "string"
+//    "isBlocked":
+//        type: "boolean"
+//        description: "Indicates whether the licence is blocked."
+//        default: false
 //    "licenceId":
 //        type: "string"
 //    "licenceKey":
@@ -47,28 +38,21 @@ import (
 //    - "models"
 //    - "name"
 //    - "rateLimit"
+//    - "isBlocked"
 
 type Licence struct {
-	Blocked       *LicenceBlocked `json:"blocked,omitempty"`
-	ContainerMeta *ContainerMeta  `json:"containerMeta,omitempty"`
-	CustomerId    *string         `json:"customerId,omitempty"`
-	LicenceId     string          `json:"licenceId"`
-	LicenceKey    string          `json:"licenceKey"`
-	Models        []string        `json:"models"`
-	Name          string          `json:"name"`
-	ProjectId     *string         `json:"projectId,omitempty"`
-	RateLimit     float64         `json:"rateLimit"`
+	ContainerMeta *ContainerMeta `json:"containerMeta,omitempty"`
+	CustomerId    *string        `json:"customerId,omitempty"`
+	IsBlocked     bool           `json:"isBlocked"`
+	LicenceId     string         `json:"licenceId"`
+	LicenceKey    string         `json:"licenceKey"`
+	Models        []string       `json:"models"`
+	Name          string         `json:"name"`
+	ProjectId     *string        `json:"projectId,omitempty"`
+	RateLimit     float64        `json:"rateLimit"`
 }
 
 func (o *Licence) Validate() error {
-	if err := func() error {
-		if o.Blocked == nil {
-			return nil
-		}
-		return o.Blocked.Validate()
-	}(); err != nil {
-		return fmt.Errorf("invalid property blocked: %w", err)
-	}
 	if err := func() error {
 		if o.ContainerMeta == nil {
 			return nil

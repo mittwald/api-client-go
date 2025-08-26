@@ -13,14 +13,19 @@ import (
 // This data type was generated from the following JSON schema:
 // oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricingStrategy"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricePlanStrategy"}
 
 type ExtensionPricing struct {
-	AlternativeMonthlyPricingStrategy *MonthlyPricingStrategy
+	AlternativeMonthlyPricingStrategy   *MonthlyPricingStrategy
+	AlternativeMonthlyPricePlanStrategy MonthlyPricePlanStrategy
 }
 
 func (a *ExtensionPricing) MarshalJSON() ([]byte, error) {
 	if a.AlternativeMonthlyPricingStrategy != nil {
 		return json.Marshal(a.AlternativeMonthlyPricingStrategy)
+	}
+	if a.AlternativeMonthlyPricePlanStrategy != nil {
+		return json.Marshal(a.AlternativeMonthlyPricePlanStrategy)
 	}
 	return []byte("null"), nil
 }
@@ -41,6 +46,23 @@ func (a *ExtensionPricing) UnmarshalJSON(input []byte) error {
 		}
 	}
 
+	reader.Reset(input)
+	var alternativeMonthlyPricePlanStrategy MonthlyPricePlanStrategy
+	if err := dec.Decode(&alternativeMonthlyPricePlanStrategy); err == nil {
+		//subtype: *generator.ReferenceType
+		if vErr := func() error {
+			for i := range alternativeMonthlyPricePlanStrategy {
+				if err := alternativeMonthlyPricePlanStrategy[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}(); vErr == nil {
+			a.AlternativeMonthlyPricePlanStrategy = alternativeMonthlyPricePlanStrategy
+			decodedAtLeastOnce = true
+		}
+	}
+
 	if !decodedAtLeastOnce {
 		return fmt.Errorf("could not unmarshal into any alternative for type %T", a)
 	}
@@ -50,6 +72,16 @@ func (a *ExtensionPricing) UnmarshalJSON(input []byte) error {
 func (a *ExtensionPricing) Validate() error {
 	if a.AlternativeMonthlyPricingStrategy != nil {
 		return a.AlternativeMonthlyPricingStrategy.Validate()
+	}
+	if a.AlternativeMonthlyPricePlanStrategy != nil {
+		return func() error {
+			for i := range a.AlternativeMonthlyPricePlanStrategy {
+				if err := a.AlternativeMonthlyPricePlanStrategy[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}()
 	}
 	return errors.New("no alternative set")
 }

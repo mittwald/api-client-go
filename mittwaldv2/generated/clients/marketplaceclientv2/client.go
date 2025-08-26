@@ -35,6 +35,11 @@ type Client interface {
 		req GetLoginLinkRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*GetLoginLinkResponse, *http.Response, error)
+	ListContractPartnersOfContributor(
+		ctx context.Context,
+		req ListContractPartnersOfContributorRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]marketplacev2.ContractPartner, *http.Response, error)
 	ListIncomingInvoices(
 		ctx context.Context,
 		req ListIncomingInvoicesRequest,
@@ -50,6 +55,11 @@ type Client interface {
 		req ReceiptGetFileAccessTokenRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*ReceiptGetFileAccessTokenResponse, *http.Response, error)
+	RotateSecretForExtensionInstance(
+		ctx context.Context,
+		req RotateSecretForExtensionInstanceRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*RotateSecretForExtensionInstanceResponse, *http.Response, error)
 	AuthenticateInstance(
 		ctx context.Context,
 		req AuthenticateInstanceRequest,
@@ -70,81 +80,46 @@ type Client interface {
 		req CancelExtensionTerminationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CancelExtensionTerminationResponse, *http.Response, error)
-	CreateContributorOnboardingProcess(
+	ChangeContext(
 		ctx context.Context,
-		req CreateContributorOnboardingProcessRequest,
+		req ChangeContextRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*CreateContributorOnboardingProcessResponse, *http.Response, error)
-	GetCustomerExtensionInstanceOrders(
-		ctx context.Context,
-		req GetCustomerExtensionInstanceOrdersRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]GetCustomerExtensionInstanceOrdersResponseItem, *http.Response, error)
-	GetExtensionInstanceContract(
-		ctx context.Context,
-		req GetExtensionInstanceContractRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*extensionv2.ExtensionInstanceContract, *http.Response, error)
-	UpdateExtensionInstanceContract(
-		ctx context.Context,
-		req UpdateExtensionInstanceContractRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*UpdateExtensionInstanceContractResponse, *http.Response, error)
-	GetProjectExtensionInstanceOrders(
-		ctx context.Context,
-		req GetProjectExtensionInstanceOrdersRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]GetProjectExtensionInstanceOrdersResponseItem, *http.Response, error)
-	Extension(
-		ctx context.Context,
-		req ExtensionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*ExtensionResponse, *http.Response, error)
-	UpdateExtensionPricing(
-		ctx context.Context,
-		req UpdateExtensionPricingRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*UpdateExtensionPricingResponse, *http.Response, error)
-	CustomerGetPaymentMethod(
-		ctx context.Context,
-		req CustomerGetPaymentMethodRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*CustomerGetPaymentMethodResponse, *http.Response, error)
-	CustomerUpdatePaymentMethod(
-		ctx context.Context,
-		req CustomerUpdatePaymentMethodRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*CustomerUpdatePaymentMethodResponse, *http.Response, error)
-	RequestExtensionVerification(
-		ctx context.Context,
-		req RequestExtensionVerificationRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*RequestExtensionVerificationResponse, *http.Response, error)
-	GetPublicKey(
-		ctx context.Context,
-		req GetPublicKeyRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*marketplacev2.PublicKey, *http.Response, error)
-	ListContractPartnersOfContributor(
-		ctx context.Context,
-		req ListContractPartnersOfContributorRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]marketplacev2.ContractPartner, *http.Response, error)
-	GetExtension(
-		ctx context.Context,
-		req GetExtensionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*any, *http.Response, error)
-	InvalidateExtensionSecret(
-		ctx context.Context,
-		req InvalidateExtensionSecretRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
+	) (*ChangeContextResponse, *http.Response, error)
 	ConsentToExtensionScopes(
 		ctx context.Context,
 		req ConsentToExtensionScopesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	CreateContributorOnboardingProcess(
+		ctx context.Context,
+		req CreateContributorOnboardingProcessRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CreateContributorOnboardingProcessResponse, *http.Response, error)
+	ListExtensionInstances(
+		ctx context.Context,
+		req ListExtensionInstancesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]marketplacev2.ExtensionInstance, *http.Response, error)
+	CreateExtensionInstance(
+		ctx context.Context,
+		req CreateExtensionInstanceRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CreateExtensionInstanceResponse, *http.Response, error)
+	CreateRetrievalKey(
+		ctx context.Context,
+		req CreateRetrievalKeyRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CreateRetrievalKeyResponse, *http.Response, error)
+	GetExtensionInstance(
+		ctx context.Context,
+		req GetExtensionInstanceRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*marketplacev2.ExtensionInstance, *http.Response, error)
+	DeleteExtensionInstance(
+		ctx context.Context,
+		req DeleteExtensionInstanceRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*any, *http.Response, error)
 	GetOwnExtension(
 		ctx context.Context,
 		req GetOwnExtensionRequest,
@@ -160,56 +135,91 @@ type Client interface {
 		req PatchExtensionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*marketplacev2.OwnExtension, *http.Response, error)
-	RequestLogoUpload(
-		ctx context.Context,
-		req RequestLogoUploadRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*RequestLogoUploadResponse, *http.Response, error)
-	RemoveLogo(
-		ctx context.Context,
-		req RemoveLogoRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	GenerateSessionToken(
-		ctx context.Context,
-		req GenerateSessionTokenRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*GenerateSessionTokenResponse, *http.Response, error)
-	ChangeContext(
-		ctx context.Context,
-		req ChangeContextRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*ChangeContextResponse, *http.Response, error)
 	DisableExtensionInstance(
 		ctx context.Context,
 		req DisableExtensionInstanceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*any, *http.Response, error)
-	GetExtensionInstance(
+	DryRunWebhook(
 		ctx context.Context,
-		req GetExtensionInstanceRequest,
+		req DryRunWebhookRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*marketplacev2.ExtensionInstance, *http.Response, error)
-	DeleteExtensionInstance(
+	) (*DryRunWebhookResponse, *http.Response, error)
+	EnableExtensionInstance(
 		ctx context.Context,
-		req DeleteExtensionInstanceRequest,
+		req EnableExtensionInstanceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*any, *http.Response, error)
+	GenerateExtensionSecret(
+		ctx context.Context,
+		req GenerateExtensionSecretRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*GenerateExtensionSecretResponse, *http.Response, error)
+	GenerateSessionToken(
+		ctx context.Context,
+		req GenerateSessionTokenRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*GenerateSessionTokenResponse, *http.Response, error)
 	GetContributor(
 		ctx context.Context,
 		req GetContributorRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*any, *http.Response, error)
+	GetCustomerExtensionInstanceOrders(
+		ctx context.Context,
+		req GetCustomerExtensionInstanceOrdersRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]GetCustomerExtensionInstanceOrdersResponseItem, *http.Response, error)
+	GetExtensionInstanceContract(
+		ctx context.Context,
+		req GetExtensionInstanceContractRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*extensionv2.ExtensionInstanceContract, *http.Response, error)
+	UpdateExtensionInstanceContract(
+		ctx context.Context,
+		req UpdateExtensionInstanceContractRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*UpdateExtensionInstanceContractResponse, *http.Response, error)
+	GetExtensionInstanceForCustomer(
+		ctx context.Context,
+		req GetExtensionInstanceForCustomerRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*marketplacev2.ExtensionInstance, *http.Response, error)
 	GetExtensionInstanceForProject(
 		ctx context.Context,
 		req GetExtensionInstanceForProjectRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*marketplacev2.ExtensionInstance, *http.Response, error)
-	RemoveAsset(
+	GetExtension(
 		ctx context.Context,
-		req RemoveAssetRequest,
+		req GetExtensionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*any, *http.Response, error)
+	GetProjectExtensionInstanceOrders(
+		ctx context.Context,
+		req GetProjectExtensionInstanceOrdersRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]GetProjectExtensionInstanceOrdersResponseItem, *http.Response, error)
+	GetPublicKey(
+		ctx context.Context,
+		req GetPublicKeyRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*marketplacev2.PublicKey, *http.Response, error)
+	InvalidateExtensionSecret(
+		ctx context.Context,
+		req InvalidateExtensionSecretRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	ListContributors(
+		ctx context.Context,
+		req ListContributorsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]marketplacev2.Contributor, *http.Response, error)
+	ListExtensions(
+		ctx context.Context,
+		req ListExtensionsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]marketplacev2.Extension, *http.Response, error)
 	ListOwnExtensions(
 		ctx context.Context,
 		req ListOwnExtensionsRequest,
@@ -220,71 +230,61 @@ type Client interface {
 		req RegisterExtensionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*RegisterExtensionResponse, *http.Response, error)
-	EnableExtensionInstance(
-		ctx context.Context,
-		req EnableExtensionInstanceRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*any, *http.Response, error)
-	SetExtensionPublishedState(
-		ctx context.Context,
-		req SetExtensionPublishedStateRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*SetExtensionPublishedStateResponse, *http.Response, error)
-	GetExtensionInstanceForCustomer(
-		ctx context.Context,
-		req GetExtensionInstanceForCustomerRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*marketplacev2.ExtensionInstance, *http.Response, error)
-	ListContributors(
-		ctx context.Context,
-		req ListContributorsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]marketplacev2.Contributor, *http.Response, error)
-	RotateSecretForExtensionInstance(
-		ctx context.Context,
-		req RotateSecretForExtensionInstanceRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*RotateSecretForExtensionInstanceResponse, *http.Response, error)
-	RequestAssetUpload(
-		ctx context.Context,
-		req RequestAssetUploadRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*RequestAssetUploadResponse, *http.Response, error)
 	ListScopes(
 		ctx context.Context,
 		req ListScopesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]ListScopesResponseItem, *http.Response, error)
-	CreateRetrievalKey(
+	Extension(
 		ctx context.Context,
-		req CreateRetrievalKeyRequest,
+		req ExtensionRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*CreateRetrievalKeyResponse, *http.Response, error)
-	GenerateExtensionSecret(
+	) (*ExtensionResponse, *http.Response, error)
+	RemoveAsset(
 		ctx context.Context,
-		req GenerateExtensionSecretRequest,
+		req RemoveAssetRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*GenerateExtensionSecretResponse, *http.Response, error)
-	DryRunWebhook(
+	) (*http.Response, error)
+	RequestLogoUpload(
 		ctx context.Context,
-		req DryRunWebhookRequest,
+		req RequestLogoUploadRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*DryRunWebhookResponse, *http.Response, error)
-	ListExtensionInstances(
+	) (*RequestLogoUploadResponse, *http.Response, error)
+	RemoveLogo(
 		ctx context.Context,
-		req ListExtensionInstancesRequest,
+		req RemoveLogoRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*[]marketplacev2.ExtensionInstance, *http.Response, error)
-	CreateExtensionInstance(
+	) (*http.Response, error)
+	RequestAssetUpload(
 		ctx context.Context,
-		req CreateExtensionInstanceRequest,
+		req RequestAssetUploadRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*CreateExtensionInstanceResponse, *http.Response, error)
-	ListExtensions(
+	) (*RequestAssetUploadResponse, *http.Response, error)
+	RequestExtensionVerification(
 		ctx context.Context,
-		req ListExtensionsRequest,
+		req RequestExtensionVerificationRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*[]marketplacev2.Extension, *http.Response, error)
+	) (*RequestExtensionVerificationResponse, *http.Response, error)
+	SetExtensionPublishedState(
+		ctx context.Context,
+		req SetExtensionPublishedStateRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*SetExtensionPublishedStateResponse, *http.Response, error)
+	UpdateExtensionPricing(
+		ctx context.Context,
+		req UpdateExtensionPricingRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*UpdateExtensionPricingResponse, *http.Response, error)
+	CustomerGetPaymentMethod(
+		ctx context.Context,
+		req CustomerGetPaymentMethodRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CustomerGetPaymentMethodResponse, *http.Response, error)
+	CustomerUpdatePaymentMethod(
+		ctx context.Context,
+		req CustomerUpdatePaymentMethodRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CustomerUpdatePaymentMethodResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -410,6 +410,34 @@ func (c *clientImpl) GetLoginLink(
 	return &response, httpRes, nil
 }
 
+// List ContractPartners of the contributor.
+func (c *clientImpl) ListContractPartnersOfContributor(
+	ctx context.Context,
+	req ListContractPartnersOfContributorRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]marketplacev2.ContractPartner, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []marketplacev2.ContractPartner
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // List incoming Invoices of a Contributor.
 func (c *clientImpl) ListIncomingInvoices(
 	ctx context.Context,
@@ -490,6 +518,34 @@ func (c *clientImpl) ReceiptGetFileAccessToken(
 	}
 
 	var response ReceiptGetFileAccessTokenResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Rotate the secret for an extension instance.
+func (c *clientImpl) RotateSecretForExtensionInstance(
+	ctx context.Context,
+	req RotateSecretForExtensionInstanceRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RotateSecretForExtensionInstanceResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RotateSecretForExtensionInstanceResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -608,6 +664,58 @@ func (c *clientImpl) CancelExtensionTermination(
 	return &response, httpRes, nil
 }
 
+// Change the context of an Extension.
+func (c *clientImpl) ChangeContext(
+	ctx context.Context,
+	req ChangeContextRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*ChangeContextResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response ChangeContextResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Consent to extension scopes.
+func (c *clientImpl) ConsentToExtensionScopes(
+	ctx context.Context,
+	req ConsentToExtensionScopesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Create the OnboardingProcess of a Contributor.
 //
 // The OnboardingProcess is needed to publish paid extensions.
@@ -632,6 +740,400 @@ func (c *clientImpl) CreateContributorOnboardingProcess(
 	}
 
 	var response CreateContributorOnboardingProcessResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List ExtensionInstances.
+func (c *clientImpl) ListExtensionInstances(
+	ctx context.Context,
+	req ListExtensionInstancesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]marketplacev2.ExtensionInstance, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []marketplacev2.ExtensionInstance
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create an ExtensionInstance.
+func (c *clientImpl) CreateExtensionInstance(
+	ctx context.Context,
+	req CreateExtensionInstanceRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CreateExtensionInstanceResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CreateExtensionInstanceResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create an access token retrieval key for an extension instance.
+func (c *clientImpl) CreateRetrievalKey(
+	ctx context.Context,
+	req CreateRetrievalKeyRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CreateRetrievalKeyResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CreateRetrievalKeyResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get an ExtensionInstance.
+func (c *clientImpl) GetExtensionInstance(
+	ctx context.Context,
+	req GetExtensionInstanceRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*marketplacev2.ExtensionInstance, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.ExtensionInstance
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete a free ExtensionInstance. If the Extension is chargable the contract must be terminated instead.
+func (c *clientImpl) DeleteExtensionInstance(
+	ctx context.Context,
+	req DeleteExtensionInstanceRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*any, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response any
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get Extension of own contributor.
+func (c *clientImpl) GetOwnExtension(
+	ctx context.Context,
+	req GetOwnExtensionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*marketplacev2.OwnExtension, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.OwnExtension
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete an extension.
+//
+// This action deletes all ExtensionInstances and afterwards the Extension itself.
+func (c *clientImpl) DeleteExtension(
+	ctx context.Context,
+	req DeleteExtensionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Patch Extension.
+func (c *clientImpl) PatchExtension(
+	ctx context.Context,
+	req PatchExtensionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*marketplacev2.OwnExtension, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.OwnExtension
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Disable an ExtensionInstance.
+func (c *clientImpl) DisableExtensionInstance(
+	ctx context.Context,
+	req DisableExtensionInstanceRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*any, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response any
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Dry run a webhook with random or given values.
+func (c *clientImpl) DryRunWebhook(
+	ctx context.Context,
+	req DryRunWebhookRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*DryRunWebhookResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response DryRunWebhookResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Enable an ExtensionInstance.
+func (c *clientImpl) EnableExtensionInstance(
+	ctx context.Context,
+	req EnableExtensionInstanceRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*any, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response any
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Generate an Extension secret for the given Extension.
+//
+// This generates a new Extension secret for the given Extension.
+// If an Extension secret existed previously, it will deprecate the existing secret.
+// This means, it will be invalidated after approximately one day.
+func (c *clientImpl) GenerateExtensionSecret(
+	ctx context.Context,
+	req GenerateExtensionSecretRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*GenerateExtensionSecretResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GenerateExtensionSecretResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Generate a session token to transmit it to the extensions frontend fragment.
+func (c *clientImpl) GenerateSessionToken(
+	ctx context.Context,
+	req GenerateSessionTokenRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*GenerateSessionTokenResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GenerateSessionTokenResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get a Contributor.
+func (c *clientImpl) GetContributor(
+	ctx context.Context,
+	req GetContributorRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*any, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response any
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -724,6 +1226,90 @@ func (c *clientImpl) UpdateExtensionInstanceContract(
 	return &response, httpRes, nil
 }
 
+// Get the ExtensionInstance of a specific customer and extension, if existing.
+func (c *clientImpl) GetExtensionInstanceForCustomer(
+	ctx context.Context,
+	req GetExtensionInstanceForCustomerRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*marketplacev2.ExtensionInstance, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.ExtensionInstance
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get the ExtensionInstance of a specific project and extension, if existing.
+func (c *clientImpl) GetExtensionInstanceForProject(
+	ctx context.Context,
+	req GetExtensionInstanceForProjectRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*marketplacev2.ExtensionInstance, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.ExtensionInstance
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get an Extension.
+func (c *clientImpl) GetExtension(
+	ctx context.Context,
+	req GetExtensionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*any, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response any
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Get all open extension orders for given project
 func (c *clientImpl) GetProjectExtensionInstanceOrders(
 	ctx context.Context,
@@ -752,6 +1338,198 @@ func (c *clientImpl) GetProjectExtensionInstanceOrders(
 	return &response, httpRes, nil
 }
 
+// Get the public key to verify the webhook signature.
+func (c *clientImpl) GetPublicKey(
+	ctx context.Context,
+	req GetPublicKeyRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*marketplacev2.PublicKey, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.PublicKey
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Invalidate the given Extension secret immediately.
+func (c *clientImpl) InvalidateExtensionSecret(
+	ctx context.Context,
+	req InvalidateExtensionSecretRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// List Contributors.
+func (c *clientImpl) ListContributors(
+	ctx context.Context,
+	req ListContributorsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]marketplacev2.Contributor, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []marketplacev2.Contributor
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Extensions.
+func (c *clientImpl) ListExtensions(
+	ctx context.Context,
+	req ListExtensionsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]marketplacev2.Extension, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []marketplacev2.Extension
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Extensions of own contributor.
+func (c *clientImpl) ListOwnExtensions(
+	ctx context.Context,
+	req ListOwnExtensionsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]marketplacev2.OwnExtension, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []marketplacev2.OwnExtension
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Register an Extension.
+func (c *clientImpl) RegisterExtension(
+	ctx context.Context,
+	req RegisterExtensionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RegisterExtensionResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RegisterExtensionResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Scopes.
+func (c *clientImpl) ListScopes(
+	ctx context.Context,
+	req ListScopesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]ListScopesResponseItem, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []ListScopesResponseItem
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Order Extension with saved payment method
 func (c *clientImpl) Extension(
 	ctx context.Context,
@@ -774,6 +1552,166 @@ func (c *clientImpl) Extension(
 	}
 
 	var response ExtensionResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Remove an asset of an extension.
+func (c *clientImpl) RemoveAsset(
+	ctx context.Context,
+	req RemoveAssetRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Add a logo to an extension.
+func (c *clientImpl) RequestLogoUpload(
+	ctx context.Context,
+	req RequestLogoUploadRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RequestLogoUploadResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestLogoUploadResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Remove the logo of an extension.
+func (c *clientImpl) RemoveLogo(
+	ctx context.Context,
+	req RemoveLogoRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Add an asset to an extension.
+func (c *clientImpl) RequestAssetUpload(
+	ctx context.Context,
+	req RequestAssetUploadRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RequestAssetUploadResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestAssetUploadResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Start the verification process of an Extension.
+func (c *clientImpl) RequestExtensionVerification(
+	ctx context.Context,
+	req RequestExtensionVerificationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RequestExtensionVerificationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestExtensionVerificationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Publish or withdraw an Extension.
+func (c *clientImpl) SetExtensionPublishedState(
+	ctx context.Context,
+	req SetExtensionPublishedStateRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*SetExtensionPublishedStateResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response SetExtensionPublishedStateResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -860,944 +1798,6 @@ func (c *clientImpl) CustomerUpdatePaymentMethod(
 	}
 
 	var response CustomerUpdatePaymentMethodResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Start the verification process of an Extension.
-func (c *clientImpl) RequestExtensionVerification(
-	ctx context.Context,
-	req RequestExtensionVerificationRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*RequestExtensionVerificationResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response RequestExtensionVerificationResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get the public key to verify the webhook signature.
-func (c *clientImpl) GetPublicKey(
-	ctx context.Context,
-	req GetPublicKeyRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*marketplacev2.PublicKey, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response marketplacev2.PublicKey
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List ContractPartners of the contributor.
-func (c *clientImpl) ListContractPartnersOfContributor(
-	ctx context.Context,
-	req ListContractPartnersOfContributorRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]marketplacev2.ContractPartner, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []marketplacev2.ContractPartner
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get an Extension.
-func (c *clientImpl) GetExtension(
-	ctx context.Context,
-	req GetExtensionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*any, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response any
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Invalidate the given Extension secret immediately.
-func (c *clientImpl) InvalidateExtensionSecret(
-	ctx context.Context,
-	req InvalidateExtensionSecretRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Consent to extension scopes.
-func (c *clientImpl) ConsentToExtensionScopes(
-	ctx context.Context,
-	req ConsentToExtensionScopesRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Get Extension of own contributor.
-func (c *clientImpl) GetOwnExtension(
-	ctx context.Context,
-	req GetOwnExtensionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*marketplacev2.OwnExtension, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response marketplacev2.OwnExtension
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Delete an extension.
-//
-// This action deletes all ExtensionInstances and afterwards the Extension itself.
-func (c *clientImpl) DeleteExtension(
-	ctx context.Context,
-	req DeleteExtensionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Patch Extension.
-func (c *clientImpl) PatchExtension(
-	ctx context.Context,
-	req PatchExtensionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*marketplacev2.OwnExtension, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response marketplacev2.OwnExtension
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Add a logo to an extension.
-func (c *clientImpl) RequestLogoUpload(
-	ctx context.Context,
-	req RequestLogoUploadRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*RequestLogoUploadResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response RequestLogoUploadResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Remove the logo of an extension.
-func (c *clientImpl) RemoveLogo(
-	ctx context.Context,
-	req RemoveLogoRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Generate a session token to transmit it to the extensions frontend fragment.
-func (c *clientImpl) GenerateSessionToken(
-	ctx context.Context,
-	req GenerateSessionTokenRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*GenerateSessionTokenResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response GenerateSessionTokenResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Change the context of an Extension.
-func (c *clientImpl) ChangeContext(
-	ctx context.Context,
-	req ChangeContextRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*ChangeContextResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response ChangeContextResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Disable an ExtensionInstance.
-func (c *clientImpl) DisableExtensionInstance(
-	ctx context.Context,
-	req DisableExtensionInstanceRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*any, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response any
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get an ExtensionInstance.
-func (c *clientImpl) GetExtensionInstance(
-	ctx context.Context,
-	req GetExtensionInstanceRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*marketplacev2.ExtensionInstance, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response marketplacev2.ExtensionInstance
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Delete a free ExtensionInstance. If the Extension is chargable the contract must be terminated instead.
-func (c *clientImpl) DeleteExtensionInstance(
-	ctx context.Context,
-	req DeleteExtensionInstanceRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*any, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response any
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a Contributor.
-func (c *clientImpl) GetContributor(
-	ctx context.Context,
-	req GetContributorRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*any, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response any
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get the ExtensionInstance of a specific project and extension, if existing.
-func (c *clientImpl) GetExtensionInstanceForProject(
-	ctx context.Context,
-	req GetExtensionInstanceForProjectRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*marketplacev2.ExtensionInstance, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response marketplacev2.ExtensionInstance
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Remove an asset of an extension.
-func (c *clientImpl) RemoveAsset(
-	ctx context.Context,
-	req RemoveAssetRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// List Extensions of own contributor.
-func (c *clientImpl) ListOwnExtensions(
-	ctx context.Context,
-	req ListOwnExtensionsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]marketplacev2.OwnExtension, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []marketplacev2.OwnExtension
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Register an Extension.
-func (c *clientImpl) RegisterExtension(
-	ctx context.Context,
-	req RegisterExtensionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*RegisterExtensionResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response RegisterExtensionResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Enable an ExtensionInstance.
-func (c *clientImpl) EnableExtensionInstance(
-	ctx context.Context,
-	req EnableExtensionInstanceRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*any, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response any
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Publish or withdraw an Extension.
-func (c *clientImpl) SetExtensionPublishedState(
-	ctx context.Context,
-	req SetExtensionPublishedStateRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*SetExtensionPublishedStateResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response SetExtensionPublishedStateResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get the ExtensionInstance of a specific customer and extension, if existing.
-func (c *clientImpl) GetExtensionInstanceForCustomer(
-	ctx context.Context,
-	req GetExtensionInstanceForCustomerRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*marketplacev2.ExtensionInstance, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response marketplacev2.ExtensionInstance
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List Contributors.
-func (c *clientImpl) ListContributors(
-	ctx context.Context,
-	req ListContributorsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]marketplacev2.Contributor, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []marketplacev2.Contributor
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Rotate the secret for an extension instance.
-func (c *clientImpl) RotateSecretForExtensionInstance(
-	ctx context.Context,
-	req RotateSecretForExtensionInstanceRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*RotateSecretForExtensionInstanceResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response RotateSecretForExtensionInstanceResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Add an asset to an extension.
-func (c *clientImpl) RequestAssetUpload(
-	ctx context.Context,
-	req RequestAssetUploadRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*RequestAssetUploadResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response RequestAssetUploadResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List Scopes.
-func (c *clientImpl) ListScopes(
-	ctx context.Context,
-	req ListScopesRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]ListScopesResponseItem, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []ListScopesResponseItem
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Create an access token retrieval key for an extension instance.
-func (c *clientImpl) CreateRetrievalKey(
-	ctx context.Context,
-	req CreateRetrievalKeyRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*CreateRetrievalKeyResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response CreateRetrievalKeyResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Generate an Extension secret for the given Extension.
-//
-// This generates a new Extension secret for the given Extension.
-// If an Extension secret existed previously, it will deprecate the existing secret.
-// This means, it will be invalidated after approximately one day.
-func (c *clientImpl) GenerateExtensionSecret(
-	ctx context.Context,
-	req GenerateExtensionSecretRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*GenerateExtensionSecretResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response GenerateExtensionSecretResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Dry run a webhook with random or given values.
-func (c *clientImpl) DryRunWebhook(
-	ctx context.Context,
-	req DryRunWebhookRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*DryRunWebhookResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response DryRunWebhookResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List ExtensionInstances.
-func (c *clientImpl) ListExtensionInstances(
-	ctx context.Context,
-	req ListExtensionInstancesRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]marketplacev2.ExtensionInstance, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []marketplacev2.ExtensionInstance
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Create an ExtensionInstance.
-func (c *clientImpl) CreateExtensionInstance(
-	ctx context.Context,
-	req CreateExtensionInstanceRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*CreateExtensionInstanceResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response CreateExtensionInstanceResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List Extensions.
-func (c *clientImpl) ListExtensions(
-	ctx context.Context,
-	req ListExtensionsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]marketplacev2.Extension, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []marketplacev2.Extension
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

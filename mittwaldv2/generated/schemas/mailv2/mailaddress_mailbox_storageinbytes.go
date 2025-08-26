@@ -15,21 +15,19 @@ import "fmt"
 //                type: "string"
 //                format: "date-time"
 //            "value":
-//                type: "integer"
-//                format: "int64"
+//                type: "number"
 //        required:
 //            - "value"
 //            - "updatedAt"
 //    "limit":
-//        type: "integer"
-//        format: "int64"
+//        type: "number"
 // required:
 //    - "limit"
 //    - "current"
 
 type MailAddressMailboxStorageInBytes struct {
 	Current MailAddressMailboxStorageInBytesCurrent `json:"current"`
-	Limit   int64                                   `json:"limit"`
+	Limit   float64                                 `json:"limit"`
 }
 
 func (o *MailAddressMailboxStorageInBytes) Validate() error {

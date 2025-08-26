@@ -38,7 +38,6 @@ import (
 //    "lockedBy":
 //        type: "object"
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.app.LockPurpose"}
-//    "phase": {"$ref": "#/components/schemas/de.mittwald.v1.app.AppPhase"}
 //    "projectId":
 //        type: "string"
 //        format: "uuid"
@@ -71,7 +70,6 @@ import (
 //    - "userInputs"
 //    - "updatePolicy"
 //    - "linkedDatabases"
-//    - "phase"
 // description: "An AppInstallation is a concrete manifestation of an App in a specific AppVersion."
 
 // An AppInstallation is a concrete manifestation of an App in a specific AppVersion.
@@ -86,7 +84,6 @@ type AppInstallation struct {
 	InstallationPath   string                    `json:"installationPath"`
 	LinkedDatabases    []LinkedDatabase          `json:"linkedDatabases"`
 	LockedBy           map[string]LockPurpose    `json:"lockedBy,omitempty"`
-	Phase              AppPhase                  `json:"phase"`
 	ProjectId          string                    `json:"projectId"`
 	ScreenshotId       *string                   `json:"screenshotId,omitempty"`
 	ScreenshotRef      *string                   `json:"screenshotRef,omitempty"`
@@ -112,9 +109,6 @@ func (o *AppInstallation) Validate() error {
 		return nil
 	}(); err != nil {
 		return fmt.Errorf("invalid property linkedDatabases: %w", err)
-	}
-	if err := o.Phase.Validate(); err != nil {
-		return fmt.Errorf("invalid property phase: %w", err)
 	}
 	if o.SystemSoftware == nil {
 		return errors.New("property systemSoftware is required, but not set")

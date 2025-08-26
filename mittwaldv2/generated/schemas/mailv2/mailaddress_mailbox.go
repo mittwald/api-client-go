@@ -48,14 +48,12 @@ import (
 //                        type: "string"
 //                        format: "date-time"
 //                    "value":
-//                        type: "integer"
-//                        format: "int64"
+//                        type: "number"
 //                required:
 //                    - "value"
 //                    - "updatedAt"
 //            "limit":
-//                type: "integer"
-//                format: "int64"
+//                type: "number"
 //        required:
 //            - "limit"
 //            - "current"

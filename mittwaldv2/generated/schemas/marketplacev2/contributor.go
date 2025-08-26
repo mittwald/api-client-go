@@ -31,7 +31,16 @@ import "fmt"
 //        type: "string"
 //        deprecated: true
 //    "state": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ContributorState"}
-//    "supportInformation": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SupportMeta"}
+//    "supportInformation":
+//        allOf:
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SupportMeta"}
+//            - type: "object"
+//              properties:
+//                "inherited":
+//                    type: "boolean"
+//                    description: "Whether the support information is inherited from the customer."
+//              required:
+//                - "inherited"
 //    "url":
 //        type: "string"
 // required:
@@ -53,7 +62,7 @@ type Contributor struct {
 	Name               string                `json:"name"`
 	Phone              *string               `json:"phone,omitempty"`
 	State              ContributorState      `json:"state"`
-	SupportInformation SupportMeta           `json:"supportInformation"`
+	SupportInformation any                   `json:"supportInformation"`
 	Url                *string               `json:"url,omitempty"`
 }
 
@@ -76,9 +85,6 @@ func (o *Contributor) Validate() error {
 	}
 	if err := o.State.Validate(); err != nil {
 		return fmt.Errorf("invalid property state: %w", err)
-	}
-	if err := o.SupportInformation.Validate(); err != nil {
-		return fmt.Errorf("invalid property supportInformation: %w", err)
 	}
 	return nil
 }
