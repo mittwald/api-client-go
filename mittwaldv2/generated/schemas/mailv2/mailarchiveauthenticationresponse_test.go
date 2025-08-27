@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("MailAddressMailboxStorageInBytes", func() {
+var _ = Describe("MailArchiveAuthenticationResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"current\":{\"updatedAt\":\"2006-01-02T15:04:05Z\",\"value\":42},\"limit\":42}")
+			exampleJSON := []byte("{\"archive\":[\"string\"],\"auth\":\"string\",\"displayName\":\"string\",\"error\":\"string\",\"mail\":[\"string\"],\"role\":\"string\"}")
 
-			sut := mailv2.MailAddressMailboxStorageInBytes{}
+			sut := mailv2.MailArchiveAuthenticationResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

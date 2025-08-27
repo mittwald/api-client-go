@@ -8,7 +8,7 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "additionalValidationSchema": {"$ref": "#/components/schemas/de.mittwald.v1.app.AdditionalValidationSchema", "description": "Additional validation schemas, such as password rules"}
+//    "additionalValidationSchema": {"$ref": "#/components/schemas/de.mittwald.v1.app.AdditionalValidationSchema"}
 //    "dataSource":
 //        type: "string"
 //        description: "Optional field to tell the frontend, which data to put into the select."

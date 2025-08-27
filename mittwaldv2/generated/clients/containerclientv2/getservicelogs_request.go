@@ -20,6 +20,7 @@ import (
 type GetServiceLogsRequest struct {
 	StackID   string
 	ServiceID string
+	Tail      *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -49,11 +50,16 @@ func (r *GetServiceLogsRequest) body() (io.Reader, string, error) {
 
 func (r *GetServiceLogsRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/stacks/%s/services/%s/logs", url.PathEscape(r.StackID), url.PathEscape(r.ServiceID)),
+		Path:     fmt.Sprintf("/v2/stacks/%s/services/%s/logs", url.PathEscape(r.StackID), url.PathEscape(r.ServiceID)),
+		RawQuery: r.query().Encode(),
 	}
 	return u.String()
 }
 
 func (r *GetServiceLogsRequest) query() url.Values {
-	return nil
+	q := make(url.Values)
+	if r.Tail != nil {
+		q.Set("tail", fmt.Sprintf("%d", *r.Tail))
+	}
+	return q
 }

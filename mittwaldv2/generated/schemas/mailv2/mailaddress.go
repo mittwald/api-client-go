@@ -99,12 +99,14 @@ import (
 //                                type: "string"
 //                                format: "date-time"
 //                            "value":
-//                                type: "number"
+//                                type: "integer"
+//                                format: "int64"
 //                        required:
 //                            - "value"
 //                            - "updatedAt"
 //                    "limit":
-//                        type: "number"
+//                        type: "integer"
+//                        format: "int64"
 //                required:
 //                    - "limit"
 //                    - "current"

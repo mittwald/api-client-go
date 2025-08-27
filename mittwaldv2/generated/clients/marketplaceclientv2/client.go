@@ -285,6 +285,11 @@ type Client interface {
 		req CustomerUpdatePaymentMethodRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CustomerUpdatePaymentMethodResponse, *http.Response, error)
+	ExpressInterestToContribute(
+		ctx context.Context,
+		req ExpressInterestToContributeRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*ExpressInterestToContributeResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1798,6 +1803,34 @@ func (c *clientImpl) CustomerUpdatePaymentMethod(
 	}
 
 	var response CustomerUpdatePaymentMethodResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Express interest to be a contributor.
+func (c *clientImpl) ExpressInterestToContribute(
+	ctx context.Context,
+	req ExpressInterestToContributeRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*ExpressInterestToContributeResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response ExpressInterestToContributeResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
