@@ -165,6 +165,11 @@ type Client interface {
 		req GetContributorRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*any, *http.Response, error)
+	PatchContributor(
+		ctx context.Context,
+		req PatchContributorRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*marketplacev2.OwnContributor, *http.Response, error)
 	GetCustomerExtensionInstanceOrders(
 		ctx context.Context,
 		req GetCustomerExtensionInstanceOrdersRequest,
@@ -1139,6 +1144,34 @@ func (c *clientImpl) GetContributor(
 	}
 
 	var response any
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Patch Contributor.
+func (c *clientImpl) PatchContributor(
+	ctx context.Context,
+	req PatchContributorRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*marketplacev2.OwnContributor, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.OwnContributor
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

@@ -18,10 +18,8 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/backup/backup-get-project-backup-toc
 type GetProjectBackupTocRequest struct {
-	ProjectID       string
 	ProjectBackupID string
 	Directory       *string
-	Namespace       *string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -51,7 +49,7 @@ func (r *GetProjectBackupTocRequest) body() (io.Reader, string, error) {
 
 func (r *GetProjectBackupTocRequest) url() string {
 	u := url.URL{
-		Path:     fmt.Sprintf("/v2/project-backups/toc/%s/%s", url.PathEscape(r.ProjectID), url.PathEscape(r.ProjectBackupID)),
+		Path:     fmt.Sprintf("/v2/project-backups/%s/toc", url.PathEscape(r.ProjectBackupID)),
 		RawQuery: r.query().Encode(),
 	}
 	return u.String()
@@ -61,9 +59,6 @@ func (r *GetProjectBackupTocRequest) query() url.Values {
 	q := make(url.Values)
 	if r.Directory != nil {
 		q.Set("directory", *r.Directory)
-	}
-	if r.Namespace != nil {
-		q.Set("namespace", *r.Namespace)
 	}
 	return q
 }

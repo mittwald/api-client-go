@@ -18,10 +18,14 @@ import "fmt"
 //        type: "string"
 //    "description":
 //        type: "string"
+//    "descriptions": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.LocalizedDescription"}
 //    "email":
 //        type: "string"
 //        format: "email"
 //        deprecated: true
+//    "homepage":
+//        type: "string"
+//        format: "uri"
 //    "id":
 //        type: "string"
 //    "imprint": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ContributorImprint"}
@@ -30,6 +34,8 @@ import "fmt"
 //        format: "uuid"
 //    "name":
 //        type: "string"
+//    "nameInherited":
+//        type: "boolean"
 //    "phone":
 //        type: "string"
 //        deprecated: true
@@ -46,36 +52,50 @@ import "fmt"
 //                - "inherited"
 //    "url":
 //        type: "string"
+//        deprecated: true
 // required:
 //    - "id"
 //    - "customerId"
 //    - "state"
 //    - "name"
+//    - "nameInherited"
 //    - "supportInformation"
+//    - "email"
 //    - "contactPersonUserId"
 //    - "contractOwner"
 //    - "contributorNumber"
 
 type OwnContributor struct {
-	ContactPersonUserId string              `json:"contactPersonUserId"`
-	ContractOwner       ContractOwner       `json:"contractOwner"`
-	ContributorNumber   string              `json:"contributorNumber"`
-	CustomerId          string              `json:"customerId"`
-	Description         *string             `json:"description,omitempty"`
-	Email               *string             `json:"email,omitempty"`
-	Id                  string              `json:"id"`
-	Imprint             *ContributorImprint `json:"imprint,omitempty"`
-	LogoRefId           *string             `json:"logoRefId,omitempty"`
-	Name                string              `json:"name"`
-	Phone               *string             `json:"phone,omitempty"`
-	State               ContributorState    `json:"state"`
-	SupportInformation  any                 `json:"supportInformation"`
-	Url                 *string             `json:"url,omitempty"`
+	ContactPersonUserId string                `json:"contactPersonUserId"`
+	ContractOwner       ContractOwner         `json:"contractOwner"`
+	ContributorNumber   string                `json:"contributorNumber"`
+	CustomerId          string                `json:"customerId"`
+	Description         *string               `json:"description,omitempty"`
+	Descriptions        *LocalizedDescription `json:"descriptions,omitempty"`
+	Email               string                `json:"email"`
+	Homepage            *string               `json:"homepage,omitempty"`
+	Id                  string                `json:"id"`
+	Imprint             *ContributorImprint   `json:"imprint,omitempty"`
+	LogoRefId           *string               `json:"logoRefId,omitempty"`
+	Name                string                `json:"name"`
+	NameInherited       bool                  `json:"nameInherited"`
+	Phone               *string               `json:"phone,omitempty"`
+	State               ContributorState      `json:"state"`
+	SupportInformation  any                   `json:"supportInformation"`
+	Url                 *string               `json:"url,omitempty"`
 }
 
 func (o *OwnContributor) Validate() error {
 	if err := o.ContractOwner.Validate(); err != nil {
 		return fmt.Errorf("invalid property contractOwner: %w", err)
+	}
+	if err := func() error {
+		if o.Descriptions == nil {
+			return nil
+		}
+		return o.Descriptions.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property descriptions: %w", err)
 	}
 	if err := func() error {
 		if o.Imprint == nil {

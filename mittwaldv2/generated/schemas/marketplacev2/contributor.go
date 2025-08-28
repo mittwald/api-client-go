@@ -19,6 +19,7 @@ import "fmt"
 //        deprecated: true
 //    "homepage":
 //        type: "string"
+//        format: "uri"
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -43,18 +44,20 @@ import "fmt"
 //                - "inherited"
 //    "url":
 //        type: "string"
+//        deprecated: true
 // required:
 //    - "id"
 //    - "customerId"
 //    - "state"
 //    - "name"
 //    - "supportInformation"
+//    - "email"
 
 type Contributor struct {
 	CustomerId         string                `json:"customerId"`
 	Description        *string               `json:"description,omitempty"`
 	Descriptions       *LocalizedDescription `json:"descriptions,omitempty"`
-	Email              *string               `json:"email,omitempty"`
+	Email              string                `json:"email"`
 	Homepage           *string               `json:"homepage,omitempty"`
 	Id                 string                `json:"id"`
 	Imprint            *ContributorImprint   `json:"imprint,omitempty"`
