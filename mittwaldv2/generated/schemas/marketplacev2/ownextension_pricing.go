@@ -12,18 +12,13 @@ import (
 
 // This data type was generated from the following JSON schema:
 // oneOf:
-//    - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricingStrategy"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricePlanStrategy"}
 
 type OwnExtensionPricing struct {
-	AlternativeMonthlyPricingStrategy   *MonthlyPricingStrategy
 	AlternativeMonthlyPricePlanStrategy MonthlyPricePlanStrategy
 }
 
 func (a *OwnExtensionPricing) MarshalJSON() ([]byte, error) {
-	if a.AlternativeMonthlyPricingStrategy != nil {
-		return json.Marshal(a.AlternativeMonthlyPricingStrategy)
-	}
 	if a.AlternativeMonthlyPricePlanStrategy != nil {
 		return json.Marshal(a.AlternativeMonthlyPricePlanStrategy)
 	}
@@ -35,16 +30,6 @@ func (a *OwnExtensionPricing) UnmarshalJSON(input []byte) error {
 	decodedAtLeastOnce := false
 	dec := json.NewDecoder(reader)
 	dec.DisallowUnknownFields()
-
-	reader.Reset(input)
-	var alternativeMonthlyPricingStrategy MonthlyPricingStrategy
-	if err := dec.Decode(&alternativeMonthlyPricingStrategy); err == nil {
-		//subtype: *generator.ReferenceType
-		if vErr := alternativeMonthlyPricingStrategy.Validate(); vErr == nil {
-			a.AlternativeMonthlyPricingStrategy = &alternativeMonthlyPricingStrategy
-			decodedAtLeastOnce = true
-		}
-	}
 
 	reader.Reset(input)
 	var alternativeMonthlyPricePlanStrategy MonthlyPricePlanStrategy
@@ -70,9 +55,6 @@ func (a *OwnExtensionPricing) UnmarshalJSON(input []byte) error {
 }
 
 func (a *OwnExtensionPricing) Validate() error {
-	if a.AlternativeMonthlyPricingStrategy != nil {
-		return a.AlternativeMonthlyPricingStrategy.Validate()
-	}
 	if a.AlternativeMonthlyPricePlanStrategy != nil {
 		return func() error {
 			for i := range a.AlternativeMonthlyPricePlanStrategy {
