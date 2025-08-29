@@ -15,6 +15,11 @@ import (
 )
 
 type Client interface {
+	ExpressInterestToContribute(
+		ctx context.Context,
+		req ExpressInterestToContributeRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*ExpressInterestToContributeResponse, *http.Response, error)
 	GetBillingInformation(
 		ctx context.Context,
 		req GetBillingInformationRequest,
@@ -50,6 +55,16 @@ type Client interface {
 		req ListOnbehalfInvoicesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]ListOnbehalfInvoicesResponseItem, *http.Response, error)
+	GetContributor(
+		ctx context.Context,
+		req GetContributorRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*any, *http.Response, error)
+	PatchContributor(
+		ctx context.Context,
+		req PatchContributorRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*marketplacev2.OwnContributor, *http.Response, error)
 	ReceiptGetFileAccessToken(
 		ctx context.Context,
 		req ReceiptGetFileAccessTokenRequest,
@@ -160,16 +175,6 @@ type Client interface {
 		req GenerateSessionTokenRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*GenerateSessionTokenResponse, *http.Response, error)
-	GetContributor(
-		ctx context.Context,
-		req GetContributorRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*any, *http.Response, error)
-	PatchContributor(
-		ctx context.Context,
-		req PatchContributorRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*marketplacev2.OwnContributor, *http.Response, error)
 	GetCustomerExtensionInstanceOrders(
 		ctx context.Context,
 		req GetCustomerExtensionInstanceOrdersRequest,
@@ -290,11 +295,6 @@ type Client interface {
 		req CustomerUpdatePaymentMethodRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CustomerUpdatePaymentMethodResponse, *http.Response, error)
-	ExpressInterestToContribute(
-		ctx context.Context,
-		req ExpressInterestToContributeRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*ExpressInterestToContributeResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -302,6 +302,34 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Express interest to be a contributor.
+func (c *clientImpl) ExpressInterestToContribute(
+	ctx context.Context,
+	req ExpressInterestToContributeRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*ExpressInterestToContributeResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response ExpressInterestToContributeResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Get Contributor Billing Information.
@@ -500,6 +528,62 @@ func (c *clientImpl) ListOnbehalfInvoices(
 	}
 
 	var response []ListOnbehalfInvoicesResponseItem
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get a Contributor.
+func (c *clientImpl) GetContributor(
+	ctx context.Context,
+	req GetContributorRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*any, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response any
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Patch Contributor.
+func (c *clientImpl) PatchContributor(
+	ctx context.Context,
+	req PatchContributorRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*marketplacev2.OwnContributor, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.OwnContributor
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -1116,62 +1200,6 @@ func (c *clientImpl) GenerateSessionToken(
 	}
 
 	var response GenerateSessionTokenResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a Contributor.
-func (c *clientImpl) GetContributor(
-	ctx context.Context,
-	req GetContributorRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*any, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response any
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Patch Contributor.
-func (c *clientImpl) PatchContributor(
-	ctx context.Context,
-	req PatchContributorRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*marketplacev2.OwnContributor, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response marketplacev2.OwnContributor
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -1836,34 +1864,6 @@ func (c *clientImpl) CustomerUpdatePaymentMethod(
 	}
 
 	var response CustomerUpdatePaymentMethodResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Express interest to be a contributor.
-func (c *clientImpl) ExpressInterestToContribute(
-	ctx context.Context,
-	req ExpressInterestToContributeRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*ExpressInterestToContributeResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response ExpressInterestToContributeResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

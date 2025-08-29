@@ -6,6 +6,10 @@ package marketplaceclientv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "dryRun":
+//        type: "boolean"
+//        description: "If set to true, the request will be validated but not executed."
+//        default: false
 //    "priceInCents":
 //        type: "number"
 //        description: "Price in cents."
@@ -13,6 +17,7 @@ package marketplaceclientv2
 
 // UpdateExtensionPricingRequestBody models the JSON body of a 'extension-update-extension-pricing' request
 type UpdateExtensionPricingRequestBody struct {
+	DryRun       *bool    `json:"dryRun,omitempty"`
 	PriceInCents *float64 `json:"priceInCents,omitempty"`
 }
 

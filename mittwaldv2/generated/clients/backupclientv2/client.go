@@ -73,7 +73,7 @@ type Client interface {
 		ctx context.Context,
 		req GetProjectBackupTocRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*backupv2.ProjectBackupTOC, *http.Response, error)
+	) (*backupv2.ProjectBackupDirectory, *http.Response, error)
 	RequestProjectBackupRestorePath(
 		ctx context.Context,
 		req RequestProjectBackupRestorePathRequest,
@@ -386,7 +386,7 @@ func (c *clientImpl) GetProjectBackupToc(
 	ctx context.Context,
 	req GetProjectBackupTocRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*backupv2.ProjectBackupTOC, *http.Response, error) {
+) (*backupv2.ProjectBackupDirectory, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -402,7 +402,7 @@ func (c *clientImpl) GetProjectBackupToc(
 		return nil, httpRes, err
 	}
 
-	var response backupv2.ProjectBackupTOC
+	var response backupv2.ProjectBackupDirectory
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

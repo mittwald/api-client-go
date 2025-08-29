@@ -52,7 +52,7 @@ import (
 //        example: "MyPingExtension"
 //    "pricing":
 //        oneOf:
-//            - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricingStrategy"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricePlanStrategy"}
 //    "published":
 //        type: "boolean"
 //        enum:

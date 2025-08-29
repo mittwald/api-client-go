@@ -12,15 +12,15 @@ import (
 
 // This data type was generated from the following JSON schema:
 // oneOf:
-//    - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricingStrategy"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricePlanStrategy"}
 
 type UnpublishedExtensionPricing struct {
-	AlternativeMonthlyPricingStrategy *MonthlyPricingStrategy
+	AlternativeMonthlyPricePlanStrategy MonthlyPricePlanStrategy
 }
 
 func (a *UnpublishedExtensionPricing) MarshalJSON() ([]byte, error) {
-	if a.AlternativeMonthlyPricingStrategy != nil {
-		return json.Marshal(a.AlternativeMonthlyPricingStrategy)
+	if a.AlternativeMonthlyPricePlanStrategy != nil {
+		return json.Marshal(a.AlternativeMonthlyPricePlanStrategy)
 	}
 	return []byte("null"), nil
 }
@@ -32,11 +32,18 @@ func (a *UnpublishedExtensionPricing) UnmarshalJSON(input []byte) error {
 	dec.DisallowUnknownFields()
 
 	reader.Reset(input)
-	var alternativeMonthlyPricingStrategy MonthlyPricingStrategy
-	if err := dec.Decode(&alternativeMonthlyPricingStrategy); err == nil {
+	var alternativeMonthlyPricePlanStrategy MonthlyPricePlanStrategy
+	if err := dec.Decode(&alternativeMonthlyPricePlanStrategy); err == nil {
 		//subtype: *generator.ReferenceType
-		if vErr := alternativeMonthlyPricingStrategy.Validate(); vErr == nil {
-			a.AlternativeMonthlyPricingStrategy = &alternativeMonthlyPricingStrategy
+		if vErr := func() error {
+			for i := range alternativeMonthlyPricePlanStrategy {
+				if err := alternativeMonthlyPricePlanStrategy[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}(); vErr == nil {
+			a.AlternativeMonthlyPricePlanStrategy = alternativeMonthlyPricePlanStrategy
 			decodedAtLeastOnce = true
 		}
 	}
@@ -48,8 +55,15 @@ func (a *UnpublishedExtensionPricing) UnmarshalJSON(input []byte) error {
 }
 
 func (a *UnpublishedExtensionPricing) Validate() error {
-	if a.AlternativeMonthlyPricingStrategy != nil {
-		return a.AlternativeMonthlyPricingStrategy.Validate()
+	if a.AlternativeMonthlyPricePlanStrategy != nil {
+		return func() error {
+			for i := range a.AlternativeMonthlyPricePlanStrategy {
+				if err := a.AlternativeMonthlyPricePlanStrategy[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}()
 	}
 	return errors.New("no alternative set")
 }

@@ -8,8 +8,6 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "absolutePath":
-//        type: "string"
 //    "isDirectory":
 //        type: "boolean"
 //    "isExecutable":
@@ -20,8 +18,10 @@ import "fmt"
 //        type: "boolean"
 //    "items":
 //        type: "array"
-//        items: {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupTOC"}
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupDirectory"}
 //    "name":
+//        type: "string"
+//    "path":
 //        type: "string"
 //    "size":
 //        type: "integer"
@@ -29,23 +29,23 @@ import "fmt"
 //    "target":
 //        type: "string"
 // required:
-//    - "absolutePath"
+//    - "path"
 //    - "name"
 //    - "size"
 
-type ProjectBackupTOC struct {
-	AbsolutePath string             `json:"absolutePath"`
-	IsDirectory  *bool              `json:"isDirectory,omitempty"`
-	IsExecutable *bool              `json:"isExecutable,omitempty"`
-	IsFile       *bool              `json:"isFile,omitempty"`
-	IsSymlink    *bool              `json:"isSymlink,omitempty"`
-	Items        []ProjectBackupTOC `json:"items,omitempty"`
-	Name         string             `json:"name"`
-	Size         int64              `json:"size"`
-	Target       *string            `json:"target,omitempty"`
+type ProjectBackupDirectory struct {
+	IsDirectory  *bool                    `json:"isDirectory,omitempty"`
+	IsExecutable *bool                    `json:"isExecutable,omitempty"`
+	IsFile       *bool                    `json:"isFile,omitempty"`
+	IsSymlink    *bool                    `json:"isSymlink,omitempty"`
+	Items        []ProjectBackupDirectory `json:"items,omitempty"`
+	Name         string                   `json:"name"`
+	Path         string                   `json:"path"`
+	Size         int64                    `json:"size"`
+	Target       *string                  `json:"target,omitempty"`
 }
 
-func (o *ProjectBackupTOC) Validate() error {
+func (o *ProjectBackupDirectory) Validate() error {
 	if err := func() error {
 		if o.Items == nil {
 			return nil
