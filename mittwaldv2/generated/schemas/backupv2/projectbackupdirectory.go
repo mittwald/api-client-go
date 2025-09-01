@@ -8,6 +8,8 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "absolutePath":
+//        type: "string"
 //    "isDirectory":
 //        type: "boolean"
 //    "isExecutable":
@@ -21,26 +23,24 @@ import "fmt"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupDirectory"}
 //    "name":
 //        type: "string"
-//    "path":
-//        type: "string"
 //    "size":
 //        type: "integer"
 //        format: "int64"
 //    "target":
 //        type: "string"
 // required:
-//    - "path"
+//    - "absolutePath"
 //    - "name"
 //    - "size"
 
 type ProjectBackupDirectory struct {
+	AbsolutePath string                   `json:"absolutePath"`
 	IsDirectory  *bool                    `json:"isDirectory,omitempty"`
 	IsExecutable *bool                    `json:"isExecutable,omitempty"`
 	IsFile       *bool                    `json:"isFile,omitempty"`
 	IsSymlink    *bool                    `json:"isSymlink,omitempty"`
 	Items        []ProjectBackupDirectory `json:"items,omitempty"`
 	Name         string                   `json:"name"`
-	Path         string                   `json:"path"`
 	Size         int64                    `json:"size"`
 	Target       *string                  `json:"target,omitempty"`
 }

@@ -200,6 +200,11 @@ type Client interface {
 		req UpdateProjectMailSettingRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	DisableMailArchive(
+		ctx context.Context,
+		req DisableMailArchiveRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1148,6 +1153,30 @@ func (c *clientImpl) UpdateMailAddressCatchAll(
 func (c *clientImpl) UpdateProjectMailSetting(
 	ctx context.Context,
 	req UpdateProjectMailSettingRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Disable a MailAddress Archive.
+func (c *clientImpl) DisableMailArchive(
+	ctx context.Context,
+	req DisableMailArchiveRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
