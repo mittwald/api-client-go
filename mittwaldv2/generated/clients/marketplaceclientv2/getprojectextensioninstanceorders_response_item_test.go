@@ -14,7 +14,7 @@ import (
 var _ = Describe("GetProjectExtensionInstanceOrdersResponseItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"extensionId\":\"string\"}")
+			exampleJSON := []byte("{\"context\":\"project\",\"extensionId\":\"string\",\"referencedId\":\"string\"}")
 
 			sut := marketplaceclientv2.GetProjectExtensionInstanceOrdersResponseItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
