@@ -29,6 +29,8 @@ import "fmt"
 //    "id":
 //        type: "string"
 //    "imprint": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ContributorImprint"}
+//    "logoInherited":
+//        type: "boolean"
 //    "logoRefId":
 //        type: "string"
 //        format: "uuid"
@@ -76,6 +78,7 @@ type OwnContributor struct {
 	Homepage            *string               `json:"homepage,omitempty"`
 	Id                  string                `json:"id"`
 	Imprint             *ContributorImprint   `json:"imprint,omitempty"`
+	LogoInherited       *bool                 `json:"logoInherited,omitempty"`
 	LogoRefId           *string               `json:"logoRefId,omitempty"`
 	Name                string                `json:"name"`
 	NameInherited       bool                  `json:"nameInherited"`

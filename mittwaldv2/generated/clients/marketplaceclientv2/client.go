@@ -75,6 +75,16 @@ type Client interface {
 		req ReceiptGetFileAccessTokenRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*ReceiptGetFileAccessTokenResponse, *http.Response, error)
+	RequestDeviatingContributorAvatarUpload(
+		ctx context.Context,
+		req RequestDeviatingContributorAvatarUploadRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*RequestDeviatingContributorAvatarUploadResponse, *http.Response, error)
+	ResetContributorAvatar(
+		ctx context.Context,
+		req ResetContributorAvatarRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	RotateSecretForExtensionInstance(
 		ctx context.Context,
 		req RotateSecretForExtensionInstanceRequest,
@@ -645,6 +655,58 @@ func (c *clientImpl) ReceiptGetFileAccessToken(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Add a deviating avatar to a Contributor.
+func (c *clientImpl) RequestDeviatingContributorAvatarUpload(
+	ctx context.Context,
+	req RequestDeviatingContributorAvatarUploadRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RequestDeviatingContributorAvatarUploadResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestDeviatingContributorAvatarUploadResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete deviating contributor avatar und return to the inherited customer avatar.
+func (c *clientImpl) ResetContributorAvatar(
+	ctx context.Context,
+	req ResetContributorAvatarRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // Rotate the secret for an extension instance.
