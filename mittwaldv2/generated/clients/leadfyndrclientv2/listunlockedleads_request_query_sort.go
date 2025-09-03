@@ -10,15 +10,17 @@ import "fmt"
 // enum:
 //    - "potential"
 //    - "relevance"
+//    - "company"
 // default: "relevance"
 
 type ListUnlockedLeadsRequestQuerySort string
 
 const ListUnlockedLeadsRequestQuerySortPotential ListUnlockedLeadsRequestQuerySort = "potential"
 const ListUnlockedLeadsRequestQuerySortRelevance ListUnlockedLeadsRequestQuerySort = "relevance"
+const ListUnlockedLeadsRequestQuerySortCompany ListUnlockedLeadsRequestQuerySort = "company"
 
 func (e ListUnlockedLeadsRequestQuerySort) Validate() error {
-	if e == ListUnlockedLeadsRequestQuerySortPotential || e == ListUnlockedLeadsRequestQuerySortRelevance {
+	if e == ListUnlockedLeadsRequestQuerySortPotential || e == ListUnlockedLeadsRequestQuerySortRelevance || e == ListUnlockedLeadsRequestQuerySortCompany {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

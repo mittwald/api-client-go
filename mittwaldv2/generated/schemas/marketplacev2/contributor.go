@@ -26,6 +26,7 @@ import "fmt"
 //    "imprint": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ContributorImprint"}
 //    "logoRefId":
 //        type: "string"
+//        format: "uuid"
 //    "name":
 //        type: "string"
 //    "phone":

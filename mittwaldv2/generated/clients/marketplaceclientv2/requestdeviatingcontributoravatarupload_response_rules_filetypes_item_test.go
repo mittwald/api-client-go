@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("UpdateExtensionPricingRequestBody", func() {
+var _ = Describe("RequestDeviatingContributorAvatarUploadResponseRulesFileTypesItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"dryRun\":true,\"priceInCents\":3.14}")
+			exampleJSON := []byte("{\"extensions\":[\".png\"],\"mimeType\":\"image/png\"}")
 
-			sut := marketplaceclientv2.UpdateExtensionPricingRequestBody{}
+			sut := marketplaceclientv2.RequestDeviatingContributorAvatarUploadResponseRulesFileTypesItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

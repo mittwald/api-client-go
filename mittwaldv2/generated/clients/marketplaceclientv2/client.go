@@ -15,6 +15,21 @@ import (
 )
 
 type Client interface {
+	GetContributor(
+		ctx context.Context,
+		req GetContributorRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*any, *http.Response, error)
+	DeleteContributor(
+		ctx context.Context,
+		req DeleteContributorRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	PatchContributor(
+		ctx context.Context,
+		req PatchContributorRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*marketplacev2.OwnContributor, *http.Response, error)
 	ExpressInterestToContribute(
 		ctx context.Context,
 		req ExpressInterestToContributeRequest,
@@ -55,21 +70,21 @@ type Client interface {
 		req ListOnbehalfInvoicesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]ListOnbehalfInvoicesResponseItem, *http.Response, error)
-	GetContributor(
-		ctx context.Context,
-		req GetContributorRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*any, *http.Response, error)
-	PatchContributor(
-		ctx context.Context,
-		req PatchContributorRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*marketplacev2.OwnContributor, *http.Response, error)
 	ReceiptGetFileAccessToken(
 		ctx context.Context,
 		req ReceiptGetFileAccessTokenRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*ReceiptGetFileAccessTokenResponse, *http.Response, error)
+	RequestDeviatingContributorAvatarUpload(
+		ctx context.Context,
+		req RequestDeviatingContributorAvatarUploadRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*RequestDeviatingContributorAvatarUploadResponse, *http.Response, error)
+	ResetContributorAvatar(
+		ctx context.Context,
+		req ResetContributorAvatarRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	RotateSecretForExtensionInstance(
 		ctx context.Context,
 		req RotateSecretForExtensionInstanceRequest,
@@ -304,6 +319,86 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
+// Get a Contributor.
+func (c *clientImpl) GetContributor(
+	ctx context.Context,
+	req GetContributorRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*any, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response any
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete a Contributor.
+func (c *clientImpl) DeleteContributor(
+	ctx context.Context,
+	req DeleteContributorRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Patch Contributor.
+func (c *clientImpl) PatchContributor(
+	ctx context.Context,
+	req PatchContributorRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*marketplacev2.OwnContributor, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response marketplacev2.OwnContributor
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Express interest to be a contributor.
 func (c *clientImpl) ExpressInterestToContribute(
 	ctx context.Context,
@@ -534,62 +629,6 @@ func (c *clientImpl) ListOnbehalfInvoices(
 	return &response, httpRes, nil
 }
 
-// Get a Contributor.
-func (c *clientImpl) GetContributor(
-	ctx context.Context,
-	req GetContributorRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*any, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response any
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Patch Contributor.
-func (c *clientImpl) PatchContributor(
-	ctx context.Context,
-	req PatchContributorRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*marketplacev2.OwnContributor, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response marketplacev2.OwnContributor
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
 // Request an Access Token for the Incoming Invoice file.
 func (c *clientImpl) ReceiptGetFileAccessToken(
 	ctx context.Context,
@@ -616,6 +655,58 @@ func (c *clientImpl) ReceiptGetFileAccessToken(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Add a deviating avatar to a Contributor.
+func (c *clientImpl) RequestDeviatingContributorAvatarUpload(
+	ctx context.Context,
+	req RequestDeviatingContributorAvatarUploadRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RequestDeviatingContributorAvatarUploadResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestDeviatingContributorAvatarUploadResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete deviating contributor avatar und return to the inherited customer avatar.
+func (c *clientImpl) ResetContributorAvatar(
+	ctx context.Context,
+	req ResetContributorAvatarRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // Rotate the secret for an extension instance.
