@@ -19,6 +19,7 @@ import (
 // https://developer.mittwald.de/docs/v2/reference/marketplace/contributor-list-incoming-invoices
 type ListIncomingInvoicesRequest struct {
 	ContributorID string
+	Search        *string
 	Limit         *int64
 	Skip          *int64
 	Page          *int64
@@ -61,6 +62,9 @@ func (r *ListIncomingInvoicesRequest) url() string {
 
 func (r *ListIncomingInvoicesRequest) query() url.Values {
 	q := make(url.Values)
+	if r.Search != nil {
+		q.Set("search", *r.Search)
+	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
 	}

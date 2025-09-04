@@ -24,7 +24,6 @@ type ListMailAddressesRequest struct {
 	ForwardAddress *bool
 	CatchAll       *bool
 	AutoResponder  *bool
-	MailArchive    *bool
 	Limit          *int64
 	Skip           *int64
 	Page           *int64
@@ -78,9 +77,6 @@ func (r *ListMailAddressesRequest) query() url.Values {
 	}
 	if r.AutoResponder != nil {
 		q.Set("autoResponder", strconv.FormatBool(*r.AutoResponder))
-	}
-	if r.MailArchive != nil {
-		q.Set("mailArchive", strconv.FormatBool(*r.MailArchive))
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
