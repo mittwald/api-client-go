@@ -60,6 +60,10 @@ import (
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.directus.Domain"}
 //        description: "List of domains which should be transferred (when allDomains is not checked)."
+//    "emailInboxes":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.directus.EmailInbox"}
+//        description: "List of email inboxes which should be transferred."
 //    "notes":
 //        type: "string"
 //        description: "Anything our customer service needs to know for the relocation process."
@@ -178,6 +182,7 @@ type CreateRelocationRequestBody struct {
 	ArticleType         CreateRelocationRequestBodyArticleType        `json:"articleType"`
 	Contact             CreateRelocationRequestBodyContact            `json:"contact"`
 	Domains             []directusv2.Domain                           `json:"domains,omitempty"`
+	EmailInboxes        []directusv2.EmailInbox                       `json:"emailInboxes,omitempty"`
 	Notes               *string                                       `json:"notes,omitempty"`
 	Prices              CreateRelocationRequestBodyPrices             `json:"prices"`
 	Provider            CreateRelocationRequestBodyProvider           `json:"provider"`
@@ -209,6 +214,21 @@ func (o *CreateRelocationRequestBody) Validate() error {
 		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property domains: %w", err)
+	}
+	if err := func() error {
+		if o.EmailInboxes == nil {
+			return nil
+		}
+		return func() error {
+			for i := range o.EmailInboxes {
+				if err := o.EmailInboxes[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}()
+	}(); err != nil {
+		return fmt.Errorf("invalid property emailInboxes: %w", err)
 	}
 	if err := o.Prices.Validate(); err != nil {
 		return fmt.Errorf("invalid property prices: %w", err)
