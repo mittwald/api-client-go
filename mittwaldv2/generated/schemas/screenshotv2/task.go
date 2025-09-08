@@ -20,7 +20,7 @@ import (
 //        type: "string"
 //        format: "uuid"
 //    "priority":
-//        type: "integer"
+//        type: "number"
 //    "settings": {"$ref": "#/components/schemas/de.mittwald.v1.screenshot.ScreenshotSettings"}
 //    "target": {"$ref": "#/components/schemas/de.mittwald.v1.screenshot.Target"}
 //    "taskState":
@@ -37,7 +37,7 @@ type Task struct {
 	ExecutedAt    *time.Time         `json:"executedAt,omitempty"`
 	FileReference *string            `json:"fileReference,omitempty"`
 	Id            string             `json:"id"`
-	Priority      int64              `json:"priority"`
+	Priority      float64            `json:"priority"`
 	Settings      ScreenshotSettings `json:"settings"`
 	Target        Target             `json:"target"`
 	TaskState     *TaskTaskState     `json:"taskState,omitempty"`

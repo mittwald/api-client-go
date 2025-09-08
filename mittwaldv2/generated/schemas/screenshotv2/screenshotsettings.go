@@ -15,16 +15,13 @@ import "fmt"
 //            - "png"
 //            - "webp"
 //    "delay":
-//        type: "integer"
-//        format: "int64"
+//        type: "number"
 //    "height":
-//        type: "integer"
-//        format: "int64"
+//        type: "number"
 //    "quality":
-//        type: "integer"
+//        type: "number"
 //    "width":
-//        type: "integer"
-//        format: "int64"
+//        type: "number"
 // required:
 //    - "width"
 //    - "height"
@@ -34,10 +31,10 @@ import "fmt"
 
 type ScreenshotSettings struct {
 	DataType ScreenshotSettingsDataType `json:"dataType"`
-	Delay    int64                      `json:"delay"`
-	Height   int64                      `json:"height"`
-	Quality  int64                      `json:"quality"`
-	Width    int64                      `json:"width"`
+	Delay    float64                    `json:"delay"`
+	Height   float64                    `json:"height"`
+	Quality  float64                    `json:"quality"`
+	Width    float64                    `json:"width"`
 }
 
 func (o *ScreenshotSettings) Validate() error {

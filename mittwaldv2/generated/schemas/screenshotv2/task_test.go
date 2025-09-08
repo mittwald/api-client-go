@@ -14,7 +14,7 @@ import (
 var _ = Describe("Task", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"executedAt\":\"2006-01-02T15:04:05Z\",\"fileReference\":\"string\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"priority\":42,\"settings\":{\"dataType\":\"jpeg\",\"delay\":42,\"height\":42,\"quality\":42,\"width\":42},\"target\":{\"domain\":\"example.com\",\"path\":\"string\",\"scheme\":\"http\"},\"taskState\":\"string\"}")
+			exampleJSON := []byte("{\"executedAt\":\"2006-01-02T15:04:05Z\",\"fileReference\":\"string\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"priority\":3.14,\"settings\":{\"dataType\":\"jpeg\",\"delay\":3.14,\"height\":3.14,\"quality\":3.14,\"width\":3.14},\"target\":{\"domain\":\"example.com\",\"path\":\"string\",\"scheme\":\"http\"},\"taskState\":\"string\"}")
 
 			sut := screenshotv2.Task{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
