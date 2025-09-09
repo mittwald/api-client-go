@@ -24,6 +24,7 @@ type ListExtensionInstancesRequest struct {
 	ContextID   *string
 	ExtensionID *string
 	SearchTerm  *string
+	Anchor      *string
 	Limit       *int64
 	Skip        *int64
 	Page        *int64
@@ -77,6 +78,9 @@ func (r *ListExtensionInstancesRequest) query() url.Values {
 	}
 	if r.SearchTerm != nil {
 		q.Set("searchTerm", *r.SearchTerm)
+	}
+	if r.Anchor != nil {
+		q.Set("anchor", *r.Anchor)
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))

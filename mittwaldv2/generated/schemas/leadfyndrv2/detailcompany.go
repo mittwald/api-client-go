@@ -20,6 +20,11 @@ package leadfyndrv2
 //                type: "string"
 //        "name":
 //            type: "string"
+//        "phoneNumbers":
+//            type: "array"
+//            items:
+//                type: "string"
+//            default: []
 //        "targetGroup":
 //            type: "array"
 //            items:
@@ -34,7 +39,8 @@ package leadfyndrv2
 //        - "websiteType"
 //        - "companyType"
 //        - "city"
+//        - "phoneNumbers"
 
 // TODO: This schema could not be automatically generated
-// {"allOf":[{"$ref":"#/components/schemas/de.mittwald.v1.leadfyndr.BasicCompany"},{"properties":{"city":{"type":"string"},"companyType":{"items":{"type":"string"},"type":"array"},"coreProduct":{"items":{"type":"string"},"type":"array"},"name":{"type":"string"},"targetGroup":{"items":{"type":"string"},"type":"array"},"websiteType":{"items":{"type":"string"},"type":"array"}},"required":["targetGroup","coreProduct","websiteType","companyType","city"],"type":"object"}]}
+// {"allOf":[{"$ref":"#/components/schemas/de.mittwald.v1.leadfyndr.BasicCompany"},{"properties":{"city":{"type":"string"},"companyType":{"items":{"type":"string"},"type":"array"},"coreProduct":{"items":{"type":"string"},"type":"array"},"name":{"type":"string"},"phoneNumbers":{"default":[],"items":{"type":"string"},"type":"array"},"targetGroup":{"items":{"type":"string"},"type":"array"},"websiteType":{"items":{"type":"string"},"type":"array"}},"required":["targetGroup","coreProduct","websiteType","companyType","city","phoneNumbers"],"type":"object"}]}
 type DetailCompany = any

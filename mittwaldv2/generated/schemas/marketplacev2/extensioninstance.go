@@ -47,6 +47,9 @@ import (
 //    "extensionName":
 //        type: "string"
 //    "extensionSubTitle": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SubTitle"}
+//    "frontendFragments":
+//        type: "object"
+//        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.FrontendFragment"}
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -79,6 +82,7 @@ type ExtensionInstance struct {
 	ExtensionId         string                              `json:"extensionId"`
 	ExtensionName       string                              `json:"extensionName"`
 	ExtensionSubTitle   *SubTitle                           `json:"extensionSubTitle,omitempty"`
+	FrontendFragments   map[string]any                      `json:"frontendFragments,omitempty"`
 	Id                  string                              `json:"id"`
 	PendingInstallation bool                                `json:"pendingInstallation"`
 	PendingRemoval      bool                                `json:"pendingRemoval"`
