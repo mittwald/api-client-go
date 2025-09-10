@@ -20,8 +20,6 @@ import (
 //    "files":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.conversation.File"}
-//    "internal":
-//        type: "boolean"
 //    "messageContent":
 //        type: "string"
 //        enum:
@@ -43,14 +41,12 @@ import (
 //    - "messageContent"
 //    - "createdAt"
 //    - "type"
-//    - "internal"
 //    - "meta"
 
 type ServiceRequest struct {
 	ConversationId string                       `json:"conversationId"`
 	CreatedAt      time.Time                    `json:"createdAt"`
 	Files          []File                       `json:"files,omitempty"`
-	Internal       bool                         `json:"internal"`
 	MessageContent ServiceRequestMessageContent `json:"messageContent"`
 	MessageId      string                       `json:"messageId"`
 	Meta           ServiceRequestMeta           `json:"meta"`
