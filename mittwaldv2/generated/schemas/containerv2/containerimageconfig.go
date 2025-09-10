@@ -14,6 +14,10 @@ import "fmt"
 //            type: "string"
 //            example: "mysqld"
 //        description: "Command of the container image."
+//    "digest":
+//        type: "string"
+//        description: "The image digest."
+//        example: "sha256:216aab5860821ba2eecad636722a6891e40a81791fbb61e2bd49bfc5aeeacdca"
 //    "entrypoint":
 //        type: "array"
 //        items:
@@ -63,9 +67,11 @@ import "fmt"
 //    - "isUserRoot"
 //    - "hasAiGeneratedData"
 //    - "isAiAvailable"
+//    - "digest"
 
 type ContainerImageConfig struct {
 	Command            []string                          `json:"command,omitempty"`
+	Digest             string                            `json:"digest"`
 	Entrypoint         []string                          `json:"entrypoint,omitempty"`
 	Env                []ContainerImageConfigEnv         `json:"env,omitempty"`
 	ExposedPorts       []ContainerImageConfigExposedPort `json:"exposedPorts,omitempty"`

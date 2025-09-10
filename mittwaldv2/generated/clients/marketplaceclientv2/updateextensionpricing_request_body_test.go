@@ -13,12 +13,21 @@ import (
 
 var _ = Describe("UpdateExtensionPricingRequestBody", func() {
 	When("unmarshaling from JSON", func() {
-		It("should unmarshal", func() {
+		It("should unmarshal into AlternativeUpdateExtensionPricingRequestBodyAlternative1", func() {
 			exampleJSON := []byte("{\"dryRun\":true,\"priceInCents\":3.14}")
 
 			sut := marketplaceclientv2.UpdateExtensionPricingRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
+			Expect(sut.AlternativeUpdateExtensionPricingRequestBodyAlternative1).NotTo(BeNil())
+		})
+		It("should unmarshal into AlternativeUpdateExtensionPricingRequestBodyAlternative2", func() {
+			exampleJSON := []byte("{\"dryRun\":true,\"pricePlan\":{\"variants\":[{\"description\":\"string\",\"key\":\"string\",\"name\":\"string\",\"priceInCents\":3.14}]}}")
+
+			sut := marketplaceclientv2.UpdateExtensionPricingRequestBody{}
+			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
+			Expect(sut.Validate()).To(Succeed())
+			Expect(sut.AlternativeUpdateExtensionPricingRequestBodyAlternative2).NotTo(BeNil())
 		})
 	})
 })

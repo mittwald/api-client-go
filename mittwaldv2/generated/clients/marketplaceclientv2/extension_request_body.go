@@ -22,6 +22,10 @@ import (
 //            type: "string"
 //            format: "uuid"
 //            description: "The customer the extension should be booked for. Either customerId or projectId is required."
+//        "variantKey":
+//            type: "string"
+//            description: "The Variant Key of the selected Variant of the Extension. This is only required if the Extension has multiple Variants."
+//            example: "default"
 //      required:
 //        - "consentedScopes"
 //        - "customerId"
@@ -35,6 +39,10 @@ import (
 //            type: "string"
 //            format: "uuid"
 //            description: "The project the extension should be installed in. Either customerId or projectId is required."
+//        "variantKey":
+//            type: "string"
+//            description: "The Variant Key of the selected Variant of the Extension. This is only required if the Extension has multiple Variants."
+//            example: "default"
 //      required:
 //        - "consentedScopes"
 //        - "projectId"
