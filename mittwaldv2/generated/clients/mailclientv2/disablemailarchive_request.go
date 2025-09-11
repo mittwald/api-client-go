@@ -13,12 +13,12 @@ import (
 // DisableMailArchiveRequest models a request for the 'mail-disable-mail-archive'
 // operation. See [1] for more information.
 //
-// Disable a MailAddress Archive.
+// Disable the mail-archive of a MailAddress.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/mail/mail-disable-mail-archive
 type DisableMailArchiveRequest struct {
-	MailArchiveID string
+	MailAddressID string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -48,7 +48,7 @@ func (r *DisableMailArchiveRequest) body() (io.Reader, string, error) {
 
 func (r *DisableMailArchiveRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/mail-archive/%s", url.PathEscape(r.MailArchiveID)),
+		Path: fmt.Sprintf("/v2/mail-addresses/%s/mail-archive", url.PathEscape(r.MailAddressID)),
 	}
 	return u.String()
 }

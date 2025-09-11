@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/llmlocksmithv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/aihostingv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/membershipv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/projectv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/storagespacev2"
@@ -31,12 +31,12 @@ type Client interface {
 		ctx context.Context,
 		req GetLlmLicencesExperimentalRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*[]llmlocksmithv2.Licence, *http.Response, error)
+	) (*[]aihostingv2.Licence, *http.Response, error)
 	CreateLlmBetaLicenceExperimental(
 		ctx context.Context,
 		req CreateLlmBetaLicenceExperimentalRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*llmlocksmithv2.Licence, *http.Response, error)
+	) (*aihostingv2.Licence, *http.Response, error)
 	ListInvitesForProject(
 		ctx context.Context,
 		req ListInvitesForProjectRequest,
@@ -116,12 +116,12 @@ type Client interface {
 		ctx context.Context,
 		req GetLlmLicenceExperimentalRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*llmlocksmithv2.Licence, *http.Response, error)
+	) (*aihostingv2.Licence, *http.Response, error)
 	UpdateLlmLicenceExperimental(
 		ctx context.Context,
 		req UpdateLlmLicenceExperimentalRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*llmlocksmithv2.Licence, *http.Response, error)
+	) (*aihostingv2.Licence, *http.Response, error)
 	GetProjectTokenInvite(
 		ctx context.Context,
 		req GetProjectTokenInviteRequest,
@@ -261,7 +261,7 @@ func (c *clientImpl) GetLlmLicencesExperimental(
 	ctx context.Context,
 	req GetLlmLicencesExperimentalRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*[]llmlocksmithv2.Licence, *http.Response, error) {
+) (*[]aihostingv2.Licence, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -277,7 +277,7 @@ func (c *clientImpl) GetLlmLicencesExperimental(
 		return nil, httpRes, err
 	}
 
-	var response []llmlocksmithv2.Licence
+	var response []aihostingv2.Licence
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -291,7 +291,7 @@ func (c *clientImpl) CreateLlmBetaLicenceExperimental(
 	ctx context.Context,
 	req CreateLlmBetaLicenceExperimentalRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*llmlocksmithv2.Licence, *http.Response, error) {
+) (*aihostingv2.Licence, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -307,7 +307,7 @@ func (c *clientImpl) CreateLlmBetaLicenceExperimental(
 		return nil, httpRes, err
 	}
 
-	var response llmlocksmithv2.Licence
+	var response aihostingv2.Licence
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -711,7 +711,7 @@ func (c *clientImpl) GetLlmLicenceExperimental(
 	ctx context.Context,
 	req GetLlmLicenceExperimentalRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*llmlocksmithv2.Licence, *http.Response, error) {
+) (*aihostingv2.Licence, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -727,7 +727,7 @@ func (c *clientImpl) GetLlmLicenceExperimental(
 		return nil, httpRes, err
 	}
 
-	var response llmlocksmithv2.Licence
+	var response aihostingv2.Licence
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -739,7 +739,7 @@ func (c *clientImpl) UpdateLlmLicenceExperimental(
 	ctx context.Context,
 	req UpdateLlmLicenceExperimentalRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*llmlocksmithv2.Licence, *http.Response, error) {
+) (*aihostingv2.Licence, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -755,7 +755,7 @@ func (c *clientImpl) UpdateLlmLicenceExperimental(
 		return nil, httpRes, err
 	}
 
-	var response llmlocksmithv2.Licence
+	var response aihostingv2.Licence
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

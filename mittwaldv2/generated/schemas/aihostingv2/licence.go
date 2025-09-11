@@ -1,4 +1,4 @@
-package llmlocksmithv2
+package aihostingv2
 
 import (
 	"errors"
@@ -11,7 +11,7 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "containerMeta": {"$ref": "#/components/schemas/de.mittwald.v1.llmlocksmith.ContainerMeta"}
+//    "containerMeta": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.ContainerMeta"}
 //    "customerId":
 //        type: "string"
 //    "isBlocked":
@@ -20,18 +20,37 @@ import (
 //        default: false
 //    "licenceId":
 //        type: "string"
+//        description: "Auto generated uuid to identify licences in requests."
 //    "licenceKey":
 //        type: "string"
+//        description: "The secret API key which is required for authentication with the LLM hosting."
+//    "limit":
+//        type: "object"
+//        properties:
+//            "allowedRequestsPerUnit":
+//                type: "number"
+//            "unit":
+//                type: "string"
+//                enum:
+//                    - "minute"
+//                    - "hour"
+//        required:
+//            - "allowedRequestsPerUnit"
+//            - "unit"
+//        description: "The number of allowed requests per unit. Limits are shared across all licences within the same project."
 //    "models":
 //        type: "array"
 //        items:
 //            type: "string"
+//        description: "An array of LLM model identifiers enabled for this licence."
 //    "name":
 //        type: "string"
 //    "projectId":
 //        type: "string"
 //    "rateLimit":
 //        type: "number"
+//        description: "Deprecated, please us limit.allowedRequestsPerUnit"
+//        deprecated: true
 // required:
 //    - "licenceId"
 //    - "licenceKey"
@@ -39,6 +58,7 @@ import (
 //    - "name"
 //    - "rateLimit"
 //    - "isBlocked"
+//    - "limit"
 
 type Licence struct {
 	ContainerMeta *ContainerMeta `json:"containerMeta,omitempty"`
@@ -46,6 +66,7 @@ type Licence struct {
 	IsBlocked     bool           `json:"isBlocked"`
 	LicenceId     string         `json:"licenceId"`
 	LicenceKey    string         `json:"licenceKey"`
+	Limit         LicenceLimit   `json:"limit"`
 	Models        []string       `json:"models"`
 	Name          string         `json:"name"`
 	ProjectId     *string        `json:"projectId,omitempty"`
@@ -60,6 +81,9 @@ func (o *Licence) Validate() error {
 		return o.ContainerMeta.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property containerMeta: %w", err)
+	}
+	if err := o.Limit.Validate(); err != nil {
+		return fmt.Errorf("invalid property limit: %w", err)
 	}
 	if o.Models == nil {
 		return errors.New("property models is required, but not set")

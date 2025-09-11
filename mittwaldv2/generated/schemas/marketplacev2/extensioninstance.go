@@ -59,6 +59,9 @@ import (
 //    "pendingRemoval":
 //        type: "boolean"
 //        default: false
+//    "variantKey":
+//        type: "string"
+//        example: "default"
 // required:
 //    - "id"
 //    - "extensionId"
@@ -86,6 +89,7 @@ type ExtensionInstance struct {
 	Id                  string                              `json:"id"`
 	PendingInstallation bool                                `json:"pendingInstallation"`
 	PendingRemoval      bool                                `json:"pendingRemoval"`
+	VariantKey          *string                             `json:"variantKey,omitempty"`
 }
 
 func (o *ExtensionInstance) Validate() error {

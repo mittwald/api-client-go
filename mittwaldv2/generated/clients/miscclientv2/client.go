@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/llmlocksmithv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/aihostingv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/verificationv2"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
 	"github.com/mittwald/api-client-go/pkg/httperr"
@@ -19,7 +19,7 @@ type Client interface {
 		ctx context.Context,
 		req GetLlmModelsExperimentalRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*[]llmlocksmithv2.Model, *http.Response, error)
+	) (*[]aihostingv2.Model, *http.Response, error)
 	VerificationDetectPhishingEmail(
 		ctx context.Context,
 		req VerificationDetectPhishingEmailRequest,
@@ -49,7 +49,7 @@ func (c *clientImpl) GetLlmModelsExperimental(
 	ctx context.Context,
 	req GetLlmModelsExperimentalRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*[]llmlocksmithv2.Model, *http.Response, error) {
+) (*[]aihostingv2.Model, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -65,7 +65,7 @@ func (c *clientImpl) GetLlmModelsExperimental(
 		return nil, httpRes, err
 	}
 
-	var response []llmlocksmithv2.Model
+	var response []aihostingv2.Model
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
