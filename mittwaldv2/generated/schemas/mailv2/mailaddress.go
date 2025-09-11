@@ -15,6 +15,24 @@ import (
 //    "address":
 //        type: "string"
 //        format: "idn-email"
+//    "archive":
+//        type: "object"
+//        properties:
+//            "active":
+//                type: "boolean"
+//                description: "shows if the mail-archive is enabled"
+//            "quota":
+//                type: "integer"
+//                format: "int64"
+//                description: "maximum available mail-archive storage in bytes"
+//            "usedBytes":
+//                type: "integer"
+//                format: "int64"
+//                description: "current mail-archive usage in bytes"
+//        required:
+//            - "active"
+//            - "quota"
+//            - "usedBytes"
 //    "autoResponder":
 //        type: "object"
 //        properties:
@@ -119,9 +137,11 @@ import (
 //    - "autoResponder"
 //    - "isArchived"
 //    - "isBackupInProgress"
+//    - "archive"
 
 type MailAddress struct {
 	Address            string                   `json:"address"`
+	Archive            MailAddressArchive       `json:"archive"`
 	AutoResponder      MailAddressAutoResponder `json:"autoResponder"`
 	ForwardAddresses   []string                 `json:"forwardAddresses"`
 	Id                 string                   `json:"id"`
@@ -135,6 +155,9 @@ type MailAddress struct {
 }
 
 func (o *MailAddress) Validate() error {
+	if err := o.Archive.Validate(); err != nil {
+		return fmt.Errorf("invalid property archive: %w", err)
+	}
 	if err := o.AutoResponder.Validate(); err != nil {
 		return fmt.Errorf("invalid property autoResponder: %w", err)
 	}

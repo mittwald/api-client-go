@@ -14,7 +14,7 @@ import (
 var _ = Describe("ExtensionRequestBodyAlternative1", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"consentedScopes\":[\"string\"],\"customerId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{\"consentedScopes\":[\"string\"],\"customerId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"variantKey\":\"default\"}")
 
 			sut := marketplaceclientv2.ExtensionRequestBodyAlternative1{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

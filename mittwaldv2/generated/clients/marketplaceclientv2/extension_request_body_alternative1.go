@@ -16,6 +16,10 @@ import "errors"
 //        type: "string"
 //        format: "uuid"
 //        description: "The customer the extension should be booked for. Either customerId or projectId is required."
+//    "variantKey":
+//        type: "string"
+//        description: "The Variant Key of the selected Variant of the Extension. This is only required if the Extension has multiple Variants."
+//        example: "default"
 // required:
 //    - "consentedScopes"
 //    - "customerId"
@@ -23,6 +27,7 @@ import "errors"
 type ExtensionRequestBodyAlternative1 struct {
 	ConsentedScopes []string `json:"consentedScopes"`
 	CustomerId      string   `json:"customerId"`
+	VariantKey      *string  `json:"variantKey,omitempty"`
 }
 
 func (o *ExtensionRequestBodyAlternative1) Validate() error {

@@ -1,4 +1,4 @@
-package llmlocksmithv2_test
+package aihostingv2_test
 
 import (
 	"testing"
@@ -9,5 +9,5 @@ import (
 
 func TestTypes(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "llmlocksmithv2_test types")
+	RunSpecs(t, "aihostingv2_test types")
 }

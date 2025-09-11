@@ -1,4 +1,4 @@
-package llmlocksmithv2
+package aihostingv2
 
 import "fmt"
 

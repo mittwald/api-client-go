@@ -13,6 +13,7 @@ import "fmt"
 //    - "upgrading"
 //    - "ready"
 //    - "disabled"
+//    - "reconfiguring"
 // description: "Phase describes the current phase/state of an AppInstallation in its lifecycle."
 // example: "ready"
 
@@ -24,9 +25,10 @@ const PhaseInstalling Phase = "installing"
 const PhaseUpgrading Phase = "upgrading"
 const PhaseReady Phase = "ready"
 const PhaseDisabled Phase = "disabled"
+const PhaseReconfiguring Phase = "reconfiguring"
 
 func (e Phase) Validate() error {
-	if e == PhasePending || e == PhaseInstalling || e == PhaseUpgrading || e == PhaseReady || e == PhaseDisabled {
+	if e == PhasePending || e == PhaseInstalling || e == PhaseUpgrading || e == PhaseReady || e == PhaseDisabled || e == PhaseReconfiguring {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
