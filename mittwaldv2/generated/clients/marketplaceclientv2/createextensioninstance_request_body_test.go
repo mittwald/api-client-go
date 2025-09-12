@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateExtensionInstanceRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"consentedScopes\":[\"string\"],\"context\":\"project\",\"contextId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"extensionId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{\"consentedScopes\":[\"string\"],\"context\":\"project\",\"contextId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"extensionId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"variantKey\":\"string\"}")
 
 			sut := marketplaceclientv2.CreateExtensionInstanceRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
