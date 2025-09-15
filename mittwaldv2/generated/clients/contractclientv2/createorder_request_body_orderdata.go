@@ -19,6 +19,7 @@ import (
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.DomainOrder"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.ExternalCertificateOrder"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.LeadFyndrOrder"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.order.MailArchiveOrder"}
 
 type CreateOrderRequestBodyOrderData struct {
 	AlternativeProjectHostingOrder      *orderv2.ProjectHostingOrder
@@ -26,6 +27,7 @@ type CreateOrderRequestBodyOrderData struct {
 	AlternativeDomainOrder              *orderv2.DomainOrder
 	AlternativeExternalCertificateOrder *orderv2.ExternalCertificateOrder
 	AlternativeLeadFyndrOrder           *orderv2.LeadFyndrOrder
+	AlternativeMailArchiveOrder         *orderv2.MailArchiveOrder
 }
 
 func (a *CreateOrderRequestBodyOrderData) MarshalJSON() ([]byte, error) {
@@ -43,6 +45,9 @@ func (a *CreateOrderRequestBodyOrderData) MarshalJSON() ([]byte, error) {
 	}
 	if a.AlternativeLeadFyndrOrder != nil {
 		return json.Marshal(a.AlternativeLeadFyndrOrder)
+	}
+	if a.AlternativeMailArchiveOrder != nil {
+		return json.Marshal(a.AlternativeMailArchiveOrder)
 	}
 	return []byte("null"), nil
 }
@@ -103,6 +108,16 @@ func (a *CreateOrderRequestBodyOrderData) UnmarshalJSON(input []byte) error {
 		}
 	}
 
+	reader.Reset(input)
+	var alternativeMailArchiveOrder orderv2.MailArchiveOrder
+	if err := dec.Decode(&alternativeMailArchiveOrder); err == nil {
+		//subtype: *generator.ReferenceType
+		if vErr := alternativeMailArchiveOrder.Validate(); vErr == nil {
+			a.AlternativeMailArchiveOrder = &alternativeMailArchiveOrder
+			decodedAtLeastOnce = true
+		}
+	}
+
 	if !decodedAtLeastOnce {
 		return fmt.Errorf("could not unmarshal into any alternative for type %T", a)
 	}
@@ -124,6 +139,9 @@ func (a *CreateOrderRequestBodyOrderData) Validate() error {
 	}
 	if a.AlternativeLeadFyndrOrder != nil {
 		return a.AlternativeLeadFyndrOrder.Validate()
+	}
+	if a.AlternativeMailArchiveOrder != nil {
+		return a.AlternativeMailArchiveOrder.Validate()
 	}
 	return errors.New("no alternative set")
 }

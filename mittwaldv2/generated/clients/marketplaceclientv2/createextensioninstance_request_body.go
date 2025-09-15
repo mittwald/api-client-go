@@ -24,6 +24,8 @@ import (
 //    "extensionId":
 //        type: "string"
 //        format: "uuid"
+//    "variantKey":
+//        type: "string"
 // required:
 //    - "extensionId"
 //    - "consentedScopes"
@@ -37,6 +39,7 @@ type CreateExtensionInstanceRequestBody struct {
 	Context         marketplacev2.Context `json:"context"`
 	ContextId       string                `json:"contextId"`
 	ExtensionId     string                `json:"extensionId"`
+	VariantKey      *string               `json:"variantKey,omitempty"`
 }
 
 func (o *CreateExtensionInstanceRequestBody) Validate() error {
