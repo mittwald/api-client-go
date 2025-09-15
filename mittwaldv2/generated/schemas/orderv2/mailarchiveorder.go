@@ -9,14 +9,14 @@ package orderv2
 //    "mailAddressId":
 //        type: "string"
 //        format: "uuid"
-//    "useCurrentData":
+//    "syncExistingMails":
 //        type: "boolean"
 // required:
 //    - "mailAddressId"
 
 type MailArchiveOrder struct {
-	MailAddressId  string `json:"mailAddressId"`
-	UseCurrentData *bool  `json:"useCurrentData,omitempty"`
+	MailAddressId     string `json:"mailAddressId"`
+	SyncExistingMails *bool  `json:"syncExistingMails,omitempty"`
 }
 
 func (o *MailArchiveOrder) Validate() error {

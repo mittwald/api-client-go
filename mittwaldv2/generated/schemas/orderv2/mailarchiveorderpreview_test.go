@@ -14,7 +14,7 @@ import (
 var _ = Describe("MailArchiveOrderPreview", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"mailAddressId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"useCurrentData\":true}")
+			exampleJSON := []byte("{\"mailAddressId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"syncExistingMails\":true}")
 
 			sut := orderv2.MailArchiveOrderPreview{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
