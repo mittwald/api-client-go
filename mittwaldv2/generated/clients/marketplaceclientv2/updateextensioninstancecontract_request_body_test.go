@@ -14,7 +14,7 @@ import (
 var _ = Describe("UpdateExtensionInstanceContractRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"variantKey\":\"default\"}")
+			exampleJSON := []byte("{}")
 
 			sut := marketplaceclientv2.UpdateExtensionInstanceContractRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
