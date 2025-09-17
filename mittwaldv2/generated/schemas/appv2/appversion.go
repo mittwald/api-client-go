@@ -17,6 +17,9 @@ import "fmt"
 //    "databases":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.app.DatabaseDependency"}
+//    "defaultCronjobs":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.app.DefaultCronjob"}
 //    "docRoot":
 //        type: "string"
 //    "docRootUserEditable":
@@ -54,6 +57,7 @@ type AppVersion struct {
 	BackendPathTemplate        *string                    `json:"backendPathTemplate,omitempty"`
 	BreakingNote               *BreakingNote              `json:"breakingNote,omitempty"`
 	Databases                  []DatabaseDependency       `json:"databases,omitempty"`
+	DefaultCronjobs            []DefaultCronjob           `json:"defaultCronjobs,omitempty"`
 	DocRoot                    string                     `json:"docRoot"`
 	DocRootUserEditable        bool                       `json:"docRootUserEditable"`
 	ExternalVersion            string                     `json:"externalVersion"`
@@ -88,6 +92,21 @@ func (o *AppVersion) Validate() error {
 		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property databases: %w", err)
+	}
+	if err := func() error {
+		if o.DefaultCronjobs == nil {
+			return nil
+		}
+		return func() error {
+			for i := range o.DefaultCronjobs {
+				if err := o.DefaultCronjobs[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}()
+	}(); err != nil {
+		return fmt.Errorf("invalid property defaultCronjobs: %w", err)
 	}
 	if err := func() error {
 		if o.RequestHandler == nil {

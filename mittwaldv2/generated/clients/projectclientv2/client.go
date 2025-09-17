@@ -17,16 +17,6 @@ import (
 )
 
 type Client interface {
-	DeprecatedLeaveProject(
-		ctx context.Context,
-		req DeprecatedLeaveProjectRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	AcceptProjectInvite(
-		ctx context.Context,
-		req AcceptProjectInviteRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	GetLlmLicencesExperimental(
 		ctx context.Context,
 		req GetLlmLicencesExperimentalRequest,
@@ -37,26 +27,11 @@ type Client interface {
 		req CreateLlmBetaLicenceExperimentalRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*aihostingv2.Licence, *http.Response, error)
-	ListInvitesForProject(
-		ctx context.Context,
-		req ListInvitesForProjectRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]membershipv2.ProjectInvite, *http.Response, error)
-	CreateProjectInvite(
-		ctx context.Context,
-		req CreateProjectInviteRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*membershipv2.ProjectInvite, *http.Response, error)
 	CreateProject(
 		ctx context.Context,
 		req CreateProjectRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CreateProjectResponse, *http.Response, error)
-	DeclineProjectInvite(
-		ctx context.Context,
-		req DeclineProjectInviteRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	RequestProjectAvatarUpload(
 		ctx context.Context,
 		req RequestProjectAvatarUploadRequest,
@@ -65,31 +40,6 @@ type Client interface {
 	DeleteProjectAvatar(
 		ctx context.Context,
 		req DeleteProjectAvatarRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	GetProjectInvite(
-		ctx context.Context,
-		req GetProjectInviteRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*membershipv2.ProjectInvite, *http.Response, error)
-	DeleteProjectInvite(
-		ctx context.Context,
-		req DeleteProjectInviteRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	GetProjectMembership(
-		ctx context.Context,
-		req GetProjectMembershipRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*membershipv2.ProjectMembership, *http.Response, error)
-	DeleteProjectMembership(
-		ctx context.Context,
-		req DeleteProjectMembershipRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	UpdateProjectMembership(
-		ctx context.Context,
-		req UpdateProjectMembershipRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetProject(
@@ -122,36 +72,11 @@ type Client interface {
 		req UpdateLlmLicenceExperimentalRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*aihostingv2.Licence, *http.Response, error)
-	GetProjectTokenInvite(
-		ctx context.Context,
-		req GetProjectTokenInviteRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*membershipv2.ProjectInvite, *http.Response, error)
-	GetSelfMembershipForProject(
-		ctx context.Context,
-		req GetSelfMembershipForProjectRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*membershipv2.ProjectMembership, *http.Response, error)
 	GetServer(
 		ctx context.Context,
 		req GetServerRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*projectv2.Server, *http.Response, error)
-	ListMembershipsForProject(
-		ctx context.Context,
-		req ListMembershipsForProjectRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]membershipv2.ProjectMembership, *http.Response, error)
-	ListProjectInvites(
-		ctx context.Context,
-		req ListProjectInvitesRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]membershipv2.ProjectInvite, *http.Response, error)
-	ListProjectMemberships(
-		ctx context.Context,
-		req ListProjectMembershipsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]membershipv2.ProjectMembership, *http.Response, error)
 	ListProjects(
 		ctx context.Context,
 		req ListProjectsRequest,
@@ -162,11 +87,6 @@ type Client interface {
 		req ListServersRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]projectv2.Server, *http.Response, error)
-	ResendProjectInviteMail(
-		ctx context.Context,
-		req ResendProjectInviteMailRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	UpdateProjectDescription(
 		ctx context.Context,
 		req UpdateProjectDescriptionRequest,
@@ -197,6 +117,86 @@ type Client interface {
 		req StoragespaceReplaceServerNotificationThresholdRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	ResendProjectInviteMail(
+		ctx context.Context,
+		req ResendProjectInviteMailRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	AcceptProjectInvite(
+		ctx context.Context,
+		req AcceptProjectInviteRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	GetProjectTokenInvite(
+		ctx context.Context,
+		req GetProjectTokenInviteRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*membershipv2.ProjectInvite, *http.Response, error)
+	ListProjectMemberships(
+		ctx context.Context,
+		req ListProjectMembershipsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]membershipv2.ProjectMembership, *http.Response, error)
+	DeclineProjectInvite(
+		ctx context.Context,
+		req DeclineProjectInviteRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	GetProjectMembership(
+		ctx context.Context,
+		req GetProjectMembershipRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*membershipv2.ProjectMembership, *http.Response, error)
+	DeleteProjectMembership(
+		ctx context.Context,
+		req DeleteProjectMembershipRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	UpdateProjectMembership(
+		ctx context.Context,
+		req UpdateProjectMembershipRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	GetProjectInvite(
+		ctx context.Context,
+		req GetProjectInviteRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*membershipv2.ProjectInvite, *http.Response, error)
+	DeleteProjectInvite(
+		ctx context.Context,
+		req DeleteProjectInviteRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	GetSelfMembershipForProject(
+		ctx context.Context,
+		req GetSelfMembershipForProjectRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*membershipv2.ProjectMembership, *http.Response, error)
+	DeprecatedLeaveProject(
+		ctx context.Context,
+		req DeprecatedLeaveProjectRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	ListProjectInvites(
+		ctx context.Context,
+		req ListProjectInvitesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]membershipv2.ProjectInvite, *http.Response, error)
+	ListInvitesForProject(
+		ctx context.Context,
+		req ListInvitesForProjectRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]membershipv2.ProjectInvite, *http.Response, error)
+	CreateProjectInvite(
+		ctx context.Context,
+		req CreateProjectInviteRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*membershipv2.ProjectInvite, *http.Response, error)
+	ListMembershipsForProject(
+		ctx context.Context,
+		req ListMembershipsForProjectRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]membershipv2.ProjectMembership, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -204,56 +204,6 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
-}
-
-// Leave a Project.
-//
-// Deprecated by `DELETE /v2/project-memberships/{projectMembershipId}`.
-func (c *clientImpl) DeprecatedLeaveProject(
-	ctx context.Context,
-	req DeprecatedLeaveProjectRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Accept a ProjectInvite.
-func (c *clientImpl) AcceptProjectInvite(
-	ctx context.Context,
-	req AcceptProjectInviteRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
 
 // Get a list of already created llm licences.
@@ -314,62 +264,6 @@ func (c *clientImpl) CreateLlmBetaLicenceExperimental(
 	return &response, httpRes, nil
 }
 
-// List Invites belonging to a Project.
-func (c *clientImpl) ListInvitesForProject(
-	ctx context.Context,
-	req ListInvitesForProjectRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]membershipv2.ProjectInvite, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []membershipv2.ProjectInvite
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Create a ProjectInvite.
-func (c *clientImpl) CreateProjectInvite(
-	ctx context.Context,
-	req CreateProjectInviteRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*membershipv2.ProjectInvite, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response membershipv2.ProjectInvite
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
 // Create a Project belonging to a Server.
 func (c *clientImpl) CreateProject(
 	ctx context.Context,
@@ -396,30 +290,6 @@ func (c *clientImpl) CreateProject(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Decline a ProjectInvite.
-func (c *clientImpl) DeclineProjectInvite(
-	ctx context.Context,
-	req DeclineProjectInviteRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
 
 // Request a Project avatar upload.
@@ -454,134 +324,6 @@ func (c *clientImpl) RequestProjectAvatarUpload(
 func (c *clientImpl) DeleteProjectAvatar(
 	ctx context.Context,
 	req DeleteProjectAvatarRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Get a ProjectInvite.
-func (c *clientImpl) GetProjectInvite(
-	ctx context.Context,
-	req GetProjectInviteRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*membershipv2.ProjectInvite, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response membershipv2.ProjectInvite
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Delete a ProjectInvite.
-func (c *clientImpl) DeleteProjectInvite(
-	ctx context.Context,
-	req DeleteProjectInviteRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Get a ProjectMembership
-func (c *clientImpl) GetProjectMembership(
-	ctx context.Context,
-	req GetProjectMembershipRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*membershipv2.ProjectMembership, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response membershipv2.ProjectMembership
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Delete a ProjectMembership.
-func (c *clientImpl) DeleteProjectMembership(
-	ctx context.Context,
-	req DeleteProjectMembershipRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update a ProjectMembership.
-func (c *clientImpl) UpdateProjectMembership(
-	ctx context.Context,
-	req UpdateProjectMembershipRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -762,62 +504,6 @@ func (c *clientImpl) UpdateLlmLicenceExperimental(
 	return &response, httpRes, nil
 }
 
-// Get a ProjectInvite by token.
-func (c *clientImpl) GetProjectTokenInvite(
-	ctx context.Context,
-	req GetProjectTokenInviteRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*membershipv2.ProjectInvite, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response membershipv2.ProjectInvite
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get the executing user's membership in a Project.
-func (c *clientImpl) GetSelfMembershipForProject(
-	ctx context.Context,
-	req GetSelfMembershipForProjectRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*membershipv2.ProjectMembership, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response membershipv2.ProjectMembership
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
 // Get a Server.
 func (c *clientImpl) GetServer(
 	ctx context.Context,
@@ -840,90 +526,6 @@ func (c *clientImpl) GetServer(
 	}
 
 	var response projectv2.Server
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List Memberships belonging to a Project.
-func (c *clientImpl) ListMembershipsForProject(
-	ctx context.Context,
-	req ListMembershipsForProjectRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]membershipv2.ProjectMembership, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []membershipv2.ProjectMembership
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List ProjectInvites belonging to the executing user.
-func (c *clientImpl) ListProjectInvites(
-	ctx context.Context,
-	req ListProjectInvitesRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]membershipv2.ProjectInvite, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []membershipv2.ProjectInvite
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List ProjectMemberships belonging to the executing user.
-func (c *clientImpl) ListProjectMemberships(
-	ctx context.Context,
-	req ListProjectMembershipsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]membershipv2.ProjectMembership, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []membershipv2.ProjectMembership
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -984,30 +586,6 @@ func (c *clientImpl) ListServers(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Resend the mail for a ProjectInvite.
-func (c *clientImpl) ResendProjectInviteMail(
-	ctx context.Context,
-	req ResendProjectInviteMailRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
 
 // Update a Project's description.
@@ -1160,4 +738,426 @@ func (c *clientImpl) StoragespaceReplaceServerNotificationThreshold(
 	}
 
 	return httpRes, nil
+}
+
+// Resend the mail for a ProjectInvite.
+func (c *clientImpl) ResendProjectInviteMail(
+	ctx context.Context,
+	req ResendProjectInviteMailRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Accept a ProjectInvite.
+func (c *clientImpl) AcceptProjectInvite(
+	ctx context.Context,
+	req AcceptProjectInviteRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Get a ProjectInvite by token.
+func (c *clientImpl) GetProjectTokenInvite(
+	ctx context.Context,
+	req GetProjectTokenInviteRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*membershipv2.ProjectInvite, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response membershipv2.ProjectInvite
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List ProjectMemberships belonging to the executing user.
+func (c *clientImpl) ListProjectMemberships(
+	ctx context.Context,
+	req ListProjectMembershipsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]membershipv2.ProjectMembership, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []membershipv2.ProjectMembership
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Decline a ProjectInvite.
+func (c *clientImpl) DeclineProjectInvite(
+	ctx context.Context,
+	req DeclineProjectInviteRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Get a ProjectMembership
+func (c *clientImpl) GetProjectMembership(
+	ctx context.Context,
+	req GetProjectMembershipRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*membershipv2.ProjectMembership, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response membershipv2.ProjectMembership
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete a ProjectMembership.
+func (c *clientImpl) DeleteProjectMembership(
+	ctx context.Context,
+	req DeleteProjectMembershipRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a ProjectMembership.
+func (c *clientImpl) UpdateProjectMembership(
+	ctx context.Context,
+	req UpdateProjectMembershipRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Get a ProjectInvite.
+func (c *clientImpl) GetProjectInvite(
+	ctx context.Context,
+	req GetProjectInviteRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*membershipv2.ProjectInvite, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response membershipv2.ProjectInvite
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete a ProjectInvite.
+func (c *clientImpl) DeleteProjectInvite(
+	ctx context.Context,
+	req DeleteProjectInviteRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Get the executing user's membership in a Project.
+func (c *clientImpl) GetSelfMembershipForProject(
+	ctx context.Context,
+	req GetSelfMembershipForProjectRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*membershipv2.ProjectMembership, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response membershipv2.ProjectMembership
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Leave a Project.
+//
+// Deprecated by `DELETE /v2/project-memberships/{projectMembershipId}`.
+func (c *clientImpl) DeprecatedLeaveProject(
+	ctx context.Context,
+	req DeprecatedLeaveProjectRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// List ProjectInvites belonging to the executing user.
+func (c *clientImpl) ListProjectInvites(
+	ctx context.Context,
+	req ListProjectInvitesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]membershipv2.ProjectInvite, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []membershipv2.ProjectInvite
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Invites belonging to a Project.
+func (c *clientImpl) ListInvitesForProject(
+	ctx context.Context,
+	req ListInvitesForProjectRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]membershipv2.ProjectInvite, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []membershipv2.ProjectInvite
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create a ProjectInvite.
+func (c *clientImpl) CreateProjectInvite(
+	ctx context.Context,
+	req CreateProjectInviteRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*membershipv2.ProjectInvite, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response membershipv2.ProjectInvite
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Memberships belonging to a Project.
+func (c *clientImpl) ListMembershipsForProject(
+	ctx context.Context,
+	req ListMembershipsForProjectRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]membershipv2.ProjectMembership, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []membershipv2.ProjectMembership
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }

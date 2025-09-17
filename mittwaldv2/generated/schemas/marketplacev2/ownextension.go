@@ -81,6 +81,7 @@ import (
 //            - "blocked"
 //            - "disabled"
 //        description: "deprecated"
+//        deprecated: true
 //    "statistics": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExtensionStatistics"}
 //    "subTitle": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SubTitle"}
 //    "support":

@@ -15,21 +15,6 @@ import (
 )
 
 type Client interface {
-	AcceptCustomerInvite(
-		ctx context.Context,
-		req AcceptCustomerInviteRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	ListInvitesForCustomer(
-		ctx context.Context,
-		req ListInvitesForCustomerRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]membershipv2.CustomerInvite, *http.Response, error)
-	CreateCustomerInvite(
-		ctx context.Context,
-		req CreateCustomerInviteRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*membershipv2.CustomerInvite, *http.Response, error)
 	ListCustomers(
 		ctx context.Context,
 		req ListCustomersRequest,
@@ -55,19 +40,34 @@ type Client interface {
 		req CreateWalletRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CreateWalletResponse, *http.Response, error)
-	DeclineCustomerInvite(
+	GetCustomer(
 		ctx context.Context,
-		req DeclineCustomerInviteRequest,
+		req GetCustomerRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	GetCustomerInvite(
+	) (*customerv2.Customer, *http.Response, error)
+	UpdateCustomer(
 		ctx context.Context,
-		req GetCustomerInviteRequest,
+		req UpdateCustomerRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*membershipv2.CustomerInvite, *http.Response, error)
-	DeleteCustomerInvite(
+	) (*UpdateCustomerResponse, *http.Response, error)
+	DeleteCustomer(
 		ctx context.Context,
-		req DeleteCustomerInviteRequest,
+		req DeleteCustomerRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*DeleteCustomerResponse, *http.Response, error)
+	IsCustomerLegallyCompetent(
+		ctx context.Context,
+		req IsCustomerLegallyCompetentRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*IsCustomerLegallyCompetentResponse, *http.Response, error)
+	RequestAvatarUpload(
+		ctx context.Context,
+		req RequestAvatarUploadRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*RequestAvatarUploadResponse, *http.Response, error)
+	RemoveAvatar(
+		ctx context.Context,
+		req RemoveAvatarRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetCustomerMembership(
@@ -85,66 +85,66 @@ type Client interface {
 		req UpdateCustomerMembershipRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	GetCustomer(
-		ctx context.Context,
-		req GetCustomerRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*customerv2.Customer, *http.Response, error)
-	UpdateCustomer(
-		ctx context.Context,
-		req UpdateCustomerRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*UpdateCustomerResponse, *http.Response, error)
-	DeleteCustomer(
-		ctx context.Context,
-		req DeleteCustomerRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*DeleteCustomerResponse, *http.Response, error)
-	GetCustomerTokenInvite(
-		ctx context.Context,
-		req GetCustomerTokenInviteRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*membershipv2.CustomerInvite, *http.Response, error)
-	IsCustomerLegallyCompetent(
-		ctx context.Context,
-		req IsCustomerLegallyCompetentRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*IsCustomerLegallyCompetentResponse, *http.Response, error)
-	ListCustomerInvites(
-		ctx context.Context,
-		req ListCustomerInvitesRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]membershipv2.CustomerInvite, *http.Response, error)
-	ListCustomerMemberships(
-		ctx context.Context,
-		req ListCustomerMembershipsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]membershipv2.CustomerMembership, *http.Response, error)
-	ListMembershipsForCustomer(
-		ctx context.Context,
-		req ListMembershipsForCustomerRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]membershipv2.CustomerMembership, *http.Response, error)
-	RequestAvatarUpload(
-		ctx context.Context,
-		req RequestAvatarUploadRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*RequestAvatarUploadResponse, *http.Response, error)
-	RemoveAvatar(
-		ctx context.Context,
-		req RemoveAvatarRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	ResendCustomerInviteMail(
 		ctx context.Context,
 		req ResendCustomerInviteMailRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	AcceptCustomerInvite(
+		ctx context.Context,
+		req AcceptCustomerInviteRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	GetCustomerInvite(
+		ctx context.Context,
+		req GetCustomerInviteRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*membershipv2.CustomerInvite, *http.Response, error)
+	DeleteCustomerInvite(
+		ctx context.Context,
+		req DeleteCustomerInviteRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	DeclineCustomerInvite(
+		ctx context.Context,
+		req DeclineCustomerInviteRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	ListCustomerMemberships(
+		ctx context.Context,
+		req ListCustomerMembershipsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]membershipv2.CustomerMembership, *http.Response, error)
+	ListInvitesForCustomer(
+		ctx context.Context,
+		req ListInvitesForCustomerRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]membershipv2.CustomerInvite, *http.Response, error)
+	CreateCustomerInvite(
+		ctx context.Context,
+		req CreateCustomerInviteRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*membershipv2.CustomerInvite, *http.Response, error)
 	DeprecatedLeaveCustomer(
 		ctx context.Context,
 		req DeprecatedLeaveCustomerRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetCustomerTokenInvite(
+		ctx context.Context,
+		req GetCustomerTokenInviteRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*membershipv2.CustomerInvite, *http.Response, error)
+	ListMembershipsForCustomer(
+		ctx context.Context,
+		req ListMembershipsForCustomerRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]membershipv2.CustomerMembership, *http.Response, error)
+	ListCustomerInvites(
+		ctx context.Context,
+		req ListCustomerInvitesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]membershipv2.CustomerInvite, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -152,86 +152,6 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
-}
-
-// Accept a CustomerInvite.
-func (c *clientImpl) AcceptCustomerInvite(
-	ctx context.Context,
-	req AcceptCustomerInviteRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// List Invites belonging to a Customer.
-func (c *clientImpl) ListInvitesForCustomer(
-	ctx context.Context,
-	req ListInvitesForCustomerRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]membershipv2.CustomerInvite, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []membershipv2.CustomerInvite
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Create a CustomerInvite.
-func (c *clientImpl) CreateCustomerInvite(
-	ctx context.Context,
-	req CreateCustomerInviteRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*membershipv2.CustomerInvite, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response membershipv2.CustomerInvite
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
 
 // Get all customer profiles the authenticated user has access to.
@@ -374,36 +294,12 @@ func (c *clientImpl) CreateWallet(
 	return &response, httpRes, nil
 }
 
-// Decline a CustomerInvite.
-func (c *clientImpl) DeclineCustomerInvite(
+// Get a customer profile.
+func (c *clientImpl) GetCustomer(
 	ctx context.Context,
-	req DeclineCustomerInviteRequest,
+	req GetCustomerRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Get a CustomerInvite.
-func (c *clientImpl) GetCustomerInvite(
-	ctx context.Context,
-	req GetCustomerInviteRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*membershipv2.CustomerInvite, *http.Response, error) {
+) (*customerv2.Customer, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -419,17 +315,129 @@ func (c *clientImpl) GetCustomerInvite(
 		return nil, httpRes, err
 	}
 
-	var response membershipv2.CustomerInvite
+	var response customerv2.Customer
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
 }
 
-// Delete a CustomerInvite.
-func (c *clientImpl) DeleteCustomerInvite(
+// Update a customer profile.
+func (c *clientImpl) UpdateCustomer(
 	ctx context.Context,
-	req DeleteCustomerInviteRequest,
+	req UpdateCustomerRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*UpdateCustomerResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response UpdateCustomerResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete a customer profile.
+func (c *clientImpl) DeleteCustomer(
+	ctx context.Context,
+	req DeleteCustomerRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*DeleteCustomerResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response DeleteCustomerResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Check if the customer profile has a valid contract partner configured.
+func (c *clientImpl) IsCustomerLegallyCompetent(
+	ctx context.Context,
+	req IsCustomerLegallyCompetentRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*IsCustomerLegallyCompetentResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response IsCustomerLegallyCompetentResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Request a new avatar upload for the customer profile.
+func (c *clientImpl) RequestAvatarUpload(
+	ctx context.Context,
+	req RequestAvatarUploadRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RequestAvatarUploadResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestAvatarUploadResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Remove the avatar picture of the customer profile.
+func (c *clientImpl) RemoveAvatar(
+	ctx context.Context,
+	req RemoveAvatarRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -526,94 +534,58 @@ func (c *clientImpl) UpdateCustomerMembership(
 	return httpRes, nil
 }
 
-// Get a customer profile.
-func (c *clientImpl) GetCustomer(
+// Resend the mail for a CustomerInvite.
+func (c *clientImpl) ResendCustomerInviteMail(
 	ctx context.Context,
-	req GetCustomerRequest,
+	req ResendCustomerInviteMailRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*customerv2.Customer, *http.Response, error) {
+) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
 	if err != nil {
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
 	if httpRes.StatusCode >= 400 {
 		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
-	var response customerv2.Customer
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
+	return httpRes, nil
 }
 
-// Update a customer profile.
-func (c *clientImpl) UpdateCustomer(
+// Accept a CustomerInvite.
+func (c *clientImpl) AcceptCustomerInvite(
 	ctx context.Context,
-	req UpdateCustomerRequest,
+	req AcceptCustomerInviteRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*UpdateCustomerResponse, *http.Response, error) {
+) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
 	if err != nil {
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
 	if httpRes.StatusCode >= 400 {
 		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
-	var response UpdateCustomerResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
+	return httpRes, nil
 }
 
-// Delete a customer profile.
-func (c *clientImpl) DeleteCustomer(
+// Get a CustomerInvite.
+func (c *clientImpl) GetCustomerInvite(
 	ctx context.Context,
-	req DeleteCustomerRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*DeleteCustomerResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response DeleteCustomerResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a CustomerInvite by token.
-func (c *clientImpl) GetCustomerTokenInvite(
-	ctx context.Context,
-	req GetCustomerTokenInviteRequest,
+	req GetCustomerInviteRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*membershipv2.CustomerInvite, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -638,60 +610,52 @@ func (c *clientImpl) GetCustomerTokenInvite(
 	return &response, httpRes, nil
 }
 
-// Check if the customer profile has a valid contract partner configured.
-func (c *clientImpl) IsCustomerLegallyCompetent(
+// Delete a CustomerInvite.
+func (c *clientImpl) DeleteCustomerInvite(
 	ctx context.Context,
-	req IsCustomerLegallyCompetentRequest,
+	req DeleteCustomerInviteRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*IsCustomerLegallyCompetentResponse, *http.Response, error) {
+) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
 	if err != nil {
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
 	if httpRes.StatusCode >= 400 {
 		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
-	var response IsCustomerLegallyCompetentResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
+	return httpRes, nil
 }
 
-// List CustomerInvites belonging to the executing user.
-func (c *clientImpl) ListCustomerInvites(
+// Decline a CustomerInvite.
+func (c *clientImpl) DeclineCustomerInvite(
 	ctx context.Context,
-	req ListCustomerInvitesRequest,
+	req DeclineCustomerInviteRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*[]membershipv2.CustomerInvite, *http.Response, error) {
+) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
 	if err != nil {
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
 	if httpRes.StatusCode >= 400 {
 		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
-	var response []membershipv2.CustomerInvite
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
+	return httpRes, nil
 }
 
 // List CustomerMemberships belonging to the executing user.
@@ -716,6 +680,116 @@ func (c *clientImpl) ListCustomerMemberships(
 	}
 
 	var response []membershipv2.CustomerMembership
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Invites belonging to a Customer.
+func (c *clientImpl) ListInvitesForCustomer(
+	ctx context.Context,
+	req ListInvitesForCustomerRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]membershipv2.CustomerInvite, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []membershipv2.CustomerInvite
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create a CustomerInvite.
+func (c *clientImpl) CreateCustomerInvite(
+	ctx context.Context,
+	req CreateCustomerInviteRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*membershipv2.CustomerInvite, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response membershipv2.CustomerInvite
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Leave a Customer.
+//
+// Deprecated by `DELETE /v2/customer-memberships/{customerMembershipId}`.
+func (c *clientImpl) DeprecatedLeaveCustomer(
+	ctx context.Context,
+	req DeprecatedLeaveCustomerRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Get a CustomerInvite by token.
+func (c *clientImpl) GetCustomerTokenInvite(
+	ctx context.Context,
+	req GetCustomerTokenInviteRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*membershipv2.CustomerInvite, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response membershipv2.CustomerInvite
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -750,12 +824,12 @@ func (c *clientImpl) ListMembershipsForCustomer(
 	return &response, httpRes, nil
 }
 
-// Request a new avatar upload for the customer profile.
-func (c *clientImpl) RequestAvatarUpload(
+// List CustomerInvites belonging to the executing user.
+func (c *clientImpl) ListCustomerInvites(
 	ctx context.Context,
-	req RequestAvatarUploadRequest,
+	req ListCustomerInvitesRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*RequestAvatarUploadResponse, *http.Response, error) {
+) (*[]membershipv2.CustomerInvite, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -771,83 +845,9 @@ func (c *clientImpl) RequestAvatarUpload(
 		return nil, httpRes, err
 	}
 
-	var response RequestAvatarUploadResponse
+	var response []membershipv2.CustomerInvite
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Remove the avatar picture of the customer profile.
-func (c *clientImpl) RemoveAvatar(
-	ctx context.Context,
-	req RemoveAvatarRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Resend the mail for a CustomerInvite.
-func (c *clientImpl) ResendCustomerInviteMail(
-	ctx context.Context,
-	req ResendCustomerInviteMailRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Leave a Customer.
-//
-// Deprecated by `DELETE /v2/customer-memberships/{customerMembershipId}`.
-func (c *clientImpl) DeprecatedLeaveCustomer(
-	ctx context.Context,
-	req DeprecatedLeaveCustomerRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }

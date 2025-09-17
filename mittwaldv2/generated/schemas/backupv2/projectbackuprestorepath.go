@@ -12,12 +12,12 @@ package backupv2
 //        default: false
 //    "sourcePath":
 //        type: "string"
-//        description: "Source path within the backup to restore from. If not set, it will be determined as '/home/p-shortid/html' as it's originally sourced from there."
+//        description: "Source path within the backup to restore from. If not set, it will be determined as '/data-p-shortId-userdata/p-shortId/web' as it's originally sourced from there."
 //        example: "/data-p-shortId-userdata/p-shortId/web"
 //    "targetPath":
 //        type: "string"
-//        description: "Target path where the backup should be restored to. If not set, equaled source path with adjusted path mapping. The target path will be determined to equal the origin source, e.g. '/data-p-shortid-userdata/p-shortid/web' will be determined as '/home/p-shortid/html' as it's originally sourced from there."
-//        example: "/home/p-shortid/html"
+//        description: "Target path where the backup should be restored to. If not set, equaled source path with adjusted path mapping. The target path will be determined to equal the origin source, e.g. '/data-p-shortid-userdata/p-shortid/web' will be determined as 'data-p-shortid-userdata/p-shortid/web' as it's originally sourced from there."
+//        example: "data-p-shortId-userdata/p-shortId/web"
 
 type ProjectBackupRestorePath struct {
 	ClearTargetPath *bool   `json:"clearTargetPath,omitempty"`
