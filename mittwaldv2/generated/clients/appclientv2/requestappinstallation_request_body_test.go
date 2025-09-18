@@ -14,7 +14,7 @@ import (
 var _ = Describe("RequestAppinstallationRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"appVersionId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"description\":\"string\",\"updatePolicy\":\"none\",\"userInputs\":[{\"name\":\"string\",\"value\":\"string\"}]}")
+			exampleJSON := []byte("{\"appVersionId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"description\":\"string\",\"installationPath\":\"string\",\"updatePolicy\":\"none\",\"userInputs\":[{\"name\":\"string\",\"value\":\"string\"}]}")
 
 			sut := appclientv2.RequestAppinstallationRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

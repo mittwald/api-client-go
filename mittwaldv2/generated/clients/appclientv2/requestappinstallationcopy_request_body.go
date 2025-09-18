@@ -8,6 +8,8 @@ package appclientv2
 // properties:
 //    "description":
 //        type: "string"
+//    "installationPath":
+//        type: "string"
 //    "targetProjectId":
 //        type: "string"
 //        format: "uuid"
@@ -17,8 +19,9 @@ package appclientv2
 
 // RequestAppinstallationCopyRequestBody models the JSON body of a 'app-request-appinstallation-copy' request
 type RequestAppinstallationCopyRequestBody struct {
-	Description     string  `json:"description"`
-	TargetProjectId *string `json:"targetProjectId,omitempty"`
+	Description      string  `json:"description"`
+	InstallationPath *string `json:"installationPath,omitempty"`
+	TargetProjectId  *string `json:"targetProjectId,omitempty"`
 }
 
 func (o *RequestAppinstallationCopyRequestBody) Validate() error {
