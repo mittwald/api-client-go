@@ -49,7 +49,7 @@ func (r *GetProjectBackupTocRequest) body() (io.Reader, string, error) {
 
 func (r *GetProjectBackupTocRequest) url() string {
 	u := url.URL{
-		Path:     fmt.Sprintf("/v2/project-backups/%s/toc", url.PathEscape(r.ProjectBackupID)),
+		Path:     fmt.Sprintf("/v2/project-backups/%s/paths", url.PathEscape(r.ProjectBackupID)),
 		RawQuery: r.query().Encode(),
 	}
 	return u.String()

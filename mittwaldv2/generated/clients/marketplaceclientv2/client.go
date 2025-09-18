@@ -310,6 +310,11 @@ type Client interface {
 		req CustomerUpdatePaymentMethodRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CustomerUpdatePaymentMethodResponse, *http.Response, error)
+	RequestVerification(
+		ctx context.Context,
+		req RequestVerificationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1959,4 +1964,28 @@ func (c *clientImpl) CustomerUpdatePaymentMethod(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Start the verification process of a contributor.
+func (c *clientImpl) RequestVerification(
+	ctx context.Context,
+	req RequestVerificationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }

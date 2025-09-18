@@ -16,8 +16,8 @@ package backupv2
 //        example: "/data-p-shortId-userdata/p-shortId/web"
 //    "targetPath":
 //        type: "string"
-//        description: "Target path where the backup should be restored to. If not set, equaled source path with adjusted path mapping. The target path will be determined to equal the origin source, e.g. '/data-p-shortid-userdata/p-shortid/web' will be determined as 'data-p-shortid-userdata/p-shortid/web' as it's originally sourced from there."
-//        example: "data-p-shortId-userdata/p-shortId/web"
+//        description: "Target path where the backup should be restored to. If not set, the target path will be determined to equal the origin source, e.g. '/data-p-shortid-userdata/p-shortid' will be determined as 'data-p-shortid-userdata/p-shortid' as it's originally sourced from there."
+//        example: "data-p-shortId-userdata/p-shortId"
 
 type ProjectBackupRestorePath struct {
 	ClearTargetPath *bool   `json:"clearTargetPath,omitempty"`

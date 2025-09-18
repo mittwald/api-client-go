@@ -27,6 +27,7 @@ import (
 //    "detailedDescriptions": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions"}
 //    "disabled":
 //        type: "boolean"
+//        deprecated: true
 //    "externalFrontends":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent"}
