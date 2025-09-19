@@ -27,6 +27,7 @@ import (
 //    "detailedDescriptions": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions"}
 //    "disabled":
 //        type: "boolean"
+//        deprecated: true
 //    "externalFrontends":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExternalComponent"}
@@ -81,6 +82,7 @@ import (
 //            - "blocked"
 //            - "disabled"
 //        description: "deprecated"
+//        deprecated: true
 //    "statistics": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExtensionStatistics"}
 //    "subTitle": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.SubTitle"}
 //    "support":

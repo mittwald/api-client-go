@@ -10,6 +10,7 @@ import "fmt"
 // enum:
 //    - "enabled"
 //    - "disabled"
+// deprecated: true
 
 type ContributorState string
 

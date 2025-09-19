@@ -12,6 +12,7 @@ import "fmt"
 //    - "blocked"
 //    - "disabled"
 // description: "deprecated"
+// deprecated: true
 
 // deprecated
 type OwnExtensionState string

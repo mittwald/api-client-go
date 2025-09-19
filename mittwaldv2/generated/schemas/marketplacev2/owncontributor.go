@@ -55,10 +55,16 @@ import "fmt"
 //    "url":
 //        type: "string"
 //        deprecated: true
+//    "verificationRequested":
+//        type: "boolean"
+//    "verified":
+//        type: "boolean"
 // required:
 //    - "id"
 //    - "customerId"
 //    - "state"
+//    - "verified"
+//    - "verificationRequested"
 //    - "name"
 //    - "nameInherited"
 //    - "supportInformation"
@@ -68,24 +74,26 @@ import "fmt"
 //    - "contributorNumber"
 
 type OwnContributor struct {
-	ContactPersonUserId string                `json:"contactPersonUserId"`
-	ContractOwner       ContractOwner         `json:"contractOwner"`
-	ContributorNumber   string                `json:"contributorNumber"`
-	CustomerId          string                `json:"customerId"`
-	Description         *string               `json:"description,omitempty"`
-	Descriptions        *LocalizedDescription `json:"descriptions,omitempty"`
-	Email               string                `json:"email"`
-	Homepage            *string               `json:"homepage,omitempty"`
-	Id                  string                `json:"id"`
-	Imprint             *ContributorImprint   `json:"imprint,omitempty"`
-	LogoInherited       *bool                 `json:"logoInherited,omitempty"`
-	LogoRefId           *string               `json:"logoRefId,omitempty"`
-	Name                string                `json:"name"`
-	NameInherited       bool                  `json:"nameInherited"`
-	Phone               *string               `json:"phone,omitempty"`
-	State               ContributorState      `json:"state"`
-	SupportInformation  any                   `json:"supportInformation"`
-	Url                 *string               `json:"url,omitempty"`
+	ContactPersonUserId   string                `json:"contactPersonUserId"`
+	ContractOwner         ContractOwner         `json:"contractOwner"`
+	ContributorNumber     string                `json:"contributorNumber"`
+	CustomerId            string                `json:"customerId"`
+	Description           *string               `json:"description,omitempty"`
+	Descriptions          *LocalizedDescription `json:"descriptions,omitempty"`
+	Email                 string                `json:"email"`
+	Homepage              *string               `json:"homepage,omitempty"`
+	Id                    string                `json:"id"`
+	Imprint               *ContributorImprint   `json:"imprint,omitempty"`
+	LogoInherited         *bool                 `json:"logoInherited,omitempty"`
+	LogoRefId             *string               `json:"logoRefId,omitempty"`
+	Name                  string                `json:"name"`
+	NameInherited         bool                  `json:"nameInherited"`
+	Phone                 *string               `json:"phone,omitempty"`
+	State                 ContributorState      `json:"state"`
+	SupportInformation    any                   `json:"supportInformation"`
+	Url                   *string               `json:"url,omitempty"`
+	VerificationRequested bool                  `json:"verificationRequested"`
+	Verified              bool                  `json:"verified"`
 }
 
 func (o *OwnContributor) Validate() error {
