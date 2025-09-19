@@ -12,17 +12,17 @@ package backupv2
 //        default: false
 //    "sourcePath":
 //        type: "string"
-//        description: "Source path within the backup to restore from. If not set, it will be determined as '/data-p-shortId-userdata/p-shortId/web' as it's originally sourced from there."
+//        description: "Source path within the backup to restore from. If not set, it will be determined as '/data-p-shortId-userdata/p-shortId/web' as it's originally sourced from there. This will trigger a full restore of the project."
 //        example: "/data-p-shortId-userdata/p-shortId/web"
-//    "targetPath":
+//    "targetDir":
 //        type: "string"
-//        description: "Target path where the backup should be restored to. If not set, the target path will be determined to equal the origin source, e.g. '/data-p-shortid-userdata/p-shortid' will be determined as 'data-p-shortid-userdata/p-shortid' as it's originally sourced from there."
+//        description: "Target path where the source path should be restored to. If not set, the target path will be determined to equal the origin source, e.g. source path='/data-p-shortid-userdata/p-shortid/web/myapp' target path='data-p-shortid-userdata/p-shortid/web/'. This e.g. will restore the /myapp folder to /web. Also the target path should always be a folder, no files allowed here."
 //        example: "data-p-shortId-userdata/p-shortId"
 
 type ProjectBackupRestorePath struct {
 	ClearTargetPath *bool   `json:"clearTargetPath,omitempty"`
 	SourcePath      *string `json:"sourcePath,omitempty"`
-	TargetPath      *string `json:"targetPath,omitempty"`
+	TargetDir       *string `json:"targetDir,omitempty"`
 }
 
 func (o *ProjectBackupRestorePath) Validate() error {

@@ -8,6 +8,9 @@ package marketplacev2
 // properties:
 //    "description":
 //        type: "string"
+//    "isBookingStopped":
+//        type: "boolean"
+//        example: "If a variant is no longer bookable the existing extension instances will not be removed but no new ones can be created."
 //    "key":
 //        type: "string"
 //    "name":
@@ -18,12 +21,14 @@ package marketplacev2
 // required:
 //    - "key"
 //    - "priceInCents"
+//    - "isBookingStopped"
 
 type MonthlyPricePlanStrategyItem struct {
-	Description  *string `json:"description,omitempty"`
-	Key          string  `json:"key"`
-	Name         *string `json:"name,omitempty"`
-	PriceInCents int64   `json:"priceInCents"`
+	Description      *string `json:"description,omitempty"`
+	IsBookingStopped bool    `json:"isBookingStopped"`
+	Key              string  `json:"key"`
+	Name             *string `json:"name,omitempty"`
+	PriceInCents     int64   `json:"priceInCents"`
 }
 
 func (o *MonthlyPricePlanStrategyItem) Validate() error {
