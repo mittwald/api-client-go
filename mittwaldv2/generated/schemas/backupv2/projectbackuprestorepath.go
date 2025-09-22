@@ -12,7 +12,7 @@ package backupv2
 //        default: false
 //    "sourcePath":
 //        type: "string"
-//        description: "Source path within the backup to restore from. If not set, it will be determined as '/data-p-shortId-userdata/p-shortId/web' as it's originally sourced from there. This will trigger a full restore of the project."
+//        description: "Source path within the backup to restore from. If not set, a full restore of the project will be triggered."
 //        example: "/data-p-shortId-userdata/p-shortId/web"
 //    "targetDir":
 //        type: "string"
