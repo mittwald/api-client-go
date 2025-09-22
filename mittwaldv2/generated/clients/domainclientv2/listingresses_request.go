@@ -18,11 +18,12 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/domain/ingress-list-ingresses
 type ListIngressesRequest struct {
-	ProjectID     *string
-	CertificateID *string
-	Limit         *int64
-	Skip          *int64
-	Page          *int64
+	ProjectID         *string
+	CertificateID     *string
+	HostnameSubstring *string
+	Limit             *int64
+	Skip              *int64
+	Page              *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -65,6 +66,9 @@ func (r *ListIngressesRequest) query() url.Values {
 	}
 	if r.CertificateID != nil {
 		q.Set("certificateId", *r.CertificateID)
+	}
+	if r.HostnameSubstring != nil {
+		q.Set("hostnameSubstring", *r.HostnameSubstring)
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
