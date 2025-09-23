@@ -8,7 +8,7 @@ package backupv2
 // properties:
 //    "clearTargetPath":
 //        type: "boolean"
-//        description: "Whether to clear the target path before restoring. If true, existing files in the target path will be deleted before the restore. If false, existing files will be kept and may be overwritten if they exist in the backup."
+//        description: "If true, existing files in the target path will be deleted before the restore. If false, existing files will be kept and may be overwritten if they exist in the backup."
 //        default: false
 //    "sourcePath":
 //        type: "string"

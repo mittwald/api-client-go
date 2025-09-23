@@ -6,13 +6,16 @@ package marketplacev2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "isNonChargeableCustomer":
+//        type: "boolean"
 //    "isOwnExtension":
 //        type: "boolean"
 // required:
 //    - "isOwnExtension"
 
 type ExtensionInstanceChargeabilityReasons struct {
-	IsOwnExtension bool `json:"isOwnExtension"`
+	IsNonChargeableCustomer *bool `json:"isNonChargeableCustomer,omitempty"`
+	IsOwnExtension          bool  `json:"isOwnExtension"`
 }
 
 func (o *ExtensionInstanceChargeabilityReasons) Validate() error {
