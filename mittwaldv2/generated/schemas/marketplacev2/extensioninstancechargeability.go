@@ -14,8 +14,6 @@ import "fmt"
 //    "reasons":
 //        type: "object"
 //        properties:
-//            "isNonChargeableCustomer":
-//                type: "boolean"
 //            "isOwnExtension":
 //                type: "boolean"
 //        required:

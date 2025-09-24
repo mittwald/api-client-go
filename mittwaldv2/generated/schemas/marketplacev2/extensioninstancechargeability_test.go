@@ -14,7 +14,7 @@ import (
 var _ = Describe("ExtensionInstanceChargeability", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"isChargeable\":true,\"reasons\":{\"isNonChargeableCustomer\":true,\"isOwnExtension\":true}}")
+			exampleJSON := []byte("{\"isChargeable\":true,\"reasons\":{\"isOwnExtension\":true}}")
 
 			sut := marketplacev2.ExtensionInstanceChargeability{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -26,6 +26,9 @@ import "fmt"
 //    "interval":
 //        type: "string"
 //        example: "*/5 * * * *"
+//    "timeZone":
+//        type: "string"
+//        example: "Europe/Berlin"
 //    "timeout":
 //        type: "integer"
 //        maximum: 86400
@@ -45,6 +48,7 @@ type CronjobRequest struct {
 	Destination CronjobRequestDestination `json:"destination"`
 	Email       *string                   `json:"email,omitempty"`
 	Interval    string                    `json:"interval"`
+	TimeZone    *string                   `json:"timeZone,omitempty"`
 	Timeout     int64                     `json:"timeout"`
 }
 
