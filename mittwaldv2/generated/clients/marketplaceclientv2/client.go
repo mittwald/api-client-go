@@ -90,6 +90,11 @@ type Client interface {
 		req RequestVerificationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	CancelVerification(
+		ctx context.Context,
+		req CancelVerificationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	RotateSecretForExtensionInstance(
 		ctx context.Context,
 		req RotateSecretForExtensionInstanceRequest,
@@ -718,6 +723,30 @@ func (c *clientImpl) ResetContributorAvatar(
 func (c *clientImpl) RequestVerification(
 	ctx context.Context,
 	req RequestVerificationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Cancel the verification-process of a contributor.
+func (c *clientImpl) CancelVerification(
+	ctx context.Context,
+	req CancelVerificationRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

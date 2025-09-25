@@ -23,7 +23,6 @@ import (
 //    "phase":
 //        type: "string"
 //        enum:
-//            - ""
 //            - "Pending"
 //            - "Exporting"
 //            - "Failed"
