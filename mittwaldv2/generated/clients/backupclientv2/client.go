@@ -69,11 +69,6 @@ type Client interface {
 		req DeleteProjectBackupRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	UpdateProjectBackupDescription(
-		ctx context.Context,
-		req UpdateProjectBackupDescriptionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	GetProjectBackupToc(
 		ctx context.Context,
 		req GetProjectBackupTocRequest,
@@ -82,6 +77,11 @@ type Client interface {
 	RequestProjectBackupRestorePath(
 		ctx context.Context,
 		req RequestProjectBackupRestorePathRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	UpdateProjectBackupDescription(
+		ctx context.Context,
+		req UpdateProjectBackupDescriptionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -381,30 +381,6 @@ func (c *clientImpl) DeleteProjectBackup(
 	return httpRes, nil
 }
 
-// Change the description of a ProjectBackup.
-func (c *clientImpl) UpdateProjectBackupDescription(
-	ctx context.Context,
-	req UpdateProjectBackupDescriptionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Get table of contents for a Project Backup.
 func (c *clientImpl) GetProjectBackupToc(
 	ctx context.Context,
@@ -437,6 +413,30 @@ func (c *clientImpl) GetProjectBackupToc(
 func (c *clientImpl) RequestProjectBackupRestorePath(
 	ctx context.Context,
 	req RequestProjectBackupRestorePathRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Change the description of a ProjectBackup.
+func (c *clientImpl) UpdateProjectBackupDescription(
+	ctx context.Context,
+	req UpdateProjectBackupDescriptionRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

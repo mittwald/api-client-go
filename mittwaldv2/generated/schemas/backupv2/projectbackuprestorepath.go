@@ -12,16 +12,18 @@ package backupv2
 //        default: false
 //    "sourcePath":
 //        type: "string"
-//        description: "Source path within the backup to restore from. If not set, a full restore of the project will be triggered."
-//        example: "/data-p-shortId-userdata/p-shortId/web"
+//        description: "Source path within the backup to restore from."
+//        example: "/html/mainApp/config"
 //    "targetDir":
 //        type: "string"
-//        description: "Target path where the source path should be restored to. If not set, the target path will be determined to equal the origin source, e.g. source path='/data-p-shortid-userdata/p-shortid/web/myapp' target path='data-p-shortid-userdata/p-shortid/web/'. This e.g. will restore the /myapp folder to /web. Also the target path should always be a folder, no files allowed here."
-//        example: "data-p-shortId-userdata/p-shortId"
+//        description: "Target path where the source path should be restored to. If not set, the target path will be determined to equal the origin source. The target path should always be a folder, no files allowed here."
+//        example: "/html/mainApp"
+// required:
+//    - "sourcePath"
 
 type ProjectBackupRestorePath struct {
 	ClearTargetPath *bool   `json:"clearTargetPath,omitempty"`
-	SourcePath      *string `json:"sourcePath,omitempty"`
+	SourcePath      string  `json:"sourcePath"`
 	TargetDir       *string `json:"targetDir,omitempty"`
 }
 

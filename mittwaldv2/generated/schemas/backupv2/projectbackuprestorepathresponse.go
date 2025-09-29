@@ -22,13 +22,15 @@ import "fmt"
 //        type: "string"
 // required:
 //    - "phase"
+//    - "sourcePath"
+//    - "determinedSourcePath"
 
 type ProjectBackupRestorePathResponse struct {
 	ClearTargetPath      *bool            `json:"clearTargetPath,omitempty"`
-	DeterminedSourcePath *string          `json:"determinedSourcePath,omitempty"`
+	DeterminedSourcePath string           `json:"determinedSourcePath"`
 	DeterminedTargetPath *string          `json:"determinedTargetPath,omitempty"`
 	Phase                RestorePathPhase `json:"phase"`
-	SourcePath           *string          `json:"sourcePath,omitempty"`
+	SourcePath           string           `json:"sourcePath"`
 	TargetPath           *string          `json:"targetPath,omitempty"`
 }
 

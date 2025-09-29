@@ -15,11 +15,14 @@ package appv2
 //    "pathTemplate":
 //        type: "string"
 //        example: "/bin/bash"
+// required:
+//    - "interpreterTemplate"
+//    - "pathTemplate"
 
 type CronjobCommand struct {
-	InterpreterTemplate *string `json:"interpreterTemplate,omitempty"`
+	InterpreterTemplate string  `json:"interpreterTemplate"`
 	ParametersTemplate  *string `json:"parametersTemplate,omitempty"`
-	PathTemplate        *string `json:"pathTemplate,omitempty"`
+	PathTemplate        string  `json:"pathTemplate"`
 }
 
 func (o *CronjobCommand) Validate() error {

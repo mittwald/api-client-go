@@ -23,12 +23,12 @@ import "fmt"
 //    "email":
 //        type: "string"
 //        format: "email"
+//    "failedExecutionAlertThreshold":
+//        type: "integer"
+//        minimum: 0
 //    "interval":
 //        type: "string"
 //        example: "*/5 * * * *"
-//    "timeZone":
-//        type: "string"
-//        example: "Europe/Berlin"
 //    "timeout":
 //        type: "integer"
 //        maximum: 86400
@@ -42,14 +42,14 @@ import "fmt"
 //    - "timeout"
 
 type CronjobRequest struct {
-	Active      bool                      `json:"active"`
-	AppId       string                    `json:"appId"`
-	Description string                    `json:"description"`
-	Destination CronjobRequestDestination `json:"destination"`
-	Email       *string                   `json:"email,omitempty"`
-	Interval    string                    `json:"interval"`
-	TimeZone    *string                   `json:"timeZone,omitempty"`
-	Timeout     int64                     `json:"timeout"`
+	Active                        bool                      `json:"active"`
+	AppId                         string                    `json:"appId"`
+	Description                   string                    `json:"description"`
+	Destination                   CronjobRequestDestination `json:"destination"`
+	Email                         *string                   `json:"email,omitempty"`
+	FailedExecutionAlertThreshold *int64                    `json:"failedExecutionAlertThreshold,omitempty"`
+	Interval                      string                    `json:"interval"`
+	Timeout                       int64                     `json:"timeout"`
 }
 
 func (o *CronjobRequest) Validate() error {

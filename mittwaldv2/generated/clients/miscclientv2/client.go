@@ -35,11 +35,6 @@ type Client interface {
 		req VerificationVerifyCompanyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*VerificationVerifyCompanyResponse, *http.Response, error)
-	MiscellaneousListTimeZones(
-		ctx context.Context,
-		req MiscellaneousListTimeZonesRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]string, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -161,34 +156,6 @@ func (c *clientImpl) VerificationVerifyCompany(
 	}
 
 	var response VerificationVerifyCompanyResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List valid time zones.
-func (c *clientImpl) MiscellaneousListTimeZones(
-	ctx context.Context,
-	req MiscellaneousListTimeZonesRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]string, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []string
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

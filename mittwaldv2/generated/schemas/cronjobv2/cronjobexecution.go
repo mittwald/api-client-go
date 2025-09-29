@@ -34,10 +34,6 @@ import (
 //        type: "string"
 //        format: "date-time"
 //        deprecated: true
-//    "exitCode":
-//        type: "integer"
-//        format: "int32"
-//        example: 0
 //    "id":
 //        type: "string"
 //        example: "cron-bd26li-28027320"
@@ -59,7 +55,6 @@ import (
 //            - "TimedOut"
 //    "successful":
 //        type: "boolean"
-//    "summary": {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.StatusSummary"}
 //    "triggeredBy":
 //        type: "object"
 //        properties:
@@ -79,13 +74,11 @@ type CronjobExecution struct {
 	End                    *time.Time                   `json:"end,omitempty"`
 	ExecutionEnd           *time.Time                   `json:"executionEnd,omitempty"`
 	ExecutionStart         *time.Time                   `json:"executionStart,omitempty"`
-	ExitCode               *int64                       `json:"exitCode,omitempty"`
 	Id                     string                       `json:"id"`
 	LogPath                *string                      `json:"logPath,omitempty"`
 	Start                  *time.Time                   `json:"start,omitempty"`
 	Status                 CronjobExecutionStatus       `json:"status"`
 	Successful             bool                         `json:"successful"`
-	Summary                *StatusSummary               `json:"summary,omitempty"`
 	TriggeredBy            *CronjobExecutionTriggeredBy `json:"triggeredBy,omitempty"`
 }
 
@@ -100,14 +93,6 @@ func (o *CronjobExecution) Validate() error {
 	}
 	if err := o.Status.Validate(); err != nil {
 		return fmt.Errorf("invalid property status: %w", err)
-	}
-	if err := func() error {
-		if o.Summary == nil {
-			return nil
-		}
-		return o.Summary.Validate()
-	}(); err != nil {
-		return fmt.Errorf("invalid property summary: %w", err)
 	}
 	if err := func() error {
 		if o.TriggeredBy == nil {
