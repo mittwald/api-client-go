@@ -21,6 +21,7 @@ type ListIngressesRequest struct {
 	ProjectID         *string
 	CertificateID     *string
 	HostnameSubstring *string
+	AppInstallationID *string
 	Limit             *int64
 	Skip              *int64
 	Page              *int64
@@ -69,6 +70,9 @@ func (r *ListIngressesRequest) query() url.Values {
 	}
 	if r.HostnameSubstring != nil {
 		q.Set("hostnameSubstring", *r.HostnameSubstring)
+	}
+	if r.AppInstallationID != nil {
+		q.Set("appInstallationId", *r.AppInstallationID)
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))

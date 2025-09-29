@@ -20,6 +20,9 @@ import "fmt"
 //    "email":
 //        type: "string"
 //        format: "email"
+//    "failedExecutionAlertThreshold":
+//        type: "integer"
+//        minimum: 0
 //    "interval":
 //        type: "string"
 //        example: "*/5 * * * *"
@@ -31,12 +34,13 @@ import "fmt"
 
 // UpdateCronjobRequestBody models the JSON body of a 'cronjob-update-cronjob' request
 type UpdateCronjobRequestBody struct {
-	Active      *bool                                `json:"active,omitempty"`
-	Description *string                              `json:"description,omitempty"`
-	Destination *UpdateCronjobRequestBodyDestination `json:"destination,omitempty"`
-	Email       *string                              `json:"email,omitempty"`
-	Interval    *string                              `json:"interval,omitempty"`
-	Timeout     *int64                               `json:"timeout,omitempty"`
+	Active                        *bool                                `json:"active,omitempty"`
+	Description                   *string                              `json:"description,omitempty"`
+	Destination                   *UpdateCronjobRequestBodyDestination `json:"destination,omitempty"`
+	Email                         *string                              `json:"email,omitempty"`
+	FailedExecutionAlertThreshold *int64                               `json:"failedExecutionAlertThreshold,omitempty"`
+	Interval                      *string                              `json:"interval,omitempty"`
+	Timeout                       *int64                               `json:"timeout,omitempty"`
 }
 
 func (o *UpdateCronjobRequestBody) Validate() error {

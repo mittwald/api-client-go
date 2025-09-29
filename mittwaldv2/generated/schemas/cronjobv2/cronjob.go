@@ -29,6 +29,8 @@ import (
 //    "email":
 //        type: "string"
 //        format: "email"
+//    "failedExecutionAlertThreshold":
+//        type: "integer"
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -65,20 +67,21 @@ import (
 //    - "timeout"
 
 type Cronjob struct {
-	Active            bool               `json:"active"`
-	AppId             string             `json:"appId"`
-	CreatedAt         time.Time          `json:"createdAt"`
-	Description       string             `json:"description"`
-	Destination       CronjobDestination `json:"destination"`
-	Email             *string            `json:"email,omitempty"`
-	Id                string             `json:"id"`
-	Interval          string             `json:"interval"`
-	LatestExecution   *CronjobExecution  `json:"latestExecution,omitempty"`
-	NextExecutionTime *time.Time         `json:"nextExecutionTime,omitempty"`
-	ProjectId         *string            `json:"projectId,omitempty"`
-	ShortId           string             `json:"shortId"`
-	Timeout           int64              `json:"timeout"`
-	UpdatedAt         time.Time          `json:"updatedAt"`
+	Active                        bool               `json:"active"`
+	AppId                         string             `json:"appId"`
+	CreatedAt                     time.Time          `json:"createdAt"`
+	Description                   string             `json:"description"`
+	Destination                   CronjobDestination `json:"destination"`
+	Email                         *string            `json:"email,omitempty"`
+	FailedExecutionAlertThreshold *int64             `json:"failedExecutionAlertThreshold,omitempty"`
+	Id                            string             `json:"id"`
+	Interval                      string             `json:"interval"`
+	LatestExecution               *CronjobExecution  `json:"latestExecution,omitempty"`
+	NextExecutionTime             *time.Time         `json:"nextExecutionTime,omitempty"`
+	ProjectId                     *string            `json:"projectId,omitempty"`
+	ShortId                       string             `json:"shortId"`
+	Timeout                       int64              `json:"timeout"`
+	UpdatedAt                     time.Time          `json:"updatedAt"`
 }
 
 func (o *Cronjob) Validate() error {
