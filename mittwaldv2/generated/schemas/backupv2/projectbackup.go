@@ -35,7 +35,7 @@ import (
 //    "requestedAt":
 //        type: "string"
 //        format: "date-time"
-//    "restorePath": {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePathResponse"}
+//    "restorePath": {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePath"}
 //    "status":
 //        type: "string"
 //        example: "Completed"
@@ -47,17 +47,17 @@ import (
 //    - "requestedAt"
 
 type ProjectBackup struct {
-	CreatedAt   *time.Time                        `json:"createdAt,omitempty"`
-	Deletable   bool                              `json:"deletable"`
-	Description *string                           `json:"description,omitempty"`
-	ExpiresAt   *time.Time                        `json:"expiresAt,omitempty"`
-	Export      *ProjectBackupExport              `json:"export,omitempty"`
-	Id          string                            `json:"id"`
-	ParentId    *string                           `json:"parentId,omitempty"`
-	ProjectId   string                            `json:"projectId"`
-	RequestedAt time.Time                         `json:"requestedAt"`
-	RestorePath *ProjectBackupRestorePathResponse `json:"restorePath,omitempty"`
-	Status      string                            `json:"status"`
+	CreatedAt   *time.Time                `json:"createdAt,omitempty"`
+	Deletable   bool                      `json:"deletable"`
+	Description *string                   `json:"description,omitempty"`
+	ExpiresAt   *time.Time                `json:"expiresAt,omitempty"`
+	Export      *ProjectBackupExport      `json:"export,omitempty"`
+	Id          string                    `json:"id"`
+	ParentId    *string                   `json:"parentId,omitempty"`
+	ProjectId   string                    `json:"projectId"`
+	RequestedAt time.Time                 `json:"requestedAt"`
+	RestorePath *ProjectBackupRestorePath `json:"restorePath,omitempty"`
+	Status      string                    `json:"status"`
 }
 
 func (o *ProjectBackup) Validate() error {

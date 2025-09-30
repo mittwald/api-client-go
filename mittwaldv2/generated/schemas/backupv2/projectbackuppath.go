@@ -20,7 +20,7 @@ import "fmt"
 //        type: "boolean"
 //    "items":
 //        type: "array"
-//        items: {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupDirectory"}
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupPath"}
 //    "name":
 //        type: "string"
 //    "size":
@@ -33,19 +33,19 @@ import "fmt"
 //    - "name"
 //    - "size"
 
-type ProjectBackupDirectory struct {
-	AbsolutePath string                   `json:"absolutePath"`
-	IsDirectory  *bool                    `json:"isDirectory,omitempty"`
-	IsExecutable *bool                    `json:"isExecutable,omitempty"`
-	IsFile       *bool                    `json:"isFile,omitempty"`
-	IsSymlink    *bool                    `json:"isSymlink,omitempty"`
-	Items        []ProjectBackupDirectory `json:"items,omitempty"`
-	Name         string                   `json:"name"`
-	Size         int64                    `json:"size"`
-	Target       *string                  `json:"target,omitempty"`
+type ProjectBackupPath struct {
+	AbsolutePath string              `json:"absolutePath"`
+	IsDirectory  *bool               `json:"isDirectory,omitempty"`
+	IsExecutable *bool               `json:"isExecutable,omitempty"`
+	IsFile       *bool               `json:"isFile,omitempty"`
+	IsSymlink    *bool               `json:"isSymlink,omitempty"`
+	Items        []ProjectBackupPath `json:"items,omitempty"`
+	Name         string              `json:"name"`
+	Size         int64               `json:"size"`
+	Target       *string             `json:"target,omitempty"`
 }
 
-func (o *ProjectBackupDirectory) Validate() error {
+func (o *ProjectBackupPath) Validate() error {
 	if err := func() error {
 		if o.Items == nil {
 			return nil

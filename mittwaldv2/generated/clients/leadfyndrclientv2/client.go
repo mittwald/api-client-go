@@ -74,6 +74,16 @@ type Client interface {
 		req RemoveUnlockedLeadReservationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*RemoveUnlockedLeadReservationResponse, *http.Response, error)
+	GetLeadsExportHistory(
+		ctx context.Context,
+		req GetLeadsExportHistoryRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]leadfyndrv2.LeadsExport, *http.Response, error)
+	CreateLeadsExport(
+		ctx context.Context,
+		req CreateLeadsExportRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CreateLeadsExportResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -413,6 +423,62 @@ func (c *clientImpl) RemoveUnlockedLeadReservation(
 	}
 
 	var response RemoveUnlockedLeadReservationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get unlocked leads export history for the given customerId.
+func (c *clientImpl) GetLeadsExportHistory(
+	ctx context.Context,
+	req GetLeadsExportHistoryRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]leadfyndrv2.LeadsExport, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []leadfyndrv2.LeadsExport
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create an export of unlocked leads for the given customerId.
+func (c *clientImpl) CreateLeadsExport(
+	ctx context.Context,
+	req CreateLeadsExportRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CreateLeadsExportResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CreateLeadsExportResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

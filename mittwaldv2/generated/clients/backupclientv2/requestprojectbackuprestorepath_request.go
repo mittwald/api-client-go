@@ -23,7 +23,7 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/backup/backup-request-project-backup-restore-path
 type RequestProjectBackupRestorePathRequest struct {
-	Body            backupv2.ProjectBackupRestorePath
+	Body            backupv2.ProjectBackupRestorePathRequest
 	ProjectBackupID string
 }
 
