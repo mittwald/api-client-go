@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("LeadsExport", func() {
+var _ = Describe("LeadsExportExporter", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"customerId\":\"string\",\"exportId\":\"string\",\"exportedAt\":\"2006-01-02T15:04:05Z\",\"exportedBy\":{\"avatarRefId\":\"string\",\"person\":{\"firstName\":\"string\",\"lastName\":\"string\"},\"userId\":\"string\"},\"leadCount\":42}")
+			exampleJSON := []byte("{\"avatarRefId\":\"string\",\"person\":{\"firstName\":\"string\",\"lastName\":\"string\"},\"userId\":\"string\"}")
 
-			sut := leadfyndrv2.LeadsExport{}
+			sut := leadfyndrv2.LeadsExportExporter{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

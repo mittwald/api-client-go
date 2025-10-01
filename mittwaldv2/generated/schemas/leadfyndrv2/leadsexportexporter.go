@@ -20,18 +20,18 @@ import "fmt"
 //        required:
 //            - "firstName"
 //            - "lastName"
-//    "required": {}
 //    "userId":
 //        type: "string"
+// required:
+//    - "userId"
 
-type LeadsExportExportedBy struct {
-	AvatarRefId *string                      `json:"avatarRefId,omitempty"`
-	Person      *LeadsExportExportedByPerson `json:"person,omitempty"`
-	Required    *any                         `json:"required,omitempty"`
-	UserId      *string                      `json:"userId,omitempty"`
+type LeadsExportExporter struct {
+	AvatarRefId *string                    `json:"avatarRefId,omitempty"`
+	Person      *LeadsExportExporterPerson `json:"person,omitempty"`
+	UserId      string                     `json:"userId"`
 }
 
-func (o *LeadsExportExportedBy) Validate() error {
+func (o *LeadsExportExporter) Validate() error {
 	if err := func() error {
 		if o.Person == nil {
 			return nil

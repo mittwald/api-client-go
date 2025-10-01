@@ -18,24 +18,7 @@ import (
 //    "exportedAt":
 //        type: "string"
 //        format: "date-time"
-//    "exportedBy":
-//        type: "object"
-//        properties:
-//            "avatarRefId":
-//                type: "string"
-//            "person":
-//                type: "object"
-//                properties:
-//                    "firstName":
-//                        type: "string"
-//                    "lastName":
-//                        type: "string"
-//                required:
-//                    - "firstName"
-//                    - "lastName"
-//            "required": {}
-//            "userId":
-//                type: "string"
+//    "exportedBy": {"$ref": "#/components/schemas/de.mittwald.v1.leadfyndr.LeadsExportExporter"}
 //    "leadCount":
 //        type: "integer"
 //        format: "int32"
@@ -47,11 +30,11 @@ import (
 //    - "leadCount"
 
 type LeadsExport struct {
-	CustomerId string                 `json:"customerId"`
-	ExportId   string                 `json:"exportId"`
-	ExportedAt time.Time              `json:"exportedAt"`
-	ExportedBy *LeadsExportExportedBy `json:"exportedBy,omitempty"`
-	LeadCount  int64                  `json:"leadCount"`
+	CustomerId string               `json:"customerId"`
+	ExportId   string               `json:"exportId"`
+	ExportedAt time.Time            `json:"exportedAt"`
+	ExportedBy *LeadsExportExporter `json:"exportedBy,omitempty"`
+	LeadCount  int64                `json:"leadCount"`
 }
 
 func (o *LeadsExport) Validate() error {

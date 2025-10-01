@@ -14,11 +14,11 @@ package leadfyndrv2
 //    - "firstName"
 //    - "lastName"
 
-type LeadsExportExportedByPerson struct {
+type LeadsExportExporterPerson struct {
 	FirstName string `json:"firstName"`
 	LastName  string `json:"lastName"`
 }
 
-func (o *LeadsExportExportedByPerson) Validate() error {
+func (o *LeadsExportExporterPerson) Validate() error {
 	return nil
 }
