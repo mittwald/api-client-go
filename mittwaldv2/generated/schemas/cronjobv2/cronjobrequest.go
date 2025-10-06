@@ -25,7 +25,7 @@ import "fmt"
 //        format: "email"
 //    "failedExecutionAlertThreshold":
 //        type: "integer"
-//        minimum: 0
+//        minimum: 1
 //    "interval":
 //        type: "string"
 //        example: "*/5 * * * *"
