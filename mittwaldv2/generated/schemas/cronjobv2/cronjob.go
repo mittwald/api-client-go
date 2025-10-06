@@ -31,6 +31,7 @@ import (
 //        format: "email"
 //    "failedExecutionAlertThreshold":
 //        type: "integer"
+//        minimum: 1
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -65,6 +66,7 @@ import (
 //    - "description"
 //    - "destination"
 //    - "timeout"
+//    - "failedExecutionAlertThreshold"
 
 type Cronjob struct {
 	Active                        bool               `json:"active"`
@@ -73,7 +75,7 @@ type Cronjob struct {
 	Description                   string             `json:"description"`
 	Destination                   CronjobDestination `json:"destination"`
 	Email                         *string            `json:"email,omitempty"`
-	FailedExecutionAlertThreshold *int64             `json:"failedExecutionAlertThreshold,omitempty"`
+	FailedExecutionAlertThreshold int64              `json:"failedExecutionAlertThreshold"`
 	Id                            string             `json:"id"`
 	Interval                      string             `json:"interval"`
 	LatestExecution               *CronjobExecution  `json:"latestExecution,omitempty"`
