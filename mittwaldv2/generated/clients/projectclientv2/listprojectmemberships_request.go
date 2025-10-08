@@ -23,6 +23,7 @@ import (
 type ListProjectMembershipsRequest struct {
 	Limit       *int64
 	Skip        *int64
+	Page        *int64
 	HasExpiry   *bool
 	IsInherited *bool
 	Role        *membershipv2.ProjectRoles
@@ -68,6 +69,9 @@ func (r *ListProjectMembershipsRequest) query() url.Values {
 	}
 	if r.Skip != nil {
 		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
 	if r.HasExpiry != nil {
 		q.Set("hasExpiry", strconv.FormatBool(*r.HasExpiry))

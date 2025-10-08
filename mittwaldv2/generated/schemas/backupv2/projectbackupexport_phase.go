@@ -8,7 +8,6 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "string"
 // enum:
-//    - ""
 //    - "Pending"
 //    - "Exporting"
 //    - "Failed"
@@ -18,7 +17,6 @@ import "fmt"
 
 type ProjectBackupExportPhase string
 
-const ProjectBackupExportPhaseEmpty ProjectBackupExportPhase = ""
 const ProjectBackupExportPhasePending ProjectBackupExportPhase = "Pending"
 const ProjectBackupExportPhaseExporting ProjectBackupExportPhase = "Exporting"
 const ProjectBackupExportPhaseFailed ProjectBackupExportPhase = "Failed"
@@ -26,7 +24,7 @@ const ProjectBackupExportPhaseCompleted ProjectBackupExportPhase = "Completed"
 const ProjectBackupExportPhaseExpired ProjectBackupExportPhase = "Expired"
 
 func (e ProjectBackupExportPhase) Validate() error {
-	if e == ProjectBackupExportPhaseEmpty || e == ProjectBackupExportPhasePending || e == ProjectBackupExportPhaseExporting || e == ProjectBackupExportPhaseFailed || e == ProjectBackupExportPhaseCompleted || e == ProjectBackupExportPhaseExpired {
+	if e == ProjectBackupExportPhasePending || e == ProjectBackupExportPhaseExporting || e == ProjectBackupExportPhaseFailed || e == ProjectBackupExportPhaseCompleted || e == ProjectBackupExportPhaseExpired {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

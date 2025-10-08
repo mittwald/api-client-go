@@ -19,7 +19,7 @@ import (
 //    "cancellationOf":
 //        type: "string"
 //        format: "uuid"
-//        description: "The ID of the invoice that this invoice cancels."
+//        description: "The ID of the Invoice that this invoice cancels."
 //    "currency":
 //        type: "string"
 //        example: "EUR"
@@ -63,6 +63,10 @@ import (
 //        type: "string"
 //        format: "uuid"
 //    "recipient": {"$ref": "#/components/schemas/de.mittwald.v1.invoice.Recipient"}
+//    "reissuedBy":
+//        type: "string"
+//        format: "uuid"
+//        description: "The ID of the Invoice that is a Reissue of this one."
 //    "status":
 //        type: "string"
 //        enum:
@@ -110,6 +114,7 @@ type Invoice struct {
 	PaymentSettings *PaymentSettings    `json:"paymentSettings,omitempty"`
 	PdfId           string              `json:"pdfId"`
 	Recipient       Recipient           `json:"recipient"`
+	ReissuedBy      *string             `json:"reissuedBy,omitempty"`
 	Status          InvoiceStatus       `json:"status"`
 	TotalGross      float64             `json:"totalGross"`
 	TotalNet        float64             `json:"totalNet"`
