@@ -21,12 +21,12 @@ import (
 //
 // [1]: https://developer.mittwald.de/docs/v2/reference/contract/order-list-orders
 type ListOrdersRequest struct {
-	Limit          *int64
-	Skip           *int64
-	Page           *int64
 	IncludesStatus []orderv2.OrderStatus
 	ExcludesStatus []orderv2.OrderStatus
 	TemplateNames  []string
+	Limit          *int64
+	Skip           *int64
+	Page           *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -64,15 +64,6 @@ func (r *ListOrdersRequest) url() string {
 
 func (r *ListOrdersRequest) query() url.Values {
 	q := make(url.Values)
-	if r.Limit != nil {
-		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
-	}
-	if r.Skip != nil {
-		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
-	}
-	if r.Page != nil {
-		q.Set("page", fmt.Sprintf("%d", *r.Page))
-	}
 	for _, val := range r.IncludesStatus {
 		q.Add("includesStatus", string(val))
 	}
@@ -81,6 +72,15 @@ func (r *ListOrdersRequest) query() url.Values {
 	}
 	for _, val := range r.TemplateNames {
 		q.Add("templateNames", val)
+	}
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
 	return q
 }
