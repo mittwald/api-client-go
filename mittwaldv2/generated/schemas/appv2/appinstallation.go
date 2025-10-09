@@ -22,6 +22,9 @@ import (
 //        example: "2024-09-20T22:57:32.000Z"
 //    "customDocumentRoot":
 //        type: "string"
+//    "deletionRequested":
+//        type: "boolean"
+//        default: false
 //    "description":
 //        type: "string"
 //    "disabled":
@@ -80,6 +83,7 @@ type AppInstallation struct {
 	AppVersion         VersionStatus             `json:"appVersion"`
 	CreatedAt          time.Time                 `json:"createdAt"`
 	CustomDocumentRoot *string                   `json:"customDocumentRoot,omitempty"`
+	DeletionRequested  *bool                     `json:"deletionRequested,omitempty"`
 	Description        string                    `json:"description"`
 	Disabled           bool                      `json:"disabled"`
 	Id                 string                    `json:"id"`
