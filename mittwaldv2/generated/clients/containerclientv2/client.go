@@ -84,6 +84,11 @@ type Client interface {
 		req ListServicesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]containerv2.ServiceResponse, *http.Response, error)
+	ListStackVolumes(
+		ctx context.Context,
+		req ListStackVolumesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]containerv2.VolumeResponse, *http.Response, error)
 	ListStacks(
 		ctx context.Context,
 		req ListStacksRequest,
@@ -129,11 +134,6 @@ type Client interface {
 		req ValidateRegistryCredentialsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*ValidateRegistryCredentialsResponse, *http.Response, error)
-	ListStackVolumes(
-		ctx context.Context,
-		req ListStackVolumesRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]containerv2.VolumeResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -519,6 +519,34 @@ func (c *clientImpl) ListServices(
 	return &response, httpRes, nil
 }
 
+// List Volumes belonging to a Stack.
+func (c *clientImpl) ListStackVolumes(
+	ctx context.Context,
+	req ListStackVolumesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]containerv2.VolumeResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []containerv2.VolumeResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // List Stacks belonging to a Project.
 func (c *clientImpl) ListStacks(
 	ctx context.Context,
@@ -745,34 +773,6 @@ func (c *clientImpl) ValidateRegistryCredentials(
 	}
 
 	var response ValidateRegistryCredentialsResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List Volumes belonging to a Stack.
-func (c *clientImpl) ListStackVolumes(
-	ctx context.Context,
-	req ListStackVolumesRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]containerv2.VolumeResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []containerv2.VolumeResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

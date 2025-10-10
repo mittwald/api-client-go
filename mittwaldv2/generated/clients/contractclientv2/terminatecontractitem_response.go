@@ -13,6 +13,9 @@ import "time"
 //    "contractItemId":
 //        type: "string"
 //        format: "uuid"
+//    "explanation":
+//        type: "string"
+//        example: "I consolidated multiple servers into one instance to reduce overhead"
 //    "reason":
 //        type: "string"
 //        example: "Server wird nicht mehr benötigt"
@@ -23,6 +26,7 @@ import "time"
 type TerminateContractItemResponse struct {
 	ContractId            *string    `json:"contractId,omitempty"`
 	ContractItemId        *string    `json:"contractItemId,omitempty"`
+	Explanation           *string    `json:"explanation,omitempty"`
 	Reason                *string    `json:"reason,omitempty"`
 	TerminationTargetDate *time.Time `json:"terminationTargetDate,omitempty"`
 }
