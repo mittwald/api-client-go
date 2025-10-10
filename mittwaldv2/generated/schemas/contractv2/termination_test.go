@@ -14,7 +14,7 @@ import (
 var _ = Describe("Termination", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"cancellationForbidden\":true,\"reason\":\"Not needed anymore\",\"scheduledAtDate\":\"2006-01-02T15:04:05Z\",\"scheduledByUserId\":\"string\",\"targetDate\":\"2006-01-02T15:04:05Z\"}")
+			exampleJSON := []byte("{\"cancellationForbidden\":true,\"explanation\":\"Not needed anymore\",\"reason\":\"Not needed anymore\",\"scheduledAtDate\":\"2006-01-02T15:04:05Z\",\"scheduledByUserId\":\"string\",\"targetDate\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := contractv2.Termination{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

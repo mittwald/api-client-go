@@ -7,6 +7,9 @@ import "time"
 
 // This data type was generated from the following JSON schema:
 // properties:
+//    "explanation":
+//        type: "string"
+//        example: "The website for my temporary project is no longer needed"
 //    "reason":
 //        type: "string"
 //        description: "A reason for the termination can be given as plain text."
@@ -19,6 +22,7 @@ import "time"
 
 // TerminateContractRequestBody models the JSON body of a 'contract-terminate-contract' request
 type TerminateContractRequestBody struct {
+	Explanation           *string    `json:"explanation,omitempty"`
 	Reason                *string    `json:"reason,omitempty"`
 	TerminationTargetDate *time.Time `json:"terminationTargetDate,omitempty"`
 }

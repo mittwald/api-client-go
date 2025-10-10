@@ -13,6 +13,9 @@ import (
 //    "contractId":
 //        type: "string"
 //        format: "uuid"
+//    "explanation":
+//        type: "string"
+//        example: "The website for my temporary project is no longer needed"
 //    "itemsScheduledForTermination":
 //        type: "array"
 //        items:
@@ -27,6 +30,7 @@ import (
 
 type TerminateContractResponse struct {
 	ContractId                   *string    `json:"contractId,omitempty"`
+	Explanation                  *string    `json:"explanation,omitempty"`
 	ItemsScheduledForTermination []string   `json:"itemsScheduledForTermination,omitempty"`
 	Reason                       *string    `json:"reason,omitempty"`
 	TerminationTargetDate        *time.Time `json:"terminationTargetDate,omitempty"`

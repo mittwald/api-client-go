@@ -11,6 +11,9 @@ import "time"
 //    "cancellationForbidden":
 //        type: "boolean"
 //        description: "Indicates whether the User is allowed to cancel the Termination."
+//    "explanation":
+//        type: "string"
+//        example: "Not needed anymore"
 //    "reason":
 //        type: "string"
 //        example: "Not needed anymore"
@@ -28,6 +31,7 @@ import "time"
 
 type Termination struct {
 	CancellationForbidden *bool     `json:"cancellationForbidden,omitempty"`
+	Explanation           *string   `json:"explanation,omitempty"`
 	Reason                *string   `json:"reason,omitempty"`
 	ScheduledAtDate       time.Time `json:"scheduledAtDate"`
 	ScheduledByUserId     *string   `json:"scheduledByUserId,omitempty"`

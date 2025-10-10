@@ -14,7 +14,7 @@ import (
 var _ = Describe("TerminateContractRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"reason\":\"Projekt wird nicht mehr benötigt\",\"terminationTargetDate\":\"2006-01-02T15:04:05Z\"}")
+			exampleJSON := []byte("{\"explanation\":\"The website for my temporary project is no longer needed\",\"reason\":\"Projekt wird nicht mehr benötigt\",\"terminationTargetDate\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := contractclientv2.TerminateContractRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
