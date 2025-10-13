@@ -36,6 +36,8 @@ import (
 //    "customerId":
 //        type: "string"
 //        example: "f282f1a8-2b15-4b08-9850-6788e3b20136"
+//    "deletionRequested":
+//        type: "boolean"
 //    "description":
 //        type: "string"
 //        example: "My first Project!"
@@ -124,6 +126,7 @@ type Project struct {
 	ClusterId                      *string                          `json:"clusterId,omitempty"`
 	CreatedAt                      time.Time                        `json:"createdAt"`
 	CustomerId                     string                           `json:"customerId"`
+	DeletionRequested              *bool                            `json:"deletionRequested,omitempty"`
 	Description                    string                           `json:"description"`
 	Directories                    map[string]string                `json:"directories"`
 	DisableReason                  *DisableReason                   `json:"disableReason,omitempty"`
