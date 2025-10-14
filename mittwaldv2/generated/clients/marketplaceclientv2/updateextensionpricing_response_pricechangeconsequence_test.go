@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("UpdateExtensionInstanceContractRequestBody", func() {
+var _ = Describe("UpdateExtensionPricingResponsePriceChangeConsequence", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"variantKey\":\"default\"}")
+			exampleJSON := []byte("{\"contributorConsequence\":\"NONE\",\"globalCustomerConsequence\":\"NONE\",\"variantConsequences\":[{\"consequence\":\"NONE\",\"variantKey\":\"string\"}]}")
 
-			sut := marketplaceclientv2.UpdateExtensionInstanceContractRequestBody{}
+			sut := marketplaceclientv2.UpdateExtensionPricingResponsePriceChangeConsequence{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

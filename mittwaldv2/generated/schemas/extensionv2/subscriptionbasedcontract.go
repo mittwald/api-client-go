@@ -30,6 +30,12 @@ import (
 //    "terminationTargetDate":
 //        type: "string"
 //        format: "date-time"
+//    "variantDescription":
+//        type: "string"
+//    "variantKey":
+//        type: "string"
+//    "variantName":
+//        type: "string"
 // required:
 //    - "status"
 //    - "interactionRequired"
@@ -42,6 +48,9 @@ type SubscriptionBasedContract struct {
 	InteractionRequired   bool                            `json:"interactionRequired"`
 	Status                SubscriptionBasedContractStatus `json:"status"`
 	TerminationTargetDate *time.Time                      `json:"terminationTargetDate,omitempty"`
+	VariantDescription    *string                         `json:"variantDescription,omitempty"`
+	VariantKey            *string                         `json:"variantKey,omitempty"`
+	VariantName           *string                         `json:"variantName,omitempty"`
 }
 
 func (o *SubscriptionBasedContract) Validate() error {

@@ -14,7 +14,7 @@ import (
 var _ = Describe("UpdateExtensionPricingResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"extensionId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"priceChangeConsequence\":{\"contributorConsequence\":\"NONE\",\"globalCustomerConsequence\":\"NONE\",\"variantConsequences\":[{\"consequence\":null,\"variantKey\":null}]}}")
+			exampleJSON := []byte("{\"extensionId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"nextPossiblePriceChange\":\"2006-01-02T15:04:05Z\",\"priceChangeConsequence\":{\"contributorConsequence\":\"NONE\",\"globalCustomerConsequence\":\"NONE\",\"variantConsequences\":[{\"consequence\":\"NONE\",\"variantKey\":\"string\"}]}}")
 
 			sut := marketplaceclientv2.UpdateExtensionPricingResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

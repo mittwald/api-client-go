@@ -5,10 +5,16 @@ package marketplaceclientv2
 
 // This data type was generated from the following JSON schema:
 // type: "object"
+// properties:
+//    "variantKey":
+//        type: "string"
+//        description: "The Variant Key of the selected Variant of the Extension. This is only required if the Extension has multiple Variants."
+//        example: "default"
 // description: UpdateExtensionInstanceContractRequestBody models the JSON body of a 'extension-update-extension-instance-contract' request
 
 // UpdateExtensionInstanceContractRequestBody models the JSON body of a 'extension-update-extension-instance-contract' request
 type UpdateExtensionInstanceContractRequestBody struct {
+	VariantKey *string `json:"variantKey,omitempty"`
 }
 
 func (o *UpdateExtensionInstanceContractRequestBody) Validate() error {
