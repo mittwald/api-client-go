@@ -15,6 +15,16 @@ import (
 )
 
 type Client interface {
+	RequestVerification(
+		ctx context.Context,
+		req RequestVerificationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	CancelVerification(
+		ctx context.Context,
+		req CancelVerificationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	GetContributor(
 		ctx context.Context,
 		req GetContributorRequest,
@@ -83,16 +93,6 @@ type Client interface {
 	ResetContributorAvatar(
 		ctx context.Context,
 		req ResetContributorAvatarRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	RequestVerification(
-		ctx context.Context,
-		req RequestVerificationRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	CancelVerification(
-		ctx context.Context,
-		req CancelVerificationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	RotateSecretForExtensionInstance(
@@ -327,6 +327,54 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Start the verification process of a contributor.
+func (c *clientImpl) RequestVerification(
+	ctx context.Context,
+	req RequestVerificationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Cancel the verification-process of a contributor.
+func (c *clientImpl) CancelVerification(
+	ctx context.Context,
+	req CancelVerificationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // Get a Contributor.
@@ -699,54 +747,6 @@ func (c *clientImpl) RequestDeviatingContributorAvatarUpload(
 func (c *clientImpl) ResetContributorAvatar(
 	ctx context.Context,
 	req ResetContributorAvatarRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Start the verification process of a contributor.
-func (c *clientImpl) RequestVerification(
-	ctx context.Context,
-	req RequestVerificationRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Cancel the verification-process of a contributor.
-func (c *clientImpl) CancelVerification(
-	ctx context.Context,
-	req CancelVerificationRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
