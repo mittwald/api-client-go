@@ -63,8 +63,6 @@ import (
 //    "imageRefId":
 //        type: "string"
 //        format: "uuid"
-//    "ipAddress":
-//        type: "string"
 //    "isReady":
 //        type: "boolean"
 //        description: "deprecated by property status"
@@ -137,7 +135,6 @@ type Project struct {
 	Features                       []ProjectFeature                 `json:"features,omitempty"`
 	Id                             string                           `json:"id"`
 	ImageRefId                     *string                          `json:"imageRefId,omitempty"`
-	IpAddress                      *string                          `json:"ipAddress,omitempty"`
 	IsReady                        bool                             `json:"isReady"`
 	ProjectHostingId               *string                          `json:"projectHostingId,omitempty"`
 	Readiness                      DeprecatedProjectReadinessStatus `json:"readiness"`
