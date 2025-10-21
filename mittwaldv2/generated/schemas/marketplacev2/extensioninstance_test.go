@@ -14,7 +14,7 @@ import (
 var _ = Describe("ExtensionInstance", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"aggregateReference\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"},\"chargeability\":{\"isChargeable\":true,\"reasons\":{\"isOwnExtension\":true}},\"consentedScopes\":[\"string\"],\"contributorId\":\"string\",\"contributorName\":\"string\",\"createdAt\":\"2006-01-02T15:04:05Z\",\"disabled\":true,\"extensionId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"extensionName\":\"string\",\"extensionSubTitle\":{\"de\":\"Ping deine App an\",\"en\":\"Ping your app\"},\"frontendFragments\":{\"string\":null},\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"pendingInstallation\":true,\"pendingRemoval\":true,\"variantKey\":\"default\"}")
+			exampleJSON := []byte("{\"aggregateReference\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"},\"chargeability\":{\"isChargeable\":true,\"reasons\":{\"isNonChargeableCustomer\":true,\"isOwnExtension\":true}},\"consentedScopes\":[\"string\"],\"contributorId\":\"string\",\"contributorName\":\"string\",\"createdAt\":\"2006-01-02T15:04:05Z\",\"disabled\":true,\"extensionId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"extensionName\":\"string\",\"extensionSubTitle\":{\"de\":\"Ping deine App an\",\"en\":\"Ping your app\"},\"frontendFragments\":{\"string\":null},\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"pendingInstallation\":true,\"pendingRemoval\":true,\"variantKey\":\"default\"}")
 
 			sut := marketplacev2.ExtensionInstance{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

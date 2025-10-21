@@ -73,10 +73,11 @@ import (
 //    - "aggregateReference"
 //    - "extensionName"
 //    - "contributorName"
+//    - "chargeability"
 
 type ExtensionInstance struct {
 	AggregateReference  ExtensionInstanceAggregateReference `json:"aggregateReference"`
-	Chargeability       *ExtensionInstanceChargeability     `json:"chargeability,omitempty"`
+	Chargeability       ExtensionInstanceChargeability      `json:"chargeability"`
 	ConsentedScopes     []string                            `json:"consentedScopes"`
 	ContributorId       string                              `json:"contributorId"`
 	ContributorName     string                              `json:"contributorName"`
@@ -96,12 +97,7 @@ func (o *ExtensionInstance) Validate() error {
 	if err := o.AggregateReference.Validate(); err != nil {
 		return fmt.Errorf("invalid property aggregateReference: %w", err)
 	}
-	if err := func() error {
-		if o.Chargeability == nil {
-			return nil
-		}
-		return o.Chargeability.Validate()
-	}(); err != nil {
+	if err := o.Chargeability.Validate(); err != nil {
 		return fmt.Errorf("invalid property chargeability: %w", err)
 	}
 	if o.ConsentedScopes == nil {
