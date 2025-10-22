@@ -14,6 +14,21 @@ import "fmt"
 //            type: "string"
 //        description: "Defaults to image config on empty"
 //        example: ["mysqld"]
+//    "deploy":
+//        type: "object"
+//        properties:
+//            "resources":
+//                type: "object"
+//                properties:
+//                    "limits":
+//                        type: "object"
+//                        properties:
+//                            "cpus":
+//                                type: "string"
+//                                example: 1.5
+//                            "memory":
+//                                type: "string"
+//                                example: "1gb"
 //    "description":
 //        type: "string"
 //        example: "MySQL DB"
@@ -50,14 +65,15 @@ import "fmt"
 //        example: ["data:/var/lib/mysql:ro"]
 
 type ServiceRequest struct {
-	Command     []string          `json:"command,omitempty"`
-	Description *string           `json:"description,omitempty"`
-	Entrypoint  []string          `json:"entrypoint,omitempty"`
-	Environment map[string]string `json:"environment,omitempty"`
-	Envs        map[string]string `json:"envs,omitempty"`
-	Image       *string           `json:"image,omitempty"`
-	Ports       []string          `json:"ports,omitempty"`
-	Volumes     []string          `json:"volumes,omitempty"`
+	Command     []string              `json:"command,omitempty"`
+	Deploy      *ServiceRequestDeploy `json:"deploy,omitempty"`
+	Description *string               `json:"description,omitempty"`
+	Entrypoint  []string              `json:"entrypoint,omitempty"`
+	Environment map[string]string     `json:"environment,omitempty"`
+	Envs        map[string]string     `json:"envs,omitempty"`
+	Image       *string               `json:"image,omitempty"`
+	Ports       []string              `json:"ports,omitempty"`
+	Volumes     []string              `json:"volumes,omitempty"`
 }
 
 func (o *ServiceRequest) Validate() error {
@@ -68,6 +84,14 @@ func (o *ServiceRequest) Validate() error {
 		return nil
 	}(); err != nil {
 		return fmt.Errorf("invalid property command: %w", err)
+	}
+	if err := func() error {
+		if o.Deploy == nil {
+			return nil
+		}
+		return o.Deploy.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property deploy: %w", err)
 	}
 	if err := func() error {
 		if o.Entrypoint == nil {

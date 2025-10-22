@@ -19,7 +19,7 @@ import (
 // https://developer.mittwald.de/docs/v2/reference/backup/backup-get-project-backup-databases
 type GetProjectBackupDatabasesRequest struct {
 	ProjectBackupID string
-	Directory       *string
+	DatabaseName    *string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -57,8 +57,8 @@ func (r *GetProjectBackupDatabasesRequest) url() string {
 
 func (r *GetProjectBackupDatabasesRequest) query() url.Values {
 	q := make(url.Values)
-	if r.Directory != nil {
-		q.Set("directory", *r.Directory)
+	if r.DatabaseName != nil {
+		q.Set("databaseName", *r.DatabaseName)
 	}
 	return q
 }
