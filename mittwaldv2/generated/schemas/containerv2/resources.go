@@ -4,20 +4,17 @@ package containerv2
 // DO NOT EDIT.
 
 // This data type was generated from the following JSON schema:
-// type: "object"
 // properties:
 //    "cpus":
 //        type: "string"
-//        example: 1.5
 //    "memory":
 //        type: "string"
-//        example: "1gb"
 
-type ServiceRequestDeployResourcesLimits struct {
+type Resources struct {
 	Cpus   *string `json:"cpus,omitempty"`
 	Memory *string `json:"memory,omitempty"`
 }
 
-func (o *ServiceRequestDeployResourcesLimits) Validate() error {
+func (o *Resources) Validate() error {
 	return nil
 }

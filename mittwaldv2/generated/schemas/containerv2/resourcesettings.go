@@ -8,21 +8,13 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "limits":
-//        type: "object"
-//        properties:
-//            "cpus":
-//                type: "string"
-//                example: 1.5
-//            "memory":
-//                type: "string"
-//                example: "1gb"
+//    "limits": {"$ref": "#/components/schemas/de.mittwald.v1.container.Resources"}
 
-type ServiceRequestDeployResources struct {
-	Limits *ServiceRequestDeployResourcesLimits `json:"limits,omitempty"`
+type ResourceSettings struct {
+	Limits *Resources `json:"limits,omitempty"`
 }
 
-func (o *ServiceRequestDeployResources) Validate() error {
+func (o *ResourceSettings) Validate() error {
 	if err := func() error {
 		if o.Limits == nil {
 			return nil

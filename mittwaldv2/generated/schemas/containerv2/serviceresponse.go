@@ -18,13 +18,7 @@ import (
 //    "id":
 //        type: "string"
 //        format: "uuid"
-//    "limits":
-//        type: "object"
-//        properties:
-//            "cpus":
-//                type: "string"
-//            "memory":
-//                type: "string"
+//    "limits": {"$ref": "#/components/schemas/de.mittwald.v1.container.Resources"}
 //    "message":
 //        type: "string"
 //        example: "Container ready"
@@ -61,19 +55,19 @@ import (
 //    - "requiresRecreate"
 
 type ServiceResponse struct {
-	DeployedState    ServiceState           `json:"deployedState"`
-	Description      string                 `json:"description"`
-	Id               string                 `json:"id"`
-	Limits           *ServiceResponseLimits `json:"limits,omitempty"`
-	Message          *string                `json:"message,omitempty"`
-	PendingState     ServiceState           `json:"pendingState"`
-	ProjectId        string                 `json:"projectId"`
-	RequiresRecreate bool                   `json:"requiresRecreate"`
-	ServiceName      string                 `json:"serviceName"`
-	ShortId          string                 `json:"shortId"`
-	StackId          string                 `json:"stackId"`
-	Status           ServiceStatus          `json:"status"`
-	StatusSetAt      time.Time              `json:"statusSetAt"`
+	DeployedState    ServiceState  `json:"deployedState"`
+	Description      string        `json:"description"`
+	Id               string        `json:"id"`
+	Limits           *Resources    `json:"limits,omitempty"`
+	Message          *string       `json:"message,omitempty"`
+	PendingState     ServiceState  `json:"pendingState"`
+	ProjectId        string        `json:"projectId"`
+	RequiresRecreate bool          `json:"requiresRecreate"`
+	ServiceName      string        `json:"serviceName"`
+	ShortId          string        `json:"shortId"`
+	StackId          string        `json:"stackId"`
+	Status           ServiceStatus `json:"status"`
+	StatusSetAt      time.Time     `json:"statusSetAt"`
 }
 
 func (o *ServiceResponse) Validate() error {
