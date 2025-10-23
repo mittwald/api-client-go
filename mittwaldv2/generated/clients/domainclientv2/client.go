@@ -172,6 +172,16 @@ type Client interface {
 		req AbortDomainDeclarationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	CreateScheduledDeletion(
+		ctx context.Context,
+		req CreateScheduledDeletionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	CancelScheduledDeletion(
+		ctx context.Context,
+		req CancelScheduledDeletionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	CheckDomainRegistrability(
 		ctx context.Context,
 		req CheckDomainRegistrabilityRequest,
@@ -317,16 +327,6 @@ type Client interface {
 		req ListCertificatesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]sslv2.Certificate, *http.Response, error)
-	CreateScheduledDeletion(
-		ctx context.Context,
-		req CreateScheduledDeletionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	CancelScheduledDeletion(
-		ctx context.Context,
-		req CancelScheduledDeletionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1186,6 +1186,54 @@ func (c *clientImpl) AbortDomainDeclaration(
 	return httpRes, nil
 }
 
+// Create a scheduled deletion of a Domain.
+func (c *clientImpl) CreateScheduledDeletion(
+	ctx context.Context,
+	req CreateScheduledDeletionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Cancel a scheduled deletion of a Domain.
+func (c *clientImpl) CancelScheduledDeletion(
+	ctx context.Context,
+	req CancelScheduledDeletionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Check if a Domain is available to register.
 //
 // If false, you have to start a transfer with an auth code instead.
@@ -1984,52 +2032,4 @@ func (c *clientImpl) ListCertificates(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Create a scheduled deletion of a Domain.
-func (c *clientImpl) CreateScheduledDeletion(
-	ctx context.Context,
-	req CreateScheduledDeletionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Cancel a scheduled deletion of a Domain.
-func (c *clientImpl) CancelScheduledDeletion(
-	ctx context.Context,
-	req CancelScheduledDeletionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
