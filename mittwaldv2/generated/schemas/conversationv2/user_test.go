@@ -14,7 +14,7 @@ import (
 var _ = Describe("User", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"active\":true,\"avatarRefId\":\"string\",\"clearName\":\"string\",\"department\":\"development\",\"userId\":\"string\"}")
+			exampleJSON := []byte("{\"active\":true,\"atlasGroup\":{\"acronym\":\"string\",\"id\":\"string\",\"isDefaultGroup\":true,\"name\":\"string\"},\"avatarRefId\":\"string\",\"clearName\":\"string\",\"department\":\"development\",\"group\":{\"acronym\":\"string\",\"id\":\"string\",\"isDefaultGroup\":true,\"name\":\"string\"},\"userId\":\"string\"}")
 
 			sut := conversationv2.User{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

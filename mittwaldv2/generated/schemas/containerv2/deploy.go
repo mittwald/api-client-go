@@ -8,13 +8,13 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "resources": {"$ref": "#/components/schemas/de.mittwald.v1.container.ResourceSettings"}
+//    "resources": {"$ref": "#/components/schemas/de.mittwald.v1.container.Resources"}
 
-type DeployOptions struct {
-	Resources *ResourceSettings `json:"resources,omitempty"`
+type Deploy struct {
+	Resources *Resources `json:"resources,omitempty"`
 }
 
-func (o *DeployOptions) Validate() error {
+func (o *Deploy) Validate() error {
 	if err := func() error {
 		if o.Resources == nil {
 			return nil

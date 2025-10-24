@@ -11,6 +11,7 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "deploy": {"$ref": "#/components/schemas/de.mittwald.v1.container.Deploy"}
 //    "deployedState": {"$ref": "#/components/schemas/de.mittwald.v1.container.ServiceState"}
 //    "description":
 //        type: "string"
@@ -18,7 +19,6 @@ import (
 //    "id":
 //        type: "string"
 //        format: "uuid"
-//    "limits": {"$ref": "#/components/schemas/de.mittwald.v1.container.Resources"}
 //    "message":
 //        type: "string"
 //        example: "Container ready"
@@ -55,10 +55,10 @@ import (
 //    - "requiresRecreate"
 
 type ServiceResponse struct {
+	Deploy           *Deploy       `json:"deploy,omitempty"`
 	DeployedState    ServiceState  `json:"deployedState"`
 	Description      string        `json:"description"`
 	Id               string        `json:"id"`
-	Limits           *Resources    `json:"limits,omitempty"`
 	Message          *string       `json:"message,omitempty"`
 	PendingState     ServiceState  `json:"pendingState"`
 	ProjectId        string        `json:"projectId"`
@@ -71,16 +71,16 @@ type ServiceResponse struct {
 }
 
 func (o *ServiceResponse) Validate() error {
-	if err := o.DeployedState.Validate(); err != nil {
-		return fmt.Errorf("invalid property deployedState: %w", err)
-	}
 	if err := func() error {
-		if o.Limits == nil {
+		if o.Deploy == nil {
 			return nil
 		}
-		return o.Limits.Validate()
+		return o.Deploy.Validate()
 	}(); err != nil {
-		return fmt.Errorf("invalid property limits: %w", err)
+		return fmt.Errorf("invalid property deploy: %w", err)
+	}
+	if err := o.DeployedState.Validate(); err != nil {
+		return fmt.Errorf("invalid property deployedState: %w", err)
 	}
 	if err := o.PendingState.Validate(); err != nil {
 		return fmt.Errorf("invalid property pendingState: %w", err)

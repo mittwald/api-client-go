@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("Resources", func() {
+var _ = Describe("Deploy", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"limits\":{\"cpus\":\"string\",\"memory\":\"string\"}}")
+			exampleJSON := []byte("{\"resources\":{\"limits\":{\"cpus\":\"string\",\"memory\":\"string\"}}}")
 
-			sut := containerv2.Resources{}
+			sut := containerv2.Deploy{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})
