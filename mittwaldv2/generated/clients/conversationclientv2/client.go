@@ -14,16 +14,6 @@ import (
 )
 
 type Client interface {
-	ListCategories(
-		ctx context.Context,
-		req ListCategoriesRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]conversationv2.Category, *http.Response, error)
-	GetFileAccessToken(
-		ctx context.Context,
-		req GetFileAccessTokenRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*GetFileAccessTokenResponse, *http.Response, error)
 	ListConversations(
 		ctx context.Context,
 		req ListConversationsRequest,
@@ -34,21 +24,6 @@ type Client interface {
 		req CreateConversationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CreateConversationResponse, *http.Response, error)
-	SetConversationStatus(
-		ctx context.Context,
-		req SetConversationStatusRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*SetConversationStatusResponse, *http.Response, error)
-	GetCategory(
-		ctx context.Context,
-		req GetCategoryRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*conversationv2.Category, *http.Response, error)
-	GetConversationMembers(
-		ctx context.Context,
-		req GetConversationMembersRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*conversationv2.ConversationMembers, *http.Response, error)
 	ListMessagesByConversation(
 		ctx context.Context,
 		req ListMessagesByConversationRequest,
@@ -59,16 +34,21 @@ type Client interface {
 		req CreateMessageRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CreateMessageResponse, *http.Response, error)
+	GetCategory(
+		ctx context.Context,
+		req GetCategoryRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*conversationv2.Category, *http.Response, error)
+	GetConversationMembers(
+		ctx context.Context,
+		req GetConversationMembersRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*conversationv2.ConversationMembers, *http.Response, error)
 	GetConversationPreferencesOfCustomer(
 		ctx context.Context,
 		req GetConversationPreferencesOfCustomerRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*conversationv2.ConversationPreferences, *http.Response, error)
-	UpdateMessage(
-		ctx context.Context,
-		req UpdateMessageRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*UpdateMessageResponse, *http.Response, error)
 	GetConversation(
 		ctx context.Context,
 		req GetConversationRequest,
@@ -79,11 +59,31 @@ type Client interface {
 		req UpdateConversationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*UpdateConversationResponse, *http.Response, error)
+	GetFileAccessToken(
+		ctx context.Context,
+		req GetFileAccessTokenRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*GetFileAccessTokenResponse, *http.Response, error)
+	ListCategories(
+		ctx context.Context,
+		req ListCategoriesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]conversationv2.Category, *http.Response, error)
 	RequestFileUpload(
 		ctx context.Context,
 		req RequestFileUploadRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*RequestFileUploadResponse, *http.Response, error)
+	SetConversationStatus(
+		ctx context.Context,
+		req SetConversationStatusRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*SetConversationStatusResponse, *http.Response, error)
+	UpdateMessage(
+		ctx context.Context,
+		req UpdateMessageRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*UpdateMessageResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -91,62 +91,6 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
-}
-
-// Get all conversation categories.
-func (c *clientImpl) ListCategories(
-	ctx context.Context,
-	req ListCategoriesRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]conversationv2.Category, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []conversationv2.Category
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Request an access token for the File belonging to the Conversation.
-func (c *clientImpl) GetFileAccessToken(
-	ctx context.Context,
-	req GetFileAccessTokenRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*GetFileAccessTokenResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response GetFileAccessTokenResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
 
 // Get all conversation the authenticated user has created or has access to.
@@ -199,90 +143,6 @@ func (c *clientImpl) CreateConversation(
 	}
 
 	var response CreateConversationResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Update the status of a conversation.
-func (c *clientImpl) SetConversationStatus(
-	ctx context.Context,
-	req SetConversationStatusRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*SetConversationStatusResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response SetConversationStatusResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a specific conversation category.
-func (c *clientImpl) GetCategory(
-	ctx context.Context,
-	req GetCategoryRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*conversationv2.Category, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response conversationv2.Category
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get members of a support conversation.
-func (c *clientImpl) GetConversationMembers(
-	ctx context.Context,
-	req GetConversationMembersRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*conversationv2.ConversationMembers, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response conversationv2.ConversationMembers
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -345,6 +205,62 @@ func (c *clientImpl) CreateMessage(
 	return &response, httpRes, nil
 }
 
+// Get a specific conversation category.
+func (c *clientImpl) GetCategory(
+	ctx context.Context,
+	req GetCategoryRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*conversationv2.Category, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response conversationv2.Category
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get members of a support conversation.
+func (c *clientImpl) GetConversationMembers(
+	ctx context.Context,
+	req GetConversationMembersRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*conversationv2.ConversationMembers, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response conversationv2.ConversationMembers
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Get preferences for customer conversations.
 func (c *clientImpl) GetConversationPreferencesOfCustomer(
 	ctx context.Context,
@@ -367,34 +283,6 @@ func (c *clientImpl) GetConversationPreferencesOfCustomer(
 	}
 
 	var response conversationv2.ConversationPreferences
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Update the content of the message
-func (c *clientImpl) UpdateMessage(
-	ctx context.Context,
-	req UpdateMessageRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*UpdateMessageResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response UpdateMessageResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -457,6 +345,62 @@ func (c *clientImpl) UpdateConversation(
 	return &response, httpRes, nil
 }
 
+// Request an access token for the File belonging to the Conversation.
+func (c *clientImpl) GetFileAccessToken(
+	ctx context.Context,
+	req GetFileAccessTokenRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*GetFileAccessTokenResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GetFileAccessTokenResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get all conversation categories.
+func (c *clientImpl) ListCategories(
+	ctx context.Context,
+	req ListCategoriesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]conversationv2.Category, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []conversationv2.Category
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Request a file upload token for the conversation.
 func (c *clientImpl) RequestFileUpload(
 	ctx context.Context,
@@ -479,6 +423,62 @@ func (c *clientImpl) RequestFileUpload(
 	}
 
 	var response RequestFileUploadResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update the status of a conversation.
+func (c *clientImpl) SetConversationStatus(
+	ctx context.Context,
+	req SetConversationStatusRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*SetConversationStatusResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response SetConversationStatusResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update the content of the message
+func (c *clientImpl) UpdateMessage(
+	ctx context.Context,
+	req UpdateMessageRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*UpdateMessageResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response UpdateMessageResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

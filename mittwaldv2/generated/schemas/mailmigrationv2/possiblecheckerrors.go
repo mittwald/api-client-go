@@ -11,6 +11,9 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "activeMailArchiveForAddress":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.mailmigration.CheckMigrationIsPossibleErrorActiveMailArchiveForAddress"}
 //    "alreadyExistingMailAddress":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.mailmigration.CheckMigrationIsPossibleErrorAlreadyExistingMailAddress"}
@@ -36,8 +39,10 @@ import (
 //    - "catchAllTargetWithoutAlias"
 //    - "missingVerifiedIngress"
 //    - "alreadyExistingMailAddress"
+//    - "activeMailArchiveForAddress"
 
 type PossibleCheckErrors struct {
+	ActiveMailArchiveForAddress  []CheckMigrationIsPossibleErrorActiveMailArchiveForAddress  `json:"activeMailArchiveForAddress"`
 	AlreadyExistingMailAddress   []CheckMigrationIsPossibleErrorAlreadyExistingMailAddress   `json:"alreadyExistingMailAddress"`
 	AmbiguousMailAddressDelivery []CheckMigrationIsPossibleErrorAmbiguousMailAddressDelivery `json:"ambiguousMailAddressDelivery"`
 	AmbiguousMailboxDelivery     []CheckMigrationIsPossibleErrorAmbiguousMailboxDelivery     `json:"ambiguousMailboxDelivery"`
@@ -47,6 +52,19 @@ type PossibleCheckErrors struct {
 }
 
 func (o *PossibleCheckErrors) Validate() error {
+	if o.ActiveMailArchiveForAddress == nil {
+		return errors.New("property activeMailArchiveForAddress is required, but not set")
+	}
+	if err := func() error {
+		for i := range o.ActiveMailArchiveForAddress {
+			if err := o.ActiveMailArchiveForAddress[i].Validate(); err != nil {
+				return fmt.Errorf("item %d is invalid %w", i, err)
+			}
+		}
+		return nil
+	}(); err != nil {
+		return fmt.Errorf("invalid property activeMailArchiveForAddress: %w", err)
+	}
 	if o.AlreadyExistingMailAddress == nil {
 		return errors.New("property alreadyExistingMailAddress is required, but not set")
 	}

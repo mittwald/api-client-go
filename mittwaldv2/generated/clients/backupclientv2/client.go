@@ -69,11 +69,21 @@ type Client interface {
 		req DeleteProjectBackupRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetProjectBackupDatabases(
+		ctx context.Context,
+		req GetProjectBackupDatabasesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*backupv2.ProjectBackupDatabase, *http.Response, error)
 	GetProjectBackupDirectories(
 		ctx context.Context,
 		req GetProjectBackupDirectoriesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*backupv2.ProjectBackupPath, *http.Response, error)
+	RequestProjectBackupRestoreDatabase(
+		ctx context.Context,
+		req RequestProjectBackupRestoreDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	RequestProjectBackupRestorePath(
 		ctx context.Context,
 		req RequestProjectBackupRestorePathRequest,
@@ -84,16 +94,6 @@ type Client interface {
 		req UpdateProjectBackupDescriptionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	RequestProjectBackupRestoreDatabase(
-		ctx context.Context,
-		req RequestProjectBackupRestoreDatabaseRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	GetProjectBackupDatabases(
-		ctx context.Context,
-		req GetProjectBackupDatabasesRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*backupv2.ProjectBackupDatabase, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -391,6 +391,34 @@ func (c *clientImpl) DeleteProjectBackup(
 	return httpRes, nil
 }
 
+// Get databases for a ProjectBackup.
+func (c *clientImpl) GetProjectBackupDatabases(
+	ctx context.Context,
+	req GetProjectBackupDatabasesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*backupv2.ProjectBackupDatabase, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response backupv2.ProjectBackupDatabase
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Get paths for a ProjectBackup.
 func (c *clientImpl) GetProjectBackupDirectories(
 	ctx context.Context,
@@ -417,6 +445,30 @@ func (c *clientImpl) GetProjectBackupDirectories(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Restore a ProjectBackup's database.
+func (c *clientImpl) RequestProjectBackupRestoreDatabase(
+	ctx context.Context,
+	req RequestProjectBackupRestoreDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // Restore a ProjectBackup's path.
@@ -465,56 +517,4 @@ func (c *clientImpl) UpdateProjectBackupDescription(
 	}
 
 	return httpRes, nil
-}
-
-// Restore a ProjectBackup's database.
-func (c *clientImpl) RequestProjectBackupRestoreDatabase(
-	ctx context.Context,
-	req RequestProjectBackupRestoreDatabaseRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Get databases for a ProjectBackup.
-func (c *clientImpl) GetProjectBackupDatabases(
-	ctx context.Context,
-	req GetProjectBackupDatabasesRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*backupv2.ProjectBackupDatabase, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response backupv2.ProjectBackupDatabase
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
