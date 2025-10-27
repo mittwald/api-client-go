@@ -14,7 +14,7 @@ import (
 var _ = Describe("CheckMigrationIsPossibleErrorResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"errors\":{\"alreadyExistingMailAddress\":[{\"address\":\"string\"}],\"ambiguousMailAddressDelivery\":[{\"addresses\":[\"string\"],\"mailboxName\":\"string\"}],\"ambiguousMailboxDelivery\":[{\"address\":\"string\",\"mailboxes\":[\"string\"]}],\"catchAllMissingAddress\":[{\"address\":\"string\"}],\"catchAllTargetWithoutAlias\":[{\"address\":\"string\",\"mailboxName\":\"string\"}],\"missingVerifiedIngress\":[{\"hostname\":\"string\"}]}}")
+			exampleJSON := []byte("{\"errors\":{\"activeMailArchiveForAddress\":[{\"address\":\"string\"}],\"alreadyExistingMailAddress\":[{\"address\":\"string\"}],\"ambiguousMailAddressDelivery\":[{\"addresses\":[\"string\"],\"mailboxName\":\"string\"}],\"ambiguousMailboxDelivery\":[{\"address\":\"string\",\"mailboxes\":[\"string\"]}],\"catchAllMissingAddress\":[{\"address\":\"string\"}],\"catchAllTargetWithoutAlias\":[{\"address\":\"string\",\"mailboxName\":\"string\"}],\"missingVerifiedIngress\":[{\"hostname\":\"string\"}]}}")
 
 			sut := mailmigrationv2.CheckMigrationIsPossibleErrorResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
