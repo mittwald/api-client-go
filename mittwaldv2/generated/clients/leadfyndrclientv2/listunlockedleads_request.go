@@ -26,7 +26,7 @@ type ListUnlockedLeadsRequest struct {
 	EmployeeCountMax           *int64
 	SalesVolumeMin             *int64
 	SalesVolumeMax             *int64
-	Technologies               []string
+	Technologies               []ListUnlockedLeadsRequestQueryTechnologiesItem
 	BusinessFields             []string
 	LocationCity               *string
 	LocationPostCode           *string
@@ -99,7 +99,7 @@ func (r *ListUnlockedLeadsRequest) query() url.Values {
 		q.Set("salesVolumeMax", fmt.Sprintf("%d", *r.SalesVolumeMax))
 	}
 	for _, val := range r.Technologies {
-		q.Add("technologies", val)
+		q.Add("technologies", val.String())
 	}
 	for _, val := range r.BusinessFields {
 		q.Add("businessFields", val)

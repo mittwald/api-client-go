@@ -10,11 +10,13 @@ import "fmt"
 // properties:
 //    "active":
 //        type: "boolean"
+//    "atlasGroup": {"$ref": "#/components/schemas/de.mittwald.v1.conversation.Group"}
 //    "avatarRefId":
 //        type: "string"
 //    "clearName":
 //        type: "string"
 //    "department": {"$ref": "#/components/schemas/de.mittwald.v1.conversation.Department"}
+//    "group": {"$ref": "#/components/schemas/de.mittwald.v1.conversation.Group"}
 //    "userId":
 //        type: "string"
 // required:
@@ -22,13 +24,23 @@ import "fmt"
 
 type User struct {
 	Active      *bool       `json:"active,omitempty"`
+	AtlasGroup  *Group      `json:"atlasGroup,omitempty"`
 	AvatarRefId *string     `json:"avatarRefId,omitempty"`
 	ClearName   *string     `json:"clearName,omitempty"`
 	Department  *Department `json:"department,omitempty"`
+	Group       *Group      `json:"group,omitempty"`
 	UserId      string      `json:"userId"`
 }
 
 func (o *User) Validate() error {
+	if err := func() error {
+		if o.AtlasGroup == nil {
+			return nil
+		}
+		return o.AtlasGroup.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property atlasGroup: %w", err)
+	}
 	if err := func() error {
 		if o.Department == nil {
 			return nil
@@ -36,6 +48,14 @@ func (o *User) Validate() error {
 		return o.Department.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property department: %w", err)
+	}
+	if err := func() error {
+		if o.Group == nil {
+			return nil
+		}
+		return o.Group.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property group: %w", err)
 	}
 	return nil
 }

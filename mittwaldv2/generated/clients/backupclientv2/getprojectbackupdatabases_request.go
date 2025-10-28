@@ -13,7 +13,7 @@ import (
 // GetProjectBackupDatabasesRequest models a request for the
 // 'backup-get-project-backup-databases' operation. See [1] for more information.
 //
-// Get databases for a ProjectBackup.
+// Check databases for a ProjectBackup.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/backup/backup-get-project-backup-databases

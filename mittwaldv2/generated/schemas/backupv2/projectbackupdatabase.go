@@ -12,15 +12,11 @@ import "errors"
 //        type: "array"
 //        items:
 //            type: "string"
-//    "projectBackupId":
-//        type: "string"
 // required:
-//    - "projectBackupId"
 //    - "databases"
 
 type ProjectBackupDatabase struct {
-	Databases       []string `json:"databases"`
-	ProjectBackupId string   `json:"projectBackupId"`
+	Databases []string `json:"databases"`
 }
 
 func (o *ProjectBackupDatabase) Validate() error {

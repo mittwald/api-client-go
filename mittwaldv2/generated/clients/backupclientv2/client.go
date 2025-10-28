@@ -391,7 +391,7 @@ func (c *clientImpl) DeleteProjectBackup(
 	return httpRes, nil
 }
 
-// Get databases for a ProjectBackup.
+// Check databases for a ProjectBackup.
 func (c *clientImpl) GetProjectBackupDatabases(
 	ctx context.Context,
 	req GetProjectBackupDatabasesRequest,

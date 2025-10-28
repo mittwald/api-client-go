@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("NewDatabase", func() {
+var _ = Describe("ProjectBackupRestoreDatabase", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"database_name\":\"https://mydomain.com\",\"user_password\":\"string\",\"version\":\"1.0.0\"}")
+			exampleJSON := []byte("{\"phase\":\"running\",\"sourceDatabaseId\":\"string\",\"targetDatabaseId\":\"string\"}")
 
-			sut := backupv2.NewDatabase{}
+			sut := backupv2.ProjectBackupRestoreDatabase{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})
