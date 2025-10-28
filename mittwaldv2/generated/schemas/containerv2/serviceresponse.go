@@ -11,6 +11,7 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "deploy": {"$ref": "#/components/schemas/de.mittwald.v1.container.Deploy"}
 //    "deployedState": {"$ref": "#/components/schemas/de.mittwald.v1.container.ServiceState"}
 //    "description":
 //        type: "string"
@@ -54,6 +55,7 @@ import (
 //    - "requiresRecreate"
 
 type ServiceResponse struct {
+	Deploy           *Deploy       `json:"deploy,omitempty"`
 	DeployedState    ServiceState  `json:"deployedState"`
 	Description      string        `json:"description"`
 	Id               string        `json:"id"`
@@ -69,6 +71,14 @@ type ServiceResponse struct {
 }
 
 func (o *ServiceResponse) Validate() error {
+	if err := func() error {
+		if o.Deploy == nil {
+			return nil
+		}
+		return o.Deploy.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property deploy: %w", err)
+	}
 	if err := o.DeployedState.Validate(); err != nil {
 		return fmt.Errorf("invalid property deployedState: %w", err)
 	}

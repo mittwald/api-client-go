@@ -14,6 +14,7 @@ import "fmt"
 //            type: "string"
 //        description: "Defaults to image config on empty"
 //        example: ["mysqld"]
+//    "deploy": {"$ref": "#/components/schemas/de.mittwald.v1.container.Deploy"}
 //    "description":
 //        type: "string"
 //        example: "MySQL DB"
@@ -53,6 +54,7 @@ import "fmt"
 
 type ServiceDeclareRequest struct {
 	Command     []string          `json:"command,omitempty"`
+	Deploy      *Deploy           `json:"deploy,omitempty"`
 	Description *string           `json:"description,omitempty"`
 	Entrypoint  []string          `json:"entrypoint,omitempty"`
 	Environment map[string]string `json:"environment,omitempty"`
@@ -70,6 +72,14 @@ func (o *ServiceDeclareRequest) Validate() error {
 		return nil
 	}(); err != nil {
 		return fmt.Errorf("invalid property command: %w", err)
+	}
+	if err := func() error {
+		if o.Deploy == nil {
+			return nil
+		}
+		return o.Deploy.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property deploy: %w", err)
 	}
 	if err := func() error {
 		if o.Entrypoint == nil {
