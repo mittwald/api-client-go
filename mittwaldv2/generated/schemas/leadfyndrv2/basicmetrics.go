@@ -10,7 +10,6 @@ import "fmt"
 // properties:
 //    "co2":
 //        type: "number"
-//        maximum: 1
 //        minimum: 0
 //        format: "float"
 //    "contentLoaded":
