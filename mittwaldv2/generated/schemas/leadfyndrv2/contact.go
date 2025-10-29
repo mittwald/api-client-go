@@ -11,16 +11,16 @@ import "fmt"
 //    "address":
 //        type: "object"
 //        properties:
-//            "address_prefix":
+//            "addressPrefix":
 //                type: "string"
 //            "city":
 //                type: "string"
 //                minLength: 1
-//            "country_code":
+//            "countryCode":
 //                type: "string"
 //                maxLength: 2
 //                minLength: 2
-//            "house_number":
+//            "houseNumber":
 //                type: "string"
 //                minLength: 1
 //            "street":

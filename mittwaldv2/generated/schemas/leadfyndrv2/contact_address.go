@@ -6,16 +6,16 @@ package leadfyndrv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "address_prefix":
+//    "addressPrefix":
 //        type: "string"
 //    "city":
 //        type: "string"
 //        minLength: 1
-//    "country_code":
+//    "countryCode":
 //        type: "string"
 //        maxLength: 2
 //        minLength: 2
-//    "house_number":
+//    "houseNumber":
 //        type: "string"
 //        minLength: 1
 //    "street":
@@ -26,12 +26,12 @@ package leadfyndrv2
 //        minLength: 1
 
 type ContactAddress struct {
-	Address_prefix *string `json:"address_prefix,omitempty"`
-	City           *string `json:"city,omitempty"`
-	Country_code   *string `json:"country_code,omitempty"`
-	House_number   *string `json:"house_number,omitempty"`
-	Street         *string `json:"street,omitempty"`
-	Zip            *string `json:"zip,omitempty"`
+	AddressPrefix *string `json:"addressPrefix,omitempty"`
+	City          *string `json:"city,omitempty"`
+	CountryCode   *string `json:"countryCode,omitempty"`
+	HouseNumber   *string `json:"houseNumber,omitempty"`
+	Street        *string `json:"street,omitempty"`
+	Zip           *string `json:"zip,omitempty"`
 }
 
 func (o *ContactAddress) Validate() error {
