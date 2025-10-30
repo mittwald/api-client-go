@@ -8,20 +8,20 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "phase": {"$ref": "#/components/schemas/de.mittwald.v1.backup.RestorePhase"}
-//    "sourceDatabaseId":
+//    "databaseBackupDump":
 //        type: "string"
+//    "phase": {"$ref": "#/components/schemas/de.mittwald.v1.backup.RestorePhase"}
 //    "targetDatabaseId":
 //        type: "string"
 // required:
 //    - "phase"
-//    - "sourceDatabaseId"
+//    - "databaseBackupDump"
 //    - "targetDatabaseId"
 
 type ProjectBackupRestoreDatabase struct {
-	Phase            RestorePhase `json:"phase"`
-	SourceDatabaseId string       `json:"sourceDatabaseId"`
-	TargetDatabaseId string       `json:"targetDatabaseId"`
+	DatabaseBackupDump string       `json:"databaseBackupDump"`
+	Phase              RestorePhase `json:"phase"`
+	TargetDatabaseId   string       `json:"targetDatabaseId"`
 }
 
 func (o *ProjectBackupRestoreDatabase) Validate() error {

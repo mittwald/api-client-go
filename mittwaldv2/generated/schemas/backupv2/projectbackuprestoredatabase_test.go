@@ -14,7 +14,7 @@ import (
 var _ = Describe("ProjectBackupRestoreDatabase", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"phase\":\"running\",\"sourceDatabaseId\":\"string\",\"targetDatabaseId\":\"string\"}")
+			exampleJSON := []byte("{\"databaseBackupDump\":\"string\",\"phase\":\"running\",\"targetDatabaseId\":\"string\"}")
 
 			sut := backupv2.ProjectBackupRestoreDatabase{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

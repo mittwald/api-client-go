@@ -6,18 +6,20 @@ package backupv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "sourceDatabaseId":
+//    "databaseBackupDump":
 //        type: "string"
-//        format: "uuid"
+//        description: "Database backup dump from the backup to restore from."
 //    "targetDatabaseId":
 //        type: "string"
 //        format: "uuid"
+//        description: "ID of the target database to restore to."
 // required:
-//    - "sourceDatabaseId"
+//    - "databaseBackupDump"
+//    - "targetDatabaseId"
 
 type ProjectBackupRestoreDatabaseRequest struct {
-	SourceDatabaseId string  `json:"sourceDatabaseId"`
-	TargetDatabaseId *string `json:"targetDatabaseId,omitempty"`
+	DatabaseBackupDump string `json:"databaseBackupDump"`
+	TargetDatabaseId   string `json:"targetDatabaseId"`
 }
 
 func (o *ProjectBackupRestoreDatabaseRequest) Validate() error {

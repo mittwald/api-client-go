@@ -14,7 +14,7 @@ import (
 var _ = Describe("CronjobExecutionAnalysis", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"issues\":[\"string\"],\"message\":\"**Mögliche Fehlerursache**: Der zur Verfügung stehende Speicherplatz reicht für die Durchführung des Backups nicht aus. **Möglicher Lösungsansatz:** Passe den reservierten Speicherplatz für den Pod in den Umgebungsvariablen an.\",\"recommendation\":\"string\"}")
+			exampleJSON := []byte("{\"message\":\"Überprüfe die URL im Cronjob-Konfigurationsformular und korrigiere sie gegebenenfalls. Stelle sicher, dass die Domain gültig ist und DNS-Einträge korrekt konfiguriert wurden. Falls die URL falsch ist, aktualisiere sie mit der richtigen Adresse.\"}")
 
 			sut := cronjobv2.CronjobExecutionAnalysis{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
