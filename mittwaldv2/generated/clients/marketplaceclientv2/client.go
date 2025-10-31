@@ -1159,7 +1159,7 @@ func (c *clientImpl) GetOwnExtension(
 
 // Delete an extension.
 //
-// This action deletes all ExtensionInstances and afterwards the Extension itself.
+// Remove the Extension. Make sure that there are no instances for this extension
 func (c *clientImpl) DeleteExtension(
 	ctx context.Context,
 	req DeleteExtensionRequest,
