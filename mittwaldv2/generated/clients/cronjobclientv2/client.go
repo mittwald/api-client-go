@@ -54,6 +54,11 @@ type Client interface {
 		req UpdateCronjobRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetExecutionAnalysis(
+		ctx context.Context,
+		req GetExecutionAnalysisRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*cronjobv2.CronjobExecutionAnalysis, *http.Response, error)
 	GetExecution(
 		ctx context.Context,
 		req GetExecutionRequest,
@@ -64,11 +69,6 @@ type Client interface {
 		req UpdateCronjobAppIDRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	GetExecutionAnalysis(
-		ctx context.Context,
-		req GetExecutionAnalysisRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*cronjobv2.CronjobExecutionAnalysis, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -290,6 +290,34 @@ func (c *clientImpl) UpdateCronjob(
 	return httpRes, nil
 }
 
+// Get a CronjobExecution analysis for failed executions.
+func (c *clientImpl) GetExecutionAnalysis(
+	ctx context.Context,
+	req GetExecutionAnalysisRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*cronjobv2.CronjobExecutionAnalysis, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response cronjobv2.CronjobExecutionAnalysis
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Get a CronjobExecution.
 func (c *clientImpl) GetExecution(
 	ctx context.Context,
@@ -340,32 +368,4 @@ func (c *clientImpl) UpdateCronjobAppID(
 	}
 
 	return httpRes, nil
-}
-
-// Get a CronjobExecution analysis for failed executions.
-func (c *clientImpl) GetExecutionAnalysis(
-	ctx context.Context,
-	req GetExecutionAnalysisRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*cronjobv2.CronjobExecutionAnalysis, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response cronjobv2.CronjobExecutionAnalysis
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
