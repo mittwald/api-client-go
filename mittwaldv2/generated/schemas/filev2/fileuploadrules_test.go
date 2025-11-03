@@ -14,7 +14,7 @@ import (
 var _ = Describe("FileUploadRules", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"extensions\":[\"\"],\"fileTypes\":[{\"extensions\":[\"\"],\"mimeType\":\"image/jpeg\"}],\"maxNameLength\":80,\"maxSizeInBytes\":1000000,\"maxSizeInKB\":1000,\"maxSizeInKb\":1000,\"mimeTypes\":[\"\"],\"properties\":{\"imageDimensions\":{\"max\":null,\"min\":null}}}")
+			exampleJSON := []byte("{\"extensions\":[\"string\"],\"fileTypes\":[{\"extensions\":[\"string\"],\"mimeType\":\"image/jpeg\"}],\"maxNameLength\":80,\"maxSizeInBytes\":1000000,\"maxSizeInKB\":1000,\"maxSizeInKb\":1000,\"mimeTypes\":[\"string\"],\"properties\":{\"imageDimensions\":{\"max\":null,\"min\":null}}}")
 
 			sut := filev2.FileUploadRules{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

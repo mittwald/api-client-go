@@ -64,7 +64,7 @@ import (
 //    - "storageUsageInBytesSetAt"
 //    - "status"
 //    - "statusSetAt"
-// example: {"configuration": {"additionalFlags": ["--tcp-keepalive", "300"], "maxMemory": "16Mi", "maxMemoryPolicy": "allkeys-lru", "persistent": "true"}, "createdAt": "2023-03-28T13:15:00.000Z", "description": "My first RedisDatabase!", "finalizers": ["app:appinstallation:28471edf-d266-4d79-8ca8-169e330746db"], "hostname": "redis-xxxxxx.pg-example.db.example.com", "id": "fcfe9aea-84d5-46eb-ac6f-a0ccffa908b1", "name": "redis_xxxxxx", "port": 6379, "projectId": "9f2bddf1-dea6-4441-b4fe-a22ff39caff8", "status": "error", "statusSetAt": "2024-03-05T9:26:32.000Z", "storageUsageInBytes": 10485760, "storageUsageInBytesSetAt": "2024-03-05T9:26:32.000Z", "updatedAt": "2023-03-29T15:50:10.000Z", "version": "7.0"}
+// example: {"configuration": {"additionalFlags": ["--tcp-keepalive", "300"], "maxMemory": "16Mi", "maxMemoryPolicy": "allkeys-lru", "persistent": true}, "createdAt": "2023-03-28T13:15:00.000Z", "description": "My first RedisDatabase!", "finalizers": ["app:appinstallation:28471edf-d266-4d79-8ca8-169e330746db"], "hostname": "redis-xxxxxx.pg-example.db.example.com", "id": "fcfe9aea-84d5-46eb-ac6f-a0ccffa908b1", "name": "redis_xxxxxx", "port": 6379, "projectId": "9f2bddf1-dea6-4441-b4fe-a22ff39caff8", "status": "error", "statusSetAt": "2024-03-05T09:26:32.000Z", "storageUsageInBytes": 10485760, "storageUsageInBytesSetAt": "2024-03-05T09:26:32.000Z", "updatedAt": "2023-03-29T15:50:10.000Z", "version": "7.0"}
 
 type RedisDatabase struct {
 	Configuration            *RedisDatabaseConfiguration `json:"configuration,omitempty"`

@@ -99,6 +99,11 @@ type Client interface {
 		req DeprecatedUpdateProjectMailSettingRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	UpdateProjectMailSetting(
+		ctx context.Context,
+		req UpdateProjectMailSettingRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	ListDeliveryBoxes(
 		ctx context.Context,
 		req ListDeliveryBoxesRequest,
@@ -177,11 +182,6 @@ type Client interface {
 	UpdateMailAddressCatchAll(
 		ctx context.Context,
 		req UpdateMailAddressCatchAllRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	UpdateProjectMailSetting(
-		ctx context.Context,
-		req UpdateProjectMailSettingRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -625,6 +625,30 @@ func (c *clientImpl) DeprecatedUpdateProjectMailSetting(
 	return httpRes, nil
 }
 
+// Update a mail setting of a Project.
+func (c *clientImpl) UpdateProjectMailSetting(
+	ctx context.Context,
+	req UpdateProjectMailSettingRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // List DeliveryBoxes belonging to a Project.
 func (c *clientImpl) ListDeliveryBoxes(
 	ctx context.Context,
@@ -1021,30 +1045,6 @@ func (c *clientImpl) UpdateMailAddressAddress(
 func (c *clientImpl) UpdateMailAddressCatchAll(
 	ctx context.Context,
 	req UpdateMailAddressCatchAllRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update a mail setting of a Project.
-func (c *clientImpl) UpdateProjectMailSetting(
-	ctx context.Context,
-	req UpdateProjectMailSettingRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

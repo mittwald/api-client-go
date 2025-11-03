@@ -24,9 +24,9 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/mail/deprecated-mail-update-project-mail-setting
 type DeprecatedUpdateProjectMailSettingRequest struct {
-	Body      DeprecatedUpdateProjectMailSettingRequestBody
-	ProjectID string
-	Setting   DeprecatedUpdateProjectMailSettingRequestPathSetting
+	Body        DeprecatedUpdateProjectMailSettingRequestBody
+	ProjectID   string
+	MailSetting DeprecatedUpdateProjectMailSettingRequestPathMailSetting
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -60,7 +60,7 @@ func (r *DeprecatedUpdateProjectMailSettingRequest) body() (io.Reader, string, e
 
 func (r *DeprecatedUpdateProjectMailSettingRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/projects/%s/mail-settings/%s", url.PathEscape(r.ProjectID), url.PathEscape(string(r.Setting))),
+		Path: fmt.Sprintf("/v2/projects/%s/mail-settings/%s", url.PathEscape(r.ProjectID), url.PathEscape(string(r.MailSetting))),
 	}
 	return u.String()
 }
