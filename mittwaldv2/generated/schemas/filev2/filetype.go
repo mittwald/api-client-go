@@ -12,7 +12,7 @@ import "errors"
 //        type: "array"
 //        items:
 //            type: "string"
-//            example: [".jpe", ".jpeg", ".jpg"]
+//        example: [".jpe", ".jpeg", ".jpg"]
 //    "mimeType":
 //        type: "string"
 //        example: "image/jpeg"

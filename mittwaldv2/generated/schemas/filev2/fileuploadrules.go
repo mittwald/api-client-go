@@ -15,7 +15,7 @@ import (
 //        type: "array"
 //        items:
 //            type: "string"
-//            example: [".png", ".jpeg", ".jpg"]
+//        example: [".png", ".jpeg", ".jpg"]
 //    "fileTypes":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.file.FileType"}
@@ -42,7 +42,7 @@ import (
 //        type: "array"
 //        items:
 //            type: "string"
-//            example: ["image/png", "image/jpeg"]
+//        example: ["image/png", "image/jpeg"]
 //    "properties":
 //        type: "object"
 //        properties:

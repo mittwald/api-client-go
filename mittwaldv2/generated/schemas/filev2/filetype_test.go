@@ -14,7 +14,7 @@ import (
 var _ = Describe("FileType", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"extensions\":[\"\"],\"mimeType\":\"image/jpeg\"}")
+			exampleJSON := []byte("{\"extensions\":[\"string\"],\"mimeType\":\"image/jpeg\"}")
 
 			sut := filev2.FileType{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
