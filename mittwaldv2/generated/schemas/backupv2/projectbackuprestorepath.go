@@ -13,7 +13,7 @@ import "fmt"
 //        default: false
 //    "determinedTargetPath":
 //        type: "string"
-//    "phase": {"$ref": "#/components/schemas/de.mittwald.v1.backup.RestorePhase"}
+//    "phase": {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePhase"}
 //    "sourcePath":
 //        type: "string"
 //    "targetPath":
@@ -25,11 +25,11 @@ import "fmt"
 //    - "clearTargetPath"
 
 type ProjectBackupRestorePath struct {
-	ClearTargetPath      bool         `json:"clearTargetPath"`
-	DeterminedTargetPath string       `json:"determinedTargetPath"`
-	Phase                RestorePhase `json:"phase"`
-	SourcePath           string       `json:"sourcePath"`
-	TargetPath           *string      `json:"targetPath,omitempty"`
+	ClearTargetPath      bool                      `json:"clearTargetPath"`
+	DeterminedTargetPath string                    `json:"determinedTargetPath"`
+	Phase                ProjectBackupRestorePhase `json:"phase"`
+	SourcePath           string                    `json:"sourcePath"`
+	TargetPath           *string                   `json:"targetPath,omitempty"`
 }
 
 func (o *ProjectBackupRestorePath) Validate() error {

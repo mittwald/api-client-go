@@ -11,13 +11,13 @@ import "fmt"
 //    - "running"
 //    - "completed"
 
-type RestorePhase string
+type ProjectBackupRestorePhase string
 
-const RestorePhaseRunning RestorePhase = "running"
-const RestorePhaseCompleted RestorePhase = "completed"
+const ProjectBackupRestorePhaseRunning ProjectBackupRestorePhase = "running"
+const ProjectBackupRestorePhaseCompleted ProjectBackupRestorePhase = "completed"
 
-func (e RestorePhase) Validate() error {
-	if e == RestorePhaseRunning || e == RestorePhaseCompleted {
+func (e ProjectBackupRestorePhase) Validate() error {
+	if e == ProjectBackupRestorePhaseRunning || e == ProjectBackupRestorePhaseCompleted {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

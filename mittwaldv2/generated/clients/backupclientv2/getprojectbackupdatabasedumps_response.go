@@ -1,4 +1,4 @@
-package backupv2
+package backupclientv2
 
 import "errors"
 
@@ -15,11 +15,11 @@ import "errors"
 // required:
 //    - "databases"
 
-type ProjectBackupDatabase struct {
+type GetProjectBackupDatabaseDumpsResponse struct {
 	Databases []string `json:"databases"`
 }
 
-func (o *ProjectBackupDatabase) Validate() error {
+func (o *GetProjectBackupDatabaseDumpsResponse) Validate() error {
 	if o.Databases == nil {
 		return errors.New("property databases is required, but not set")
 	}

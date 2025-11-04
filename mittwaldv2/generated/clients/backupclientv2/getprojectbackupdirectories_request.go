@@ -13,7 +13,7 @@ import (
 // GetProjectBackupDirectoriesRequest models a request for the
 // 'backup-get-project-backup-directories' operation. See [1] for more information.
 //
-// Get paths for a ProjectBackup.
+// List paths for a ProjectBackup.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/backup/backup-get-project-backup-directories

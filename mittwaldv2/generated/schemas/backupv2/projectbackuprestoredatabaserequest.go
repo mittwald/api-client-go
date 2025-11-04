@@ -9,6 +9,7 @@ package backupv2
 //    "databaseBackupDump":
 //        type: "string"
 //        description: "Database backup dump from the backup to restore from."
+//        example: "dbdump-mysql-123456"
 //    "targetDatabaseId":
 //        type: "string"
 //        format: "uuid"

@@ -10,7 +10,7 @@ import "fmt"
 // properties:
 //    "databaseBackupDump":
 //        type: "string"
-//    "phase": {"$ref": "#/components/schemas/de.mittwald.v1.backup.RestorePhase"}
+//    "phase": {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePhase"}
 //    "targetDatabaseId":
 //        type: "string"
 // required:
@@ -19,9 +19,9 @@ import "fmt"
 //    - "targetDatabaseId"
 
 type ProjectBackupRestoreDatabase struct {
-	DatabaseBackupDump string       `json:"databaseBackupDump"`
-	Phase              RestorePhase `json:"phase"`
-	TargetDatabaseId   string       `json:"targetDatabaseId"`
+	DatabaseBackupDump string                    `json:"databaseBackupDump"`
+	Phase              ProjectBackupRestorePhase `json:"phase"`
+	TargetDatabaseId   string                    `json:"targetDatabaseId"`
 }
 
 func (o *ProjectBackupRestoreDatabase) Validate() error {
