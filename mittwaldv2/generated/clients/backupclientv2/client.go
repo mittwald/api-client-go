@@ -69,6 +69,16 @@ type Client interface {
 		req DeleteProjectBackupRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetProjectBackupDirectories(
+		ctx context.Context,
+		req GetProjectBackupDirectoriesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*backupv2.ProjectBackupPath, *http.Response, error)
+	RequestProjectBackupRestorePath(
+		ctx context.Context,
+		req RequestProjectBackupRestorePathRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	UpdateProjectBackupDescription(
 		ctx context.Context,
 		req UpdateProjectBackupDescriptionRequest,
@@ -351,6 +361,58 @@ func (c *clientImpl) GetProjectBackup(
 func (c *clientImpl) DeleteProjectBackup(
 	ctx context.Context,
 	req DeleteProjectBackupRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Get table of contents for a ProjectBackup.
+func (c *clientImpl) GetProjectBackupDirectories(
+	ctx context.Context,
+	req GetProjectBackupDirectoriesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*backupv2.ProjectBackupPath, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response backupv2.ProjectBackupPath
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Restore a ProjectBackup's path.
+func (c *clientImpl) RequestProjectBackupRestorePath(
+	ctx context.Context,
+	req RequestProjectBackupRestorePathRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
