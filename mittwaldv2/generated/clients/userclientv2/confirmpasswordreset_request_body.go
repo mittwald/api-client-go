@@ -11,8 +11,8 @@ package userclientv2
 //        description: "The new password."
 //    "token":
 //        type: "string"
-//        maxLength: 6
-//        minLength: 6
+//        maxLength: 20
+//        minLength: 20
 //        description: "Password reset token"
 //    "userId":
 //        type: "string"
