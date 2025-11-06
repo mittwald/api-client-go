@@ -17,6 +17,9 @@ import "fmt"
 //            - "FEATURE_SET_MODIFIED"
 //            - "FEATURE_SET_UNCHANGED"
 //        description: "DescriptionChangeType defines how the description change should be handled. Values:\n  - FEATURE_SET_MODIFIED: The users have to confirm to the new contract details equal as price changes.\n  - FEATURE_SET_UNCHANGED: The changes are only wording updates and do not impact the contract details, so no confirm is required.\n"
+//    "isBookingStopped":
+//        type: "boolean"
+//        description: "stop extension variant from being booked"
 //    "key":
 //        type: "string"
 //        description: "Key that needs to be unique in Variant."
@@ -33,6 +36,7 @@ import "fmt"
 type Variant struct {
 	Description           *string                       `json:"description,omitempty"`
 	DescriptionChangeType *VariantDescriptionChangeType `json:"descriptionChangeType,omitempty"`
+	IsBookingStopped      *bool                         `json:"isBookingStopped,omitempty"`
 	Key                   string                        `json:"key"`
 	Name                  *string                       `json:"name,omitempty"`
 	PriceInCents          float64                       `json:"priceInCents"`

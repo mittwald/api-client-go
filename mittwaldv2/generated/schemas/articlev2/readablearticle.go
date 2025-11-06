@@ -42,10 +42,10 @@ import "fmt"
 //        properties:
 //            "cpu":
 //                type: "string"
-//                example: 1
+//                example: "1"
 //            "memory":
 //                type: "string"
-//                example: 10
+//                example: "10"
 //            "name":
 //                type: "string"
 //                example: "psplus-shared"

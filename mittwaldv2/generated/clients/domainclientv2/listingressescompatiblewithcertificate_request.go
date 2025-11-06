@@ -23,7 +23,10 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/domain/ingress-list-ingresses-compatible-with-certificate
 type ListIngressesCompatibleWithCertificateRequest struct {
-	Body ListIngressesCompatibleWithCertificateRequestBody
+	Body  ListIngressesCompatibleWithCertificateRequestBody
+	Limit *int64
+	Skip  *int64
+	Page  *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -57,11 +60,22 @@ func (r *ListIngressesCompatibleWithCertificateRequest) body() (io.Reader, strin
 
 func (r *ListIngressesCompatibleWithCertificateRequest) url() string {
 	u := url.URL{
-		Path: "/v2/actions/list-ingresses-compatible-with-certificate",
+		Path:     "/v2/actions/list-ingresses-compatible-with-certificate",
+		RawQuery: r.query().Encode(),
 	}
 	return u.String()
 }
 
 func (r *ListIngressesCompatibleWithCertificateRequest) query() url.Values {
-	return nil
+	q := make(url.Values)
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
+	}
+	return q
 }
