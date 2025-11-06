@@ -43,7 +43,7 @@ import "fmt"
 //        type: "array"
 //        items:
 //            type: "string"
-//        example: ["3306:3306/tcp"]
+//        example: ["3306/tcp"]
 //    "volumes":
 //        type: "array"
 //        items:

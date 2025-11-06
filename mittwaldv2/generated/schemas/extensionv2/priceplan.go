@@ -11,6 +11,12 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "isDowngradeAllowed":
+//        type: "boolean"
+//        description: "Indicates whether downgrading between variants is allowed."
+//    "isUpgradeAllowed":
+//        type: "boolean"
+//        description: "Indicates whether upgrading between variants is allowed."
 //    "variants":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.extension.Variant"}
@@ -20,7 +26,9 @@ import (
 
 // PricePlan with Variants.
 type PricePlan struct {
-	Variants []Variant `json:"variants"`
+	IsDowngradeAllowed *bool     `json:"isDowngradeAllowed,omitempty"`
+	IsUpgradeAllowed   *bool     `json:"isUpgradeAllowed,omitempty"`
+	Variants           []Variant `json:"variants"`
 }
 
 func (o *PricePlan) Validate() error {

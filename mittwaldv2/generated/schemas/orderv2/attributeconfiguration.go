@@ -11,7 +11,7 @@ package orderv2
 //        example: "storage"
 //    "value":
 //        type: "string"
-//        example: 10
+//        example: "10"
 // required:
 //    - "key"
 
