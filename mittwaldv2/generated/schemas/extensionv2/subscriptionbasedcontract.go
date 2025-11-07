@@ -20,14 +20,6 @@ import (
 //        format: "date-time"
 //    "interactionRequired":
 //        type: "boolean"
-//    "pendingVariantChange":
-//        type: "object"
-//        properties:
-//            "effectiveDate":
-//                type: "string"
-//                format: "date-time"
-//            "targetVariantKey":
-//                type: "string"
 //    "status":
 //        type: "string"
 //        enum:
@@ -51,26 +43,17 @@ import (
 
 // A strategy for Contracts that will be paid periodically.
 type SubscriptionBasedContract struct {
-	CurrentPrice          *int64                                         `json:"currentPrice,omitempty"`
-	InteractionDeadline   *time.Time                                     `json:"interactionDeadline,omitempty"`
-	InteractionRequired   bool                                           `json:"interactionRequired"`
-	PendingVariantChange  *SubscriptionBasedContractPendingVariantChange `json:"pendingVariantChange,omitempty"`
-	Status                SubscriptionBasedContractStatus                `json:"status"`
-	TerminationTargetDate *time.Time                                     `json:"terminationTargetDate,omitempty"`
-	VariantDescription    *string                                        `json:"variantDescription,omitempty"`
-	VariantKey            *string                                        `json:"variantKey,omitempty"`
-	VariantName           *string                                        `json:"variantName,omitempty"`
+	CurrentPrice          *int64                          `json:"currentPrice,omitempty"`
+	InteractionDeadline   *time.Time                      `json:"interactionDeadline,omitempty"`
+	InteractionRequired   bool                            `json:"interactionRequired"`
+	Status                SubscriptionBasedContractStatus `json:"status"`
+	TerminationTargetDate *time.Time                      `json:"terminationTargetDate,omitempty"`
+	VariantDescription    *string                         `json:"variantDescription,omitempty"`
+	VariantKey            *string                         `json:"variantKey,omitempty"`
+	VariantName           *string                         `json:"variantName,omitempty"`
 }
 
 func (o *SubscriptionBasedContract) Validate() error {
-	if err := func() error {
-		if o.PendingVariantChange == nil {
-			return nil
-		}
-		return o.PendingVariantChange.Validate()
-	}(); err != nil {
-		return fmt.Errorf("invalid property pendingVariantChange: %w", err)
-	}
 	if err := o.Status.Validate(); err != nil {
 		return fmt.Errorf("invalid property status: %w", err)
 	}
