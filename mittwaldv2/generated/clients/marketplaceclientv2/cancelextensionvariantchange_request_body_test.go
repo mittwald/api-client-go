@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("ListOnbehalfInvoicesResponseItem", func() {
+var _ = Describe("CancelExtensionVariantChangeRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"invoiceDate\":\"2006-01-02T15:04:05Z\",\"invoiceId\":\"string\",\"invoiceNumber\":\"string\",\"invoiceType\":\"INVOICE\",\"pdfLink\":\"string\",\"totalGross\":3.14,\"totalNet\":3.14,\"webLink\":\"string\"}")
+			exampleJSON := []byte("{}")
 
-			sut := marketplaceclientv2.ListOnbehalfInvoicesResponseItem{}
+			sut := marketplaceclientv2.CancelExtensionVariantChangeRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})
