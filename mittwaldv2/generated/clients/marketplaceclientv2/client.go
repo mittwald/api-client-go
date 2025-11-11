@@ -320,16 +320,6 @@ type Client interface {
 		req CustomerUpdatePaymentMethodRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CustomerUpdatePaymentMethodResponse, *http.Response, error)
-	ScheduleExtensionVariantChange(
-		ctx context.Context,
-		req ScheduleExtensionVariantChangeRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*any, *http.Response, error)
-	CancelExtensionVariantChange(
-		ctx context.Context,
-		req CancelExtensionVariantChangeRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*CancelExtensionVariantChangeResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -2023,62 +2013,6 @@ func (c *clientImpl) CustomerUpdatePaymentMethod(
 	}
 
 	var response CustomerUpdatePaymentMethodResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Schedule an Extension Instance Variant change for the next possible date.
-func (c *clientImpl) ScheduleExtensionVariantChange(
-	ctx context.Context,
-	req ScheduleExtensionVariantChangeRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*any, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response any
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Cancel an Extension Instance Variant Change.
-func (c *clientImpl) CancelExtensionVariantChange(
-	ctx context.Context,
-	req CancelExtensionVariantChangeRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*CancelExtensionVariantChangeResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response CancelExtensionVariantChangeResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
