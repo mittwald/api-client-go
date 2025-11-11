@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("User", func() {
+var _ = Describe("Group", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"active\":true,\"atlasGroup\":{\"acronym\":\"string\",\"id\":\"string\",\"isDefaultGroup\":true,\"name\":\"string\"},\"avatarRefId\":\"string\",\"clearName\":\"string\",\"department\":\"development\",\"group\":{\"acronym\":\"string\",\"id\":\"string\",\"isDefaultGroup\":true,\"name\":\"string\"},\"userId\":\"string\"}")
+			exampleJSON := []byte("{\"acronym\":\"string\",\"id\":\"string\",\"isDefaultGroup\":true,\"name\":\"string\"}")
 
-			sut := conversationv2.User{}
+			sut := conversationv2.Group{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})
