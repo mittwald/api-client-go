@@ -14,7 +14,7 @@ import "errors"
 //            type: "string"
 //            maxLength: 16
 //            minLength: 16
-//            example: 1234123412341234
+//            example: "1234123412341234"
 //        maxItems: 20
 //        minItems: 20
 // required:

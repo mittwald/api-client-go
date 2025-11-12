@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateAPITokenResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"token\":\"string\"}")
+			exampleJSON := []byte("{\"token\":\"00000000-0000-4000-0000-000000000000:foobar:mittwald_a\"}")
 
 			sut := userclientv2.CreateAPITokenResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
