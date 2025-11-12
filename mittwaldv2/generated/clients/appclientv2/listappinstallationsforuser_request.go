@@ -20,7 +20,6 @@ import (
 type ListAppinstallationsForUserRequest struct {
 	AppIDs     []string
 	SearchTerm *string
-	CustomerID *string
 	Limit      *int64
 	Skip       *int64
 	Page       *int64
@@ -66,9 +65,6 @@ func (r *ListAppinstallationsForUserRequest) query() url.Values {
 	}
 	if r.SearchTerm != nil {
 		q.Set("searchTerm", *r.SearchTerm)
-	}
-	if r.CustomerID != nil {
-		q.Set("customerId", *r.CustomerID)
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))

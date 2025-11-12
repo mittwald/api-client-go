@@ -15,7 +15,7 @@ package userclientv2
 //        maxLength: 16
 //        minLength: 6
 //        description: "The token that was send to your email address"
-//        example: 123456
+//        example: "123456"
 //    "userId":
 //        type: "string"
 //        format: "uuid"

@@ -9,6 +9,7 @@ package userclientv2
 //    "token":
 //        type: "string"
 //        description: "The `ApiToken`."
+//        example: "00000000-0000-4000-0000-000000000000:foobar:mittwald_a"
 // required:
 //    - "token"
 

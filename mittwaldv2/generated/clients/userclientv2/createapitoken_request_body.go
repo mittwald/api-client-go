@@ -28,7 +28,7 @@ import (
 //        minItems: 1
 //        uniqueItems: true
 //        description: "Determines the access rights of the ApiToken."
-//        example: {"value": ["api_read"]}
+//        example: ["api_read"]
 // required:
 //    - "roles"
 //    - "description"
