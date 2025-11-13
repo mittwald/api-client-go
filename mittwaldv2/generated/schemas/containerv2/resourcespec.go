@@ -7,8 +7,10 @@ package containerv2
 // properties:
 //    "cpus":
 //        type: "string"
+//        example: "0.5"
 //    "memory":
 //        type: "string"
+//        example: "1gb"
 
 type ResourceSpec struct {
 	Cpus   *string `json:"cpus,omitempty"`

@@ -14,7 +14,7 @@ import (
 var _ = Describe("ResourceSpec", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"cpus\":\"string\",\"memory\":\"string\"}")
+			exampleJSON := []byte("{\"cpus\":\"0.5\",\"memory\":\"1gb\"}")
 
 			sut := containerv2.ResourceSpec{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
