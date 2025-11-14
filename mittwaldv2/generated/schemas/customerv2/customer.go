@@ -42,6 +42,8 @@ import (
 //        type: "boolean"
 //    "isInDefaultOfPayment":
 //        type: "boolean"
+//    "is_mail_address_invalid":
+//        type: "boolean"
 //    "levelOfUndeliverableDunningNotice":
 //        type: "string"
 //        enum:
@@ -85,6 +87,7 @@ type Customer struct {
 	IsAllowedToPlaceOrders            *bool                                      `json:"isAllowedToPlaceOrders,omitempty"`
 	IsBanned                          *bool                                      `json:"isBanned,omitempty"`
 	IsInDefaultOfPayment              *bool                                      `json:"isInDefaultOfPayment,omitempty"`
+	Is_mail_address_invalid           *bool                                      `json:"is_mail_address_invalid,omitempty"`
 	LevelOfUndeliverableDunningNotice *CustomerLevelOfUndeliverableDunningNotice `json:"levelOfUndeliverableDunningNotice,omitempty"`
 	MemberCount                       int64                                      `json:"memberCount"`
 	Name                              string                                     `json:"name"`
