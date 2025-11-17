@@ -8,7 +8,7 @@ package dnsv2
 // properties:
 //    "fqdn":
 //        type: "string"
-//        maxLength: 50
+//        maxLength: 255
 //        minLength: 1
 //        format: "idn-dnsname"
 //    "priority":

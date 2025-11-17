@@ -10,6 +10,8 @@ import "fmt"
 // properties:
 //    "fqdn":
 //        type: "string"
+//        maxLength: 255
+//        minLength: 1
 //        format: "idn-dnsname"
 //    "settings": {"$ref": "#/components/schemas/de.mittwald.v1.dns.RecordSettings"}
 // required:
