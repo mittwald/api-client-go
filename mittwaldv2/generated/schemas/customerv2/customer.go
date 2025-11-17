@@ -30,6 +30,15 @@ import (
 //        type: "string"
 //    "customerNumber":
 //        type: "string"
+//    "deletionProhibitedBy":
+//        type: "array"
+//        items:
+//            type: "string"
+//            enum:
+//                - "hasOpenInvoices"
+//                - "hasActiveContracts"
+//                - "hasActiveExtensionSubscriptions"
+//                - "isActiveContributor"
 //    "executingUserRoles":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.customer.Role"}
@@ -41,8 +50,6 @@ import (
 //    "isBanned":
 //        type: "boolean"
 //    "isInDefaultOfPayment":
-//        type: "boolean"
-//    "is_mail_address_invalid":
 //        type: "boolean"
 //    "levelOfUndeliverableDunningNotice":
 //        type: "string"
@@ -82,12 +89,12 @@ type Customer struct {
 	CreationDate                      time.Time                                  `json:"creationDate"`
 	CustomerId                        string                                     `json:"customerId"`
 	CustomerNumber                    string                                     `json:"customerNumber"`
+	DeletionProhibitedBy              []CustomerDeletionProhibitedByItem         `json:"deletionProhibitedBy,omitempty"`
 	ExecutingUserRoles                []Role                                     `json:"executingUserRoles,omitempty"`
 	Flags                             []CustomerFlag                             `json:"flags,omitempty"`
 	IsAllowedToPlaceOrders            *bool                                      `json:"isAllowedToPlaceOrders,omitempty"`
 	IsBanned                          *bool                                      `json:"isBanned,omitempty"`
 	IsInDefaultOfPayment              *bool                                      `json:"isInDefaultOfPayment,omitempty"`
-	Is_mail_address_invalid           *bool                                      `json:"is_mail_address_invalid,omitempty"`
 	LevelOfUndeliverableDunningNotice *CustomerLevelOfUndeliverableDunningNotice `json:"levelOfUndeliverableDunningNotice,omitempty"`
 	MemberCount                       int64                                      `json:"memberCount"`
 	Name                              string                                     `json:"name"`
@@ -105,6 +112,21 @@ func (o *Customer) Validate() error {
 		return o.ActiveSuspension.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property activeSuspension: %w", err)
+	}
+	if err := func() error {
+		if o.DeletionProhibitedBy == nil {
+			return nil
+		}
+		return func() error {
+			for i := range o.DeletionProhibitedBy {
+				if err := o.DeletionProhibitedBy[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}()
+	}(); err != nil {
+		return fmt.Errorf("invalid property deletionProhibitedBy: %w", err)
 	}
 	if err := func() error {
 		if o.ExecutingUserRoles == nil {

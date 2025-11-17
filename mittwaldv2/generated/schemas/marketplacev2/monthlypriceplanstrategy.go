@@ -12,7 +12,7 @@ package marketplacev2
 //            type: "string"
 //        "isBookingStopped":
 //            type: "boolean"
-//            example: "If a variant is no longer bookable the existing extension instances will not be removed but no new ones can be created."
+//            description: "If a variant is no longer bookable the existing extension instances will not be removed but no new ones can be created."
 //        "key":
 //            type: "string"
 //        "name":

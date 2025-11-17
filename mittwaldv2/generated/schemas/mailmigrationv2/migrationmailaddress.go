@@ -20,23 +20,27 @@ import "fmt"
 // required:
 //    - "id"
 //    - "address"
-//    - "preMigrationJobs"
 //    - "migrationJobs"
 //    - "finished"
 
 type MigrationMailAddress struct {
-	Address          string                              `json:"address"`
-	Finished         bool                                `json:"finished"`
-	Id               string                              `json:"id"`
-	MigrationJobs    MigrationMailAddressMigrationJob    `json:"migrationJobs"`
-	PreMigrationJobs MigrationMailAddressPreMigrationJob `json:"preMigrationJobs"`
+	Address          string                               `json:"address"`
+	Finished         bool                                 `json:"finished"`
+	Id               string                               `json:"id"`
+	MigrationJobs    MigrationMailAddressMigrationJob     `json:"migrationJobs"`
+	PreMigrationJobs *MigrationMailAddressPreMigrationJob `json:"preMigrationJobs,omitempty"`
 }
 
 func (o *MigrationMailAddress) Validate() error {
 	if err := o.MigrationJobs.Validate(); err != nil {
 		return fmt.Errorf("invalid property migrationJobs: %w", err)
 	}
-	if err := o.PreMigrationJobs.Validate(); err != nil {
+	if err := func() error {
+		if o.PreMigrationJobs == nil {
+			return nil
+		}
+		return o.PreMigrationJobs.Validate()
+	}(); err != nil {
 		return fmt.Errorf("invalid property preMigrationJobs: %w", err)
 	}
 	return nil
