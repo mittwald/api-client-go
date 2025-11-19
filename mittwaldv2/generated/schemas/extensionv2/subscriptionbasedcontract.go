@@ -11,6 +11,9 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "contractPeriodEndDate":
+//        type: "string"
+//        format: "date-time"
 //    "currentPrice":
 //        type: "integer"
 //        description: "monthly price in Euro Cent"
@@ -51,6 +54,7 @@ import (
 
 // A strategy for Contracts that will be paid periodically.
 type SubscriptionBasedContract struct {
+	ContractPeriodEndDate *time.Time                                     `json:"contractPeriodEndDate,omitempty"`
 	CurrentPrice          *int64                                         `json:"currentPrice,omitempty"`
 	InteractionDeadline   *time.Time                                     `json:"interactionDeadline,omitempty"`
 	InteractionRequired   bool                                           `json:"interactionRequired"`
