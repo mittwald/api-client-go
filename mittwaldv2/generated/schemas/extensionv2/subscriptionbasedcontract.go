@@ -31,6 +31,9 @@ import (
 //                format: "date-time"
 //            "targetVariantKey":
 //                type: "string"
+//        required:
+//            - "targetVariantKey"
+//            - "effectiveDate"
 //    "status":
 //        type: "string"
 //        enum:

@@ -13,10 +13,13 @@ import "time"
 //        format: "date-time"
 //    "targetVariantKey":
 //        type: "string"
+// required:
+//    - "targetVariantKey"
+//    - "effectiveDate"
 
 type SubscriptionBasedContractPendingVariantChange struct {
-	EffectiveDate    *time.Time `json:"effectiveDate,omitempty"`
-	TargetVariantKey *string    `json:"targetVariantKey,omitempty"`
+	EffectiveDate    time.Time `json:"effectiveDate"`
+	TargetVariantKey string    `json:"targetVariantKey"`
 }
 
 func (o *SubscriptionBasedContractPendingVariantChange) Validate() error {
