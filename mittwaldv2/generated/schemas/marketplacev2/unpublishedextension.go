@@ -53,6 +53,7 @@ import (
 //    "pricing":
 //        oneOf:
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.MonthlyPricePlanStrategy"}
+//    "pricingDetails": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.PricePlanDetails"}
 //    "published":
 //        type: "boolean"
 //        enum:
@@ -115,6 +116,7 @@ type UnpublishedExtension struct {
 	LogoRefId            *string                      `json:"logoRefId,omitempty"`
 	Name                 string                       `json:"name"`
 	Pricing              *UnpublishedExtensionPricing `json:"pricing,omitempty"`
+	PricingDetails       *PricePlanDetails            `json:"pricingDetails,omitempty"`
 	Published            *bool                        `json:"published,omitempty"`
 	Scopes               []string                     `json:"scopes"`
 	State                UnpublishedExtensionState    `json:"state"`
@@ -194,6 +196,14 @@ func (o *UnpublishedExtension) Validate() error {
 		return o.Pricing.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property pricing: %w", err)
+	}
+	if err := func() error {
+		if o.PricingDetails == nil {
+			return nil
+		}
+		return o.PricingDetails.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property pricingDetails: %w", err)
 	}
 	if o.Scopes == nil {
 		return errors.New("property scopes is required, but not set")
