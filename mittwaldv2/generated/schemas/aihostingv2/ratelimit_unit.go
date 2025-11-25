@@ -11,13 +11,13 @@ import "fmt"
 //    - "minute"
 //    - "hour"
 
-type LicenceLimitUnit string
+type RateLimitUnit string
 
-const LicenceLimitUnitMinute LicenceLimitUnit = "minute"
-const LicenceLimitUnitHour LicenceLimitUnit = "hour"
+const RateLimitUnitMinute RateLimitUnit = "minute"
+const RateLimitUnitHour RateLimitUnit = "hour"
 
-func (e LicenceLimitUnit) Validate() error {
-	if e == LicenceLimitUnitMinute || e == LicenceLimitUnitHour {
+func (e RateLimitUnit) Validate() error {
+	if e == RateLimitUnitMinute || e == RateLimitUnitHour {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
