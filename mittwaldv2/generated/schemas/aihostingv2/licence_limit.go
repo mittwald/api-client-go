@@ -9,7 +9,7 @@ import "fmt"
 // type: "object"
 // properties:
 //    "allowedRequestsPerUnit":
-//        type: "integer"
+//        type: "number"
 //    "unit":
 //        type: "string"
 //        enum:
@@ -21,12 +21,12 @@ import "fmt"
 // description: "The number of allowed requests per unit. Limits are shared across all licences within the same project."
 
 // The number of allowed requests per unit. Limits are shared across all licences within the same project.
-type RateLimit struct {
-	AllowedRequestsPerUnit int64         `json:"allowedRequestsPerUnit"`
-	Unit                   RateLimitUnit `json:"unit"`
+type LicenceLimit struct {
+	AllowedRequestsPerUnit float64          `json:"allowedRequestsPerUnit"`
+	Unit                   LicenceLimitUnit `json:"unit"`
 }
 
-func (o *RateLimit) Validate() error {
+func (o *LicenceLimit) Validate() error {
 	if err := o.Unit.Validate(); err != nil {
 		return fmt.Errorf("invalid property unit: %w", err)
 	}

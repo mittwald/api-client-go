@@ -14,7 +14,7 @@ import (
 var _ = Describe("Licence", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"containerMeta\":{\"containerId\":\"string\",\"errorMessage\":\"string\",\"ingressId\":\"string\",\"stackId\":\"string\",\"status\":\"created\"},\"customerId\":\"string\",\"isBlocked\":true,\"licenceId\":\"string\",\"licenceKey\":\"string\",\"limit\":{\"allowedRequestsPerUnit\":42,\"unit\":\"minute\"},\"models\":[\"string\"],\"name\":\"string\",\"projectId\":\"string\",\"tokenUsage\":{\"tariffLimit\":42,\"used\":42}}")
+			exampleJSON := []byte("{\"containerMeta\":{\"containerId\":\"string\",\"errorMessage\":\"string\",\"ingressId\":\"string\",\"stackId\":\"string\",\"status\":\"created\"},\"customerId\":\"string\",\"isBlocked\":true,\"licenceId\":\"string\",\"licenceKey\":\"string\",\"limit\":{\"allowedRequestsPerUnit\":3.14,\"unit\":\"minute\"},\"models\":[\"string\"],\"name\":\"string\",\"projectId\":\"string\",\"rateLimit\":3.14}")
 
 			sut := aihostingv2.Licence{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

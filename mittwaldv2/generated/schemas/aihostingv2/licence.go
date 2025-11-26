@@ -24,7 +24,20 @@ import (
 //    "licenceKey":
 //        type: "string"
 //        description: "The secret API key which is required for authentication with the LLM hosting."
-//    "limit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
+//    "limit":
+//        type: "object"
+//        properties:
+//            "allowedRequestsPerUnit":
+//                type: "number"
+//            "unit":
+//                type: "string"
+//                enum:
+//                    - "minute"
+//                    - "hour"
+//        required:
+//            - "allowedRequestsPerUnit"
+//            - "unit"
+//        description: "The number of allowed requests per unit. Limits are shared across all licences within the same project."
 //    "models":
 //        type: "array"
 //        items:
@@ -34,14 +47,17 @@ import (
 //        type: "string"
 //    "projectId":
 //        type: "string"
-//    "tokenUsage": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.TokenUsage"}
+//    "rateLimit":
+//        type: "number"
+//        description: "Deprecated, please us limit.allowedRequestsPerUnit"
+//        deprecated: true
 // required:
 //    - "licenceId"
 //    - "licenceKey"
 //    - "models"
 //    - "name"
+//    - "rateLimit"
 //    - "isBlocked"
-//    - "tokenUsage"
 //    - "limit"
 
 type Licence struct {
@@ -50,11 +66,11 @@ type Licence struct {
 	IsBlocked     bool           `json:"isBlocked"`
 	LicenceId     string         `json:"licenceId"`
 	LicenceKey    string         `json:"licenceKey"`
-	Limit         RateLimit      `json:"limit"`
+	Limit         LicenceLimit   `json:"limit"`
 	Models        []string       `json:"models"`
 	Name          string         `json:"name"`
 	ProjectId     *string        `json:"projectId,omitempty"`
-	TokenUsage    TokenUsage     `json:"tokenUsage"`
+	RateLimit     float64        `json:"rateLimit"`
 }
 
 func (o *Licence) Validate() error {
@@ -71,9 +87,6 @@ func (o *Licence) Validate() error {
 	}
 	if o.Models == nil {
 		return errors.New("property models is required, but not set")
-	}
-	if err := o.TokenUsage.Validate(); err != nil {
-		return fmt.Errorf("invalid property tokenUsage: %w", err)
 	}
 	return nil
 }

@@ -1,7 +1,6 @@
 package mittwaldv2
 
 import (
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/aihostingclientv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/appclientv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/articleclientv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/clients/backupclientv2"
@@ -53,7 +52,6 @@ type Client interface {
 	Marketplace() marketplaceclientv2.Client
 	Misc() miscclientv2.Client
 	LeadFyndr() leadfyndrclientv2.Client
-	AIHosting() aihostingclientv2.Client
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -149,8 +147,4 @@ func (c *clientImpl) Misc() miscclientv2.Client {
 
 func (c *clientImpl) LeadFyndr() leadfyndrclientv2.Client {
 	return leadfyndrclientv2.NewClient(c.client)
-}
-
-func (c *clientImpl) AIHosting() aihostingclientv2.Client {
-	return aihostingclientv2.NewClient(c.client)
 }
