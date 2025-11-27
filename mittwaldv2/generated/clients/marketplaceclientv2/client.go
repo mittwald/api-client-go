@@ -134,7 +134,7 @@ type Client interface {
 		ctx context.Context,
 		req ScheduleExtensionVariantChangeRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*any, *http.Response, error)
+	) (*ScheduleExtensionVariantChangeResponse, *http.Response, error)
 	CancelExtensionVariantChange(
 		ctx context.Context,
 		req CancelExtensionVariantChangeRequest,
@@ -980,7 +980,7 @@ func (c *clientImpl) ScheduleExtensionVariantChange(
 	ctx context.Context,
 	req ScheduleExtensionVariantChangeRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*any, *http.Response, error) {
+) (*ScheduleExtensionVariantChangeResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -996,7 +996,7 @@ func (c *clientImpl) ScheduleExtensionVariantChange(
 		return nil, httpRes, err
 	}
 
-	var response any
+	var response ScheduleExtensionVariantChangeResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
