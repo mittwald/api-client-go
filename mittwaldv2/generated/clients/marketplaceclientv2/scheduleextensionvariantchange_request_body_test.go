@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("UpdateExtensionPricingRequestBodyAlternative2", func() {
+var _ = Describe("ScheduleExtensionVariantChangeRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"dryRun\":true,\"pricePlan\":{\"isDowngradeAllowed\":true,\"isUpgradeAllowed\":true,\"variants\":[{\"description\":\"string\",\"descriptionChangeType\":\"FEATURE_SET_MODIFIED\",\"isBookingStopped\":true,\"key\":\"string\",\"name\":\"string\",\"priceInCents\":3.14}]}}")
+			exampleJSON := []byte("{\"targetVariantKey\":\"string\"}")
 
-			sut := marketplaceclientv2.UpdateExtensionPricingRequestBodyAlternative2{}
+			sut := marketplaceclientv2.ScheduleExtensionVariantChangeRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

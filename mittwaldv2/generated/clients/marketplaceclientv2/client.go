@@ -120,6 +120,16 @@ type Client interface {
 		req CancelExtensionTerminationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CancelExtensionTerminationResponse, *http.Response, error)
+	ScheduleExtensionVariantChange(
+		ctx context.Context,
+		req ScheduleExtensionVariantChangeRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*ScheduleExtensionVariantChangeResponse, *http.Response, error)
+	CancelExtensionVariantChange(
+		ctx context.Context,
+		req CancelExtensionVariantChangeRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CancelExtensionVariantChangeResponse, *http.Response, error)
 	ChangeContext(
 		ctx context.Context,
 		req ChangeContextRequest,
@@ -320,16 +330,6 @@ type Client interface {
 		req CustomerUpdatePaymentMethodRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CustomerUpdatePaymentMethodResponse, *http.Response, error)
-	RejectContributorInternal(
-		ctx context.Context,
-		req RejectContributorInternalRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	VerifyContributorInternal(
-		ctx context.Context,
-		req VerifyContributorInternalRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -911,6 +911,62 @@ func (c *clientImpl) CancelExtensionTermination(
 	}
 
 	var response CancelExtensionTerminationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Schedule an Extension Instance Variant change for the next possible date.
+func (c *clientImpl) ScheduleExtensionVariantChange(
+	ctx context.Context,
+	req ScheduleExtensionVariantChangeRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*ScheduleExtensionVariantChangeResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response ScheduleExtensionVariantChangeResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Cancel an Extension Instance Variant Change.
+func (c *clientImpl) CancelExtensionVariantChange(
+	ctx context.Context,
+	req CancelExtensionVariantChangeRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CancelExtensionVariantChangeResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CancelExtensionVariantChangeResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -2027,52 +2083,4 @@ func (c *clientImpl) CustomerUpdatePaymentMethod(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Reject a contributor verification request.
-func (c *clientImpl) RejectContributorInternal(
-	ctx context.Context,
-	req RejectContributorInternalRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Accept a contributor verification request
-func (c *clientImpl) VerifyContributorInternal(
-	ctx context.Context,
-	req VerifyContributorInternalRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }

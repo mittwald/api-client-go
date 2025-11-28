@@ -287,16 +287,6 @@ type Client interface {
 		req CheckReplaceCertificateRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*sslv2.CheckReplaceCertificateResponse, *http.Response, error)
-	GetCertificate(
-		ctx context.Context,
-		req GetCertificateRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*sslv2.Certificate, *http.Response, error)
-	ReplaceCertificate(
-		ctx context.Context,
-		req ReplaceCertificateRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	ListCertificateRequests(
 		ctx context.Context,
 		req ListCertificateRequestsRequest,
@@ -307,16 +297,6 @@ type Client interface {
 		req CreateCertificateRequestRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*sslv2.CertificateRequestCreateResponse, *http.Response, error)
-	GetCertificateRequest(
-		ctx context.Context,
-		req GetCertificateRequestRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*sslv2.CertificateRequest, *http.Response, error)
-	ListCertificates(
-		ctx context.Context,
-		req ListCertificatesRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]sslv2.Certificate, *http.Response, error)
 	DeleteCertificateRequest(
 		ctx context.Context,
 		req DeleteCertificateRequestRequest,
@@ -327,6 +307,26 @@ type Client interface {
 		req DeleteCertificateRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetCertificateRequest(
+		ctx context.Context,
+		req GetCertificateRequestRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*sslv2.CertificateRequest, *http.Response, error)
+	GetCertificate(
+		ctx context.Context,
+		req GetCertificateRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*sslv2.Certificate, *http.Response, error)
+	ReplaceCertificate(
+		ctx context.Context,
+		req ReplaceCertificateRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	ListCertificates(
+		ctx context.Context,
+		req ListCertificatesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]sslv2.Certificate, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1822,58 +1822,6 @@ func (c *clientImpl) CheckReplaceCertificate(
 	return &response, httpRes, nil
 }
 
-// Get a Certificate.
-func (c *clientImpl) GetCertificate(
-	ctx context.Context,
-	req GetCertificateRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*sslv2.Certificate, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response sslv2.Certificate
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Update a Certificate.
-func (c *clientImpl) ReplaceCertificate(
-	ctx context.Context,
-	req ReplaceCertificateRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // List CertificateRequests belonging to a Project or an Ingress.
 func (c *clientImpl) ListCertificateRequests(
 	ctx context.Context,
@@ -1930,62 +1878,6 @@ func (c *clientImpl) CreateCertificateRequest(
 	return &response, httpRes, nil
 }
 
-// Get a CertificateRequest.
-func (c *clientImpl) GetCertificateRequest(
-	ctx context.Context,
-	req GetCertificateRequestRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*sslv2.CertificateRequest, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response sslv2.CertificateRequest
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List Certificates belonging to a Project or an Ingress.
-func (c *clientImpl) ListCertificates(
-	ctx context.Context,
-	req ListCertificatesRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]sslv2.Certificate, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []sslv2.Certificate
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
 // Delete a CertificateRequest.
 func (c *clientImpl) DeleteCertificateRequest(
 	ctx context.Context,
@@ -2032,4 +1924,112 @@ func (c *clientImpl) DeleteCertificate(
 	}
 
 	return httpRes, nil
+}
+
+// Get a CertificateRequest.
+func (c *clientImpl) GetCertificateRequest(
+	ctx context.Context,
+	req GetCertificateRequestRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*sslv2.CertificateRequest, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response sslv2.CertificateRequest
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get a Certificate.
+func (c *clientImpl) GetCertificate(
+	ctx context.Context,
+	req GetCertificateRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*sslv2.Certificate, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response sslv2.Certificate
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update a Certificate.
+func (c *clientImpl) ReplaceCertificate(
+	ctx context.Context,
+	req ReplaceCertificateRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// List Certificates belonging to a Project or an Ingress.
+func (c *clientImpl) ListCertificates(
+	ctx context.Context,
+	req ListCertificatesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]sslv2.Certificate, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []sslv2.Certificate
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
