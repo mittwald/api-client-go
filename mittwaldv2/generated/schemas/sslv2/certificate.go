@@ -54,13 +54,10 @@ import (
 //    - "projectId"
 //    - "validFrom"
 //    - "validTo"
-//    - "certificate"
-//    - "isExpired"
-//    - "lastExpirationThresholdHit"
 
 type Certificate struct {
 	CaBundle                   *string   `json:"caBundle,omitempty"`
-	Certificate                string    `json:"certificate"`
+	Certificate                *string   `json:"certificate,omitempty"`
 	CertificateOrderId         *string   `json:"certificateOrderId,omitempty"`
 	CertificateRequestId       string    `json:"certificateRequestId"`
 	CertificateType            int64     `json:"certificateType"`
@@ -68,9 +65,9 @@ type Certificate struct {
 	Contact                    *Contact  `json:"contact,omitempty"`
 	DnsNames                   []string  `json:"dnsNames,omitempty"`
 	Id                         string    `json:"id"`
-	IsExpired                  bool      `json:"isExpired"`
+	IsExpired                  *bool     `json:"isExpired,omitempty"`
 	Issuer                     *string   `json:"issuer,omitempty"`
-	LastExpirationThresholdHit int64     `json:"lastExpirationThresholdHit"`
+	LastExpirationThresholdHit *int64    `json:"lastExpirationThresholdHit,omitempty"`
 	ProjectId                  string    `json:"projectId"`
 	ValidFrom                  time.Time `json:"validFrom"`
 	ValidTo                    time.Time `json:"validTo"`

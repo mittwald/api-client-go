@@ -9,5 +9,6 @@ package sslv2
 //    - 0
 //    - 1
 //    - 2
+//    - 3
 
 type CertificateType = int64
