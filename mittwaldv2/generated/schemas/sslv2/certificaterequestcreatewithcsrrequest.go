@@ -18,6 +18,7 @@ import "fmt"
 //    - "projectId"
 //    - "commonName"
 //    - "contact"
+// additionalProperties: false
 
 type CertificateRequestCreateWithCSRRequest struct {
 	CommonName string  `json:"commonName"`

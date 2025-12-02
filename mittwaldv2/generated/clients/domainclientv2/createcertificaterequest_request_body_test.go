@@ -29,5 +29,13 @@ var _ = Describe("CreateCertificateRequestRequestBody", func() {
 			Expect(sut.Validate()).To(Succeed())
 			Expect(sut.AlternativeCertificateRequestCreateWithCSRRequest).NotTo(BeNil())
 		})
+		It("should unmarshal into AlternativeCertificateRequestCreateWithDNSRequest", func() {
+			exampleJSON := []byte("{\"commonName\":\"string\",\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+
+			sut := domainclientv2.CreateCertificateRequestRequestBody{}
+			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
+			Expect(sut.Validate()).To(Succeed())
+			Expect(sut.AlternativeCertificateRequestCreateWithDNSRequest).NotTo(BeNil())
+		})
 	})
 })

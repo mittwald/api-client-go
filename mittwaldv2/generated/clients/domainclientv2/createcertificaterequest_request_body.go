@@ -16,11 +16,13 @@ import (
 // oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.ssl.CertificateRequestCreateRequest"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.ssl.CertificateRequestCreateWithCSRRequest"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.ssl.CertificateRequestCreateWithDNSRequest"}
 // description: CreateCertificateRequestRequestBody models the JSON body of a 'ssl-create-certificate-request' request
 
 type CreateCertificateRequestRequestBody struct {
 	AlternativeCertificateRequestCreateRequest        *sslv2.CertificateRequestCreateRequest
 	AlternativeCertificateRequestCreateWithCSRRequest *sslv2.CertificateRequestCreateWithCSRRequest
+	AlternativeCertificateRequestCreateWithDNSRequest *sslv2.CertificateRequestCreateWithDNSRequest
 }
 
 func (a *CreateCertificateRequestRequestBody) MarshalJSON() ([]byte, error) {
@@ -29,6 +31,9 @@ func (a *CreateCertificateRequestRequestBody) MarshalJSON() ([]byte, error) {
 	}
 	if a.AlternativeCertificateRequestCreateWithCSRRequest != nil {
 		return json.Marshal(a.AlternativeCertificateRequestCreateWithCSRRequest)
+	}
+	if a.AlternativeCertificateRequestCreateWithDNSRequest != nil {
+		return json.Marshal(a.AlternativeCertificateRequestCreateWithDNSRequest)
 	}
 	return []byte("null"), nil
 }
@@ -59,6 +64,16 @@ func (a *CreateCertificateRequestRequestBody) UnmarshalJSON(input []byte) error 
 		}
 	}
 
+	reader.Reset(input)
+	var alternativeCertificateRequestCreateWithDNSRequest sslv2.CertificateRequestCreateWithDNSRequest
+	if err := dec.Decode(&alternativeCertificateRequestCreateWithDNSRequest); err == nil {
+		//subtype: *generator.ReferenceType
+		if vErr := alternativeCertificateRequestCreateWithDNSRequest.Validate(); vErr == nil {
+			a.AlternativeCertificateRequestCreateWithDNSRequest = &alternativeCertificateRequestCreateWithDNSRequest
+			decodedAtLeastOnce = true
+		}
+	}
+
 	if !decodedAtLeastOnce {
 		return fmt.Errorf("could not unmarshal into any alternative for type %T", a)
 	}
@@ -71,6 +86,9 @@ func (a *CreateCertificateRequestRequestBody) Validate() error {
 	}
 	if a.AlternativeCertificateRequestCreateWithCSRRequest != nil {
 		return a.AlternativeCertificateRequestCreateWithCSRRequest.Validate()
+	}
+	if a.AlternativeCertificateRequestCreateWithDNSRequest != nil {
+		return a.AlternativeCertificateRequestCreateWithDNSRequest.Validate()
 	}
 	return errors.New("no alternative set")
 }
