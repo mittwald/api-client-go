@@ -184,6 +184,11 @@ type Client interface {
 		req UpdateMailAddressCatchAllRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	ListMailAddressesForUser(
+		ctx context.Context,
+		req ListMailAddressesForUserRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]mailv2.MailAddress, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1063,4 +1068,32 @@ func (c *clientImpl) UpdateMailAddressCatchAll(
 	}
 
 	return httpRes, nil
+}
+
+// List MailAddresses.
+func (c *clientImpl) ListMailAddressesForUser(
+	ctx context.Context,
+	req ListMailAddressesForUserRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]mailv2.MailAddress, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []mailv2.MailAddress
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
