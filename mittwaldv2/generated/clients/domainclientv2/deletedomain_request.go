@@ -18,8 +18,9 @@ import (
 //
 // [1]: https://developer.mittwald.de/docs/v2/reference/domain/domain-delete-domain
 type DeleteDomainRequest struct {
-	DomainID string
-	Transit  *bool
+	DomainID        string
+	Transit         *bool
+	DeleteIngresses *bool
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -59,6 +60,9 @@ func (r *DeleteDomainRequest) query() url.Values {
 	q := make(url.Values)
 	if r.Transit != nil {
 		q.Set("transit", strconv.FormatBool(*r.Transit))
+	}
+	if r.DeleteIngresses != nil {
+		q.Set("deleteIngresses", strconv.FormatBool(*r.DeleteIngresses))
 	}
 	return q
 }
