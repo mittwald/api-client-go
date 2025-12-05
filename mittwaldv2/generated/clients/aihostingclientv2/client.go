@@ -14,71 +14,71 @@ import (
 )
 
 type Client interface {
-	AiHostingCustomerGetLlmLicences(
+	AiHostingCustomerGetKey(
 		ctx context.Context,
-		req AiHostingCustomerGetLlmLicencesRequest,
+		req AiHostingCustomerGetKeyRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*[]aihostingv2.Licence, *http.Response, error)
-	AiHostingCustomerCreateLlmLicence(
+	) (*aihostingv2.Key, *http.Response, error)
+	AiHostingCustomerUpdateKey(
 		ctx context.Context,
-		req AiHostingCustomerCreateLlmLicenceRequest,
+		req AiHostingCustomerUpdateKeyRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*aihostingv2.Licence, *http.Response, error)
-	AiHostingCustomerGetLlmLicence(
+	) (*aihostingv2.Key, *http.Response, error)
+	AiHostingCustomerDeleteKey(
 		ctx context.Context,
-		req AiHostingCustomerGetLlmLicenceRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*aihostingv2.Licence, *http.Response, error)
-	AiHostingCustomerUpdateLlmLicence(
-		ctx context.Context,
-		req AiHostingCustomerUpdateLlmLicenceRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*aihostingv2.Licence, *http.Response, error)
-	AiHostingCustomerDeleteLlmLicence(
-		ctx context.Context,
-		req AiHostingCustomerDeleteLlmLicenceRequest,
+		req AiHostingCustomerDeleteKeyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	AiHostingCustomerGetLlmTariffOptions(
+	AiHostingProjectGetKey(
 		ctx context.Context,
-		req AiHostingCustomerGetLlmTariffOptionsRequest,
+		req AiHostingProjectGetKeyRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*aihostingv2.Key, *http.Response, error)
+	AiHostingProjectUpdateKey(
+		ctx context.Context,
+		req AiHostingProjectUpdateKeyRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*aihostingv2.Key, *http.Response, error)
+	AiHostingProjectDeleteKey(
+		ctx context.Context,
+		req AiHostingProjectDeleteKeyRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	AiHostingCustomerGetKeys(
+		ctx context.Context,
+		req AiHostingCustomerGetKeysRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]aihostingv2.Key, *http.Response, error)
+	AiHostingCustomerCreateKey(
+		ctx context.Context,
+		req AiHostingCustomerCreateKeyRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*aihostingv2.Key, *http.Response, error)
+	AiHostingCustomerGetUsage(
+		ctx context.Context,
+		req AiHostingCustomerGetUsageRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*aihostingv2.TariffOptions, *http.Response, error)
-	AiHostingGetLlmModels(
+	AiHostingGetModels(
 		ctx context.Context,
-		req AiHostingGetLlmModelsRequest,
+		req AiHostingGetModelsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]aihostingv2.Model, *http.Response, error)
-	AiHostingProjectGetLlmLicences(
+	AiHostingProjectGetKeys(
 		ctx context.Context,
-		req AiHostingProjectGetLlmLicencesRequest,
+		req AiHostingProjectGetKeysRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*[]aihostingv2.Licence, *http.Response, error)
-	AiHostingProjectCreateLlmLicence(
+	) (*[]aihostingv2.Key, *http.Response, error)
+	AiHostingProjectCreateKey(
 		ctx context.Context,
-		req AiHostingProjectCreateLlmLicenceRequest,
+		req AiHostingProjectCreateKeyRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*aihostingv2.Licence, *http.Response, error)
-	AiHostingProjectGetLlmLicence(
+	) (*aihostingv2.Key, *http.Response, error)
+	AiHostingProjectGetUsage(
 		ctx context.Context,
-		req AiHostingProjectGetLlmLicenceRequest,
+		req AiHostingProjectGetUsageRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*aihostingv2.Licence, *http.Response, error)
-	AiHostingProjectUpdateLlmLicence(
-		ctx context.Context,
-		req AiHostingProjectUpdateLlmLicenceRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*aihostingv2.Licence, *http.Response, error)
-	AiHostingProjectDeleteLlmLicence(
-		ctx context.Context,
-		req AiHostingProjectDeleteLlmLicenceRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	AiHostingProjectGetLlmTariffOptions(
-		ctx context.Context,
-		req AiHostingProjectGetLlmTariffOptionsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*AiHostingProjectGetLlmTariffOptionsResponse, *http.Response, error)
+	) (*AiHostingProjectGetUsageResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -88,12 +88,12 @@ func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
 }
 
-// Get a list of already created llm licences.
-func (c *clientImpl) AiHostingCustomerGetLlmLicences(
+// Get a key of a customer.
+func (c *clientImpl) AiHostingCustomerGetKey(
 	ctx context.Context,
-	req AiHostingCustomerGetLlmLicencesRequest,
+	req AiHostingCustomerGetKeyRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*[]aihostingv2.Licence, *http.Response, error) {
+) (*aihostingv2.Key, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -109,21 +109,19 @@ func (c *clientImpl) AiHostingCustomerGetLlmLicences(
 		return nil, httpRes, err
 	}
 
-	var response []aihostingv2.Licence
+	var response aihostingv2.Key
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
 }
 
-// Creates a new llm licence for a customer.
-//
-// Creates a new llm licence for a customer. Can be linked with a project to directly create web-ui container.
-func (c *clientImpl) AiHostingCustomerCreateLlmLicence(
+// Update a key for a customer.
+func (c *clientImpl) AiHostingCustomerUpdateKey(
 	ctx context.Context,
-	req AiHostingCustomerCreateLlmLicenceRequest,
+	req AiHostingCustomerUpdateKeyRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*aihostingv2.Licence, *http.Response, error) {
+) (*aihostingv2.Key, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -139,73 +137,17 @@ func (c *clientImpl) AiHostingCustomerCreateLlmLicence(
 		return nil, httpRes, err
 	}
 
-	var response aihostingv2.Licence
+	var response aihostingv2.Key
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
 }
 
-// Get a licence of a customer.
-func (c *clientImpl) AiHostingCustomerGetLlmLicence(
+// Delete a key for a customer.
+func (c *clientImpl) AiHostingCustomerDeleteKey(
 	ctx context.Context,
-	req AiHostingCustomerGetLlmLicenceRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*aihostingv2.Licence, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response aihostingv2.Licence
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Update a llm Licence for a customer.
-func (c *clientImpl) AiHostingCustomerUpdateLlmLicence(
-	ctx context.Context,
-	req AiHostingCustomerUpdateLlmLicenceRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*aihostingv2.Licence, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response aihostingv2.Licence
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Delete a llm Licence for a customer.
-func (c *clientImpl) AiHostingCustomerDeleteLlmLicence(
-	ctx context.Context,
-	req AiHostingCustomerDeleteLlmLicenceRequest,
+	req AiHostingCustomerDeleteKeyRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -226,10 +168,148 @@ func (c *clientImpl) AiHostingCustomerDeleteLlmLicence(
 	return httpRes, nil
 }
 
-// Get llm tariff and usages of a customer.
-func (c *clientImpl) AiHostingCustomerGetLlmTariffOptions(
+// Get a key of a project.
+func (c *clientImpl) AiHostingProjectGetKey(
 	ctx context.Context,
-	req AiHostingCustomerGetLlmTariffOptionsRequest,
+	req AiHostingProjectGetKeyRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*aihostingv2.Key, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response aihostingv2.Key
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update a key for a project.
+func (c *clientImpl) AiHostingProjectUpdateKey(
+	ctx context.Context,
+	req AiHostingProjectUpdateKeyRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*aihostingv2.Key, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response aihostingv2.Key
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Delete a key for a project.
+func (c *clientImpl) AiHostingProjectDeleteKey(
+	ctx context.Context,
+	req AiHostingProjectDeleteKeyRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Get a list of already created keys.
+func (c *clientImpl) AiHostingCustomerGetKeys(
+	ctx context.Context,
+	req AiHostingCustomerGetKeysRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]aihostingv2.Key, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []aihostingv2.Key
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Creates a new key.
+//
+// Creates a new key. Can be linked with a project to directly create web-ui container.
+func (c *clientImpl) AiHostingCustomerCreateKey(
+	ctx context.Context,
+	req AiHostingCustomerCreateKeyRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*aihostingv2.Key, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response aihostingv2.Key
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get ai hosting tariff and usages of a customer.
+func (c *clientImpl) AiHostingCustomerGetUsage(
+	ctx context.Context,
+	req AiHostingCustomerGetUsageRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*aihostingv2.TariffOptions, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -254,10 +334,10 @@ func (c *clientImpl) AiHostingCustomerGetLlmTariffOptions(
 	return &response, httpRes, nil
 }
 
-// Get a list of currently active llm models.
-func (c *clientImpl) AiHostingGetLlmModels(
+// Get a list of currently active models.
+func (c *clientImpl) AiHostingGetModels(
 	ctx context.Context,
-	req AiHostingGetLlmModelsRequest,
+	req AiHostingGetModelsRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*[]aihostingv2.Model, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -282,12 +362,12 @@ func (c *clientImpl) AiHostingGetLlmModels(
 	return &response, httpRes, nil
 }
 
-// Get a list of already created llm licences of a project.
-func (c *clientImpl) AiHostingProjectGetLlmLicences(
+// Get a list of keys of a project.
+func (c *clientImpl) AiHostingProjectGetKeys(
 	ctx context.Context,
-	req AiHostingProjectGetLlmLicencesRequest,
+	req AiHostingProjectGetKeysRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*[]aihostingv2.Licence, *http.Response, error) {
+) (*[]aihostingv2.Key, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -303,21 +383,21 @@ func (c *clientImpl) AiHostingProjectGetLlmLicences(
 		return nil, httpRes, err
 	}
 
-	var response []aihostingv2.Licence
+	var response []aihostingv2.Key
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
 }
 
-// Creates a new llm Licence for a project.
+// Creates a new key for a project.
 //
-// Creates a new llm Licence for a project. Can be linked with a project to directly create web-ui container.
-func (c *clientImpl) AiHostingProjectCreateLlmLicence(
+// Creates a new key for a project. Same as the customer route but with required projectId. And project users can create it.
+func (c *clientImpl) AiHostingProjectCreateKey(
 	ctx context.Context,
-	req AiHostingProjectCreateLlmLicenceRequest,
+	req AiHostingProjectCreateKeyRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*aihostingv2.Licence, *http.Response, error) {
+) (*aihostingv2.Key, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -333,19 +413,19 @@ func (c *clientImpl) AiHostingProjectCreateLlmLicence(
 		return nil, httpRes, err
 	}
 
-	var response aihostingv2.Licence
+	var response aihostingv2.Key
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
 }
 
-// Get a licence of a project.
-func (c *clientImpl) AiHostingProjectGetLlmLicence(
+// Get ai hosting tariff and usages of a project. Same as the customer route, but less details.
+func (c *clientImpl) AiHostingProjectGetUsage(
 	ctx context.Context,
-	req AiHostingProjectGetLlmLicenceRequest,
+	req AiHostingProjectGetUsageRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*aihostingv2.Licence, *http.Response, error) {
+) (*AiHostingProjectGetUsageResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -361,87 +441,7 @@ func (c *clientImpl) AiHostingProjectGetLlmLicence(
 		return nil, httpRes, err
 	}
 
-	var response aihostingv2.Licence
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Update a llm Licence for a project.
-func (c *clientImpl) AiHostingProjectUpdateLlmLicence(
-	ctx context.Context,
-	req AiHostingProjectUpdateLlmLicenceRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*aihostingv2.Licence, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response aihostingv2.Licence
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Delete a llm Licence for a project.
-func (c *clientImpl) AiHostingProjectDeleteLlmLicence(
-	ctx context.Context,
-	req AiHostingProjectDeleteLlmLicenceRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Get llm tariff and usages of a project. Same as the customer route, but less details.
-func (c *clientImpl) AiHostingProjectGetLlmTariffOptions(
-	ctx context.Context,
-	req AiHostingProjectGetLlmTariffOptionsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*AiHostingProjectGetLlmTariffOptionsResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response AiHostingProjectGetLlmTariffOptionsResponse
+	var response AiHostingProjectGetUsageResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

@@ -18,9 +18,9 @@ import "fmt"
 // required:
 //    - "allowedRequestsPerUnit"
 //    - "unit"
-// description: "The number of allowed requests per unit. Limits are shared across all licences within the same project."
+// description: "The number of allowed requests per unit. Limits are shared across all keys within the same project."
 
-// The number of allowed requests per unit. Limits are shared across all licences within the same project.
+// The number of allowed requests per unit. Limits are shared across all keys within the same project.
 type RateLimit struct {
 	AllowedRequestsPerUnit int64         `json:"allowedRequestsPerUnit"`
 	Unit                   RateLimitUnit `json:"unit"`

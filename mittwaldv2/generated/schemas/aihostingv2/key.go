@@ -16,40 +16,40 @@ import (
 //        type: "string"
 //    "isBlocked":
 //        type: "boolean"
-//        description: "Indicates whether the licence is blocked."
+//        description: "Indicates whether the key is blocked."
 //        default: false
-//    "licenceId":
+//    "key":
 //        type: "string"
-//        description: "Auto generated uuid to identify licences in requests."
-//    "licenceKey":
+//        description: "The secret API key which is required for authentication with the AI hosting."
+//    "keyId":
 //        type: "string"
-//        description: "The secret API key which is required for authentication with the LLM hosting."
+//        description: "Auto generated uuid to identify keys in requests."
 //    "limit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
 //    "models":
 //        type: "array"
 //        items:
 //            type: "string"
-//        description: "An array of LLM model identifiers enabled for this licence."
+//        description: "An array of LLM model identifiers enabled for this key."
 //    "name":
 //        type: "string"
 //    "projectId":
 //        type: "string"
 //    "tokenUsage": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.TokenUsage"}
 // required:
-//    - "licenceId"
-//    - "licenceKey"
+//    - "keyId"
+//    - "key"
 //    - "models"
 //    - "name"
 //    - "isBlocked"
 //    - "tokenUsage"
 //    - "limit"
 
-type Licence struct {
+type Key struct {
 	ContainerMeta *ContainerMeta `json:"containerMeta,omitempty"`
 	CustomerId    *string        `json:"customerId,omitempty"`
 	IsBlocked     bool           `json:"isBlocked"`
-	LicenceId     string         `json:"licenceId"`
-	LicenceKey    string         `json:"licenceKey"`
+	Key           string         `json:"key"`
+	KeyId         string         `json:"keyId"`
 	Limit         RateLimit      `json:"limit"`
 	Models        []string       `json:"models"`
 	Name          string         `json:"name"`
@@ -57,7 +57,7 @@ type Licence struct {
 	TokenUsage    TokenUsage     `json:"tokenUsage"`
 }
 
-func (o *Licence) Validate() error {
+func (o *Key) Validate() error {
 	if err := func() error {
 		if o.ContainerMeta == nil {
 			return nil

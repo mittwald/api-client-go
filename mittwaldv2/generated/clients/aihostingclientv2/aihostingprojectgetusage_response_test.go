@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("AiHostingProjectCreateLlmLicenceRequestBody", func() {
+var _ = Describe("AiHostingProjectGetUsageResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"createWebuiContainer\":true,\"name\":\"string\"}")
+			exampleJSON := []byte("{\"keys\":{\"available\":42,\"tariffLimit\":42,\"used\":42},\"projectId\":\"string\"}")
 
-			sut := aihostingclientv2.AiHostingProjectCreateLlmLicenceRequestBody{}
+			sut := aihostingclientv2.AiHostingProjectGetUsageResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

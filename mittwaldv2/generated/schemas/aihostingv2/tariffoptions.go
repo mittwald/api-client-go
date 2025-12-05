@@ -8,7 +8,9 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "licences": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.TariffUsage"}
+//    "customerId":
+//        type: "string"
+//    "keys": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.TariffUsage"}
 //    "limit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
 //    "tokens": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.TariffUsageBig"}
 //    "topUsages":
@@ -16,9 +18,9 @@ import "fmt"
 //        items:
 //            type: "object"
 //            properties:
-//                "licenceId":
+//                "keyId":
 //                    type: "string"
-//                "licenceName":
+//                "name":
 //                    type: "string"
 //                "projectId":
 //                    type: "string"
@@ -26,23 +28,25 @@ import "fmt"
 //                    type: "integer"
 //                    format: "int64"
 //            required:
-//                - "licenceName"
+//                - "name"
 //                - "tokenUsed"
 // required:
-//    - "licences"
+//    - "customerId"
+//    - "keys"
 //    - "tokens"
 //    - "limit"
 
 type TariffOptions struct {
-	Licences  TariffUsage                  `json:"licences"`
-	Limit     RateLimit                    `json:"limit"`
-	Tokens    TariffUsageBig               `json:"tokens"`
-	TopUsages []TariffOptionsTopUsagesItem `json:"topUsages,omitempty"`
+	CustomerId string                       `json:"customerId"`
+	Keys       TariffUsage                  `json:"keys"`
+	Limit      RateLimit                    `json:"limit"`
+	Tokens     TariffUsageBig               `json:"tokens"`
+	TopUsages  []TariffOptionsTopUsagesItem `json:"topUsages,omitempty"`
 }
 
 func (o *TariffOptions) Validate() error {
-	if err := o.Licences.Validate(); err != nil {
-		return fmt.Errorf("invalid property licences: %w", err)
+	if err := o.Keys.Validate(); err != nil {
+		return fmt.Errorf("invalid property keys: %w", err)
 	}
 	if err := o.Limit.Validate(); err != nil {
 		return fmt.Errorf("invalid property limit: %w", err)

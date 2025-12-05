@@ -6,9 +6,9 @@ package aihostingv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "licenceId":
+//    "keyId":
 //        type: "string"
-//    "licenceName":
+//    "name":
 //        type: "string"
 //    "projectId":
 //        type: "string"
@@ -16,14 +16,14 @@ package aihostingv2
 //        type: "integer"
 //        format: "int64"
 // required:
-//    - "licenceName"
+//    - "name"
 //    - "tokenUsed"
 
 type TariffOptionsTopUsagesItem struct {
-	LicenceId   *string `json:"licenceId,omitempty"`
-	LicenceName string  `json:"licenceName"`
-	ProjectId   *string `json:"projectId,omitempty"`
-	TokenUsed   int64   `json:"tokenUsed"`
+	KeyId     *string `json:"keyId,omitempty"`
+	Name      string  `json:"name"`
+	ProjectId *string `json:"projectId,omitempty"`
+	TokenUsed int64   `json:"tokenUsed"`
 }
 
 func (o *TariffOptionsTopUsagesItem) Validate() error {

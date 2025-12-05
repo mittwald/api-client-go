@@ -33,11 +33,10 @@ import (
 //        format: "date-time"
 // required:
 //    - "id"
-//    - "contact"
 
 type CertificateRequestCreateResponse struct {
 	CommonName     *string    `json:"commonName,omitempty"`
-	Contact        Contact    `json:"contact"`
+	Contact        *Contact   `json:"contact,omitempty"`
 	DnsNames       []string   `json:"dnsNames,omitempty"`
 	Id             string     `json:"id"`
 	Issuer         *string    `json:"issuer,omitempty"`
@@ -47,7 +46,12 @@ type CertificateRequestCreateResponse struct {
 }
 
 func (o *CertificateRequestCreateResponse) Validate() error {
-	if err := o.Contact.Validate(); err != nil {
+	if err := func() error {
+		if o.Contact == nil {
+			return nil
+		}
+		return o.Contact.Validate()
+	}(); err != nil {
 		return fmt.Errorf("invalid property contact: %w", err)
 	}
 	if err := func() error {

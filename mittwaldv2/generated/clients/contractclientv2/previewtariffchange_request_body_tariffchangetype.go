@@ -11,15 +11,17 @@ import "fmt"
 //    - "projectHosting"
 //    - "server"
 //    - "leadFyndr"
+//    - "aiHosting"
 
 type PreviewTariffChangeRequestBodyTariffChangeType string
 
 const PreviewTariffChangeRequestBodyTariffChangeTypeProjectHosting PreviewTariffChangeRequestBodyTariffChangeType = "projectHosting"
 const PreviewTariffChangeRequestBodyTariffChangeTypeServer PreviewTariffChangeRequestBodyTariffChangeType = "server"
 const PreviewTariffChangeRequestBodyTariffChangeTypeLeadFyndr PreviewTariffChangeRequestBodyTariffChangeType = "leadFyndr"
+const PreviewTariffChangeRequestBodyTariffChangeTypeAiHosting PreviewTariffChangeRequestBodyTariffChangeType = "aiHosting"
 
 func (e PreviewTariffChangeRequestBodyTariffChangeType) Validate() error {
-	if e == PreviewTariffChangeRequestBodyTariffChangeTypeProjectHosting || e == PreviewTariffChangeRequestBodyTariffChangeTypeServer || e == PreviewTariffChangeRequestBodyTariffChangeTypeLeadFyndr {
+	if e == PreviewTariffChangeRequestBodyTariffChangeTypeProjectHosting || e == PreviewTariffChangeRequestBodyTariffChangeTypeServer || e == PreviewTariffChangeRequestBodyTariffChangeTypeLeadFyndr || e == PreviewTariffChangeRequestBodyTariffChangeTypeAiHosting {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

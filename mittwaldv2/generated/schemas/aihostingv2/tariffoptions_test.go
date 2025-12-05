@@ -14,7 +14,7 @@ import (
 var _ = Describe("TariffOptions", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"licences\":{\"available\":42,\"tariffLimit\":42,\"used\":42},\"limit\":{\"allowedRequestsPerUnit\":42,\"unit\":\"minute\"},\"tokens\":{\"available\":42,\"tariffLimit\":42,\"used\":42},\"topUsages\":[{\"licenceId\":\"string\",\"licenceName\":\"string\",\"projectId\":\"string\",\"tokenUsed\":42}]}")
+			exampleJSON := []byte("{\"customerId\":\"string\",\"keys\":{\"available\":42,\"tariffLimit\":42,\"used\":42},\"limit\":{\"allowedRequestsPerUnit\":42,\"unit\":\"minute\"},\"tokens\":{\"available\":42,\"tariffLimit\":42,\"used\":42},\"topUsages\":[{\"keyId\":\"string\",\"name\":\"string\",\"projectId\":\"string\",\"tokenUsed\":42}]}")
 
 			sut := aihostingv2.TariffOptions{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
