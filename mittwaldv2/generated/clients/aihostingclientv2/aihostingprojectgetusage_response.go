@@ -2,6 +2,7 @@ package aihostingclientv2
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/aihostingv2"
 )
@@ -13,6 +14,9 @@ import (
 // type: "object"
 // properties:
 //    "keys": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.TariffUsage"}
+//    "nextTokenReset":
+//        type: "string"
+//        format: "date-time"
 //    "projectId":
 //        type: "string"
 // required:
@@ -20,8 +24,9 @@ import (
 //    - "projectId"
 
 type AiHostingProjectGetUsageResponse struct {
-	Keys      aihostingv2.TariffUsage `json:"keys"`
-	ProjectId string                  `json:"projectId"`
+	Keys           aihostingv2.TariffUsage `json:"keys"`
+	NextTokenReset *time.Time              `json:"nextTokenReset,omitempty"`
+	ProjectId      string                  `json:"projectId"`
 }
 
 func (o *AiHostingProjectGetUsageResponse) Validate() error {

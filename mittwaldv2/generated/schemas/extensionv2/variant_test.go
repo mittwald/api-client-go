@@ -14,7 +14,7 @@ import (
 var _ = Describe("Variant", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"description\":\"string\",\"descriptionChangeType\":\"FEATURE_SET_MODIFIED\",\"isBookingStopped\":true,\"key\":\"string\",\"name\":\"string\",\"priceInCents\":3.14}")
+			exampleJSON := []byte("{\"deletionDeadline\":\"2006-01-02T15:04:05Z\",\"description\":\"string\",\"descriptionChangeType\":\"FEATURE_SET_MODIFIED\",\"isBookingStopped\":true,\"isDeletionScheduled\":true,\"key\":\"string\",\"name\":\"string\",\"priceInCents\":3.14}")
 
 			sut := extensionv2.Variant{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
