@@ -9,15 +9,13 @@ import "fmt"
 // type: "string"
 // enum:
 //    - "minute"
-//    - "hour"
 
 type RateLimitUnit string
 
 const RateLimitUnitMinute RateLimitUnit = "minute"
-const RateLimitUnitHour RateLimitUnit = "hour"
 
 func (e RateLimitUnit) Validate() error {
-	if e == RateLimitUnitMinute || e == RateLimitUnitHour {
+	if e == RateLimitUnitMinute {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

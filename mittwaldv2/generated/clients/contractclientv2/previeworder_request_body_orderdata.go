@@ -20,7 +20,6 @@ import (
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.ExternalCertificateOrderPreview"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.LeadFyndrOrderPreview"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.MailArchiveOrderPreview"}
-//    - {"$ref": "#/components/schemas/de.mittwald.v1.order.AIHostingOrderPreview"}
 
 type PreviewOrderRequestBodyOrderData struct {
 	AlternativeProjectHostingOrderPreview      *orderv2.ProjectHostingOrderPreview
@@ -29,7 +28,6 @@ type PreviewOrderRequestBodyOrderData struct {
 	AlternativeExternalCertificateOrderPreview *orderv2.ExternalCertificateOrderPreview
 	AlternativeLeadFyndrOrderPreview           *orderv2.LeadFyndrOrderPreview
 	AlternativeMailArchiveOrderPreview         *orderv2.MailArchiveOrderPreview
-	AlternativeAIHostingOrderPreview           *orderv2.AIHostingOrderPreview
 }
 
 func (a *PreviewOrderRequestBodyOrderData) MarshalJSON() ([]byte, error) {
@@ -50,9 +48,6 @@ func (a *PreviewOrderRequestBodyOrderData) MarshalJSON() ([]byte, error) {
 	}
 	if a.AlternativeMailArchiveOrderPreview != nil {
 		return json.Marshal(a.AlternativeMailArchiveOrderPreview)
-	}
-	if a.AlternativeAIHostingOrderPreview != nil {
-		return json.Marshal(a.AlternativeAIHostingOrderPreview)
 	}
 	return []byte("null"), nil
 }
@@ -123,16 +118,6 @@ func (a *PreviewOrderRequestBodyOrderData) UnmarshalJSON(input []byte) error {
 		}
 	}
 
-	reader.Reset(input)
-	var alternativeAIHostingOrderPreview orderv2.AIHostingOrderPreview
-	if err := dec.Decode(&alternativeAIHostingOrderPreview); err == nil {
-		//subtype: *generator.ReferenceType
-		if vErr := alternativeAIHostingOrderPreview.Validate(); vErr == nil {
-			a.AlternativeAIHostingOrderPreview = &alternativeAIHostingOrderPreview
-			decodedAtLeastOnce = true
-		}
-	}
-
 	if !decodedAtLeastOnce {
 		return fmt.Errorf("could not unmarshal into any alternative for type %T", a)
 	}
@@ -157,9 +142,6 @@ func (a *PreviewOrderRequestBodyOrderData) Validate() error {
 	}
 	if a.AlternativeMailArchiveOrderPreview != nil {
 		return a.AlternativeMailArchiveOrderPreview.Validate()
-	}
-	if a.AlternativeAIHostingOrderPreview != nil {
-		return a.AlternativeAIHostingOrderPreview.Validate()
 	}
 	return errors.New("no alternative set")
 }

@@ -24,7 +24,6 @@ import (
 //    "keyId":
 //        type: "string"
 //        description: "Auto generated uuid to identify keys in requests."
-//    "limit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
 //    "models":
 //        type: "array"
 //        items:
@@ -34,6 +33,7 @@ import (
 //        type: "string"
 //    "projectId":
 //        type: "string"
+//    "rateLimit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
 //    "tokenUsage": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.TokenUsage"}
 // required:
 //    - "keyId"
@@ -42,7 +42,7 @@ import (
 //    - "name"
 //    - "isBlocked"
 //    - "tokenUsage"
-//    - "limit"
+//    - "rateLimit"
 
 type Key struct {
 	ContainerMeta *ContainerMeta `json:"containerMeta,omitempty"`
@@ -50,10 +50,10 @@ type Key struct {
 	IsBlocked     bool           `json:"isBlocked"`
 	Key           string         `json:"key"`
 	KeyId         string         `json:"keyId"`
-	Limit         RateLimit      `json:"limit"`
 	Models        []string       `json:"models"`
 	Name          string         `json:"name"`
 	ProjectId     *string        `json:"projectId,omitempty"`
+	RateLimit     RateLimit      `json:"rateLimit"`
 	TokenUsage    TokenUsage     `json:"tokenUsage"`
 }
 
@@ -66,11 +66,11 @@ func (o *Key) Validate() error {
 	}(); err != nil {
 		return fmt.Errorf("invalid property containerMeta: %w", err)
 	}
-	if err := o.Limit.Validate(); err != nil {
-		return fmt.Errorf("invalid property limit: %w", err)
-	}
 	if o.Models == nil {
 		return errors.New("property models is required, but not set")
+	}
+	if err := o.RateLimit.Validate(); err != nil {
+		return fmt.Errorf("invalid property rateLimit: %w", err)
 	}
 	if err := o.TokenUsage.Validate(); err != nil {
 		return fmt.Errorf("invalid property tokenUsage: %w", err)

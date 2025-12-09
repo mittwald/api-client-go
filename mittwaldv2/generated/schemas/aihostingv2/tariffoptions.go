@@ -17,10 +17,10 @@ import (
 //        type: "string"
 //        format: "date-time"
 //    "keys": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.TariffUsage"}
-//    "limit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
 //    "nextTokenReset":
 //        type: "string"
 //        format: "date-time"
+//    "rateLimit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
 //    "tokens": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.TariffUsageBig"}
 //    "topUsages":
 //        type: "array"
@@ -43,15 +43,15 @@ import (
 //    - "customerId"
 //    - "keys"
 //    - "tokens"
-//    - "limit"
+//    - "rateLimit"
 //    - "nextTokenReset"
 
 type TariffOptions struct {
 	CustomerId     string                       `json:"customerId"`
 	DeletedAt      *time.Time                   `json:"deletedAt,omitempty"`
 	Keys           TariffUsage                  `json:"keys"`
-	Limit          RateLimit                    `json:"limit"`
 	NextTokenReset time.Time                    `json:"nextTokenReset"`
+	RateLimit      RateLimit                    `json:"rateLimit"`
 	Tokens         TariffUsageBig               `json:"tokens"`
 	TopUsages      []TariffOptionsTopUsagesItem `json:"topUsages,omitempty"`
 }
@@ -60,8 +60,8 @@ func (o *TariffOptions) Validate() error {
 	if err := o.Keys.Validate(); err != nil {
 		return fmt.Errorf("invalid property keys: %w", err)
 	}
-	if err := o.Limit.Validate(); err != nil {
-		return fmt.Errorf("invalid property limit: %w", err)
+	if err := o.RateLimit.Validate(); err != nil {
+		return fmt.Errorf("invalid property rateLimit: %w", err)
 	}
 	if err := o.Tokens.Validate(); err != nil {
 		return fmt.Errorf("invalid property tokens: %w", err)

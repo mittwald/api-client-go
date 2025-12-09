@@ -14,7 +14,6 @@ import "fmt"
 //        type: "string"
 //        enum:
 //            - "minute"
-//            - "hour"
 // required:
 //    - "allowedRequestsPerUnit"
 //    - "unit"

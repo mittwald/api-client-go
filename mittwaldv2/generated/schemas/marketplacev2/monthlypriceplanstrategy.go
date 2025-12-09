@@ -8,11 +8,16 @@ package marketplacev2
 // items:
 //    type: "object"
 //    properties:
+//        "deletionDeadline":
+//            type: "string"
+//            format: "date-time"
 //        "description":
 //            type: "string"
 //        "isBookingStopped":
 //            type: "boolean"
 //            description: "If a variant is no longer bookable the existing extension instances will not be removed but no new ones can be created."
+//        "isDeletionScheduled":
+//            type: "boolean"
 //        "key":
 //            type: "string"
 //        "name":
@@ -24,6 +29,7 @@ package marketplacev2
 //        - "key"
 //        - "priceInCents"
 //        - "isBookingStopped"
+//        - "isDeletionScheduled"
 // description: "A price plan with (multiple) variants, including different prices for different included service descriptions"
 
 type MonthlyPricePlanStrategy []MonthlyPricePlanStrategyItem
