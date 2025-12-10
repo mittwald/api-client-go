@@ -36,7 +36,7 @@ import (
 //        type: "string"
 //        format: "date-time"
 //    "restore": {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestore"}
-//    "restorePath": {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePathDeprecated", "deprecated": true, "description": "Deprecated: Use 'restore.pathRestore' instead. This field will be removed in a future version."}
+//    "restorePath": {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePathDeprecated"}
 //    "status":
 //        type: "string"
 //        example: "Completed"
