@@ -7,6 +7,9 @@ import "time"
 
 // This data type was generated from the following JSON schema:
 // properties:
+//    "deleteIngresses":
+//        type: "boolean"
+//        description: "Whether to also delete the corresponding Ingress and subdomain Ingresses."
 //    "deletionDate":
 //        type: "string"
 //        format: "date-time"
@@ -16,7 +19,8 @@ import "time"
 
 // CreateScheduledDeletionRequestBody models the JSON body of a 'domain-create-scheduled-deletion' request
 type CreateScheduledDeletionRequestBody struct {
-	DeletionDate time.Time `json:"deletionDate"`
+	DeleteIngresses *bool     `json:"deleteIngresses,omitempty"`
+	DeletionDate    time.Time `json:"deletionDate"`
 }
 
 func (o *CreateScheduledDeletionRequestBody) Validate() error {
