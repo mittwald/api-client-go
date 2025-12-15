@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateScheduledDeletionRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"deletionDate\":\"2006-01-02T15:04:05Z\"}")
+			exampleJSON := []byte("{\"deleteIngresses\":true,\"deletionDate\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := domainclientv2.CreateScheduledDeletionRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
