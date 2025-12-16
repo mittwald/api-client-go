@@ -57,8 +57,6 @@ import (
 //    - "certificateType"
 //    - "certificateRequestId"
 //    - "projectId"
-//    - "validFrom"
-//    - "validTo"
 
 type Certificate struct {
 	CaBundle                   *string                 `json:"caBundle,omitempty"`
@@ -75,8 +73,8 @@ type Certificate struct {
 	Issuer                     *string                 `json:"issuer,omitempty"`
 	LastExpirationThresholdHit *int64                  `json:"lastExpirationThresholdHit,omitempty"`
 	ProjectId                  string                  `json:"projectId"`
-	ValidFrom                  time.Time               `json:"validFrom"`
-	ValidTo                    time.Time               `json:"validTo"`
+	ValidFrom                  *time.Time              `json:"validFrom,omitempty"`
+	ValidTo                    *time.Time              `json:"validTo,omitempty"`
 }
 
 func (o *Certificate) Validate() error {
