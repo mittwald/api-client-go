@@ -14,7 +14,7 @@ import (
 var _ = Describe("UpdateExtensionPricingRequestBodyAlternative2", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"dryRun\":true,\"pricePlan\":{\"isDowngradeAllowed\":true,\"isUpgradeAllowed\":true,\"variants\":[{\"description\":\"string\",\"descriptionChangeType\":\"FEATURE_SET_MODIFIED\",\"isBookingStopped\":true,\"key\":\"string\",\"name\":\"string\",\"priceInCents\":3.14}]}}")
+			exampleJSON := []byte("{\"dryRun\":true,\"pricePlan\":{\"isDowngradeAllowed\":true,\"isUpgradeAllowed\":true,\"variants\":[{\"deletionDeadline\":\"2006-01-02T15:04:05Z\",\"description\":\"string\",\"descriptionChangeType\":\"FEATURE_SET_MODIFIED\",\"isBookingStopped\":true,\"isDeletionScheduled\":true,\"key\":\"string\",\"name\":\"string\",\"priceInCents\":3.14}]}}")
 
 			sut := marketplaceclientv2.UpdateExtensionPricingRequestBodyAlternative2{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

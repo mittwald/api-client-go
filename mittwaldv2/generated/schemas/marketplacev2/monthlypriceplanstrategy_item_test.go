@@ -14,7 +14,7 @@ import (
 var _ = Describe("MonthlyPricePlanStrategyItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"description\":\"string\",\"isBookingStopped\":true,\"key\":\"string\",\"name\":\"string\",\"priceInCents\":42}")
+			exampleJSON := []byte("{\"deletionDeadline\":\"2006-01-02T15:04:05Z\",\"description\":\"string\",\"isBookingStopped\":true,\"isDeletionScheduled\":true,\"key\":\"string\",\"name\":\"string\",\"priceInCents\":42}")
 
 			sut := marketplacev2.MonthlyPricePlanStrategyItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
