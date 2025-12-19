@@ -34,6 +34,13 @@ import (
 //    "invoiceNumber":
 //        type: "string"
 //        example: "RG1234567"
+//    "invoiceType":
+//        type: "string"
+//        enum:
+//            - "REGULAR"
+//            - "CORRECTION"
+//            - "REISSUE"
+//            - "CANCELLATION"
 //    "pdfId":
 //        type: "string"
 //        format: "uuid"
@@ -58,20 +65,29 @@ import (
 //    - "currency"
 
 type ListIncomingInvoicesResponseItem struct {
-	Currency       string              `json:"currency"`
-	CustomerId     string              `json:"customerId"`
-	CustomerName   string              `json:"customerName"`
-	CustomerNumber string              `json:"customerNumber"`
-	Date           time.Time           `json:"date"`
-	Id             string              `json:"id"`
-	InvoiceNumber  string              `json:"invoiceNumber"`
-	PdfId          string              `json:"pdfId"`
-	Recipient      invoicev2.Recipient `json:"recipient"`
-	TotalGross     float64             `json:"totalGross"`
-	TotalNet       float64             `json:"totalNet"`
+	Currency       string                                       `json:"currency"`
+	CustomerId     string                                       `json:"customerId"`
+	CustomerName   string                                       `json:"customerName"`
+	CustomerNumber string                                       `json:"customerNumber"`
+	Date           time.Time                                    `json:"date"`
+	Id             string                                       `json:"id"`
+	InvoiceNumber  string                                       `json:"invoiceNumber"`
+	InvoiceType    *ListIncomingInvoicesResponseItemInvoiceType `json:"invoiceType,omitempty"`
+	PdfId          string                                       `json:"pdfId"`
+	Recipient      invoicev2.Recipient                          `json:"recipient"`
+	TotalGross     float64                                      `json:"totalGross"`
+	TotalNet       float64                                      `json:"totalNet"`
 }
 
 func (o *ListIncomingInvoicesResponseItem) Validate() error {
+	if err := func() error {
+		if o.InvoiceType == nil {
+			return nil
+		}
+		return o.InvoiceType.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property invoiceType: %w", err)
+	}
 	if err := o.Recipient.Validate(); err != nil {
 		return fmt.Errorf("invalid property recipient: %w", err)
 	}
