@@ -474,7 +474,7 @@ func (c *clientImpl) RequestProjectBackupRestorePath(
 	return httpRes, nil
 }
 
-// Restore a ProjectBackup (path or database).
+// Restore a ProjectBackup.
 func (c *clientImpl) RequestProjectBackupRestore(
 	ctx context.Context,
 	req RequestProjectBackupRestoreRequest,

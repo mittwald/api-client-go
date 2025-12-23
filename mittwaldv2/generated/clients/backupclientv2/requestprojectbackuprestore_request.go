@@ -17,7 +17,7 @@ import (
 // RequestProjectBackupRestoreRequest models a request for the
 // 'backup-request-project-backup-restore' operation. See [1] for more information.
 //
-// Restore a ProjectBackup (path or database).
+// Restore a ProjectBackup.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/backup/backup-request-project-backup-restore

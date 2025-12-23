@@ -4,17 +4,22 @@ package backupv2
 // DO NOT EDIT.
 
 // This data type was generated from the following JSON schema:
-// type: "array"
-// items:
-//    type: "object"
-//    properties:
-//        "databaseBackupDump":
-//            type: "string"
-//        "targetDatabaseId":
-//            type: "string"
-//            format: "uuid"
-//    required:
-//        - "databaseBackupDump"
-//        - "targetDatabaseId"
+// type: "object"
+// properties:
+//    "databaseBackupDump":
+//        type: "string"
+//    "targetDatabaseId":
+//        type: "string"
+//        format: "uuid"
+// required:
+//    - "databaseBackupDump"
+//    - "targetDatabaseId"
 
-type ProjectBackupRestoreDatabase []ProjectBackupRestoreDatabaseItem
+type ProjectBackupRestoreDatabase struct {
+	DatabaseBackupDump string `json:"databaseBackupDump"`
+	TargetDatabaseId   string `json:"targetDatabaseId"`
+}
+
+func (o *ProjectBackupRestoreDatabase) Validate() error {
+	return nil
+}

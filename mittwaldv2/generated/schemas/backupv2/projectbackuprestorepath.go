@@ -21,11 +21,12 @@ import "errors"
 //        type: "string"
 // required:
 //    - "sourcePaths"
+//    - "determinedTargetPath"
 //    - "clearTargetPath"
 
 type ProjectBackupRestorePath struct {
 	ClearTargetPath      bool     `json:"clearTargetPath"`
-	DeterminedTargetPath *string  `json:"determinedTargetPath,omitempty"`
+	DeterminedTargetPath string   `json:"determinedTargetPath"`
 	SourcePaths          []string `json:"sourcePaths"`
 	TargetRestorePath    *string  `json:"targetRestorePath,omitempty"`
 }

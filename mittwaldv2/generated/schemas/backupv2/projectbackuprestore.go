@@ -8,33 +8,35 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "databaseRestore": {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestoreDatabase"}
+//    "databaseRestores":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestoreDatabase"}
 //    "pathRestore": {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePath"}
 //    "phase": {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePhase"}
 // required:
 //    - "phase"
 
 type ProjectBackupRestore struct {
-	DatabaseRestore ProjectBackupRestoreDatabase `json:"databaseRestore,omitempty"`
-	PathRestore     *ProjectBackupRestorePath    `json:"pathRestore,omitempty"`
-	Phase           ProjectBackupRestorePhase    `json:"phase"`
+	DatabaseRestores []ProjectBackupRestoreDatabase `json:"databaseRestores,omitempty"`
+	PathRestore      *ProjectBackupRestorePath      `json:"pathRestore,omitempty"`
+	Phase            ProjectBackupRestorePhase      `json:"phase"`
 }
 
 func (o *ProjectBackupRestore) Validate() error {
 	if err := func() error {
-		if o.DatabaseRestore == nil {
+		if o.DatabaseRestores == nil {
 			return nil
 		}
 		return func() error {
-			for i := range o.DatabaseRestore {
-				if err := o.DatabaseRestore[i].Validate(); err != nil {
+			for i := range o.DatabaseRestores {
+				if err := o.DatabaseRestores[i].Validate(); err != nil {
 					return fmt.Errorf("item %d is invalid %w", i, err)
 				}
 			}
 			return nil
 		}()
 	}(); err != nil {
-		return fmt.Errorf("invalid property databaseRestore: %w", err)
+		return fmt.Errorf("invalid property databaseRestores: %w", err)
 	}
 	if err := func() error {
 		if o.PathRestore == nil {
