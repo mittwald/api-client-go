@@ -20,13 +20,10 @@ import (
 //
 // Restore a ProjectBackup's path.
 //
-// **Deprecated**: Use POST /v2/project-backups/{projectBackupId}/restore instead.
-// This endpoint will be removed in a future version.
-//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/backup/backup-request-project-backup-restore-path
 type RequestProjectBackupRestorePathRequest struct {
-	Body            backupv2.ProjectBackupRestorePathRequestDeprecated
+	Body            backupv2.ProjectBackupRestorePathRequest
 	ProjectBackupID string
 }
 

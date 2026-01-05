@@ -14,7 +14,7 @@ import (
 var _ = Describe("ProjectBackupRestorePathRequest", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"clearTargetPath\":true,\"sourcePaths\":[\"string\"],\"targetRestorePath\":\"/html/mainApp\"}")
+			exampleJSON := []byte("{\"clearTargetPath\":true,\"sourcePath\":\"/html/mainApp/config/\",\"targetPath\":\"/html/mainApp\"}")
 
 			sut := backupv2.ProjectBackupRestorePathRequest{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
