@@ -16,6 +16,7 @@ import (
 //    "appId":
 //        type: "string"
 //        format: "uuid"
+//    "concurrencyPolicy": {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ConcurrencyPolicy"}
 //    "createdAt":
 //        type: "string"
 //        format: "date-time"
@@ -48,6 +49,8 @@ import (
 //    "shortId":
 //        type: "string"
 //        example: "cron-bd26li"
+//    "timeZone":
+//        type: "string"
 //    "timeout":
 //        type: "integer"
 //        maximum: 86400
@@ -71,6 +74,7 @@ import (
 type Cronjob struct {
 	Active                        bool               `json:"active"`
 	AppId                         string             `json:"appId"`
+	ConcurrencyPolicy             *ConcurrencyPolicy `json:"concurrencyPolicy,omitempty"`
 	CreatedAt                     time.Time          `json:"createdAt"`
 	Description                   string             `json:"description"`
 	Destination                   CronjobDestination `json:"destination"`
@@ -82,11 +86,20 @@ type Cronjob struct {
 	NextExecutionTime             *time.Time         `json:"nextExecutionTime,omitempty"`
 	ProjectId                     *string            `json:"projectId,omitempty"`
 	ShortId                       string             `json:"shortId"`
+	TimeZone                      *string            `json:"timeZone,omitempty"`
 	Timeout                       int64              `json:"timeout"`
 	UpdatedAt                     time.Time          `json:"updatedAt"`
 }
 
 func (o *Cronjob) Validate() error {
+	if err := func() error {
+		if o.ConcurrencyPolicy == nil {
+			return nil
+		}
+		return o.ConcurrencyPolicy.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property concurrencyPolicy: %w", err)
+	}
 	if err := o.Destination.Validate(); err != nil {
 		return fmt.Errorf("invalid property destination: %w", err)
 	}
