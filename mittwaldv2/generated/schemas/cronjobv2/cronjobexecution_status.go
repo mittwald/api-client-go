@@ -15,6 +15,8 @@ import "fmt"
 //    - "Running"
 //    - "AbortedByUser"
 //    - "TimedOut"
+//    - "Error"
+//    - "Suspended"
 
 type CronjobExecutionStatus string
 
@@ -25,9 +27,11 @@ const CronjobExecutionStatusPending CronjobExecutionStatus = "Pending"
 const CronjobExecutionStatusRunning CronjobExecutionStatus = "Running"
 const CronjobExecutionStatusAbortedByUser CronjobExecutionStatus = "AbortedByUser"
 const CronjobExecutionStatusTimedOut CronjobExecutionStatus = "TimedOut"
+const CronjobExecutionStatusError CronjobExecutionStatus = "Error"
+const CronjobExecutionStatusSuspended CronjobExecutionStatus = "Suspended"
 
 func (e CronjobExecutionStatus) Validate() error {
-	if e == CronjobExecutionStatusComplete || e == CronjobExecutionStatusFailed || e == CronjobExecutionStatusAbortedBySystem || e == CronjobExecutionStatusPending || e == CronjobExecutionStatusRunning || e == CronjobExecutionStatusAbortedByUser || e == CronjobExecutionStatusTimedOut {
+	if e == CronjobExecutionStatusComplete || e == CronjobExecutionStatusFailed || e == CronjobExecutionStatusAbortedBySystem || e == CronjobExecutionStatusPending || e == CronjobExecutionStatusRunning || e == CronjobExecutionStatusAbortedByUser || e == CronjobExecutionStatusTimedOut || e == CronjobExecutionStatusError || e == CronjobExecutionStatusSuspended {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

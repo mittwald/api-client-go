@@ -28,7 +28,7 @@ import (
 //    "dnsCertSpec":
 //        type: "object"
 //        properties:
-//            "cNameTarget":
+//            "cnameTarget":
 //                type: "string"
 //    "dnsNames":
 //        type: "array"

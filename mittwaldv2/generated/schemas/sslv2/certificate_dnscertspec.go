@@ -6,11 +6,11 @@ package sslv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "cNameTarget":
+//    "cnameTarget":
 //        type: "string"
 
 type CertificateDNSCertSpec struct {
-	CNameTarget *string `json:"cNameTarget,omitempty"`
+	CnameTarget *string `json:"cnameTarget,omitempty"`
 }
 
 func (o *CertificateDNSCertSpec) Validate() error {

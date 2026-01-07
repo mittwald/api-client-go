@@ -58,7 +58,7 @@ func (r *AiHostingCustomerCreateKeyRequest) body() (io.Reader, string, error) {
 
 func (r *AiHostingCustomerCreateKeyRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/customers/%s/ai-hosting/keys", url.PathEscape(r.CustomerID)),
+		Path: fmt.Sprintf("/v2/customers/%s/ai-hosting-keys", url.PathEscape(r.CustomerID)),
 	}
 	return u.String()
 }

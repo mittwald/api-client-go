@@ -48,7 +48,7 @@ func (r *AiHostingProjectGetKeysRequest) body() (io.Reader, string, error) {
 
 func (r *AiHostingProjectGetKeysRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/projects/%s/ai-hosting/keys", url.PathEscape(r.ProjectID)),
+		Path: fmt.Sprintf("/v2/projects/%s/ai-hosting-keys", url.PathEscape(r.ProjectID)),
 	}
 	return u.String()
 }

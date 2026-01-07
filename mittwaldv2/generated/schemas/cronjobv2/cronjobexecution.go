@@ -57,9 +57,10 @@ import (
 //            - "Running"
 //            - "AbortedByUser"
 //            - "TimedOut"
+//            - "Error"
+//            - "Suspended"
 //    "successful":
 //        type: "boolean"
-//    "summary": {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.StatusSummary"}
 //    "triggeredBy":
 //        type: "object"
 //        properties:
@@ -85,7 +86,6 @@ type CronjobExecution struct {
 	Start                  *time.Time                   `json:"start,omitempty"`
 	Status                 CronjobExecutionStatus       `json:"status"`
 	Successful             bool                         `json:"successful"`
-	Summary                *StatusSummary               `json:"summary,omitempty"`
 	TriggeredBy            *CronjobExecutionTriggeredBy `json:"triggeredBy,omitempty"`
 }
 
@@ -100,14 +100,6 @@ func (o *CronjobExecution) Validate() error {
 	}
 	if err := o.Status.Validate(); err != nil {
 		return fmt.Errorf("invalid property status: %w", err)
-	}
-	if err := func() error {
-		if o.Summary == nil {
-			return nil
-		}
-		return o.Summary.Validate()
-	}(); err != nil {
-		return fmt.Errorf("invalid property summary: %w", err)
 	}
 	if err := func() error {
 		if o.TriggeredBy == nil {

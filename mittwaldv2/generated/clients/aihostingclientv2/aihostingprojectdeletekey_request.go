@@ -49,7 +49,7 @@ func (r *AiHostingProjectDeleteKeyRequest) body() (io.Reader, string, error) {
 
 func (r *AiHostingProjectDeleteKeyRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/projects/%s/ai-hosting/keys/%s", url.PathEscape(r.ProjectID), url.PathEscape(r.KeyID)),
+		Path: fmt.Sprintf("/v2/projects/%s/ai-hosting-keys/%s", url.PathEscape(r.ProjectID), url.PathEscape(r.KeyID)),
 	}
 	return u.String()
 }

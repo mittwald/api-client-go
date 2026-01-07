@@ -14,11 +14,6 @@ import (
 )
 
 type Client interface {
-	AbortExecution(
-		ctx context.Context,
-		req AbortExecutionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	ListCronjobs(
 		ctx context.Context,
 		req ListCronjobsRequest,
@@ -69,6 +64,11 @@ type Client interface {
 		req UpdateCronjobAppIDRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	DeprecatedAbortExecution(
+		ctx context.Context,
+		req DeprecatedAbortExecutionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -76,30 +76,6 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
-}
-
-// Abort a CronjobExecution.
-func (c *clientImpl) AbortExecution(
-	ctx context.Context,
-	req AbortExecutionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
 
 // List Cronjobs belonging to a Project.
@@ -350,6 +326,30 @@ func (c *clientImpl) GetExecution(
 func (c *clientImpl) UpdateCronjobAppID(
 	ctx context.Context,
 	req UpdateCronjobAppIDRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Abort a CronjobExecution. Deprecated because this feature is not available at this time.
+func (c *clientImpl) DeprecatedAbortExecution(
+	ctx context.Context,
+	req DeprecatedAbortExecutionRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
