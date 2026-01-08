@@ -14,7 +14,6 @@ import "fmt"
 //        type: "string"
 //        enum:
 //            - "full"
-//            - "readonly"
 //    "externalAccess":
 //        type: "boolean"
 //    "password":

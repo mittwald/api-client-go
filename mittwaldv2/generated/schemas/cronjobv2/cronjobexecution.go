@@ -57,8 +57,6 @@ import (
 //            - "Running"
 //            - "AbortedByUser"
 //            - "TimedOut"
-//            - "Error"
-//            - "Suspended"
 //    "successful":
 //        type: "boolean"
 //    "triggeredBy":
