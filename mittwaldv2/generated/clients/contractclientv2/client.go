@@ -46,6 +46,11 @@ type Client interface {
 		req GetBaseItemOfContractRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*contractv2.ContractItem, *http.Response, error)
+	GetDetailOfContractByAiHosting(
+		ctx context.Context,
+		req GetDetailOfContractByAiHostingRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*contractv2.Contract, *http.Response, error)
 	GetDetailOfContractByCertificate(
 		ctx context.Context,
 		req GetDetailOfContractByCertificateRequest,
@@ -166,11 +171,6 @@ type Client interface {
 		req PreviewTariffChangeRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*PreviewTariffChangeResponse, *http.Response, error)
-	GetDetailOfContractByAiHosting(
-		ctx context.Context,
-		req GetDetailOfContractByAiHostingRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*contractv2.Contract, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -342,6 +342,34 @@ func (c *clientImpl) GetBaseItemOfContract(
 	}
 
 	var response contractv2.ContractItem
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Return the AI Hosting Contract for the given Customer.
+func (c *clientImpl) GetDetailOfContractByAiHosting(
+	ctx context.Context,
+	req GetDetailOfContractByAiHostingRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*contractv2.Contract, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response contractv2.Contract
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -1026,34 +1054,6 @@ func (c *clientImpl) PreviewTariffChange(
 	}
 
 	var response PreviewTariffChangeResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Return the AI Hosting Contract for the given Customer.
-func (c *clientImpl) GetDetailOfContractByAiHosting(
-	ctx context.Context,
-	req GetDetailOfContractByAiHostingRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*contractv2.Contract, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response contractv2.Contract
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

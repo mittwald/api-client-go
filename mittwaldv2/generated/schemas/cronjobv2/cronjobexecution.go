@@ -34,6 +34,10 @@ import (
 //        type: "string"
 //        format: "date-time"
 //        deprecated: true
+//    "exitCode":
+//        type: "integer"
+//        format: "int32"
+//        example: 0
 //    "id":
 //        type: "string"
 //        example: "cron-bd26li-28027320"
@@ -74,6 +78,7 @@ type CronjobExecution struct {
 	End                    *time.Time                   `json:"end,omitempty"`
 	ExecutionEnd           *time.Time                   `json:"executionEnd,omitempty"`
 	ExecutionStart         *time.Time                   `json:"executionStart,omitempty"`
+	ExitCode               *int64                       `json:"exitCode,omitempty"`
 	Id                     string                       `json:"id"`
 	LogPath                *string                      `json:"logPath,omitempty"`
 	Start                  *time.Time                   `json:"start,omitempty"`

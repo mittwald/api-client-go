@@ -9,15 +9,13 @@ import "fmt"
 // type: "string"
 // enum:
 //    - "full"
-//    - "readonly"
 
 type CreateMySqlUserWithDatabaseAccessLevel string
 
 const CreateMySqlUserWithDatabaseAccessLevelFull CreateMySqlUserWithDatabaseAccessLevel = "full"
-const CreateMySqlUserWithDatabaseAccessLevelReadonly CreateMySqlUserWithDatabaseAccessLevel = "readonly"
 
 func (e CreateMySqlUserWithDatabaseAccessLevel) Validate() error {
-	if e == CreateMySqlUserWithDatabaseAccessLevelFull || e == CreateMySqlUserWithDatabaseAccessLevelReadonly {
+	if e == CreateMySqlUserWithDatabaseAccessLevelFull {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
