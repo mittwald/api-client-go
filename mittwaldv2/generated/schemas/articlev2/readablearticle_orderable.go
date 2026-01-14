@@ -8,22 +8,24 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "string"
 // enum:
+//    - "full"
 //    - "forbidden"
 //    - "internal"
 //    - "beta_testing"
-//    - "full"
 //    - "deprecated"
+// description: "Only Articles with the value 'full' can be ordered by everyone. Forbidden Articles are not allowed to be ordered. Internal Articles have to be ordered by a mittwald employee. Beta testing Articles can be ordered but maybe feature incomplete. Deprecated Articles are not orderable anymore."
 
+// Only Articles with the value 'full' can be ordered by everyone. Forbidden Articles are not allowed to be ordered. Internal Articles have to be ordered by a mittwald employee. Beta testing Articles can be ordered but maybe feature incomplete. Deprecated Articles are not orderable anymore.
 type ReadableArticleOrderable string
 
+const ReadableArticleOrderableFull ReadableArticleOrderable = "full"
 const ReadableArticleOrderableForbidden ReadableArticleOrderable = "forbidden"
 const ReadableArticleOrderableInternal ReadableArticleOrderable = "internal"
 const ReadableArticleOrderableBetaTesting ReadableArticleOrderable = "beta_testing"
-const ReadableArticleOrderableFull ReadableArticleOrderable = "full"
 const ReadableArticleOrderableDeprecated ReadableArticleOrderable = "deprecated"
 
 func (e ReadableArticleOrderable) Validate() error {
-	if e == ReadableArticleOrderableForbidden || e == ReadableArticleOrderableInternal || e == ReadableArticleOrderableBetaTesting || e == ReadableArticleOrderableFull || e == ReadableArticleOrderableDeprecated {
+	if e == ReadableArticleOrderableFull || e == ReadableArticleOrderableForbidden || e == ReadableArticleOrderableInternal || e == ReadableArticleOrderableBetaTesting || e == ReadableArticleOrderableDeprecated {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

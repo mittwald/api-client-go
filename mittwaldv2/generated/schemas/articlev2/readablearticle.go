@@ -63,11 +63,12 @@ import "fmt"
 //    "orderable":
 //        type: "string"
 //        enum:
+//            - "full"
 //            - "forbidden"
 //            - "internal"
 //            - "beta_testing"
-//            - "full"
 //            - "deprecated"
+//        description: "Only Articles with the value 'full' can be ordered by everyone. Forbidden Articles are not allowed to be ordered. Internal Articles have to be ordered by a mittwald employee. Beta testing Articles can be ordered but maybe feature incomplete. Deprecated Articles are not orderable anymore."
 //    "possibleArticleChanges":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.article.ReadableChangeArticleOptions"}
