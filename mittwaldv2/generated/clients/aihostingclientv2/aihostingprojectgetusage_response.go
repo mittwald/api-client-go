@@ -23,13 +23,13 @@ import (
 //    - "keys"
 //    - "projectId"
 
-type AiHostingProjectGetUsageResponse struct {
+type AIHostingProjectGetUsageResponse struct {
 	Keys           aihostingv2.TariffUsage `json:"keys"`
 	NextTokenReset *time.Time              `json:"nextTokenReset,omitempty"`
 	ProjectId      string                  `json:"projectId"`
 }
 
-func (o *AiHostingProjectGetUsageResponse) Validate() error {
+func (o *AIHostingProjectGetUsageResponse) Validate() error {
 	if err := o.Keys.Validate(); err != nil {
 		return fmt.Errorf("invalid property keys: %w", err)
 	}

@@ -18,10 +18,10 @@ type CreateTariffChangeRequestBodyTariffChangeType string
 const CreateTariffChangeRequestBodyTariffChangeTypeProjectHosting CreateTariffChangeRequestBodyTariffChangeType = "projectHosting"
 const CreateTariffChangeRequestBodyTariffChangeTypeServer CreateTariffChangeRequestBodyTariffChangeType = "server"
 const CreateTariffChangeRequestBodyTariffChangeTypeLeadFyndr CreateTariffChangeRequestBodyTariffChangeType = "leadFyndr"
-const CreateTariffChangeRequestBodyTariffChangeTypeAiHosting CreateTariffChangeRequestBodyTariffChangeType = "aiHosting"
+const CreateTariffChangeRequestBodyTariffChangeTypeAIHosting CreateTariffChangeRequestBodyTariffChangeType = "aiHosting"
 
 func (e CreateTariffChangeRequestBodyTariffChangeType) Validate() error {
-	if e == CreateTariffChangeRequestBodyTariffChangeTypeProjectHosting || e == CreateTariffChangeRequestBodyTariffChangeTypeServer || e == CreateTariffChangeRequestBodyTariffChangeTypeLeadFyndr || e == CreateTariffChangeRequestBodyTariffChangeTypeAiHosting {
+	if e == CreateTariffChangeRequestBodyTariffChangeTypeProjectHosting || e == CreateTariffChangeRequestBodyTariffChangeTypeServer || e == CreateTariffChangeRequestBodyTariffChangeTypeLeadFyndr || e == CreateTariffChangeRequestBodyTariffChangeTypeAIHosting {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

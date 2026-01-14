@@ -46,9 +46,9 @@ type Client interface {
 		req GetBaseItemOfContractRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*contractv2.ContractItem, *http.Response, error)
-	GetDetailOfContractByAiHosting(
+	GetDetailOfContractByAIHosting(
 		ctx context.Context,
-		req GetDetailOfContractByAiHostingRequest,
+		req GetDetailOfContractByAIHostingRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*contractv2.Contract, *http.Response, error)
 	GetDetailOfContractByCertificate(
@@ -349,9 +349,9 @@ func (c *clientImpl) GetBaseItemOfContract(
 }
 
 // Return the AI Hosting Contract for the given Customer.
-func (c *clientImpl) GetDetailOfContractByAiHosting(
+func (c *clientImpl) GetDetailOfContractByAIHosting(
 	ctx context.Context,
-	req GetDetailOfContractByAiHostingRequest,
+	req GetDetailOfContractByAIHostingRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*contractv2.Contract, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

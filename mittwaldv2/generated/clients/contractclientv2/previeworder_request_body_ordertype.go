@@ -24,10 +24,10 @@ const PreviewOrderRequestBodyOrderTypeServer PreviewOrderRequestBodyOrderType = 
 const PreviewOrderRequestBodyOrderTypeExternalCertificate PreviewOrderRequestBodyOrderType = "externalCertificate"
 const PreviewOrderRequestBodyOrderTypeLeadFyndr PreviewOrderRequestBodyOrderType = "leadFyndr"
 const PreviewOrderRequestBodyOrderTypeMailArchive PreviewOrderRequestBodyOrderType = "mailArchive"
-const PreviewOrderRequestBodyOrderTypeAiHosting PreviewOrderRequestBodyOrderType = "aiHosting"
+const PreviewOrderRequestBodyOrderTypeAIHosting PreviewOrderRequestBodyOrderType = "aiHosting"
 
 func (e PreviewOrderRequestBodyOrderType) Validate() error {
-	if e == PreviewOrderRequestBodyOrderTypeDomain || e == PreviewOrderRequestBodyOrderTypeProjectHosting || e == PreviewOrderRequestBodyOrderTypeServer || e == PreviewOrderRequestBodyOrderTypeExternalCertificate || e == PreviewOrderRequestBodyOrderTypeLeadFyndr || e == PreviewOrderRequestBodyOrderTypeMailArchive || e == PreviewOrderRequestBodyOrderTypeAiHosting {
+	if e == PreviewOrderRequestBodyOrderTypeDomain || e == PreviewOrderRequestBodyOrderTypeProjectHosting || e == PreviewOrderRequestBodyOrderTypeServer || e == PreviewOrderRequestBodyOrderTypeExternalCertificate || e == PreviewOrderRequestBodyOrderTypeLeadFyndr || e == PreviewOrderRequestBodyOrderTypeMailArchive || e == PreviewOrderRequestBodyOrderTypeAIHosting {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
