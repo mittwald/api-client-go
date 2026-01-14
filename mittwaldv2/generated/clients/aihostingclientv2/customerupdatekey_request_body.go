@@ -11,14 +11,17 @@ package aihostingclientv2
 //    "name":
 //        type: "string"
 //        minLength: 5
-// description: AIHostingProjectUpdateKeyRequestBody models the JSON body of a 'ai-hosting-project-update-key' request
+//    "projectId":
+//        type: "string"
+// description: CustomerUpdateKeyRequestBody models the JSON body of a 'ai-hosting-customer-update-key' request
 
-// AIHostingProjectUpdateKeyRequestBody models the JSON body of a 'ai-hosting-project-update-key' request
-type AIHostingProjectUpdateKeyRequestBody struct {
+// CustomerUpdateKeyRequestBody models the JSON body of a 'ai-hosting-customer-update-key' request
+type CustomerUpdateKeyRequestBody struct {
 	CreateWebuiContainer *bool   `json:"createWebuiContainer,omitempty"`
 	Name                 *string `json:"name,omitempty"`
+	ProjectId            *string `json:"projectId,omitempty"`
 }
 
-func (o *AIHostingProjectUpdateKeyRequestBody) Validate() error {
+func (o *CustomerUpdateKeyRequestBody) Validate() error {
 	return nil
 }
