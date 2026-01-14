@@ -15,15 +15,15 @@ package aihostingclientv2
 //        type: "string"
 // required:
 //    - "name"
-// description: AIHostingCustomerCreateKeyRequestBody models the JSON body of a 'ai-hosting-customer-create-key' request
+// description: CustomerCreateKeyRequestBody models the JSON body of a 'ai-hosting-customer-create-key' request
 
-// AIHostingCustomerCreateKeyRequestBody models the JSON body of a 'ai-hosting-customer-create-key' request
-type AIHostingCustomerCreateKeyRequestBody struct {
+// CustomerCreateKeyRequestBody models the JSON body of a 'ai-hosting-customer-create-key' request
+type CustomerCreateKeyRequestBody struct {
 	CreateWebuiContainer *bool   `json:"createWebuiContainer,omitempty"`
 	Name                 string  `json:"name"`
 	ProjectId            *string `json:"projectId,omitempty"`
 }
 
-func (o *AIHostingCustomerCreateKeyRequestBody) Validate() error {
+func (o *CustomerCreateKeyRequestBody) Validate() error {
 	return nil
 }
