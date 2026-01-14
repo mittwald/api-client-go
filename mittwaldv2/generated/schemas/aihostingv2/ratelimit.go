@@ -9,24 +9,23 @@ import "fmt"
 // type: "object"
 // properties:
 //    "allowedRequestsPerUnit":
-//        type: "number"
+//        type: "integer"
 //    "unit":
 //        type: "string"
 //        enum:
 //            - "minute"
-//            - "hour"
 // required:
 //    - "allowedRequestsPerUnit"
 //    - "unit"
-// description: "The number of allowed requests per unit. Limits are shared across all licences within the same project."
+// description: "The number of allowed requests per unit. Limits are shared across all keys within the same project."
 
-// The number of allowed requests per unit. Limits are shared across all licences within the same project.
-type LicenceLimit struct {
-	AllowedRequestsPerUnit float64          `json:"allowedRequestsPerUnit"`
-	Unit                   LicenceLimitUnit `json:"unit"`
+// The number of allowed requests per unit. Limits are shared across all keys within the same project.
+type RateLimit struct {
+	AllowedRequestsPerUnit int64         `json:"allowedRequestsPerUnit"`
+	Unit                   RateLimitUnit `json:"unit"`
 }
 
-func (o *LicenceLimit) Validate() error {
+func (o *RateLimit) Validate() error {
 	if err := o.Unit.Validate(); err != nil {
 		return fmt.Errorf("invalid property unit: %w", err)
 	}

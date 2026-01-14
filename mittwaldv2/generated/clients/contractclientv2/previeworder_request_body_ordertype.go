@@ -14,6 +14,7 @@ import "fmt"
 //    - "externalCertificate"
 //    - "leadFyndr"
 //    - "mailArchive"
+//    - "aiHosting"
 
 type PreviewOrderRequestBodyOrderType string
 
@@ -23,9 +24,10 @@ const PreviewOrderRequestBodyOrderTypeServer PreviewOrderRequestBodyOrderType = 
 const PreviewOrderRequestBodyOrderTypeExternalCertificate PreviewOrderRequestBodyOrderType = "externalCertificate"
 const PreviewOrderRequestBodyOrderTypeLeadFyndr PreviewOrderRequestBodyOrderType = "leadFyndr"
 const PreviewOrderRequestBodyOrderTypeMailArchive PreviewOrderRequestBodyOrderType = "mailArchive"
+const PreviewOrderRequestBodyOrderTypeAiHosting PreviewOrderRequestBodyOrderType = "aiHosting"
 
 func (e PreviewOrderRequestBodyOrderType) Validate() error {
-	if e == PreviewOrderRequestBodyOrderTypeDomain || e == PreviewOrderRequestBodyOrderTypeProjectHosting || e == PreviewOrderRequestBodyOrderTypeServer || e == PreviewOrderRequestBodyOrderTypeExternalCertificate || e == PreviewOrderRequestBodyOrderTypeLeadFyndr || e == PreviewOrderRequestBodyOrderTypeMailArchive {
+	if e == PreviewOrderRequestBodyOrderTypeDomain || e == PreviewOrderRequestBodyOrderTypeProjectHosting || e == PreviewOrderRequestBodyOrderTypeServer || e == PreviewOrderRequestBodyOrderTypeExternalCertificate || e == PreviewOrderRequestBodyOrderTypeLeadFyndr || e == PreviewOrderRequestBodyOrderTypeMailArchive || e == PreviewOrderRequestBodyOrderTypeAiHosting {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

@@ -17,11 +17,13 @@ import (
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.ProjectHostingTariffChange"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.ServerTariffChange"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.LeadFyndrTariffChange"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.order.AIHostingTariffChange"}
 
 type PreviewTariffChangeRequestBodyTariffChangeData struct {
 	AlternativeProjectHostingTariffChange *orderv2.ProjectHostingTariffChange
 	AlternativeServerTariffChange         *orderv2.ServerTariffChange
 	AlternativeLeadFyndrTariffChange      *orderv2.LeadFyndrTariffChange
+	AlternativeAIHostingTariffChange      *orderv2.AIHostingTariffChange
 }
 
 func (a *PreviewTariffChangeRequestBodyTariffChangeData) MarshalJSON() ([]byte, error) {
@@ -33,6 +35,9 @@ func (a *PreviewTariffChangeRequestBodyTariffChangeData) MarshalJSON() ([]byte, 
 	}
 	if a.AlternativeLeadFyndrTariffChange != nil {
 		return json.Marshal(a.AlternativeLeadFyndrTariffChange)
+	}
+	if a.AlternativeAIHostingTariffChange != nil {
+		return json.Marshal(a.AlternativeAIHostingTariffChange)
 	}
 	return []byte("null"), nil
 }
@@ -73,6 +78,16 @@ func (a *PreviewTariffChangeRequestBodyTariffChangeData) UnmarshalJSON(input []b
 		}
 	}
 
+	reader.Reset(input)
+	var alternativeAIHostingTariffChange orderv2.AIHostingTariffChange
+	if err := dec.Decode(&alternativeAIHostingTariffChange); err == nil {
+		//subtype: *generator.ReferenceType
+		if vErr := alternativeAIHostingTariffChange.Validate(); vErr == nil {
+			a.AlternativeAIHostingTariffChange = &alternativeAIHostingTariffChange
+			decodedAtLeastOnce = true
+		}
+	}
+
 	if !decodedAtLeastOnce {
 		return fmt.Errorf("could not unmarshal into any alternative for type %T", a)
 	}
@@ -88,6 +103,9 @@ func (a *PreviewTariffChangeRequestBodyTariffChangeData) Validate() error {
 	}
 	if a.AlternativeLeadFyndrTariffChange != nil {
 		return a.AlternativeLeadFyndrTariffChange.Validate()
+	}
+	if a.AlternativeAIHostingTariffChange != nil {
+		return a.AlternativeAIHostingTariffChange.Validate()
 	}
 	return errors.New("no alternative set")
 }
