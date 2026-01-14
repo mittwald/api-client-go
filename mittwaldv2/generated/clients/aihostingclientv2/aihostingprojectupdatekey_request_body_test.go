@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("AiHostingProjectUpdateKeyRequestBody", func() {
+var _ = Describe("AIHostingProjectUpdateKeyRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
 			exampleJSON := []byte("{\"createWebuiContainer\":true,\"name\":\"string\"}")
 
-			sut := aihostingclientv2.AiHostingProjectUpdateKeyRequestBody{}
+			sut := aihostingclientv2.AIHostingProjectUpdateKeyRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

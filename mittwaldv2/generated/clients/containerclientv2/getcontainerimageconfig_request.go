@@ -21,7 +21,7 @@ type GetContainerImageConfigRequest struct {
 	ImageReference              string
 	UseCredentialsForProjectID  *string
 	UseCredentialsForRegistryID *string
-	GenerateAiData              *bool
+	GenerateAIData              *bool
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -66,8 +66,8 @@ func (r *GetContainerImageConfigRequest) query() url.Values {
 	if r.UseCredentialsForRegistryID != nil {
 		q.Set("useCredentialsForRegistryId", *r.UseCredentialsForRegistryID)
 	}
-	if r.GenerateAiData != nil {
-		q.Set("generateAiData", strconv.FormatBool(*r.GenerateAiData))
+	if r.GenerateAIData != nil {
+		q.Set("generateAiData", strconv.FormatBool(*r.GenerateAIData))
 	}
 	return q
 }

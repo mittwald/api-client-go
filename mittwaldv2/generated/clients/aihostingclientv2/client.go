@@ -14,71 +14,71 @@ import (
 )
 
 type Client interface {
-	AiHostingCustomerGetKey(
+	AIHostingCustomerGetKey(
 		ctx context.Context,
-		req AiHostingCustomerGetKeyRequest,
+		req AIHostingCustomerGetKeyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*aihostingv2.Key, *http.Response, error)
-	AiHostingCustomerUpdateKey(
+	AIHostingCustomerUpdateKey(
 		ctx context.Context,
-		req AiHostingCustomerUpdateKeyRequest,
+		req AIHostingCustomerUpdateKeyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*aihostingv2.Key, *http.Response, error)
-	AiHostingCustomerDeleteKey(
+	AIHostingCustomerDeleteKey(
 		ctx context.Context,
-		req AiHostingCustomerDeleteKeyRequest,
+		req AIHostingCustomerDeleteKeyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	AiHostingProjectGetKey(
+	AIHostingProjectGetKey(
 		ctx context.Context,
-		req AiHostingProjectGetKeyRequest,
+		req AIHostingProjectGetKeyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*aihostingv2.Key, *http.Response, error)
-	AiHostingProjectUpdateKey(
+	AIHostingProjectUpdateKey(
 		ctx context.Context,
-		req AiHostingProjectUpdateKeyRequest,
+		req AIHostingProjectUpdateKeyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*aihostingv2.Key, *http.Response, error)
-	AiHostingProjectDeleteKey(
+	AIHostingProjectDeleteKey(
 		ctx context.Context,
-		req AiHostingProjectDeleteKeyRequest,
+		req AIHostingProjectDeleteKeyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	AiHostingCustomerGetKeys(
+	AIHostingCustomerGetKeys(
 		ctx context.Context,
-		req AiHostingCustomerGetKeysRequest,
+		req AIHostingCustomerGetKeysRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]aihostingv2.Key, *http.Response, error)
-	AiHostingCustomerCreateKey(
+	AIHostingCustomerCreateKey(
 		ctx context.Context,
-		req AiHostingCustomerCreateKeyRequest,
+		req AIHostingCustomerCreateKeyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*aihostingv2.Key, *http.Response, error)
-	AiHostingCustomerGetUsage(
+	AIHostingCustomerGetUsage(
 		ctx context.Context,
-		req AiHostingCustomerGetUsageRequest,
+		req AIHostingCustomerGetUsageRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*aihostingv2.TariffOptions, *http.Response, error)
-	AiHostingGetModels(
+	AIHostingGetModels(
 		ctx context.Context,
-		req AiHostingGetModelsRequest,
+		req AIHostingGetModelsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]aihostingv2.Model, *http.Response, error)
-	AiHostingProjectGetKeys(
+	AIHostingProjectGetKeys(
 		ctx context.Context,
-		req AiHostingProjectGetKeysRequest,
+		req AIHostingProjectGetKeysRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]aihostingv2.Key, *http.Response, error)
-	AiHostingProjectCreateKey(
+	AIHostingProjectCreateKey(
 		ctx context.Context,
-		req AiHostingProjectCreateKeyRequest,
+		req AIHostingProjectCreateKeyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*aihostingv2.Key, *http.Response, error)
-	AiHostingProjectGetUsage(
+	AIHostingProjectGetUsage(
 		ctx context.Context,
-		req AiHostingProjectGetUsageRequest,
+		req AIHostingProjectGetUsageRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*AiHostingProjectGetUsageResponse, *http.Response, error)
+	) (*AIHostingProjectGetUsageResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -89,9 +89,9 @@ func NewClient(client httpclient.RequestRunner) Client {
 }
 
 // Get a key of a customer.
-func (c *clientImpl) AiHostingCustomerGetKey(
+func (c *clientImpl) AIHostingCustomerGetKey(
 	ctx context.Context,
-	req AiHostingCustomerGetKeyRequest,
+	req AIHostingCustomerGetKeyRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*aihostingv2.Key, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -117,9 +117,9 @@ func (c *clientImpl) AiHostingCustomerGetKey(
 }
 
 // Update a key for a customer.
-func (c *clientImpl) AiHostingCustomerUpdateKey(
+func (c *clientImpl) AIHostingCustomerUpdateKey(
 	ctx context.Context,
-	req AiHostingCustomerUpdateKeyRequest,
+	req AIHostingCustomerUpdateKeyRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*aihostingv2.Key, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -145,9 +145,9 @@ func (c *clientImpl) AiHostingCustomerUpdateKey(
 }
 
 // Delete a key for a customer.
-func (c *clientImpl) AiHostingCustomerDeleteKey(
+func (c *clientImpl) AIHostingCustomerDeleteKey(
 	ctx context.Context,
-	req AiHostingCustomerDeleteKeyRequest,
+	req AIHostingCustomerDeleteKeyRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -169,9 +169,9 @@ func (c *clientImpl) AiHostingCustomerDeleteKey(
 }
 
 // Get a key of a project.
-func (c *clientImpl) AiHostingProjectGetKey(
+func (c *clientImpl) AIHostingProjectGetKey(
 	ctx context.Context,
-	req AiHostingProjectGetKeyRequest,
+	req AIHostingProjectGetKeyRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*aihostingv2.Key, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -197,9 +197,9 @@ func (c *clientImpl) AiHostingProjectGetKey(
 }
 
 // Update a key for a project.
-func (c *clientImpl) AiHostingProjectUpdateKey(
+func (c *clientImpl) AIHostingProjectUpdateKey(
 	ctx context.Context,
-	req AiHostingProjectUpdateKeyRequest,
+	req AIHostingProjectUpdateKeyRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*aihostingv2.Key, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -225,9 +225,9 @@ func (c *clientImpl) AiHostingProjectUpdateKey(
 }
 
 // Delete a key for a project.
-func (c *clientImpl) AiHostingProjectDeleteKey(
+func (c *clientImpl) AIHostingProjectDeleteKey(
 	ctx context.Context,
-	req AiHostingProjectDeleteKeyRequest,
+	req AIHostingProjectDeleteKeyRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -249,9 +249,9 @@ func (c *clientImpl) AiHostingProjectDeleteKey(
 }
 
 // Get a list of already created keys.
-func (c *clientImpl) AiHostingCustomerGetKeys(
+func (c *clientImpl) AIHostingCustomerGetKeys(
 	ctx context.Context,
-	req AiHostingCustomerGetKeysRequest,
+	req AIHostingCustomerGetKeysRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*[]aihostingv2.Key, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -279,9 +279,9 @@ func (c *clientImpl) AiHostingCustomerGetKeys(
 // Creates a new key.
 //
 // Creates a new key. Can be linked with a project to directly create web-ui container.
-func (c *clientImpl) AiHostingCustomerCreateKey(
+func (c *clientImpl) AIHostingCustomerCreateKey(
 	ctx context.Context,
-	req AiHostingCustomerCreateKeyRequest,
+	req AIHostingCustomerCreateKeyRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*aihostingv2.Key, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -307,9 +307,9 @@ func (c *clientImpl) AiHostingCustomerCreateKey(
 }
 
 // Get ai hosting tariff and usages of a customer.
-func (c *clientImpl) AiHostingCustomerGetUsage(
+func (c *clientImpl) AIHostingCustomerGetUsage(
 	ctx context.Context,
-	req AiHostingCustomerGetUsageRequest,
+	req AIHostingCustomerGetUsageRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*aihostingv2.TariffOptions, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -335,9 +335,9 @@ func (c *clientImpl) AiHostingCustomerGetUsage(
 }
 
 // Get a list of currently active models.
-func (c *clientImpl) AiHostingGetModels(
+func (c *clientImpl) AIHostingGetModels(
 	ctx context.Context,
-	req AiHostingGetModelsRequest,
+	req AIHostingGetModelsRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*[]aihostingv2.Model, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -363,9 +363,9 @@ func (c *clientImpl) AiHostingGetModels(
 }
 
 // Get a list of keys of a project.
-func (c *clientImpl) AiHostingProjectGetKeys(
+func (c *clientImpl) AIHostingProjectGetKeys(
 	ctx context.Context,
-	req AiHostingProjectGetKeysRequest,
+	req AIHostingProjectGetKeysRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*[]aihostingv2.Key, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -393,9 +393,9 @@ func (c *clientImpl) AiHostingProjectGetKeys(
 // Creates a new key for a project.
 //
 // Creates a new key for a project. Same as the customer route but with required projectId. And project users can create it.
-func (c *clientImpl) AiHostingProjectCreateKey(
+func (c *clientImpl) AIHostingProjectCreateKey(
 	ctx context.Context,
-	req AiHostingProjectCreateKeyRequest,
+	req AIHostingProjectCreateKeyRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*aihostingv2.Key, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -421,11 +421,11 @@ func (c *clientImpl) AiHostingProjectCreateKey(
 }
 
 // Get ai hosting tariff and usages of a project. Same as the customer route, but less details.
-func (c *clientImpl) AiHostingProjectGetUsage(
+func (c *clientImpl) AIHostingProjectGetUsage(
 	ctx context.Context,
-	req AiHostingProjectGetUsageRequest,
+	req AIHostingProjectGetUsageRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*AiHostingProjectGetUsageResponse, *http.Response, error) {
+) (*AIHostingProjectGetUsageResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -441,7 +441,7 @@ func (c *clientImpl) AiHostingProjectGetUsage(
 		return nil, httpRes, err
 	}
 
-	var response AiHostingProjectGetUsageResponse
+	var response AIHostingProjectGetUsageResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

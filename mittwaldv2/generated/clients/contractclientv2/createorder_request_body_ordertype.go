@@ -25,10 +25,10 @@ const CreateOrderRequestBodyOrderTypeServer CreateOrderRequestBodyOrderType = "s
 const CreateOrderRequestBodyOrderTypeExternalCertificate CreateOrderRequestBodyOrderType = "externalCertificate"
 const CreateOrderRequestBodyOrderTypeLeadFyndr CreateOrderRequestBodyOrderType = "leadFyndr"
 const CreateOrderRequestBodyOrderTypeMailArchive CreateOrderRequestBodyOrderType = "mailArchive"
-const CreateOrderRequestBodyOrderTypeAiHosting CreateOrderRequestBodyOrderType = "aiHosting"
+const CreateOrderRequestBodyOrderTypeAIHosting CreateOrderRequestBodyOrderType = "aiHosting"
 
 func (e CreateOrderRequestBodyOrderType) Validate() error {
-	if e == CreateOrderRequestBodyOrderTypeDomain || e == CreateOrderRequestBodyOrderTypeProjectHosting || e == CreateOrderRequestBodyOrderTypeServer || e == CreateOrderRequestBodyOrderTypeExternalCertificate || e == CreateOrderRequestBodyOrderTypeLeadFyndr || e == CreateOrderRequestBodyOrderTypeMailArchive || e == CreateOrderRequestBodyOrderTypeAiHosting {
+	if e == CreateOrderRequestBodyOrderTypeDomain || e == CreateOrderRequestBodyOrderTypeProjectHosting || e == CreateOrderRequestBodyOrderTypeServer || e == CreateOrderRequestBodyOrderTypeExternalCertificate || e == CreateOrderRequestBodyOrderTypeLeadFyndr || e == CreateOrderRequestBodyOrderTypeMailArchive || e == CreateOrderRequestBodyOrderTypeAIHosting {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
