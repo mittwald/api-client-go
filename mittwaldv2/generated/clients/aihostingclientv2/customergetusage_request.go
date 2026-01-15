@@ -13,7 +13,7 @@ import (
 // CustomerGetUsageRequest models a request for the 'ai-hosting-customer-get-usage'
 // operation. See [1] for more information.
 //
-// Get ai hosting tariff and usages of a customer.
+// Get ai hosting plan and usages of a customer.
 //
 // [1]: https://developer.mittwald.de/docs/v2/reference/ai
 // hosting/ai-hosting-customer-get-usage

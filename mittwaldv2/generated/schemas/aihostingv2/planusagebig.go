@@ -10,10 +10,15 @@ package aihostingv2
 //        type: "integer"
 //        minimum: -1
 //        format: "int64"
+//    "planLimit":
+//        type: "integer"
+//        minimum: -1
+//        format: "int64"
 //    "tariffLimit":
 //        type: "integer"
 //        minimum: -1
 //        format: "int64"
+//        deprecated: true
 //    "used":
 //        type: "integer"
 //        minimum: 0
@@ -22,13 +27,15 @@ package aihostingv2
 //    - "used"
 //    - "available"
 //    - "tariffLimit"
+//    - "planLimit"
 
-type TariffUsageBig struct {
+type PlanUsageBig struct {
 	Available   int64 `json:"available"`
+	PlanLimit   int64 `json:"planLimit"`
 	TariffLimit int64 `json:"tariffLimit"`
 	Used        int64 `json:"used"`
 }
 
-func (o *TariffUsageBig) Validate() error {
+func (o *PlanUsageBig) Validate() error {
 	return nil
 }

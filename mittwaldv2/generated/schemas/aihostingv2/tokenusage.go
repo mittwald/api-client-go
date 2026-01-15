@@ -6,10 +6,15 @@ package aihostingv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "planLimit":
+//        type: "integer"
+//        minimum: -1
+//        format: "int64"
 //    "tariffLimit":
 //        type: "integer"
 //        minimum: -1
 //        format: "int64"
+//        deprecated: true
 //    "used":
 //        type: "integer"
 //        minimum: 0
@@ -17,8 +22,10 @@ package aihostingv2
 // required:
 //    - "used"
 //    - "tariffLimit"
+//    - "planLimit"
 
 type TokenUsage struct {
+	PlanLimit   int64 `json:"planLimit"`
 	TariffLimit int64 `json:"tariffLimit"`
 	Used        int64 `json:"used"`
 }

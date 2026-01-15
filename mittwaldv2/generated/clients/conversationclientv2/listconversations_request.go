@@ -1,6 +1,7 @@
 package conversationclientv2
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -17,8 +18,13 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/conversation/conversation-list-conversations
 type ListConversationsRequest struct {
-	Sort  []ListConversationsRequestQuerySortItem
-	Order []ListConversationsRequestQueryOrderItem
+	FullTextSearch *string
+	Status         []ListConversationsRequestQueryStatusItem
+	Limit          *int64
+	Skip           *int64
+	Page           *int64
+	Sort           []ListConversationsRequestQuerySortItem
+	Order          []ListConversationsRequestQueryOrderItem
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -56,6 +62,21 @@ func (r *ListConversationsRequest) url() string {
 
 func (r *ListConversationsRequest) query() url.Values {
 	q := make(url.Values)
+	if r.FullTextSearch != nil {
+		q.Set("fullTextSearch", *r.FullTextSearch)
+	}
+	for _, val := range r.Status {
+		q.Add("status", string(val))
+	}
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
+	}
 	for _, val := range r.Sort {
 		q.Add("sort", string(val))
 	}

@@ -13,7 +13,7 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "keys": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.TariffUsage"}
+//    "keys": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsage"}
 //    "nextTokenReset":
 //        type: "string"
 //        format: "date-time"
@@ -24,9 +24,9 @@ import (
 //    - "projectId"
 
 type ProjectGetUsageResponse struct {
-	Keys           aihostingv2.TariffUsage `json:"keys"`
-	NextTokenReset *time.Time              `json:"nextTokenReset,omitempty"`
-	ProjectId      string                  `json:"projectId"`
+	Keys           aihostingv2.PlanUsage `json:"keys"`
+	NextTokenReset *time.Time            `json:"nextTokenReset,omitempty"`
+	ProjectId      string                `json:"projectId"`
 }
 
 func (o *ProjectGetUsageResponse) Validate() error {

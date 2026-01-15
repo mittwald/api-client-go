@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("TariffUsageBig", func() {
+var _ = Describe("PlanOptionsTopUsagesItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"available\":42,\"tariffLimit\":42,\"used\":42}")
+			exampleJSON := []byte("{\"keyId\":\"string\",\"name\":\"string\",\"projectId\":\"string\",\"tokenUsed\":42}")
 
-			sut := aihostingv2.TariffUsageBig{}
+			sut := aihostingv2.PlanOptionsTopUsagesItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})
