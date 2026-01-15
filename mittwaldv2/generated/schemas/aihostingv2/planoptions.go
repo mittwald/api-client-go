@@ -16,12 +16,12 @@ import (
 //    "deletedAt":
 //        type: "string"
 //        format: "date-time"
-//    "keys": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.TariffUsage"}
+//    "keys": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsage"}
 //    "nextTokenReset":
 //        type: "string"
 //        format: "date-time"
 //    "rateLimit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
-//    "tokens": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.TariffUsageBig"}
+//    "tokens": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsageBig"}
 //    "topUsages":
 //        type: "array"
 //        items:
@@ -46,17 +46,17 @@ import (
 //    - "rateLimit"
 //    - "nextTokenReset"
 
-type TariffOptions struct {
-	CustomerId     string                       `json:"customerId"`
-	DeletedAt      *time.Time                   `json:"deletedAt,omitempty"`
-	Keys           TariffUsage                  `json:"keys"`
-	NextTokenReset time.Time                    `json:"nextTokenReset"`
-	RateLimit      RateLimit                    `json:"rateLimit"`
-	Tokens         TariffUsageBig               `json:"tokens"`
-	TopUsages      []TariffOptionsTopUsagesItem `json:"topUsages,omitempty"`
+type PlanOptions struct {
+	CustomerId     string                     `json:"customerId"`
+	DeletedAt      *time.Time                 `json:"deletedAt,omitempty"`
+	Keys           PlanUsage                  `json:"keys"`
+	NextTokenReset time.Time                  `json:"nextTokenReset"`
+	RateLimit      RateLimit                  `json:"rateLimit"`
+	Tokens         PlanUsageBig               `json:"tokens"`
+	TopUsages      []PlanOptionsTopUsagesItem `json:"topUsages,omitempty"`
 }
 
-func (o *TariffOptions) Validate() error {
+func (o *PlanOptions) Validate() error {
 	if err := o.Keys.Validate(); err != nil {
 		return fmt.Errorf("invalid property keys: %w", err)
 	}

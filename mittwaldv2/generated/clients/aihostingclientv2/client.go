@@ -43,7 +43,7 @@ type Client interface {
 		ctx context.Context,
 		req CustomerGetUsageRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*aihostingv2.TariffOptions, *http.Response, error)
+	) (*aihostingv2.PlanOptions, *http.Response, error)
 	GetModels(
 		ctx context.Context,
 		req GetModelsRequest,
@@ -226,12 +226,12 @@ func (c *clientImpl) CustomerDeleteKey(
 	return httpRes, nil
 }
 
-// Get ai hosting tariff and usages of a customer.
+// Get ai hosting plan and usages of a customer.
 func (c *clientImpl) CustomerGetUsage(
 	ctx context.Context,
 	req CustomerGetUsageRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*aihostingv2.TariffOptions, *http.Response, error) {
+) (*aihostingv2.PlanOptions, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -247,7 +247,7 @@ func (c *clientImpl) CustomerGetUsage(
 		return nil, httpRes, err
 	}
 
-	var response aihostingv2.TariffOptions
+	var response aihostingv2.PlanOptions
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -420,7 +420,7 @@ func (c *clientImpl) ProjectDeleteKey(
 	return httpRes, nil
 }
 
-// Get ai hosting tariff and usages of a project. Same as the customer route, but less details.
+// Get ai hosting plan and usages of a project. Same as the customer route, but less details.
 func (c *clientImpl) ProjectGetUsage(
 	ctx context.Context,
 	req ProjectGetUsageRequest,

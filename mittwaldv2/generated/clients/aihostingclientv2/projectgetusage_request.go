@@ -13,7 +13,7 @@ import (
 // ProjectGetUsageRequest models a request for the 'ai-hosting-project-get-usage'
 // operation. See [1] for more information.
 //
-// Get ai hosting tariff and usages of a project. Same as the customer route, but
+// Get ai hosting plan and usages of a project. Same as the customer route, but
 // less details.
 //
 // [1]: https://developer.mittwald.de/docs/v2/reference/ai

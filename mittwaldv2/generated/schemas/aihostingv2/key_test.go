@@ -14,7 +14,7 @@ import (
 var _ = Describe("Key", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"containerMeta\":{\"containerId\":\"string\",\"errorMessage\":\"string\",\"ingressId\":\"string\",\"stackId\":\"string\",\"status\":\"created\"},\"customerId\":\"string\",\"isBlocked\":true,\"key\":\"string\",\"keyId\":\"string\",\"models\":[\"string\"],\"name\":\"string\",\"projectId\":\"string\",\"rateLimit\":{\"allowedRequestsPerUnit\":42,\"unit\":\"minute\"},\"tokenUsage\":{\"tariffLimit\":42,\"used\":42}}")
+			exampleJSON := []byte("{\"containerMeta\":{\"containerId\":\"string\",\"errorMessage\":\"string\",\"ingressId\":\"string\",\"stackId\":\"string\",\"status\":\"created\"},\"customerId\":\"string\",\"isBlocked\":true,\"key\":\"string\",\"keyId\":\"string\",\"models\":[\"string\"],\"name\":\"string\",\"projectId\":\"string\",\"rateLimit\":{\"allowedRequestsPerUnit\":42,\"unit\":\"minute\"},\"tokenUsage\":{\"planLimit\":42,\"tariffLimit\":42,\"used\":42}}")
 
 			sut := aihostingv2.Key{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

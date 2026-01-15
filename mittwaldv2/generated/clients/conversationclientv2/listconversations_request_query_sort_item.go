@@ -11,7 +11,6 @@ import "fmt"
 //    - "createdAt"
 //    - "lastMessage.createdAt"
 //    - "title"
-//    - "priority"
 //    - "shortId"
 //    - "conversationId"
 
@@ -20,12 +19,11 @@ type ListConversationsRequestQuerySortItem string
 const ListConversationsRequestQuerySortItemCreatedAt ListConversationsRequestQuerySortItem = "createdAt"
 const ListConversationsRequestQuerySortItemLastMessageCreatedAt ListConversationsRequestQuerySortItem = "lastMessage.createdAt"
 const ListConversationsRequestQuerySortItemTitle ListConversationsRequestQuerySortItem = "title"
-const ListConversationsRequestQuerySortItemPriority ListConversationsRequestQuerySortItem = "priority"
 const ListConversationsRequestQuerySortItemShortID ListConversationsRequestQuerySortItem = "shortId"
 const ListConversationsRequestQuerySortItemConversationID ListConversationsRequestQuerySortItem = "conversationId"
 
 func (e ListConversationsRequestQuerySortItem) Validate() error {
-	if e == ListConversationsRequestQuerySortItemCreatedAt || e == ListConversationsRequestQuerySortItemLastMessageCreatedAt || e == ListConversationsRequestQuerySortItemTitle || e == ListConversationsRequestQuerySortItemPriority || e == ListConversationsRequestQuerySortItemShortID || e == ListConversationsRequestQuerySortItemConversationID {
+	if e == ListConversationsRequestQuerySortItemCreatedAt || e == ListConversationsRequestQuerySortItemLastMessageCreatedAt || e == ListConversationsRequestQuerySortItemTitle || e == ListConversationsRequestQuerySortItemShortID || e == ListConversationsRequestQuerySortItemConversationID {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
