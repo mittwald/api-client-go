@@ -10,24 +10,17 @@ package aihostingv2
 //        type: "integer"
 //        minimum: -1
 //        format: "int64"
-//    "tariffLimit":
-//        type: "integer"
-//        minimum: -1
-//        format: "int64"
-//        deprecated: true
 //    "used":
 //        type: "integer"
 //        minimum: 0
 //        format: "int64"
 // required:
 //    - "used"
-//    - "tariffLimit"
 //    - "planLimit"
 
 type TokenUsage struct {
-	PlanLimit   int64 `json:"planLimit"`
-	TariffLimit int64 `json:"tariffLimit"`
-	Used        int64 `json:"used"`
+	PlanLimit int64 `json:"planLimit"`
+	Used      int64 `json:"used"`
 }
 
 func (o *TokenUsage) Validate() error {
