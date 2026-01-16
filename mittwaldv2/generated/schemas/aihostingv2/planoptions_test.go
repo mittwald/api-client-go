@@ -14,7 +14,7 @@ import (
 var _ = Describe("PlanOptions", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"customerId\":\"string\",\"deletedAt\":\"2006-01-02T15:04:05Z\",\"keys\":{\"available\":42,\"planLimit\":42,\"tariffLimit\":42,\"used\":42},\"nextTokenReset\":\"2006-01-02T15:04:05Z\",\"rateLimit\":{\"allowedRequestsPerUnit\":42,\"unit\":\"minute\"},\"tokens\":{\"available\":42,\"planLimit\":42,\"tariffLimit\":42,\"used\":42},\"topUsages\":[{\"keyId\":\"string\",\"name\":\"string\",\"projectId\":\"string\",\"tokenUsed\":42}]}")
+			exampleJSON := []byte("{\"customerId\":\"string\",\"deletedAt\":\"2006-01-02T15:04:05Z\",\"keys\":{\"available\":42,\"planLimit\":42,\"used\":42},\"nextTokenReset\":\"2006-01-02T15:04:05Z\",\"rateLimit\":{\"allowedRequestsPerUnit\":42,\"unit\":\"minute\"},\"tokens\":{\"available\":42,\"planLimit\":42,\"used\":42},\"topUsages\":[{\"keyId\":\"string\",\"name\":\"string\",\"projectId\":\"string\",\"tokenUsed\":42}]}")
 
 			sut := aihostingv2.PlanOptions{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

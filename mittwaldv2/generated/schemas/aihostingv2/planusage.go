@@ -12,24 +12,18 @@ package aihostingv2
 //    "planLimit":
 //        type: "integer"
 //        minimum: -1
-//    "tariffLimit":
-//        type: "integer"
-//        minimum: -1
-//        deprecated: true
 //    "used":
 //        type: "integer"
 //        minimum: 0
 // required:
 //    - "used"
 //    - "available"
-//    - "tariffLimit"
 //    - "planLimit"
 
 type PlanUsage struct {
-	Available   int64 `json:"available"`
-	PlanLimit   int64 `json:"planLimit"`
-	TariffLimit int64 `json:"tariffLimit"`
-	Used        int64 `json:"used"`
+	Available int64 `json:"available"`
+	PlanLimit int64 `json:"planLimit"`
+	Used      int64 `json:"used"`
 }
 
 func (o *PlanUsage) Validate() error {

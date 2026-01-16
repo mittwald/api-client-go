@@ -14,7 +14,7 @@ import (
 var _ = Describe("TokenUsage", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"planLimit\":42,\"tariffLimit\":42,\"used\":42}")
+			exampleJSON := []byte("{\"planLimit\":42,\"used\":42}")
 
 			sut := aihostingv2.TokenUsage{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -21,6 +21,7 @@ import (
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.LeadFyndrOrderPreview"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.MailArchiveOrderPreview"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.AIHostingOrderPreview"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.order.LicenceOrderPreview"}
 
 type PreviewOrderRequestBodyOrderData struct {
 	AlternativeProjectHostingOrderPreview      *orderv2.ProjectHostingOrderPreview
@@ -30,6 +31,7 @@ type PreviewOrderRequestBodyOrderData struct {
 	AlternativeLeadFyndrOrderPreview           *orderv2.LeadFyndrOrderPreview
 	AlternativeMailArchiveOrderPreview         *orderv2.MailArchiveOrderPreview
 	AlternativeAIHostingOrderPreview           *orderv2.AIHostingOrderPreview
+	AlternativeLicenceOrderPreview             *orderv2.LicenceOrderPreview
 }
 
 func (a *PreviewOrderRequestBodyOrderData) MarshalJSON() ([]byte, error) {
@@ -53,6 +55,9 @@ func (a *PreviewOrderRequestBodyOrderData) MarshalJSON() ([]byte, error) {
 	}
 	if a.AlternativeAIHostingOrderPreview != nil {
 		return json.Marshal(a.AlternativeAIHostingOrderPreview)
+	}
+	if a.AlternativeLicenceOrderPreview != nil {
+		return json.Marshal(a.AlternativeLicenceOrderPreview)
 	}
 	return []byte("null"), nil
 }
@@ -133,6 +138,16 @@ func (a *PreviewOrderRequestBodyOrderData) UnmarshalJSON(input []byte) error {
 		}
 	}
 
+	reader.Reset(input)
+	var alternativeLicenceOrderPreview orderv2.LicenceOrderPreview
+	if err := dec.Decode(&alternativeLicenceOrderPreview); err == nil {
+		//subtype: *generator.ReferenceType
+		if vErr := alternativeLicenceOrderPreview.Validate(); vErr == nil {
+			a.AlternativeLicenceOrderPreview = &alternativeLicenceOrderPreview
+			decodedAtLeastOnce = true
+		}
+	}
+
 	if !decodedAtLeastOnce {
 		return fmt.Errorf("could not unmarshal into any alternative for type %T", a)
 	}
@@ -160,6 +175,9 @@ func (a *PreviewOrderRequestBodyOrderData) Validate() error {
 	}
 	if a.AlternativeAIHostingOrderPreview != nil {
 		return a.AlternativeAIHostingOrderPreview.Validate()
+	}
+	if a.AlternativeLicenceOrderPreview != nil {
+		return a.AlternativeLicenceOrderPreview.Validate()
 	}
 	return errors.New("no alternative set")
 }

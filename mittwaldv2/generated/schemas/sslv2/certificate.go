@@ -30,6 +30,7 @@ import (
 //        properties:
 //            "cnameTarget":
 //                type: "string"
+//            "status": {"$ref": "#/components/schemas/de.mittwald.v1.ssl.DNSCertStatus"}
 //    "dnsNames":
 //        type: "array"
 //        items:
