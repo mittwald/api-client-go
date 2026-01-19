@@ -10,6 +10,7 @@ import "fmt"
 // enum:
 //    - "issuing"
 //    - "ready"
+//    - "cname_error"
 //    - "error"
 //    - "undefined"
 
@@ -17,11 +18,12 @@ type ProjectCertificateStatus string
 
 const ProjectCertificateStatusIssuing ProjectCertificateStatus = "issuing"
 const ProjectCertificateStatusReady ProjectCertificateStatus = "ready"
+const ProjectCertificateStatusCnameError ProjectCertificateStatus = "cname_error"
 const ProjectCertificateStatusError ProjectCertificateStatus = "error"
 const ProjectCertificateStatusUndefined ProjectCertificateStatus = "undefined"
 
 func (e ProjectCertificateStatus) Validate() error {
-	if e == ProjectCertificateStatusIssuing || e == ProjectCertificateStatusReady || e == ProjectCertificateStatusError || e == ProjectCertificateStatusUndefined {
+	if e == ProjectCertificateStatusIssuing || e == ProjectCertificateStatusReady || e == ProjectCertificateStatusCnameError || e == ProjectCertificateStatusError || e == ProjectCertificateStatusUndefined {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
