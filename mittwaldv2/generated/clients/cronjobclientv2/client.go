@@ -322,7 +322,7 @@ func (c *clientImpl) GetExecution(
 	return &response, httpRes, nil
 }
 
-// Update a Cronjob's app id.
+// Update a Cronjob's app installation id.
 func (c *clientImpl) UpdateCronjobAppID(
 	ctx context.Context,
 	req UpdateCronjobAppIDRequest,

@@ -15,7 +15,7 @@ import (
 // UpdateCronjobAppIDRequest models a request for the
 // 'cronjob-update-cronjob-app-id' operation. See [1] for more information.
 //
-// Update a Cronjob's app id.
+// Update a Cronjob's app installation id.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/cronjob/cronjob-update-cronjob-app-id
@@ -55,7 +55,7 @@ func (r *UpdateCronjobAppIDRequest) body() (io.Reader, string, error) {
 
 func (r *UpdateCronjobAppIDRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/cronjobs/%s/app-id", url.PathEscape(r.CronjobID)),
+		Path: fmt.Sprintf("/v2/cronjobs/%s/app-installation-id", url.PathEscape(r.CronjobID)),
 	}
 	return u.String()
 }
