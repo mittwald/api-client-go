@@ -9,13 +9,19 @@ package cronjobclientv2
 //    "appId":
 //        type: "string"
 //        format: "uuid"
+//        description: "DEPRECATED: Use 'appInstallationId' instead. This field will be removed in a future version."
+//        deprecated: true
+//    "appInstallationId":
+//        type: "string"
+//        format: "uuid"
 // required:
 //    - "appId"
 // description: UpdateCronjobAppIDRequestBody models the JSON body of a 'cronjob-update-cronjob-app-id' request
 
 // UpdateCronjobAppIDRequestBody models the JSON body of a 'cronjob-update-cronjob-app-id' request
 type UpdateCronjobAppIDRequestBody struct {
-	AppId string `json:"appId"`
+	AppId             string  `json:"appId"`
+	AppInstallationId *string `json:"appInstallationId,omitempty"`
 }
 
 func (o *UpdateCronjobAppIDRequestBody) Validate() error {

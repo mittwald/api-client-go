@@ -21,7 +21,7 @@ import (
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.LeadFyndrOrderPreview"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.MailArchiveOrderPreview"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.AIHostingOrderPreview"}
-//    - {"$ref": "#/components/schemas/de.mittwald.v1.order.LicenceOrderPreview"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.order.LicenseOrderPreview"}
 
 type PreviewOrderRequestBodyOrderData struct {
 	AlternativeProjectHostingOrderPreview      *orderv2.ProjectHostingOrderPreview
@@ -31,7 +31,7 @@ type PreviewOrderRequestBodyOrderData struct {
 	AlternativeLeadFyndrOrderPreview           *orderv2.LeadFyndrOrderPreview
 	AlternativeMailArchiveOrderPreview         *orderv2.MailArchiveOrderPreview
 	AlternativeAIHostingOrderPreview           *orderv2.AIHostingOrderPreview
-	AlternativeLicenceOrderPreview             *orderv2.LicenceOrderPreview
+	AlternativeLicenseOrderPreview             *orderv2.LicenseOrderPreview
 }
 
 func (a *PreviewOrderRequestBodyOrderData) MarshalJSON() ([]byte, error) {
@@ -56,8 +56,8 @@ func (a *PreviewOrderRequestBodyOrderData) MarshalJSON() ([]byte, error) {
 	if a.AlternativeAIHostingOrderPreview != nil {
 		return json.Marshal(a.AlternativeAIHostingOrderPreview)
 	}
-	if a.AlternativeLicenceOrderPreview != nil {
-		return json.Marshal(a.AlternativeLicenceOrderPreview)
+	if a.AlternativeLicenseOrderPreview != nil {
+		return json.Marshal(a.AlternativeLicenseOrderPreview)
 	}
 	return []byte("null"), nil
 }
@@ -139,11 +139,11 @@ func (a *PreviewOrderRequestBodyOrderData) UnmarshalJSON(input []byte) error {
 	}
 
 	reader.Reset(input)
-	var alternativeLicenceOrderPreview orderv2.LicenceOrderPreview
-	if err := dec.Decode(&alternativeLicenceOrderPreview); err == nil {
+	var alternativeLicenseOrderPreview orderv2.LicenseOrderPreview
+	if err := dec.Decode(&alternativeLicenseOrderPreview); err == nil {
 		//subtype: *generator.ReferenceType
-		if vErr := alternativeLicenceOrderPreview.Validate(); vErr == nil {
-			a.AlternativeLicenceOrderPreview = &alternativeLicenceOrderPreview
+		if vErr := alternativeLicenseOrderPreview.Validate(); vErr == nil {
+			a.AlternativeLicenseOrderPreview = &alternativeLicenseOrderPreview
 			decodedAtLeastOnce = true
 		}
 	}
@@ -176,8 +176,8 @@ func (a *PreviewOrderRequestBodyOrderData) Validate() error {
 	if a.AlternativeAIHostingOrderPreview != nil {
 		return a.AlternativeAIHostingOrderPreview.Validate()
 	}
-	if a.AlternativeLicenceOrderPreview != nil {
-		return a.AlternativeLicenceOrderPreview.Validate()
+	if a.AlternativeLicenseOrderPreview != nil {
+		return a.AlternativeLicenseOrderPreview.Validate()
 	}
 	return errors.New("no alternative set")
 }

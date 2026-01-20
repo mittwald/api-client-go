@@ -16,6 +16,11 @@ import (
 //    "appId":
 //        type: "string"
 //        format: "uuid"
+//        description: "DEPRECATED: Use 'appInstallationId' instead. This field will be removed in a future version."
+//        deprecated: true
+//    "appInstallationId":
+//        type: "string"
+//        format: "uuid"
 //    "concurrencyPolicy": {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ConcurrencyPolicy"}
 //    "createdAt":
 //        type: "string"
@@ -74,6 +79,7 @@ import (
 type Cronjob struct {
 	Active                        bool               `json:"active"`
 	AppId                         string             `json:"appId"`
+	AppInstallationId             *string            `json:"appInstallationId,omitempty"`
 	ConcurrencyPolicy             *ConcurrencyPolicy `json:"concurrencyPolicy,omitempty"`
 	CreatedAt                     time.Time          `json:"createdAt"`
 	Description                   string             `json:"description"`

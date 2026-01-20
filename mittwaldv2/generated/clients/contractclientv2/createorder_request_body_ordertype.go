@@ -15,7 +15,7 @@ import "fmt"
 //    - "leadFyndr"
 //    - "mailArchive"
 //    - "aiHosting"
-//    - "licence"
+//    - "license"
 // example: "projectHosting"
 
 type CreateOrderRequestBodyOrderType string
@@ -27,10 +27,10 @@ const CreateOrderRequestBodyOrderTypeExternalCertificate CreateOrderRequestBodyO
 const CreateOrderRequestBodyOrderTypeLeadFyndr CreateOrderRequestBodyOrderType = "leadFyndr"
 const CreateOrderRequestBodyOrderTypeMailArchive CreateOrderRequestBodyOrderType = "mailArchive"
 const CreateOrderRequestBodyOrderTypeAIHosting CreateOrderRequestBodyOrderType = "aiHosting"
-const CreateOrderRequestBodyOrderTypeLicence CreateOrderRequestBodyOrderType = "licence"
+const CreateOrderRequestBodyOrderTypeLicense CreateOrderRequestBodyOrderType = "license"
 
 func (e CreateOrderRequestBodyOrderType) Validate() error {
-	if e == CreateOrderRequestBodyOrderTypeDomain || e == CreateOrderRequestBodyOrderTypeProjectHosting || e == CreateOrderRequestBodyOrderTypeServer || e == CreateOrderRequestBodyOrderTypeExternalCertificate || e == CreateOrderRequestBodyOrderTypeLeadFyndr || e == CreateOrderRequestBodyOrderTypeMailArchive || e == CreateOrderRequestBodyOrderTypeAIHosting || e == CreateOrderRequestBodyOrderTypeLicence {
+	if e == CreateOrderRequestBodyOrderTypeDomain || e == CreateOrderRequestBodyOrderTypeProjectHosting || e == CreateOrderRequestBodyOrderTypeServer || e == CreateOrderRequestBodyOrderTypeExternalCertificate || e == CreateOrderRequestBodyOrderTypeLeadFyndr || e == CreateOrderRequestBodyOrderTypeMailArchive || e == CreateOrderRequestBodyOrderTypeAIHosting || e == CreateOrderRequestBodyOrderTypeLicense {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

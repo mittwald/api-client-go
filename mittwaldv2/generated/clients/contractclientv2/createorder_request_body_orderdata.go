@@ -21,7 +21,7 @@ import (
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.LeadFyndrOrder"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.MailArchiveOrder"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.order.AIHostingOrder"}
-//    - {"$ref": "#/components/schemas/de.mittwald.v1.order.LicenceOrder"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.order.LicenseOrder"}
 
 type CreateOrderRequestBodyOrderData struct {
 	AlternativeProjectHostingOrder      *orderv2.ProjectHostingOrder
@@ -31,7 +31,7 @@ type CreateOrderRequestBodyOrderData struct {
 	AlternativeLeadFyndrOrder           *orderv2.LeadFyndrOrder
 	AlternativeMailArchiveOrder         *orderv2.MailArchiveOrder
 	AlternativeAIHostingOrder           *orderv2.AIHostingOrder
-	AlternativeLicenceOrder             *orderv2.LicenceOrder
+	AlternativeLicenseOrder             *orderv2.LicenseOrder
 }
 
 func (a *CreateOrderRequestBodyOrderData) MarshalJSON() ([]byte, error) {
@@ -56,8 +56,8 @@ func (a *CreateOrderRequestBodyOrderData) MarshalJSON() ([]byte, error) {
 	if a.AlternativeAIHostingOrder != nil {
 		return json.Marshal(a.AlternativeAIHostingOrder)
 	}
-	if a.AlternativeLicenceOrder != nil {
-		return json.Marshal(a.AlternativeLicenceOrder)
+	if a.AlternativeLicenseOrder != nil {
+		return json.Marshal(a.AlternativeLicenseOrder)
 	}
 	return []byte("null"), nil
 }
@@ -139,11 +139,11 @@ func (a *CreateOrderRequestBodyOrderData) UnmarshalJSON(input []byte) error {
 	}
 
 	reader.Reset(input)
-	var alternativeLicenceOrder orderv2.LicenceOrder
-	if err := dec.Decode(&alternativeLicenceOrder); err == nil {
+	var alternativeLicenseOrder orderv2.LicenseOrder
+	if err := dec.Decode(&alternativeLicenseOrder); err == nil {
 		//subtype: *generator.ReferenceType
-		if vErr := alternativeLicenceOrder.Validate(); vErr == nil {
-			a.AlternativeLicenceOrder = &alternativeLicenceOrder
+		if vErr := alternativeLicenseOrder.Validate(); vErr == nil {
+			a.AlternativeLicenseOrder = &alternativeLicenseOrder
 			decodedAtLeastOnce = true
 		}
 	}
@@ -176,8 +176,8 @@ func (a *CreateOrderRequestBodyOrderData) Validate() error {
 	if a.AlternativeAIHostingOrder != nil {
 		return a.AlternativeAIHostingOrder.Validate()
 	}
-	if a.AlternativeLicenceOrder != nil {
-		return a.AlternativeLicenceOrder.Validate()
+	if a.AlternativeLicenseOrder != nil {
+		return a.AlternativeLicenseOrder.Validate()
 	}
 	return errors.New("no alternative set")
 }
