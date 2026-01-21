@@ -15,11 +15,11 @@ import "errors"
 // required:
 //    - "databases"
 
-type GetProjectBackupDatabaseDumpsResponse struct {
+type GetProjectBackupDatabaseDumpsV2ExperimentalResponse struct {
 	Databases []string `json:"databases"`
 }
 
-func (o *GetProjectBackupDatabaseDumpsResponse) Validate() error {
+func (o *GetProjectBackupDatabaseDumpsV2ExperimentalResponse) Validate() error {
 	if o.Databases == nil {
 		return errors.New("property databases is required, but not set")
 	}
