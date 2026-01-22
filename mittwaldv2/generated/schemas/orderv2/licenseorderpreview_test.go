@@ -14,7 +14,7 @@ import (
 var _ = Describe("LicenseOrderPreview", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal into AlternativeLicenseOrderPreviewAlternative1", func() {
-			exampleJSON := []byte("{\"licenseType\":\"typo3\",\"majorVersion\":12}")
+			exampleJSON := []byte("{\"description\":\"string\",\"licenseType\":\"typo3\",\"majorVersion\":12}")
 
 			sut := orderv2.LicenseOrderPreview{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

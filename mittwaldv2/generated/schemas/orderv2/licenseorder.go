@@ -14,6 +14,9 @@ import (
 // oneOf:
 //    - type: "object"
 //      properties:
+//        "description":
+//            type: "string"
+//            description: "Describe for which typo3 instance the license will be used."
 //        "licenseType":
 //            type: "string"
 //            enum:
@@ -29,6 +32,7 @@ import (
 //        - "licenseType"
 //        - "projectId"
 //        - "majorVersion"
+//        - "description"
 //      description: "TYPO3 ELTS license"
 
 type LicenseOrder struct {

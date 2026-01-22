@@ -157,5 +157,13 @@ var _ = Describe("CertificateErrorMessage", func() {
 			Expect(sut.Validate()).To(Succeed())
 			Expect(sut.AlternativeCertificateErrorMessageAlternative18).NotTo(BeNil())
 		})
+		It("should unmarshal into AlternativeError", func() {
+			exampleJSON := []byte("{\"message\":\"Something went wrong\",\"type\":\"InternalServerError\"}")
+
+			sut := sslv2.CertificateErrorMessage{}
+			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
+			Expect(sut.Validate()).To(Succeed())
+			Expect(sut.AlternativeError).NotTo(BeNil())
+		})
 	})
 })

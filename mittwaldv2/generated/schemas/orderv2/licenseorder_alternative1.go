@@ -8,6 +8,9 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "description":
+//        type: "string"
+//        description: "Describe for which typo3 instance the license will be used."
 //    "licenseType":
 //        type: "string"
 //        enum:
@@ -23,10 +26,12 @@ import "fmt"
 //    - "licenseType"
 //    - "projectId"
 //    - "majorVersion"
+//    - "description"
 // description: "TYPO3 ELTS license"
 
 // TYPO3 ELTS license
 type LicenseOrderAlternative1 struct {
+	Description  string                              `json:"description"`
 	LicenseType  LicenseOrderAlternative1LicenseType `json:"licenseType"`
 	MajorVersion float64                             `json:"majorVersion"`
 	ProjectId    string                              `json:"projectId"`

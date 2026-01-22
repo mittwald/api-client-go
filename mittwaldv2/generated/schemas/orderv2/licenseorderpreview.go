@@ -14,6 +14,9 @@ import (
 // oneOf:
 //    - type: "object"
 //      properties:
+//        "description":
+//            type: "string"
+//            description: "Describe for which typo3 instance the license will be used."
 //        "licenseType":
 //            type: "string"
 //            enum:

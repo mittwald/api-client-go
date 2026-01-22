@@ -82,6 +82,7 @@ import "fmt"
 //              enum:
 //                - "unknown"
 //              description: "An unknown error occurred."
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.commons.Error"}
 // required:
 //    - "message"
 
