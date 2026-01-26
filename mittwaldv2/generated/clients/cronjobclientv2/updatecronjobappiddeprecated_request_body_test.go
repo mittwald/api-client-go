@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("UpdateCronjobAppIDRequestBody", func() {
+var _ = Describe("UpdateCronjobAppIDDeprecatedRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
 			exampleJSON := []byte("{\"appId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"appInstallationId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
 
-			sut := cronjobclientv2.UpdateCronjobAppIDRequestBody{}
+			sut := cronjobclientv2.UpdateCronjobAppIDDeprecatedRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

@@ -59,14 +59,19 @@ type Client interface {
 		req GetExecutionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*cronjobv2.CronjobExecution, *http.Response, error)
-	UpdateCronjobAppID(
-		ctx context.Context,
-		req UpdateCronjobAppIDRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	DeprecatedAbortExecution(
 		ctx context.Context,
 		req DeprecatedAbortExecutionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	ReplaceCronjobAppInstallationID(
+		ctx context.Context,
+		req ReplaceCronjobAppInstallationIDRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	UpdateCronjobAppIDDeprecated(
+		ctx context.Context,
+		req UpdateCronjobAppIDDeprecatedRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -322,10 +327,10 @@ func (c *clientImpl) GetExecution(
 	return &response, httpRes, nil
 }
 
-// Update a Cronjob's app installation id.
-func (c *clientImpl) UpdateCronjobAppID(
+// Abort a CronjobExecution. Deprecated because this feature is not available at this time.
+func (c *clientImpl) DeprecatedAbortExecution(
 	ctx context.Context,
-	req UpdateCronjobAppIDRequest,
+	req DeprecatedAbortExecutionRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -346,10 +351,36 @@ func (c *clientImpl) UpdateCronjobAppID(
 	return httpRes, nil
 }
 
-// Abort a CronjobExecution. Deprecated because this feature is not available at this time.
-func (c *clientImpl) DeprecatedAbortExecution(
+// Update a Cronjob's app installation id.
+func (c *clientImpl) ReplaceCronjobAppInstallationID(
 	ctx context.Context,
-	req DeprecatedAbortExecutionRequest,
+	req ReplaceCronjobAppInstallationIDRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a Cronjob's app installation id.
+//
+// Deprecated by PUT /v2/cronjobs/{cronjobId}/app-installation-id.
+func (c *clientImpl) UpdateCronjobAppIDDeprecated(
+	ctx context.Context,
+	req UpdateCronjobAppIDDeprecatedRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
