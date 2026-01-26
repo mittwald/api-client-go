@@ -16,14 +16,14 @@ package cronjobclientv2
 //        format: "uuid"
 // required:
 //    - "appId"
-// description: UpdateCronjobAppIDRequestBody models the JSON body of a 'cronjob-update-cronjob-app-id' request
+// description: UpdateCronjobAppIDDeprecatedRequestBody models the JSON body of a 'cronjob-update-cronjob-app-id-deprecated' request
 
-// UpdateCronjobAppIDRequestBody models the JSON body of a 'cronjob-update-cronjob-app-id' request
-type UpdateCronjobAppIDRequestBody struct {
+// UpdateCronjobAppIDDeprecatedRequestBody models the JSON body of a 'cronjob-update-cronjob-app-id-deprecated' request
+type UpdateCronjobAppIDDeprecatedRequestBody struct {
 	AppId             string  `json:"appId"`
 	AppInstallationId *string `json:"appInstallationId,omitempty"`
 }
 
-func (o *UpdateCronjobAppIDRequestBody) Validate() error {
+func (o *UpdateCronjobAppIDDeprecatedRequestBody) Validate() error {
 	return nil
 }
