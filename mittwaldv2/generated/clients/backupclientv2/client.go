@@ -74,14 +74,24 @@ type Client interface {
 		req GetProjectBackupDirectoriesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*backupv2.ProjectBackupPath, *http.Response, error)
-	RequestProjectBackupRestorePath(
-		ctx context.Context,
-		req RequestProjectBackupRestorePathRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	UpdateProjectBackupDescription(
 		ctx context.Context,
 		req UpdateProjectBackupDescriptionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	GetProjectBackupDatabaseDumpsV2Experimental(
+		ctx context.Context,
+		req GetProjectBackupDatabaseDumpsV2ExperimentalRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*GetProjectBackupDatabaseDumpsV2ExperimentalResponse, *http.Response, error)
+	RequestProjectBackupRestorePathDeprecated(
+		ctx context.Context,
+		req RequestProjectBackupRestorePathDeprecatedRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	RequestProjectBackupRestoreV2Experimental(
+		ctx context.Context,
+		req RequestProjectBackupRestoreV2ExperimentalRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -381,7 +391,7 @@ func (c *clientImpl) DeleteProjectBackup(
 	return httpRes, nil
 }
 
-// Get table of contents for a ProjectBackup.
+// List paths for a ProjectBackup.
 func (c *clientImpl) GetProjectBackupDirectories(
 	ctx context.Context,
 	req GetProjectBackupDirectoriesRequest,
@@ -409,10 +419,10 @@ func (c *clientImpl) GetProjectBackupDirectories(
 	return &response, httpRes, nil
 }
 
-// Restore a ProjectBackup's path.
-func (c *clientImpl) RequestProjectBackupRestorePath(
+// Change the description of a ProjectBackup.
+func (c *clientImpl) UpdateProjectBackupDescription(
 	ctx context.Context,
-	req RequestProjectBackupRestorePathRequest,
+	req UpdateProjectBackupDescriptionRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -433,10 +443,65 @@ func (c *clientImpl) RequestProjectBackupRestorePath(
 	return httpRes, nil
 }
 
-// Change the description of a ProjectBackup.
-func (c *clientImpl) UpdateProjectBackupDescription(
+// List database dump's for a ProjectBackup.
+func (c *clientImpl) GetProjectBackupDatabaseDumpsV2Experimental(
 	ctx context.Context,
-	req UpdateProjectBackupDescriptionRequest,
+	req GetProjectBackupDatabaseDumpsV2ExperimentalRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*GetProjectBackupDatabaseDumpsV2ExperimentalResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GetProjectBackupDatabaseDumpsV2ExperimentalResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Restore a ProjectBackup's path.
+//
+// **Deprecated**: Use POST /v2/project-backups/{projectBackupId}/restore instead.
+// This endpoint will be removed in a future version.
+func (c *clientImpl) RequestProjectBackupRestorePathDeprecated(
+	ctx context.Context,
+	req RequestProjectBackupRestorePathDeprecatedRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Restore a ProjectBackup.
+func (c *clientImpl) RequestProjectBackupRestoreV2Experimental(
+	ctx context.Context,
+	req RequestProjectBackupRestoreV2ExperimentalRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

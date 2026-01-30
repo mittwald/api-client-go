@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("ProjectBackupRestorePathRequest", func() {
+var _ = Describe("ProjectBackupRestorePathRequestDeprecated", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"clearTargetPath\":true,\"sourcePaths\":[\"string\"],\"targetRestorePath\":\"/html/mainApp\"}")
+			exampleJSON := []byte("{\"clearTargetPath\":true,\"sourcePath\":\"/html/mainApp/config/\",\"targetPath\":\"/html/mainApp\"}")
 
-			sut := backupv2.ProjectBackupRestorePathRequest{}
+			sut := backupv2.ProjectBackupRestorePathRequestDeprecated{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

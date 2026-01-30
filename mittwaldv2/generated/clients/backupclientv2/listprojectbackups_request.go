@@ -21,13 +21,14 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/backup/backup-list-project-backups
 type ListProjectBackupsRequest struct {
-	ProjectID       string
-	SearchTerm      *string
-	WithExportsOnly *bool
-	SortOrder       *backupv2.BackupSortOrder
-	Limit           *int64
-	Skip            *int64
-	Page            *int64
+	ProjectID           string
+	SearchTerm          *string
+	WithExportsOnly     *bool
+	SortOrder           *backupv2.BackupSortOrder
+	RunningRestoresOnly *bool
+	Limit               *int64
+	Skip                *int64
+	Page                *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -73,6 +74,9 @@ func (r *ListProjectBackupsRequest) query() url.Values {
 	}
 	if r.SortOrder != nil {
 		q.Set("sortOrder", string(*r.SortOrder))
+	}
+	if r.RunningRestoresOnly != nil {
+		q.Set("runningRestoresOnly", strconv.FormatBool(*r.RunningRestoresOnly))
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
