@@ -18,10 +18,11 @@ import (
 // [1]: https://developer.mittwald.de/docs/v2/reference/domain/domain-list-domains
 type ListDomainsRequest struct {
 	ProjectID        *string
-	Page             *int64
-	Limit            *int64
 	DomainSearchName *string
 	ContactHash      *string
+	Limit            *int64
+	Skip             *int64
+	Page             *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -62,17 +63,20 @@ func (r *ListDomainsRequest) query() url.Values {
 	if r.ProjectID != nil {
 		q.Set("projectId", *r.ProjectID)
 	}
-	if r.Page != nil {
-		q.Set("page", fmt.Sprintf("%d", *r.Page))
-	}
-	if r.Limit != nil {
-		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
-	}
 	if r.DomainSearchName != nil {
 		q.Set("domainSearchName", *r.DomainSearchName)
 	}
 	if r.ContactHash != nil {
 		q.Set("contactHash", *r.ContactHash)
+	}
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
 	return q
 }
