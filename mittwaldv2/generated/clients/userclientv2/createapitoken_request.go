@@ -15,7 +15,7 @@ import (
 // CreateAPITokenRequest models a request for the 'user-create-api-token'
 // operation. See [1] for more information.
 //
-// Store a new ApiToken.
+// Create a new ApiToken.
 //
 // [1]: https://developer.mittwald.de/docs/v2/reference/user/user-create-api-token
 type CreateAPITokenRequest struct {
