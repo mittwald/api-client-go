@@ -69,21 +69,16 @@ type Client interface {
 		req DeleteProjectBackupRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	GetProjectBackupDirectories(
-		ctx context.Context,
-		req GetProjectBackupDirectoriesRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*backupv2.ProjectBackupPath, *http.Response, error)
-	UpdateProjectBackupDescription(
-		ctx context.Context,
-		req UpdateProjectBackupDescriptionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	GetProjectBackupDatabaseDumpsV2Experimental(
 		ctx context.Context,
 		req GetProjectBackupDatabaseDumpsV2ExperimentalRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*GetProjectBackupDatabaseDumpsV2ExperimentalResponse, *http.Response, error)
+	GetProjectBackupDirectories(
+		ctx context.Context,
+		req GetProjectBackupDirectoriesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*backupv2.ProjectBackupPath, *http.Response, error)
 	RequestProjectBackupRestorePathDeprecated(
 		ctx context.Context,
 		req RequestProjectBackupRestorePathDeprecatedRequest,
@@ -92,6 +87,11 @@ type Client interface {
 	RequestProjectBackupRestoreV2Experimental(
 		ctx context.Context,
 		req RequestProjectBackupRestoreV2ExperimentalRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	UpdateProjectBackupDescription(
+		ctx context.Context,
+		req UpdateProjectBackupDescriptionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -391,58 +391,6 @@ func (c *clientImpl) DeleteProjectBackup(
 	return httpRes, nil
 }
 
-// List paths for a ProjectBackup.
-func (c *clientImpl) GetProjectBackupDirectories(
-	ctx context.Context,
-	req GetProjectBackupDirectoriesRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*backupv2.ProjectBackupPath, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response backupv2.ProjectBackupPath
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Change the description of a ProjectBackup.
-func (c *clientImpl) UpdateProjectBackupDescription(
-	ctx context.Context,
-	req UpdateProjectBackupDescriptionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // List database dump's for a ProjectBackup.
 func (c *clientImpl) GetProjectBackupDatabaseDumpsV2Experimental(
 	ctx context.Context,
@@ -465,6 +413,34 @@ func (c *clientImpl) GetProjectBackupDatabaseDumpsV2Experimental(
 	}
 
 	var response GetProjectBackupDatabaseDumpsV2ExperimentalResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List paths for a ProjectBackup.
+func (c *clientImpl) GetProjectBackupDirectories(
+	ctx context.Context,
+	req GetProjectBackupDirectoriesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*backupv2.ProjectBackupPath, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response backupv2.ProjectBackupPath
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -502,6 +478,30 @@ func (c *clientImpl) RequestProjectBackupRestorePathDeprecated(
 func (c *clientImpl) RequestProjectBackupRestoreV2Experimental(
 	ctx context.Context,
 	req RequestProjectBackupRestoreV2ExperimentalRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Change the description of a ProjectBackup.
+func (c *clientImpl) UpdateProjectBackupDescription(
+	ctx context.Context,
+	req UpdateProjectBackupDescriptionRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

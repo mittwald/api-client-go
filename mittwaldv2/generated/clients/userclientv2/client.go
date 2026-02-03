@@ -1688,7 +1688,7 @@ func (c *clientImpl) ListAPITokens(
 	return &response, httpRes, nil
 }
 
-// Store a new ApiToken.
+// Create a new ApiToken.
 func (c *clientImpl) CreateAPIToken(
 	ctx context.Context,
 	req CreateAPITokenRequest,
