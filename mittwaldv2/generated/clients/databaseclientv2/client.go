@@ -345,6 +345,8 @@ func (c *clientImpl) CreateRedisDatabase(
 }
 
 // Get a MySQLDatabase.
+//
+// Returns a MySQLDatabase resource and its current status. Note that establishing a connection requires the linked user to have a status of ready; relying solely on the database status is insufficient.
 func (c *clientImpl) GetMysqlDatabase(
 	ctx context.Context,
 	req GetMysqlDatabaseRequest,

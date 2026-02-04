@@ -15,6 +15,10 @@ import (
 //
 // Get a MySQLDatabase.
 //
+// Returns a MySQLDatabase resource and its current status. Note that establishing
+// a connection requires the linked user to have a status of ready; relying solely
+// on the database status is insufficient.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/database/database-get-mysql-database
 type GetMysqlDatabaseRequest struct {

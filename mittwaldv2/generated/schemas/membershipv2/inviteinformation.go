@@ -13,17 +13,12 @@ package membershipv2
 //        type: "string"
 //        format: "uuid"
 //        description: "ID of the user that created the invite."
-//    "userId":
-//        type: "string"
-//        format: "uuid"
-//        description: "ID of the user this invite is for."
 // required:
 //    - "invitedBy"
 
 type InviteInformation struct {
 	InvitationToken *string `json:"invitationToken,omitempty"`
 	InvitedBy       string  `json:"invitedBy"`
-	UserId          *string `json:"userId,omitempty"`
 }
 
 func (o *InviteInformation) Validate() error {

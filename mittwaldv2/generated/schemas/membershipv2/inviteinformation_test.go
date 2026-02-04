@@ -14,7 +14,7 @@ import (
 var _ = Describe("InviteInformation", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"invitationToken\":\"string\",\"invitedBy\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"userId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{\"invitationToken\":\"string\",\"invitedBy\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
 
 			sut := membershipv2.InviteInformation{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
