@@ -14,7 +14,7 @@ import (
 //    "avatarRefId":
 //        type: "string"
 //        format: "uuid"
-//        description: "Reference to the Project's avatar."
+//        description: "Reference to the Customer's avatar."
 //    "customerId":
 //        type: "string"
 //        format: "uuid"
