@@ -25,6 +25,12 @@ import (
 //    "commonName":
 //        type: "string"
 //    "contact": {"$ref": "#/components/schemas/de.mittwald.v1.ssl.Contact"}
+//    "dnsCertSpec":
+//        type: "object"
+//        properties:
+//            "cnameTarget":
+//                type: "string"
+//            "status": {"$ref": "#/components/schemas/de.mittwald.v1.ssl.DNSCertStatus"}
 //    "dnsNames":
 //        type: "array"
 //        items:
@@ -52,28 +58,24 @@ import (
 //    - "certificateType"
 //    - "certificateRequestId"
 //    - "projectId"
-//    - "validFrom"
-//    - "validTo"
-//    - "certificate"
-//    - "isExpired"
-//    - "lastExpirationThresholdHit"
 
 type Certificate struct {
-	CaBundle                   *string   `json:"caBundle,omitempty"`
-	Certificate                string    `json:"certificate"`
-	CertificateOrderId         *string   `json:"certificateOrderId,omitempty"`
-	CertificateRequestId       string    `json:"certificateRequestId"`
-	CertificateType            int64     `json:"certificateType"`
-	CommonName                 *string   `json:"commonName,omitempty"`
-	Contact                    *Contact  `json:"contact,omitempty"`
-	DnsNames                   []string  `json:"dnsNames,omitempty"`
-	Id                         string    `json:"id"`
-	IsExpired                  bool      `json:"isExpired"`
-	Issuer                     *string   `json:"issuer,omitempty"`
-	LastExpirationThresholdHit int64     `json:"lastExpirationThresholdHit"`
-	ProjectId                  string    `json:"projectId"`
-	ValidFrom                  time.Time `json:"validFrom"`
-	ValidTo                    time.Time `json:"validTo"`
+	CaBundle                   *string                 `json:"caBundle,omitempty"`
+	Certificate                *string                 `json:"certificate,omitempty"`
+	CertificateOrderId         *string                 `json:"certificateOrderId,omitempty"`
+	CertificateRequestId       string                  `json:"certificateRequestId"`
+	CertificateType            int64                   `json:"certificateType"`
+	CommonName                 *string                 `json:"commonName,omitempty"`
+	Contact                    *Contact                `json:"contact,omitempty"`
+	DnsCertSpec                *CertificateDNSCertSpec `json:"dnsCertSpec,omitempty"`
+	DnsNames                   []string                `json:"dnsNames,omitempty"`
+	Id                         string                  `json:"id"`
+	IsExpired                  *bool                   `json:"isExpired,omitempty"`
+	Issuer                     *string                 `json:"issuer,omitempty"`
+	LastExpirationThresholdHit *int64                  `json:"lastExpirationThresholdHit,omitempty"`
+	ProjectId                  string                  `json:"projectId"`
+	ValidFrom                  *time.Time              `json:"validFrom,omitempty"`
+	ValidTo                    *time.Time              `json:"validTo,omitempty"`
 }
 
 func (o *Certificate) Validate() error {
@@ -84,6 +86,14 @@ func (o *Certificate) Validate() error {
 		return o.Contact.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property contact: %w", err)
+	}
+	if err := func() error {
+		if o.DnsCertSpec == nil {
+			return nil
+		}
+		return o.DnsCertSpec.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property dnsCertSpec: %w", err)
 	}
 	if err := func() error {
 		if o.DnsNames == nil {

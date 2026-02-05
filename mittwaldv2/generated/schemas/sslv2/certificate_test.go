@@ -14,7 +14,7 @@ import (
 var _ = Describe("Certificate", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"caBundle\":\"string\",\"certificate\":\"string\",\"certificateOrderId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"certificateRequestId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"certificateType\":42,\"commonName\":\"string\",\"contact\":{\"city\":\"string\",\"company\":\"string\",\"country\":\"DE\",\"organizationalUnit\":\"string\",\"state\":\"string\"},\"dnsNames\":[\"string\"],\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"isExpired\":true,\"issuer\":\"string\",\"lastExpirationThresholdHit\":42,\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"validFrom\":\"2006-01-02T15:04:05Z\",\"validTo\":\"2006-01-02T15:04:05Z\"}")
+			exampleJSON := []byte("{\"caBundle\":\"string\",\"certificate\":\"string\",\"certificateOrderId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"certificateRequestId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"certificateType\":42,\"commonName\":\"string\",\"contact\":{\"city\":\"string\",\"company\":\"string\",\"country\":\"DE\",\"organizationalUnit\":\"string\",\"state\":\"string\"},\"dnsCertSpec\":{\"cnameTarget\":\"string\",\"status\":{\"message\":\"string\",\"status\":\"issuing\",\"updatedAt\":\"2006-01-02T15:04:05Z\"}},\"dnsNames\":[\"string\"],\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"isExpired\":true,\"issuer\":\"string\",\"lastExpirationThresholdHit\":42,\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"validFrom\":\"2006-01-02T15:04:05Z\",\"validTo\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := sslv2.Certificate{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

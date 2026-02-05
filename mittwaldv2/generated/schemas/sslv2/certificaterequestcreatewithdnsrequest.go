@@ -6,25 +6,21 @@ package sslv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "certificate":
-//        type: "string"
-//    "privateKey":
+//    "commonName":
 //        type: "string"
 //    "projectId":
 //        type: "string"
 //        format: "uuid"
 // required:
 //    - "projectId"
-//    - "certificate"
-//    - "privateKey"
+//    - "commonName"
 // additionalProperties: false
 
-type CertificateRequestCreateRequest struct {
-	Certificate string `json:"certificate"`
-	PrivateKey  string `json:"privateKey"`
-	ProjectId   string `json:"projectId"`
+type CertificateRequestCreateWithDNSRequest struct {
+	CommonName string `json:"commonName"`
+	ProjectId  string `json:"projectId"`
 }
 
-func (o *CertificateRequestCreateRequest) Validate() error {
+func (o *CertificateRequestCreateWithDNSRequest) Validate() error {
 	return nil
 }
