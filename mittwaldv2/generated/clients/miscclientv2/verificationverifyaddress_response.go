@@ -6,13 +6,17 @@ package miscclientv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "confidence":
+//        type: "string"
 //    "exists":
 //        type: "boolean"
 // required:
 //    - "exists"
+//    - "confidence"
 
 type VerificationVerifyAddressResponse struct {
-	Exists bool `json:"exists"`
+	Confidence string `json:"confidence"`
+	Exists     bool   `json:"exists"`
 }
 
 func (o *VerificationVerifyAddressResponse) Validate() error {

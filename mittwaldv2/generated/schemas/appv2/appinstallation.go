@@ -35,6 +35,9 @@ import (
 //        format: "uuid"
 //    "installationPath":
 //        type: "string"
+//    "lastError":
+//        type: "string"
+//        description: "The last error that occurred during an update. Resets on success."
 //    "linkedDatabases":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.app.LinkedDatabase"}
@@ -88,6 +91,7 @@ type AppInstallation struct {
 	Disabled           bool                      `json:"disabled"`
 	Id                 string                    `json:"id"`
 	InstallationPath   string                    `json:"installationPath"`
+	LastError          *string                   `json:"lastError,omitempty"`
 	LinkedDatabases    []LinkedDatabase          `json:"linkedDatabases"`
 	LockedBy           map[string]LockPurpose    `json:"lockedBy,omitempty"`
 	Phase              Phase                     `json:"phase"`

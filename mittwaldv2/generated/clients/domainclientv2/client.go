@@ -97,11 +97,6 @@ type Client interface {
 		req DeprecatedGetHandleFieldsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedGetHandleFieldsResponse, *http.Response, error)
-	DeprecatedGetScreenshotForDomain(
-		ctx context.Context,
-		req DeprecatedGetScreenshotForDomainRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*DeprecatedGetScreenshotForDomainResponse, *http.Response, error)
 	DeprecatedListDomains(
 		ctx context.Context,
 		req DeprecatedListDomainsRequest,
@@ -207,11 +202,6 @@ type Client interface {
 		req DeleteDomainRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*DeleteDomainResponse, *http.Response, error)
-	GetLatestScreenshot(
-		ctx context.Context,
-		req GetLatestScreenshotRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*GetLatestScreenshotResponse, *http.Response, error)
 	ListTldContactSchemas(
 		ctx context.Context,
 		req ListTldContactSchemasRequest,
@@ -332,6 +322,16 @@ type Client interface {
 		req SetCertificateRequestCertificateRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetLatestScreenshot(
+		ctx context.Context,
+		req GetLatestScreenshotRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*GetLatestScreenshotResponse, *http.Response, error)
+	DeprecatedGetScreenshotForDomain(
+		ctx context.Context,
+		req DeprecatedGetScreenshotForDomainRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*DeprecatedGetScreenshotForDomainResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -775,36 +775,6 @@ func (c *clientImpl) DeprecatedGetHandleFields(
 	}
 
 	var response DeprecatedGetHandleFieldsResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get File Service Reference for a Screenshot of a domain.
-//
-// Deprecated by `GET /v2/domains/{domainId}/latest-screenshot`.
-func (c *clientImpl) DeprecatedGetScreenshotForDomain(
-	ctx context.Context,
-	req DeprecatedGetScreenshotForDomainRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*DeprecatedGetScreenshotForDomainResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response DeprecatedGetScreenshotForDomainResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -1377,34 +1347,6 @@ func (c *clientImpl) DeleteDomain(
 	}
 
 	var response DeleteDomainResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get the latest screenshot's FileReference belonging to a Domain.
-func (c *clientImpl) GetLatestScreenshot(
-	ctx context.Context,
-	req GetLatestScreenshotRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*GetLatestScreenshotResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response GetLatestScreenshotResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -2061,4 +2003,62 @@ func (c *clientImpl) SetCertificateRequestCertificate(
 	}
 
 	return httpRes, nil
+}
+
+// Get the latest screenshot's FileReference belonging to a Domain.
+func (c *clientImpl) GetLatestScreenshot(
+	ctx context.Context,
+	req GetLatestScreenshotRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*GetLatestScreenshotResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GetLatestScreenshotResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get File Service Reference for a Screenshot of a domain.
+//
+// Deprecated by `GET /v2/domains/{domainId}/latest-screenshot`.
+func (c *clientImpl) DeprecatedGetScreenshotForDomain(
+	ctx context.Context,
+	req DeprecatedGetScreenshotForDomainRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*DeprecatedGetScreenshotForDomainResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response DeprecatedGetScreenshotForDomainResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }

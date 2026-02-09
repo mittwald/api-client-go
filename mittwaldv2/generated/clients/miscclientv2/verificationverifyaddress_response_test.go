@@ -14,7 +14,7 @@ import (
 var _ = Describe("VerificationVerifyAddressResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"exists\":true}")
+			exampleJSON := []byte("{\"confidence\":\"string\",\"exists\":true}")
 
 			sut := miscclientv2.VerificationVerifyAddressResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
