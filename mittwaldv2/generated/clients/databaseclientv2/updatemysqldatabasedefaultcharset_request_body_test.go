@@ -14,7 +14,7 @@ import (
 var _ = Describe("UpdateMysqlDatabaseDefaultCharsetRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"characterSettings\":{\"characterSet\":\"string\",\"collation\":\"string\"}}")
+			exampleJSON := []byte("{\"characterSettings\":{\"characterSet\":\"utf8mb4\",\"collation\":\"utf8mb4_general_ci\"}}")
 
 			sut := databaseclientv2.UpdateMysqlDatabaseDefaultCharsetRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

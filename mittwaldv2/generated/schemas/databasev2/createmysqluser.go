@@ -10,11 +10,14 @@ import "fmt"
 // properties:
 //    "accessIpMask":
 //        type: "string"
+//        description: "An IP range (in CIDR notation) for which access should be allowed."
+//        example: "203.0.113.123/32"
 //    "accessLevel":
 //        type: "string"
 //        enum:
 //            - "full"
 //            - "readonly"
+//        description: "The access level that this MySQLUser should have for the database. The `full` access level grants the user read/write privileges on the database.\n"
 //    "databaseId":
 //        type: "string"
 //        format: "uuid"
@@ -22,6 +25,7 @@ import "fmt"
 //        type: "string"
 //    "externalAccess":
 //        type: "boolean"
+//        description: "Describes if users should be able to connection to this database from external\nsources. Defaults to `false` when not set.\n\nTo find out how to connect to your database from external sources, refer to the `externalHostname` field of the `GET /v2/mysql-databases/{id}` endpoint.\n"
 //    "password":
 //        type: "string"
 // required:

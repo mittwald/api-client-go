@@ -10,7 +10,9 @@ import "fmt"
 // enum:
 //    - "full"
 //    - "readonly"
+// description: "The access level that this MySQLUser should have for the database. The `full` access level grants the user read/write privileges on the database.\n"
 
+// The access level that this MySQLUser should have for the database. The `full` access level grants the user read/write privileges on the database.
 type CreateMySqlUserAccessLevel string
 
 const CreateMySqlUserAccessLevelFull CreateMySqlUserAccessLevel = "full"
