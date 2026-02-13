@@ -14,7 +14,7 @@ import (
 var _ = Describe("CharacterSettings", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"characterSet\":\"string\",\"collation\":\"string\"}")
+			exampleJSON := []byte("{\"characterSet\":\"utf8mb4\",\"collation\":\"utf8mb4_general_ci\"}")
 
 			sut := databasev2.CharacterSettings{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

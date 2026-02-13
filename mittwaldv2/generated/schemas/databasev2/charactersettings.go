@@ -8,8 +8,12 @@ package databasev2
 // properties:
 //    "characterSet":
 //        type: "string"
+//        description: "A valid MySQL character set. Refer to https://dev.mysql.com/doc/refman/8.4/en/charset-mysql.html for more information and available character sets.\n"
+//        example: "utf8mb4"
 //    "collation":
 //        type: "string"
+//        description: "A valid MySQL collation. Refer to https://dev.mysql.com/doc/refman/8.4/en/charset-mysql.html for more information and available collations.\n"
+//        example: "utf8mb4_general_ci"
 // required:
 //    - "characterSet"
 //    - "collation"

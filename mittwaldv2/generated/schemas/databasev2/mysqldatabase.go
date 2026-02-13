@@ -17,8 +17,11 @@ import (
 //        format: "date-time"
 //    "description":
 //        type: "string"
+//        description: "A description of the MySQLDatabase. This is for your own reference and has no effect on the database itself.\n"
 //    "externalHostname":
 //        type: "string"
+//        description: "The hostname that you can use to connect to this MySQLDatabase from external sources, like your local machine or services running outside the mittwald cloud platform.\n\nNote that you still need a database user with `externalAccess` enabled to connect via this hostname.\n"
+//        example: "mysql.example-cluster.project.host"
 //    "finalizers":
 //        type: "array"
 //        items:
@@ -27,6 +30,8 @@ import (
 //        uniqueItems: true
 //    "hostname":
 //        type: "string"
+//        description: "The hostname that you can use to connect to this MySQLDatabase from _within_ the hosting environment.\n"
+//        example: "mysql-XXXXXX.pg-YYYYYY.db.project.host"
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -37,6 +42,7 @@ import (
 //    "mainUser": {"$ref": "#/components/schemas/de.mittwald.v1.database.MySqlUser"}
 //    "name":
 //        type: "string"
+//        description: "The name of the MySQLDatabase. This is also the name of the database that you can use when connecting to it. It is automatically generated and cannot be changed.\n"
 //    "projectId":
 //        type: "string"
 //        format: "uuid"
@@ -55,6 +61,8 @@ import (
 //        format: "date-time"
 //    "version":
 //        type: "string"
+//        description: "The MySQL version that this database is running, in `<major>.<minor>` format. Use the `GET /v2/mysql-versions` endpoint to query available versions.\n"
+//        example: "8.4"
 // required:
 //    - "id"
 //    - "createdAt"

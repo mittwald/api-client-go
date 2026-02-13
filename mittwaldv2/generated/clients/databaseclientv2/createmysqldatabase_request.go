@@ -17,6 +17,14 @@ import (
 //
 // Create a MySQLDatabase with a MySQLUser.
 //
+// This operation creates a MySQLDatabase and an associated MySQLUser.
+//
+// Please note that this operation is asynchronous. Even after a successful
+// response, you will still need to wait until the database is successfully
+// provisioned. Currently, the recommended way for that is to poll the `GET
+// /v2/mysql-databases/{id}` endpoint and observe the `mainUser.status` field in
+// the response.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/database/database-create-mysql-database
 type CreateMysqlDatabaseRequest struct {

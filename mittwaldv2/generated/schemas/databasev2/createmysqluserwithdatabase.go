@@ -14,8 +14,10 @@ import "fmt"
 //        type: "string"
 //        enum:
 //            - "full"
+//        description: "The access level that this MySQLUser should have for the database. The `full` access level grants the user read/write privileges on the database.\n\nFor MySQLUsers that are created in the same step as the database itself, `full` is the only available option.\n"
 //    "externalAccess":
 //        type: "boolean"
+//        description: "Describes if users should be able to connection to this database from external\nsources. Defaults to `false` when not set.\n\nTo find out how to connect to your database from external sources, refer to the `externalHostname` field of the `GET /v2/mysql-databases/{id}` endpoint.\n"
 //    "password":
 //        type: "string"
 // required:

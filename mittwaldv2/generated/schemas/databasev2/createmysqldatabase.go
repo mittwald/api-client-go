@@ -11,11 +11,14 @@ import "fmt"
 //    "characterSettings": {"$ref": "#/components/schemas/de.mittwald.v1.database.characterSettings"}
 //    "description":
 //        type: "string"
+//        description: "A description of the MySQLDatabase. This is for your own reference and has no effect on the database itself.\n"
 //    "projectId":
 //        type: "string"
 //        format: "uuid"
 //    "version":
 //        type: "string"
+//        description: "The MySQL version to use for this database, in `<major>.<minor>` format. Use the `GET /v2/mysql-versions` endpoint to query available versions.\n"
+//        example: "8.4"
 // required:
 //    - "projectId"
 //    - "version"

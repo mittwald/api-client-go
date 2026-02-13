@@ -9,7 +9,6 @@ import (
 	"net/http"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/policyv2"
-	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/pollv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/signupv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/userv2"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
@@ -322,16 +321,6 @@ type Client interface {
 		req UpdatePersonalizedSettingsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	GetPollStatus(
-		ctx context.Context,
-		req GetPollStatusRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*pollv2.UserPollSettings, *http.Response, error)
-	PostPollStatus(
-		ctx context.Context,
-		req PostPollStatusRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*pollv2.UserPollSettings, *http.Response, error)
 	GetSession(
 		ctx context.Context,
 		req GetSessionRequest,
@@ -2058,62 +2047,6 @@ func (c *clientImpl) UpdatePersonalizedSettings(
 	}
 
 	return httpRes, nil
-}
-
-// Get poll settings for the specified user.
-func (c *clientImpl) GetPollStatus(
-	ctx context.Context,
-	req GetPollStatusRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*pollv2.UserPollSettings, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response pollv2.UserPollSettings
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Store new or update poll settings.
-func (c *clientImpl) PostPollStatus(
-	ctx context.Context,
-	req PostPollStatusRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*pollv2.UserPollSettings, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response pollv2.UserPollSettings
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
 
 // Get a specific session.
