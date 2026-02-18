@@ -13,11 +13,14 @@ import (
 // properties:
 //    "accessIpMask":
 //        type: "string"
+//        description: "An IP range (in CIDR notation) for which access should be allowed."
+//        example: "203.0.113.123/32"
 //    "accessLevel":
 //        type: "string"
 //        enum:
 //            - "full"
 //            - "readonly"
+//        description: "The access level that this MySQLUser should have for the database. The `full` access level grants\nthe user read/write privileges on the database.\n"
 //    "createdAt":
 //        type: "string"
 //        format: "date-time"
@@ -30,13 +33,17 @@ import (
 //        type: "boolean"
 //    "externalAccess":
 //        type: "boolean"
+//        description: "Describes if users should be able to connection to this database from external sources.\nDefaults to `false` when not set.\n\nTo find out how to connect to your database from external sources, refer to the `externalHostname`\nfield of the `GET /v2/mysql-databases/{id}` endpoint.\n"
 //    "id":
 //        type: "string"
 //        format: "uuid"
 //    "mainUser":
 //        type: "boolean"
+//        description: "Indicates whether this MySQL user is the main user of the database. The main user is created by\ndefault when a new MySQL database is provisioned. It can neither be deleted nor disabled,\nbut its password can be updated.\n"
 //    "name":
 //        type: "string"
+//        description: "The name of the MySQL user. This can be used as the username when connecting to the database.\n"
+//        example: "dbu_XXXXXX"
 //    "passwordUpdatedAt":
 //        type: "string"
 //        format: "date-time"

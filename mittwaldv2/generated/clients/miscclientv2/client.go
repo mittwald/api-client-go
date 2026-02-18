@@ -166,7 +166,7 @@ func (c *clientImpl) VerificationVerifyAddress(
 
 // Check if a company exists.
 //
-// Only companies registered in the german company register are currently supported.
+// Only companies registered in the German company register are currently supported.
 func (c *clientImpl) VerificationVerifyCompany(
 	ctx context.Context,
 	req VerificationVerifyCompanyRequest,
