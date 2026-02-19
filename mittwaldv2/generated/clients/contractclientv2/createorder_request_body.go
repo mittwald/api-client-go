@@ -17,7 +17,6 @@ import "fmt"
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.LeadFyndrOrder"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.MailArchiveOrder"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.AIHostingOrder"}
-//            - {"$ref": "#/components/schemas/de.mittwald.v1.order.LicenseOrder"}
 //    "orderType":
 //        type: "string"
 //        enum:
@@ -28,7 +27,6 @@ import "fmt"
 //            - "leadFyndr"
 //            - "mailArchive"
 //            - "aiHosting"
-//            - "license"
 //        example: "projectHosting"
 // description: CreateOrderRequestBody models the JSON body of a 'order-create-order' request
 

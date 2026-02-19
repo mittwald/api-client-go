@@ -17,7 +17,6 @@ import "fmt"
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.LeadFyndrOrderPreview"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.MailArchiveOrderPreview"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.order.AIHostingOrderPreview"}
-//            - {"$ref": "#/components/schemas/de.mittwald.v1.order.LicenseOrderPreview"}
 //    "orderType":
 //        type: "string"
 //        enum:
@@ -28,7 +27,6 @@ import "fmt"
 //            - "leadFyndr"
 //            - "mailArchive"
 //            - "aiHosting"
-//            - "license"
 // description: PreviewOrderRequestBody models the JSON body of a 'order-preview-order' request
 
 // PreviewOrderRequestBody models the JSON body of a 'order-preview-order' request

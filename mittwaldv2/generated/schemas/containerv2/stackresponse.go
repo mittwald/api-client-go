@@ -24,6 +24,16 @@ import "fmt"
 //    "services":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.container.ServiceResponse"}
+//    "updateSchedule":
+//        type: "object"
+//        properties:
+//            "schedule":
+//                type: "string"
+//            "timezone":
+//                type: "string"
+//        required:
+//            - "schedule"
+//        nullable: true
 //    "volumes":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.container.VolumeResponse"}
@@ -35,13 +45,14 @@ import "fmt"
 //    - "prefix"
 
 type StackResponse struct {
-	Description string            `json:"description"`
-	Disabled    bool              `json:"disabled"`
-	Id          string            `json:"id"`
-	Prefix      string            `json:"prefix"`
-	ProjectId   string            `json:"projectId"`
-	Services    []ServiceResponse `json:"services,omitempty"`
-	Volumes     []VolumeResponse  `json:"volumes,omitempty"`
+	Description    string                       `json:"description"`
+	Disabled       bool                         `json:"disabled"`
+	Id             string                       `json:"id"`
+	Prefix         string                       `json:"prefix"`
+	ProjectId      string                       `json:"projectId"`
+	Services       []ServiceResponse            `json:"services,omitempty"`
+	UpdateSchedule *StackResponseUpdateSchedule `json:"updateSchedule,omitempty"`
+	Volumes        []VolumeResponse             `json:"volumes,omitempty"`
 }
 
 func (o *StackResponse) Validate() error {
@@ -59,6 +70,14 @@ func (o *StackResponse) Validate() error {
 		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property services: %w", err)
+	}
+	if err := func() error {
+		if o.UpdateSchedule == nil {
+			return nil
+		}
+		return o.UpdateSchedule.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property updateSchedule: %w", err)
 	}
 	if err := func() error {
 		if o.Volumes == nil {
