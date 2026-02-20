@@ -27,12 +27,12 @@ import "fmt"
 //    "updateSchedule":
 //        type: "object"
 //        properties:
-//            "schedule":
+//            "cron":
 //                type: "string"
 //            "timezone":
 //                type: "string"
 //        required:
-//            - "schedule"
+//            - "cron"
 //        nullable: true
 //    "volumes":
 //        type: "array"

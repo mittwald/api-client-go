@@ -6,16 +6,16 @@ package containerv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "schedule":
+//    "cron":
 //        type: "string"
 //    "timezone":
 //        type: "string"
 // required:
-//    - "schedule"
+//    - "cron"
 // nullable: true
 
 type StackResponseUpdateSchedule struct {
-	Schedule string  `json:"schedule"`
+	Cron     string  `json:"cron"`
 	Timezone *string `json:"timezone,omitempty"`
 }
 

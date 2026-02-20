@@ -6,18 +6,19 @@ package containerclientv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "schedule":
+//    "cron":
 //        type: "string"
 //        example: "* * * * *"
 //    "timezone":
 //        type: "string"
+//        description: "Valid timezones can be retrieved via GET /v2/time-zones"
 //        example: "Europe/Berlin"
 // required:
-//    - "schedule"
+//    - "cron"
 // nullable: true
 
 type SetStackUpdateScheduleRequestBodyUpdateSchedule struct {
-	Schedule string  `json:"schedule"`
+	Cron     string  `json:"cron"`
 	Timezone *string `json:"timezone,omitempty"`
 }
 

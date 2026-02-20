@@ -10,14 +10,15 @@ import "fmt"
 //    "updateSchedule":
 //        type: "object"
 //        properties:
-//            "schedule":
+//            "cron":
 //                type: "string"
 //                example: "* * * * *"
 //            "timezone":
 //                type: "string"
+//                description: "Valid timezones can be retrieved via GET /v2/time-zones"
 //                example: "Europe/Berlin"
 //        required:
-//            - "schedule"
+//            - "cron"
 //        nullable: true
 // description: SetStackUpdateScheduleRequestBody models the JSON body of a 'container-set-stack-update-schedule' request
 

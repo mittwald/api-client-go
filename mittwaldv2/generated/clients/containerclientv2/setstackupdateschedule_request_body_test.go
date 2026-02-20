@@ -14,7 +14,7 @@ import (
 var _ = Describe("SetStackUpdateScheduleRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"updateSchedule\":{\"schedule\":\"* * * * *\",\"timezone\":\"Europe/Berlin\"}}")
+			exampleJSON := []byte("{\"updateSchedule\":{\"cron\":\"* * * * *\",\"timezone\":\"Europe/Berlin\"}}")
 
 			sut := containerclientv2.SetStackUpdateScheduleRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
