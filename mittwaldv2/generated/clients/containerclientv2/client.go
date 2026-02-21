@@ -114,6 +114,11 @@ type Client interface {
 		req RestartServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	SetStackUpdateSchedule(
+		ctx context.Context,
+		req SetStackUpdateScheduleRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	StartService(
 		ctx context.Context,
 		req StartServiceRequest,
@@ -134,11 +139,6 @@ type Client interface {
 		req ValidateRegistryCredentialsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*ValidateRegistryCredentialsResponse, *http.Response, error)
-	SetStackUpdateSchedule(
-		ctx context.Context,
-		req SetStackUpdateScheduleRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -680,6 +680,30 @@ func (c *clientImpl) RestartService(
 	return httpRes, nil
 }
 
+// Set an update schedule for a Stack.
+func (c *clientImpl) SetStackUpdateSchedule(
+	ctx context.Context,
+	req SetStackUpdateScheduleRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Start a stopped Service.
 func (c *clientImpl) StartService(
 	ctx context.Context,
@@ -782,28 +806,4 @@ func (c *clientImpl) ValidateRegistryCredentials(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Set an update schedule for a Stack.
-func (c *clientImpl) SetStackUpdateSchedule(
-	ctx context.Context,
-	req SetStackUpdateScheduleRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
