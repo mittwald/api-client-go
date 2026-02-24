@@ -12,6 +12,9 @@ import (
 
 // This data type was generated from the following JSON schema:
 // properties:
+//    "avoidEmailConfirmation":
+//        type: "boolean"
+//        description: "Whether to avoid the email confirmation if possible. If set to true, a transfer lock of 60 days might be applied to the domain."
 //    "contact":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.domain.HandleField"}
@@ -22,7 +25,8 @@ import (
 
 // UpdateDomainContactRequestBody models the JSON body of a 'domain-update-domain-contact' request
 type UpdateDomainContactRequestBody struct {
-	Contact []domainv2.HandleField `json:"contact"`
+	AvoidEmailConfirmation *bool                  `json:"avoidEmailConfirmation,omitempty"`
+	Contact                []domainv2.HandleField `json:"contact"`
 }
 
 func (o *UpdateDomainContactRequestBody) Validate() error {

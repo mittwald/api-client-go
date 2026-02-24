@@ -14,7 +14,7 @@ import (
 var _ = Describe("UpdateDomainContactRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"contact\":[{\"name\":\"string\",\"value\":\"string\"}]}")
+			exampleJSON := []byte("{\"avoidEmailConfirmation\":true,\"contact\":[{\"name\":\"string\",\"value\":\"string\"}]}")
 
 			sut := domainclientv2.UpdateDomainContactRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
