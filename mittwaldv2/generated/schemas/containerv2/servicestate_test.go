@@ -14,7 +14,7 @@ import (
 var _ = Describe("ServiceState", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"command\":[\"string\"],\"entrypoint\":[\"string\"],\"envs\":{\"string\":\"string\"},\"image\":\"string\",\"imageDigest\":\"string\",\"ports\":[\"string\"],\"volumes\":[\"string\"]}")
+			exampleJSON := []byte("{\"command\":[\"string\"],\"entrypoint\":[\"string\"],\"envs\":{\"MYSQL_DATABASE\":\"my_db\",\"MYSQL_PASSWORD\":\"my_password\",\"MYSQL_ROOT_PASSWORD\":\"my_root_password\",\"MYSQL_USER\":\"my_user\"},\"image\":\"mysql:8.0\",\"imageDigest\":\"string\",\"ports\":[\"string\"],\"volumes\":[\"string\"]}")
 
 			sut := containerv2.ServiceState{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

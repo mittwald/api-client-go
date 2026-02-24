@@ -28,7 +28,7 @@ type Client interface {
 		ctx context.Context,
 		req VerificationVerifyAddressRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*verificationv2.VerifyAddressResponse, *http.Response, error)
+	) (*VerificationVerifyAddressResponse, *http.Response, error)
 	VerificationVerifyCompany(
 		ctx context.Context,
 		req VerificationVerifyCompanyRequest,
@@ -108,7 +108,7 @@ func (c *clientImpl) VerificationVerifyAddress(
 	ctx context.Context,
 	req VerificationVerifyAddressRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*verificationv2.VerifyAddressResponse, *http.Response, error) {
+) (*VerificationVerifyAddressResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -124,7 +124,7 @@ func (c *clientImpl) VerificationVerifyAddress(
 		return nil, httpRes, err
 	}
 
-	var response verificationv2.VerifyAddressResponse
+	var response VerificationVerifyAddressResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -133,7 +133,7 @@ func (c *clientImpl) VerificationVerifyAddress(
 
 // Check if a company exists.
 //
-// Only companies registered in the German company register are currently supported.
+// Only companies registered in the german company register are currently supported.
 func (c *clientImpl) VerificationVerifyCompany(
 	ctx context.Context,
 	req VerificationVerifyCompanyRequest,

@@ -14,8 +14,11 @@ import (
 // PullImageForServiceRequest models a request for the
 // 'container-pull-image-for-service' operation. See [1] for more information.
 //
-// Pulls the latest version of the Service's image and optionally recreates the
-// Service.
+// # Pull image and recreate
+//
+// Pulls the latest image for this container and recreates it.
+//
+// You can skip re-creation by setting the `skipRecreate` query parameter.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/container/container-pull-image-for-service

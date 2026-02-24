@@ -14,7 +14,7 @@ import (
 var _ = Describe("DeclareStackRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"services\":{\"string\":{\"command\":null,\"deploy\":null,\"description\":null,\"entrypoint\":null,\"environment\":null,\"envs\":null,\"image\":\"mysql\",\"ports\":null,\"volumes\":null}},\"volumes\":{\"string\":{\"name\":\"mysql-volume\"}}}")
+			exampleJSON := []byte("{\"services\":{\"string\":{\"command\":null,\"deploy\":null,\"description\":null,\"entrypoint\":null,\"environment\":null,\"envs\":null,\"image\":\"mysql:8.0\",\"ports\":null,\"volumes\":null}},\"volumes\":{\"string\":{\"name\":\"mysql-volume\"}}}")
 
 			sut := containerclientv2.DeclareStackRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -7,9 +7,11 @@ package containerv2
 // properties:
 //    "cpus":
 //        type: "string"
+//        description: "CPU limit for the container. The value can be specified as a decimal number, where `1` corresponds to\none full CPU core. For example, `0.5` means that the container is limited to using half of a CPU core.\n"
 //        example: "0.5"
 //    "memory":
 //        type: "string"
+//        description: "Memory limit for the container. The value can be specified in bytes or using a suffix to indicate\nthe unit.\n\nThe format matches the one [used by Docker Compose](https://docs.docker.com/reference/compose-file/extension/#specifying-byte-values):\n\n> Values express a byte value as a string in `{amount}{byte unit}` format: The supported units are\n`b` (bytes), `k` or `kb` (kilo bytes), `m` or `mb` (mega bytes) and `g` or `gb` (giga bytes).\n"
 //        example: "1gb"
 
 type ResourceSpec struct {

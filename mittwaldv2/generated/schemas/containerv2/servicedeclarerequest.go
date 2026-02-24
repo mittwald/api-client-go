@@ -12,7 +12,7 @@ import "fmt"
 //        type: "array"
 //        items:
 //            type: "string"
-//        description: "Defaults to image config on empty"
+//        description: "The container command (equivalent to the [Docker cmd](https://docs.docker.com/reference/dockerfile/#cmd)). When omitted, this defaults to the command defined in the image.\n"
 //        example: ["mysqld"]
 //    "deploy": {"$ref": "#/components/schemas/de.mittwald.v1.container.Deploy"}
 //    "description":
@@ -22,12 +22,13 @@ import "fmt"
 //        type: "array"
 //        items:
 //            type: "string"
-//        description: "Defaults to image config on empty"
+//        description: "The container entrypoint (equivalent to the [Docker entrypoint](https://docs.docker.com/reference/dockerfile/#entrypoint)). When omitted, this defaults to the entrypoint defined in the image.\n"
 //        example: ["docker-entrypoint.sh"]
 //    "environment":
 //        type: "object"
 //        additionalProperties:
 //            type: "string"
+//        description: "Key-value map of environment variables that should be passed into the container.\n"
 //        example: {"MYSQL_DATABASE": "my_db", "MYSQL_PASSWORD": "my_password", "MYSQL_ROOT_PASSWORD": "my_root_password", "MYSQL_USER": "my_user"}
 //    "envs":
 //        type: "object"
@@ -38,17 +39,20 @@ import "fmt"
 //        deprecated: true
 //    "image":
 //        type: "string"
-//        example: "mysql"
+//        description: "The image to run, in the usual format also used by `docker run` and `docker compose`. When the image is pulled from a private registry, make sure to create it first, using the `container-create-registry` endpoint. The appropriate registry is matched by hostname.\n"
+//        example: "mysql:8.0"
 //    "ports":
 //        type: "array"
 //        items:
 //            type: "string"
+//        description: "Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource.\n"
 //        example: ["3306/tcp"]
 //    "volumes":
 //        type: "array"
 //        items:
 //            type: "string"
-//        example: ["data:/var/lib/mysql:ro"]
+//        description: "Volume mounts for this container. These items always follow the format `<volume>:<mountpoint>`. The `<volume>` may either be a named volume, or a file path in the (always present) project file system (which is shared among containers and managed apps within a project).\n"
+//        example: ["data:/var/lib/mysql:ro", "/home/p-XXXXX/html:/var/www"]
 // required:
 //    - "image"
 
