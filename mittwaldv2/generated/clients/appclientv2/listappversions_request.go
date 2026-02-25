@@ -18,8 +18,9 @@ import (
 //
 // [1]: https://developer.mittwald.de/docs/v2/reference/app/app-list-appversions
 type ListAppversionsRequest struct {
-	AppID       string
-	Recommended *bool
+	AppID        string
+	VersionRange *string
+	Recommended  *bool
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -57,6 +58,9 @@ func (r *ListAppversionsRequest) url() string {
 
 func (r *ListAppversionsRequest) query() url.Values {
 	q := make(url.Values)
+	if r.VersionRange != nil {
+		q.Set("versionRange", *r.VersionRange)
+	}
 	if r.Recommended != nil {
 		q.Set("recommended", strconv.FormatBool(*r.Recommended))
 	}
