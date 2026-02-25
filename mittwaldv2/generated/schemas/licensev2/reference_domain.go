@@ -10,12 +10,12 @@ import "fmt"
 // enum:
 //    - "project"
 
-type AggregateReferenceAggregate string
+type ReferenceDomain string
 
-const AggregateReferenceAggregateProject AggregateReferenceAggregate = "project"
+const ReferenceDomainProject ReferenceDomain = "project"
 
-func (e AggregateReferenceAggregate) Validate() error {
-	if e == AggregateReferenceAggregateProject {
+func (e ReferenceDomain) Validate() error {
+	if e == ReferenceDomainProject {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

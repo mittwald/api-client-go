@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("AggregateReference", func() {
+var _ = Describe("Reference", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
 			exampleJSON := []byte("{\"aggregate\":\"project\",\"domain\":\"project\",\"id\":\"string\"}")
 
-			sut := licensev2.AggregateReference{}
+			sut := licensev2.Reference{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

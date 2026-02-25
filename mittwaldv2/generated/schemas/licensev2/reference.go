@@ -23,13 +23,13 @@ import "fmt"
 //    - "domain"
 //    - "aggregate"
 
-type AggregateReference struct {
-	Aggregate AggregateReferenceAggregate `json:"aggregate"`
-	Domain    AggregateReferenceDomain    `json:"domain"`
-	Id        string                      `json:"id"`
+type Reference struct {
+	Aggregate ReferenceAggregate `json:"aggregate"`
+	Domain    ReferenceDomain    `json:"domain"`
+	Id        string             `json:"id"`
 }
 
-func (o *AggregateReference) Validate() error {
+func (o *Reference) Validate() error {
 	if err := o.Aggregate.Validate(); err != nil {
 		return fmt.Errorf("invalid property aggregate: %w", err)
 	}

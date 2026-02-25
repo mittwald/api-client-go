@@ -55,7 +55,7 @@ func (r *RotateLicenseKeyRequest) body() (io.Reader, string, error) {
 
 func (r *RotateLicenseKeyRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/licenses/%s/actions/rotate-license-key", url.PathEscape(r.LicenseID)),
+		Path: fmt.Sprintf("/v2/licenses/%s/actions/rotate-key", url.PathEscape(r.LicenseID)),
 	}
 	return u.String()
 }

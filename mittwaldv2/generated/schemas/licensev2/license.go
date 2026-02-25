@@ -11,10 +11,8 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "aggregateReference": {"$ref": "#/components/schemas/de.mittwald.v1.license.AggregateReference"}
 //    "description":
 //        type: "string"
-//        example: ""
 //    "expiryDate":
 //        type: "string"
 //        format: "date-time"
@@ -27,30 +25,28 @@ import (
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.license.ExternalKey"}
 //    "kind": {"$ref": "#/components/schemas/de.mittwald.v1.license.Kind"}
 //    "meta": {"$ref": "#/components/schemas/de.mittwald.v1.license.Meta"}
+//    "reference": {"$ref": "#/components/schemas/de.mittwald.v1.license.Reference"}
 //    "volume":
 //        type: "integer"
 // required:
 //    - "id"
 //    - "description"
 //    - "kind"
-//    - "aggregateReference"
+//    - "reference"
 //    - "meta"
 
 type License struct {
-	AggregateReference AggregateReference   `json:"aggregateReference"`
-	Description        string               `json:"description"`
-	ExpiryDate         *time.Time           `json:"expiryDate,omitempty"`
-	Id                 string               `json:"id"`
-	KeyReference       *LicenseKeyReference `json:"keyReference,omitempty"`
-	Kind               Kind                 `json:"kind"`
-	Meta               Meta                 `json:"meta"`
-	Volume             *int64               `json:"volume,omitempty"`
+	Description  string               `json:"description"`
+	ExpiryDate   *time.Time           `json:"expiryDate,omitempty"`
+	Id           string               `json:"id"`
+	KeyReference *LicenseKeyReference `json:"keyReference,omitempty"`
+	Kind         Kind                 `json:"kind"`
+	Meta         Meta                 `json:"meta"`
+	Reference    Reference            `json:"reference"`
+	Volume       *int64               `json:"volume,omitempty"`
 }
 
 func (o *License) Validate() error {
-	if err := o.AggregateReference.Validate(); err != nil {
-		return fmt.Errorf("invalid property aggregateReference: %w", err)
-	}
 	if err := func() error {
 		if o.KeyReference == nil {
 			return nil
@@ -64,6 +60,9 @@ func (o *License) Validate() error {
 	}
 	if err := o.Meta.Validate(); err != nil {
 		return fmt.Errorf("invalid property meta: %w", err)
+	}
+	if err := o.Reference.Validate(); err != nil {
+		return fmt.Errorf("invalid property reference: %w", err)
 	}
 	return nil
 }

@@ -14,7 +14,7 @@ import (
 var _ = Describe("License", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"aggregateReference\":{\"aggregate\":\"project\",\"domain\":\"project\",\"id\":\"string\"},\"description\":\"\",\"expiryDate\":\"2006-01-02T15:04:05Z\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"keyReference\":{\"key\":\"Afdkj49dsfj3\"},\"kind\":\"typo3-elts\",\"meta\":{\"appVersion\":{\"description\":\"string\"}},\"volume\":42}")
+			exampleJSON := []byte("{\"description\":\"string\",\"expiryDate\":\"2006-01-02T15:04:05Z\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"keyReference\":{\"key\":\"Afdkj49dsfj3\"},\"kind\":\"typo3-elts\",\"meta\":{\"appVersion\":{\"description\":\"string\"}},\"reference\":{\"aggregate\":\"project\",\"domain\":\"project\",\"id\":\"string\"},\"volume\":42}")
 
 			sut := licensev2.License{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
