@@ -39,7 +39,7 @@ import "fmt"
 //        deprecated: true
 //    "image":
 //        type: "string"
-//        description: "The image to run, in the usual format also used by `docker run` and `docker compose`. When the image is pulled from a private registry, make sure to create it first, using the `container-create-registry` endpoint. The appropriate registry is matched by hostname.\n"
+//        description: "The image to run, in the usual format also used by `docker run` and `docker compose`. When\nthe image is pulled from a private registry, make sure to create the registry first\nusing the `container-create-registry` endpoint (you can push the image later, although\nthe container will remain in a pending state until the image is actually available).\n\nThe appropriate registry is matched by hostname.\n"
 //        example: "mysql:8.0"
 //    "ports":
 //        type: "array"
