@@ -21,6 +21,7 @@ import (
 //        format: "uuid"
 //    "message":
 //        type: "string"
+//        description: "Message explaining the current state of the container. This may contain information about the current state of the container, or errors that occurred during deployment.\n"
 //        example: "Container ready"
 //    "pendingState": {"$ref": "#/components/schemas/de.mittwald.v1.container.ServiceState"}
 //    "projectId":
@@ -33,6 +34,7 @@ import (
 //        example: "mysql-db"
 //    "shortId":
 //        type: "string"
+//        description: "A short ID of the container. This is a unique identifier for the container within the project, and can be used to reference it in other API calls, or for SSH connections.\n"
 //        example: "c-12e4u6"
 //    "stackId":
 //        type: "string"

@@ -9,7 +9,7 @@ package dnsv2
 //    "seconds":
 //        type: "integer"
 //        maximum: 86400
-//        minimum: 300
+//        minimum: 60
 // required:
 //    - "seconds"
 
