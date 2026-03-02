@@ -12,14 +12,14 @@ import "errors"
 //        type: "array"
 //        items:
 //            type: "string"
-//            format: "idn-email"
+//            pattern: "^([a-zA-Z0-9.!#$%&'*\\/=?^_{|}~-]+@[a-zA-Z0-9-*]+(?:\\.([a-zA-Z0-9-]+|\\*))+)$"
 //    "projectId":
 //        type: "string"
 //    "whitelist":
 //        type: "array"
 //        items:
 //            type: "string"
-//            format: "idn-email"
+//            pattern: "^([a-zA-Z0-9.!#$%&'*\\/=?^_{|}~-]+@[a-zA-Z0-9-*]+(?:\\.([a-zA-Z0-9-]+|\\*))+)$"
 // required:
 //    - "projectId"
 //    - "blacklist"

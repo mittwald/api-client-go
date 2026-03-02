@@ -12,7 +12,7 @@ import "errors"
 //        type: "array"
 //        items:
 //            type: "string"
-//            format: "idn-email"
+//            pattern: "^([a-zA-Z0-9.!#$%&'*\\/=?^_{|}~-]+@[a-zA-Z0-9-*]+(?:\\.([a-zA-Z0-9-]+|\\*))+)$"
 // required:
 //    - "blacklist"
 // description: DeprecatedProjectsettingUpdateBlacklistRequestBody models the JSON body of a 'deprecated-mail-projectsetting-update-blacklist' request

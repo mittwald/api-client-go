@@ -18,7 +18,7 @@ import (
 //            type: "array"
 //            items:
 //                type: "string"
-//                format: "idn-email"
+//                pattern: "^([a-zA-Z0-9.!#$%&'*\\/=?^_{|}~-]+@[a-zA-Z0-9-*]+(?:\\.([a-zA-Z0-9-]+|\\*))+)$"
 //      required:
 //        - "blacklist"
 //    - type: "object"
@@ -27,7 +27,7 @@ import (
 //            type: "array"
 //            items:
 //                type: "string"
-//                format: "idn-email"
+//                pattern: "^([a-zA-Z0-9.!#$%&'*\\/=?^_{|}~-]+@[a-zA-Z0-9-*]+(?:\\.([a-zA-Z0-9-]+|\\*))+)$"
 //      required:
 //        - "whitelist"
 // description: UpdateProjectMailSettingRequestBody models the JSON body of a 'mail-update-project-mail-setting' request

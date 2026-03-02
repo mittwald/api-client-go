@@ -24,6 +24,7 @@ type ListOrdersRequest struct {
 	IncludesStatus []orderv2.OrderStatus
 	ExcludesStatus []orderv2.OrderStatus
 	TemplateNames  []string
+	Types          []orderv2.OrderType
 	Limit          *int64
 	Skip           *int64
 	Page           *int64
@@ -72,6 +73,9 @@ func (r *ListOrdersRequest) query() url.Values {
 	}
 	for _, val := range r.TemplateNames {
 		q.Add("templateNames", val)
+	}
+	for _, val := range r.Types {
+		q.Add("types", string(val))
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
