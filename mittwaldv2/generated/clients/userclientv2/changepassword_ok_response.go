@@ -21,10 +21,11 @@ import "time"
 // required:
 //    - "token"
 //    - "expires"
+//    - "refreshToken"
 
 type ChangePasswordOKResponse struct {
 	Expires      time.Time `json:"expires"`
-	RefreshToken *string   `json:"refreshToken,omitempty"`
+	RefreshToken string    `json:"refreshToken"`
 	Token        string    `json:"token"`
 }
 
