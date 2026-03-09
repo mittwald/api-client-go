@@ -335,6 +335,11 @@ type Client interface {
 		req CustomerUpdatePaymentMethodRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CustomerUpdatePaymentMethodResponse, *http.Response, error)
+	ListAllExtensionInstanceWebhookExecutions(
+		ctx context.Context,
+		req ListAllExtensionInstanceWebhookExecutionsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]marketplacev2.ExtensionInstanceWebhookExecution, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -2112,6 +2117,34 @@ func (c *clientImpl) CustomerUpdatePaymentMethod(
 	}
 
 	var response CustomerUpdatePaymentMethodResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List all Webhook Executions of an ExtensionInstance.
+func (c *clientImpl) ListAllExtensionInstanceWebhookExecutions(
+	ctx context.Context,
+	req ListAllExtensionInstanceWebhookExecutionsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]marketplacev2.ExtensionInstanceWebhookExecution, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []marketplacev2.ExtensionInstanceWebhookExecution
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

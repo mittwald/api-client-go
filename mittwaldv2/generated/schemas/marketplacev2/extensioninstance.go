@@ -62,6 +62,9 @@ import (
 //    "variantKey":
 //        type: "string"
 //        example: "default"
+//    "webhookExecutionHalted":
+//        type: "boolean"
+//        default: false
 // required:
 //    - "id"
 //    - "extensionId"
@@ -74,23 +77,25 @@ import (
 //    - "extensionName"
 //    - "contributorName"
 //    - "chargeability"
+//    - "webhookExecutionHalted"
 
 type ExtensionInstance struct {
-	AggregateReference  ExtensionInstanceAggregateReference `json:"aggregateReference"`
-	Chargeability       ExtensionInstanceChargeability      `json:"chargeability"`
-	ConsentedScopes     []string                            `json:"consentedScopes"`
-	ContributorId       string                              `json:"contributorId"`
-	ContributorName     string                              `json:"contributorName"`
-	CreatedAt           *time.Time                          `json:"createdAt,omitempty"`
-	Disabled            bool                                `json:"disabled"`
-	ExtensionId         string                              `json:"extensionId"`
-	ExtensionName       string                              `json:"extensionName"`
-	ExtensionSubTitle   *SubTitle                           `json:"extensionSubTitle,omitempty"`
-	FrontendFragments   map[string]any                      `json:"frontendFragments,omitempty"`
-	Id                  string                              `json:"id"`
-	PendingInstallation bool                                `json:"pendingInstallation"`
-	PendingRemoval      bool                                `json:"pendingRemoval"`
-	VariantKey          *string                             `json:"variantKey,omitempty"`
+	AggregateReference     ExtensionInstanceAggregateReference `json:"aggregateReference"`
+	Chargeability          ExtensionInstanceChargeability      `json:"chargeability"`
+	ConsentedScopes        []string                            `json:"consentedScopes"`
+	ContributorId          string                              `json:"contributorId"`
+	ContributorName        string                              `json:"contributorName"`
+	CreatedAt              *time.Time                          `json:"createdAt,omitempty"`
+	Disabled               bool                                `json:"disabled"`
+	ExtensionId            string                              `json:"extensionId"`
+	ExtensionName          string                              `json:"extensionName"`
+	ExtensionSubTitle      *SubTitle                           `json:"extensionSubTitle,omitempty"`
+	FrontendFragments      map[string]any                      `json:"frontendFragments,omitempty"`
+	Id                     string                              `json:"id"`
+	PendingInstallation    bool                                `json:"pendingInstallation"`
+	PendingRemoval         bool                                `json:"pendingRemoval"`
+	VariantKey             *string                             `json:"variantKey,omitempty"`
+	WebhookExecutionHalted bool                                `json:"webhookExecutionHalted"`
 }
 
 func (o *ExtensionInstance) Validate() error {
