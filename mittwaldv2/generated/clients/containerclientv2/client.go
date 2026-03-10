@@ -79,6 +79,11 @@ type Client interface {
 		req GetServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.ServiceResponse, *http.Response, error)
+	ListSelfStacks(
+		ctx context.Context,
+		req ListSelfStacksRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]containerv2.StackResponse, *http.Response, error)
 	ListServices(
 		ctx context.Context,
 		req ListServicesRequest,
@@ -139,11 +144,6 @@ type Client interface {
 		req ValidateRegistryCredentialsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*ValidateRegistryCredentialsResponse, *http.Response, error)
-	ListAccessibleStacks(
-		ctx context.Context,
-		req ListAccessibleStacksRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]containerv2.StackResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -501,6 +501,34 @@ func (c *clientImpl) GetService(
 	return &response, httpRes, nil
 }
 
+// List Stacks belonging to the executing user.
+func (c *clientImpl) ListSelfStacks(
+	ctx context.Context,
+	req ListSelfStacksRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]containerv2.StackResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []containerv2.StackResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // List Services belonging to a Project.
 func (c *clientImpl) ListServices(
 	ctx context.Context,
@@ -811,34 +839,6 @@ func (c *clientImpl) ValidateRegistryCredentials(
 	}
 
 	var response ValidateRegistryCredentialsResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List all Stacks accessible by the authenticated User.
-func (c *clientImpl) ListAccessibleStacks(
-	ctx context.Context,
-	req ListAccessibleStacksRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]containerv2.StackResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []containerv2.StackResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

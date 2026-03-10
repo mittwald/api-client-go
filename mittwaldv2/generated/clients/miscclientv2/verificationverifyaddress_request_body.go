@@ -11,7 +11,7 @@ package miscclientv2
 //        example: "Bremen"
 //    "country":
 //        type: "string"
-//        description: "Accepts the whole english or german name as well as the ISO 3166-2 country codes."
+//        description: "The country format should be ISO 3166-2 Alpha 2 Country Code."
 //        example: "DE"
 //    "street":
 //        type: "string"

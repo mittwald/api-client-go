@@ -28,7 +28,8 @@ import (
 //        type: "array"
 //        items:
 //            type: "string"
-//        description: "An array of LLM model identifiers enabled for this key."
+//        description: "This Field is deprecated. You can find the allowed models in the /ai-hosting route."
+//        deprecated: true
 //    "name":
 //        type: "string"
 //    "projectId":

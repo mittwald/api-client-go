@@ -14,7 +14,7 @@ import (
 var _ = Describe("ExtensionInstanceWebhookExecution", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"attempts\":42,\"contributorId\":\"string\",\"extensionId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"extensionInstanceId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"failed\":true,\"halted\":true,\"kind\":\"extension-added-to-context\",\"nextScheduledExecution\":\"2006-01-02T15:04:05Z\",\"running\":true,\"successful\":true,\"webhookTraceId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{\"attempts\":42,\"contributorId\":\"string\",\"extensionId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"extensionInstanceId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"kind\":\"extension-added-to-context\",\"nextScheduledExecution\":\"2006-01-02T15:04:05Z\",\"state\":\"running\",\"webhookTraceId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
 
 			sut := marketplacev2.ExtensionInstanceWebhookExecution{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

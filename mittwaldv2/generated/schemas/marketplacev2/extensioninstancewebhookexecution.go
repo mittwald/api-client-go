@@ -21,22 +21,17 @@ import (
 //    "extensionInstanceId":
 //        type: "string"
 //        format: "uuid"
-//    "failed":
-//        type: "boolean"
-//        default: false
-//    "halted":
-//        type: "boolean"
-//        default: false
 //    "kind": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.WebhookKind", "type": "string"}
 //    "nextScheduledExecution":
 //        type: "string"
 //        format: "date-time"
-//    "running":
-//        type: "boolean"
-//        default: false
-//    "successful":
-//        type: "boolean"
-//        default: true
+//    "state":
+//        type: "string"
+//        enum:
+//            - "running"
+//            - "halted"
+//            - "failed"
+//            - "successful"
 //    "webhookTraceId":
 //        type: "string"
 //        format: "uuid"
@@ -46,29 +41,26 @@ import (
 //    - "extensionId"
 //    - "contributorId"
 //    - "kind"
-//    - "successful"
-//    - "running"
-//    - "halted"
-//    - "failed"
+//    - "state"
 //    - "attempts"
 
 type ExtensionInstanceWebhookExecution struct {
-	Attempts               int64       `json:"attempts"`
-	ContributorId          string      `json:"contributorId"`
-	ExtensionId            string      `json:"extensionId"`
-	ExtensionInstanceId    string      `json:"extensionInstanceId"`
-	Failed                 bool        `json:"failed"`
-	Halted                 bool        `json:"halted"`
-	Kind                   WebhookKind `json:"kind"`
-	NextScheduledExecution *time.Time  `json:"nextScheduledExecution,omitempty"`
-	Running                bool        `json:"running"`
-	Successful             bool        `json:"successful"`
-	WebhookTraceId         string      `json:"webhookTraceId"`
+	Attempts               int64                                  `json:"attempts"`
+	ContributorId          string                                 `json:"contributorId"`
+	ExtensionId            string                                 `json:"extensionId"`
+	ExtensionInstanceId    string                                 `json:"extensionInstanceId"`
+	Kind                   WebhookKind                            `json:"kind"`
+	NextScheduledExecution *time.Time                             `json:"nextScheduledExecution,omitempty"`
+	State                  ExtensionInstanceWebhookExecutionState `json:"state"`
+	WebhookTraceId         string                                 `json:"webhookTraceId"`
 }
 
 func (o *ExtensionInstanceWebhookExecution) Validate() error {
 	if err := o.Kind.Validate(); err != nil {
 		return fmt.Errorf("invalid property kind: %w", err)
+	}
+	if err := o.State.Validate(); err != nil {
+		return fmt.Errorf("invalid property state: %w", err)
 	}
 	return nil
 }
