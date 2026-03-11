@@ -94,6 +94,11 @@ type Client interface {
 		req UpdateProjectBackupDescriptionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	ReplaceProjectBackupExpirationTime(
+		ctx context.Context,
+		req ReplaceProjectBackupExpirationTimeRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -502,6 +507,30 @@ func (c *clientImpl) RequestProjectBackupRestoreV2Experimental(
 func (c *clientImpl) UpdateProjectBackupDescription(
 	ctx context.Context,
 	req UpdateProjectBackupDescriptionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a Backup's expiration time.
+func (c *clientImpl) ReplaceProjectBackupExpirationTime(
+	ctx context.Context,
+	req ReplaceProjectBackupExpirationTimeRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
