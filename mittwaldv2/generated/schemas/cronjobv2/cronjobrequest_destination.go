@@ -14,6 +14,7 @@ import (
 // oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.CronjobUrl"}
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.CronjobCommand"}
+// description: "DEPRECATED: Use 'target.AppInstallationTarget' instead. This field will be removed in a future version."
 
 type CronjobRequestDestination struct {
 	AlternativeCronjobUrl     *CronjobUrl

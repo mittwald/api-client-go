@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("UpdateProjectBackupExpirationTimeRequestBody", func() {
+var _ = Describe("ReplaceProjectBackupExpirationTimeRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
 			exampleJSON := []byte("{\"expirationTime\":\"2006-01-02T15:04:05Z\"}")
 
-			sut := backupclientv2.UpdateProjectBackupExpirationTimeRequestBody{}
+			sut := backupclientv2.ReplaceProjectBackupExpirationTimeRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

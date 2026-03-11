@@ -12,13 +12,13 @@ import "time"
 //        type: "string"
 //        format: "date-time"
 //        description: "Time when to expire the Backup."
-// description: UpdateProjectBackupExpirationTimeRequestBody models the JSON body of a 'backup-update-project-backup-expiration-time' request
+// description: ReplaceProjectBackupExpirationTimeRequestBody models the JSON body of a 'backup-replace-project-backup-expiration-time' request
 
-// UpdateProjectBackupExpirationTimeRequestBody models the JSON body of a 'backup-update-project-backup-expiration-time' request
-type UpdateProjectBackupExpirationTimeRequestBody struct {
+// ReplaceProjectBackupExpirationTimeRequestBody models the JSON body of a 'backup-replace-project-backup-expiration-time' request
+type ReplaceProjectBackupExpirationTimeRequestBody struct {
 	ExpirationTime *time.Time `json:"expirationTime,omitempty"`
 }
 
-func (o *UpdateProjectBackupExpirationTimeRequestBody) Validate() error {
+func (o *ReplaceProjectBackupExpirationTimeRequestBody) Validate() error {
 	return nil
 }
