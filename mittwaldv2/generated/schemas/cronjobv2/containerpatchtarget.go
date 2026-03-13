@@ -8,16 +8,16 @@ package cronjobv2
 // properties:
 //    "command":
 //        type: "string"
-//    "serviceName":
+//    "containerIdentifier":
 //        type: "string"
 //    "stackId":
 //        type: "string"
 //        format: "uuid"
 
 type ContainerPatchTarget struct {
-	Command     *string `json:"command,omitempty"`
-	ServiceName *string `json:"serviceName,omitempty"`
-	StackId     *string `json:"stackId,omitempty"`
+	Command             *string `json:"command,omitempty"`
+	ContainerIdentifier *string `json:"containerIdentifier,omitempty"`
+	StackId             *string `json:"stackId,omitempty"`
 }
 
 func (o *ContainerPatchTarget) Validate() error {

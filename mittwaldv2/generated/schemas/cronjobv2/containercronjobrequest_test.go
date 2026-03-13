@@ -14,7 +14,7 @@ import (
 var _ = Describe("ContainerCronjobRequest", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"active\":true,\"concurrencyPolicy\":\"allow\",\"description\":\"i am a cronjob\",\"email\":\"string\",\"failedExecutionAlertThreshold\":42,\"interval\":\"*/5 * * * *\",\"target\":{\"command\":\"string\",\"serviceName\":\"string\",\"stackId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"},\"timeZone\":\"Europe/Berlin\",\"timeout\":42}")
+			exampleJSON := []byte("{\"active\":true,\"concurrencyPolicy\":\"allow\",\"description\":\"i am a cronjob\",\"email\":\"string\",\"failedExecutionAlertThreshold\":42,\"interval\":\"*/5 * * * *\",\"target\":{\"command\":\"string\",\"containerIdentifier\":\"string\",\"stackId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"},\"timeZone\":\"Europe/Berlin\",\"timeout\":42}")
 
 			sut := cronjobv2.ContainerCronjobRequest{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

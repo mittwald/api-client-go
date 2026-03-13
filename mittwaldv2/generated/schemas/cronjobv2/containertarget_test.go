@@ -14,7 +14,7 @@ import (
 var _ = Describe("ContainerTarget", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"command\":\"string\",\"serviceName\":\"string\",\"stackId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{\"command\":\"string\",\"containerIdentifier\":\"string\",\"stackId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
 
 			sut := cronjobv2.ContainerTarget{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
