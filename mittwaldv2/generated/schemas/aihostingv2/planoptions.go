@@ -17,6 +17,9 @@ import (
 //        type: "string"
 //        format: "date-time"
 //    "keys": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsage"}
+//    "modelTermsApprovalRequired":
+//        type: "boolean"
+//        default: false
 //    "nextTokenReset":
 //        type: "string"
 //        format: "date-time"
@@ -45,15 +48,17 @@ import (
 //    - "tokens"
 //    - "rateLimit"
 //    - "nextTokenReset"
+//    - "modelTermsApprovalRequired"
 
 type PlanOptions struct {
-	CustomerId     string                     `json:"customerId"`
-	DeletedAt      *time.Time                 `json:"deletedAt,omitempty"`
-	Keys           PlanUsage                  `json:"keys"`
-	NextTokenReset time.Time                  `json:"nextTokenReset"`
-	RateLimit      RateLimit                  `json:"rateLimit"`
-	Tokens         PlanUsageBig               `json:"tokens"`
-	TopUsages      []PlanOptionsTopUsagesItem `json:"topUsages,omitempty"`
+	CustomerId                 string                     `json:"customerId"`
+	DeletedAt                  *time.Time                 `json:"deletedAt,omitempty"`
+	Keys                       PlanUsage                  `json:"keys"`
+	ModelTermsApprovalRequired bool                       `json:"modelTermsApprovalRequired"`
+	NextTokenReset             time.Time                  `json:"nextTokenReset"`
+	RateLimit                  RateLimit                  `json:"rateLimit"`
+	Tokens                     PlanUsageBig               `json:"tokens"`
+	TopUsages                  []PlanOptionsTopUsagesItem `json:"topUsages,omitempty"`
 }
 
 func (o *PlanOptions) Validate() error {

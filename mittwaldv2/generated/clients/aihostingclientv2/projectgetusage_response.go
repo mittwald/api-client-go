@@ -14,6 +14,8 @@ import (
 // type: "object"
 // properties:
 //    "keys": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsage"}
+//    "modelTermsApprovalRequired":
+//        type: "boolean"
 //    "nextTokenReset":
 //        type: "string"
 //        format: "date-time"
@@ -22,11 +24,13 @@ import (
 // required:
 //    - "keys"
 //    - "projectId"
+//    - "modelTermsApprovalRequired"
 
 type ProjectGetUsageResponse struct {
-	Keys           aihostingv2.PlanUsage `json:"keys"`
-	NextTokenReset *time.Time            `json:"nextTokenReset,omitempty"`
-	ProjectId      string                `json:"projectId"`
+	Keys                       aihostingv2.PlanUsage `json:"keys"`
+	ModelTermsApprovalRequired bool                  `json:"modelTermsApprovalRequired"`
+	NextTokenReset             *time.Time            `json:"nextTokenReset,omitempty"`
+	ProjectId                  string                `json:"projectId"`
 }
 
 func (o *ProjectGetUsageResponse) Validate() error {

@@ -33,6 +33,7 @@ import "fmt"
 //        format: "email"
 //    "failedExecutionAlertThreshold":
 //        type: "integer"
+//        maximum: 80
 //        minimum: 1
 //    "interval":
 //        type: "string"
