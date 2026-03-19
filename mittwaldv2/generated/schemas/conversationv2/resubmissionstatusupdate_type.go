@@ -10,12 +10,12 @@ import "fmt"
 // enum:
 //    - "STATUS_UPDATE"
 
-type StatusUpdateType string
+type ResubmissionStatusUpdateType string
 
-const StatusUpdateTypeSTATUSUPDATE StatusUpdateType = "STATUS_UPDATE"
+const ResubmissionStatusUpdateTypeSTATUSUPDATE ResubmissionStatusUpdateType = "STATUS_UPDATE"
 
-func (e StatusUpdateType) Validate() error {
-	if e == StatusUpdateTypeSTATUSUPDATE {
+func (e ResubmissionStatusUpdateType) Validate() error {
+	if e == ResubmissionStatusUpdateTypeSTATUSUPDATE {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

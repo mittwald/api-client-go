@@ -22,7 +22,7 @@ var _ = Describe("ListMessagesByConversationResponseItem", func() {
 			Expect(sut.AlternativeMessage).NotTo(BeNil())
 		})
 		It("should unmarshal into AlternativeStatusUpdate", func() {
-			exampleJSON := []byte("{\"conversationId\":\"string\",\"createdAt\":\"string\",\"internal\":true,\"messageContent\":\"string\",\"meta\":{\"user\":{\"active\":true,\"atlasGroup\":{\"acronym\":\"string\",\"id\":\"string\",\"isDefaultGroup\":true,\"name\":\"string\"},\"avatarRefId\":\"string\",\"clearName\":\"string\",\"department\":\"development\",\"group\":{\"acronym\":\"string\",\"id\":\"string\",\"isDefaultGroup\":true,\"name\":\"string\"},\"userId\":\"string\"}},\"type\":\"STATUS_UPDATE\"}")
+			exampleJSON := []byte("{\"conversationId\":\"string\",\"createdAt\":\"2006-01-02T15:04:05Z\",\"internal\":true,\"messageContent\":\"RESUBMISSION_CREATED\",\"meta\":{\"groupAcronym\":\"string\",\"groupId\":\"string\",\"groupName\":\"string\",\"resubmitAt\":\"2006-01-02T15:04:05Z\",\"user\":null},\"type\":\"STATUS_UPDATE\"}")
 
 			sut := conversationclientv2.ListMessagesByConversationResponseItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

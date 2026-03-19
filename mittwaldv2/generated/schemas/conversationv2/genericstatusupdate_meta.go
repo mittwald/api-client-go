@@ -10,11 +10,11 @@ import "fmt"
 // properties:
 //    "user": {"$ref": "#/components/schemas/de.mittwald.v1.conversation.User"}
 
-type StatusUpdateMeta struct {
+type GenericStatusUpdateMeta struct {
 	User *User `json:"user,omitempty"`
 }
 
-func (o *StatusUpdateMeta) Validate() error {
+func (o *GenericStatusUpdateMeta) Validate() error {
 	if err := func() error {
 		if o.User == nil {
 			return nil
