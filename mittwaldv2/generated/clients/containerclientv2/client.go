@@ -144,6 +144,16 @@ type Client interface {
 		req ValidateRegistryCredentialsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*ValidateRegistryCredentialsResponse, *http.Response, error)
+	CallPullImageWebhookForService(
+		ctx context.Context,
+		req CallPullImageWebhookForServiceRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	RotatePullImageWebhookForService(
+		ctx context.Context,
+		req RotatePullImageWebhookForServiceRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*containerv2.ServicePullImageWebhookResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -839,6 +849,64 @@ func (c *clientImpl) ValidateRegistryCredentials(
 	}
 
 	var response ValidateRegistryCredentialsResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Call pull-image webhook
+//
+// Calls the pull-image webhook endpoint for a Service using a webhook token.
+func (c *clientImpl) CallPullImageWebhookForService(
+	ctx context.Context,
+	req CallPullImageWebhookForServiceRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Create or rotate pull-image webhook token
+//
+// Creates or rotates the pull-image webhook token for a Service.
+//
+// The returned token is shown only once.
+func (c *clientImpl) RotatePullImageWebhookForService(
+	ctx context.Context,
+	req RotatePullImageWebhookForServiceRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*containerv2.ServicePullImageWebhookResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response containerv2.ServicePullImageWebhookResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

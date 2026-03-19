@@ -9,16 +9,14 @@ import "fmt"
 // type: "string"
 // enum:
 //    - "name"
-//    - "pricing.priceInCents"
 // default: "name"
 
 type ListExtensionsRequestQuerySort string
 
 const ListExtensionsRequestQuerySortName ListExtensionsRequestQuerySort = "name"
-const ListExtensionsRequestQuerySortPricingPriceInCents ListExtensionsRequestQuerySort = "pricing.priceInCents"
 
 func (e ListExtensionsRequestQuerySort) Validate() error {
-	if e == ListExtensionsRequestQuerySortName || e == ListExtensionsRequestQuerySortPricingPriceInCents {
+	if e == ListExtensionsRequestQuerySortName {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
