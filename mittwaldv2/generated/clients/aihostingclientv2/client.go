@@ -14,6 +14,11 @@ import (
 )
 
 type Client interface {
+	CustomerAcceptModelTerms(
+		ctx context.Context,
+		req CustomerAcceptModelTermsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	CustomerGetKeys(
 		ctx context.Context,
 		req CustomerGetKeysRequest,
@@ -39,6 +44,11 @@ type Client interface {
 		req CustomerDeleteKeyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	CustomerGetDetailedModels(
+		ctx context.Context,
+		req CustomerGetDetailedModelsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]aihostingv2.CustomerDetailedModel, *http.Response, error)
 	CustomerGetUsage(
 		ctx context.Context,
 		req CustomerGetUsageRequest,
@@ -74,26 +84,16 @@ type Client interface {
 		req ProjectDeleteKeyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	ProjectGetUsage(
-		ctx context.Context,
-		req ProjectGetUsageRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*ProjectGetUsageResponse, *http.Response, error)
-	CustomerGetDetailedModels(
-		ctx context.Context,
-		req CustomerGetDetailedModelsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]aihostingv2.CustomerDetailedModel, *http.Response, error)
 	ProjectGetDetailedModels(
 		ctx context.Context,
 		req ProjectGetDetailedModelsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]aihostingv2.ProjectDetailedModel, *http.Response, error)
-	CustomerAcceptModelTerms(
+	ProjectGetUsage(
 		ctx context.Context,
-		req CustomerAcceptModelTermsRequest,
+		req ProjectGetUsageRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
+	) (*ProjectGetUsageResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -101,6 +101,32 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Accepts the model terms for a customer.
+//
+// Accept all model terms for a customer that are not already accepted. If there are no terms to accept, this endpoint will do nothing and return 204.
+func (c *clientImpl) CustomerAcceptModelTerms(
+	ctx context.Context,
+	req CustomerAcceptModelTermsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // Get a list of already created keys.
@@ -239,6 +265,34 @@ func (c *clientImpl) CustomerDeleteKey(
 	}
 
 	return httpRes, nil
+}
+
+// Get a list of currently active models.
+func (c *clientImpl) CustomerGetDetailedModels(
+	ctx context.Context,
+	req CustomerGetDetailedModelsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]aihostingv2.CustomerDetailedModel, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []aihostingv2.CustomerDetailedModel
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Get ai hosting plan and usages of a customer.
@@ -435,62 +489,6 @@ func (c *clientImpl) ProjectDeleteKey(
 	return httpRes, nil
 }
 
-// Get ai hosting plan and usages of a project. Same as the customer route, but less details.
-func (c *clientImpl) ProjectGetUsage(
-	ctx context.Context,
-	req ProjectGetUsageRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*ProjectGetUsageResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response ProjectGetUsageResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a list of currently active models.
-func (c *clientImpl) CustomerGetDetailedModels(
-	ctx context.Context,
-	req CustomerGetDetailedModelsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]aihostingv2.CustomerDetailedModel, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []aihostingv2.CustomerDetailedModel
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
 // Get a list of currently active models.
 func (c *clientImpl) ProjectGetDetailedModels(
 	ctx context.Context,
@@ -519,28 +517,30 @@ func (c *clientImpl) ProjectGetDetailedModels(
 	return &response, httpRes, nil
 }
 
-// Accepts the model terms for a customer.
-//
-// Accept all model terms for a customer that are not already accepted. If there are no terms to accept, this endpoint will do nothing and return 204.
-func (c *clientImpl) CustomerAcceptModelTerms(
+// Get ai hosting plan and usages of a project. Same as the customer route, but less details.
+func (c *clientImpl) ProjectGetUsage(
 	ctx context.Context,
-	req CustomerAcceptModelTermsRequest,
+	req ProjectGetUsageRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
+) (*ProjectGetUsageResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
 	if err != nil {
-		return httpRes, err
+		return nil, httpRes, err
 	}
 
 	if httpRes.StatusCode >= 400 {
 		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
+		return nil, httpRes, err
 	}
 
-	return httpRes, nil
+	var response ProjectGetUsageResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }

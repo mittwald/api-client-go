@@ -54,7 +54,7 @@ func (r *RotatePullImageWebhookForServiceRequest) body() (io.Reader, string, err
 
 func (r *RotatePullImageWebhookForServiceRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/stacks/%s/services/%s/actions/pull/webhook", url.PathEscape(r.StackID), url.PathEscape(r.ServiceID)),
+		Path: fmt.Sprintf("/v2/stacks/%s/services/%s/webhook-token", url.PathEscape(r.StackID), url.PathEscape(r.ServiceID)),
 	}
 	return u.String()
 }
