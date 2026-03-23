@@ -14,6 +14,11 @@ import (
 )
 
 type Client interface {
+	CallPullImageWebhookForService(
+		ctx context.Context,
+		req CallPullImageWebhookForServiceRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	ListRegistries(
 		ctx context.Context,
 		req ListRegistriesRequest,
@@ -119,6 +124,11 @@ type Client interface {
 		req RestartServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	RotatePullImageWebhookForService(
+		ctx context.Context,
+		req RotatePullImageWebhookForServiceRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*containerv2.ServicePullImageWebhookResponse, *http.Response, error)
 	SetStackUpdateSchedule(
 		ctx context.Context,
 		req SetStackUpdateScheduleRequest,
@@ -151,6 +161,32 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Call pull-image webhook
+//
+// Calls the pull-image webhook endpoint for a Service using a webhook token.
+func (c *clientImpl) CallPullImageWebhookForService(
+	ctx context.Context,
+	req CallPullImageWebhookForServiceRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // List Registries belonging to a Project.
@@ -715,6 +751,38 @@ func (c *clientImpl) RestartService(
 	}
 
 	return httpRes, nil
+}
+
+// Create or rotate pull-image webhook token
+//
+// Creates or rotates the pull-image webhook token for a Service.
+//
+// The returned token is shown only once.
+func (c *clientImpl) RotatePullImageWebhookForService(
+	ctx context.Context,
+	req RotatePullImageWebhookForServiceRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*containerv2.ServicePullImageWebhookResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response containerv2.ServicePullImageWebhookResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Set an update schedule for a Stack.

@@ -14,11 +14,6 @@ import (
 )
 
 type Client interface {
-	ExecuteAction(
-		ctx context.Context,
-		req ExecuteActionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	GetApp(
 		ctx context.Context,
 		req GetAppRequest,
@@ -139,6 +134,11 @@ type Client interface {
 		req DeprecatedLinkDatabaseRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	DeprecatedInstallationExecuteAction(
+		ctx context.Context,
+		req DeprecatedInstallationExecuteActionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -146,30 +146,6 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
-}
-
-// Trigger a runtime action belonging to an AppInstallation.
-func (c *clientImpl) ExecuteAction(
-	ctx context.Context,
-	req ExecuteActionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
 
 // Get an App.
@@ -798,6 +774,32 @@ func (c *clientImpl) SetDatabaseUsers(
 func (c *clientImpl) DeprecatedLinkDatabase(
 	ctx context.Context,
 	req DeprecatedLinkDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Trigger a runtime action belonging to an AppInstallation.
+//
+// This endpoint is deprecated and will be removed in a future version. No AppInstallation supports runtime actions, making this endpoint non-functional.
+func (c *clientImpl) DeprecatedInstallationExecuteAction(
+	ctx context.Context,
+	req DeprecatedInstallationExecuteActionRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
