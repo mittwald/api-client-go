@@ -12,9 +12,15 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "anySystemSoftwareUpdateAvailable":
+//        type: "boolean"
 //    "appId":
 //        type: "string"
 //        format: "uuid"
+//    "appName":
+//        type: "string"
+//    "appUpdateAvailable":
+//        type: "boolean"
 //    "appVersion": {"$ref": "#/components/schemas/de.mittwald.v1.app.VersionStatus"}
 //    "createdAt":
 //        type: "string"
@@ -82,26 +88,29 @@ import (
 
 // An AppInstallation is a concrete manifestation of an App in a specific AppVersion.
 type AppInstallation struct {
-	AppId              string                    `json:"appId"`
-	AppVersion         VersionStatus             `json:"appVersion"`
-	CreatedAt          time.Time                 `json:"createdAt"`
-	CustomDocumentRoot *string                   `json:"customDocumentRoot,omitempty"`
-	DeletionRequested  *bool                     `json:"deletionRequested,omitempty"`
-	Description        string                    `json:"description"`
-	Disabled           bool                      `json:"disabled"`
-	Id                 string                    `json:"id"`
-	InstallationPath   string                    `json:"installationPath"`
-	LastError          *string                   `json:"lastError,omitempty"`
-	LinkedDatabases    []LinkedDatabase          `json:"linkedDatabases"`
-	LockedBy           map[string]LockPurpose    `json:"lockedBy,omitempty"`
-	Phase              Phase                     `json:"phase"`
-	ProjectId          string                    `json:"projectId"`
-	ScreenshotId       *string                   `json:"screenshotId,omitempty"`
-	ScreenshotRef      *string                   `json:"screenshotRef,omitempty"`
-	ShortId            string                    `json:"shortId"`
-	SystemSoftware     []InstalledSystemSoftware `json:"systemSoftware"`
-	UpdatePolicy       AppUpdatePolicy           `json:"updatePolicy"`
-	UserInputs         []SavedUserInput          `json:"userInputs"`
+	AnySystemSoftwareUpdateAvailable *bool                     `json:"anySystemSoftwareUpdateAvailable,omitempty"`
+	AppId                            string                    `json:"appId"`
+	AppName                          *string                   `json:"appName,omitempty"`
+	AppUpdateAvailable               *bool                     `json:"appUpdateAvailable,omitempty"`
+	AppVersion                       VersionStatus             `json:"appVersion"`
+	CreatedAt                        time.Time                 `json:"createdAt"`
+	CustomDocumentRoot               *string                   `json:"customDocumentRoot,omitempty"`
+	DeletionRequested                *bool                     `json:"deletionRequested,omitempty"`
+	Description                      string                    `json:"description"`
+	Disabled                         bool                      `json:"disabled"`
+	Id                               string                    `json:"id"`
+	InstallationPath                 string                    `json:"installationPath"`
+	LastError                        *string                   `json:"lastError,omitempty"`
+	LinkedDatabases                  []LinkedDatabase          `json:"linkedDatabases"`
+	LockedBy                         map[string]LockPurpose    `json:"lockedBy,omitempty"`
+	Phase                            Phase                     `json:"phase"`
+	ProjectId                        string                    `json:"projectId"`
+	ScreenshotId                     *string                   `json:"screenshotId,omitempty"`
+	ScreenshotRef                    *string                   `json:"screenshotRef,omitempty"`
+	ShortId                          string                    `json:"shortId"`
+	SystemSoftware                   []InstalledSystemSoftware `json:"systemSoftware"`
+	UpdatePolicy                     AppUpdatePolicy           `json:"updatePolicy"`
+	UserInputs                       []SavedUserInput          `json:"userInputs"`
 }
 
 func (o *AppInstallation) Validate() error {

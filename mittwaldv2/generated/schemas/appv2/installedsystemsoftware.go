@@ -8,10 +8,14 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "name":
+//        type: "string"
 //    "systemSoftwareId":
 //        type: "string"
 //        format: "uuid"
 //    "systemSoftwareVersion": {"$ref": "#/components/schemas/de.mittwald.v1.app.VersionStatus"}
+//    "updateAvailable":
+//        type: "boolean"
 //    "updatePolicy": {"$ref": "#/components/schemas/de.mittwald.v1.app.SystemSoftwareUpdatePolicy"}
 // required:
 //    - "systemSoftwareId"
@@ -21,8 +25,10 @@ import "fmt"
 
 // InstalledSystemSoftware describes the currently configured and installed SystemSoftwareVersion of a SystemSoftware besides the desired SystemSoftwareUpdatePolicy inside an AppInstallation.
 type InstalledSystemSoftware struct {
+	Name                  *string                    `json:"name,omitempty"`
 	SystemSoftwareId      string                     `json:"systemSoftwareId"`
 	SystemSoftwareVersion VersionStatus              `json:"systemSoftwareVersion"`
+	UpdateAvailable       *bool                      `json:"updateAvailable,omitempty"`
 	UpdatePolicy          SystemSoftwareUpdatePolicy `json:"updatePolicy"`
 }
 
