@@ -43,7 +43,7 @@ type Client interface {
 		ctx context.Context,
 		req GetInstalledSystemsoftwareForAppinstallationRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*GetInstalledSystemsoftwareForAppinstallationResponse, *http.Response, error)
+	) (*[]appv2.SystemSoftware, *http.Response, error)
 	GetMissingDependenciesForAppinstallation(
 		ctx context.Context,
 		req GetMissingDependenciesForAppinstallationRequest,
@@ -285,7 +285,7 @@ func (c *clientImpl) GetInstalledSystemsoftwareForAppinstallation(
 	ctx context.Context,
 	req GetInstalledSystemsoftwareForAppinstallationRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*GetInstalledSystemsoftwareForAppinstallationResponse, *http.Response, error) {
+) (*[]appv2.SystemSoftware, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -301,7 +301,7 @@ func (c *clientImpl) GetInstalledSystemsoftwareForAppinstallation(
 		return nil, httpRes, err
 	}
 
-	var response GetInstalledSystemsoftwareForAppinstallationResponse
+	var response []appv2.SystemSoftware
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

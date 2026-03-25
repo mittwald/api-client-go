@@ -14,7 +14,7 @@ import (
 var _ = Describe("InstalledSystemSoftware", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"name\":\"string\",\"systemSoftwareId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"systemSoftwareVersion\":{\"current\":\"string\",\"desired\":\"string\",\"externalVersion\":\"string\"},\"updateAvailable\":true,\"updatePolicy\":\"none\"}")
+			exampleJSON := []byte("{\"systemSoftwareId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"systemSoftwareVersion\":{\"current\":\"string\",\"desired\":\"string\"},\"updatePolicy\":\"none\"}")
 
 			sut := appv2.InstalledSystemSoftware{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

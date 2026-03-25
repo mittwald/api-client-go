@@ -14,7 +14,7 @@ import (
 var _ = Describe("VersionStatus", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"current\":\"string\",\"desired\":\"string\",\"externalVersion\":\"string\"}")
+			exampleJSON := []byte("{\"current\":\"string\",\"desired\":\"string\"}")
 
 			sut := appv2.VersionStatus{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
