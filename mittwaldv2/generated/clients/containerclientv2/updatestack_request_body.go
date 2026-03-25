@@ -10,6 +10,9 @@ import "github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/container
 // properties:
 //    "services":
 //        type: "object"
+//        propertyNames:
+//            type: "string"
+//            maxLength: 63
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.container.ServiceRequest"}
 //    "volumes":
 //        type: "object"

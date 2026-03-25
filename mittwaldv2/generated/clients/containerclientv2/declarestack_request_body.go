@@ -10,6 +10,9 @@ import "github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/container
 // properties:
 //    "services":
 //        type: "object"
+//        propertyNames:
+//            type: "string"
+//            maxLength: 63
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.container.ServiceDeclareRequest"}
 //        description: "A set of containers that should be started in this stack. The key is relevant for\nnetwork connectivity between containers, because you can use it as DNS name to\nresolve this containers from other containers running in the same project (or from\nmanaged apps running in the same project).\n\nTo **delete** an existing container from a stack using a `PUT` request, simply omit\nit from the request body. Using a `PATCH` request, set it to an empty object `{}`.\n"
 //    "volumes":
