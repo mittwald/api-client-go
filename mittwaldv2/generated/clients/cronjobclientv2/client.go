@@ -14,26 +14,6 @@ import (
 )
 
 type Client interface {
-	ListCronjobs(
-		ctx context.Context,
-		req ListCronjobsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]cronjobv2.Cronjob, *http.Response, error)
-	CreateCronjob(
-		ctx context.Context,
-		req CreateCronjobRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*CreateCronjobResponse, *http.Response, error)
-	ListExecutions(
-		ctx context.Context,
-		req ListExecutionsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]cronjobv2.CronjobExecution, *http.Response, error)
-	CreateExecution(
-		ctx context.Context,
-		req CreateExecutionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*CreateExecutionResponse, *http.Response, error)
 	GetCronjob(
 		ctx context.Context,
 		req GetCronjobRequest,
@@ -49,16 +29,6 @@ type Client interface {
 		req UpdateCronjobRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	GetExecutionAnalysis(
-		ctx context.Context,
-		req GetExecutionAnalysisRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*cronjobv2.CronjobExecutionAnalysis, *http.Response, error)
-	GetExecution(
-		ctx context.Context,
-		req GetExecutionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*cronjobv2.CronjobExecution, *http.Response, error)
 	ReplaceCronjobAppInstallationID(
 		ctx context.Context,
 		req ReplaceCronjobAppInstallationIDRequest,
@@ -69,6 +39,36 @@ type Client interface {
 		req UpdateCronjobAppIDDeprecatedRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	ListExecutions(
+		ctx context.Context,
+		req ListExecutionsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]cronjobv2.CronjobExecution, *http.Response, error)
+	CreateExecution(
+		ctx context.Context,
+		req CreateExecutionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CreateExecutionResponse, *http.Response, error)
+	GetExecutionAnalysis(
+		ctx context.Context,
+		req GetExecutionAnalysisRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*cronjobv2.CronjobExecutionAnalysis, *http.Response, error)
+	ListCronjobs(
+		ctx context.Context,
+		req ListCronjobsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]cronjobv2.Cronjob, *http.Response, error)
+	CreateCronjob(
+		ctx context.Context,
+		req CreateCronjobRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CreateCronjobResponse, *http.Response, error)
+	GetExecution(
+		ctx context.Context,
+		req GetExecutionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*cronjobv2.CronjobExecution, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -76,118 +76,6 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
-}
-
-// List Cronjobs belonging to a Project.
-func (c *clientImpl) ListCronjobs(
-	ctx context.Context,
-	req ListCronjobsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]cronjobv2.Cronjob, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []cronjobv2.Cronjob
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Create a Cronjob.
-func (c *clientImpl) CreateCronjob(
-	ctx context.Context,
-	req CreateCronjobRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*CreateCronjobResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response CreateCronjobResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List CronjobExecutions belonging to a Cronjob.
-func (c *clientImpl) ListExecutions(
-	ctx context.Context,
-	req ListExecutionsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]cronjobv2.CronjobExecution, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []cronjobv2.CronjobExecution
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Trigger a Cronjob.
-func (c *clientImpl) CreateExecution(
-	ctx context.Context,
-	req CreateExecutionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*CreateExecutionResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response CreateExecutionResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
 
 // Get a Cronjob.
@@ -266,62 +154,6 @@ func (c *clientImpl) UpdateCronjob(
 	return httpRes, nil
 }
 
-// Get a CronjobExecution analysis for failed executions.
-func (c *clientImpl) GetExecutionAnalysis(
-	ctx context.Context,
-	req GetExecutionAnalysisRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*cronjobv2.CronjobExecutionAnalysis, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response cronjobv2.CronjobExecutionAnalysis
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a CronjobExecution.
-func (c *clientImpl) GetExecution(
-	ctx context.Context,
-	req GetExecutionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*cronjobv2.CronjobExecution, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response cronjobv2.CronjobExecution
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
 // Update a Cronjob's app installation id.
 func (c *clientImpl) ReplaceCronjobAppInstallationID(
 	ctx context.Context,
@@ -370,4 +202,172 @@ func (c *clientImpl) UpdateCronjobAppIDDeprecated(
 	}
 
 	return httpRes, nil
+}
+
+// List CronjobExecutions belonging to a Cronjob.
+func (c *clientImpl) ListExecutions(
+	ctx context.Context,
+	req ListExecutionsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]cronjobv2.CronjobExecution, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []cronjobv2.CronjobExecution
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Trigger a Cronjob.
+func (c *clientImpl) CreateExecution(
+	ctx context.Context,
+	req CreateExecutionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CreateExecutionResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CreateExecutionResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get a CronjobExecution analysis for failed executions.
+func (c *clientImpl) GetExecutionAnalysis(
+	ctx context.Context,
+	req GetExecutionAnalysisRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*cronjobv2.CronjobExecutionAnalysis, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response cronjobv2.CronjobExecutionAnalysis
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Cronjobs belonging to a Project.
+func (c *clientImpl) ListCronjobs(
+	ctx context.Context,
+	req ListCronjobsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]cronjobv2.Cronjob, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []cronjobv2.Cronjob
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create a Cronjob.
+func (c *clientImpl) CreateCronjob(
+	ctx context.Context,
+	req CreateCronjobRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CreateCronjobResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CreateCronjobResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get a CronjobExecution.
+func (c *clientImpl) GetExecution(
+	ctx context.Context,
+	req GetExecutionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*cronjobv2.CronjobExecution, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response cronjobv2.CronjobExecution
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
