@@ -10,14 +10,12 @@ import "github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/container
 // properties:
 //    "services":
 //        type: "object"
-//        propertyNames:
-//            type: "string"
-//            maxLength: 63
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.container.ServiceRequest"}
+//        description: "A set of containers that should be started in this stack. The key is relevant for\nnetwork connectivity between containers, because you can use it as DNS name to\nresolve this containers from other containers running in the same project (or from\nmanaged apps running in the same project).\n\nTo **delete** an existing container from a stack using a `PUT` request, simply omit\nit from the request body. Using a `PATCH` request, set it to an empty object `{}`.\n\nKeys must be strings of max 63 characters.\n"
 //    "volumes":
 //        type: "object"
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.container.VolumeRequest"}
-//        description: "Volumes belonging to a Stack. Removing results in a detach, delete must be explicit."
+//        description: "A set of named volumes that should be created for this stack. Removing a volume\nfrom this set will not delete the volume (for safety), but only detach it from the\nstack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}` endpoint.\n"
 // description: UpdateStackRequestBody models the JSON body of a 'container-update-stack' request
 
 // UpdateStackRequestBody models the JSON body of a 'container-update-stack' request
