@@ -41,7 +41,7 @@ import "fmt"
 //    "target":
 //        oneOf:
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.AppInstallationTarget"}
-//            - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ContainerTarget"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ServiceTarget"}
 //    "timeZone":
 //        type: "string"
 //        example: "Europe/Berlin"

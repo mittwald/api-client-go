@@ -8,22 +8,18 @@ package cronjobv2
 // properties:
 //    "command":
 //        type: "string"
-//    "containerShortId":
+//    "serviceIdentifier":
 //        type: "string"
 //    "stackId":
 //        type: "string"
 //        format: "uuid"
-// required:
-//    - "stackId"
-//    - "containerShortId"
-//    - "command"
 
-type ContainerTargetResponse struct {
-	Command          string `json:"command"`
-	ContainerShortId string `json:"containerShortId"`
-	StackId          string `json:"stackId"`
+type ServicePatchTarget struct {
+	Command           *string `json:"command,omitempty"`
+	ServiceIdentifier *string `json:"serviceIdentifier,omitempty"`
+	StackId           *string `json:"stackId,omitempty"`
 }
 
-func (o *ContainerTargetResponse) Validate() error {
+func (o *ServicePatchTarget) Validate() error {
 	return nil
 }

@@ -57,7 +57,7 @@ import (
 //    "target":
 //        oneOf:
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.AppInstallationTarget"}
-//            - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ContainerTargetResponse"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ServiceTargetResponse"}
 //    "timeZone":
 //        type: "string"
 //    "timeout":

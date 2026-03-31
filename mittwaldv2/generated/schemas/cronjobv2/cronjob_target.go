@@ -13,19 +13,19 @@ import (
 // This data type was generated from the following JSON schema:
 // oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.AppInstallationTarget"}
-//    - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ContainerTargetResponse"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ServiceTargetResponse"}
 
 type CronjobTarget struct {
-	AlternativeAppInstallationTarget   *AppInstallationTarget
-	AlternativeContainerTargetResponse *ContainerTargetResponse
+	AlternativeAppInstallationTarget *AppInstallationTarget
+	AlternativeServiceTargetResponse *ServiceTargetResponse
 }
 
 func (a *CronjobTarget) MarshalJSON() ([]byte, error) {
 	if a.AlternativeAppInstallationTarget != nil {
 		return json.Marshal(a.AlternativeAppInstallationTarget)
 	}
-	if a.AlternativeContainerTargetResponse != nil {
-		return json.Marshal(a.AlternativeContainerTargetResponse)
+	if a.AlternativeServiceTargetResponse != nil {
+		return json.Marshal(a.AlternativeServiceTargetResponse)
 	}
 	return []byte("null"), nil
 }
@@ -47,11 +47,11 @@ func (a *CronjobTarget) UnmarshalJSON(input []byte) error {
 	}
 
 	reader.Reset(input)
-	var alternativeContainerTargetResponse ContainerTargetResponse
-	if err := dec.Decode(&alternativeContainerTargetResponse); err == nil {
+	var alternativeServiceTargetResponse ServiceTargetResponse
+	if err := dec.Decode(&alternativeServiceTargetResponse); err == nil {
 		//subtype: *generator.ReferenceType
-		if vErr := alternativeContainerTargetResponse.Validate(); vErr == nil {
-			a.AlternativeContainerTargetResponse = &alternativeContainerTargetResponse
+		if vErr := alternativeServiceTargetResponse.Validate(); vErr == nil {
+			a.AlternativeServiceTargetResponse = &alternativeServiceTargetResponse
 			decodedAtLeastOnce = true
 		}
 	}
@@ -66,8 +66,8 @@ func (a *CronjobTarget) Validate() error {
 	if a.AlternativeAppInstallationTarget != nil {
 		return a.AlternativeAppInstallationTarget.Validate()
 	}
-	if a.AlternativeContainerTargetResponse != nil {
-		return a.AlternativeContainerTargetResponse.Validate()
+	if a.AlternativeServiceTargetResponse != nil {
+		return a.AlternativeServiceTargetResponse.Validate()
 	}
 	return errors.New("no alternative set")
 }

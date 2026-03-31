@@ -23,7 +23,7 @@ import "fmt"
 //    "interval":
 //        type: "string"
 //        example: "*/5 * * * *"
-//    "target": {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ContainerTarget"}
+//    "target": {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ServiceTarget"}
 //    "timeZone":
 //        type: "string"
 //        example: "Europe/Berlin"
@@ -37,19 +37,19 @@ import "fmt"
 //    - "active"
 //    - "timeout"
 
-type ContainerCronjobRequest struct {
+type ServiceCronjobRequest struct {
 	Active                        bool               `json:"active"`
 	ConcurrencyPolicy             *ConcurrencyPolicy `json:"concurrencyPolicy,omitempty"`
 	Description                   string             `json:"description"`
 	Email                         *string            `json:"email,omitempty"`
 	FailedExecutionAlertThreshold *int64             `json:"failedExecutionAlertThreshold,omitempty"`
 	Interval                      string             `json:"interval"`
-	Target                        *ContainerTarget   `json:"target,omitempty"`
+	Target                        *ServiceTarget     `json:"target,omitempty"`
 	TimeZone                      *string            `json:"timeZone,omitempty"`
 	Timeout                       int64              `json:"timeout"`
 }
 
-func (o *ContainerCronjobRequest) Validate() error {
+func (o *ServiceCronjobRequest) Validate() error {
 	if err := func() error {
 		if o.ConcurrencyPolicy == nil {
 			return nil

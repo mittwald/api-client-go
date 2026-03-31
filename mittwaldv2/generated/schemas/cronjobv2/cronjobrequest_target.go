@@ -13,19 +13,19 @@ import (
 // This data type was generated from the following JSON schema:
 // oneOf:
 //    - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.AppInstallationTarget"}
-//    - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ContainerTarget"}
+//    - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ServiceTarget"}
 
 type CronjobRequestTarget struct {
 	AlternativeAppInstallationTarget *AppInstallationTarget
-	AlternativeContainerTarget       *ContainerTarget
+	AlternativeServiceTarget         *ServiceTarget
 }
 
 func (a *CronjobRequestTarget) MarshalJSON() ([]byte, error) {
 	if a.AlternativeAppInstallationTarget != nil {
 		return json.Marshal(a.AlternativeAppInstallationTarget)
 	}
-	if a.AlternativeContainerTarget != nil {
-		return json.Marshal(a.AlternativeContainerTarget)
+	if a.AlternativeServiceTarget != nil {
+		return json.Marshal(a.AlternativeServiceTarget)
 	}
 	return []byte("null"), nil
 }
@@ -47,11 +47,11 @@ func (a *CronjobRequestTarget) UnmarshalJSON(input []byte) error {
 	}
 
 	reader.Reset(input)
-	var alternativeContainerTarget ContainerTarget
-	if err := dec.Decode(&alternativeContainerTarget); err == nil {
+	var alternativeServiceTarget ServiceTarget
+	if err := dec.Decode(&alternativeServiceTarget); err == nil {
 		//subtype: *generator.ReferenceType
-		if vErr := alternativeContainerTarget.Validate(); vErr == nil {
-			a.AlternativeContainerTarget = &alternativeContainerTarget
+		if vErr := alternativeServiceTarget.Validate(); vErr == nil {
+			a.AlternativeServiceTarget = &alternativeServiceTarget
 			decodedAtLeastOnce = true
 		}
 	}
@@ -66,8 +66,8 @@ func (a *CronjobRequestTarget) Validate() error {
 	if a.AlternativeAppInstallationTarget != nil {
 		return a.AlternativeAppInstallationTarget.Validate()
 	}
-	if a.AlternativeContainerTarget != nil {
-		return a.AlternativeContainerTarget.Validate()
+	if a.AlternativeServiceTarget != nil {
+		return a.AlternativeServiceTarget.Validate()
 	}
 	return errors.New("no alternative set")
 }

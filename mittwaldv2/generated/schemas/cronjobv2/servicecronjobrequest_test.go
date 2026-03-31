@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("ContainerTargetResponse", func() {
+var _ = Describe("ServiceCronjobRequest", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"command\":\"string\",\"containerShortId\":\"string\",\"stackId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{\"active\":true,\"concurrencyPolicy\":\"allow\",\"description\":\"i am a cronjob\",\"email\":\"string\",\"failedExecutionAlertThreshold\":42,\"interval\":\"*/5 * * * *\",\"target\":{\"command\":\"string\",\"serviceIdentifier\":\"string\",\"stackId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"},\"timeZone\":\"Europe/Berlin\",\"timeout\":42}")
 
-			sut := cronjobv2.ContainerTargetResponse{}
+			sut := cronjobv2.ServiceCronjobRequest{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

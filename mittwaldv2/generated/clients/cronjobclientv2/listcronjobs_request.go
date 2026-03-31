@@ -19,11 +19,11 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/cronjob/cronjob-list-cronjobs
 type ListCronjobsRequest struct {
-	ProjectID                string
-	IncludeContainerCronjobs *bool
-	Limit                    *int64
-	Skip                     *int64
-	Page                     *int64
+	ProjectID              string
+	IncludeServiceCronjobs *bool
+	Limit                  *int64
+	Skip                   *int64
+	Page                   *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -61,8 +61,8 @@ func (r *ListCronjobsRequest) url() string {
 
 func (r *ListCronjobsRequest) query() url.Values {
 	q := make(url.Values)
-	if r.IncludeContainerCronjobs != nil {
-		q.Set("includeContainerCronjobs", strconv.FormatBool(*r.IncludeContainerCronjobs))
+	if r.IncludeServiceCronjobs != nil {
+		q.Set("includeServiceCronjobs", strconv.FormatBool(*r.IncludeServiceCronjobs))
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
