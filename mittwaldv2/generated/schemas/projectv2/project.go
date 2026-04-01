@@ -71,6 +71,8 @@ import (
 //        type: "string"
 //        format: "uuid"
 //    "readiness": {"$ref": "#/components/schemas/de.mittwald.v1.project.DeprecatedProjectReadinessStatus"}
+//    "serverGroupId":
+//        type: "string"
 //    "serverId":
 //        type: "string"
 //        format: "uuid"
@@ -117,6 +119,7 @@ import (
 //    - "backupStorageUsageInBytes"
 //    - "backupStorageUsageInBytesSetAt"
 //    - "supportedFeatures"
+//    - "serverGroupId"
 
 type Project struct {
 	BackupStorageUsageInBytes      int64                            `json:"backupStorageUsageInBytes"`
@@ -138,6 +141,7 @@ type Project struct {
 	IsReady                        bool                             `json:"isReady"`
 	ProjectHostingId               *string                          `json:"projectHostingId,omitempty"`
 	Readiness                      DeprecatedProjectReadinessStatus `json:"readiness"`
+	ServerGroupId                  string                           `json:"serverGroupId"`
 	ServerId                       *string                          `json:"serverId,omitempty"`
 	ServerShortId                  *string                          `json:"serverShortId,omitempty"`
 	ShortId                        string                           `json:"shortId"`

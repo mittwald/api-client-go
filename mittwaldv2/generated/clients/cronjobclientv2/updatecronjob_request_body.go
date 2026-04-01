@@ -22,6 +22,7 @@ import (
 //        oneOf:
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.CronjobUrl"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.CronjobCommand"}
+//        description: "deprecated, use target instead"
 //    "email":
 //        type: "string"
 //        format: "email"
@@ -31,6 +32,10 @@ import (
 //    "interval":
 //        type: "string"
 //        example: "*/5 * * * *"
+//    "target":
+//        oneOf:
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.AppInstallationTarget"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ServiceTarget"}
 //    "timeZone":
 //        type: "string"
 //    "timeout":
@@ -48,6 +53,7 @@ type UpdateCronjobRequestBody struct {
 	Email                         *string                              `json:"email,omitempty"`
 	FailedExecutionAlertThreshold *int64                               `json:"failedExecutionAlertThreshold,omitempty"`
 	Interval                      *string                              `json:"interval,omitempty"`
+	Target                        *UpdateCronjobRequestBodyTarget      `json:"target,omitempty"`
 	TimeZone                      *string                              `json:"timeZone,omitempty"`
 	Timeout                       *int64                               `json:"timeout,omitempty"`
 }
@@ -68,6 +74,14 @@ func (o *UpdateCronjobRequestBody) Validate() error {
 		return o.Destination.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property destination: %w", err)
+	}
+	if err := func() error {
+		if o.Target == nil {
+			return nil
+		}
+		return o.Target.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property target: %w", err)
 	}
 	return nil
 }

@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("CronjobRequestDestination", func() {
+var _ = Describe("AppInstallationTargetDestination", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal into AlternativeCronjobUrl", func() {
 			exampleJSON := []byte("{\"url\":\"https://mydomain.com\"}")
 
-			sut := cronjobv2.CronjobRequestDestination{}
+			sut := cronjobv2.AppInstallationTargetDestination{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 			Expect(sut.AlternativeCronjobUrl).NotTo(BeNil())
@@ -24,7 +24,7 @@ var _ = Describe("CronjobRequestDestination", func() {
 		It("should unmarshal into AlternativeCronjobCommand", func() {
 			exampleJSON := []byte("{\"interpreter\":\"/usr/bin/bash\",\"parameters\":\"--debug\",\"path\":\"/html/my-wordpress/script.sh\"}")
 
-			sut := cronjobv2.CronjobRequestDestination{}
+			sut := cronjobv2.AppInstallationTargetDestination{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 			Expect(sut.AlternativeCronjobCommand).NotTo(BeNil())

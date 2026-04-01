@@ -13,11 +13,12 @@ import "fmt"
 //    "appId":
 //        type: "string"
 //        format: "uuid"
-//        description: "DEPRECATED: Use 'appInstallationId' instead. This field will be removed in a future version."
+//        description: "DEPRECATED: Use 'target.AppInstallationTarget' instead. This field will be removed in a future version."
 //        deprecated: true
 //    "appInstallationId":
 //        type: "string"
 //        format: "uuid"
+//        description: "DEPRECATED: Use 'target.AppInstallationTarget' instead. This field will be removed in a future version."
 //    "concurrencyPolicy": {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ConcurrencyPolicy"}
 //    "description":
 //        type: "string"
@@ -26,15 +27,21 @@ import "fmt"
 //        oneOf:
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.CronjobUrl"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.CronjobCommand"}
+//        description: "DEPRECATED: Use 'target.AppInstallationTarget' instead. This field will be removed in a future version."
 //    "email":
 //        type: "string"
 //        format: "email"
 //    "failedExecutionAlertThreshold":
 //        type: "integer"
+//        maximum: 80
 //        minimum: 1
 //    "interval":
 //        type: "string"
 //        example: "*/5 * * * *"
+//    "target":
+//        oneOf:
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.AppInstallationTarget"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.cronjob.ServiceTarget"}
 //    "timeZone":
 //        type: "string"
 //        example: "Europe/Berlin"
@@ -43,25 +50,24 @@ import "fmt"
 //        maximum: 86400
 //        minimum: 1
 // required:
-//    - "appId"
 //    - "description"
-//    - "destination"
 //    - "interval"
 //    - "active"
 //    - "timeout"
 
 type CronjobRequest struct {
-	Active                        bool                      `json:"active"`
-	AppId                         string                    `json:"appId"`
-	AppInstallationId             *string                   `json:"appInstallationId,omitempty"`
-	ConcurrencyPolicy             *ConcurrencyPolicy        `json:"concurrencyPolicy,omitempty"`
-	Description                   string                    `json:"description"`
-	Destination                   CronjobRequestDestination `json:"destination"`
-	Email                         *string                   `json:"email,omitempty"`
-	FailedExecutionAlertThreshold *int64                    `json:"failedExecutionAlertThreshold,omitempty"`
-	Interval                      string                    `json:"interval"`
-	TimeZone                      *string                   `json:"timeZone,omitempty"`
-	Timeout                       int64                     `json:"timeout"`
+	Active                        bool                       `json:"active"`
+	AppId                         *string                    `json:"appId,omitempty"`
+	AppInstallationId             *string                    `json:"appInstallationId,omitempty"`
+	ConcurrencyPolicy             *ConcurrencyPolicy         `json:"concurrencyPolicy,omitempty"`
+	Description                   string                     `json:"description"`
+	Destination                   *CronjobRequestDestination `json:"destination,omitempty"`
+	Email                         *string                    `json:"email,omitempty"`
+	FailedExecutionAlertThreshold *int64                     `json:"failedExecutionAlertThreshold,omitempty"`
+	Interval                      string                     `json:"interval"`
+	Target                        *CronjobRequestTarget      `json:"target,omitempty"`
+	TimeZone                      *string                    `json:"timeZone,omitempty"`
+	Timeout                       int64                      `json:"timeout"`
 }
 
 func (o *CronjobRequest) Validate() error {
@@ -73,8 +79,21 @@ func (o *CronjobRequest) Validate() error {
 	}(); err != nil {
 		return fmt.Errorf("invalid property concurrencyPolicy: %w", err)
 	}
-	if err := o.Destination.Validate(); err != nil {
+	if err := func() error {
+		if o.Destination == nil {
+			return nil
+		}
+		return o.Destination.Validate()
+	}(); err != nil {
 		return fmt.Errorf("invalid property destination: %w", err)
+	}
+	if err := func() error {
+		if o.Target == nil {
+			return nil
+		}
+		return o.Target.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property target: %w", err)
 	}
 	return nil
 }
