@@ -23,6 +23,8 @@ import (
 //        type: "string"
 //        example: "My first Server!"
 //    "disabledReason": {"$ref": "#/components/schemas/de.mittwald.v1.project.ServerDisableReason"}
+//    "groupId":
+//        type: "string"
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -58,6 +60,7 @@ import (
 //    - "createdAt"
 //    - "clusterName"
 //    - "status"
+//    - "groupId"
 
 type Server struct {
 	ClusterName          string                          `json:"clusterName"`
@@ -65,6 +68,7 @@ type Server struct {
 	CustomerId           string                          `json:"customerId"`
 	Description          string                          `json:"description"`
 	DisabledReason       *ServerDisableReason            `json:"disabledReason,omitempty"`
+	GroupId              string                          `json:"groupId"`
 	Id                   string                          `json:"id"`
 	ImageRefId           *string                         `json:"imageRefId,omitempty"`
 	IsReady              bool                            `json:"isReady"`
