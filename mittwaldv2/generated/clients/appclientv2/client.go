@@ -129,14 +129,14 @@ type Client interface {
 		req SetDatabaseUsersRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	DeprecatedLinkDatabase(
-		ctx context.Context,
-		req DeprecatedLinkDatabaseRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	DeprecatedInstallationExecuteAction(
 		ctx context.Context,
 		req DeprecatedInstallationExecuteActionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	DeprecatedLinkDatabase(
+		ctx context.Context,
+		req DeprecatedLinkDatabaseRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -768,12 +768,12 @@ func (c *clientImpl) SetDatabaseUsers(
 	return httpRes, nil
 }
 
-// Create linkage between an AppInstallation and a MySql-Database.
+// Trigger a runtime action belonging to an AppInstallation.
 //
-// This route is deprecated. Use PATCH /v2/app-installations/{appInstallationId}/database instead.
-func (c *clientImpl) DeprecatedLinkDatabase(
+// This endpoint is deprecated and will be removed in a future version. No AppInstallation supports runtime actions, making this endpoint non-functional.
+func (c *clientImpl) DeprecatedInstallationExecuteAction(
 	ctx context.Context,
-	req DeprecatedLinkDatabaseRequest,
+	req DeprecatedInstallationExecuteActionRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -794,12 +794,12 @@ func (c *clientImpl) DeprecatedLinkDatabase(
 	return httpRes, nil
 }
 
-// Trigger a runtime action belonging to an AppInstallation.
+// Create linkage between an AppInstallation and a MySql-Database.
 //
-// This endpoint is deprecated and will be removed in a future version. No AppInstallation supports runtime actions, making this endpoint non-functional.
-func (c *clientImpl) DeprecatedInstallationExecuteAction(
+// This route is deprecated. Use PATCH /v2/app-installations/{appInstallationId}/database instead.
+func (c *clientImpl) DeprecatedLinkDatabase(
 	ctx context.Context,
-	req DeprecatedInstallationExecuteActionRequest,
+	req DeprecatedLinkDatabaseRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
