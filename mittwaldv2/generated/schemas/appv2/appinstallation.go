@@ -12,9 +12,13 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "appExternalVersion":
+//        type: "string"
 //    "appId":
 //        type: "string"
 //        format: "uuid"
+//    "appName":
+//        type: "string"
 //    "appVersion": {"$ref": "#/components/schemas/de.mittwald.v1.app.VersionStatus"}
 //    "createdAt":
 //        type: "string"
@@ -60,6 +64,9 @@ import (
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.app.InstalledSystemSoftware"}
 //    "updatePolicy": {"$ref": "#/components/schemas/de.mittwald.v1.app.AppUpdatePolicy"}
+//    "updatesAvailable":
+//        type: "boolean"
+//        default: false
 //    "userInputs":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.app.SavedUserInput"}
@@ -82,7 +89,9 @@ import (
 
 // An AppInstallation is a concrete manifestation of an App in a specific AppVersion.
 type AppInstallation struct {
+	AppExternalVersion *string                   `json:"appExternalVersion,omitempty"`
 	AppId              string                    `json:"appId"`
+	AppName            *string                   `json:"appName,omitempty"`
 	AppVersion         VersionStatus             `json:"appVersion"`
 	CreatedAt          time.Time                 `json:"createdAt"`
 	CustomDocumentRoot *string                   `json:"customDocumentRoot,omitempty"`
@@ -101,6 +110,7 @@ type AppInstallation struct {
 	ShortId            string                    `json:"shortId"`
 	SystemSoftware     []InstalledSystemSoftware `json:"systemSoftware"`
 	UpdatePolicy       AppUpdatePolicy           `json:"updatePolicy"`
+	UpdatesAvailable   *bool                     `json:"updatesAvailable,omitempty"`
 	UserInputs         []SavedUserInput          `json:"userInputs"`
 }
 

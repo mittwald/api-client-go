@@ -9,6 +9,7 @@ import (
 	"net/http"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/dnsv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/domainmigrationv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/domainv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/ingressv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/sslv2"
@@ -222,6 +223,21 @@ type Client interface {
 		req ListTldsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]domainv2.TopLevel, *http.Response, error)
+	MigrationCheckMigrationIsPossible(
+		ctx context.Context,
+		req MigrationCheckMigrationIsPossibleRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*domainmigrationv2.CheckMigrationResponse, *http.Response, error)
+	MigrationListMigrations(
+		ctx context.Context,
+		req MigrationListMigrationsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]domainmigrationv2.Migration, *http.Response, error)
+	MigrationRequestDomainMigration(
+		ctx context.Context,
+		req MigrationRequestDomainMigrationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	ResendDomainEmail(
 		ctx context.Context,
 		req ResendDomainEmailRequest,
@@ -1469,6 +1485,86 @@ func (c *clientImpl) ListTlds(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Check if a Domain-Migration from a pAccount into a Project is possible.
+func (c *clientImpl) MigrationCheckMigrationIsPossible(
+	ctx context.Context,
+	req MigrationCheckMigrationIsPossibleRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*domainmigrationv2.CheckMigrationResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response domainmigrationv2.CheckMigrationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Domain-Migrations belonging to a p-Account.
+func (c *clientImpl) MigrationListMigrations(
+	ctx context.Context,
+	req MigrationListMigrationsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]domainmigrationv2.Migration, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []domainmigrationv2.Migration
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create a Domain-Migration from a pAccount into a Project.
+func (c *clientImpl) MigrationRequestDomainMigration(
+	ctx context.Context,
+	req MigrationRequestDomainMigrationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // Resend a Domain email.
