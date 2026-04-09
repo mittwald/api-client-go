@@ -24,15 +24,18 @@ import "fmt"
 //    - "systemSoftwareId"
 //    - "updatePolicy"
 //    - "systemSoftwareVersion"
+//    - "name"
+//    - "externalVersion"
+//    - "updateAvailable"
 // description: "InstalledSystemSoftware describes the currently configured and installed SystemSoftwareVersion of a SystemSoftware besides the desired SystemSoftwareUpdatePolicy inside an AppInstallation."
 
 // InstalledSystemSoftware describes the currently configured and installed SystemSoftwareVersion of a SystemSoftware besides the desired SystemSoftwareUpdatePolicy inside an AppInstallation.
 type InstalledSystemSoftware struct {
-	ExternalVersion       *string                    `json:"externalVersion,omitempty"`
-	Name                  *string                    `json:"name,omitempty"`
+	ExternalVersion       string                     `json:"externalVersion"`
+	Name                  string                     `json:"name"`
 	SystemSoftwareId      string                     `json:"systemSoftwareId"`
 	SystemSoftwareVersion VersionStatus              `json:"systemSoftwareVersion"`
-	UpdateAvailable       *bool                      `json:"updateAvailable,omitempty"`
+	UpdateAvailable       bool                       `json:"updateAvailable"`
 	UpdatePolicy          SystemSoftwareUpdatePolicy `json:"updatePolicy"`
 }
 

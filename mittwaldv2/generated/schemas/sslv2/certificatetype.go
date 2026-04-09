@@ -10,5 +10,6 @@ package sslv2
 //    - 1
 //    - 2
 //    - 3
+// description: "Specifies the type of certificate.\n\nPossible values:\n- `0` – `UNSPECIFIED`: The certificate type is not specified.\n- `1` – `INTERNAL`: A certificate issued and managed internally by the system.\n- `2` – `EXTERNAL`: A certificate provided by an external source and imported into the system.\n- `3` – `DNS`: A certificate validated using DNS-based verification.\n"
 
 type CertificateType = int64
