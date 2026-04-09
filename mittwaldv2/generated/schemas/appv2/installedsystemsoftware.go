@@ -8,21 +8,34 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "externalVersion":
+//        type: "string"
+//    "name":
+//        type: "string"
 //    "systemSoftwareId":
 //        type: "string"
 //        format: "uuid"
 //    "systemSoftwareVersion": {"$ref": "#/components/schemas/de.mittwald.v1.app.VersionStatus"}
+//    "updateAvailable":
+//        type: "boolean"
+//        default: false
 //    "updatePolicy": {"$ref": "#/components/schemas/de.mittwald.v1.app.SystemSoftwareUpdatePolicy"}
 // required:
 //    - "systemSoftwareId"
 //    - "updatePolicy"
 //    - "systemSoftwareVersion"
+//    - "name"
+//    - "externalVersion"
+//    - "updateAvailable"
 // description: "InstalledSystemSoftware describes the currently configured and installed SystemSoftwareVersion of a SystemSoftware besides the desired SystemSoftwareUpdatePolicy inside an AppInstallation."
 
 // InstalledSystemSoftware describes the currently configured and installed SystemSoftwareVersion of a SystemSoftware besides the desired SystemSoftwareUpdatePolicy inside an AppInstallation.
 type InstalledSystemSoftware struct {
+	ExternalVersion       string                     `json:"externalVersion"`
+	Name                  string                     `json:"name"`
 	SystemSoftwareId      string                     `json:"systemSoftwareId"`
 	SystemSoftwareVersion VersionStatus              `json:"systemSoftwareVersion"`
+	UpdateAvailable       bool                       `json:"updateAvailable"`
 	UpdatePolicy          SystemSoftwareUpdatePolicy `json:"updatePolicy"`
 }
 

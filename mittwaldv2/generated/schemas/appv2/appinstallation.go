@@ -12,9 +12,13 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "appExternalVersion":
+//        type: "string"
 //    "appId":
 //        type: "string"
 //        format: "uuid"
+//    "appName":
+//        type: "string"
 //    "appVersion": {"$ref": "#/components/schemas/de.mittwald.v1.app.VersionStatus"}
 //    "createdAt":
 //        type: "string"
@@ -59,6 +63,9 @@ import (
 //    "systemSoftware":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.app.InstalledSystemSoftware"}
+//    "updateAvailable":
+//        type: "boolean"
+//        default: false
 //    "updatePolicy": {"$ref": "#/components/schemas/de.mittwald.v1.app.AppUpdatePolicy"}
 //    "userInputs":
 //        type: "array"
@@ -78,11 +85,16 @@ import (
 //    - "updatePolicy"
 //    - "linkedDatabases"
 //    - "phase"
+//    - "appName"
+//    - "updateAvailable"
+//    - "appExternalVersion"
 // description: "An AppInstallation is a concrete manifestation of an App in a specific AppVersion."
 
 // An AppInstallation is a concrete manifestation of an App in a specific AppVersion.
 type AppInstallation struct {
+	AppExternalVersion string                    `json:"appExternalVersion"`
 	AppId              string                    `json:"appId"`
+	AppName            string                    `json:"appName"`
 	AppVersion         VersionStatus             `json:"appVersion"`
 	CreatedAt          time.Time                 `json:"createdAt"`
 	CustomDocumentRoot *string                   `json:"customDocumentRoot,omitempty"`
@@ -100,6 +112,7 @@ type AppInstallation struct {
 	ScreenshotRef      *string                   `json:"screenshotRef,omitempty"`
 	ShortId            string                    `json:"shortId"`
 	SystemSoftware     []InstalledSystemSoftware `json:"systemSoftware"`
+	UpdateAvailable    bool                      `json:"updateAvailable"`
 	UpdatePolicy       AppUpdatePolicy           `json:"updatePolicy"`
 	UserInputs         []SavedUserInput          `json:"userInputs"`
 }
