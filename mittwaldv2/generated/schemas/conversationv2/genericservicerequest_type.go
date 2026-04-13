@@ -10,12 +10,12 @@ import "fmt"
 // enum:
 //    - "SERVICE_REQUEST"
 
-type ServiceRequestType string
+type GenericServiceRequestType string
 
-const ServiceRequestTypeSERVICEREQUEST ServiceRequestType = "SERVICE_REQUEST"
+const GenericServiceRequestTypeSERVICEREQUEST GenericServiceRequestType = "SERVICE_REQUEST"
 
-func (e ServiceRequestType) Validate() error {
-	if e == ServiceRequestTypeSERVICEREQUEST {
+func (e GenericServiceRequestType) Validate() error {
+	if e == GenericServiceRequestTypeSERVICEREQUEST {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

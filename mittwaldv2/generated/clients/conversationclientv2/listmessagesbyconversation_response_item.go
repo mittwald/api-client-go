@@ -21,7 +21,7 @@ import (
 type ListMessagesByConversationResponseItem struct {
 	AlternativeMessage        *conversationv2.Message
 	AlternativeStatusUpdate   *conversationv2.StatusUpdate
-	AlternativeServiceRequest *conversationv2.ServiceRequest
+	AlternativeServiceRequest *any
 }
 
 func (a *ListMessagesByConversationResponseItem) MarshalJSON() ([]byte, error) {
@@ -64,13 +64,11 @@ func (a *ListMessagesByConversationResponseItem) UnmarshalJSON(input []byte) err
 	}
 
 	reader.Reset(input)
-	var alternativeServiceRequest conversationv2.ServiceRequest
+	var alternativeServiceRequest any
 	if err := dec.Decode(&alternativeServiceRequest); err == nil {
 		//subtype: *generator.ReferenceType
-		if vErr := alternativeServiceRequest.Validate(); vErr == nil {
-			a.AlternativeServiceRequest = &alternativeServiceRequest
-			decodedAtLeastOnce = true
-		}
+		a.AlternativeServiceRequest = &alternativeServiceRequest
+		decodedAtLeastOnce = true
 	}
 
 	if !decodedAtLeastOnce {
@@ -87,7 +85,7 @@ func (a *ListMessagesByConversationResponseItem) Validate() error {
 		return a.AlternativeStatusUpdate.Validate()
 	}
 	if a.AlternativeServiceRequest != nil {
-		return a.AlternativeServiceRequest.Validate()
+		return nil
 	}
 	return errors.New("no alternative set")
 }
