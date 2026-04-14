@@ -18,6 +18,7 @@ import "fmt"
 //    - "TRANSFER_OUT"
 //    - "OWNER_CHANGE"
 //    - "DECLARE_REQUESTED"
+//    - "CONTACT_VERIFICATION"
 
 type ProcessType string
 
@@ -31,9 +32,10 @@ const ProcessTypeUPDATE ProcessType = "UPDATE"
 const ProcessTypeTRANSFEROUT ProcessType = "TRANSFER_OUT"
 const ProcessTypeOWNERCHANGE ProcessType = "OWNER_CHANGE"
 const ProcessTypeDECLAREREQUESTED ProcessType = "DECLARE_REQUESTED"
+const ProcessTypeCONTACTVERIFICATION ProcessType = "CONTACT_VERIFICATION"
 
 func (e ProcessType) Validate() error {
-	if e == ProcessTypeUNSPECIFIED || e == ProcessTypeREGISTER || e == ProcessTypeTRANSFER || e == ProcessTypeDELETE || e == ProcessTypeTRANSIT || e == ProcessTypeRESTORE || e == ProcessTypeUPDATE || e == ProcessTypeTRANSFEROUT || e == ProcessTypeOWNERCHANGE || e == ProcessTypeDECLAREREQUESTED {
+	if e == ProcessTypeUNSPECIFIED || e == ProcessTypeREGISTER || e == ProcessTypeTRANSFER || e == ProcessTypeDELETE || e == ProcessTypeTRANSIT || e == ProcessTypeRESTORE || e == ProcessTypeUPDATE || e == ProcessTypeTRANSFEROUT || e == ProcessTypeOWNERCHANGE || e == ProcessTypeDECLAREREQUESTED || e == ProcessTypeCONTACTVERIFICATION {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
