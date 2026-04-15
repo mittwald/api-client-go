@@ -14,7 +14,7 @@ import (
 var _ = Describe("CheckMigrationResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"allDomainsMigratable\":true,\"domains\":[{\"hostname\":\"string\",\"issues\":{\"alreadyExists\":true,\"insufficientLegacyData\":true,\"tldNotSupported\":true,\"transferLock\":true,\"validationErrors\":[{\"context\":{\"format\":\"email\"},\"message\":\"should be string\",\"path\":\".address.street\",\"type\":\"format\"}],\"wrongAuthCode\":true},\"migratable\":true}],\"generalIssues\":{\"customerIsNotAllowedToOrder\":true,\"legacyTokenNotAuthorized\":true},\"generallyPossible\":true}")
+			exampleJSON := []byte("{\"allDomainsMigratable\":true,\"domains\":[{\"hostname\":\"string\",\"issues\":{\"doesNotExist\":true,\"internalError\":true,\"invalidOwnerFields\":[{\"context\":{\"format\":\"email\"},\"message\":\"should be string\",\"path\":\".address.street\",\"type\":\"format\"}],\"premium\":true,\"registrarNotSupported\":true,\"tldNotSupported\":true},\"migratable\":true}],\"generalIssues\":{\"customerIsNotAllowedToOrder\":true,\"legacyTokenNotAuthorized\":true},\"generallyPossible\":true}")
 
 			sut := domainmigrationv2.CheckMigrationResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

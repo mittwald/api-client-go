@@ -13,49 +13,49 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "alreadyExists":
+//    "doesNotExist":
 //        type: "boolean"
-//    "insufficientLegacyData":
+//    "internalError":
+//        type: "boolean"
+//    "invalidOwnerFields":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.commons.ValidationErrorSchema"}
+//    "premium":
+//        type: "boolean"
+//    "registrarNotSupported":
 //        type: "boolean"
 //    "tldNotSupported":
 //        type: "boolean"
-//    "transferLock":
-//        type: "boolean"
-//    "validationErrors":
-//        type: "array"
-//        items: {"$ref": "#/components/schemas/de.mittwald.v1.commons.ValidationErrorSchema"}
-//    "wrongAuthCode":
-//        type: "boolean"
 // required:
-//    - "validationErrors"
-//    - "alreadyExists"
-//    - "wrongAuthCode"
-//    - "transferLock"
+//    - "invalidOwnerFields"
+//    - "doesNotExist"
+//    - "premium"
 //    - "tldNotSupported"
-//    - "insufficientLegacyData"
+//    - "registrarNotSupported"
+//    - "internalError"
 
 type DomainNotMigratableReasons struct {
-	AlreadyExists          bool                              `json:"alreadyExists"`
-	InsufficientLegacyData bool                              `json:"insufficientLegacyData"`
-	TldNotSupported        bool                              `json:"tldNotSupported"`
-	TransferLock           bool                              `json:"transferLock"`
-	ValidationErrors       []commonsv2.ValidationErrorSchema `json:"validationErrors"`
-	WrongAuthCode          bool                              `json:"wrongAuthCode"`
+	DoesNotExist          bool                              `json:"doesNotExist"`
+	InternalError         bool                              `json:"internalError"`
+	InvalidOwnerFields    []commonsv2.ValidationErrorSchema `json:"invalidOwnerFields"`
+	Premium               bool                              `json:"premium"`
+	RegistrarNotSupported bool                              `json:"registrarNotSupported"`
+	TldNotSupported       bool                              `json:"tldNotSupported"`
 }
 
 func (o *DomainNotMigratableReasons) Validate() error {
-	if o.ValidationErrors == nil {
-		return errors.New("property validationErrors is required, but not set")
+	if o.InvalidOwnerFields == nil {
+		return errors.New("property invalidOwnerFields is required, but not set")
 	}
 	if err := func() error {
-		for i := range o.ValidationErrors {
-			if err := o.ValidationErrors[i].Validate(); err != nil {
+		for i := range o.InvalidOwnerFields {
+			if err := o.InvalidOwnerFields[i].Validate(); err != nil {
 				return fmt.Errorf("item %d is invalid %w", i, err)
 			}
 		}
 		return nil
 	}(); err != nil {
-		return fmt.Errorf("invalid property validationErrors: %w", err)
+		return fmt.Errorf("invalid property invalidOwnerFields: %w", err)
 	}
 	return nil
 }

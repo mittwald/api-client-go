@@ -17,8 +17,6 @@ import (
 //
 // Check if an address exists.
 //
-// Only the DACH region is currently supported.
-//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/misc/verification-verify-address
 type VerificationVerifyAddressRequest struct {
