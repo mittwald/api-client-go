@@ -135,8 +135,6 @@ func (c *clientImpl) VerificationDetectPhishingEmail(
 }
 
 // Check if an address exists.
-//
-// Only the DACH region is currently supported.
 func (c *clientImpl) VerificationVerifyAddress(
 	ctx context.Context,
 	req VerificationVerifyAddressRequest,
