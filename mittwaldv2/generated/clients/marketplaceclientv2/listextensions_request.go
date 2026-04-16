@@ -24,6 +24,8 @@ type ListExtensionsRequest struct {
 	Context           *marketplacev2.Context
 	SearchTerm        *string
 	IncludeDeprecated *bool
+	IncludeFree       *bool
+	IncludeChargeable *bool
 	Limit             *int64
 	Skip              *int64
 	Page              *int64
@@ -74,6 +76,12 @@ func (r *ListExtensionsRequest) query() url.Values {
 	}
 	if r.IncludeDeprecated != nil {
 		q.Set("includeDeprecated", strconv.FormatBool(*r.IncludeDeprecated))
+	}
+	if r.IncludeFree != nil {
+		q.Set("includeFree", strconv.FormatBool(*r.IncludeFree))
+	}
+	if r.IncludeChargeable != nil {
+		q.Set("includeChargeable", strconv.FormatBool(*r.IncludeChargeable))
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))

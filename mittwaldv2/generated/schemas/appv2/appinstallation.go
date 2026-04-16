@@ -49,6 +49,8 @@ import (
 //        type: "object"
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.app.LockPurpose"}
 //    "phase": {"$ref": "#/components/schemas/de.mittwald.v1.app.Phase"}
+//    "projectDescription":
+//        type: "string"
 //    "projectId":
 //        type: "string"
 //        format: "uuid"
@@ -88,6 +90,7 @@ import (
 //    - "appName"
 //    - "updateAvailable"
 //    - "appExternalVersion"
+//    - "projectDescription"
 // description: "An AppInstallation is a concrete manifestation of an App in a specific AppVersion."
 
 // An AppInstallation is a concrete manifestation of an App in a specific AppVersion.
@@ -107,6 +110,7 @@ type AppInstallation struct {
 	LinkedDatabases    []LinkedDatabase          `json:"linkedDatabases"`
 	LockedBy           map[string]LockPurpose    `json:"lockedBy,omitempty"`
 	Phase              Phase                     `json:"phase"`
+	ProjectDescription string                    `json:"projectDescription"`
 	ProjectId          string                    `json:"projectId"`
 	ScreenshotId       *string                   `json:"screenshotId,omitempty"`
 	ScreenshotRef      *string                   `json:"screenshotRef,omitempty"`

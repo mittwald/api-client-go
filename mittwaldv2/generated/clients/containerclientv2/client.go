@@ -149,6 +149,11 @@ type Client interface {
 		req ValidateRegistryCredentialsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*ValidateRegistryCredentialsResponse, *http.Response, error)
+	DeprecatedValidateContainerRegistryUri(
+		ctx context.Context,
+		req DeprecatedValidateContainerRegistryUriRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*DeprecatedValidateContainerRegistryUriResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -874,6 +879,36 @@ func (c *clientImpl) ValidateRegistryCredentials(
 	}
 
 	var response ValidateRegistryCredentialsResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Validate a Registries' URI.
+//
+// Deprecated. Container registry URI validation is performed automatically during resource creation; this endpoint is no longer necessary. This endpoint will be removed in a future version.
+func (c *clientImpl) DeprecatedValidateContainerRegistryUri(
+	ctx context.Context,
+	req DeprecatedValidateContainerRegistryUriRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*DeprecatedValidateContainerRegistryUriResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response DeprecatedValidateContainerRegistryUriResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
