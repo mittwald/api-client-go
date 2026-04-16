@@ -14,7 +14,7 @@ import (
 var _ = Describe("MigrationNotPossibleReasons", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"customerIsNotAllowedToOrder\":true,\"legacyTokenNotAuthorized\":true}")
+			exampleJSON := []byte("{\"customerIsNotAllowedToOrder\":true,\"legacyTokenNotAuthorized\":true,\"noDomainsInSource\":true}")
 
 			sut := domainmigrationv2.MigrationNotPossibleReasons{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

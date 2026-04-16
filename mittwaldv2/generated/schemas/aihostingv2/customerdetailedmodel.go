@@ -28,6 +28,9 @@ import (
 //    "status": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.DetailedModelStatus"}
 //    "termsOfServiceLink":
 //        type: "string"
+//    "tokenFactor":
+//        type: "number"
+//        format: "float"
 // required:
 //    - "name"
 //    - "displayName"
@@ -35,6 +38,7 @@ import (
 //    - "termsOfServiceLink"
 //    - "activeAt"
 //    - "status"
+//    - "tokenFactor"
 
 type CustomerDetailedModel struct {
 	ActiveAt           time.Time           `json:"activeAt"`
@@ -45,6 +49,7 @@ type CustomerDetailedModel struct {
 	ReplacesModelName  *string             `json:"replacesModelName,omitempty"`
 	Status             DetailedModelStatus `json:"status"`
 	TermsOfServiceLink string              `json:"termsOfServiceLink"`
+	TokenFactor        float64             `json:"tokenFactor"`
 }
 
 func (o *CustomerDetailedModel) Validate() error {

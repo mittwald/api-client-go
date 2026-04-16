@@ -10,13 +10,17 @@ package domainmigrationv2
 //        type: "boolean"
 //    "legacyTokenNotAuthorized":
 //        type: "boolean"
+//    "noDomainsInSource":
+//        type: "boolean"
 // required:
 //    - "customerIsNotAllowedToOrder"
 //    - "legacyTokenNotAuthorized"
+//    - "noDomainsInSource"
 
 type MigrationNotPossibleReasons struct {
 	CustomerIsNotAllowedToOrder bool `json:"customerIsNotAllowedToOrder"`
 	LegacyTokenNotAuthorized    bool `json:"legacyTokenNotAuthorized"`
+	NoDomainsInSource           bool `json:"noDomainsInSource"`
 }
 
 func (o *MigrationNotPossibleReasons) Validate() error {
