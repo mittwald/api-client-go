@@ -144,21 +144,6 @@ type Client interface {
 		req StopServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	ValidateRegistryCredentials(
-		ctx context.Context,
-		req ValidateRegistryCredentialsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*ValidateRegistryCredentialsResponse, *http.Response, error)
-	GetTemplate(
-		ctx context.Context,
-		req GetTemplateRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*containerv2.Template, *http.Response, error)
-	ListTemplates(
-		ctx context.Context,
-		req ListTemplatesRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]containerv2.Template, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -860,88 +845,4 @@ func (c *clientImpl) StopService(
 	}
 
 	return httpRes, nil
-}
-
-// Validate a Registries' credentials.
-func (c *clientImpl) ValidateRegistryCredentials(
-	ctx context.Context,
-	req ValidateRegistryCredentialsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*ValidateRegistryCredentialsResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response ValidateRegistryCredentialsResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a Template by ID.
-func (c *clientImpl) GetTemplate(
-	ctx context.Context,
-	req GetTemplateRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*containerv2.Template, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response containerv2.Template
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List Templates by category.
-func (c *clientImpl) ListTemplates(
-	ctx context.Context,
-	req ListTemplatesRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]containerv2.Template, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []containerv2.Template
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
