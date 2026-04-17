@@ -10,7 +10,6 @@ import "fmt"
 // enum:
 //    - "running"
 //    - "stopped"
-//    - "restarting"
 //    - "error"
 //    - "creating"
 //    - "starting"
@@ -19,13 +18,12 @@ type ServiceStatus string
 
 const ServiceStatusRunning ServiceStatus = "running"
 const ServiceStatusStopped ServiceStatus = "stopped"
-const ServiceStatusRestarting ServiceStatus = "restarting"
 const ServiceStatusError ServiceStatus = "error"
 const ServiceStatusCreating ServiceStatus = "creating"
 const ServiceStatusStarting ServiceStatus = "starting"
 
 func (e ServiceStatus) Validate() error {
-	if e == ServiceStatusRunning || e == ServiceStatusStopped || e == ServiceStatusRestarting || e == ServiceStatusError || e == ServiceStatusCreating || e == ServiceStatusStarting {
+	if e == ServiceStatusRunning || e == ServiceStatusStopped || e == ServiceStatusError || e == ServiceStatusCreating || e == ServiceStatusStarting {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
