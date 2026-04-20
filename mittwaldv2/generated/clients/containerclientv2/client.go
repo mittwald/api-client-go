@@ -144,11 +144,6 @@ type Client interface {
 		req StopServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	ValidateRegistryCredentials(
-		ctx context.Context,
-		req ValidateRegistryCredentialsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*ValidateRegistryCredentialsResponse, *http.Response, error)
 	DeprecatedValidateContainerRegistryUri(
 		ctx context.Context,
 		req DeprecatedValidateContainerRegistryUriRequest,
@@ -855,34 +850,6 @@ func (c *clientImpl) StopService(
 	}
 
 	return httpRes, nil
-}
-
-// Validate a Registries' credentials.
-func (c *clientImpl) ValidateRegistryCredentials(
-	ctx context.Context,
-	req ValidateRegistryCredentialsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*ValidateRegistryCredentialsResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response ValidateRegistryCredentialsResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
 
 // Validate a Registries' URI.
