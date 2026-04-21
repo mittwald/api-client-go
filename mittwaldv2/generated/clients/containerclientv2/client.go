@@ -149,6 +149,11 @@ type Client interface {
 		req DeprecatedValidateContainerRegistryUriRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedValidateContainerRegistryUriResponse, *http.Response, error)
+	DeprecatedValidateRegistryCredentials(
+		ctx context.Context,
+		req DeprecatedValidateRegistryCredentialsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*DeprecatedValidateRegistryCredentialsResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -876,6 +881,36 @@ func (c *clientImpl) DeprecatedValidateContainerRegistryUri(
 	}
 
 	var response DeprecatedValidateContainerRegistryUriResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Validate a Registries' credentials.
+//
+// Deprecated. Registry credential validation is performed automatically on a scheduled basis in the backend. This endpoint will be removed in a future version.
+func (c *clientImpl) DeprecatedValidateRegistryCredentials(
+	ctx context.Context,
+	req DeprecatedValidateRegistryCredentialsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*DeprecatedValidateRegistryCredentialsResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response DeprecatedValidateRegistryCredentialsResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
