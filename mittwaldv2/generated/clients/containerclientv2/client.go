@@ -154,6 +154,16 @@ type Client interface {
 		req DeprecatedValidateContainerRegistryUriRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedValidateContainerRegistryUriResponse, *http.Response, error)
+	GetTemplate(
+		ctx context.Context,
+		req GetTemplateRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*containerv2.Template, *http.Response, error)
+	ListTemplates(
+		ctx context.Context,
+		req ListTemplatesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]containerv2.Template, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -911,6 +921,62 @@ func (c *clientImpl) DeprecatedValidateContainerRegistryUri(
 	}
 
 	var response DeprecatedValidateContainerRegistryUriResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get a Container Template by ID.
+func (c *clientImpl) GetTemplate(
+	ctx context.Context,
+	req GetTemplateRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*containerv2.Template, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response containerv2.Template
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Container Templates.
+func (c *clientImpl) ListTemplates(
+	ctx context.Context,
+	req ListTemplatesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]containerv2.Template, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []containerv2.Template
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
