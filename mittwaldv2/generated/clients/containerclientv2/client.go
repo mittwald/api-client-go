@@ -29,6 +29,16 @@ type Client interface {
 		req CreateRegistryRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.Registry, *http.Response, error)
+	ListStacks(
+		ctx context.Context,
+		req ListStacksRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]containerv2.StackResponse, *http.Response, error)
+	CreateStack(
+		ctx context.Context,
+		req CreateStackRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*containerv2.StackResponse, *http.Response, error)
 	GetStack(
 		ctx context.Context,
 		req GetStackRequest,
@@ -89,6 +99,11 @@ type Client interface {
 		req GetServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.ServiceResponse, *http.Response, error)
+	GetTemplate(
+		ctx context.Context,
+		req GetTemplateRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*containerv2.Template, *http.Response, error)
 	ListSelfStacks(
 		ctx context.Context,
 		req ListSelfStacksRequest,
@@ -104,16 +119,11 @@ type Client interface {
 		req ListStackVolumesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]containerv2.VolumeResponse, *http.Response, error)
-	ListStacks(
+	ListTemplates(
 		ctx context.Context,
-		req ListStacksRequest,
+		req ListTemplatesRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*[]containerv2.StackResponse, *http.Response, error)
-	CreateStack(
-		ctx context.Context,
-		req CreateStackRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*containerv2.StackResponse, *http.Response, error)
+	) (*[]containerv2.Template, *http.Response, error)
 	ListVolumes(
 		ctx context.Context,
 		req ListVolumesRequest,
@@ -139,6 +149,11 @@ type Client interface {
 		req RotatePullImageWebhookForServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.ServicePullImageWebhookResponse, *http.Response, error)
+	SetStackDescription(
+		ctx context.Context,
+		req SetStackDescriptionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	SetStackUpdateSchedule(
 		ctx context.Context,
 		req SetStackUpdateScheduleRequest,
@@ -154,31 +169,21 @@ type Client interface {
 		req StopServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	DeprecatedValidateRegistryCredentials(
-		ctx context.Context,
-		req DeprecatedValidateRegistryCredentialsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*DeprecatedValidateRegistryCredentialsResponse, *http.Response, error)
 	DeprecatedValidateContainerRegistryUri(
 		ctx context.Context,
 		req DeprecatedValidateContainerRegistryUriRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedValidateContainerRegistryUriResponse, *http.Response, error)
-	GetTemplate(
+	DeprecatedValidateRegistryCredentials(
 		ctx context.Context,
-		req GetTemplateRequest,
+		req DeprecatedValidateRegistryCredentialsRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*containerv2.Template, *http.Response, error)
-	ListTemplates(
+	) (*DeprecatedValidateRegistryCredentialsResponse, *http.Response, error)
+	CreateStackFromTemplate(
 		ctx context.Context,
-		req ListTemplatesRequest,
+		req CreateStackFromTemplateRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*[]containerv2.Template, *http.Response, error)
-	SetStackDescription(
-		ctx context.Context,
-		req SetStackDescriptionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
+	) (*containerv2.StackResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -264,6 +269,62 @@ func (c *clientImpl) CreateRegistry(
 	}
 
 	var response containerv2.Registry
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Stacks belonging to a Project.
+func (c *clientImpl) ListStacks(
+	ctx context.Context,
+	req ListStacksRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]containerv2.StackResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []containerv2.StackResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create a Stack.
+func (c *clientImpl) CreateStack(
+	ctx context.Context,
+	req CreateStackRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*containerv2.StackResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response containerv2.StackResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -586,6 +647,34 @@ func (c *clientImpl) GetService(
 	return &response, httpRes, nil
 }
 
+// Get a Container Template by ID.
+func (c *clientImpl) GetTemplate(
+	ctx context.Context,
+	req GetTemplateRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*containerv2.Template, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response containerv2.Template
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // List Stacks belonging to the executing user.
 func (c *clientImpl) ListSelfStacks(
 	ctx context.Context,
@@ -670,12 +759,12 @@ func (c *clientImpl) ListStackVolumes(
 	return &response, httpRes, nil
 }
 
-// List Stacks belonging to a Project.
-func (c *clientImpl) ListStacks(
+// List Container Templates.
+func (c *clientImpl) ListTemplates(
 	ctx context.Context,
-	req ListStacksRequest,
+	req ListTemplatesRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*[]containerv2.StackResponse, *http.Response, error) {
+) (*[]containerv2.Template, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -691,35 +780,7 @@ func (c *clientImpl) ListStacks(
 		return nil, httpRes, err
 	}
 
-	var response []containerv2.StackResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Create a Stack.
-func (c *clientImpl) CreateStack(
-	ctx context.Context,
-	req CreateStackRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*containerv2.StackResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response containerv2.StackResponse
+	var response []containerv2.Template
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -862,6 +923,30 @@ func (c *clientImpl) RotatePullImageWebhookForService(
 	return &response, httpRes, nil
 }
 
+// Replace the description of a Stack.
+func (c *clientImpl) SetStackDescription(
+	ctx context.Context,
+	req SetStackDescriptionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Set an update schedule for a Stack.
 func (c *clientImpl) SetStackUpdateSchedule(
 	ctx context.Context,
@@ -934,36 +1019,6 @@ func (c *clientImpl) StopService(
 	return httpRes, nil
 }
 
-// Validate a Registries' credentials.
-//
-// Deprecated. Registry credential validation is performed automatically on a scheduled basis in the backend. This endpoint will be removed in a future version.
-func (c *clientImpl) DeprecatedValidateRegistryCredentials(
-	ctx context.Context,
-	req DeprecatedValidateRegistryCredentialsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*DeprecatedValidateRegistryCredentialsResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response DeprecatedValidateRegistryCredentialsResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
 // Validate a Registries' URI.
 //
 // Deprecated. Container registry URI validation is performed automatically during resource creation; this endpoint is no longer necessary. This endpoint will be removed in a future version.
@@ -994,12 +1049,14 @@ func (c *clientImpl) DeprecatedValidateContainerRegistryUri(
 	return &response, httpRes, nil
 }
 
-// Get a Container Template by ID.
-func (c *clientImpl) GetTemplate(
+// Validate a Registries' credentials.
+//
+// Deprecated. Registry credential validation is performed automatically on a scheduled basis in the backend. This endpoint will be removed in a future version.
+func (c *clientImpl) DeprecatedValidateRegistryCredentials(
 	ctx context.Context,
-	req GetTemplateRequest,
+	req DeprecatedValidateRegistryCredentialsRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*containerv2.Template, *http.Response, error) {
+) (*DeprecatedValidateRegistryCredentialsResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -1015,19 +1072,19 @@ func (c *clientImpl) GetTemplate(
 		return nil, httpRes, err
 	}
 
-	var response containerv2.Template
+	var response DeprecatedValidateRegistryCredentialsResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
 }
 
-// List Container Templates.
-func (c *clientImpl) ListTemplates(
+// Create a Stack from a Template.
+func (c *clientImpl) CreateStackFromTemplate(
 	ctx context.Context,
-	req ListTemplatesRequest,
+	req CreateStackFromTemplateRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*[]containerv2.Template, *http.Response, error) {
+) (*containerv2.StackResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -1043,33 +1100,9 @@ func (c *clientImpl) ListTemplates(
 		return nil, httpRes, err
 	}
 
-	var response []containerv2.Template
+	var response containerv2.StackResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Replace the description of a Stack.
-func (c *clientImpl) SetStackDescription(
-	ctx context.Context,
-	req SetStackDescriptionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }

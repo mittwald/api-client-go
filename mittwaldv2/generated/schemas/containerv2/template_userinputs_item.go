@@ -8,6 +8,8 @@ package containerv2
 // properties:
 //    "dataSource":
 //        type: "string"
+//    "defaultValue":
+//        type: "string"
 //    "name":
 //        type: "string"
 //    "required":
@@ -20,6 +22,7 @@ package containerv2
 
 type TemplateUserInputsItem struct {
 	DataSource       *string `json:"dataSource,omitempty"`
+	DefaultValue     *string `json:"defaultValue,omitempty"`
 	Name             string  `json:"name"`
 	Required         bool    `json:"required"`
 	ValidationSchema *string `json:"validationSchema,omitempty"`

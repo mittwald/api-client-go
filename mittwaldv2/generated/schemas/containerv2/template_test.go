@@ -14,7 +14,7 @@ import (
 var _ = Describe("Template", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"categories\":[\"string\"],\"description\":{\"de\":\"string\",\"en\":\"string\"},\"developer\":\"string\",\"domains\":[{\"port\":\"string\",\"service\":\"string\",\"userInput\":\"string\"}],\"icon\":\"string\",\"id\":\"string\",\"license\":\"string\",\"manifestVersion\":\"string\",\"name\":\"string\",\"repository\":\"string\",\"tagline\":{\"de\":\"string\",\"en\":\"string\"},\"userInputs\":[{\"dataSource\":\"string\",\"name\":\"string\",\"required\":true,\"validationSchema\":\"string\"}],\"version\":\"string\",\"website\":\"string\"}")
+			exampleJSON := []byte("{\"categories\":[\"string\"],\"description\":{\"de\":\"string\",\"en\":\"string\"},\"developer\":\"string\",\"domains\":[{\"port\":\"string\",\"service\":\"string\",\"userInput\":\"string\"}],\"icon\":\"string\",\"id\":\"string\",\"license\":\"string\",\"manifestVersion\":\"string\",\"name\":\"string\",\"repository\":\"string\",\"tagline\":{\"de\":\"string\",\"en\":\"string\"},\"userInputs\":[{\"dataSource\":\"string\",\"defaultValue\":\"string\",\"name\":\"string\",\"required\":true,\"validationSchema\":\"string\"}],\"version\":\"string\",\"website\":\"string\"}")
 
 			sut := containerv2.Template{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

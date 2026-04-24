@@ -72,6 +72,8 @@ import (
 //            properties:
 //                "dataSource":
 //                    type: "string"
+//                "defaultValue":
+//                    type: "string"
 //                "name":
 //                    type: "string"
 //                "required":

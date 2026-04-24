@@ -40,6 +40,21 @@ import (
 //                            type: "string"
 //                        "domainName":
 //                            type: "string"
+//    "email":
+//        type: "object"
+//        properties:
+//            "emailInboxes":
+//                type: "array"
+//                items:
+//                    type: "object"
+//                    properties:
+//                        "email":
+//                            type: "string"
+//                        "password":
+//                            type: "string"
+//                    required:
+//                        - "email"
+//                        - "password"
 //    "notes":
 //        type: "string"
 //    "preferredRelocationDate":
@@ -108,6 +123,7 @@ import (
 type ServiceRequestRelocationPayload struct {
 	Contact                 ServiceRequestRelocationPayloadContact `json:"contact"`
 	Domain                  *ServiceRequestRelocationPayloadDomain `json:"domain,omitempty"`
+	Email                   *ServiceRequestRelocationPayloadEmail  `json:"email,omitempty"`
 	Notes                   *string                                `json:"notes,omitempty"`
 	PreferredRelocationDate *time.Time                             `json:"preferredRelocationDate,omitempty"`
 	RedirectusKey           float64                                `json:"redirectusKey"`
@@ -127,6 +143,14 @@ func (o *ServiceRequestRelocationPayload) Validate() error {
 		return o.Domain.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property domain: %w", err)
+	}
+	if err := func() error {
+		if o.Email == nil {
+			return nil
+		}
+		return o.Email.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property email: %w", err)
 	}
 	if err := o.Source.Validate(); err != nil {
 		return fmt.Errorf("invalid property source: %w", err)
