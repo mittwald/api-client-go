@@ -23,6 +23,7 @@ import (
 //                "issues": {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.DomainNotMigratableReasons"}
 //                "migratable":
 //                    type: "boolean"
+//                "migrationData": {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.MigrationData"}
 //            required:
 //                - "hostname"
 //                - "migratable"

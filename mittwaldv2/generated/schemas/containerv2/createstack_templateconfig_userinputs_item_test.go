@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("CreateStack", func() {
+var _ = Describe("CreateStackTemplateConfigUserInputsItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"description\":\"N8N\",\"prefix\":\"n8n\",\"templateConfig\":{\"templateId\":\"uptime-kuma\",\"userInputs\":[{\"name\":\"HOST\",\"value\":\"kuma.example.org\"}]}}")
+			exampleJSON := []byte("{\"name\":\"HOST\",\"value\":\"kuma.example.org\"}")
 
-			sut := containerv2.CreateStack{}
+			sut := containerv2.CreateStackTemplateConfigUserInputsItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

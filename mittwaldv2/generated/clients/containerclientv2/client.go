@@ -179,11 +179,6 @@ type Client interface {
 		req DeprecatedValidateRegistryCredentialsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedValidateRegistryCredentialsResponse, *http.Response, error)
-	CreateStackFromTemplate(
-		ctx context.Context,
-		req CreateStackFromTemplateRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*containerv2.StackResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1073,34 +1068,6 @@ func (c *clientImpl) DeprecatedValidateRegistryCredentials(
 	}
 
 	var response DeprecatedValidateRegistryCredentialsResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Create a Stack from a Template.
-func (c *clientImpl) CreateStackFromTemplate(
-	ctx context.Context,
-	req CreateStackFromTemplateRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*containerv2.StackResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response containerv2.StackResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

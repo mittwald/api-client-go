@@ -8,9 +8,6 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "prefix":
-//        type: "string"
-//        example: "kuma"
 //    "templateId":
 //        type: "string"
 //        example: "uptime-kuma"
@@ -32,13 +29,12 @@ import "fmt"
 // required:
 //    - "templateId"
 
-type CreateStackFromTemplate struct {
-	Prefix     *string                                 `json:"prefix,omitempty"`
-	TemplateId string                                  `json:"templateId"`
-	UserInputs []CreateStackFromTemplateUserInputsItem `json:"userInputs,omitempty"`
+type CreateStackTemplateConfig struct {
+	TemplateId string                                    `json:"templateId"`
+	UserInputs []CreateStackTemplateConfigUserInputsItem `json:"userInputs,omitempty"`
 }
 
-func (o *CreateStackFromTemplate) Validate() error {
+func (o *CreateStackTemplateConfig) Validate() error {
 	if err := func() error {
 		if o.UserInputs == nil {
 			return nil

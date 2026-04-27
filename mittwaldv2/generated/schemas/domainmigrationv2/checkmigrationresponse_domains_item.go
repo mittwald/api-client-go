@@ -13,14 +13,16 @@ import "fmt"
 //    "issues": {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.DomainNotMigratableReasons"}
 //    "migratable":
 //        type: "boolean"
+//    "migrationData": {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.MigrationData"}
 // required:
 //    - "hostname"
 //    - "migratable"
 
 type CheckMigrationResponseDomainsItem struct {
-	Hostname   string                      `json:"hostname"`
-	Issues     *DomainNotMigratableReasons `json:"issues,omitempty"`
-	Migratable bool                        `json:"migratable"`
+	Hostname      string                      `json:"hostname"`
+	Issues        *DomainNotMigratableReasons `json:"issues,omitempty"`
+	Migratable    bool                        `json:"migratable"`
+	MigrationData *MigrationData              `json:"migrationData,omitempty"`
 }
 
 func (o *CheckMigrationResponseDomainsItem) Validate() error {
@@ -31,6 +33,14 @@ func (o *CheckMigrationResponseDomainsItem) Validate() error {
 		return o.Issues.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property issues: %w", err)
+	}
+	if err := func() error {
+		if o.MigrationData == nil {
+			return nil
+		}
+		return o.MigrationData.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property migrationData: %w", err)
 	}
 	return nil
 }

@@ -14,7 +14,7 @@ import (
 var _ = Describe("CheckMigrationResponseDomainsItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"hostname\":\"string\",\"issues\":{\"insufficientState\":true,\"isPremiumDomain\":true,\"registrarNotSupported\":true,\"tldNotSupported\":true},\"migratable\":true}")
+			exampleJSON := []byte("{\"hostname\":\"string\",\"issues\":{\"insufficientState\":true,\"isPremiumDomain\":true,\"registrarNotSupported\":true,\"tldNotSupported\":true},\"migratable\":true,\"migrationData\":{\"dnsRecords\":[{\"ttl\":42,\"type\":\"A\",\"value\":\"string\"}],\"subdomains\":[{\"dnsRecords\":[{\"ttl\":42,\"type\":\"A\",\"value\":\"string\"}],\"hostname\":\"string\",\"target\":\"string\"}]}}")
 
 			sut := domainmigrationv2.CheckMigrationResponseDomainsItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

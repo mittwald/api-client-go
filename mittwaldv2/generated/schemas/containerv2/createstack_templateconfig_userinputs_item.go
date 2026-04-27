@@ -16,11 +16,11 @@ package containerv2
 //    - "name"
 //    - "value"
 
-type CreateStackFromTemplateUserInputsItem struct {
+type CreateStackTemplateConfigUserInputsItem struct {
 	Name  string `json:"name"`
 	Value string `json:"value"`
 }
 
-func (o *CreateStackFromTemplateUserInputsItem) Validate() error {
+func (o *CreateStackTemplateConfigUserInputsItem) Validate() error {
 	return nil
 }

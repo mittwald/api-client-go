@@ -18,9 +18,10 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/container/container-list-self-stacks
 type ListSelfStacksRequest struct {
-	Limit *int64
-	Skip  *int64
-	Page  *int64
+	SearchTerm *string
+	Limit      *int64
+	Skip       *int64
+	Page       *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -58,6 +59,9 @@ func (r *ListSelfStacksRequest) url() string {
 
 func (r *ListSelfStacksRequest) query() url.Values {
 	q := make(url.Values)
+	if r.SearchTerm != nil {
+		q.Set("searchTerm", *r.SearchTerm)
+	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
 	}
