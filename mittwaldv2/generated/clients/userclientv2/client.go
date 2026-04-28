@@ -1260,7 +1260,7 @@ func (c *clientImpl) PasswordValidationGetPasswordPolicy(
 	return &response, httpRes, nil
 }
 
-// Get a password policy.
+// DEPRECAED. Use `GET` `/v2/password-policies/{passwordPolicy}` instead.
 func (c *clientImpl) PasswordValidationGetPasswordPolicyV2Deprecated(
 	ctx context.Context,
 	req PasswordValidationGetPasswordPolicyV2DeprecatedRequest,

@@ -14,16 +14,21 @@ import (
 //    "dnsRecords":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.DNSRecord"}
+//    "monthlyPriceCents":
+//        type: "integer"
+//        description: "Monthly net domain price in EUR cents."
 //    "subdomains":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.Subdomain"}
 // required:
 //    - "subdomains"
 //    - "dnsRecords"
+//    - "monthlyPriceCents"
 
 type MigrationData struct {
-	DnsRecords []DNSRecord `json:"dnsRecords"`
-	Subdomains []Subdomain `json:"subdomains"`
+	DnsRecords        []DNSRecord `json:"dnsRecords"`
+	MonthlyPriceCents int64       `json:"monthlyPriceCents"`
+	Subdomains        []Subdomain `json:"subdomains"`
 }
 
 func (o *MigrationData) Validate() error {

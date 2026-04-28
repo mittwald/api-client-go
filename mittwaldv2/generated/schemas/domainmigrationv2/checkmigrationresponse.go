@@ -16,17 +16,9 @@ import (
 //    "domains":
 //        type: "array"
 //        items:
-//            type: "object"
-//            properties:
-//                "hostname":
-//                    type: "string"
-//                "issues": {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.DomainNotMigratableReasons"}
-//                "migratable":
-//                    type: "boolean"
-//                "migrationData": {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.MigrationData"}
-//            required:
-//                - "hostname"
-//                - "migratable"
+//            oneOf:
+//                - {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.MigratableDomain"}
+//                - {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.NonMigratableDomain"}
 //    "generalIssues": {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.MigrationNotPossibleReasons"}
 //    "generallyPossible":
 //        type: "boolean"
