@@ -14,17 +14,22 @@ package aihostingv2
 //        type: "string"
 //    "termsOfServiceLink":
 //        type: "string"
+//    "tokenFactor":
+//        type: "number"
+//        format: "float"
 // required:
 //    - "name"
 //    - "displayName"
 //    - "docLink"
 //    - "termsOfServiceLink"
+//    - "tokenFactor"
 
 type Model struct {
-	DisplayName        string `json:"displayName"`
-	DocLink            string `json:"docLink"`
-	Name               string `json:"name"`
-	TermsOfServiceLink string `json:"termsOfServiceLink"`
+	DisplayName        string  `json:"displayName"`
+	DocLink            string  `json:"docLink"`
+	Name               string  `json:"name"`
+	TermsOfServiceLink string  `json:"termsOfServiceLink"`
+	TokenFactor        float64 `json:"tokenFactor"`
 }
 
 func (o *Model) Validate() error {

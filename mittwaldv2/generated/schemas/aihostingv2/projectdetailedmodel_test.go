@@ -14,7 +14,7 @@ import (
 var _ = Describe("ProjectDetailedModel", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"activeAt\":\"2006-01-02T15:04:05Z\",\"displayName\":\"string\",\"docLink\":\"string\",\"name\":\"string\",\"removalAt\":\"2006-01-02T15:04:05Z\",\"replacesModelName\":\"string\",\"status\":\"active\",\"termsOfServiceLink\":\"string\"}")
+			exampleJSON := []byte("{\"activeAt\":\"2006-01-02T15:04:05Z\",\"displayName\":\"string\",\"docLink\":\"string\",\"name\":\"string\",\"removalAt\":\"2006-01-02T15:04:05Z\",\"replacesModelName\":\"string\",\"status\":\"active\",\"termsOfServiceLink\":\"string\",\"tokenFactor\":3.14}")
 
 			sut := aihostingv2.ProjectDetailedModel{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
