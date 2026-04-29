@@ -24,6 +24,9 @@ import "fmt"
 //    "services":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.container.ServiceResponse"}
+//    "templateId":
+//        type: "string"
+//        description: "Id of the Template used to create this stack, if one was used."
 //    "updateSchedule":
 //        type: "object"
 //        properties:
@@ -51,6 +54,7 @@ type StackResponse struct {
 	Prefix         string                       `json:"prefix"`
 	ProjectId      string                       `json:"projectId"`
 	Services       []ServiceResponse            `json:"services,omitempty"`
+	TemplateId     *string                      `json:"templateId,omitempty"`
 	UpdateSchedule *StackResponseUpdateSchedule `json:"updateSchedule,omitempty"`
 	Volumes        []VolumeResponse             `json:"volumes,omitempty"`
 }

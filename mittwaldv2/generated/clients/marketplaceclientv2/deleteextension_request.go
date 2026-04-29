@@ -17,7 +17,7 @@ import (
 //
 // Delete an extension.
 //
-// Remove the Extension. Make sure that there are no instances for this extension
+// Start the deletion period of the Extension.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/marketplace/extension-delete-extension

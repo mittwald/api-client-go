@@ -27,10 +27,13 @@ import (
 //    "createdAt":
 //        type: "string"
 //        format: "date-time"
+//    "deletionDeadline":
+//        type: "string"
+//        format: "date-time"
 //    "deprecation": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExtensionDeprecation"}
 //    "description":
 //        type: "string"
-//        description: "A short description of the capabilites of the Extension."
+//        description: "A short description of the capabilities of the Extension."
 //    "detailedDescriptions": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.DetailedDescriptions"}
 //    "disabled":
 //        type: "boolean"
@@ -48,6 +51,8 @@ import (
 //    "id":
 //        type: "string"
 //        format: "uuid"
+//    "isDeletionScheduled":
+//        type: "boolean"
 //    "logoRefId":
 //        type: "string"
 //        format: "uuid"
@@ -117,6 +122,7 @@ type Extension struct {
 	Context              Context               `json:"context"`
 	ContributorId        string                `json:"contributorId"`
 	CreatedAt            time.Time             `json:"createdAt"`
+	DeletionDeadline     *time.Time            `json:"deletionDeadline,omitempty"`
 	Deprecation          *ExtensionDeprecation `json:"deprecation,omitempty"`
 	Description          string                `json:"description"`
 	DetailedDescriptions *DetailedDescriptions `json:"detailedDescriptions,omitempty"`
@@ -125,6 +131,7 @@ type Extension struct {
 	FrontendComponents   []ExternalComponent   `json:"frontendComponents,omitempty"`
 	FrontendFragments    map[string]any        `json:"frontendFragments,omitempty"`
 	Id                   string                `json:"id"`
+	IsDeletionScheduled  *bool                 `json:"isDeletionScheduled,omitempty"`
 	LogoRefId            string                `json:"logoRefId"`
 	Name                 string                `json:"name"`
 	Pricing              *ExtensionPricing     `json:"pricing,omitempty"`

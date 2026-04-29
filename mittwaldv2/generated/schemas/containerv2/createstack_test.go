@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateStack", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"description\":\"N8N\",\"prefix\":\"n8n\",\"templateConfig\":{\"templateId\":\"uptime-kuma\",\"userInputs\":[{\"name\":\"HOST\",\"value\":\"kuma.example.org\"}]}}")
+			exampleJSON := []byte("{\"description\":\"uptime kuma\",\"templateConfig\":{\"templateId\":\"uptime-kuma\",\"userInputs\":[{\"name\":\"HOST\",\"value\":\"kuma.example.org\"}]}}")
 
 			sut := containerv2.CreateStack{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

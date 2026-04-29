@@ -8,7 +8,6 @@ package marketplaceclientv2
 // properties:
 //    "reason":
 //        type: "string"
-//        example: "The deprecation phase of the extension has ended. The successor will now be the only usable version of this extension."
 // description: DeleteExtensionRequestBody models the JSON body of a 'extension-delete-extension' request
 
 // DeleteExtensionRequestBody models the JSON body of a 'extension-delete-extension' request

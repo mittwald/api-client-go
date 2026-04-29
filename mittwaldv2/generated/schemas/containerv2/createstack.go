@@ -10,11 +10,7 @@ import "fmt"
 // properties:
 //    "description":
 //        type: "string"
-//        example: "N8N"
-//    "prefix":
-//        type: "string"
-//        maxLength: 10
-//        example: "n8n"
+//        example: "uptime kuma"
 //    "templateConfig":
 //        type: "object"
 //        properties:
@@ -43,7 +39,6 @@ import "fmt"
 
 type CreateStack struct {
 	Description    string                     `json:"description"`
-	Prefix         *string                    `json:"prefix,omitempty"`
 	TemplateConfig *CreateStackTemplateConfig `json:"templateConfig,omitempty"`
 }
 
