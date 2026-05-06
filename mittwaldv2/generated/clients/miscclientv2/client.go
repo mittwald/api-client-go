@@ -19,11 +19,6 @@ type Client interface {
 		req MiscellaneousListTimeZonesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]string, *http.Response, error)
-	ServicetokenAuthenticateService(
-		ctx context.Context,
-		req ServicetokenAuthenticateServiceRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*ServicetokenAuthenticateServiceResponse, *http.Response, error)
 	VerificationDetectPhishingEmail(
 		ctx context.Context,
 		req VerificationDetectPhishingEmailRequest,
@@ -70,34 +65,6 @@ func (c *clientImpl) MiscellaneousListTimeZones(
 	}
 
 	var response []string
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Obtain a service token.
-func (c *clientImpl) ServicetokenAuthenticateService(
-	ctx context.Context,
-	req ServicetokenAuthenticateServiceRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*ServicetokenAuthenticateServiceResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response ServicetokenAuthenticateServiceResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

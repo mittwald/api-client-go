@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateConversationRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"categoryId\":\"string\",\"mainUserId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"notificationRoles\":[\"customer_owner\"],\"relatedTo\":{\"aggregate\":\"user\",\"domain\":\"user\",\"id\":\"string\"},\"sharedWith\":{\"aggregate\":\"user\",\"domain\":\"user\",\"id\":\"string\"},\"title\":\"string\"}")
+			exampleJSON := []byte("{\"categoryId\":\"string\",\"mainUserId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"messageContent\":\"string\",\"notificationRoles\":[\"customer_owner\"],\"relatedTo\":{\"aggregate\":\"user\",\"domain\":\"user\",\"id\":\"string\"},\"sharedWith\":{\"aggregate\":\"user\",\"domain\":\"user\",\"id\":\"string\"},\"title\":\"string\"}")
 
 			sut := conversationclientv2.CreateConversationRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

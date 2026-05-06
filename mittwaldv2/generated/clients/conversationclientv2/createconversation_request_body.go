@@ -17,6 +17,9 @@ import (
 //    "mainUserId":
 //        type: "string"
 //        format: "uuid"
+//    "messageContent":
+//        type: "string"
+//        maxLength: 8000
 //    "notificationRoles":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.conversation.NotificationRole"}
@@ -30,6 +33,7 @@ import (
 type CreateConversationRequestBody struct {
 	CategoryId        *string                                     `json:"categoryId,omitempty"`
 	MainUserId        *string                                     `json:"mainUserId,omitempty"`
+	MessageContent    *string                                     `json:"messageContent,omitempty"`
 	NotificationRoles []conversationv2.NotificationRole           `json:"notificationRoles,omitempty"`
 	RelatedTo         *conversationv2.RelatedAggregateReference   `json:"relatedTo,omitempty"`
 	SharedWith        *conversationv2.ShareableAggregateReference `json:"sharedWith,omitempty"`
