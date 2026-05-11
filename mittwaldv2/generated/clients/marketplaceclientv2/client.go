@@ -1256,9 +1256,9 @@ func (c *clientImpl) GetOwnExtension(
 	return &response, httpRes, nil
 }
 
-// Delete an extension.
+// Delete an Extension.
 //
-// Remove the Extension. Make sure that there are no instances for this extension
+// Start the deletion period of the Extension.
 func (c *clientImpl) DeleteExtension(
 	ctx context.Context,
 	req DeleteExtensionRequest,

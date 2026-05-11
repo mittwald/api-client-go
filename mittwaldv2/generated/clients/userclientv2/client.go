@@ -217,11 +217,6 @@ type Client interface {
 		req ChangePasswordRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*ChangePasswordResponse, *http.Response, error)
-	CheckToken(
-		ctx context.Context,
-		req CheckTokenRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*CheckTokenResponse, *http.Response, error)
 	GetMFAStatus(
 		ctx context.Context,
 		req GetMFAStatusRequest,
@@ -437,6 +432,11 @@ type Client interface {
 		req VerifyRegistrationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*VerifyRegistrationResponse, *http.Response, error)
+	CheckToken(
+		ctx context.Context,
+		req CheckTokenRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CheckTokenResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1494,34 +1494,6 @@ func (c *clientImpl) ChangePassword(
 	}
 
 	var response ChangePasswordResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Check token for validity.
-func (c *clientImpl) CheckToken(
-	ctx context.Context,
-	req CheckTokenRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*CheckTokenResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response CheckTokenResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -2670,6 +2642,34 @@ func (c *clientImpl) VerifyRegistration(
 	}
 
 	var response VerifyRegistrationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Check token for validity.
+func (c *clientImpl) CheckToken(
+	ctx context.Context,
+	req CheckTokenRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CheckTokenResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CheckTokenResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

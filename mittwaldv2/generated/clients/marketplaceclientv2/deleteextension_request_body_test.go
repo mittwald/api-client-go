@@ -14,7 +14,7 @@ import (
 var _ = Describe("DeleteExtensionRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"reason\":\"The deprecation phase of the extension has ended. The successor will now be the only usable version of this extension.\"}")
+			exampleJSON := []byte("{\"reason\":\"string\"}")
 
 			sut := marketplaceclientv2.DeleteExtensionRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

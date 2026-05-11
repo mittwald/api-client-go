@@ -15,9 +15,9 @@ import (
 // DeleteExtensionRequest models a request for the 'extension-delete-extension'
 // operation. See [1] for more information.
 //
-// Delete an extension.
+// Delete an Extension.
 //
-// Remove the Extension. Make sure that there are no instances for this extension
+// Start the deletion period of the Extension.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/marketplace/extension-delete-extension
