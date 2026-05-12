@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("CheckTokenResponse", func() {
+var _ = Describe("GetCurrentSessionStatusResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"publicToken\":\"string\"}")
+			exampleJSON := []byte("{\"isEmployee\":true,\"isImpersonated\":true,\"userId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
 
-			sut := userclientv2.CheckTokenResponse{}
+			sut := userclientv2.GetCurrentSessionStatusResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

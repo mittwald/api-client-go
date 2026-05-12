@@ -10,14 +10,20 @@ package appv2
 //        type: "string"
 //    "desired":
 //        type: "string"
+//    "lastChangeBy":
+//        type: "string"
+//    "previous":
+//        type: "string"
 // required:
 //    - "desired"
 // description: "VersionStatus describes the current and desired version of something like the AppVersion of an AppInstallation. If diverging, an internal process is going to assert, the current value will be aligned."
 
 // VersionStatus describes the current and desired version of something like the AppVersion of an AppInstallation. If diverging, an internal process is going to assert, the current value will be aligned.
 type VersionStatus struct {
-	Current *string `json:"current,omitempty"`
-	Desired string  `json:"desired"`
+	Current      *string `json:"current,omitempty"`
+	Desired      string  `json:"desired"`
+	LastChangeBy *string `json:"lastChangeBy,omitempty"`
+	Previous     *string `json:"previous,omitempty"`
 }
 
 func (o *VersionStatus) Validate() error {

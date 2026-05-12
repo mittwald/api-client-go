@@ -69,11 +69,11 @@ type Client interface {
 		req DeleteProjectBackupRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	GetProjectBackupDatabaseDumpsV2Experimental(
+	GetProjectBackupDatabaseDumps(
 		ctx context.Context,
-		req GetProjectBackupDatabaseDumpsV2ExperimentalRequest,
+		req GetProjectBackupDatabaseDumpsRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*GetProjectBackupDatabaseDumpsV2ExperimentalResponse, *http.Response, error)
+	) (*GetProjectBackupDatabaseDumpsResponse, *http.Response, error)
 	GetProjectBackupDirectories(
 		ctx context.Context,
 		req GetProjectBackupDirectoriesRequest,
@@ -89,9 +89,9 @@ type Client interface {
 		req RequestProjectBackupRestorePathDeprecatedRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	RequestProjectBackupRestoreV2Experimental(
+	RequestProjectBackupRestore(
 		ctx context.Context,
-		req RequestProjectBackupRestoreV2ExperimentalRequest,
+		req RequestProjectBackupRestoreRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	UpdateProjectBackupDescription(
@@ -397,11 +397,11 @@ func (c *clientImpl) DeleteProjectBackup(
 }
 
 // List database dump's for a ProjectBackup.
-func (c *clientImpl) GetProjectBackupDatabaseDumpsV2Experimental(
+func (c *clientImpl) GetProjectBackupDatabaseDumps(
 	ctx context.Context,
-	req GetProjectBackupDatabaseDumpsV2ExperimentalRequest,
+	req GetProjectBackupDatabaseDumpsRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*GetProjectBackupDatabaseDumpsV2ExperimentalResponse, *http.Response, error) {
+) (*GetProjectBackupDatabaseDumpsResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -417,7 +417,7 @@ func (c *clientImpl) GetProjectBackupDatabaseDumpsV2Experimental(
 		return nil, httpRes, err
 	}
 
-	var response GetProjectBackupDatabaseDumpsV2ExperimentalResponse
+	var response GetProjectBackupDatabaseDumpsResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -504,9 +504,9 @@ func (c *clientImpl) RequestProjectBackupRestorePathDeprecated(
 }
 
 // Restore a ProjectBackup.
-func (c *clientImpl) RequestProjectBackupRestoreV2Experimental(
+func (c *clientImpl) RequestProjectBackupRestore(
 	ctx context.Context,
-	req RequestProjectBackupRestoreV2ExperimentalRequest,
+	req RequestProjectBackupRestoreRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

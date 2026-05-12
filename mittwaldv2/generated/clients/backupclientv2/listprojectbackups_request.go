@@ -26,6 +26,7 @@ type ListProjectBackupsRequest struct {
 	WithExportsOnly     *bool
 	SortOrder           *backupv2.BackupSortOrder
 	RunningRestoresOnly *bool
+	RunningBackupsOnly  *bool
 	Limit               *int64
 	Skip                *int64
 	Page                *int64
@@ -77,6 +78,9 @@ func (r *ListProjectBackupsRequest) query() url.Values {
 	}
 	if r.RunningRestoresOnly != nil {
 		q.Set("runningRestoresOnly", strconv.FormatBool(*r.RunningRestoresOnly))
+	}
+	if r.RunningBackupsOnly != nil {
+		q.Set("runningBackupsOnly", strconv.FormatBool(*r.RunningBackupsOnly))
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))

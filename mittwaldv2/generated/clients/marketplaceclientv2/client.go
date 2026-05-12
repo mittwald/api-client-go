@@ -1256,7 +1256,7 @@ func (c *clientImpl) GetOwnExtension(
 	return &response, httpRes, nil
 }
 
-// Delete an extension.
+// Delete an Extension.
 //
 // Start the deletion period of the Extension.
 func (c *clientImpl) DeleteExtension(

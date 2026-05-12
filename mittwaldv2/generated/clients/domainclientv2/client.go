@@ -208,11 +208,21 @@ type Client interface {
 		req DeleteDomainRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*DeleteDomainResponse, *http.Response, error)
+	GetContactVerification(
+		ctx context.Context,
+		req GetContactVerificationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*domainv2.ContactVerification, *http.Response, error)
 	GetLatestScreenshot(
 		ctx context.Context,
 		req GetLatestScreenshotRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*GetLatestScreenshotResponse, *http.Response, error)
+	ListContactVerifications(
+		ctx context.Context,
+		req ListContactVerificationsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]domainv2.ContactVerification, *http.Response, error)
 	ListTldContactSchemas(
 		ctx context.Context,
 		req ListTldContactSchemasRequest,
@@ -236,6 +246,11 @@ type Client interface {
 	MigrationRequestDomainMigration(
 		ctx context.Context,
 		req MigrationRequestDomainMigrationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	ResendContactVerificationEmail(
+		ctx context.Context,
+		req ResendContactVerificationEmailRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	ResendDomainEmail(
@@ -1399,6 +1414,34 @@ func (c *clientImpl) DeleteDomain(
 	return &response, httpRes, nil
 }
 
+// Get a Contact-Verification.
+func (c *clientImpl) GetContactVerification(
+	ctx context.Context,
+	req GetContactVerificationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*domainv2.ContactVerification, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response domainv2.ContactVerification
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Get the latest screenshot's FileReference belonging to a Domain.
 func (c *clientImpl) GetLatestScreenshot(
 	ctx context.Context,
@@ -1421,6 +1464,34 @@ func (c *clientImpl) GetLatestScreenshot(
 	}
 
 	var response GetLatestScreenshotResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Contact-Verifications belonging to the executing user.
+func (c *clientImpl) ListContactVerifications(
+	ctx context.Context,
+	req ListContactVerificationsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]domainv2.ContactVerification, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []domainv2.ContactVerification
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -1547,6 +1618,30 @@ func (c *clientImpl) MigrationListMigrations(
 func (c *clientImpl) MigrationRequestDomainMigration(
 	ctx context.Context,
 	req MigrationRequestDomainMigrationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Resends a Contact-Verification email.
+func (c *clientImpl) ResendContactVerificationEmail(
+	ctx context.Context,
+	req ResendContactVerificationEmailRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

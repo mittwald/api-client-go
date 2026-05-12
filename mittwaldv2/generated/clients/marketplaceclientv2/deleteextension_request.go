@@ -15,7 +15,7 @@ import (
 // DeleteExtensionRequest models a request for the 'extension-delete-extension'
 // operation. See [1] for more information.
 //
-// Delete an extension.
+// Delete an Extension.
 //
 // Start the deletion period of the Extension.
 //

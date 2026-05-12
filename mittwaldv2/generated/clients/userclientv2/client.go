@@ -22,6 +22,11 @@ type Client interface {
 		req DeprecatedChangeEmailRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	DeprecatedCheckToken(
+		ctx context.Context,
+		req DeprecatedCheckTokenRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*DeprecatedCheckTokenResponse, *http.Response, error)
 	DeprecatedConfirmPasswordReset(
 		ctx context.Context,
 		req DeprecatedConfirmPasswordResetRequest,
@@ -217,11 +222,6 @@ type Client interface {
 		req ChangePasswordRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*ChangePasswordResponse, *http.Response, error)
-	CheckToken(
-		ctx context.Context,
-		req CheckTokenRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*CheckTokenResponse, *http.Response, error)
 	GetMFAStatus(
 		ctx context.Context,
 		req GetMFAStatusRequest,
@@ -307,6 +307,11 @@ type Client interface {
 		req DeleteUserRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*any, *http.Response, error)
+	GetCurrentSessionStatus(
+		ctx context.Context,
+		req GetCurrentSessionStatusRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*GetCurrentSessionStatusResponse, *http.Response, error)
 	GetPasswordUpdatedAt(
 		ctx context.Context,
 		req GetPasswordUpdatedAtRequest,
@@ -468,6 +473,37 @@ func (c *clientImpl) DeprecatedChangeEmail(
 	}
 
 	return httpRes, nil
+}
+
+// Check token for validity.
+//
+// Deprecated. Use `GET /users/self/sessions/current/status` instead,
+// which returns status informationen of the current session.
+func (c *clientImpl) DeprecatedCheckToken(
+	ctx context.Context,
+	req DeprecatedCheckTokenRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*DeprecatedCheckTokenResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response DeprecatedCheckTokenResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Confirm password reset. Replaced by `POST` `/v2/users/self/credentials/password/confirm-reset`.
@@ -1500,34 +1536,6 @@ func (c *clientImpl) ChangePassword(
 	return &response, httpRes, nil
 }
 
-// Check token for validity.
-func (c *clientImpl) CheckToken(
-	ctx context.Context,
-	req CheckTokenRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*CheckTokenResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response CheckTokenResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
 // Get your current multi factor auth status.
 func (c *clientImpl) GetMFAStatus(
 	ctx context.Context,
@@ -1974,6 +1982,34 @@ func (c *clientImpl) DeleteUser(
 	}
 
 	var response any
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Check status of the current session.
+func (c *clientImpl) GetCurrentSessionStatus(
+	ctx context.Context,
+	req GetCurrentSessionStatusRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*GetCurrentSessionStatusResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GetCurrentSessionStatusResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
