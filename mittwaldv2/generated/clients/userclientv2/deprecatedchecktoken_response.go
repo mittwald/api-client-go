@@ -15,11 +15,11 @@ package userclientv2
 //    - "id"
 //    - "publicToken"
 
-type CheckTokenResponse struct {
+type DeprecatedCheckTokenResponse struct {
 	Id          string `json:"id"`
 	PublicToken string `json:"publicToken"`
 }
 
-func (o *CheckTokenResponse) Validate() error {
+func (o *DeprecatedCheckTokenResponse) Validate() error {
 	return nil
 }

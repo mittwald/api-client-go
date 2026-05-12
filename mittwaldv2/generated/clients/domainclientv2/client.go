@@ -327,6 +327,21 @@ type Client interface {
 		req ListCertificatesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]sslv2.Certificate, *http.Response, error)
+	GetContactVerification(
+		ctx context.Context,
+		req GetContactVerificationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*domainv2.ContactVerification, *http.Response, error)
+	ListContactVerifications(
+		ctx context.Context,
+		req ListContactVerificationsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]domainv2.ContactVerification, *http.Response, error)
+	ResendContactVerificationEmail(
+		ctx context.Context,
+		req ResendContactVerificationEmailRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -2032,4 +2047,84 @@ func (c *clientImpl) ListCertificates(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Get a Contact-Verification.
+func (c *clientImpl) GetContactVerification(
+	ctx context.Context,
+	req GetContactVerificationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*domainv2.ContactVerification, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response domainv2.ContactVerification
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Contact-Verifications belonging to the executing user.
+func (c *clientImpl) ListContactVerifications(
+	ctx context.Context,
+	req ListContactVerificationsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]domainv2.ContactVerification, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []domainv2.ContactVerification
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Resends a Contact-Verification email.
+func (c *clientImpl) ResendContactVerificationEmail(
+	ctx context.Context,
+	req ResendContactVerificationEmailRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }

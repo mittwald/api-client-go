@@ -432,11 +432,16 @@ type Client interface {
 		req VerifyRegistrationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*VerifyRegistrationResponse, *http.Response, error)
-	CheckToken(
+	GetCurrentSessionStatus(
 		ctx context.Context,
-		req CheckTokenRequest,
+		req GetCurrentSessionStatusRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*CheckTokenResponse, *http.Response, error)
+	) (*GetCurrentSessionStatusResponse, *http.Response, error)
+	DeprecatedCheckToken(
+		ctx context.Context,
+		req DeprecatedCheckTokenRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*DeprecatedCheckTokenResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -2648,12 +2653,12 @@ func (c *clientImpl) VerifyRegistration(
 	return &response, httpRes, nil
 }
 
-// Check token for validity.
-func (c *clientImpl) CheckToken(
+// Check status of the current session.
+func (c *clientImpl) GetCurrentSessionStatus(
 	ctx context.Context,
-	req CheckTokenRequest,
+	req GetCurrentSessionStatusRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*CheckTokenResponse, *http.Response, error) {
+) (*GetCurrentSessionStatusResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -2669,7 +2674,38 @@ func (c *clientImpl) CheckToken(
 		return nil, httpRes, err
 	}
 
-	var response CheckTokenResponse
+	var response GetCurrentSessionStatusResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Check token for validity.
+//
+// Deprecated. Use `GET /users/self/sessions/current/status` instead,
+// which returns status informationen of the current session.
+func (c *clientImpl) DeprecatedCheckToken(
+	ctx context.Context,
+	req DeprecatedCheckTokenRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*DeprecatedCheckTokenResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response DeprecatedCheckTokenResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
