@@ -27,6 +27,7 @@ type ListMembershipsForCustomerRequest struct {
 	Skip       *int64
 	HasExpiry  *bool
 	Role       *membershipv2.CustomerRoles
+	SearchTerm *string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -75,6 +76,9 @@ func (r *ListMembershipsForCustomerRequest) query() url.Values {
 	}
 	if r.Role != nil {
 		q.Set("role", string(*r.Role))
+	}
+	if r.SearchTerm != nil {
+		q.Set("searchTerm", *r.SearchTerm)
 	}
 	return q
 }

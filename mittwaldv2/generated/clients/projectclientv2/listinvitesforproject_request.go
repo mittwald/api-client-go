@@ -18,9 +18,10 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/project/project-list-invites-for-project
 type ListInvitesForProjectRequest struct {
-	ProjectID string
-	Limit     *int64
-	Skip      *int64
+	ProjectID  string
+	Limit      *int64
+	Skip       *int64
+	SearchTerm *string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -63,6 +64,9 @@ func (r *ListInvitesForProjectRequest) query() url.Values {
 	}
 	if r.Skip != nil {
 		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.SearchTerm != nil {
+		q.Set("searchTerm", *r.SearchTerm)
 	}
 	return q
 }
