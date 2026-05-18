@@ -8,6 +8,8 @@ package appclientv2
 // properties:
 //    "description":
 //        type: "string"
+//    "domain":
+//        type: "string"
 //    "installationPath":
 //        type: "string"
 //    "targetProjectId":
@@ -20,6 +22,7 @@ package appclientv2
 // RequestAppinstallationCopyRequestBody models the JSON body of a 'app-request-appinstallation-copy' request
 type RequestAppinstallationCopyRequestBody struct {
 	Description      string  `json:"description"`
+	Domain           *string `json:"domain,omitempty"`
 	InstallationPath *string `json:"installationPath,omitempty"`
 	TargetProjectId  *string `json:"targetProjectId,omitempty"`
 }
