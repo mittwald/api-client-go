@@ -14,7 +14,7 @@ import (
 // 'password-validation-get-password-policy-v2-deprecated' operation. See [1] for
 // more information.
 //
-// Get a password policy.
+// DEPRECAED. Use `GET` `/v2/password-policies/{passwordPolicy}` instead.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/user/password-validation-get-password-policy-v2-deprecated
