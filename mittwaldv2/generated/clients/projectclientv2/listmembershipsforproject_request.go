@@ -28,6 +28,7 @@ type ListMembershipsForProjectRequest struct {
 	IsInherited *bool
 	Role        *membershipv2.ProjectRoles
 	HasMFA      *bool
+	SearchTerm  *string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -82,6 +83,9 @@ func (r *ListMembershipsForProjectRequest) query() url.Values {
 	}
 	if r.HasMFA != nil {
 		q.Set("hasMfa", strconv.FormatBool(*r.HasMFA))
+	}
+	if r.SearchTerm != nil {
+		q.Set("searchTerm", *r.SearchTerm)
 	}
 	return q
 }
