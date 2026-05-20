@@ -12,6 +12,8 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "isForced":
+//        type: "boolean"
 //    "newArticles":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.contract.Article"}
@@ -29,6 +31,7 @@ import (
 //    - "newArticles"
 
 type TariffChange struct {
+	IsForced          *bool     `json:"isForced,omitempty"`
 	NewArticles       []Article `json:"newArticles"`
 	ScheduledAtDate   time.Time `json:"scheduledAtDate"`
 	ScheduledByUserId *string   `json:"scheduledByUserId,omitempty"`
