@@ -59,6 +59,11 @@ type Client interface {
 		req DeleteMysqlDatabaseRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	PatchMysqlDatabase(
+		ctx context.Context,
+		req PatchMysqlDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	GetMysqlUser(
 		ctx context.Context,
 		req GetMysqlUserRequest,
@@ -82,6 +87,11 @@ type Client interface {
 	DeleteRedisDatabase(
 		ctx context.Context,
 		req DeleteRedisDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	PatchRedisDatabase(
+		ctx context.Context,
+		req PatchRedisDatabaseRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DisableMysqlUser(
@@ -404,6 +414,30 @@ func (c *clientImpl) DeleteMysqlDatabase(
 	return httpRes, nil
 }
 
+// Update a MySqlDatabase.
+func (c *clientImpl) PatchMysqlDatabase(
+	ctx context.Context,
+	req PatchMysqlDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Get a MySQLUser.
 func (c *clientImpl) GetMysqlUser(
 	ctx context.Context,
@@ -512,6 +546,30 @@ func (c *clientImpl) GetRedisDatabase(
 func (c *clientImpl) DeleteRedisDatabase(
 	ctx context.Context,
 	req DeleteRedisDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a RedisDatabase.
+func (c *clientImpl) PatchRedisDatabase(
+	ctx context.Context,
+	req PatchRedisDatabaseRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
