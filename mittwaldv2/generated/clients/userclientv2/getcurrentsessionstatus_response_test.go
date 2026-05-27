@@ -14,7 +14,7 @@ import (
 var _ = Describe("GetCurrentSessionStatusResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"isEmployee\":true,\"isImpersonated\":true,\"userId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{\"isEmployee\":true,\"isImpersonated\":true,\"tokenId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"userId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
 
 			sut := userclientv2.GetCurrentSessionStatusResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

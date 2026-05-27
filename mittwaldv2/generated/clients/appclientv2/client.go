@@ -139,6 +139,11 @@ type Client interface {
 		req DeprecatedLinkDatabaseRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	RequestAppinstallationStaging(
+		ctx context.Context,
+		req RequestAppinstallationStagingRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*RequestAppinstallationStagingResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -818,4 +823,32 @@ func (c *clientImpl) DeprecatedLinkDatabase(
 	}
 
 	return httpRes, nil
+}
+
+// Request a staging for an AppInstallation.
+func (c *clientImpl) RequestAppinstallationStaging(
+	ctx context.Context,
+	req RequestAppinstallationStagingRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RequestAppinstallationStagingResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestAppinstallationStagingResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }

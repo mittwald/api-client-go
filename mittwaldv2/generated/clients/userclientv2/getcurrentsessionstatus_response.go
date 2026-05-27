@@ -12,18 +12,24 @@ package userclientv2
 //    "isImpersonated":
 //        type: "boolean"
 //        description: "Whether the current session is an impersonation."
+//    "tokenId":
+//        type: "string"
+//        format: "uuid"
+//        description: "The ID of the token currently in use."
 //    "userId":
 //        type: "string"
 //        format: "uuid"
 //        description: "ID of the executing user."
 // required:
 //    - "userId"
+//    - "tokenId"
 //    - "isImpersonated"
 //    - "isEmployee"
 
 type GetCurrentSessionStatusResponse struct {
 	IsEmployee     bool   `json:"isEmployee"`
 	IsImpersonated bool   `json:"isImpersonated"`
+	TokenId        string `json:"tokenId"`
 	UserId         string `json:"userId"`
 }
 
