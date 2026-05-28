@@ -94,6 +94,11 @@ type Client interface {
 		req ProjectGetUsageRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*ProjectGetUsageResponse, *http.Response, error)
+	ProjectLinkContainer(
+		ctx context.Context,
+		req ProjectLinkContainerRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -543,4 +548,30 @@ func (c *clientImpl) ProjectGetUsage(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Links a container with a project licence.
+//
+// Links a container with a project licence. This will emit a WebUiContainerLinkedEvent and update the licence with the container metadata.
+func (c *clientImpl) ProjectLinkContainer(
+	ctx context.Context,
+	req ProjectLinkContainerRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
