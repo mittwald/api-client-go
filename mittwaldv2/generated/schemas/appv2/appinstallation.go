@@ -34,6 +34,8 @@ import (
 //    "disabled":
 //        type: "boolean"
 //        default: false
+//    "hostname":
+//        type: "string"
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -49,6 +51,15 @@ import (
 //        type: "object"
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.app.LockPurpose"}
 //    "phase": {"$ref": "#/components/schemas/de.mittwald.v1.app.Phase"}
+//    "ports":
+//        type: "array"
+//        items:
+//            type: "object"
+//            properties:
+//                "name":
+//                    type: "string"
+//                "port":
+//                    type: "integer"
 //    "projectDescription":
 //        type: "string"
 //    "projectId":
@@ -95,30 +106,32 @@ import (
 
 // An AppInstallation is a concrete manifestation of an App in a specific AppVersion.
 type AppInstallation struct {
-	AppExternalVersion string                    `json:"appExternalVersion"`
-	AppId              string                    `json:"appId"`
-	AppName            string                    `json:"appName"`
-	AppVersion         VersionStatus             `json:"appVersion"`
-	CreatedAt          time.Time                 `json:"createdAt"`
-	CustomDocumentRoot *string                   `json:"customDocumentRoot,omitempty"`
-	DeletionRequested  *bool                     `json:"deletionRequested,omitempty"`
-	Description        string                    `json:"description"`
-	Disabled           bool                      `json:"disabled"`
-	Id                 string                    `json:"id"`
-	InstallationPath   string                    `json:"installationPath"`
-	LastError          *string                   `json:"lastError,omitempty"`
-	LinkedDatabases    []LinkedDatabase          `json:"linkedDatabases"`
-	LockedBy           map[string]LockPurpose    `json:"lockedBy,omitempty"`
-	Phase              Phase                     `json:"phase"`
-	ProjectDescription string                    `json:"projectDescription"`
-	ProjectId          string                    `json:"projectId"`
-	ScreenshotId       *string                   `json:"screenshotId,omitempty"`
-	ScreenshotRef      *string                   `json:"screenshotRef,omitempty"`
-	ShortId            string                    `json:"shortId"`
-	SystemSoftware     []InstalledSystemSoftware `json:"systemSoftware"`
-	UpdateAvailable    bool                      `json:"updateAvailable"`
-	UpdatePolicy       AppUpdatePolicy           `json:"updatePolicy"`
-	UserInputs         []SavedUserInput          `json:"userInputs"`
+	AppExternalVersion string                     `json:"appExternalVersion"`
+	AppId              string                     `json:"appId"`
+	AppName            string                     `json:"appName"`
+	AppVersion         VersionStatus              `json:"appVersion"`
+	CreatedAt          time.Time                  `json:"createdAt"`
+	CustomDocumentRoot *string                    `json:"customDocumentRoot,omitempty"`
+	DeletionRequested  *bool                      `json:"deletionRequested,omitempty"`
+	Description        string                     `json:"description"`
+	Disabled           bool                       `json:"disabled"`
+	Hostname           *string                    `json:"hostname,omitempty"`
+	Id                 string                     `json:"id"`
+	InstallationPath   string                     `json:"installationPath"`
+	LastError          *string                    `json:"lastError,omitempty"`
+	LinkedDatabases    []LinkedDatabase           `json:"linkedDatabases"`
+	LockedBy           map[string]LockPurpose     `json:"lockedBy,omitempty"`
+	Phase              Phase                      `json:"phase"`
+	Ports              []AppInstallationPortsItem `json:"ports,omitempty"`
+	ProjectDescription string                     `json:"projectDescription"`
+	ProjectId          string                     `json:"projectId"`
+	ScreenshotId       *string                    `json:"screenshotId,omitempty"`
+	ScreenshotRef      *string                    `json:"screenshotRef,omitempty"`
+	ShortId            string                     `json:"shortId"`
+	SystemSoftware     []InstalledSystemSoftware  `json:"systemSoftware"`
+	UpdateAvailable    bool                       `json:"updateAvailable"`
+	UpdatePolicy       AppUpdatePolicy            `json:"updatePolicy"`
+	UserInputs         []SavedUserInput           `json:"userInputs"`
 }
 
 func (o *AppInstallation) Validate() error {
@@ -140,6 +153,21 @@ func (o *AppInstallation) Validate() error {
 	}
 	if err := o.Phase.Validate(); err != nil {
 		return fmt.Errorf("invalid property phase: %w", err)
+	}
+	if err := func() error {
+		if o.Ports == nil {
+			return nil
+		}
+		return func() error {
+			for i := range o.Ports {
+				if err := o.Ports[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}()
+	}(); err != nil {
+		return fmt.Errorf("invalid property ports: %w", err)
 	}
 	if o.SystemSoftware == nil {
 		return errors.New("property systemSoftware is required, but not set")
