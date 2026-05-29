@@ -14,7 +14,7 @@ import (
 var _ = Describe("CheckMigrationResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"allDomainsMigratable\":true,\"domains\":[{\"hostname\":\"string\",\"migratable\":true,\"migrationData\":{\"dnsRecords\":[{\"ttl\":42,\"type\":\"A\",\"value\":\"string\"}],\"monthlyPriceCents\":42,\"subdomains\":[{\"dnsRecords\":[{\"ttl\":42,\"type\":\"A\",\"value\":\"string\"}],\"hostname\":\"string\",\"target\":\"string\"}]}}],\"generalIssues\":{\"customerIsNotAllowedToOrder\":true,\"legacyTokenNotAuthorized\":true,\"noDomainsInSource\":true},\"generallyPossible\":true}")
+			exampleJSON := []byte("{\"allDomainsMigratable\":true,\"domains\":[{\"hostname\":\"string\",\"migratable\":true,\"migrationData\":{\"dnsRecords\":[{\"name\":\"string\",\"ttl\":42,\"type\":\"A\",\"value\":\"string\"}],\"monthlyPriceCents\":42,\"subdomains\":[{\"dnsRecords\":[{\"name\":\"string\",\"ttl\":42,\"type\":\"A\",\"value\":\"string\"}],\"hostname\":\"string\",\"target\":\"string\"}]}}],\"generalIssues\":{\"customerIsNotAllowedToOrder\":true,\"legacyTokenNotAuthorized\":true,\"noDomainsInSource\":true},\"generallyPossible\":true}")
 
 			sut := domainmigrationv2.CheckMigrationResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

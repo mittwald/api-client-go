@@ -8,6 +8,8 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "name":
+//        type: "string"
 //    "ttl":
 //        type: "integer"
 //        maximum: 86400
@@ -21,6 +23,7 @@ import "fmt"
 //    - "ttl"
 
 type DNSRecord struct {
+	Name  *string       `json:"name,omitempty"`
 	Ttl   int64         `json:"ttl"`
 	Type  DNSRecordType `json:"type"`
 	Value string        `json:"value"`

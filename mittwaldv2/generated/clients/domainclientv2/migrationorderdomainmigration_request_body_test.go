@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("MigrationRequestDomainMigrationRequestBody", func() {
+var _ = Describe("MigrationOrderDomainMigrationRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"domains\":[\"string\"],\"sourceLegacyProjectId\":\"string\",\"targetProjectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{\"domains\":[\"string\"],\"pAccount\":\"string\",\"projectId\":\"string\"}")
 
-			sut := domainclientv2.MigrationRequestDomainMigrationRequestBody{}
+			sut := domainclientv2.MigrationOrderDomainMigrationRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

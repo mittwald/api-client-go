@@ -29,6 +29,10 @@ import (
 //        format: "uuid"
 //    "requiresRecreate":
 //        type: "boolean"
+//    "restartPolicy":
+//        type: "string"
+//        pattern: "^(no|always|on-failure|unless-stopped)$"
+//        example: "always"
 //    "serviceName":
 //        type: "string"
 //        example: "mysql-db"
@@ -65,6 +69,7 @@ type ServiceResponse struct {
 	PendingState     ServiceState  `json:"pendingState"`
 	ProjectId        string        `json:"projectId"`
 	RequiresRecreate bool          `json:"requiresRecreate"`
+	RestartPolicy    *string       `json:"restartPolicy,omitempty"`
 	ServiceName      string        `json:"serviceName"`
 	ShortId          string        `json:"shortId"`
 	StackId          string        `json:"stackId"`

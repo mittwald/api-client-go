@@ -14,7 +14,7 @@ import (
 var _ = Describe("MigrationCheckMigrationIsPossibleRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"sourceLegacyProjectId\":\"string\",\"targetProjectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{\"pAccount\":\"string\",\"projectId\":\"string\"}")
 
 			sut := domainclientv2.MigrationCheckMigrationIsPossibleRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

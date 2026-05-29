@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("Subdomain", func() {
+var _ = Describe("MigrationDomainsItemCoabDataHandleDataHandleFieldsItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"dnsRecords\":[{\"name\":\"string\",\"ttl\":42,\"type\":\"A\",\"value\":\"string\"}],\"hostname\":\"string\",\"target\":\"string\"}")
+			exampleJSON := []byte("{\"name\":\"string\",\"value\":\"string\"}")
 
-			sut := domainmigrationv2.Subdomain{}
+			sut := domainmigrationv2.MigrationDomainsItemCoabDataHandleDataHandleFieldsItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

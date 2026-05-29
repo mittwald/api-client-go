@@ -6,20 +6,22 @@ package domainclientv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "sourceLegacyProjectId":
+//    "pAccount":
 //        type: "string"
-//    "targetProjectId":
+//        pattern: "^p[1-9][0-9]{3,}$"
+//        description: "Name of the pAccount in customer center to migrate domains from."
+//    "projectId":
 //        type: "string"
-//        format: "uuid"
+//        description: "ID of the Project to migrate the domains into."
 // required:
-//    - "sourceLegacyProjectId"
-//    - "targetProjectId"
+//    - "pAccount"
+//    - "projectId"
 // description: MigrationCheckMigrationIsPossibleRequestBody models the JSON body of a 'domain-migration-check-migration-is-possible' request
 
 // MigrationCheckMigrationIsPossibleRequestBody models the JSON body of a 'domain-migration-check-migration-is-possible' request
 type MigrationCheckMigrationIsPossibleRequestBody struct {
-	SourceLegacyProjectId string `json:"sourceLegacyProjectId"`
-	TargetProjectId       string `json:"targetProjectId"`
+	PAccount  string `json:"pAccount"`
+	ProjectId string `json:"projectId"`
 }
 
 func (o *MigrationCheckMigrationIsPossibleRequestBody) Validate() error {

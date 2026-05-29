@@ -238,16 +238,6 @@ type Client interface {
 		req MigrationCheckMigrationIsPossibleRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*domainmigrationv2.CheckMigrationResponse, *http.Response, error)
-	MigrationListMigrations(
-		ctx context.Context,
-		req MigrationListMigrationsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]domainmigrationv2.Migration, *http.Response, error)
-	MigrationRequestDomainMigration(
-		ctx context.Context,
-		req MigrationRequestDomainMigrationRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	ResendContactVerificationEmail(
 		ctx context.Context,
 		req ResendContactVerificationEmailRequest,
@@ -361,6 +351,21 @@ type Client interface {
 	SetCertificateRequestCertificate(
 		ctx context.Context,
 		req SetCertificateRequestCertificateRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	MigrationListMigrationsByProjectID(
+		ctx context.Context,
+		req MigrationListMigrationsByProjectIDRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]domainmigrationv2.Migration, *http.Response, error)
+	MigrationListMigrationsByPAccount(
+		ctx context.Context,
+		req MigrationListMigrationsByPAccountRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]domainmigrationv2.Migration, *http.Response, error)
+	MigrationOrderDomainMigration(
+		ctx context.Context,
+		req MigrationOrderDomainMigrationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -1586,58 +1591,6 @@ func (c *clientImpl) MigrationCheckMigrationIsPossible(
 	return &response, httpRes, nil
 }
 
-// List Domain-Migrations belonging to a p-Account.
-func (c *clientImpl) MigrationListMigrations(
-	ctx context.Context,
-	req MigrationListMigrationsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]domainmigrationv2.Migration, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []domainmigrationv2.Migration
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Create a Domain-Migration from a pAccount into a Project.
-func (c *clientImpl) MigrationRequestDomainMigration(
-	ctx context.Context,
-	req MigrationRequestDomainMigrationRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Resends a Contact-Verification email.
 func (c *clientImpl) ResendContactVerificationEmail(
 	ctx context.Context,
@@ -2234,6 +2187,86 @@ func (c *clientImpl) ListCertificates(
 func (c *clientImpl) SetCertificateRequestCertificate(
 	ctx context.Context,
 	req SetCertificateRequestCertificateRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// List Domain-Migrations belonging to a Project.
+func (c *clientImpl) MigrationListMigrationsByProjectID(
+	ctx context.Context,
+	req MigrationListMigrationsByProjectIDRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]domainmigrationv2.Migration, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []domainmigrationv2.Migration
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Domain-Migrations belonging to a pAccount.
+func (c *clientImpl) MigrationListMigrationsByPAccount(
+	ctx context.Context,
+	req MigrationListMigrationsByPAccountRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]domainmigrationv2.Migration, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []domainmigrationv2.Migration
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Order a Domain-Migration from a pAccount into a Project.
+func (c *clientImpl) MigrationOrderDomainMigration(
+	ctx context.Context,
+	req MigrationOrderDomainMigrationRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

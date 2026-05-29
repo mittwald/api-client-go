@@ -14,7 +14,7 @@ import (
 var _ = Describe("DNSRecord", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"ttl\":42,\"type\":\"A\",\"value\":\"string\"}")
+			exampleJSON := []byte("{\"name\":\"string\",\"ttl\":42,\"type\":\"A\",\"value\":\"string\"}")
 
 			sut := domainmigrationv2.DNSRecord{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
