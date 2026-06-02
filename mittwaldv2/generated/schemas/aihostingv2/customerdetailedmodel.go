@@ -18,6 +18,14 @@ import (
 //        type: "string"
 //    "docLink":
 //        type: "string"
+//    "label":
+//        type: "string"
+//        enum:
+//            - "lts"
+//            - "stable"
+//            - "experimental"
+//            - "legacy stable"
+//            - "preview"
 //    "name":
 //        type: "string"
 //    "removalAt":
@@ -41,18 +49,27 @@ import (
 //    - "tokenFactor"
 
 type CustomerDetailedModel struct {
-	ActiveAt           time.Time           `json:"activeAt"`
-	DisplayName        string              `json:"displayName"`
-	DocLink            string              `json:"docLink"`
-	Name               string              `json:"name"`
-	RemovalAt          *time.Time          `json:"removalAt,omitempty"`
-	ReplacesModelName  *string             `json:"replacesModelName,omitempty"`
-	Status             DetailedModelStatus `json:"status"`
-	TermsOfServiceLink string              `json:"termsOfServiceLink"`
-	TokenFactor        float64             `json:"tokenFactor"`
+	ActiveAt           time.Time                   `json:"activeAt"`
+	DisplayName        string                      `json:"displayName"`
+	DocLink            string                      `json:"docLink"`
+	Label              *CustomerDetailedModelLabel `json:"label,omitempty"`
+	Name               string                      `json:"name"`
+	RemovalAt          *time.Time                  `json:"removalAt,omitempty"`
+	ReplacesModelName  *string                     `json:"replacesModelName,omitempty"`
+	Status             DetailedModelStatus         `json:"status"`
+	TermsOfServiceLink string                      `json:"termsOfServiceLink"`
+	TokenFactor        float64                     `json:"tokenFactor"`
 }
 
 func (o *CustomerDetailedModel) Validate() error {
+	if err := func() error {
+		if o.Label == nil {
+			return nil
+		}
+		return o.Label.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property label: %w", err)
+	}
 	if err := o.Status.Validate(); err != nil {
 		return fmt.Errorf("invalid property status: %w", err)
 	}
