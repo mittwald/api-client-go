@@ -55,7 +55,7 @@ func (r *MigrationOrderDomainMigrationRequest) body() (io.Reader, string, error)
 
 func (r *MigrationOrderDomainMigrationRequest) url() string {
 	u := url.URL{
-		Path: "/v2/domain-migrations/actions/order",
+		Path: "/v2/domain-migrations",
 	}
 	return u.String()
 }

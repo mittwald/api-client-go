@@ -14,7 +14,7 @@ import (
 var _ = Describe("Migration", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"createdAt\":\"2006-01-02T15:04:05Z\",\"domains\":[{\"coabData\":{\"dnsRecords\":null,\"handleData\":null,\"nameservers\":null,\"subdomains\":null},\"domain\":\"string\",\"domainId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"state\":\"pending\"}],\"finishedAt\":\"2006-01-02T15:04:05Z\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"orderId\":\"string\",\"pAccount\":\"string\",\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
+			exampleJSON := []byte("{\"createdAt\":\"2006-01-02T15:04:05Z\",\"domains\":[{\"coabData\":{\"dnsRecords\":null,\"handleData\":null,\"nameservers\":null,\"subdomains\":null},\"domain\":\"string\",\"domainId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"state\":\"pending\"}],\"finishedAt\":\"2006-01-02T15:04:05Z\",\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"pAccount\":\"string\",\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
 
 			sut := domainmigrationv2.Migration{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

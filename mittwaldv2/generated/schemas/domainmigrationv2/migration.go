@@ -72,8 +72,6 @@ import (
 //    "id":
 //        type: "string"
 //        format: "uuid"
-//    "orderId":
-//        type: "string"
 //    "pAccount":
 //        type: "string"
 //    "projectId":
@@ -83,7 +81,6 @@ import (
 //    - "id"
 //    - "pAccount"
 //    - "projectId"
-//    - "orderId"
 //    - "domains"
 
 type Migration struct {
@@ -91,7 +88,6 @@ type Migration struct {
 	Domains    []MigrationDomainsItem `json:"domains"`
 	FinishedAt *time.Time             `json:"finishedAt,omitempty"`
 	Id         string                 `json:"id"`
-	OrderId    string                 `json:"orderId"`
 	PAccount   string                 `json:"pAccount"`
 	ProjectId  string                 `json:"projectId"`
 }
