@@ -13,6 +13,7 @@ import "fmt"
 //    - "error"
 //    - "creating"
 //    - "starting"
+//    - "stopping"
 
 type ServiceStatus string
 
@@ -21,9 +22,10 @@ const ServiceStatusStopped ServiceStatus = "stopped"
 const ServiceStatusError ServiceStatus = "error"
 const ServiceStatusCreating ServiceStatus = "creating"
 const ServiceStatusStarting ServiceStatus = "starting"
+const ServiceStatusStopping ServiceStatus = "stopping"
 
 func (e ServiceStatus) Validate() error {
-	if e == ServiceStatusRunning || e == ServiceStatusStopped || e == ServiceStatusError || e == ServiceStatusCreating || e == ServiceStatusStarting {
+	if e == ServiceStatusRunning || e == ServiceStatusStopped || e == ServiceStatusError || e == ServiceStatusCreating || e == ServiceStatusStarting || e == ServiceStatusStopping {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
