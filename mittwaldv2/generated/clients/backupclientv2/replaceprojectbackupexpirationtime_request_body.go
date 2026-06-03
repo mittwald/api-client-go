@@ -11,7 +11,7 @@ import "time"
 //    "expirationTime":
 //        type: "string"
 //        format: "date-time"
-//        description: "Time when to expire the Backup."
+//        description: "Time when to expire the Backup. Must be no more than one year in the future."
 // description: ReplaceProjectBackupExpirationTimeRequestBody models the JSON body of a 'backup-replace-project-backup-expiration-time' request
 
 // ReplaceProjectBackupExpirationTimeRequestBody models the JSON body of a 'backup-replace-project-backup-expiration-time' request

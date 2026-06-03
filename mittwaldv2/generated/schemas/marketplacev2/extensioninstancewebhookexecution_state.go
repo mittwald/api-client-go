@@ -9,6 +9,7 @@ import "fmt"
 // type: "string"
 // enum:
 //    - "running"
+//    - "queued"
 //    - "halted"
 //    - "failed"
 //    - "successful"
@@ -16,12 +17,13 @@ import "fmt"
 type ExtensionInstanceWebhookExecutionState string
 
 const ExtensionInstanceWebhookExecutionStateRunning ExtensionInstanceWebhookExecutionState = "running"
+const ExtensionInstanceWebhookExecutionStateQueued ExtensionInstanceWebhookExecutionState = "queued"
 const ExtensionInstanceWebhookExecutionStateHalted ExtensionInstanceWebhookExecutionState = "halted"
 const ExtensionInstanceWebhookExecutionStateFailed ExtensionInstanceWebhookExecutionState = "failed"
 const ExtensionInstanceWebhookExecutionStateSuccessful ExtensionInstanceWebhookExecutionState = "successful"
 
 func (e ExtensionInstanceWebhookExecutionState) Validate() error {
-	if e == ExtensionInstanceWebhookExecutionStateRunning || e == ExtensionInstanceWebhookExecutionStateHalted || e == ExtensionInstanceWebhookExecutionStateFailed || e == ExtensionInstanceWebhookExecutionStateSuccessful {
+	if e == ExtensionInstanceWebhookExecutionStateRunning || e == ExtensionInstanceWebhookExecutionStateQueued || e == ExtensionInstanceWebhookExecutionStateHalted || e == ExtensionInstanceWebhookExecutionStateFailed || e == ExtensionInstanceWebhookExecutionStateSuccessful {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

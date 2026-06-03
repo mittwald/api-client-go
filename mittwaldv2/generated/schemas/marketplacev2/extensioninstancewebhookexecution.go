@@ -38,6 +38,7 @@ import (
 //        type: "string"
 //        enum:
 //            - "running"
+//            - "queued"
 //            - "halted"
 //            - "failed"
 //            - "successful"
