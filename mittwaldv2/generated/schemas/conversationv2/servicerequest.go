@@ -13,13 +13,15 @@ package conversationv2
 //            enum:
 //                - "relocation"
 //                - "call"
+//                - "mailSendLimitIncrease"
 //        "meta":
 //            oneOf:
 //                - {"$ref": "#/components/schemas/de.mittwald.v1.conversation.ServiceRequestRelocationPayload"}
+//                - {"$ref": "#/components/schemas/de.mittwald.v1.conversation.ServiceRequestMailSendLimitIncreasePayload"}
 //      required:
 //        - "messageContent"
 //        - "meta"
 
 // TODO: This schema could not be automatically generated
-// {"allOf":[{"$ref":"#/components/schemas/de.mittwald.v1.conversation.GenericServiceRequest"},{"properties":{"messageContent":{"enum":["relocation","call"],"type":"string"},"meta":{"oneOf":[{"$ref":"#/components/schemas/de.mittwald.v1.conversation.ServiceRequestRelocationPayload"}]}},"required":["messageContent","meta"],"type":"object"}]}
+// {"allOf":[{"$ref":"#/components/schemas/de.mittwald.v1.conversation.GenericServiceRequest"},{"properties":{"messageContent":{"enum":["relocation","call","mailSendLimitIncrease"],"type":"string"},"meta":{"oneOf":[{"$ref":"#/components/schemas/de.mittwald.v1.conversation.ServiceRequestRelocationPayload"},{"$ref":"#/components/schemas/de.mittwald.v1.conversation.ServiceRequestMailSendLimitIncreasePayload"}]}},"required":["messageContent","meta"],"type":"object"}]}
 type ServiceRequest = any
