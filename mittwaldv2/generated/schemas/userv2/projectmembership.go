@@ -14,6 +14,9 @@ import (
 //    "expiresAt":
 //        type: "string"
 //        format: "date-time"
+//    "id":
+//        type: "string"
+//        format: "uuid"
 //    "inherited":
 //        type: "boolean"
 //    "memberSince":
@@ -25,6 +28,7 @@ import (
 //            - "owner"
 //            - "emailadmin"
 //            - "external"
+//            - "id"
 // required:
 //    - "role"
 //    - "memberSince"
@@ -32,6 +36,7 @@ import (
 
 type ProjectMembership struct {
 	ExpiresAt   *time.Time            `json:"expiresAt,omitempty"`
+	Id          *string               `json:"id,omitempty"`
 	Inherited   bool                  `json:"inherited"`
 	MemberSince time.Time             `json:"memberSince"`
 	Role        ProjectMembershipRole `json:"role"`
