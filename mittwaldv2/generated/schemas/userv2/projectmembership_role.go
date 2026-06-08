@@ -11,15 +11,17 @@ import "fmt"
 //    - "owner"
 //    - "emailadmin"
 //    - "external"
+//    - "id"
 
 type ProjectMembershipRole string
 
 const ProjectMembershipRoleOwner ProjectMembershipRole = "owner"
 const ProjectMembershipRoleEmailadmin ProjectMembershipRole = "emailadmin"
 const ProjectMembershipRoleExternal ProjectMembershipRole = "external"
+const ProjectMembershipRoleID ProjectMembershipRole = "id"
 
 func (e ProjectMembershipRole) Validate() error {
-	if e == ProjectMembershipRoleOwner || e == ProjectMembershipRoleEmailadmin || e == ProjectMembershipRoleExternal {
+	if e == ProjectMembershipRoleOwner || e == ProjectMembershipRoleEmailadmin || e == ProjectMembershipRoleExternal || e == ProjectMembershipRoleID {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

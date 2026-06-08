@@ -29,6 +29,8 @@ import (
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseMysqlUserCreated"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseMysqlUserUpdated"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseMysqlUserDeleted"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationCopyRequested"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationAppVersionSet"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.GenericAction"}
 //    "aggregate": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AggregateReference"}
 //    "dateTime":

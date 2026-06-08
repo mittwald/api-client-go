@@ -14,6 +14,9 @@ import (
 //    "expiresAt":
 //        type: "string"
 //        format: "date-time"
+//    "id":
+//        type: "string"
+//        format: "uuid"
 //    "memberSince":
 //        type: "string"
 //        format: "date-time"
@@ -26,9 +29,11 @@ import (
 // required:
 //    - "role"
 //    - "memberSince"
+//    - "id"
 
 type CustomerMembership struct {
 	ExpiresAt   *time.Time             `json:"expiresAt,omitempty"`
+	Id          string                 `json:"id"`
 	MemberSince time.Time              `json:"memberSince"`
 	Role        CustomerMembershipRole `json:"role"`
 }
