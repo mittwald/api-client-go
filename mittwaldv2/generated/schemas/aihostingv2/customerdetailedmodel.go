@@ -1,6 +1,7 @@
 package aihostingv2
 
 import (
+	"errors"
 	"fmt"
 	"time"
 )
@@ -31,8 +32,18 @@ import (
 //    "removalAt":
 //        type: "string"
 //        format: "date-time"
+//    "replacedBy":
+//        type: "string"
+//        description: "This model was replaced by this value."
 //    "replacesModelName":
 //        type: "string"
+//        description: "This Field is deprecated. You can use replacesModelNames."
+//        deprecated: true
+//    "replacesModelNames":
+//        type: "array"
+//        items:
+//            type: "string"
+//        description: "List of models which were replaced by this model."
 //    "status": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.DetailedModelStatus"}
 //    "termsOfServiceLink":
 //        type: "string"
@@ -44,6 +55,7 @@ import (
 //    - "displayName"
 //    - "docLink"
 //    - "termsOfServiceLink"
+//    - "replacesModelNames"
 //    - "activeAt"
 //    - "status"
 //    - "tokenFactor"
@@ -55,7 +67,9 @@ type CustomerDetailedModel struct {
 	Label              *CustomerDetailedModelLabel `json:"label,omitempty"`
 	Name               string                      `json:"name"`
 	RemovalAt          *time.Time                  `json:"removalAt,omitempty"`
+	ReplacedBy         *string                     `json:"replacedBy,omitempty"`
 	ReplacesModelName  *string                     `json:"replacesModelName,omitempty"`
+	ReplacesModelNames []string                    `json:"replacesModelNames"`
 	Status             DetailedModelStatus         `json:"status"`
 	TermsOfServiceLink string                      `json:"termsOfServiceLink"`
 	TokenFactor        float64                     `json:"tokenFactor"`
@@ -69,6 +83,9 @@ func (o *CustomerDetailedModel) Validate() error {
 		return o.Label.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property label: %w", err)
+	}
+	if o.ReplacesModelNames == nil {
+		return errors.New("property replacesModelNames is required, but not set")
 	}
 	if err := o.Status.Validate(); err != nil {
 		return fmt.Errorf("invalid property status: %w", err)
