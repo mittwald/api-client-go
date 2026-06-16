@@ -252,7 +252,7 @@ type Client interface {
 		ctx context.Context,
 		req MigrationOrderDomainMigrationRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
+	) (*MigrationOrderDomainMigrationResponse, *http.Response, error)
 	ResendContactVerificationEmail(
 		ctx context.Context,
 		req ResendContactVerificationEmailRequest,
@@ -1652,23 +1652,27 @@ func (c *clientImpl) MigrationOrderDomainMigration(
 	ctx context.Context,
 	req MigrationOrderDomainMigrationRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
+) (*MigrationOrderDomainMigrationResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
 	if err != nil {
-		return httpRes, err
+		return nil, httpRes, err
 	}
 
 	if httpRes.StatusCode >= 400 {
 		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
+		return nil, httpRes, err
 	}
 
-	return httpRes, nil
+	var response MigrationOrderDomainMigrationResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Resends a Contact-Verification email.

@@ -17,8 +17,10 @@ import "errors"
 //        type: "string"
 //        pattern: "^p[1-9][0-9]{3,}$"
 //        description: "Name of the pAccount in customer center to migrate domains from."
+//        example: "p123456"
 //    "projectId":
 //        type: "string"
+//        format: "uuid"
 //        description: "ID of the Project to migrate the domains into."
 // required:
 //    - "pAccount"
