@@ -14,7 +14,7 @@ import (
 var _ = Describe("IngressIps", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"v4\":[\"string\"]}")
+			exampleJSON := []byte("{\"v4\":[\"string\"],\"v6\":[\"string\"]}")
 
 			sut := ingressv2.IngressIps{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

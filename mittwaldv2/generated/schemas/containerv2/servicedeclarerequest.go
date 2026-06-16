@@ -47,6 +47,9 @@ import "fmt"
 //            type: "string"
 //        description: "Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource.\n"
 //        example: ["3306/tcp"]
+//    "restartPolicy":
+//        type: "string"
+//        example: "always"
 //    "volumes":
 //        type: "array"
 //        items:
@@ -57,15 +60,16 @@ import "fmt"
 //    - "image"
 
 type ServiceDeclareRequest struct {
-	Command     []string          `json:"command,omitempty"`
-	Deploy      *Deploy           `json:"deploy,omitempty"`
-	Description *string           `json:"description,omitempty"`
-	Entrypoint  []string          `json:"entrypoint,omitempty"`
-	Environment map[string]string `json:"environment,omitempty"`
-	Envs        map[string]string `json:"envs,omitempty"`
-	Image       string            `json:"image"`
-	Ports       []string          `json:"ports,omitempty"`
-	Volumes     []string          `json:"volumes,omitempty"`
+	Command       []string          `json:"command,omitempty"`
+	Deploy        *Deploy           `json:"deploy,omitempty"`
+	Description   *string           `json:"description,omitempty"`
+	Entrypoint    []string          `json:"entrypoint,omitempty"`
+	Environment   map[string]string `json:"environment,omitempty"`
+	Envs          map[string]string `json:"envs,omitempty"`
+	Image         string            `json:"image"`
+	Ports         []string          `json:"ports,omitempty"`
+	RestartPolicy *string           `json:"restartPolicy,omitempty"`
+	Volumes       []string          `json:"volumes,omitempty"`
 }
 
 func (o *ServiceDeclareRequest) Validate() error {

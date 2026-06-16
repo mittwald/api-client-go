@@ -13,16 +13,26 @@ import "errors"
 //        items:
 //            type: "string"
 //            format: "ipv4"
+//    "v6":
+//        type: "array"
+//        items:
+//            type: "string"
+//            format: "ipv6"
 // required:
 //    - "v4"
+//    - "v6"
 
 type IngressIps struct {
 	V4 []string `json:"v4"`
+	V6 []string `json:"v6"`
 }
 
 func (o *IngressIps) Validate() error {
 	if o.V4 == nil {
 		return errors.New("property v4 is required, but not set")
+	}
+	if o.V6 == nil {
+		return errors.New("property v6 is required, but not set")
 	}
 	return nil
 }

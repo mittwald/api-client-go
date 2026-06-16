@@ -29,6 +29,14 @@ import (
 //        format: "uuid"
 //    "requiresRecreate":
 //        type: "boolean"
+//    "restartPolicy":
+//        type: "string"
+//        enum:
+//            - "no"
+//            - "always"
+//            - "on-failure"
+//            - "unless-stopped"
+//        example: "always"
 //    "serviceName":
 //        type: "string"
 //        example: "mysql-db"
@@ -57,19 +65,20 @@ import (
 //    - "requiresRecreate"
 
 type ServiceResponse struct {
-	Deploy           *Deploy       `json:"deploy,omitempty"`
-	DeployedState    ServiceState  `json:"deployedState"`
-	Description      string        `json:"description"`
-	Id               string        `json:"id"`
-	Message          *string       `json:"message,omitempty"`
-	PendingState     ServiceState  `json:"pendingState"`
-	ProjectId        string        `json:"projectId"`
-	RequiresRecreate bool          `json:"requiresRecreate"`
-	ServiceName      string        `json:"serviceName"`
-	ShortId          string        `json:"shortId"`
-	StackId          string        `json:"stackId"`
-	Status           ServiceStatus `json:"status"`
-	StatusSetAt      time.Time     `json:"statusSetAt"`
+	Deploy           *Deploy                       `json:"deploy,omitempty"`
+	DeployedState    ServiceState                  `json:"deployedState"`
+	Description      string                        `json:"description"`
+	Id               string                        `json:"id"`
+	Message          *string                       `json:"message,omitempty"`
+	PendingState     ServiceState                  `json:"pendingState"`
+	ProjectId        string                        `json:"projectId"`
+	RequiresRecreate bool                          `json:"requiresRecreate"`
+	RestartPolicy    *ServiceResponseRestartPolicy `json:"restartPolicy,omitempty"`
+	ServiceName      string                        `json:"serviceName"`
+	ShortId          string                        `json:"shortId"`
+	StackId          string                        `json:"stackId"`
+	Status           ServiceStatus                 `json:"status"`
+	StatusSetAt      time.Time                     `json:"statusSetAt"`
 }
 
 func (o *ServiceResponse) Validate() error {
@@ -86,6 +95,14 @@ func (o *ServiceResponse) Validate() error {
 	}
 	if err := o.PendingState.Validate(); err != nil {
 		return fmt.Errorf("invalid property pendingState: %w", err)
+	}
+	if err := func() error {
+		if o.RestartPolicy == nil {
+			return nil
+		}
+		return o.RestartPolicy.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property restartPolicy: %w", err)
 	}
 	if err := o.Status.Validate(); err != nil {
 		return fmt.Errorf("invalid property status: %w", err)

@@ -35,8 +35,14 @@ import (
 //                items:
 //                    type: "string"
 //                    format: "ipv4"
+//            "v6":
+//                type: "array"
+//                items:
+//                    type: "string"
+//                    format: "ipv6"
 //        required:
 //            - "v4"
+//            - "v6"
 //    "isDefault":
 //        type: "boolean"
 //        description: "Whether this ingress is the default ingress or not. A default ingress is automatically created, it cannot be deleted. There can be only one default ingress per project."
