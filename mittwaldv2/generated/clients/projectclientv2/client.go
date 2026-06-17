@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/activitylogv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/membershipv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/projectv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/storagespacev2"
@@ -121,6 +122,11 @@ type Client interface {
 		req ListMembershipsForProjectRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]membershipv2.ProjectMembership, *http.Response, error)
+	ListProjectActivities(
+		ctx context.Context,
+		req ListProjectActivitiesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]activitylogv2.LogEntry, *http.Response, error)
 	ListProjectInvites(
 		ctx context.Context,
 		req ListProjectInvitesRequest,
@@ -733,6 +739,34 @@ func (c *clientImpl) ListMembershipsForProject(
 	}
 
 	var response []membershipv2.ProjectMembership
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get the activities of a project.
+func (c *clientImpl) ListProjectActivities(
+	ctx context.Context,
+	req ListProjectActivitiesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]activitylogv2.LogEntry, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []activitylogv2.LogEntry
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
