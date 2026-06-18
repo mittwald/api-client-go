@@ -14,7 +14,7 @@ import (
 var _ = Describe("ArticleAddons", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"hidden\":true,\"key\":\"string\",\"type\":\"string\",\"value\":\"string\",\"valueMergeType\":\"add\"}")
+			exampleJSON := []byte("{\"hidden\":true,\"key\":\"Varnish\",\"type\":\"config\",\"value\":\"noway\",\"valueMergeType\":\"add\"}")
 
 			sut := articlev2.ArticleAddons{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

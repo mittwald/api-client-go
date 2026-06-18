@@ -10,6 +10,7 @@ import "fmt"
 // properties:
 //    "customerEditable":
 //        type: "boolean"
+//        description: "Used if there are custom configurations needed for an Order like a Server name."
 //    "key":
 //        type: "string"
 //        minLength: 1
@@ -19,15 +20,19 @@ import "fmt"
 //        enum:
 //            - "add"
 //            - "set"
+//        description: "Used if Articles are ordered as a batch."
 //    "readonly":
 //        type: "boolean"
+//        description: "Used if not need for an Order."
 //    "required":
 //        type: "boolean"
 //    "unit":
 //        type: "string"
+//        description: "Used if Articles are ordered as a batch."
 //        example: "GHz"
 //    "value":
 //        type: "string"
+//        description: "Will be ignored if customerEditable is set."
 //        example: "4"
 // required:
 //    - "key"
