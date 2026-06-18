@@ -84,6 +84,11 @@ type Client interface {
 		req DeleteVolumeRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetContainerImageConfig(
+		ctx context.Context,
+		req GetContainerImageConfigRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*containerv2.ContainerImageConfig, *http.Response, error)
 	GetServiceLogs(
 		ctx context.Context,
 		req GetServiceLogsRequest,
@@ -174,11 +179,6 @@ type Client interface {
 		req DeprecatedValidateRegistryCredentialsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedValidateRegistryCredentialsResponse, *http.Response, error)
-	GetContainerImageConfig(
-		ctx context.Context,
-		req GetContainerImageConfigRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*containerv2.ContainerImageConfig, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -560,6 +560,34 @@ func (c *clientImpl) DeleteVolume(
 	}
 
 	return httpRes, nil
+}
+
+// Get a ContainerImageConfig.
+func (c *clientImpl) GetContainerImageConfig(
+	ctx context.Context,
+	req GetContainerImageConfigRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*containerv2.ContainerImageConfig, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response containerv2.ContainerImageConfig
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Get logs belonging to a Service.
@@ -1040,34 +1068,6 @@ func (c *clientImpl) DeprecatedValidateRegistryCredentials(
 	}
 
 	var response DeprecatedValidateRegistryCredentialsResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get a ContainerImageConfig.
-func (c *clientImpl) GetContainerImageConfig(
-	ctx context.Context,
-	req GetContainerImageConfigRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*containerv2.ContainerImageConfig, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response containerv2.ContainerImageConfig
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

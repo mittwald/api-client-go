@@ -10,7 +10,9 @@ import "fmt"
 // enum:
 //    - "add"
 //    - "set"
+// description: "Used if Articles are ordered as a batch."
 
+// Used if Articles are ordered as a batch.
 type ArticleAddonsValueMergeType string
 
 const ArticleAddonsValueMergeTypeAdd ArticleAddonsValueMergeType = "add"

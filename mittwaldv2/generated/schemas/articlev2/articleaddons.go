@@ -10,18 +10,26 @@ import "fmt"
 // properties:
 //    "hidden":
 //        type: "boolean"
+//        description: "Defines if the Addon should not be shown."
 //    "key":
 //        type: "string"
 //        minLength: 1
+//        description: "Unique key of the Addon."
+//        example: "Varnish"
 //    "type":
 //        type: "string"
+//        description: "The type/category of the addon."
+//        example: "config"
 //    "value":
 //        type: "string"
+//        description: "Value of the Addon, e.g. configuration details, status, or modifier properties."
+//        example: "noway"
 //    "valueMergeType":
 //        type: "string"
 //        enum:
 //            - "add"
 //            - "set"
+//        description: "Used if Articles are ordered as a batch."
 // required:
 //    - "key"
 //    - "value"

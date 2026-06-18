@@ -21,6 +21,7 @@ import "fmt"
 //    "balanceAddonKey":
 //        type: "string"
 //        example: "inclusive_domains"
+//        deprecated: true
 //    "contractDurationInMonth":
 //        type: "number"
 //        maximum: 42
@@ -32,11 +33,14 @@ import "fmt"
 //    "forcedInvoicingPeriodInMonth":
 //        type: "number"
 //        minimum: 0
+//        description: "If set, the Article will always be invoiced for the given months."
 //        example: 0
 //    "hasIndependentContractPeriod":
 //        type: "boolean"
+//        description: "Article has a contract period which is not dependent on the Contract Base Item."
 //    "hideOnInvoice":
 //        type: "boolean"
+//        description: "Free Article that is not showing on Invoices."
 //    "machineType":
 //        type: "object"
 //        properties:
@@ -45,6 +49,7 @@ import "fmt"
 //                example: "1"
 //            "memory":
 //                type: "string"
+//                description: "Memory in GiB"
 //                example: "10"
 //            "name":
 //                type: "string"
@@ -53,6 +58,7 @@ import "fmt"
 //            - "name"
 //            - "cpu"
 //            - "memory"
+//        description: "Resources for hosting Articles."
 //    "modifierArticles":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.article.ReadableModifierArticleOptions"}
@@ -74,6 +80,7 @@ import "fmt"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.article.ReadableChangeArticleOptions"}
 //    "price":
 //        type: "number"
+//        description: "Monthly price in Eurocent"
 //        example: 1000
 //    "tags":
 //        type: "array"

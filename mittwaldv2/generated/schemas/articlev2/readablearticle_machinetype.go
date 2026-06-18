@@ -11,6 +11,7 @@ package articlev2
 //        example: "1"
 //    "memory":
 //        type: "string"
+//        description: "Memory in GiB"
 //        example: "10"
 //    "name":
 //        type: "string"
@@ -19,7 +20,9 @@ package articlev2
 //    - "name"
 //    - "cpu"
 //    - "memory"
+// description: "Resources for hosting Articles."
 
+// Resources for hosting Articles.
 type ReadableArticleMachineType struct {
 	Cpu    string `json:"cpu"`
 	Memory string `json:"memory"`
