@@ -14,7 +14,7 @@ import (
 var _ = Describe("DomainNotMigratableReasons", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"insufficientState\":true,\"isPremiumDomain\":true,\"registrarNotSupported\":true,\"tldNotSupported\":true}")
+			exampleJSON := []byte("{\"reasonCodes\":[\"DOMAIN_NOT_MIGRATABLE_REASON_NEED_EPP\"]}")
 
 			sut := domainmigrationv2.DomainNotMigratableReasons{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

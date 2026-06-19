@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("NonMigratableDomain", func() {
+var _ = Describe("DomainNotMigratableValidationError", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"hostname\":\"string\",\"issues\":{\"reasonCodes\":[\"DOMAIN_NOT_MIGRATABLE_REASON_NEED_EPP\"]},\"migratable\":true}")
+			exampleJSON := []byte("{\"context\":{\"string\":\"string\"},\"message\":\"domain static-need-epp.com is not migratable: DOMAIN_NOT_MIGRATABLE_REASON_NEED_EPP\",\"path\":\"static-need-epp.com\",\"type\":\"DOMAIN_NOT_MIGRATABLE\"}")
 
-			sut := domainmigrationv2.NonMigratableDomain{}
+			sut := domainmigrationv2.DomainNotMigratableValidationError{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

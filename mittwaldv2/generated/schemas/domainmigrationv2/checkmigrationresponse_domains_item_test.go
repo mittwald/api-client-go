@@ -22,7 +22,7 @@ var _ = Describe("CheckMigrationResponseDomainsItem", func() {
 			Expect(sut.AlternativeMigratableDomain).NotTo(BeNil())
 		})
 		It("should unmarshal into AlternativeNonMigratableDomain", func() {
-			exampleJSON := []byte("{\"hostname\":\"string\",\"issues\":{\"insufficientState\":true,\"isPremiumDomain\":true,\"registrarNotSupported\":true,\"tldNotSupported\":true},\"migratable\":true}")
+			exampleJSON := []byte("{\"hostname\":\"string\",\"issues\":{\"reasonCodes\":[\"DOMAIN_NOT_MIGRATABLE_REASON_NEED_EPP\"]},\"migratable\":true}")
 
 			sut := domainmigrationv2.CheckMigrationResponseDomainsItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
