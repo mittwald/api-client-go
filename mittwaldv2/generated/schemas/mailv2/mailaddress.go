@@ -65,6 +65,7 @@ import (
 //    "mailbox":
 //        type: "object"
 //        properties:
+//            "mailsystemSettings": {"$ref": "#/components/schemas/de.mittwald.v1.mail.MailsystemSettings"}
 //            "name":
 //                type: "string"
 //            "passwordUpdatedAt":
@@ -119,6 +120,7 @@ import (
 //            - "spamProtection"
 //            - "storageInBytes"
 //            - "passwordUpdatedAt"
+//            - "mailsystemSettings"
 //    "projectId":
 //        type: "string"
 //    "rateLimitChangeRequest":

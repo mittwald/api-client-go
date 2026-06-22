@@ -14,7 +14,7 @@ import (
 var _ = Describe("ListMessagesByConversationResponseItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal into AlternativeMessage", func() {
-			exampleJSON := []byte("{\"conversationId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"createdAt\":\"2006-01-02T15:04:05Z\",\"createdBy\":{\"active\":null,\"atlasGroup\":null,\"avatarRefId\":null,\"clearName\":null,\"department\":null,\"group\":null,\"userId\":\"string\"},\"files\":[{\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"status\":\"requested\"}],\"internal\":true,\"messageContent\":\"string\",\"messageId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"type\":\"MESSAGE\"}")
+			exampleJSON := []byte("{\"conversationId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"createdAt\":\"2006-01-02T15:04:05Z\",\"createdBy\":{\"active\":null,\"avatarRefId\":null,\"clearName\":null,\"isEmployee\":null,\"userId\":\"string\"},\"files\":[{\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"status\":\"requested\"}],\"internal\":true,\"messageContent\":\"string\",\"messageId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"type\":\"MESSAGE\"}")
 
 			sut := conversationclientv2.ListMessagesByConversationResponseItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

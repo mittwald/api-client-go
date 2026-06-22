@@ -8,6 +8,9 @@ import "github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/container
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "description":
+//        type: "string"
+//        example: "uptime kuma"
 //    "services":
 //        type: "object"
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.container.ServiceRequest"}
@@ -20,8 +23,9 @@ import "github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/container
 
 // UpdateStackRequestBody models the JSON body of a 'container-update-stack' request
 type UpdateStackRequestBody struct {
-	Services map[string]containerv2.ServiceRequest `json:"services,omitempty"`
-	Volumes  map[string]containerv2.VolumeRequest  `json:"volumes,omitempty"`
+	Description *string                               `json:"description,omitempty"`
+	Services    map[string]containerv2.ServiceRequest `json:"services,omitempty"`
+	Volumes     map[string]containerv2.VolumeRequest  `json:"volumes,omitempty"`
 }
 
 func (o *UpdateStackRequestBody) Validate() error {

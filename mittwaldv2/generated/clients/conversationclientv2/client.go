@@ -18,7 +18,7 @@ type Client interface {
 		ctx context.Context,
 		req ListConversationsRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*[]conversationv2.Conversation, *http.Response, error)
+	) (*[]any, *http.Response, error)
 	CreateConversation(
 		ctx context.Context,
 		req CreateConversationRequest,
@@ -53,7 +53,7 @@ type Client interface {
 		ctx context.Context,
 		req GetConversationRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*conversationv2.Conversation, *http.Response, error)
+	) (*any, *http.Response, error)
 	UpdateConversation(
 		ctx context.Context,
 		req UpdateConversationRequest,
@@ -98,7 +98,7 @@ func (c *clientImpl) ListConversations(
 	ctx context.Context,
 	req ListConversationsRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*[]conversationv2.Conversation, *http.Response, error) {
+) (*[]any, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -114,7 +114,7 @@ func (c *clientImpl) ListConversations(
 		return nil, httpRes, err
 	}
 
-	var response []conversationv2.Conversation
+	var response []any
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -294,7 +294,7 @@ func (c *clientImpl) GetConversation(
 	ctx context.Context,
 	req GetConversationRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*conversationv2.Conversation, *http.Response, error) {
+) (*any, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -310,7 +310,7 @@ func (c *clientImpl) GetConversation(
 		return nil, httpRes, err
 	}
 
-	var response conversationv2.Conversation
+	var response any
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

@@ -14,7 +14,7 @@ import (
 var _ = Describe("GenericStatusUpdate", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"conversationId\":\"string\",\"createdAt\":\"2006-01-02T15:04:05Z\",\"internal\":true,\"messageContent\":\"string\",\"meta\":{\"user\":{\"active\":true,\"atlasGroup\":{\"acronym\":\"string\",\"id\":\"string\",\"isDefaultGroup\":true,\"name\":\"string\"},\"avatarRefId\":\"string\",\"clearName\":\"string\",\"department\":\"development\",\"group\":{\"acronym\":\"string\",\"id\":\"string\",\"isDefaultGroup\":true,\"name\":\"string\"},\"userId\":\"string\"}},\"type\":\"STATUS_UPDATE\"}")
+			exampleJSON := []byte("{\"conversationId\":\"string\",\"createdAt\":\"2006-01-02T15:04:05Z\",\"internal\":true,\"messageContent\":\"string\",\"meta\":{\"user\":{\"active\":true,\"avatarRefId\":\"string\",\"clearName\":\"string\",\"isEmployee\":true,\"userId\":\"string\"}},\"type\":\"STATUS_UPDATE\"}")
 
 			sut := conversationv2.GenericStatusUpdate{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

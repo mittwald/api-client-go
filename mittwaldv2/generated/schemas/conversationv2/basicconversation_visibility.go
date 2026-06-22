@@ -11,13 +11,13 @@ import "fmt"
 //    - "shared"
 //    - "private"
 
-type ConversationVisibility string
+type BasicConversationVisibility string
 
-const ConversationVisibilityShared ConversationVisibility = "shared"
-const ConversationVisibilityPrivate ConversationVisibility = "private"
+const BasicConversationVisibilityShared BasicConversationVisibility = "shared"
+const BasicConversationVisibilityPrivate BasicConversationVisibility = "private"
 
-func (e ConversationVisibility) Validate() error {
-	if e == ConversationVisibilityShared || e == ConversationVisibilityPrivate {
+func (e BasicConversationVisibility) Validate() error {
+	if e == BasicConversationVisibilityShared || e == BasicConversationVisibilityPrivate {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

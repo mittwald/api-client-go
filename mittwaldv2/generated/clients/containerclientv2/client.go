@@ -149,11 +149,6 @@ type Client interface {
 		req RotatePullImageWebhookForServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.ServicePullImageWebhookResponse, *http.Response, error)
-	SetStackDescription(
-		ctx context.Context,
-		req SetStackDescriptionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	SetStackUpdateSchedule(
 		ctx context.Context,
 		req SetStackUpdateScheduleRequest,
@@ -916,30 +911,6 @@ func (c *clientImpl) RotatePullImageWebhookForService(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Replace the description of a Stack.
-func (c *clientImpl) SetStackDescription(
-	ctx context.Context,
-	req SetStackDescriptionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
 
 // Set an update schedule for a Stack.
