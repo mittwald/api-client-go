@@ -29,6 +29,16 @@ type Client interface {
 		req CreateRegistryRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.Registry, *http.Response, error)
+	ListStacks(
+		ctx context.Context,
+		req ListStacksRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]containerv2.StackResponse, *http.Response, error)
+	CreateStack(
+		ctx context.Context,
+		req CreateStackRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*containerv2.StackResponse, *http.Response, error)
 	GetStack(
 		ctx context.Context,
 		req GetStackRequest,
@@ -39,6 +49,11 @@ type Client interface {
 		req DeclareStackRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.StackResponse, *http.Response, error)
+	DeleteStack(
+		ctx context.Context,
+		req DeleteStackRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	UpdateStack(
 		ctx context.Context,
 		req UpdateStackRequest,
@@ -99,11 +114,6 @@ type Client interface {
 		req ListStackVolumesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]containerv2.VolumeResponse, *http.Response, error)
-	ListStacks(
-		ctx context.Context,
-		req ListStacksRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]containerv2.StackResponse, *http.Response, error)
 	ListVolumes(
 		ctx context.Context,
 		req ListVolumesRequest,
@@ -245,6 +255,62 @@ func (c *clientImpl) CreateRegistry(
 	return &response, httpRes, nil
 }
 
+// List Stacks belonging to a Project.
+func (c *clientImpl) ListStacks(
+	ctx context.Context,
+	req ListStacksRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]containerv2.StackResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []containerv2.StackResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create a Stack.
+func (c *clientImpl) CreateStack(
+	ctx context.Context,
+	req CreateStackRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*containerv2.StackResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response containerv2.StackResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Get a Stack.
 func (c *clientImpl) GetStack(
 	ctx context.Context,
@@ -299,6 +365,30 @@ func (c *clientImpl) DeclareStack(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Delete a Stack.
+func (c *clientImpl) DeleteStack(
+	ctx context.Context,
+	req DeleteStackRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // Create, update or delete Services or Volumes belonging to a Stack.
@@ -615,34 +705,6 @@ func (c *clientImpl) ListStackVolumes(
 	}
 
 	var response []containerv2.VolumeResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List Stacks belonging to a Project.
-func (c *clientImpl) ListStacks(
-	ctx context.Context,
-	req ListStacksRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]containerv2.StackResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []containerv2.StackResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

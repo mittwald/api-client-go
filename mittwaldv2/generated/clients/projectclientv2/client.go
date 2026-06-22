@@ -136,7 +136,7 @@ type Client interface {
 		ctx context.Context,
 		req ListProjectsRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*[]ListProjectsResponseItem, *http.Response, error)
+	) (*[]projectv2.ProjectListItem, *http.Response, error)
 	ListServers(
 		ctx context.Context,
 		req ListServersRequest,
@@ -182,6 +182,11 @@ type Client interface {
 		req ListProjectActivitiesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]activitylogv2.LogEntry, *http.Response, error)
+	ListCustomerProjects(
+		ctx context.Context,
+		req ListCustomerProjectsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]projectv2.ProjectListItem, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -806,7 +811,7 @@ func (c *clientImpl) ListProjects(
 	ctx context.Context,
 	req ListProjectsRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*[]ListProjectsResponseItem, *http.Response, error) {
+) (*[]projectv2.ProjectListItem, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -822,7 +827,7 @@ func (c *clientImpl) ListProjects(
 		return nil, httpRes, err
 	}
 
-	var response []ListProjectsResponseItem
+	var response []projectv2.ProjectListItem
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -1055,6 +1060,34 @@ func (c *clientImpl) ListProjectActivities(
 	}
 
 	var response []activitylogv2.LogEntry
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Projects belonging to a Customer.
+func (c *clientImpl) ListCustomerProjects(
+	ctx context.Context,
+	req ListCustomerProjectsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]projectv2.ProjectListItem, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []projectv2.ProjectListItem
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
