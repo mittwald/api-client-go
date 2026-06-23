@@ -65,7 +65,6 @@ import (
 //    "mailbox":
 //        type: "object"
 //        properties:
-//            "mailsystemSettings": {"$ref": "#/components/schemas/de.mittwald.v1.mail.MailsystemSettings"}
 //            "name":
 //                type: "string"
 //            "passwordUpdatedAt":
@@ -120,17 +119,8 @@ import (
 //            - "spamProtection"
 //            - "storageInBytes"
 //            - "passwordUpdatedAt"
-//            - "mailsystemSettings"
 //    "projectId":
 //        type: "string"
-//    "rateLimitChangeRequest":
-//        type: "object"
-//        properties:
-//            "rateLimitId":
-//                type: "string"
-//                description: "id of the rate limit requested"
-//        required:
-//            - "rateLimitId"
 //    "receivingDisabled":
 //        type: "boolean"
 //    "updatedAt":
@@ -150,19 +140,18 @@ import (
 //    - "archive"
 
 type MailAddress struct {
-	Address                string                             `json:"address"`
-	Archive                MailAddressArchive                 `json:"archive"`
-	AutoResponder          MailAddressAutoResponder           `json:"autoResponder"`
-	ForwardAddresses       []string                           `json:"forwardAddresses"`
-	Id                     string                             `json:"id"`
-	IsArchived             bool                               `json:"isArchived"`
-	IsBackupInProgress     bool                               `json:"isBackupInProgress"`
-	IsCatchAll             bool                               `json:"isCatchAll"`
-	Mailbox                *MailAddressMailbox                `json:"mailbox,omitempty"`
-	ProjectId              string                             `json:"projectId"`
-	RateLimitChangeRequest *MailAddressRateLimitChangeRequest `json:"rateLimitChangeRequest,omitempty"`
-	ReceivingDisabled      bool                               `json:"receivingDisabled"`
-	UpdatedAt              time.Time                          `json:"updatedAt"`
+	Address            string                   `json:"address"`
+	Archive            MailAddressArchive       `json:"archive"`
+	AutoResponder      MailAddressAutoResponder `json:"autoResponder"`
+	ForwardAddresses   []string                 `json:"forwardAddresses"`
+	Id                 string                   `json:"id"`
+	IsArchived         bool                     `json:"isArchived"`
+	IsBackupInProgress bool                     `json:"isBackupInProgress"`
+	IsCatchAll         bool                     `json:"isCatchAll"`
+	Mailbox            *MailAddressMailbox      `json:"mailbox,omitempty"`
+	ProjectId          string                   `json:"projectId"`
+	ReceivingDisabled  bool                     `json:"receivingDisabled"`
+	UpdatedAt          time.Time                `json:"updatedAt"`
 }
 
 func (o *MailAddress) Validate() error {
@@ -182,14 +171,6 @@ func (o *MailAddress) Validate() error {
 		return o.Mailbox.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property mailbox: %w", err)
-	}
-	if err := func() error {
-		if o.RateLimitChangeRequest == nil {
-			return nil
-		}
-		return o.RateLimitChangeRequest.Validate()
-	}(); err != nil {
-		return fmt.Errorf("invalid property rateLimitChangeRequest: %w", err)
 	}
 	return nil
 }

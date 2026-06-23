@@ -11,7 +11,6 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "mailsystemSettings": {"$ref": "#/components/schemas/de.mittwald.v1.mail.MailsystemSettings"}
 //    "name":
 //        type: "string"
 //    "passwordUpdatedAt":
@@ -66,21 +65,16 @@ import (
 //    - "spamProtection"
 //    - "storageInBytes"
 //    - "passwordUpdatedAt"
-//    - "mailsystemSettings"
 
 type MailAddressMailbox struct {
-	MailsystemSettings MailsystemSettings               `json:"mailsystemSettings"`
-	Name               string                           `json:"name"`
-	PasswordUpdatedAt  time.Time                        `json:"passwordUpdatedAt"`
-	SendingEnabled     bool                             `json:"sendingEnabled"`
-	SpamProtection     MailAddressMailboxSpamProtection `json:"spamProtection"`
-	StorageInBytes     MailAddressMailboxStorageInBytes `json:"storageInBytes"`
+	Name              string                           `json:"name"`
+	PasswordUpdatedAt time.Time                        `json:"passwordUpdatedAt"`
+	SendingEnabled    bool                             `json:"sendingEnabled"`
+	SpamProtection    MailAddressMailboxSpamProtection `json:"spamProtection"`
+	StorageInBytes    MailAddressMailboxStorageInBytes `json:"storageInBytes"`
 }
 
 func (o *MailAddressMailbox) Validate() error {
-	if err := o.MailsystemSettings.Validate(); err != nil {
-		return fmt.Errorf("invalid property mailsystemSettings: %w", err)
-	}
 	if err := o.SpamProtection.Validate(); err != nil {
 		return fmt.Errorf("invalid property spamProtection: %w", err)
 	}

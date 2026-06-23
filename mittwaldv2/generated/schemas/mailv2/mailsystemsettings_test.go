@@ -14,7 +14,7 @@ import (
 var _ = Describe("MailsystemSettings", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"rateLimitId\":\"string\"}")
+			exampleJSON := []byte("{\"imapClusterId\":\"string\",\"mailDirectory\":\"string\",\"rateLimitId\":\"string\"}")
 
 			sut := mailv2.MailsystemSettings{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
