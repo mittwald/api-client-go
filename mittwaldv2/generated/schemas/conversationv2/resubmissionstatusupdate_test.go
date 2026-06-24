@@ -14,7 +14,7 @@ import (
 var _ = Describe("ResubmissionStatusUpdate", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"conversationId\":\"string\",\"createdAt\":\"2006-01-02T15:04:05Z\",\"internal\":true,\"messageContent\":\"RESUBMISSION_CREATED\",\"meta\":{\"groupAcronym\":\"string\",\"groupId\":\"string\",\"groupName\":\"string\",\"resubmitAt\":\"2006-01-02T15:04:05Z\",\"user\":{\"active\":true,\"atlasGroup\":{\"acronym\":\"string\",\"id\":\"string\",\"isDefaultGroup\":true,\"name\":\"string\"},\"avatarRefId\":\"string\",\"clearName\":\"string\",\"department\":\"development\",\"group\":{\"acronym\":\"string\",\"id\":\"string\",\"isDefaultGroup\":true,\"name\":\"string\"},\"userId\":\"string\"}},\"type\":\"STATUS_UPDATE\"}")
+			exampleJSON := []byte("{\"conversationId\":\"string\",\"createdAt\":\"2006-01-02T15:04:05Z\",\"internal\":true,\"messageContent\":\"RESUBMISSION_CREATED\",\"meta\":{\"groupAcronym\":\"string\",\"groupId\":\"string\",\"groupName\":\"string\",\"resubmitAt\":\"2006-01-02T15:04:05Z\",\"user\":{\"active\":true,\"avatarRefId\":\"string\",\"clearName\":\"string\",\"isEmployee\":true,\"userId\":\"string\"}},\"type\":\"STATUS_UPDATE\"}")
 
 			sut := conversationv2.ResubmissionStatusUpdate{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

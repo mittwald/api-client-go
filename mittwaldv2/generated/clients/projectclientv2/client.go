@@ -117,11 +117,21 @@ type Client interface {
 		req GetServerRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*projectv2.Server, *http.Response, error)
+	ListCustomerProjects(
+		ctx context.Context,
+		req ListCustomerProjectsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]projectv2.ProjectListItem, *http.Response, error)
 	ListMembershipsForProject(
 		ctx context.Context,
 		req ListMembershipsForProjectRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]membershipv2.ProjectMembership, *http.Response, error)
+	ListProjectActivities(
+		ctx context.Context,
+		req ListProjectActivitiesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]activitylogv2.LogEntry, *http.Response, error)
 	ListProjectInvites(
 		ctx context.Context,
 		req ListProjectInvitesRequest,
@@ -177,16 +187,6 @@ type Client interface {
 		req StoragespaceReplaceServerNotificationThresholdRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	ListProjectActivities(
-		ctx context.Context,
-		req ListProjectActivitiesRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]activitylogv2.LogEntry, *http.Response, error)
-	ListCustomerProjects(
-		ctx context.Context,
-		req ListCustomerProjectsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]projectv2.ProjectListItem, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -722,6 +722,34 @@ func (c *clientImpl) GetServer(
 	return &response, httpRes, nil
 }
 
+// List Projects belonging to a Customer.
+func (c *clientImpl) ListCustomerProjects(
+	ctx context.Context,
+	req ListCustomerProjectsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]projectv2.ProjectListItem, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []projectv2.ProjectListItem
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // List Memberships belonging to a Project.
 func (c *clientImpl) ListMembershipsForProject(
 	ctx context.Context,
@@ -744,6 +772,34 @@ func (c *clientImpl) ListMembershipsForProject(
 	}
 
 	var response []membershipv2.ProjectMembership
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get the activities of a project.
+func (c *clientImpl) ListProjectActivities(
+	ctx context.Context,
+	req ListProjectActivitiesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]activitylogv2.LogEntry, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []activitylogv2.LogEntry
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -1036,60 +1092,4 @@ func (c *clientImpl) StoragespaceReplaceServerNotificationThreshold(
 	}
 
 	return httpRes, nil
-}
-
-// Get the activities of a project.
-func (c *clientImpl) ListProjectActivities(
-	ctx context.Context,
-	req ListProjectActivitiesRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]activitylogv2.LogEntry, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []activitylogv2.LogEntry
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List Projects belonging to a Customer.
-func (c *clientImpl) ListCustomerProjects(
-	ctx context.Context,
-	req ListCustomerProjectsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]projectv2.ProjectListItem, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []projectv2.ProjectListItem
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
