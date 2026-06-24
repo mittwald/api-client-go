@@ -14,7 +14,7 @@ import (
 var _ = Describe("AppInstallationCopyRequestedChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"after\":{\"appId\":\"string\",\"sourceAppInstallationId\":\"string\"},\"before\":{\"appId\":\"string\",\"sourceAppInstallationId\":\"string\"}}")
+			exampleJSON := []byte("{\"after\":{\"appId\":\"string\",\"appName\":\"string\",\"sourceAppInstallationId\":\"string\",\"sourceAppName\":\"string\"},\"before\":{\"appId\":\"string\",\"appName\":\"string\",\"sourceAppInstallationId\":\"string\",\"sourceAppName\":\"string\"}}")
 
 			sut := activitylogv2.AppInstallationCopyRequestedChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

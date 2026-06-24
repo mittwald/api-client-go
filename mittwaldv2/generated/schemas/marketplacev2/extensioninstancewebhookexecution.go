@@ -34,14 +34,7 @@ import (
 //    "nextScheduledExecution":
 //        type: "string"
 //        format: "date-time"
-//    "state":
-//        type: "string"
-//        enum:
-//            - "running"
-//            - "queued"
-//            - "halted"
-//            - "failed"
-//            - "successful"
+//    "state": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.ExtensionInstanceWebhookExecutionState"}
 // required:
 //    - "id"
 //    - "extensionInstanceId"

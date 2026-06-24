@@ -21,7 +21,7 @@ import (
 //            type: "string"
 //    "message":
 //        type: "string"
-//        example: "domain static-need-epp.com is not migratable: DOMAIN_NOT_MIGRATABLE_REASON_NEED_EPP"
+//        example: "domain static-need-epp.com is not migratable: needEpp"
 //    "path":
 //        type: "string"
 //        description: "The affected domain."
@@ -29,16 +29,16 @@ import (
 //    "type":
 //        type: "string"
 //        enum:
-//            - "DOMAIN_NOT_MIGRATABLE"
-//        description: "Discriminator for this branch; always DOMAIN_NOT_MIGRATABLE."
+//            - "domainNotMigratable"
+//        description: "Discriminator for this branch; always domainNotMigratable."
 // required:
 //    - "type"
 //    - "message"
 //    - "path"
 //    - "context"
-// description: "A non-migratable-domain failure: one selected domain cannot be migrated. type is always DOMAIN_NOT_MIGRATABLE, path is the affected domain, and context.reason carries the typed reason code."
+// description: "A non-migratable-domain failure: one selected domain cannot be migrated. type is always domainNotMigratable, path is the affected domain, and context.reason carries the typed reason code."
 
-// A non-migratable-domain failure: one selected domain cannot be migrated. type is always DOMAIN_NOT_MIGRATABLE, path is the affected domain, and context.reason carries the typed reason code.
+// A non-migratable-domain failure: one selected domain cannot be migrated. type is always domainNotMigratable, path is the affected domain, and context.reason carries the typed reason code.
 type DomainNotMigratableValidationError struct {
 	Context map[string]string                      `json:"context"`
 	Message string                                 `json:"message"`

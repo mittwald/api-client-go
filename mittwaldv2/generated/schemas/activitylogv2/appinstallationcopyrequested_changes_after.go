@@ -8,15 +8,23 @@ package activitylogv2
 // properties:
 //    "appId":
 //        type: "string"
+//    "appName":
+//        type: "string"
 //    "sourceAppInstallationId":
+//        type: "string"
+//    "sourceAppName":
 //        type: "string"
 // required:
 //    - "appId"
 //    - "sourceAppInstallationId"
+//    - "appName"
+//    - "sourceAppName"
 
 type AppInstallationCopyRequestedChangesAfter struct {
 	AppId                   string `json:"appId"`
+	AppName                 string `json:"appName"`
 	SourceAppInstallationId string `json:"sourceAppInstallationId"`
+	SourceAppName           string `json:"sourceAppName"`
 }
 
 func (o *AppInstallationCopyRequestedChangesAfter) Validate() error {

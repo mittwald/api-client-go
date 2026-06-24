@@ -13,18 +13,30 @@ import "fmt"
 //        properties:
 //            "appId":
 //                type: "string"
+//            "appName":
+//                type: "string"
 //            "sourceAppInstallationId":
+//                type: "string"
+//            "sourceAppName":
 //                type: "string"
 //        required:
 //            - "appId"
 //            - "sourceAppInstallationId"
+//            - "appName"
+//            - "sourceAppName"
 //    "before":
 //        type: "object"
 //        properties:
 //            "appId":
 //                type: "string"
 //                nullable: true
+//            "appName":
+//                type: "string"
+//                nullable: true
 //            "sourceAppInstallationId":
+//                type: "string"
+//                nullable: true
+//            "sourceAppName":
 //                type: "string"
 //                nullable: true
 

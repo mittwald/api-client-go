@@ -15,20 +15,39 @@ import "fmt"
 //        enum:
 //            - true
 //    "migrationData": {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.MigrationData"}
+//    "warnings":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.DomainMigrationWarning"}
 // required:
 //    - "hostname"
 //    - "migratable"
 //    - "migrationData"
 
 type MigratableDomain struct {
-	Hostname      string        `json:"hostname"`
-	Migratable    bool          `json:"migratable"`
-	MigrationData MigrationData `json:"migrationData"`
+	Hostname      string                   `json:"hostname"`
+	Migratable    bool                     `json:"migratable"`
+	MigrationData MigrationData            `json:"migrationData"`
+	Warnings      []DomainMigrationWarning `json:"warnings,omitempty"`
 }
 
 func (o *MigratableDomain) Validate() error {
 	if err := o.MigrationData.Validate(); err != nil {
 		return fmt.Errorf("invalid property migrationData: %w", err)
+	}
+	if err := func() error {
+		if o.Warnings == nil {
+			return nil
+		}
+		return func() error {
+			for i := range o.Warnings {
+				if err := o.Warnings[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}()
+	}(); err != nil {
+		return fmt.Errorf("invalid property warnings: %w", err)
 	}
 	return nil
 }

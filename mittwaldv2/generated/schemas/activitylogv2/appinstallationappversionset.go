@@ -34,13 +34,21 @@ import "fmt"
 //        type: "string"
 //        enum:
 //            - "app.version-set"
+//    "parameters":
+//        type: "object"
+//        properties:
+//            "appInstallation": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
+//        required:
+//            - "appInstallation"
 // required:
 //    - "name"
 //    - "changes"
+//    - "parameters"
 
 type AppInstallationAppVersionSet struct {
-	Changes AppInstallationAppVersionSetChanges `json:"changes"`
-	Name    AppInstallationAppVersionSetName    `json:"name"`
+	Changes    AppInstallationAppVersionSetChanges    `json:"changes"`
+	Name       AppInstallationAppVersionSetName       `json:"name"`
+	Parameters AppInstallationAppVersionSetParameters `json:"parameters"`
 }
 
 func (o *AppInstallationAppVersionSet) Validate() error {
@@ -49,6 +57,9 @@ func (o *AppInstallationAppVersionSet) Validate() error {
 	}
 	if err := o.Name.Validate(); err != nil {
 		return fmt.Errorf("invalid property name: %w", err)
+	}
+	if err := o.Parameters.Validate(); err != nil {
+		return fmt.Errorf("invalid property parameters: %w", err)
 	}
 	return nil
 }

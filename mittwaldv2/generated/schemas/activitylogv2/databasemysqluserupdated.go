@@ -18,12 +18,15 @@ import "fmt"
 //                        type: "string"
 //                    "externalAccess":
 //                        type: "boolean"
-//                    "permissions":
-//                        type: "object"
+//                    "permissionsRead":
+//                        type: "boolean"
+//                    "permissionsWrite":
+//                        type: "boolean"
 //                required:
 //                    - "description"
 //                    - "externalAccess"
-//                    - "permissions"
+//                    - "permissionsRead"
+//                    - "permissionsWrite"
 //            "before":
 //                type: "object"
 //                properties:
@@ -33,12 +36,15 @@ import "fmt"
 //                    "externalAccess":
 //                        type: "boolean"
 //                        nullable: true
-//                    "permissions":
-//                        type: "object"
+//                    "permissionsRead":
+//                        type: "boolean"
+//                    "permissionsWrite":
+//                        type: "boolean"
 //                required:
 //                    - "description"
 //                    - "externalAccess"
-//                    - "permissions"
+//                    - "permissionsRead"
+//                    - "permissionsWrite"
 //    "name":
 //        type: "string"
 //        enum:

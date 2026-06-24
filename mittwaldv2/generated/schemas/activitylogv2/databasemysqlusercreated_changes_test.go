@@ -14,7 +14,7 @@ import (
 var _ = Describe("DatabaseMysqlUserCreatedChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"after\":{\"description\":\"string\",\"externalAccess\":true,\"name\":\"string\",\"permissions\":{}},\"before\":{\"description\":\"string\",\"externalAccess\":true,\"name\":\"string\",\"permissions\":{}}}")
+			exampleJSON := []byte("{\"after\":{\"description\":\"string\",\"externalAccess\":true,\"name\":\"string\",\"permissionsRead\":true,\"permissionsWrite\":true},\"before\":{\"description\":\"string\",\"externalAccess\":true,\"name\":\"string\",\"permissionsRead\":true,\"permissionsWrite\":true}}")
 
 			sut := activitylogv2.DatabaseMysqlUserCreatedChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

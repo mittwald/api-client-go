@@ -9,13 +9,21 @@ package activitylogv2
 //    "appId":
 //        type: "string"
 //        nullable: true
+//    "appName":
+//        type: "string"
+//        nullable: true
 //    "sourceAppInstallationId":
+//        type: "string"
+//        nullable: true
+//    "sourceAppName":
 //        type: "string"
 //        nullable: true
 
 type AppInstallationCopyRequestedChangesBefore struct {
 	AppId                   *string `json:"appId,omitempty"`
+	AppName                 *string `json:"appName,omitempty"`
 	SourceAppInstallationId *string `json:"sourceAppInstallationId,omitempty"`
+	SourceAppName           *string `json:"sourceAppName,omitempty"`
 }
 
 func (o *AppInstallationCopyRequestedChangesBefore) Validate() error {

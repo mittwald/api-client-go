@@ -14,7 +14,7 @@ import (
 var _ = Describe("CheckMigrationResponseDomainsItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal into AlternativeMigratableDomain", func() {
-			exampleJSON := []byte("{\"hostname\":\"string\",\"migratable\":true,\"migrationData\":{\"dnsRecords\":[{\"name\":\"string\",\"ttl\":42,\"type\":\"A\",\"value\":\"string\"}],\"monthlyPriceCents\":42,\"subdomains\":[{\"dnsRecords\":[{\"name\":\"string\",\"ttl\":42,\"type\":\"A\",\"value\":\"string\"}],\"hostname\":\"string\",\"target\":\"string\"}]}}")
+			exampleJSON := []byte("{\"hostname\":\"string\",\"migratable\":true,\"migrationData\":{\"dnsRecords\":[{\"name\":\"string\",\"ttl\":42,\"type\":\"A\",\"value\":\"string\"}],\"monthlyPriceCents\":42,\"subdomains\":[{\"dnsRecords\":[{\"name\":\"string\",\"ttl\":42,\"type\":\"A\",\"value\":\"string\"}],\"hostname\":\"string\",\"target\":\"string\"}]},\"warnings\":[{\"reason\":\"subdomainInvalidIngressHostname\",\"subject\":\"*.example.com\"}]}")
 
 			sut := domainmigrationv2.CheckMigrationResponseDomainsItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
@@ -22,7 +22,7 @@ var _ = Describe("CheckMigrationResponseDomainsItem", func() {
 			Expect(sut.AlternativeMigratableDomain).NotTo(BeNil())
 		})
 		It("should unmarshal into AlternativeNonMigratableDomain", func() {
-			exampleJSON := []byte("{\"hostname\":\"string\",\"issues\":{\"reasonCodes\":[\"DOMAIN_NOT_MIGRATABLE_REASON_NEED_EPP\"]},\"migratable\":true}")
+			exampleJSON := []byte("{\"hostname\":\"string\",\"issues\":[\"needEpp\"],\"migratable\":true,\"warnings\":[{\"reason\":\"subdomainInvalidIngressHostname\",\"subject\":\"*.example.com\"}]}")
 
 			sut := domainmigrationv2.CheckMigrationResponseDomainsItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

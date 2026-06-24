@@ -20,13 +20,16 @@ import "fmt"
 //                        type: "boolean"
 //                    "name":
 //                        type: "string"
-//                    "permissions":
-//                        type: "object"
+//                    "permissionsRead":
+//                        type: "boolean"
+//                    "permissionsWrite":
+//                        type: "boolean"
 //                required:
 //                    - "name"
 //                    - "description"
 //                    - "externalAccess"
-//                    - "permissions"
+//                    - "permissionsRead"
+//                    - "permissionsWrite"
 //            "before":
 //                type: "object"
 //                properties:
@@ -39,8 +42,11 @@ import "fmt"
 //                    "name":
 //                        type: "string"
 //                        nullable: true
-//                    "permissions":
-//                        type: "object"
+//                    "permissionsRead":
+//                        type: "boolean"
+//                        nullable: true
+//                    "permissionsWrite":
+//                        type: "boolean"
 //                        nullable: true
 //    "name":
 //        type: "string"

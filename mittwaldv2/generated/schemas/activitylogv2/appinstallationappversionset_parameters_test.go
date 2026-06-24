@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("DatabaseMysqlUserUpdatedChangesBeforePermissions", func() {
+var _ = Describe("AppInstallationAppVersionSetParameters", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{}")
+			exampleJSON := []byte("{\"appInstallation\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}")
 
-			sut := activitylogv2.DatabaseMysqlUserUpdatedChangesBeforePermissions{}
+			sut := activitylogv2.AppInstallationAppVersionSetParameters{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

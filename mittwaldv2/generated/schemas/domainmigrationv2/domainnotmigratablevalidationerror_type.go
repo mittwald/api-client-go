@@ -8,16 +8,16 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "string"
 // enum:
-//    - "DOMAIN_NOT_MIGRATABLE"
-// description: "Discriminator for this branch; always DOMAIN_NOT_MIGRATABLE."
+//    - "domainNotMigratable"
+// description: "Discriminator for this branch; always domainNotMigratable."
 
-// Discriminator for this branch; always DOMAIN_NOT_MIGRATABLE.
+// Discriminator for this branch; always domainNotMigratable.
 type DomainNotMigratableValidationErrorType string
 
-const DomainNotMigratableValidationErrorTypeDOMAINNOTMIGRATABLE DomainNotMigratableValidationErrorType = "DOMAIN_NOT_MIGRATABLE"
+const DomainNotMigratableValidationErrorTypeDomainNotMigratable DomainNotMigratableValidationErrorType = "domainNotMigratable"
 
 func (e DomainNotMigratableValidationErrorType) Validate() error {
-	if e == DomainNotMigratableValidationErrorTypeDOMAINNOTMIGRATABLE {
+	if e == DomainNotMigratableValidationErrorTypeDomainNotMigratable {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

@@ -14,7 +14,7 @@ import (
 var _ = Describe("DomainNotMigratableValidationError", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"context\":{\"string\":\"string\"},\"message\":\"domain static-need-epp.com is not migratable: DOMAIN_NOT_MIGRATABLE_REASON_NEED_EPP\",\"path\":\"static-need-epp.com\",\"type\":\"DOMAIN_NOT_MIGRATABLE\"}")
+			exampleJSON := []byte("{\"context\":{\"string\":\"string\"},\"message\":\"domain static-need-epp.com is not migratable: needEpp\",\"path\":\"static-need-epp.com\",\"type\":\"domainNotMigratable\"}")
 
 			sut := domainmigrationv2.DomainNotMigratableValidationError{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
