@@ -6,17 +6,13 @@ package activitylogv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "appId":
-//        type: "string"
-//    "appVersionId":
+//    "version":
 //        type: "string"
 // required:
-//    - "appId"
-//    - "appVersionId"
+//    - "version"
 
 type AppInstallationAppVersionSetChangesAfter struct {
-	AppId        string `json:"appId"`
-	AppVersionId string `json:"appVersionId"`
+	Version string `json:"version"`
 }
 
 func (o *AppInstallationAppVersionSetChangesAfter) Validate() error {

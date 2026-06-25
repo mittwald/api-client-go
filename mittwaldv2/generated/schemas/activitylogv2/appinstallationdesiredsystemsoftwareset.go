@@ -14,37 +14,15 @@ import "fmt"
 //            "after":
 //                type: "object"
 //                properties:
-//                    "software":
-//                        type: "string"
 //                    "softwareVersion":
 //                        type: "string"
-//                    "updatePolicy":
-//                        type: "string"
-//                        enum:
-//                            - "UPDATE_POLICY_UNSPECIFIED"
-//                            - "UPDATE_POLICY_NONE"
-//                            - "UPDATE_POLICY_INHERITED_FROM_APP"
-//                            - "UPDATE_POLICY_PATCH_LEVEL"
-//                            - "UPDATE_POLICY_ALL"
 //                required:
-//                    - "software"
 //                    - "softwareVersion"
-//                    - "updatePolicy"
 //            "before":
 //                type: "object"
 //                properties:
-//                    "software":
-//                        type: "string"
 //                    "softwareVersion":
 //                        type: "string"
-//                    "updatePolicy":
-//                        type: "string"
-//                        enum:
-//                            - "UPDATE_POLICY_UNSPECIFIED"
-//                            - "UPDATE_POLICY_NONE"
-//                            - "UPDATE_POLICY_INHERITED_FROM_APP"
-//                            - "UPDATE_POLICY_PATCH_LEVEL"
-//                            - "UPDATE_POLICY_ALL"
 //    "name":
 //        type: "string"
 //        enum:

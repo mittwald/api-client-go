@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("AppInstallationCopyRequestedChanges", func() {
+var _ = Describe("AppInstallationRequested", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"after\":{\"appId\":\"string\",\"appName\":\"string\",\"sourceAppInstallationId\":\"string\",\"sourceAppName\":\"string\"},\"before\":{\"appId\":\"string\",\"appName\":\"string\",\"sourceAppInstallationId\":\"string\",\"sourceAppName\":\"string\"}}")
+			exampleJSON := []byte("{\"name\":\"app.requested\",\"parameters\":{\"appInstallation\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"version\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
 
-			sut := activitylogv2.AppInstallationCopyRequestedChanges{}
+			sut := activitylogv2.AppInstallationRequested{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

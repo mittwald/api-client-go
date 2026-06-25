@@ -11,20 +11,14 @@ import "fmt"
 //    "after":
 //        type: "object"
 //        properties:
-//            "appId":
-//                type: "string"
-//            "appVersionId":
+//            "version":
 //                type: "string"
 //        required:
-//            - "appId"
-//            - "appVersionId"
+//            - "version"
 //    "before":
 //        type: "object"
 //        properties:
-//            "appId":
-//                type: "string"
-//                nullable: true
-//            "appVersionId":
+//            "version":
 //                type: "string"
 //                nullable: true
 

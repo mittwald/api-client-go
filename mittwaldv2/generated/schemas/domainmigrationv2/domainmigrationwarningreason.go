@@ -11,21 +11,24 @@ import "fmt"
 //    - "subdomainInvalidIngressHostname"
 //    - "subdomainInvalidDnsName"
 //    - "subdomainNsRecordsOverridden"
-// description: "Typed non-blocking migration warning: the domain migrates, but the named subject (`warnings[].subject`, the affected subdomain hostname) cannot be carried over as-is.\n\n* `subdomainInvalidIngressHostname`: a non-CNAME subdomain (provisioned as an ingress) does not match the `idn-hostname` format (e.g. a wildcard `*.example.de`); it is skipped and the rest of the domain migrates.\n* `subdomainInvalidDnsName`: a CNAME subdomain (provisioned as a DNS subzone) does not match the `idn-dnsname` format; it is skipped and the rest of the domain migrates.\n* `subdomainNsRecordsOverridden`: a subdomain carries its own NS records that differ from the domain's nameservers; per-subdomain delegation is not supported, so those NS records are dropped and the subdomain is served from the domain's nameservers (the rest of the subdomain still migrates)."
+//    - "registrantPhoneNeedsEpp"
+// description: "Typed non-blocking migration warning: the domain migrates, but the named subject (`warnings[].subject`) needs attention during migration.\n\n* `subdomainInvalidIngressHostname`: a non-CNAME subdomain (provisioned as an ingress) does not match the `idn-hostname` format (e.g. a wildcard `*.example.de`); it is skipped and the rest of the domain migrates.\n* `subdomainInvalidDnsName`: a CNAME subdomain (provisioned as a DNS subzone) does not match the `idn-dnsname` format; it is skipped and the rest of the domain migrates.\n* `subdomainNsRecordsOverridden`: a subdomain carries its own NS records that differ from the domain's nameservers; per-subdomain delegation is not supported, so those NS records are dropped and the subdomain is served from the domain's nameservers (the rest of the subdomain still migrates).\n* `registrantPhoneNeedsEpp`: the registry owner (registrant) phone is not EPP-conformant; a reformat-to-EPP heal will be attempted during migration. Non-blocking — the read path cannot tell whether the heal will ultimately succeed, so it only warns; the create path is the actual gate."
 
-// Typed non-blocking migration warning: the domain migrates, but the named subject (`warnings[].subject`, the affected subdomain hostname) cannot be carried over as-is.
+// Typed non-blocking migration warning: the domain migrates, but the named subject (`warnings[].subject`) needs attention during migration.
 //
 // * `subdomainInvalidIngressHostname`: a non-CNAME subdomain (provisioned as an ingress) does not match the `idn-hostname` format (e.g. a wildcard `*.example.de`); it is skipped and the rest of the domain migrates.
 // * `subdomainInvalidDnsName`: a CNAME subdomain (provisioned as a DNS subzone) does not match the `idn-dnsname` format; it is skipped and the rest of the domain migrates.
 // * `subdomainNsRecordsOverridden`: a subdomain carries its own NS records that differ from the domain's nameservers; per-subdomain delegation is not supported, so those NS records are dropped and the subdomain is served from the domain's nameservers (the rest of the subdomain still migrates).
+// * `registrantPhoneNeedsEpp`: the registry owner (registrant) phone is not EPP-conformant; a reformat-to-EPP heal will be attempted during migration. Non-blocking — the read path cannot tell whether the heal will ultimately succeed, so it only warns; the create path is the actual gate.
 type DomainMigrationWarningReason string
 
 const DomainMigrationWarningReasonSubdomainInvalidIngressHostname DomainMigrationWarningReason = "subdomainInvalidIngressHostname"
 const DomainMigrationWarningReasonSubdomainInvalidDNSName DomainMigrationWarningReason = "subdomainInvalidDnsName"
 const DomainMigrationWarningReasonSubdomainNsRecordsOverridden DomainMigrationWarningReason = "subdomainNsRecordsOverridden"
+const DomainMigrationWarningReasonRegistrantPhoneNeedsEpp DomainMigrationWarningReason = "registrantPhoneNeedsEpp"
 
 func (e DomainMigrationWarningReason) Validate() error {
-	if e == DomainMigrationWarningReasonSubdomainInvalidIngressHostname || e == DomainMigrationWarningReasonSubdomainInvalidDNSName || e == DomainMigrationWarningReasonSubdomainNsRecordsOverridden {
+	if e == DomainMigrationWarningReasonSubdomainInvalidIngressHostname || e == DomainMigrationWarningReasonSubdomainInvalidDNSName || e == DomainMigrationWarningReasonSubdomainNsRecordsOverridden || e == DomainMigrationWarningReasonRegistrantPhoneNeedsEpp {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
