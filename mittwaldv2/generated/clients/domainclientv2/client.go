@@ -9,6 +9,7 @@ import (
 	"net/http"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/dnsv2"
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/domainmigrationv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/domainv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/ingressv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/sslv2"
@@ -232,6 +233,11 @@ type Client interface {
 		req ListTldsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]domainv2.TopLevel, *http.Response, error)
+	MigrationListMigrationsByProjectID(
+		ctx context.Context,
+		req MigrationListMigrationsByProjectIDRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]domainmigrationv2.Migration, *http.Response, error)
 	ResendContactVerificationEmail(
 		ctx context.Context,
 		req ResendContactVerificationEmailRequest,
@@ -1531,6 +1537,34 @@ func (c *clientImpl) ListTlds(
 	}
 
 	var response []domainv2.TopLevel
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Domain-Migrations belonging to a Project.
+func (c *clientImpl) MigrationListMigrationsByProjectID(
+	ctx context.Context,
+	req MigrationListMigrationsByProjectIDRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]domainmigrationv2.Migration, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []domainmigrationv2.Migration
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

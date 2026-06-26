@@ -8,28 +8,42 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "string"
 // enum:
-//    - "DOMAIN_NOT_MIGRATABLE_REASON_NEED_EPP"
-//    - "DOMAIN_NOT_MIGRATABLE_REASON_TLD_NOT_SUPPORTED"
-//    - "DOMAIN_NOT_MIGRATABLE_REASON_PREMIUM_DOMAIN"
-//    - "DOMAIN_NOT_MIGRATABLE_REASON_REGISTRAR_NOT_SUPPORTED"
-//    - "DOMAIN_NOT_MIGRATABLE_REASON_NOT_ORDERABLE"
-//    - "DOMAIN_NOT_MIGRATABLE_REASON_INSUFFICIENT_STATE"
-//    - "DOMAIN_NOT_MIGRATABLE_REASON_CONTRACT_DATE_OUT_OF_RANGE"
-// description: "Typed reason a domain cannot be migrated."
+//    - "needEpp"
+//    - "tldNotSupported"
+//    - "tldNotMigratable"
+//    - "premiumDomain"
+//    - "registrarNotSupported"
+//    - "notOrderable"
+//    - "insufficientState"
+//    - "contractDateOutOfRange"
+//    - "invalidDomainName"
+// description: "Typed reason a domain cannot be migrated:\n\n* `needEpp`: the domain owner's phone number is not EPP/RFC 5733 conformant at the registry and cannot be reformatted, so the migration is rejected.\n* `tldNotSupported`: the domain's TLD is not supported for migration (also used when the registry article for the domain was not found).\n* `tldNotMigratable`: the domain's TLD is supported in general, but migration is not currently possible for this TLD.\n* `premiumDomain`: the domain is a premium domain, which is not supported yet.\n* `registrarNotSupported`: COAB names a registrar we do not support for migration.\n* `notOrderable`: the order service rejected the domain for a reason other than an unsupported TLD or a still-reserved domain.\n* `insufficientState`: the COAB data is incomplete (e.g. missing registrar, price or owner) or the domain is still reserved at the registry.\n* `contractDateOutOfRange`: the COAB contract's next-period date is in the past or more than two years in the future.\n* `invalidDomainName`: the COAB domain name does not match the `idn-naked-domain` format we accept."
 
-// Typed reason a domain cannot be migrated.
+// Typed reason a domain cannot be migrated:
+//
+// * `needEpp`: the domain owner's phone number is not EPP/RFC 5733 conformant at the registry and cannot be reformatted, so the migration is rejected.
+// * `tldNotSupported`: the domain's TLD is not supported for migration (also used when the registry article for the domain was not found).
+// * `tldNotMigratable`: the domain's TLD is supported in general, but migration is not currently possible for this TLD.
+// * `premiumDomain`: the domain is a premium domain, which is not supported yet.
+// * `registrarNotSupported`: COAB names a registrar we do not support for migration.
+// * `notOrderable`: the order service rejected the domain for a reason other than an unsupported TLD or a still-reserved domain.
+// * `insufficientState`: the COAB data is incomplete (e.g. missing registrar, price or owner) or the domain is still reserved at the registry.
+// * `contractDateOutOfRange`: the COAB contract's next-period date is in the past or more than two years in the future.
+// * `invalidDomainName`: the COAB domain name does not match the `idn-naked-domain` format we accept.
 type DomainNotMigratableReason string
 
-const DomainNotMigratableReasonDOMAINNOTMIGRATABLEREASONNEEDEPP DomainNotMigratableReason = "DOMAIN_NOT_MIGRATABLE_REASON_NEED_EPP"
-const DomainNotMigratableReasonDOMAINNOTMIGRATABLEREASONTLDNOTSUPPORTED DomainNotMigratableReason = "DOMAIN_NOT_MIGRATABLE_REASON_TLD_NOT_SUPPORTED"
-const DomainNotMigratableReasonDOMAINNOTMIGRATABLEREASONPREMIUMDOMAIN DomainNotMigratableReason = "DOMAIN_NOT_MIGRATABLE_REASON_PREMIUM_DOMAIN"
-const DomainNotMigratableReasonDOMAINNOTMIGRATABLEREASONREGISTRARNOTSUPPORTED DomainNotMigratableReason = "DOMAIN_NOT_MIGRATABLE_REASON_REGISTRAR_NOT_SUPPORTED"
-const DomainNotMigratableReasonDOMAINNOTMIGRATABLEREASONNOTORDERABLE DomainNotMigratableReason = "DOMAIN_NOT_MIGRATABLE_REASON_NOT_ORDERABLE"
-const DomainNotMigratableReasonDOMAINNOTMIGRATABLEREASONINSUFFICIENTSTATE DomainNotMigratableReason = "DOMAIN_NOT_MIGRATABLE_REASON_INSUFFICIENT_STATE"
-const DomainNotMigratableReasonDOMAINNOTMIGRATABLEREASONCONTRACTDATEOUTOFRANGE DomainNotMigratableReason = "DOMAIN_NOT_MIGRATABLE_REASON_CONTRACT_DATE_OUT_OF_RANGE"
+const DomainNotMigratableReasonNeedEpp DomainNotMigratableReason = "needEpp"
+const DomainNotMigratableReasonTldNotSupported DomainNotMigratableReason = "tldNotSupported"
+const DomainNotMigratableReasonTldNotMigratable DomainNotMigratableReason = "tldNotMigratable"
+const DomainNotMigratableReasonPremiumDomain DomainNotMigratableReason = "premiumDomain"
+const DomainNotMigratableReasonRegistrarNotSupported DomainNotMigratableReason = "registrarNotSupported"
+const DomainNotMigratableReasonNotOrderable DomainNotMigratableReason = "notOrderable"
+const DomainNotMigratableReasonInsufficientState DomainNotMigratableReason = "insufficientState"
+const DomainNotMigratableReasonContractDateOutOfRange DomainNotMigratableReason = "contractDateOutOfRange"
+const DomainNotMigratableReasonInvalidDomainName DomainNotMigratableReason = "invalidDomainName"
 
 func (e DomainNotMigratableReason) Validate() error {
-	if e == DomainNotMigratableReasonDOMAINNOTMIGRATABLEREASONNEEDEPP || e == DomainNotMigratableReasonDOMAINNOTMIGRATABLEREASONTLDNOTSUPPORTED || e == DomainNotMigratableReasonDOMAINNOTMIGRATABLEREASONPREMIUMDOMAIN || e == DomainNotMigratableReasonDOMAINNOTMIGRATABLEREASONREGISTRARNOTSUPPORTED || e == DomainNotMigratableReasonDOMAINNOTMIGRATABLEREASONNOTORDERABLE || e == DomainNotMigratableReasonDOMAINNOTMIGRATABLEREASONINSUFFICIENTSTATE || e == DomainNotMigratableReasonDOMAINNOTMIGRATABLEREASONCONTRACTDATEOUTOFRANGE {
+	if e == DomainNotMigratableReasonNeedEpp || e == DomainNotMigratableReasonTldNotSupported || e == DomainNotMigratableReasonTldNotMigratable || e == DomainNotMigratableReasonPremiumDomain || e == DomainNotMigratableReasonRegistrarNotSupported || e == DomainNotMigratableReasonNotOrderable || e == DomainNotMigratableReasonInsufficientState || e == DomainNotMigratableReasonContractDateOutOfRange || e == DomainNotMigratableReasonInvalidDomainName {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
