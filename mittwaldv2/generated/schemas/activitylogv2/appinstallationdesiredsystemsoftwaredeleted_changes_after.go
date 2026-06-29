@@ -6,15 +6,14 @@ package activitylogv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "version":
+//    "softwareVersion":
 //        type: "string"
-// required:
-//    - "version"
+// nullable: true
 
-type AppInstallationAppVersionSetChangesAfter struct {
-	Version string `json:"version"`
+type AppInstallationDesiredSystemSoftwareDeletedChangesAfter struct {
+	SoftwareVersion *string `json:"softwareVersion,omitempty"`
 }
 
-func (o *AppInstallationAppVersionSetChangesAfter) Validate() error {
+func (o *AppInstallationDesiredSystemSoftwareDeletedChangesAfter) Validate() error {
 	return nil
 }

@@ -14,7 +14,7 @@ import (
 var _ = Describe("AppInstallationDesiredSystemSoftwareSet", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{\"after\":{\"software\":\"string\",\"softwareVersion\":\"string\",\"updatePolicy\":\"UPDATE_POLICY_UNSPECIFIED\"},\"before\":{\"software\":\"string\",\"softwareVersion\":\"string\",\"updatePolicy\":\"UPDATE_POLICY_UNSPECIFIED\"}},\"name\":\"app.systemsoftware-set\",\"parameters\":{\"software\":{\"aggregate\":null,\"name\":\"string\"},\"version\":{\"aggregate\":null,\"name\":\"string\"}}}")
+			exampleJSON := []byte("{\"changes\":{\"after\":{\"softwareVersion\":\"string\"},\"before\":{\"softwareVersion\":\"string\"}},\"name\":\"app.systemsoftware-set\",\"parameters\":{\"software\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"version\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
 
 			sut := activitylogv2.AppInstallationDesiredSystemSoftwareSet{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

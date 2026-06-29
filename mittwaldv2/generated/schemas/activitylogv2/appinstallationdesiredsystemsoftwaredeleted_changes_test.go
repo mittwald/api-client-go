@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("AppInstallationDesiredSystemSoftwareSetChanges", func() {
+var _ = Describe("AppInstallationDesiredSystemSoftwareDeletedChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
 			exampleJSON := []byte("{\"after\":{\"softwareVersion\":\"string\"},\"before\":{\"softwareVersion\":\"string\"}}")
 
-			sut := activitylogv2.AppInstallationDesiredSystemSoftwareSetChanges{}
+			sut := activitylogv2.AppInstallationDesiredSystemSoftwareDeletedChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

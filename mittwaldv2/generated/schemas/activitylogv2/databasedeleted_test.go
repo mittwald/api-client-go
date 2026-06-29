@@ -14,7 +14,7 @@ import (
 var _ = Describe("DatabaseDeleted", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{},\"name\":\"database.mysql-deleted\",\"parameters\":{\"name\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
+			exampleJSON := []byte("{\"changes\":{},\"name\":\"database.mysql-deleted\",\"parameters\":{\"description\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"name\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
 
 			sut := activitylogv2.DatabaseDeleted{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

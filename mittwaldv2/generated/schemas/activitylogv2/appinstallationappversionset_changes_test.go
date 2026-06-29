@@ -14,7 +14,7 @@ import (
 var _ = Describe("AppInstallationAppVersionSetChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"after\":{\"appId\":\"string\",\"appVersionId\":\"string\"},\"before\":{\"appId\":\"string\",\"appVersionId\":\"string\"}}")
+			exampleJSON := []byte("{\"after\":{\"version\":\"string\"},\"before\":{\"version\":\"string\"}}")
 
 			sut := activitylogv2.AppInstallationAppVersionSetChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -18,12 +18,15 @@ import "fmt"
 //                        type: "string"
 //                    "externalAccess":
 //                        type: "boolean"
-//                    "permissions":
-//                        type: "object"
+//                    "permissionsRead":
+//                        type: "boolean"
+//                    "permissionsWrite":
+//                        type: "boolean"
 //                required:
 //                    - "description"
 //                    - "externalAccess"
-//                    - "permissions"
+//                    - "permissionsRead"
+//                    - "permissionsWrite"
 //            "before":
 //                type: "object"
 //                properties:
@@ -33,12 +36,15 @@ import "fmt"
 //                    "externalAccess":
 //                        type: "boolean"
 //                        nullable: true
-//                    "permissions":
-//                        type: "object"
+//                    "permissionsRead":
+//                        type: "boolean"
+//                    "permissionsWrite":
+//                        type: "boolean"
 //                required:
 //                    - "description"
 //                    - "externalAccess"
-//                    - "permissions"
+//                    - "permissionsRead"
+//                    - "permissionsWrite"
 //    "name":
 //        type: "string"
 //        enum:
@@ -47,9 +53,11 @@ import "fmt"
 //        type: "object"
 //        properties:
 //            "databaseName": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
+//            "description": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //            "name": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //        required:
 //            - "name"
+//            - "description"
 //            - "databaseName"
 // required:
 //    - "name"

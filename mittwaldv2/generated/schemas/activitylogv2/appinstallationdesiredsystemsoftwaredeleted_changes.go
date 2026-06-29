@@ -11,29 +11,22 @@ import "fmt"
 //    "after":
 //        type: "object"
 //        properties:
-//            "appId":
+//            "softwareVersion":
 //                type: "string"
-//            "sourceAppInstallationId":
-//                type: "string"
-//        required:
-//            - "appId"
-//            - "sourceAppInstallationId"
+//        nullable: true
 //    "before":
 //        type: "object"
 //        properties:
-//            "appId":
+//            "softwareVersion":
 //                type: "string"
-//                nullable: true
-//            "sourceAppInstallationId":
-//                type: "string"
-//                nullable: true
+//        nullable: true
 
-type AppInstallationCopyRequestedChanges struct {
-	After  *AppInstallationCopyRequestedChangesAfter  `json:"after,omitempty"`
-	Before *AppInstallationCopyRequestedChangesBefore `json:"before,omitempty"`
+type AppInstallationDesiredSystemSoftwareDeletedChanges struct {
+	After  *AppInstallationDesiredSystemSoftwareDeletedChangesAfter  `json:"after,omitempty"`
+	Before *AppInstallationDesiredSystemSoftwareDeletedChangesBefore `json:"before,omitempty"`
 }
 
-func (o *AppInstallationCopyRequestedChanges) Validate() error {
+func (o *AppInstallationDesiredSystemSoftwareDeletedChanges) Validate() error {
 	if err := func() error {
 		if o.After == nil {
 			return nil

@@ -14,7 +14,7 @@ import (
 var _ = Describe("DatabaseMysqlUserUpdated", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{\"after\":{\"description\":\"string\",\"externalAccess\":true,\"permissions\":{}},\"before\":{\"description\":\"string\",\"externalAccess\":true,\"permissions\":{}}},\"name\":\"database.mysql-user-updated\",\"parameters\":{\"databaseName\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"name\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
+			exampleJSON := []byte("{\"changes\":{\"after\":{\"description\":\"string\",\"externalAccess\":true,\"permissionsRead\":true,\"permissionsWrite\":true},\"before\":{\"description\":\"string\",\"externalAccess\":true,\"permissionsRead\":true,\"permissionsWrite\":true}},\"name\":\"database.mysql-user-updated\",\"parameters\":{\"databaseName\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"description\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"name\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
 
 			sut := activitylogv2.DatabaseMysqlUserUpdated{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

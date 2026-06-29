@@ -11,25 +11,25 @@ import "fmt"
 //    "name":
 //        type: "string"
 //        enum:
-//            - "app.copy-requested"
+//            - "app.requested"
 //    "parameters":
 //        type: "object"
 //        properties:
 //            "appInstallation": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
-//            "sourceAppInstallation": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
+//            "version": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //        required:
 //            - "appInstallation"
-//            - "sourceAppInstallation"
+//            - "version"
 // required:
 //    - "name"
 //    - "parameters"
 
-type AppInstallationCopyRequested struct {
-	Name       AppInstallationCopyRequestedName       `json:"name"`
-	Parameters AppInstallationCopyRequestedParameters `json:"parameters"`
+type AppInstallationRequested struct {
+	Name       AppInstallationRequestedName       `json:"name"`
+	Parameters AppInstallationRequestedParameters `json:"parameters"`
 }
 
-func (o *AppInstallationCopyRequested) Validate() error {
+func (o *AppInstallationRequested) Validate() error {
 	if err := o.Name.Validate(); err != nil {
 		return fmt.Errorf("invalid property name: %w", err)
 	}
