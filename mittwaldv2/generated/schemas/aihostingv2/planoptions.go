@@ -11,6 +11,8 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "contractId":
+//        type: "string"
 //    "customerId":
 //        type: "string"
 //    "deletedAt":
@@ -51,6 +53,7 @@ import (
 //    - "modelTermsApprovalRequired"
 
 type PlanOptions struct {
+	ContractId                 *string                    `json:"contractId,omitempty"`
 	CustomerId                 string                     `json:"customerId"`
 	DeletedAt                  *time.Time                 `json:"deletedAt,omitempty"`
 	Keys                       PlanUsage                  `json:"keys"`

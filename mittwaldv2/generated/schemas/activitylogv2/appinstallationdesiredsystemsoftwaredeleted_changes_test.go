@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("DatabaseDeletedParameters", func() {
+var _ = Describe("AppInstallationDesiredSystemSoftwareDeletedChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"description\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"name\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}")
+			exampleJSON := []byte("{\"after\":{\"softwareVersion\":\"string\"},\"before\":{\"softwareVersion\":\"string\"}}")
 
-			sut := activitylogv2.DatabaseDeletedParameters{}
+			sut := activitylogv2.AppInstallationDesiredSystemSoftwareDeletedChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

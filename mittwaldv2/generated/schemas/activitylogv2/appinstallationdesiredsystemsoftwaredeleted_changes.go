@@ -21,12 +21,12 @@ import "fmt"
 //                type: "string"
 //        nullable: true
 
-type AppInstallationDesiredSystemSoftwareSetChanges struct {
-	After  *AppInstallationDesiredSystemSoftwareSetChangesAfter  `json:"after,omitempty"`
-	Before *AppInstallationDesiredSystemSoftwareSetChangesBefore `json:"before,omitempty"`
+type AppInstallationDesiredSystemSoftwareDeletedChanges struct {
+	After  *AppInstallationDesiredSystemSoftwareDeletedChangesAfter  `json:"after,omitempty"`
+	Before *AppInstallationDesiredSystemSoftwareDeletedChangesBefore `json:"before,omitempty"`
 }
 
-func (o *AppInstallationDesiredSystemSoftwareSetChanges) Validate() error {
+func (o *AppInstallationDesiredSystemSoftwareDeletedChanges) Validate() error {
 	if err := func() error {
 		if o.After == nil {
 			return nil

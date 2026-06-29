@@ -8,6 +8,7 @@ package activitylogv2
 // properties:
 //    "softwareVersion":
 //        type: "string"
+// nullable: true
 
 type AppInstallationDesiredSystemSoftwareSetChangesBefore struct {
 	SoftwareVersion *string `json:"softwareVersion,omitempty"`

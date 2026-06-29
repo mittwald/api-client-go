@@ -26,7 +26,7 @@ import "fmt"
 //    "name":
 //        type: "string"
 //        enum:
-//            - "app.systemsoftware-set"
+//            - "app.systemsoftware-deleted"
 //    "parameters":
 //        type: "object"
 //        properties:
@@ -40,13 +40,13 @@ import "fmt"
 //    - "changes"
 //    - "parameters"
 
-type AppInstallationDesiredSystemSoftwareSet struct {
-	Changes    AppInstallationDesiredSystemSoftwareSetChanges    `json:"changes"`
-	Name       AppInstallationDesiredSystemSoftwareSetName       `json:"name"`
-	Parameters AppInstallationDesiredSystemSoftwareSetParameters `json:"parameters"`
+type AppInstallationDesiredSystemSoftwareDeleted struct {
+	Changes    AppInstallationDesiredSystemSoftwareDeletedChanges    `json:"changes"`
+	Name       AppInstallationDesiredSystemSoftwareDeletedName       `json:"name"`
+	Parameters AppInstallationDesiredSystemSoftwareDeletedParameters `json:"parameters"`
 }
 
-func (o *AppInstallationDesiredSystemSoftwareSet) Validate() error {
+func (o *AppInstallationDesiredSystemSoftwareDeleted) Validate() error {
 	if err := o.Changes.Validate(); err != nil {
 		return fmt.Errorf("invalid property changes: %w", err)
 	}

@@ -10,10 +10,10 @@ package activitylogv2
 //        type: "string"
 // nullable: true
 
-type AppInstallationDesiredSystemSoftwareSetChangesAfter struct {
+type AppInstallationDesiredSystemSoftwareDeletedChangesAfter struct {
 	SoftwareVersion *string `json:"softwareVersion,omitempty"`
 }
 
-func (o *AppInstallationDesiredSystemSoftwareSetChangesAfter) Validate() error {
+func (o *AppInstallationDesiredSystemSoftwareDeletedChangesAfter) Validate() error {
 	return nil
 }

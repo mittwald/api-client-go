@@ -9,15 +9,13 @@ import "fmt"
 // type: "string"
 // enum:
 //    - "app.systemsoftware-set"
-//    - "app.systemsoftware-deleted"
 
 type AppInstallationDesiredSystemSoftwareSetName string
 
 const AppInstallationDesiredSystemSoftwareSetNameAppSystemsoftwareSet AppInstallationDesiredSystemSoftwareSetName = "app.systemsoftware-set"
-const AppInstallationDesiredSystemSoftwareSetNameAppSystemsoftwareDeleted AppInstallationDesiredSystemSoftwareSetName = "app.systemsoftware-deleted"
 
 func (e AppInstallationDesiredSystemSoftwareSetName) Validate() error {
-	if e == AppInstallationDesiredSystemSoftwareSetNameAppSystemsoftwareSet || e == AppInstallationDesiredSystemSoftwareSetNameAppSystemsoftwareDeleted {
+	if e == AppInstallationDesiredSystemSoftwareSetNameAppSystemsoftwareSet {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

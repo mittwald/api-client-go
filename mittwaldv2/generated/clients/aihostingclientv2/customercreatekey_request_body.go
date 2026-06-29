@@ -6,6 +6,8 @@ package aihostingclientv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "contractId":
+//        type: "string"
 //    "createWebuiContainer":
 //        type: "boolean"
 //    "name":
@@ -19,6 +21,7 @@ package aihostingclientv2
 
 // CustomerCreateKeyRequestBody models the JSON body of a 'ai-hosting-customer-create-key' request
 type CustomerCreateKeyRequestBody struct {
+	ContractId           *string `json:"contractId,omitempty"`
 	CreateWebuiContainer *bool   `json:"createWebuiContainer,omitempty"`
 	Name                 string  `json:"name"`
 	ProjectId            *string `json:"projectId,omitempty"`

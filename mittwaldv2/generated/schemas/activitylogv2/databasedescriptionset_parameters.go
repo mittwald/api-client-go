@@ -8,15 +8,21 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "description": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //    "name": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 // required:
 //    - "name"
+//    - "description"
 
 type DatabaseDescriptionSetParameters struct {
-	Name ParameterProperty `json:"name"`
+	Description ParameterProperty `json:"description"`
+	Name        ParameterProperty `json:"name"`
 }
 
 func (o *DatabaseDescriptionSetParameters) Validate() error {
+	if err := o.Description.Validate(); err != nil {
+		return fmt.Errorf("invalid property description: %w", err)
+	}
 	if err := o.Name.Validate(); err != nil {
 		return fmt.Errorf("invalid property name: %w", err)
 	}

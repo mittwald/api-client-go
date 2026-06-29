@@ -20,6 +20,7 @@ import (
 type CustomerGetUsageRequest struct {
 	CustomerID    string
 	TopUsageCount *int64
+	ContractID    *string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -59,6 +60,9 @@ func (r *CustomerGetUsageRequest) query() url.Values {
 	q := make(url.Values)
 	if r.TopUsageCount != nil {
 		q.Set("topUsageCount", fmt.Sprintf("%d", *r.TopUsageCount))
+	}
+	if r.ContractID != nil {
+		q.Set("contractId", *r.ContractID)
 	}
 	return q
 }

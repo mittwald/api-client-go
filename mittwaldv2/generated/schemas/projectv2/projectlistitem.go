@@ -30,6 +30,8 @@ import (
 //                type: "string"
 //        required:
 //            - "id"
+//    "deletionRequested":
+//        type: "boolean"
 //    "description":
 //        type: "string"
 //    "disableReason": {"$ref": "#/components/schemas/de.mittwald.v1.project.DisableReason"}
@@ -58,6 +60,8 @@ import (
 //    "serverGroupId":
 //        type: "string"
 //    "serverId":
+//        type: "string"
+//    "serverShortId":
 //        type: "string"
 //    "shortId":
 //        type: "string"
@@ -92,6 +96,7 @@ import (
 //    - "backupStorageUsageInBytesSetAt"
 //    - "supportedFeatures"
 //    - "serverGroupId"
+//    - "deletionRequested"
 
 type ProjectListItem struct {
 	BackupStorageUsageInBytes      int64                            `json:"backupStorageUsageInBytes"`
@@ -99,6 +104,7 @@ type ProjectListItem struct {
 	CreatedAt                      time.Time                        `json:"createdAt"`
 	CustomerId                     string                           `json:"customerId"`
 	CustomerMeta                   ProjectListItemCustomerMeta      `json:"customerMeta"`
+	DeletionRequested              bool                             `json:"deletionRequested"`
 	Description                    string                           `json:"description"`
 	DisableReason                  *DisableReason                   `json:"disableReason,omitempty"`
 	DisabledAt                     *time.Time                       `json:"disabledAt,omitempty"`
@@ -111,6 +117,7 @@ type ProjectListItem struct {
 	Readiness                      DeprecatedProjectReadinessStatus `json:"readiness"`
 	ServerGroupId                  string                           `json:"serverGroupId"`
 	ServerId                       *string                          `json:"serverId,omitempty"`
+	ServerShortId                  *string                          `json:"serverShortId,omitempty"`
 	ShortId                        string                           `json:"shortId"`
 	Status                         ProjectStatus                    `json:"status"`
 	StatusSetAt                    time.Time                        `json:"statusSetAt"`

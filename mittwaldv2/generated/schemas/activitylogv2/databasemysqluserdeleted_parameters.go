@@ -9,19 +9,25 @@ import "fmt"
 // type: "object"
 // properties:
 //    "databaseName": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
+//    "description": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //    "name": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 // required:
 //    - "name"
+//    - "description"
 //    - "databaseName"
 
 type DatabaseMysqlUserDeletedParameters struct {
 	DatabaseName LinkedParameterProperty `json:"databaseName"`
+	Description  ParameterProperty       `json:"description"`
 	Name         ParameterProperty       `json:"name"`
 }
 
 func (o *DatabaseMysqlUserDeletedParameters) Validate() error {
 	if err := o.DatabaseName.Validate(); err != nil {
 		return fmt.Errorf("invalid property databaseName: %w", err)
+	}
+	if err := o.Description.Validate(); err != nil {
+		return fmt.Errorf("invalid property description: %w", err)
 	}
 	if err := o.Name.Validate(); err != nil {
 		return fmt.Errorf("invalid property name: %w", err)

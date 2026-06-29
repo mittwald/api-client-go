@@ -12,6 +12,8 @@ import (
 // type: "object"
 // properties:
 //    "containerMeta": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.ContainerMeta"}
+//    "contractId":
+//        type: "string"
 //    "customerId":
 //        type: "string"
 //    "isBlocked":
@@ -47,6 +49,7 @@ import (
 
 type Key struct {
 	ContainerMeta *ContainerMeta `json:"containerMeta,omitempty"`
+	ContractId    *string        `json:"contractId,omitempty"`
 	CustomerId    *string        `json:"customerId,omitempty"`
 	IsBlocked     bool           `json:"isBlocked"`
 	Key           string         `json:"key"`
