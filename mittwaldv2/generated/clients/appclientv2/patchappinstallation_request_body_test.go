@@ -14,7 +14,7 @@ import (
 var _ = Describe("PatchAppinstallationRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"appVersionId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"customDocumentRoot\":\"string\",\"description\":\"string\",\"systemSoftware\":{\"string\":{\"systemSoftwareVersion\":\"string\",\"updatePolicy\":\"none\"}},\"updatePolicy\":\"none\",\"userInputs\":[{\"name\":\"string\",\"value\":\"string\"}]}")
+			exampleJSON := []byte("{\"appVersionId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"customDocumentRoot\":\"string\",\"description\":\"string\",\"systemSoftware\":{\"string\":{\"systemSoftwareVersion\":null,\"updatePolicy\":null}},\"updatePolicy\":\"none\",\"userInputs\":[{\"name\":\"string\",\"value\":\"string\"}]}")
 
 			sut := appclientv2.PatchAppinstallationRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
