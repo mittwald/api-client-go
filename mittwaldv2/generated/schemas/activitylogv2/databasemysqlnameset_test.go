@@ -14,7 +14,7 @@ import (
 var _ = Describe("DatabaseMysqlNameSet", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{\"after\":{\"name\":\"string\"},\"before\":{\"name\":\"string\"}},\"name\":\"database.mysql-name-set\",\"parameters\":{\"name\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
+			exampleJSON := []byte("{\"changes\":{\"after\":{\"name\":\"string\"},\"before\":{\"name\":\"string\"}},\"name\":\"database.mysql-name-set\",\"parameters\":{\"description\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"name\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
 
 			sut := activitylogv2.DatabaseMysqlNameSet{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

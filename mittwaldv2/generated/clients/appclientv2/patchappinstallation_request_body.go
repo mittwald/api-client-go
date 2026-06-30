@@ -21,12 +21,7 @@ import (
 //        type: "string"
 //    "systemSoftware":
 //        type: "object"
-//        additionalProperties:
-//            type: "object"
-//            properties:
-//                "systemSoftwareVersion":
-//                    type: "string"
-//                "updatePolicy": {"$ref": "#/components/schemas/de.mittwald.v1.app.SystemSoftwareUpdatePolicy"}
+//        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.app.DesiredSystemSoftware"}
 //    "updatePolicy": {"$ref": "#/components/schemas/de.mittwald.v1.app.AppUpdatePolicy"}
 //    "userInputs":
 //        type: "array"
@@ -35,12 +30,12 @@ import (
 
 // PatchAppinstallationRequestBody models the JSON body of a 'app-patch-appinstallation' request
 type PatchAppinstallationRequestBody struct {
-	AppVersionId       *string                                                      `json:"appVersionId,omitempty"`
-	CustomDocumentRoot *string                                                      `json:"customDocumentRoot,omitempty"`
-	Description        *string                                                      `json:"description,omitempty"`
-	SystemSoftware     map[string]PatchAppinstallationRequestBodySystemSoftwareItem `json:"systemSoftware,omitempty"`
-	UpdatePolicy       *appv2.AppUpdatePolicy                                       `json:"updatePolicy,omitempty"`
-	UserInputs         []appv2.SavedUserInput                                       `json:"userInputs,omitempty"`
+	AppVersionId       *string                                `json:"appVersionId,omitempty"`
+	CustomDocumentRoot *string                                `json:"customDocumentRoot,omitempty"`
+	Description        *string                                `json:"description,omitempty"`
+	SystemSoftware     map[string]appv2.DesiredSystemSoftware `json:"systemSoftware,omitempty"`
+	UpdatePolicy       *appv2.AppUpdatePolicy                 `json:"updatePolicy,omitempty"`
+	UserInputs         []appv2.SavedUserInput                 `json:"userInputs,omitempty"`
 }
 
 func (o *PatchAppinstallationRequestBody) Validate() error {

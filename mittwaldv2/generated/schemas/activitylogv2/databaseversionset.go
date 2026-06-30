@@ -33,10 +33,12 @@ import "fmt"
 //    "parameters":
 //        type: "object"
 //        properties:
+//            "description": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //            "name": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //            "version": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //        required:
 //            - "name"
+//            - "description"
 //            - "version"
 // required:
 //    - "name"

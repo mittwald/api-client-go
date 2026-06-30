@@ -20,6 +20,9 @@ import (
 //        type: "string"
 //    "installationPath":
 //        type: "string"
+//    "systemSoftware":
+//        type: "object"
+//        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.app.DesiredSystemSoftware"}
 //    "updatePolicy": {"$ref": "#/components/schemas/de.mittwald.v1.app.AppUpdatePolicy"}
 //    "userInputs":
 //        type: "array"
@@ -33,11 +36,12 @@ import (
 
 // RequestAppinstallationRequestBody models the JSON body of a 'app-request-appinstallation' request
 type RequestAppinstallationRequestBody struct {
-	AppVersionId     string                 `json:"appVersionId"`
-	Description      string                 `json:"description"`
-	InstallationPath *string                `json:"installationPath,omitempty"`
-	UpdatePolicy     appv2.AppUpdatePolicy  `json:"updatePolicy"`
-	UserInputs       []appv2.SavedUserInput `json:"userInputs"`
+	AppVersionId     string                                 `json:"appVersionId"`
+	Description      string                                 `json:"description"`
+	InstallationPath *string                                `json:"installationPath,omitempty"`
+	SystemSoftware   map[string]appv2.DesiredSystemSoftware `json:"systemSoftware,omitempty"`
+	UpdatePolicy     appv2.AppUpdatePolicy                  `json:"updatePolicy"`
+	UserInputs       []appv2.SavedUserInput                 `json:"userInputs"`
 }
 
 func (o *RequestAppinstallationRequestBody) Validate() error {
