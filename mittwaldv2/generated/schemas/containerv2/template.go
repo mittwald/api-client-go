@@ -15,16 +15,7 @@ import (
 //        type: "array"
 //        items:
 //            type: "string"
-//    "description":
-//        type: "object"
-//        properties:
-//            "de":
-//                type: "string"
-//            "en":
-//                type: "string"
-//        required:
-//            - "de"
-//            - "en"
+//    "description": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
 //    "developer":
 //        type: "string"
 //    "domains":
@@ -47,24 +38,23 @@ import (
 //    "id":
 //        type: "string"
 //    "license":
-//        type: "string"
+//        type: "object"
+//        properties:
+//            "link":
+//                type: "string"
+//            "name":
+//                type: "string"
+//        required:
+//            - "name"
 //    "manifestVersion":
 //        type: "string"
 //        description: "Version of the manifest for this template, e.g. '1.0'"
-//    "name":
-//        type: "string"
+//    "name": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
 //    "repository":
 //        type: "string"
-//    "tagline":
-//        type: "object"
-//        properties:
-//            "de":
-//                type: "string"
-//            "en":
-//                type: "string"
-//        required:
-//            - "de"
-//            - "en"
+//    "supportLink":
+//        type: "string"
+//    "tagline": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
 //    "userInputs":
 //        type: "array"
 //        items:
@@ -101,16 +91,17 @@ import (
 
 type Template struct {
 	Categories      []string                 `json:"categories"`
-	Description     TemplateDescription      `json:"description"`
+	Description     TemplateTranslatedString `json:"description"`
 	Developer       string                   `json:"developer"`
 	Domains         []TemplateDomainsItem    `json:"domains,omitempty"`
 	Icon            string                   `json:"icon"`
 	Id              string                   `json:"id"`
-	License         *string                  `json:"license,omitempty"`
+	License         *TemplateLicense         `json:"license,omitempty"`
 	ManifestVersion string                   `json:"manifestVersion"`
-	Name            string                   `json:"name"`
+	Name            TemplateTranslatedString `json:"name"`
 	Repository      *string                  `json:"repository,omitempty"`
-	Tagline         TemplateTagline          `json:"tagline"`
+	SupportLink     *string                  `json:"supportLink,omitempty"`
+	Tagline         TemplateTranslatedString `json:"tagline"`
 	UserInputs      []TemplateUserInputsItem `json:"userInputs,omitempty"`
 	Version         string                   `json:"version"`
 	Website         *string                  `json:"website,omitempty"`
@@ -137,6 +128,17 @@ func (o *Template) Validate() error {
 		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property domains: %w", err)
+	}
+	if err := func() error {
+		if o.License == nil {
+			return nil
+		}
+		return o.License.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property license: %w", err)
+	}
+	if err := o.Name.Validate(); err != nil {
+		return fmt.Errorf("invalid property name: %w", err)
 	}
 	if err := o.Tagline.Validate(); err != nil {
 		return fmt.Errorf("invalid property tagline: %w", err)

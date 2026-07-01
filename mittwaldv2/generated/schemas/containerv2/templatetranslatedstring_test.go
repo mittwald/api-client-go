@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("TemplateDescription", func() {
+var _ = Describe("TemplateTranslatedString", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
 			exampleJSON := []byte("{\"de\":\"string\",\"en\":\"string\"}")
 
-			sut := containerv2.TemplateDescription{}
+			sut := containerv2.TemplateTranslatedString{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

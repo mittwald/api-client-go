@@ -14,11 +14,11 @@ package containerv2
 //    - "de"
 //    - "en"
 
-type TemplateDescription struct {
+type TemplateTranslatedString struct {
 	De string `json:"de"`
 	En string `json:"en"`
 }
 
-func (o *TemplateDescription) Validate() error {
+func (o *TemplateTranslatedString) Validate() error {
 	return nil
 }
