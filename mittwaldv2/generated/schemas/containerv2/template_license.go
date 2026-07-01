@@ -6,19 +6,18 @@ package containerv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "de":
+//    "link":
 //        type: "string"
-//    "en":
+//    "name":
 //        type: "string"
 // required:
-//    - "de"
-//    - "en"
+//    - "name"
 
-type TemplateDescription struct {
-	De string `json:"de"`
-	En string `json:"en"`
+type TemplateLicense struct {
+	Link *string `json:"link,omitempty"`
+	Name string  `json:"name"`
 }
 
-func (o *TemplateDescription) Validate() error {
+func (o *TemplateLicense) Validate() error {
 	return nil
 }
