@@ -14,7 +14,7 @@ import (
 var _ = Describe("Tls", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"acme\":true,\"certificateId\":\"string\",\"mode\":\"string\"}")
+			exampleJSON := []byte("{\"acme\":true,\"certificateId\":\"string\",\"isCreated\":true,\"mode\":\"string\",\"requestDeadline\":\"2006-01-02T15:04:05Z\"}")
 
 			sut := domainnextv2.Tls{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

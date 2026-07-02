@@ -99,6 +99,11 @@ type Client interface {
 		req GetServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.ServiceResponse, *http.Response, error)
+	GetTemplateIcon(
+		ctx context.Context,
+		req GetTemplateIconRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	GetTemplate(
 		ctx context.Context,
 		req GetTemplateRequest,
@@ -635,6 +640,30 @@ func (c *clientImpl) GetService(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Get a Container Template icon.
+func (c *clientImpl) GetTemplateIcon(
+	ctx context.Context,
+	req GetTemplateIconRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // Get a Container Template by ID.

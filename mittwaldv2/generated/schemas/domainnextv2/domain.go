@@ -39,14 +39,7 @@ import (
 //        description: "ID of the project this domain belongs to."
 //    "registrarData": {"$ref": "#/components/schemas/de.mittwald.domainNext.RegistrarData"}
 //    "tls": {"$ref": "#/components/schemas/de.mittwald.domainNext.Tls"}
-//    "type":
-//        type: "string"
-//        enum:
-//            - "domain"
-//            - "subdomain"
-//            - "vhost"
-//        description: "Whether this is a registrable domain, a subdomain of a registrable domain, or a plain vHost."
-//        example: "domain"
+//    "type": {"$ref": "#/components/schemas/de.mittwald.domainNext.DomainType"}
 // required:
 //    - "hostname"
 //    - "projectId"

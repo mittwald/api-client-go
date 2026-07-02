@@ -8,14 +8,14 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "string"
 // enum:
-//    - "app.requested"
+//    - "app.installation-requested"
 
 type AppInstallationRequestedName string
 
-const AppInstallationRequestedNameAppRequested AppInstallationRequestedName = "app.requested"
+const AppInstallationRequestedNameAppInstallationRequested AppInstallationRequestedName = "app.installation-requested"
 
 func (e AppInstallationRequestedName) Validate() error {
-	if e == AppInstallationRequestedNameAppRequested {
+	if e == AppInstallationRequestedNameAppInstallationRequested {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

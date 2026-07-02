@@ -11,7 +11,7 @@ import "fmt"
 //    "name":
 //        type: "string"
 //        enum:
-//            - "app.requested"
+//            - "app.installation-requested"
 //    "parameters":
 //        type: "object"
 //        properties:

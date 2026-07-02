@@ -14,7 +14,7 @@ import (
 var _ = Describe("RegistrarData", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"authCode\":{\"cipher\":\"string\",\"expires\":42,\"value\":\"string\"},\"connected\":true,\"deleted\":true,\"domain\":\"string\",\"handles\":{\"ownerC\":{\"fields\":[{\"name\":\"string\",\"value\":\"string\"}],\"ref\":\"string\"}},\"id\":\"string\",\"nameservers\":[\"string\"],\"processes\":[{\"code\":null,\"error\":null,\"lastUpdate\":null,\"registrar\":null,\"state\":null,\"status\":null,\"type\":null}],\"registrar\":\"string\",\"usesDefaultNameservers\":true}")
+			exampleJSON := []byte("{\"authCode\":{\"cipher\":\"string\",\"expires\":42,\"value\":\"string\"},\"connected\":true,\"deleted\":true,\"domain\":\"string\",\"handles\":{\"ownerC\":{\"fields\":[{\"name\":\"string\",\"value\":\"string\"}],\"ref\":\"string\"}},\"id\":\"string\",\"nameservers\":[\"string\"],\"processes\":[{\"code\":null,\"error\":null,\"lastUpdate\":null,\"registrar\":null,\"state\":null,\"status\":null,\"type\":null}],\"registrar\":\"string\",\"scheduledDeletionDate\":\"2006-01-02T15:04:05Z\",\"transferInAuthCode\":\"string\",\"usesDefaultNameservers\":true}")
 
 			sut := domainnextv2.RegistrarData{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

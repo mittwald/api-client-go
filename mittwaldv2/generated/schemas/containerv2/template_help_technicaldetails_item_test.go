@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("TemplateDomainsItem", func() {
+var _ = Describe("TemplateHelpTechnicalDetailsItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"port\":\"string\",\"purpose\":\"string\",\"service\":\"string\",\"userInput\":\"string\"}")
+			exampleJSON := []byte("{\"key\":{\"de\":\"string\",\"en\":\"string\"},\"value\":\"string\"}")
 
-			sut := containerv2.TemplateDomainsItem{}
+			sut := containerv2.TemplateHelpTechnicalDetailsItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

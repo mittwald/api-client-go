@@ -11,10 +11,14 @@ import "fmt"
 //    - "domain"
 //    - "subdomain"
 //    - "vhost"
-// description: "Whether this is a registrable domain, a subdomain of a registrable domain, or a plain vHost."
+// description: "Classifies a result:\n\n* `domain`: a registrable domain (carries registrarData).\n* `subdomain`: a subdomain of a registrable domain.\n* `vhost`: a plain vHost without a registrable domain."
 // example: "domain"
 
-// Whether this is a registrable domain, a subdomain of a registrable domain, or a plain vHost.
+// Classifies a result:
+//
+// * `domain`: a registrable domain (carries registrarData).
+// * `subdomain`: a subdomain of a registrable domain.
+// * `vhost`: a plain vHost without a registrable domain.
 type DomainType string
 
 const DomainTypeDomain DomainType = "domain"

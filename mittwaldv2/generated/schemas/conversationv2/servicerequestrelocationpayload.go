@@ -61,7 +61,7 @@ import (
 //        type: "string"
 //        format: "date-time"
 //    "redirectusKey":
-//        type: "number"
+//        type: "integer"
 //    "source":
 //        type: "object"
 //        properties:
@@ -126,7 +126,7 @@ type ServiceRequestRelocationPayload struct {
 	Email                   *ServiceRequestRelocationPayloadEmail  `json:"email,omitempty"`
 	Notes                   *string                                `json:"notes,omitempty"`
 	PreferredRelocationDate *time.Time                             `json:"preferredRelocationDate,omitempty"`
-	RedirectusKey           float64                                `json:"redirectusKey"`
+	RedirectusKey           int64                                  `json:"redirectusKey"`
 	Source                  ServiceRequestRelocationPayloadSource  `json:"source"`
 	Target                  ServiceRequestRelocationPayloadTarget  `json:"target"`
 	UserId                  string                                 `json:"userId"`

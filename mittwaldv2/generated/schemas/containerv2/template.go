@@ -25,6 +25,8 @@ import (
 //            properties:
 //                "port":
 //                    type: "string"
+//                "purpose":
+//                    type: "string"
 //                "service":
 //                    type: "string"
 //                "userInput":
@@ -33,7 +35,36 @@ import (
 //                - "userInput"
 //                - "service"
 //                - "port"
-//    "icon":
+//    "help":
+//        type: "object"
+//        properties:
+//            "alerts":
+//                type: "array"
+//                items:
+//                    type: "object"
+//                    properties:
+//                        "content": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
+//                        "heading": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
+//                        "link": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
+//                        "linkText": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
+//                        "status":
+//                            type: "string"
+//                    required:
+//                        - "status"
+//                        - "heading"
+//                        - "content"
+//            "technicalDetails":
+//                type: "array"
+//                items:
+//                    type: "object"
+//                    properties:
+//                        "key": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
+//                        "value":
+//                            type: "string"
+//                    required:
+//                        - "key"
+//                        - "value"
+//    "iconUrl":
 //        type: "string"
 //    "id":
 //        type: "string"
@@ -87,14 +118,15 @@ import (
 //    - "tagline"
 //    - "description"
 //    - "developer"
-//    - "icon"
+//    - "iconUrl"
 
 type Template struct {
 	Categories      []string                 `json:"categories"`
 	Description     TemplateTranslatedString `json:"description"`
 	Developer       string                   `json:"developer"`
 	Domains         []TemplateDomainsItem    `json:"domains,omitempty"`
-	Icon            string                   `json:"icon"`
+	Help            *TemplateHelp            `json:"help,omitempty"`
+	IconUrl         string                   `json:"iconUrl"`
 	Id              string                   `json:"id"`
 	License         *TemplateLicense         `json:"license,omitempty"`
 	ManifestVersion string                   `json:"manifestVersion"`
@@ -128,6 +160,14 @@ func (o *Template) Validate() error {
 		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property domains: %w", err)
+	}
+	if err := func() error {
+		if o.Help == nil {
+			return nil
+		}
+		return o.Help.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property help: %w", err)
 	}
 	if err := func() error {
 		if o.License == nil {
