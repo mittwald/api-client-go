@@ -8,21 +8,27 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "databaseDescription": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //    "databaseName": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
 //    "description": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //    "name": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 // required:
 //    - "name"
 //    - "description"
+//    - "databaseDescription"
 //    - "databaseName"
 
 type DatabaseMysqlUserDeletedParameters struct {
-	DatabaseName LinkedParameterProperty `json:"databaseName"`
-	Description  ParameterProperty       `json:"description"`
-	Name         ParameterProperty       `json:"name"`
+	DatabaseDescription ParameterProperty       `json:"databaseDescription"`
+	DatabaseName        LinkedParameterProperty `json:"databaseName"`
+	Description         ParameterProperty       `json:"description"`
+	Name                ParameterProperty       `json:"name"`
 }
 
 func (o *DatabaseMysqlUserDeletedParameters) Validate() error {
+	if err := o.DatabaseDescription.Validate(); err != nil {
+		return fmt.Errorf("invalid property databaseDescription: %w", err)
+	}
 	if err := o.DatabaseName.Validate(); err != nil {
 		return fmt.Errorf("invalid property databaseName: %w", err)
 	}

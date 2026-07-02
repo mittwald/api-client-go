@@ -55,12 +55,14 @@ import "fmt"
 //    "parameters":
 //        type: "object"
 //        properties:
+//            "databaseDescription": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //            "databaseName": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
 //            "description": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //            "name": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //        required:
 //            - "name"
 //            - "description"
+//            - "databaseDescription"
 //            - "databaseName"
 // required:
 //    - "name"

@@ -8,6 +8,8 @@ package containerv2
 // properties:
 //    "port":
 //        type: "string"
+//    "purpose":
+//        type: "string"
 //    "service":
 //        type: "string"
 //    "userInput":
@@ -18,9 +20,10 @@ package containerv2
 //    - "port"
 
 type TemplateDomainsItem struct {
-	Port      string `json:"port"`
-	Service   string `json:"service"`
-	UserInput string `json:"userInput"`
+	Port      string  `json:"port"`
+	Purpose   *string `json:"purpose,omitempty"`
+	Service   string  `json:"service"`
+	UserInput string  `json:"userInput"`
 }
 
 func (o *TemplateDomainsItem) Validate() error {
