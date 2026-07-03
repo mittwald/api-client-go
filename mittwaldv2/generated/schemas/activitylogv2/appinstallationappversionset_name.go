@@ -9,13 +9,15 @@ import "fmt"
 // type: "string"
 // enum:
 //    - "app.version-set"
+//    - "app.version-updated"
 
 type AppInstallationAppVersionSetName string
 
 const AppInstallationAppVersionSetNameAppVersionSet AppInstallationAppVersionSetName = "app.version-set"
+const AppInstallationAppVersionSetNameAppVersionUpdated AppInstallationAppVersionSetName = "app.version-updated"
 
 func (e AppInstallationAppVersionSetName) Validate() error {
-	if e == AppInstallationAppVersionSetNameAppVersionSet {
+	if e == AppInstallationAppVersionSetNameAppVersionSet || e == AppInstallationAppVersionSetNameAppVersionUpdated {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

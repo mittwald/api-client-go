@@ -11,8 +11,6 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "contractId":
-//        type: "string"
 //    "customerId":
 //        type: "string"
 //    "deletedAt":
@@ -26,6 +24,8 @@ import (
 //        type: "string"
 //        format: "date-time"
 //    "rateLimit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
+//    "subscriptionId":
+//        type: "string"
 //    "tokens": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsageBig"}
 //    "topUsages":
 //        type: "array"
@@ -53,13 +53,13 @@ import (
 //    - "modelTermsApprovalRequired"
 
 type PlanOptions struct {
-	ContractId                 *string                    `json:"contractId,omitempty"`
 	CustomerId                 string                     `json:"customerId"`
 	DeletedAt                  *time.Time                 `json:"deletedAt,omitempty"`
 	Keys                       PlanUsage                  `json:"keys"`
 	ModelTermsApprovalRequired bool                       `json:"modelTermsApprovalRequired"`
 	NextTokenReset             time.Time                  `json:"nextTokenReset"`
 	RateLimit                  RateLimit                  `json:"rateLimit"`
+	SubscriptionId             *string                    `json:"subscriptionId,omitempty"`
 	Tokens                     PlanUsageBig               `json:"tokens"`
 	TopUsages                  []PlanOptionsTopUsagesItem `json:"topUsages,omitempty"`
 }

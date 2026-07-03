@@ -19,8 +19,8 @@ import (
 // [1]: https://developer.mittwald.de/docs/v2/reference/ai
 // hosting/ai-hosting-project-get-usage
 type ProjectGetUsageRequest struct {
-	ProjectID  string
-	ContractID *string
+	ProjectID      string
+	SubscriptionID *string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -58,8 +58,8 @@ func (r *ProjectGetUsageRequest) url() string {
 
 func (r *ProjectGetUsageRequest) query() url.Values {
 	q := make(url.Values)
-	if r.ContractID != nil {
-		q.Set("contractId", *r.ContractID)
+	if r.SubscriptionID != nil {
+		q.Set("subscriptionId", *r.SubscriptionID)
 	}
 	return q
 }

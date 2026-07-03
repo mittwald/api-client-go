@@ -6,8 +6,6 @@ package aihostingclientv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "contractId":
-//        type: "string"
 //    "createWebuiContainer":
 //        type: "boolean"
 //    "name":
@@ -15,16 +13,18 @@ package aihostingclientv2
 //        minLength: 5
 //    "projectId":
 //        type: "string"
+//    "subscriptionId":
+//        type: "string"
 // required:
 //    - "name"
 // description: CustomerCreateKeyRequestBody models the JSON body of a 'ai-hosting-customer-create-key' request
 
 // CustomerCreateKeyRequestBody models the JSON body of a 'ai-hosting-customer-create-key' request
 type CustomerCreateKeyRequestBody struct {
-	ContractId           *string `json:"contractId,omitempty"`
 	CreateWebuiContainer *bool   `json:"createWebuiContainer,omitempty"`
 	Name                 string  `json:"name"`
 	ProjectId            *string `json:"projectId,omitempty"`
+	SubscriptionId       *string `json:"subscriptionId,omitempty"`
 }
 
 func (o *CustomerCreateKeyRequestBody) Validate() error {

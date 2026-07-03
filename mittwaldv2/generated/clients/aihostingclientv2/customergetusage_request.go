@@ -18,9 +18,9 @@ import (
 // [1]: https://developer.mittwald.de/docs/v2/reference/ai
 // hosting/ai-hosting-customer-get-usage
 type CustomerGetUsageRequest struct {
-	CustomerID    string
-	TopUsageCount *int64
-	ContractID    *string
+	CustomerID     string
+	TopUsageCount  *int64
+	SubscriptionID *string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -61,8 +61,8 @@ func (r *CustomerGetUsageRequest) query() url.Values {
 	if r.TopUsageCount != nil {
 		q.Set("topUsageCount", fmt.Sprintf("%d", *r.TopUsageCount))
 	}
-	if r.ContractID != nil {
-		q.Set("contractId", *r.ContractID)
+	if r.SubscriptionID != nil {
+		q.Set("subscriptionId", *r.SubscriptionID)
 	}
 	return q
 }

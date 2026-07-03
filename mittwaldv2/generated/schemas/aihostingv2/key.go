@@ -12,8 +12,6 @@ import (
 // type: "object"
 // properties:
 //    "containerMeta": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.ContainerMeta"}
-//    "contractId":
-//        type: "string"
 //    "customerId":
 //        type: "string"
 //    "isBlocked":
@@ -37,6 +35,8 @@ import (
 //    "projectId":
 //        type: "string"
 //    "rateLimit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
+//    "subscriptionId":
+//        type: "string"
 //    "tokenUsage": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.TokenUsage"}
 // required:
 //    - "keyId"
@@ -48,17 +48,17 @@ import (
 //    - "rateLimit"
 
 type Key struct {
-	ContainerMeta *ContainerMeta `json:"containerMeta,omitempty"`
-	ContractId    *string        `json:"contractId,omitempty"`
-	CustomerId    *string        `json:"customerId,omitempty"`
-	IsBlocked     bool           `json:"isBlocked"`
-	Key           string         `json:"key"`
-	KeyId         string         `json:"keyId"`
-	Models        []string       `json:"models"`
-	Name          string         `json:"name"`
-	ProjectId     *string        `json:"projectId,omitempty"`
-	RateLimit     RateLimit      `json:"rateLimit"`
-	TokenUsage    TokenUsage     `json:"tokenUsage"`
+	ContainerMeta  *ContainerMeta `json:"containerMeta,omitempty"`
+	CustomerId     *string        `json:"customerId,omitempty"`
+	IsBlocked      bool           `json:"isBlocked"`
+	Key            string         `json:"key"`
+	KeyId          string         `json:"keyId"`
+	Models         []string       `json:"models"`
+	Name           string         `json:"name"`
+	ProjectId      *string        `json:"projectId,omitempty"`
+	RateLimit      RateLimit      `json:"rateLimit"`
+	SubscriptionId *string        `json:"subscriptionId,omitempty"`
+	TokenUsage     TokenUsage     `json:"tokenUsage"`
 }
 
 func (o *Key) Validate() error {
