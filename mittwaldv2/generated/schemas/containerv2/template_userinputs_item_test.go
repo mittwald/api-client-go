@@ -14,7 +14,7 @@ import (
 var _ = Describe("TemplateUserInputsItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"dataSource\":\"string\",\"defaultValue\":\"string\",\"name\":\"string\",\"required\":true,\"validationSchema\":\"string\"}")
+			exampleJSON := []byte("{\"dataSource\":\"string\",\"defaultValue\":\"string\",\"label\":{\"de\":\"string\",\"en\":\"string\"},\"name\":\"string\",\"required\":true,\"validationSchema\":\"string\"}")
 
 			sut := containerv2.TemplateUserInputsItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

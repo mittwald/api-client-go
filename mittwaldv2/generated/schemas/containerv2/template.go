@@ -95,6 +95,7 @@ import (
 //                    type: "string"
 //                "defaultValue":
 //                    type: "string"
+//                "label": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
 //                "name":
 //                    type: "string"
 //                "required":
