@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("DnsZoneCreated", func() {
+var _ = Describe("DnsMxRecordSetManaged", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{},\"name\":\"dns.zone-created\",\"parameters\":{\"domain\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
+			exampleJSON := []byte("{\"changes\":{\"after\":{\"mx\":{\"managed\":true}},\"before\":{}},\"name\":\"dns.mx-record-set-managed\",\"parameters\":{\"domain\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
 
-			sut := activitylogv2.DnsZoneCreated{}
+			sut := activitylogv2.DnsMxRecordSetManaged{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

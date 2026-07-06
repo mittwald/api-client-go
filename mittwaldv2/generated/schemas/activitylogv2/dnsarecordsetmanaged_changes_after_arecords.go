@@ -6,16 +6,15 @@ package activitylogv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "domain":
+//    "managedByIngressId":
 //        type: "string"
-//        nullable: true
 // required:
-//    - "domain"
+//    - "managedByIngressId"
 
-type DnsZoneCreatedChangesBefore struct {
-	Domain string `json:"domain"`
+type DnsARecordSetManagedChangesAfterARecords struct {
+	ManagedByIngressId string `json:"managedByIngressId"`
 }
 
-func (o *DnsZoneCreatedChangesBefore) Validate() error {
+func (o *DnsARecordSetManagedChangesAfterARecords) Validate() error {
 	return nil
 }

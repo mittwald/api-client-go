@@ -10,11 +10,25 @@ import "fmt"
 // properties:
 //    "changes":
 //        type: "object"
-//        additionalProperties: false
+//        properties:
+//            "after":
+//                type: "object"
+//                properties:
+//                    "mx":
+//                        type: "object"
+//                        properties:
+//                            "managed":
+//                                type: "boolean"
+//                        required:
+//                            - "managed"
+//                required:
+//                    - "mx"
+//            "before":
+//                type: "object"
 //    "name":
 //        type: "string"
 //        enum:
-//            - "dns.zone-created"
+//            - "dns.mx-record-set-managed"
 //    "parameters":
 //        type: "object"
 //        properties:
@@ -26,13 +40,13 @@ import "fmt"
 //    - "changes"
 //    - "parameters"
 
-type DnsZoneCreated struct {
-	Changes    DnsZoneCreatedChanges    `json:"changes"`
-	Name       DnsZoneCreatedName       `json:"name"`
-	Parameters DnsZoneCreatedParameters `json:"parameters"`
+type DnsMxRecordSetManaged struct {
+	Changes    DnsMxRecordSetManagedChanges    `json:"changes"`
+	Name       DnsMxRecordSetManagedName       `json:"name"`
+	Parameters DnsMxRecordSetManagedParameters `json:"parameters"`
 }
 
-func (o *DnsZoneCreated) Validate() error {
+func (o *DnsMxRecordSetManaged) Validate() error {
 	if err := o.Changes.Validate(); err != nil {
 		return fmt.Errorf("invalid property changes: %w", err)
 	}

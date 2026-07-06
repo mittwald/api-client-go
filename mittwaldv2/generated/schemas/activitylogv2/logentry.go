@@ -13,6 +13,8 @@ import (
 // properties:
 //    "action":
 //        anyOf:
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DnsDomainDeleted"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DnsIngressDeleted"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DnsZoneCreated"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DnsZoneDeleted"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DnsCnameRecordSet"}
@@ -20,7 +22,9 @@ import (
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DnsCaaRecordSet"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DnsTxtRecordSet"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DnsARecordSet"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DnsARecordSetManaged"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DnsMxRecordSet"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DnsMxRecordSetManaged"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseCreated"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseDeleted"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseDescriptionSet"}

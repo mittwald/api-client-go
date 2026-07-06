@@ -14,7 +14,7 @@ import "fmt"
 //    "name":
 //        type: "string"
 //        enum:
-//            - "dns.zone-created"
+//            - "dns.ingress-deleted"
 //    "parameters":
 //        type: "object"
 //        properties:
@@ -26,13 +26,13 @@ import "fmt"
 //    - "changes"
 //    - "parameters"
 
-type DnsZoneCreated struct {
-	Changes    DnsZoneCreatedChanges    `json:"changes"`
-	Name       DnsZoneCreatedName       `json:"name"`
-	Parameters DnsZoneCreatedParameters `json:"parameters"`
+type DnsIngressDeleted struct {
+	Changes    DnsIngressDeletedChanges    `json:"changes"`
+	Name       DnsIngressDeletedName       `json:"name"`
+	Parameters DnsIngressDeletedParameters `json:"parameters"`
 }
 
-func (o *DnsZoneCreated) Validate() error {
+func (o *DnsIngressDeleted) Validate() error {
 	if err := o.Changes.Validate(); err != nil {
 		return fmt.Errorf("invalid property changes: %w", err)
 	}

@@ -7,9 +7,9 @@ package activitylogv2
 // type: "object"
 // additionalProperties: false
 
-type DnsZoneCreatedChanges struct {
+type DnsIngressDeletedChanges struct {
 }
 
-func (o *DnsZoneCreatedChanges) Validate() error {
+func (o *DnsIngressDeletedChanges) Validate() error {
 	return nil
 }

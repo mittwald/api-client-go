@@ -14,7 +14,7 @@ import "fmt"
 //    "name":
 //        type: "string"
 //        enum:
-//            - "dns.zone-created"
+//            - "dns.domain-deleted"
 //    "parameters":
 //        type: "object"
 //        properties:
@@ -26,13 +26,13 @@ import "fmt"
 //    - "changes"
 //    - "parameters"
 
-type DnsZoneCreated struct {
-	Changes    DnsZoneCreatedChanges    `json:"changes"`
-	Name       DnsZoneCreatedName       `json:"name"`
-	Parameters DnsZoneCreatedParameters `json:"parameters"`
+type DnsDomainDeleted struct {
+	Changes    DnsDomainDeletedChanges    `json:"changes"`
+	Name       DnsDomainDeletedName       `json:"name"`
+	Parameters DnsDomainDeletedParameters `json:"parameters"`
 }
 
-func (o *DnsZoneCreated) Validate() error {
+func (o *DnsDomainDeleted) Validate() error {
 	if err := o.Changes.Validate(); err != nil {
 		return fmt.Errorf("invalid property changes: %w", err)
 	}

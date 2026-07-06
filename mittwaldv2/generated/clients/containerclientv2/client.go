@@ -179,6 +179,16 @@ type Client interface {
 		req DeprecatedValidateRegistryCredentialsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedValidateRegistryCredentialsResponse, *http.Response, error)
+	GetTemplateStatistics(
+		ctx context.Context,
+		req GetTemplateStatisticsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*containerv2.TemplateStatsResponse, *http.Response, error)
+	GetTemplateStatisticsByCategory(
+		ctx context.Context,
+		req GetTemplateStatisticsByCategoryRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*containerv2.TemplateStatsByCategoryResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1068,6 +1078,62 @@ func (c *clientImpl) DeprecatedValidateRegistryCredentials(
 	}
 
 	var response DeprecatedValidateRegistryCredentialsResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get Container Template statistics.
+func (c *clientImpl) GetTemplateStatistics(
+	ctx context.Context,
+	req GetTemplateStatisticsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*containerv2.TemplateStatsResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response containerv2.TemplateStatsResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get Container Template statistics by category.
+func (c *clientImpl) GetTemplateStatisticsByCategory(
+	ctx context.Context,
+	req GetTemplateStatisticsByCategoryRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*containerv2.TemplateStatsByCategoryResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response containerv2.TemplateStatsByCategoryResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
