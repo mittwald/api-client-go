@@ -18,8 +18,8 @@ import (
 // [1]: https://developer.mittwald.de/docs/v2/reference/ai
 // hosting/ai-hosting-project-get-keys
 type ProjectGetKeysRequest struct {
-	ProjectID      string
-	SubscriptionID *string
+	ProjectID string
+	PlanID    *string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -57,8 +57,8 @@ func (r *ProjectGetKeysRequest) url() string {
 
 func (r *ProjectGetKeysRequest) query() url.Values {
 	q := make(url.Values)
-	if r.SubscriptionID != nil {
-		q.Set("subscriptionId", *r.SubscriptionID)
+	if r.PlanID != nil {
+		q.Set("planId", *r.PlanID)
 	}
 	return q
 }

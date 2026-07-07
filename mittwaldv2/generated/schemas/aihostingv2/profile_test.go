@@ -14,7 +14,7 @@ import (
 var _ = Describe("Profile", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"subscriptionIds\":[\"string\"]}")
+			exampleJSON := []byte("{\"planIds\":[\"string\"]}")
 
 			sut := aihostingv2.Profile{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

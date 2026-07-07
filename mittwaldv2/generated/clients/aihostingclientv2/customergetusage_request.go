@@ -13,14 +13,14 @@ import (
 // CustomerGetUsageRequest models a request for the 'ai-hosting-customer-get-usage'
 // operation. See [1] for more information.
 //
-// Get ai hosting plan and usages of a customer.
+// Get ai hosting plan and usages of a customer. Deprecated: use
+// /ai-hostings/{planId} instead.
 //
 // [1]: https://developer.mittwald.de/docs/v2/reference/ai
 // hosting/ai-hosting-customer-get-usage
 type CustomerGetUsageRequest struct {
-	CustomerID     string
-	TopUsageCount  *int64
-	SubscriptionID *string
+	CustomerID    string
+	TopUsageCount *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -60,9 +60,6 @@ func (r *CustomerGetUsageRequest) query() url.Values {
 	q := make(url.Values)
 	if r.TopUsageCount != nil {
 		q.Set("topUsageCount", fmt.Sprintf("%d", *r.TopUsageCount))
-	}
-	if r.SubscriptionID != nil {
-		q.Set("subscriptionId", *r.SubscriptionID)
 	}
 	return q
 }

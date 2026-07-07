@@ -25,6 +25,7 @@ import "fmt"
 //            - "returnDebitNoteWaitingForPayment"
 //            - "debtWrittenOff"
 //            - "bankrupt"
+//            - "notReachable"
 // required:
 //    - "severity"
 //    - "type"

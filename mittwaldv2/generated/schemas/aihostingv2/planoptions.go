@@ -23,9 +23,9 @@ import (
 //    "nextTokenReset":
 //        type: "string"
 //        format: "date-time"
-//    "rateLimit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
-//    "subscriptionId":
+//    "planId":
 //        type: "string"
+//    "rateLimit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
 //    "tokens": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsageBig"}
 //    "topUsages":
 //        type: "array"
@@ -58,8 +58,8 @@ type PlanOptions struct {
 	Keys                       PlanUsage                  `json:"keys"`
 	ModelTermsApprovalRequired bool                       `json:"modelTermsApprovalRequired"`
 	NextTokenReset             time.Time                  `json:"nextTokenReset"`
+	PlanId                     *string                    `json:"planId,omitempty"`
 	RateLimit                  RateLimit                  `json:"rateLimit"`
-	SubscriptionId             *string                    `json:"subscriptionId,omitempty"`
 	Tokens                     PlanUsageBig               `json:"tokens"`
 	TopUsages                  []PlanOptionsTopUsagesItem `json:"topUsages,omitempty"`
 }

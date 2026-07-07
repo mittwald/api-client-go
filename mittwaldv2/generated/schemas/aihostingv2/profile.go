@@ -8,20 +8,20 @@ import "errors"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "subscriptionIds":
+//    "planIds":
 //        type: "array"
 //        items:
 //            type: "string"
 // required:
-//    - "subscriptionIds"
+//    - "planIds"
 
 type Profile struct {
-	SubscriptionIds []string `json:"subscriptionIds"`
+	PlanIds []string `json:"planIds"`
 }
 
 func (o *Profile) Validate() error {
-	if o.SubscriptionIds == nil {
-		return errors.New("property subscriptionIds is required, but not set")
+	if o.PlanIds == nil {
+		return errors.New("property planIds is required, but not set")
 	}
 	return nil
 }

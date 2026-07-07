@@ -11,7 +11,7 @@ package aihostingclientv2
 //    "name":
 //        type: "string"
 //        minLength: 5
-//    "subscriptionId":
+//    "planId":
 //        type: "string"
 // required:
 //    - "name"
@@ -21,7 +21,7 @@ package aihostingclientv2
 type ProjectCreateKeyRequestBody struct {
 	CreateWebuiContainer *bool   `json:"createWebuiContainer,omitempty"`
 	Name                 string  `json:"name"`
-	SubscriptionId       *string `json:"subscriptionId,omitempty"`
+	PlanId               *string `json:"planId,omitempty"`
 }
 
 func (o *ProjectCreateKeyRequestBody) Validate() error {

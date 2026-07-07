@@ -14,7 +14,7 @@ import (
 var _ = Describe("ProjectCreateKeyRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"createWebuiContainer\":true,\"name\":\"string\",\"subscriptionId\":\"string\"}")
+			exampleJSON := []byte("{\"createWebuiContainer\":true,\"name\":\"string\",\"planId\":\"string\"}")
 
 			sut := aihostingclientv2.ProjectCreateKeyRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

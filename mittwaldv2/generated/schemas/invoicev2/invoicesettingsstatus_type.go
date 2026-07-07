@@ -12,6 +12,7 @@ import "fmt"
 //    - "returnDebitNoteWaitingForPayment"
 //    - "debtWrittenOff"
 //    - "bankrupt"
+//    - "notReachable"
 
 type InvoiceSettingsStatusType string
 
@@ -19,9 +20,10 @@ const InvoiceSettingsStatusTypeReturnDebitNote InvoiceSettingsStatusType = "retu
 const InvoiceSettingsStatusTypeReturnDebitNoteWaitingForPayment InvoiceSettingsStatusType = "returnDebitNoteWaitingForPayment"
 const InvoiceSettingsStatusTypeDebtWrittenOff InvoiceSettingsStatusType = "debtWrittenOff"
 const InvoiceSettingsStatusTypeBankrupt InvoiceSettingsStatusType = "bankrupt"
+const InvoiceSettingsStatusTypeNotReachable InvoiceSettingsStatusType = "notReachable"
 
 func (e InvoiceSettingsStatusType) Validate() error {
-	if e == InvoiceSettingsStatusTypeReturnDebitNote || e == InvoiceSettingsStatusTypeReturnDebitNoteWaitingForPayment || e == InvoiceSettingsStatusTypeDebtWrittenOff || e == InvoiceSettingsStatusTypeBankrupt {
+	if e == InvoiceSettingsStatusTypeReturnDebitNote || e == InvoiceSettingsStatusTypeReturnDebitNoteWaitingForPayment || e == InvoiceSettingsStatusTypeDebtWrittenOff || e == InvoiceSettingsStatusTypeBankrupt || e == InvoiceSettingsStatusTypeNotReachable {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
