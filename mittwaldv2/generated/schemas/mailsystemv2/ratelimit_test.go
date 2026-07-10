@@ -14,7 +14,7 @@ import (
 var _ = Describe("RateLimit", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"id\":\"string\",\"rateLimit\":42}")
+			exampleJSON := []byte("{\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"rateLimit\":42}")
 
 			sut := mailsystemv2.RateLimit{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

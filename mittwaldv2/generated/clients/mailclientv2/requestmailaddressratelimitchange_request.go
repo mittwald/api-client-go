@@ -56,7 +56,7 @@ func (r *RequestMailAddressRateLimitChangeRequest) body() (io.Reader, string, er
 
 func (r *RequestMailAddressRateLimitChangeRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/mail-addresses/%s/request-rate-limit-change", url.PathEscape(r.MailAddressID)),
+		Path: fmt.Sprintf("/v2/mail-addresses/%s/actions/request-rate-limit-change", url.PathEscape(r.MailAddressID)),
 	}
 	return u.String()
 }

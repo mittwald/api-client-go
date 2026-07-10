@@ -8,9 +8,9 @@ package mailsystemv2
 // properties:
 //    "id":
 //        type: "string"
+//        format: "uuid"
 //    "rateLimit":
 //        type: "integer"
-//        format: "int64"
 // required:
 //    - "id"
 //    - "rateLimit"

@@ -14,6 +14,11 @@ import (
 )
 
 type Client interface {
+	AddComponent(
+		ctx context.Context,
+		req AddComponentRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	CallPullImageWebhookForService(
 		ctx context.Context,
 		req CallPullImageWebhookForServiceRequest,
@@ -124,6 +129,11 @@ type Client interface {
 		req ListStackVolumesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]containerv2.VolumeResponse, *http.Response, error)
+	ListTemplateStatistics(
+		ctx context.Context,
+		req ListTemplateStatisticsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*containerv2.TemplateStatsListResponse, *http.Response, error)
 	ListTemplates(
 		ctx context.Context,
 		req ListTemplatesRequest,
@@ -179,16 +189,6 @@ type Client interface {
 		req DeprecatedValidateRegistryCredentialsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedValidateRegistryCredentialsResponse, *http.Response, error)
-	GetTemplateStatistics(
-		ctx context.Context,
-		req GetTemplateStatisticsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*containerv2.TemplateStatsResponse, *http.Response, error)
-	GetTemplateStatisticsByCategory(
-		ctx context.Context,
-		req GetTemplateStatisticsByCategoryRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*containerv2.TemplateStatsByCategoryResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -196,6 +196,30 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Add a component to a Stack.
+func (c *clientImpl) AddComponent(
+	ctx context.Context,
+	req AddComponentRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // Call pull-image webhook
@@ -788,6 +812,34 @@ func (c *clientImpl) ListStackVolumes(
 	return &response, httpRes, nil
 }
 
+// List Container Template statistics.
+func (c *clientImpl) ListTemplateStatistics(
+	ctx context.Context,
+	req ListTemplateStatisticsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*containerv2.TemplateStatsListResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response containerv2.TemplateStatsListResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // List Container Templates.
 func (c *clientImpl) ListTemplates(
 	ctx context.Context,
@@ -1078,62 +1130,6 @@ func (c *clientImpl) DeprecatedValidateRegistryCredentials(
 	}
 
 	var response DeprecatedValidateRegistryCredentialsResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get Container Template statistics.
-func (c *clientImpl) GetTemplateStatistics(
-	ctx context.Context,
-	req GetTemplateStatisticsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*containerv2.TemplateStatsResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response containerv2.TemplateStatsResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get Container Template statistics by category.
-func (c *clientImpl) GetTemplateStatisticsByCategory(
-	ctx context.Context,
-	req GetTemplateStatisticsByCategoryRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*containerv2.TemplateStatsByCategoryResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response containerv2.TemplateStatsByCategoryResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

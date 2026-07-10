@@ -49,6 +49,21 @@ type Client interface {
 		req CustomerGetDetailedModelsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]aihostingv2.CustomerDetailedModel, *http.Response, error)
+	CustomerGetPlan(
+		ctx context.Context,
+		req CustomerGetPlanRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*aihostingv2.PlanOptions, *http.Response, error)
+	CustomerUpdatePlan(
+		ctx context.Context,
+		req CustomerUpdatePlanRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	CustomerGetPlans(
+		ctx context.Context,
+		req CustomerGetPlansRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*aihostingv2.CustomerPlans, *http.Response, error)
 	CustomerGetUsage(
 		ctx context.Context,
 		req CustomerGetUsageRequest,
@@ -99,16 +114,6 @@ type Client interface {
 		req ProjectLinkContainerRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	CustomerGetPlan(
-		ctx context.Context,
-		req CustomerGetPlanRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*aihostingv2.PlanOptions, *http.Response, error)
-	CustomerGetPlans(
-		ctx context.Context,
-		req CustomerGetPlansRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*aihostingv2.CustomerPlans, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -304,6 +309,86 @@ func (c *clientImpl) CustomerGetDetailedModels(
 	}
 
 	var response []aihostingv2.CustomerDetailedModel
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get ai hosting plan and usages of a customer by planId.
+func (c *clientImpl) CustomerGetPlan(
+	ctx context.Context,
+	req CustomerGetPlanRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*aihostingv2.PlanOptions, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response aihostingv2.PlanOptions
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Renames an AI hosting plan.
+func (c *clientImpl) CustomerUpdatePlan(
+	ctx context.Context,
+	req CustomerUpdatePlanRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Get all ai hosting plans of a customer.
+func (c *clientImpl) CustomerGetPlans(
+	ctx context.Context,
+	req CustomerGetPlansRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*aihostingv2.CustomerPlans, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response aihostingv2.CustomerPlans
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -584,60 +669,4 @@ func (c *clientImpl) ProjectLinkContainer(
 	}
 
 	return httpRes, nil
-}
-
-// Get ai hosting plan and usages of a customer by planId.
-func (c *clientImpl) CustomerGetPlan(
-	ctx context.Context,
-	req CustomerGetPlanRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*aihostingv2.PlanOptions, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response aihostingv2.PlanOptions
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get all ai hosting plans of a customer.
-func (c *clientImpl) CustomerGetPlans(
-	ctx context.Context,
-	req CustomerGetPlansRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*aihostingv2.CustomerPlans, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response aihostingv2.CustomerPlans
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }

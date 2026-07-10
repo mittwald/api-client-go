@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("TemplateStatsByCategoryResponse", func() {
+var _ = Describe("TemplateStatsListResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
 			exampleJSON := []byte("{\"category\":\"string\",\"templates\":[{\"id\":\"string\",\"installations\":42,\"installations30Days\":42}]}")
 
-			sut := containerv2.TemplateStatsByCategoryResponse{}
+			sut := containerv2.TemplateStatsListResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

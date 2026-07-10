@@ -18,10 +18,11 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/container/container-list-stacks
 type ListStacksRequest struct {
-	ProjectID string
-	Limit     *int64
-	Skip      *int64
-	Page      *int64
+	ProjectID  string
+	SearchTerm *string
+	Limit      *int64
+	Skip       *int64
+	Page       *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -59,6 +60,9 @@ func (r *ListStacksRequest) url() string {
 
 func (r *ListStacksRequest) query() url.Values {
 	q := make(url.Values)
+	if r.SearchTerm != nil {
+		q.Set("searchTerm", *r.SearchTerm)
+	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
 	}

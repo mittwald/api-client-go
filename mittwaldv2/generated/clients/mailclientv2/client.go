@@ -201,6 +201,11 @@ type Client interface {
 		req RecoverMailAddressEmailsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	RequestMailAddressRateLimitChange(
+		ctx context.Context,
+		req RequestMailAddressRateLimitChangeRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	UpdateDeliveryBoxDescription(
 		ctx context.Context,
 		req UpdateDeliveryBoxDescriptionRequest,
@@ -219,11 +224,6 @@ type Client interface {
 	UpdateMailAddressCatchAll(
 		ctx context.Context,
 		req UpdateMailAddressCatchAllRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	RequestMailAddressRateLimitChange(
-		ctx context.Context,
-		req RequestMailAddressRateLimitChangeRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -1206,6 +1206,30 @@ func (c *clientImpl) RecoverMailAddressEmails(
 	return httpRes, nil
 }
 
+// Request a rate limit change for a MailAddress.
+func (c *clientImpl) RequestMailAddressRateLimitChange(
+	ctx context.Context,
+	req RequestMailAddressRateLimitChangeRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Update the description of a DeliveryBox.
 func (c *clientImpl) UpdateDeliveryBoxDescription(
 	ctx context.Context,
@@ -1282,30 +1306,6 @@ func (c *clientImpl) UpdateMailAddressAddress(
 func (c *clientImpl) UpdateMailAddressCatchAll(
 	ctx context.Context,
 	req UpdateMailAddressCatchAllRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Request a rate limit change for a MailAddress.
-func (c *clientImpl) RequestMailAddressRateLimitChange(
-	ctx context.Context,
-	req RequestMailAddressRateLimitChangeRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
