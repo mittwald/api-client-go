@@ -14,7 +14,7 @@ import (
 var _ = Describe("DnsZoneCreatedChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"after\":{\"domain\":\"string\"},\"before\":{\"domain\":\"string\"}}")
+			exampleJSON := []byte("{}")
 
 			sut := activitylogv2.DnsZoneCreatedChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

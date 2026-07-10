@@ -8,13 +8,14 @@ package mailv2
 // properties:
 //    "rateLimitId":
 //        type: "string"
+//        description: "id of the rate limit requested"
 // required:
 //    - "rateLimitId"
 
-type MailsystemSettings struct {
+type MailAddressRateLimitChangeRequest struct {
 	RateLimitId string `json:"rateLimitId"`
 }
 
-func (o *MailsystemSettings) Validate() error {
+func (o *MailAddressRateLimitChangeRequest) Validate() error {
 	return nil
 }

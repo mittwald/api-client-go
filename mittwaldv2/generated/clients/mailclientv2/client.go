@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/mailsystemv2"
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/mailv2"
 	"github.com/mittwald/api-client-go/pkg/httpclient"
 	"github.com/mittwald/api-client-go/pkg/httperr"
@@ -187,6 +188,21 @@ type Client interface {
 	UpdateMailAddressCatchAll(
 		ctx context.Context,
 		req UpdateMailAddressCatchAllRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	GetMailRateLimit(
+		ctx context.Context,
+		req GetMailRateLimitRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*mailsystemv2.RateLimit, *http.Response, error)
+	ListMailRateLimits(
+		ctx context.Context,
+		req ListMailRateLimitsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]mailsystemv2.RateLimit, *http.Response, error)
+	RequestMailAddressRateLimitChange(
+		ctx context.Context,
+		req RequestMailAddressRateLimitChangeRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -1078,6 +1094,86 @@ func (c *clientImpl) UpdateMailAddressAddress(
 func (c *clientImpl) UpdateMailAddressCatchAll(
 	ctx context.Context,
 	req UpdateMailAddressCatchAllRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Get a Mail RateLimit.
+func (c *clientImpl) GetMailRateLimit(
+	ctx context.Context,
+	req GetMailRateLimitRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*mailsystemv2.RateLimit, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response mailsystemv2.RateLimit
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Mail RateLimits.
+func (c *clientImpl) ListMailRateLimits(
+	ctx context.Context,
+	req ListMailRateLimitsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]mailsystemv2.RateLimit, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []mailsystemv2.RateLimit
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Request a rate limit change for a MailAddress.
+func (c *clientImpl) RequestMailAddressRateLimitChange(
+	ctx context.Context,
+	req RequestMailAddressRateLimitChangeRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

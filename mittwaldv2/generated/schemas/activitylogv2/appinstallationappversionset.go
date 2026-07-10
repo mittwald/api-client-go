@@ -28,6 +28,7 @@ import "fmt"
 //        type: "string"
 //        enum:
 //            - "app.version-set"
+//            - "app.version-updated"
 //    "parameters":
 //        type: "object"
 //        properties:

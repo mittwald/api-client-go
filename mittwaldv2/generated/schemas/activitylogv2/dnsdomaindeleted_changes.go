@@ -5,16 +5,11 @@ package activitylogv2
 
 // This data type was generated from the following JSON schema:
 // type: "object"
-// properties:
-//    "domain":
-//        type: "string"
-// required:
-//    - "domain"
+// additionalProperties: false
 
-type DnsZoneCreatedChangesAfter struct {
-	Domain string `json:"domain"`
+type DnsDomainDeletedChanges struct {
 }
 
-func (o *DnsZoneCreatedChangesAfter) Validate() error {
+func (o *DnsDomainDeletedChanges) Validate() error {
 	return nil
 }
