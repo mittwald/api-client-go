@@ -20,6 +20,8 @@ import (
 //    "modelTermsApprovalRequired":
 //        type: "boolean"
 //        default: false
+//    "name":
+//        type: "string"
 //    "nextTokenReset":
 //        type: "string"
 //        format: "date-time"
@@ -57,6 +59,7 @@ type PlanOptions struct {
 	DeletedAt                  *time.Time                 `json:"deletedAt,omitempty"`
 	Keys                       PlanUsage                  `json:"keys"`
 	ModelTermsApprovalRequired bool                       `json:"modelTermsApprovalRequired"`
+	Name                       *string                    `json:"name,omitempty"`
 	NextTokenReset             time.Time                  `json:"nextTokenReset"`
 	PlanId                     *string                    `json:"planId,omitempty"`
 	RateLimit                  RateLimit                  `json:"rateLimit"`

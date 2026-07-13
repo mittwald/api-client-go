@@ -14,7 +14,7 @@ import (
 var _ = Describe("AddComponentTemplateConfigUserInputsItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"name\":\"MYSQL_DATABASE\",\"value\":\"app\"}")
+			exampleJSON := []byte("{\"name\":\"HOST\",\"value\":\"kuma.example.org\"}")
 
 			sut := containerv2.AddComponentTemplateConfigUserInputsItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

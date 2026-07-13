@@ -33,7 +33,7 @@ func (r *CustomerUpdatePlanRequest) BuildRequest(reqEditors ...func(req *http.Re
 		return nil, err
 	}
 
-	req, err := http.NewRequest(http.MethodPatch, r.url(), body)
+	req, err := http.NewRequest(http.MethodPut, r.url(), body)
 	if err != nil {
 		return nil, err
 	}

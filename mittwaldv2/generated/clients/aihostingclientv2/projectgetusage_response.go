@@ -16,6 +16,8 @@ import (
 //    "keys": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsage"}
 //    "modelTermsApprovalRequired":
 //        type: "boolean"
+//    "name":
+//        type: "string"
 //    "nextTokenReset":
 //        type: "string"
 //        format: "date-time"
@@ -29,6 +31,7 @@ import (
 type ProjectGetUsageResponse struct {
 	Keys                       aihostingv2.PlanUsage `json:"keys"`
 	ModelTermsApprovalRequired bool                  `json:"modelTermsApprovalRequired"`
+	Name                       *string               `json:"name,omitempty"`
 	NextTokenReset             *time.Time            `json:"nextTokenReset,omitempty"`
 	ProjectId                  string                `json:"projectId"`
 }

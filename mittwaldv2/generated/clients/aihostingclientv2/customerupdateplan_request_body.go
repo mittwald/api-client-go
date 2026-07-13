@@ -8,13 +8,11 @@ package aihostingclientv2
 // properties:
 //    "name":
 //        type: "string"
-// required:
-//    - "name"
 // description: CustomerUpdatePlanRequestBody models the JSON body of a 'ai-hosting-customer-update-plan' request
 
 // CustomerUpdatePlanRequestBody models the JSON body of a 'ai-hosting-customer-update-plan' request
 type CustomerUpdatePlanRequestBody struct {
-	Name string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 func (o *CustomerUpdatePlanRequestBody) Validate() error {

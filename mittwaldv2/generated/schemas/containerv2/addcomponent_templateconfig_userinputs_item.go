@@ -8,10 +8,10 @@ package containerv2
 // properties:
 //    "name":
 //        type: "string"
-//        example: "MYSQL_DATABASE"
+//        example: "HOST"
 //    "value":
 //        type: "string"
-//        example: "app"
+//        example: "kuma.example.org"
 // required:
 //    - "name"
 //    - "value"

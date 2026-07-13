@@ -10,7 +10,7 @@ import "fmt"
 // properties:
 //    "templateId":
 //        type: "string"
-//        example: "mysql"
+//        example: "uptime-kuma"
 //    "userInputs":
 //        type: "array"
 //        items:
@@ -18,10 +18,10 @@ import "fmt"
 //            properties:
 //                "name":
 //                    type: "string"
-//                    example: "MYSQL_DATABASE"
+//                    example: "HOST"
 //                "value":
 //                    type: "string"
-//                    example: "app"
+//                    example: "kuma.example.org"
 //            required:
 //                - "name"
 //                - "value"
