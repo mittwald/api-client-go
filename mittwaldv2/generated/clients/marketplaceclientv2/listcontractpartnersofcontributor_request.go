@@ -22,6 +22,11 @@ type ListContractPartnersOfContributorRequest struct {
 	ContributorID       string
 	ExtensionID         *string
 	ExtensionInstanceID *string
+	Limit               *int64
+	Skip                *int64
+	Page                *int64
+	Sort                []ListContractPartnersOfContributorRequestQuerySortItem
+	Order               []ListContractPartnersOfContributorRequestQueryOrderItem
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -64,6 +69,21 @@ func (r *ListContractPartnersOfContributorRequest) query() url.Values {
 	}
 	if r.ExtensionInstanceID != nil {
 		q.Set("extensionInstanceId", *r.ExtensionInstanceID)
+	}
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
+	}
+	for _, val := range r.Sort {
+		q.Add("sort", string(val))
+	}
+	for _, val := range r.Order {
+		q.Add("order", string(val))
 	}
 	return q
 }
