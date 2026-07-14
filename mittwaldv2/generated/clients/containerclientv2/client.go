@@ -14,11 +14,6 @@ import (
 )
 
 type Client interface {
-	AddComponent(
-		ctx context.Context,
-		req AddComponentRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	CallPullImageWebhookForService(
 		ctx context.Context,
 		req CallPullImageWebhookForServiceRequest,
@@ -129,11 +124,6 @@ type Client interface {
 		req ListStackVolumesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]containerv2.VolumeResponse, *http.Response, error)
-	ListTemplateStatistics(
-		ctx context.Context,
-		req ListTemplateStatisticsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*containerv2.TemplateStatsListResponse, *http.Response, error)
 	ListTemplates(
 		ctx context.Context,
 		req ListTemplatesRequest,
@@ -196,30 +186,6 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
-}
-
-// Add a component to a Stack.
-func (c *clientImpl) AddComponent(
-	ctx context.Context,
-	req AddComponentRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }
 
 // Call pull-image webhook
@@ -806,34 +772,6 @@ func (c *clientImpl) ListStackVolumes(
 	}
 
 	var response []containerv2.VolumeResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// List Container Template statistics.
-func (c *clientImpl) ListTemplateStatistics(
-	ctx context.Context,
-	req ListTemplateStatisticsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*containerv2.TemplateStatsListResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response containerv2.TemplateStatsListResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

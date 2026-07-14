@@ -19,6 +19,9 @@ import "fmt"
 //                type: "array"
 //                items:
 //                    type: "string"
+//        required:
+//            - "aRecords"
+//            - "aaaaRecords"
 //    "before":
 //        type: "object"
 //        properties:
@@ -30,6 +33,9 @@ import "fmt"
 //                type: "array"
 //                items:
 //                    type: "string"
+//        required:
+//            - "aRecords"
+//            - "aaaaRecords"
 
 type DnsARecordSetChanges struct {
 	After  *DnsARecordSetChangesAfter  `json:"after,omitempty"`

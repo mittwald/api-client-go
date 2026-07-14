@@ -12,7 +12,12 @@ import "fmt"
 //        type: "object"
 //        properties:
 //            "aRecords":
-//                type: "string"
+//                type: "object"
+//                properties:
+//                    "managedByIngressId":
+//                        type: "string"
+//                required:
+//                    - "managedByIngressId"
 //        required:
 //            - "aRecords"
 //    "before":

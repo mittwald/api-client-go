@@ -14,33 +14,21 @@ import "fmt"
 //            "after":
 //                type: "object"
 //                properties:
-//                    "fqdn":
+//                    "mx":
 //                        type: "array"
 //                        items:
-//                            type: "string"
-//                    "priority":
-//                        type: "array"
-//                        items:
-//                            type: "number"
-//                            nullable: true
+//                            type: "object"
 //                required:
-//                    - "fqdn"
-//                    - "priority"
+//                    - "mx"
 //            "before":
 //                type: "object"
 //                properties:
-//                    "fqdn":
+//                    "mx":
 //                        type: "array"
 //                        items:
-//                            type: "string"
-//                    "priority":
-//                        type: "array"
-//                        items:
-//                            type: "number"
-//                            nullable: true
+//                            type: "object"
 //                required:
-//                    - "fqdn"
-//                    - "priority"
+//                    - "mx"
 //    "name":
 //        type: "string"
 //        enum:

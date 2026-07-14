@@ -11,13 +11,15 @@ import "fmt"
 //    "after":
 //        type: "object"
 //        properties:
-//            "fqdn":
-//                type: "string"
-//            "priority":
-//                type: "string"
+//            "mx":
+//                type: "object"
+//                properties:
+//                    "managed":
+//                        type: "boolean"
+//                required:
+//                    - "managed"
 //        required:
-//            - "fqdn"
-//            - "priority"
+//            - "mx"
 //    "before":
 //        type: "object"
 
