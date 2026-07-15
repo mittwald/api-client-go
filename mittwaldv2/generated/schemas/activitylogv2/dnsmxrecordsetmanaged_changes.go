@@ -12,12 +12,7 @@ import "fmt"
 //        type: "object"
 //        properties:
 //            "mx":
-//                type: "object"
-//                properties:
-//                    "managed":
-//                        type: "boolean"
-//                required:
-//                    - "managed"
+//                type: "string"
 //        required:
 //            - "mx"
 //    "before":

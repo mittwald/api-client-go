@@ -14,7 +14,7 @@ import (
 var _ = Describe("DnsMxRecordSetManagedChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"after\":{\"mx\":{\"managed\":true}},\"before\":{}}")
+			exampleJSON := []byte("{\"after\":{\"mx\":\"string\"},\"before\":{}}")
 
 			sut := activitylogv2.DnsMxRecordSetManagedChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
