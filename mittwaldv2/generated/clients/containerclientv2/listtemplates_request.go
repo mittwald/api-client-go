@@ -21,6 +21,7 @@ type ListTemplatesRequest struct {
 	Category   *string
 	SearchTerm *string
 	Type       *ListTemplatesRequestQueryType
+	SortOrder  *ListTemplatesRequestQuerySortOrder
 	Limit      *int64
 	Skip       *int64
 	Page       *int64
@@ -69,6 +70,9 @@ func (r *ListTemplatesRequest) query() url.Values {
 	}
 	if r.Type != nil {
 		q.Set("type", string(*r.Type))
+	}
+	if r.SortOrder != nil {
+		q.Set("sortOrder", string(*r.SortOrder))
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
