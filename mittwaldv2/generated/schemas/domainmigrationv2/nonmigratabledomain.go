@@ -20,6 +20,9 @@ import (
 //        type: "boolean"
 //        enum:
 //            - false
+//    "ownerContactIssues":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.OwnerContactIssue"}
 //    "warnings":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.domainmigration.DomainMigrationWarning"}
@@ -27,12 +30,14 @@ import (
 //    - "hostname"
 //    - "migratable"
 //    - "issues"
+//    - "ownerContactIssues"
 
 type NonMigratableDomain struct {
-	Hostname   string                      `json:"hostname"`
-	Issues     []DomainNotMigratableReason `json:"issues"`
-	Migratable bool                        `json:"migratable"`
-	Warnings   []DomainMigrationWarning    `json:"warnings,omitempty"`
+	Hostname           string                      `json:"hostname"`
+	Issues             []DomainNotMigratableReason `json:"issues"`
+	Migratable         bool                        `json:"migratable"`
+	OwnerContactIssues []OwnerContactIssue         `json:"ownerContactIssues"`
+	Warnings           []DomainMigrationWarning    `json:"warnings,omitempty"`
 }
 
 func (o *NonMigratableDomain) Validate() error {
@@ -48,6 +53,19 @@ func (o *NonMigratableDomain) Validate() error {
 		return nil
 	}(); err != nil {
 		return fmt.Errorf("invalid property issues: %w", err)
+	}
+	if o.OwnerContactIssues == nil {
+		return errors.New("property ownerContactIssues is required, but not set")
+	}
+	if err := func() error {
+		for i := range o.OwnerContactIssues {
+			if err := o.OwnerContactIssues[i].Validate(); err != nil {
+				return fmt.Errorf("item %d is invalid %w", i, err)
+			}
+		}
+		return nil
+	}(); err != nil {
+		return fmt.Errorf("invalid property ownerContactIssues: %w", err)
 	}
 	if err := func() error {
 		if o.Warnings == nil {

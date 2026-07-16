@@ -17,7 +17,8 @@ import "fmt"
 //    - "insufficientState"
 //    - "contractDateOutOfRange"
 //    - "invalidDomainName"
-// description: "Typed reason a domain cannot be migrated:\n\n* `needEpp`: the domain owner's phone number is not EPP/RFC 5733 conformant at the registry and cannot be reformatted, so the migration is rejected.\n* `tldNotSupported`: the domain's TLD is not supported for migration (also used when the registry article for the domain was not found).\n* `tldNotMigratable`: the domain's TLD is supported in general, but migration is not currently possible for this TLD.\n* `premiumDomain`: the domain is a premium domain, which is not supported yet.\n* `registrarNotSupported`: COAB names a registrar we do not support for migration.\n* `notOrderable`: the order service rejected the domain for a reason other than an unsupported TLD or a still-reserved domain.\n* `insufficientState`: the COAB data is incomplete (e.g. missing registrar, price or owner) or the domain is still reserved at the registry.\n* `contractDateOutOfRange`: the COAB contract's next-period date is in the past or more than two years in the future.\n* `invalidDomainName`: the COAB domain name does not match the `idn-naked-domain` format we accept."
+//    - "ownerContactInvalid"
+// description: "Typed reason a domain cannot be migrated:\n\n* `needEpp`: the domain owner's phone number is not EPP/RFC 5733 conformant at the registry and cannot be reformatted, so the migration is rejected.\n* `tldNotSupported`: the domain's TLD is not supported for migration (also used when the registry article for the domain was not found).\n* `tldNotMigratable`: the domain's TLD is supported in general, but migration is not currently possible for this TLD.\n* `premiumDomain`: the domain is a premium domain, which is not supported yet.\n* `registrarNotSupported`: COAB names a registrar we do not support for migration.\n* `notOrderable`: the order service rejected the domain for a reason other than an unsupported TLD or a still-reserved domain.\n* `insufficientState`: the COAB data is incomplete (e.g. missing registrar, price or owner) or the domain is still reserved at the registry.\n* `contractDateOutOfRange`: the COAB contract's next-period date is in the past or more than two years in the future.\n* `invalidDomainName`: the COAB domain name does not match the `idn-naked-domain` format we accept.\n* `ownerContactInvalid`: the domain's owner contact data (Inhaberdaten) failed validation at the registry/domain-service (invalid characters, or a TLD-specific contact-schema rule such as no consecutive whitespaces), so the migration is rejected. `ownerContactIssues` on the domain carries the affected field(s)/rule(s)."
 
 // Typed reason a domain cannot be migrated:
 //
@@ -30,6 +31,7 @@ import "fmt"
 // * `insufficientState`: the COAB data is incomplete (e.g. missing registrar, price or owner) or the domain is still reserved at the registry.
 // * `contractDateOutOfRange`: the COAB contract's next-period date is in the past or more than two years in the future.
 // * `invalidDomainName`: the COAB domain name does not match the `idn-naked-domain` format we accept.
+// * `ownerContactInvalid`: the domain's owner contact data (Inhaberdaten) failed validation at the registry/domain-service (invalid characters, or a TLD-specific contact-schema rule such as no consecutive whitespaces), so the migration is rejected. `ownerContactIssues` on the domain carries the affected field(s)/rule(s).
 type DomainNotMigratableReason string
 
 const DomainNotMigratableReasonNeedEpp DomainNotMigratableReason = "needEpp"
@@ -41,9 +43,10 @@ const DomainNotMigratableReasonNotOrderable DomainNotMigratableReason = "notOrde
 const DomainNotMigratableReasonInsufficientState DomainNotMigratableReason = "insufficientState"
 const DomainNotMigratableReasonContractDateOutOfRange DomainNotMigratableReason = "contractDateOutOfRange"
 const DomainNotMigratableReasonInvalidDomainName DomainNotMigratableReason = "invalidDomainName"
+const DomainNotMigratableReasonOwnerContactInvalid DomainNotMigratableReason = "ownerContactInvalid"
 
 func (e DomainNotMigratableReason) Validate() error {
-	if e == DomainNotMigratableReasonNeedEpp || e == DomainNotMigratableReasonTldNotSupported || e == DomainNotMigratableReasonTldNotMigratable || e == DomainNotMigratableReasonPremiumDomain || e == DomainNotMigratableReasonRegistrarNotSupported || e == DomainNotMigratableReasonNotOrderable || e == DomainNotMigratableReasonInsufficientState || e == DomainNotMigratableReasonContractDateOutOfRange || e == DomainNotMigratableReasonInvalidDomainName {
+	if e == DomainNotMigratableReasonNeedEpp || e == DomainNotMigratableReasonTldNotSupported || e == DomainNotMigratableReasonTldNotMigratable || e == DomainNotMigratableReasonPremiumDomain || e == DomainNotMigratableReasonRegistrarNotSupported || e == DomainNotMigratableReasonNotOrderable || e == DomainNotMigratableReasonInsufficientState || e == DomainNotMigratableReasonContractDateOutOfRange || e == DomainNotMigratableReasonInvalidDomainName || e == DomainNotMigratableReasonOwnerContactInvalid {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

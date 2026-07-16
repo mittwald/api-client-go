@@ -99,9 +99,9 @@ type Client interface {
 		req GetServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.ServiceResponse, *http.Response, error)
-	GetTemplateIcon(
+	GetTemplateAsset(
 		ctx context.Context,
-		req GetTemplateIconRequest,
+		req GetTemplateAssetRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetTemplate(
@@ -124,6 +124,11 @@ type Client interface {
 		req ListStackVolumesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]containerv2.VolumeResponse, *http.Response, error)
+	ListTemplateStatistics(
+		ctx context.Context,
+		req ListTemplateStatisticsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*containerv2.TemplateStatsListResponse, *http.Response, error)
 	ListTemplates(
 		ctx context.Context,
 		req ListTemplatesRequest,
@@ -167,6 +172,11 @@ type Client interface {
 	StopService(
 		ctx context.Context,
 		req StopServiceRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	DeprecatedGetTemplateIcon(
+		ctx context.Context,
+		req DeprecatedGetTemplateIconRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedValidateContainerRegistryUri(
@@ -642,10 +652,10 @@ func (c *clientImpl) GetService(
 	return &response, httpRes, nil
 }
 
-// Get a Container Template icon.
-func (c *clientImpl) GetTemplateIcon(
+// Get a Container Template asset.
+func (c *clientImpl) GetTemplateAsset(
 	ctx context.Context,
-	req GetTemplateIconRequest,
+	req GetTemplateAssetRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -772,6 +782,36 @@ func (c *clientImpl) ListStackVolumes(
 	}
 
 	var response []containerv2.VolumeResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Container Template statistics.
+//
+// Deprecated. Container Statistics should no longer be public and moved to the sortOrder logic from the template list. This endpoint will be removed in a future version.
+func (c *clientImpl) ListTemplateStatistics(
+	ctx context.Context,
+	req ListTemplateStatisticsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*containerv2.TemplateStatsListResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response containerv2.TemplateStatsListResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -994,6 +1034,32 @@ func (c *clientImpl) StartService(
 func (c *clientImpl) StopService(
 	ctx context.Context,
 	req StopServiceRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Get a Container Template icon.
+//
+// Deprecated. Use `GET /v2/container-templates/{templateId}/assets/icon.svg` instead.
+func (c *clientImpl) DeprecatedGetTemplateIcon(
+	ctx context.Context,
+	req DeprecatedGetTemplateIconRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

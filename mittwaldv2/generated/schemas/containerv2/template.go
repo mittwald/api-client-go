@@ -83,6 +83,20 @@ import (
 //    "name": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
 //    "repository":
 //        type: "string"
+//    "screenshots":
+//        type: "array"
+//        items:
+//            type: "object"
+//            properties:
+//                "bg":
+//                    type: "string"
+//                "screenshot":
+//                    type: "string"
+//                "text": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
+//            required:
+//                - "bg"
+//                - "screenshot"
+//                - "text"
 //    "supportLink":
 //        type: "string"
 //    "tagline": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
@@ -122,22 +136,23 @@ import (
 //    - "iconUrl"
 
 type Template struct {
-	Categories      []string                 `json:"categories"`
-	Description     TemplateTranslatedString `json:"description"`
-	Developer       string                   `json:"developer"`
-	Domains         []TemplateDomainsItem    `json:"domains,omitempty"`
-	Help            *TemplateHelp            `json:"help,omitempty"`
-	IconUrl         string                   `json:"iconUrl"`
-	Id              string                   `json:"id"`
-	License         *TemplateLicense         `json:"license,omitempty"`
-	ManifestVersion string                   `json:"manifestVersion"`
-	Name            TemplateTranslatedString `json:"name"`
-	Repository      *string                  `json:"repository,omitempty"`
-	SupportLink     *string                  `json:"supportLink,omitempty"`
-	Tagline         TemplateTranslatedString `json:"tagline"`
-	UserInputs      []TemplateUserInputsItem `json:"userInputs,omitempty"`
-	Version         string                   `json:"version"`
-	Website         *string                  `json:"website,omitempty"`
+	Categories      []string                  `json:"categories"`
+	Description     TemplateTranslatedString  `json:"description"`
+	Developer       string                    `json:"developer"`
+	Domains         []TemplateDomainsItem     `json:"domains,omitempty"`
+	Help            *TemplateHelp             `json:"help,omitempty"`
+	IconUrl         string                    `json:"iconUrl"`
+	Id              string                    `json:"id"`
+	License         *TemplateLicense          `json:"license,omitempty"`
+	ManifestVersion string                    `json:"manifestVersion"`
+	Name            TemplateTranslatedString  `json:"name"`
+	Repository      *string                   `json:"repository,omitempty"`
+	Screenshots     []TemplateScreenshotsItem `json:"screenshots,omitempty"`
+	SupportLink     *string                   `json:"supportLink,omitempty"`
+	Tagline         TemplateTranslatedString  `json:"tagline"`
+	UserInputs      []TemplateUserInputsItem  `json:"userInputs,omitempty"`
+	Version         string                    `json:"version"`
+	Website         *string                   `json:"website,omitempty"`
 }
 
 func (o *Template) Validate() error {
@@ -180,6 +195,21 @@ func (o *Template) Validate() error {
 	}
 	if err := o.Name.Validate(); err != nil {
 		return fmt.Errorf("invalid property name: %w", err)
+	}
+	if err := func() error {
+		if o.Screenshots == nil {
+			return nil
+		}
+		return func() error {
+			for i := range o.Screenshots {
+				if err := o.Screenshots[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}()
+	}(); err != nil {
+		return fmt.Errorf("invalid property screenshots: %w", err)
 	}
 	if err := o.Tagline.Validate(); err != nil {
 		return fmt.Errorf("invalid property tagline: %w", err)
