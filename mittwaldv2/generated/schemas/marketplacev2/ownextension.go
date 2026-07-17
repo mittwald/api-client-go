@@ -65,6 +65,10 @@ import (
 //        type: "object"
 //        properties:
 //            "context": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.Context"}
+//            "purgeScopes":
+//                type: "boolean"
+//            "purgeWebhookUrls":
+//                type: "boolean"
 //            "scopes":
 //                type: "array"
 //                items:

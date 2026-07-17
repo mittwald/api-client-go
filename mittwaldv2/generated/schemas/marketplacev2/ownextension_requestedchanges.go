@@ -9,6 +9,10 @@ import "fmt"
 // type: "object"
 // properties:
 //    "context": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.Context"}
+//    "purgeScopes":
+//        type: "boolean"
+//    "purgeWebhookUrls":
+//        type: "boolean"
 //    "scopes":
 //        type: "array"
 //        items:
@@ -21,9 +25,11 @@ import "fmt"
 // additionalProperties: false
 
 type OwnExtensionRequestedChanges struct {
-	Context     *Context                                 `json:"context,omitempty"`
-	Scopes      []string                                 `json:"scopes,omitempty"`
-	WebhookUrls *OwnExtensionRequestedChangesWebhookURLs `json:"webhookUrls,omitempty"`
+	Context          *Context                                 `json:"context,omitempty"`
+	PurgeScopes      *bool                                    `json:"purgeScopes,omitempty"`
+	PurgeWebhookUrls *bool                                    `json:"purgeWebhookUrls,omitempty"`
+	Scopes           []string                                 `json:"scopes,omitempty"`
+	WebhookUrls      *OwnExtensionRequestedChangesWebhookURLs `json:"webhookUrls,omitempty"`
 }
 
 func (o *OwnExtensionRequestedChanges) Validate() error {
