@@ -32,7 +32,7 @@ func (r *UpdateMysqlUserRequest) BuildRequest(reqEditors ...func(req *http.Reque
 		return nil, err
 	}
 
-	req, err := http.NewRequest(http.MethodPut, r.url(), body)
+	req, err := http.NewRequest(http.MethodPatch, r.url(), body)
 	if err != nil {
 		return nil, err
 	}

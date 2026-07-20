@@ -14,7 +14,7 @@ import (
 var _ = Describe("UpdateMysqlUserRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"accessIpMask\":\"string\",\"accessLevel\":\"full\",\"description\":\"string\",\"externalAccess\":true}")
+			exampleJSON := []byte("{\"accessIpMask\":\"string\",\"accessLevel\":\"full\",\"description\":\"string\",\"externalAccess\":true,\"password\":\"string\"}")
 
 			sut := databaseclientv2.UpdateMysqlUserRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

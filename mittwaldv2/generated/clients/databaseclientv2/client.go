@@ -69,14 +69,14 @@ type Client interface {
 		req GetMysqlUserRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*databasev2.MySqlUser, *http.Response, error)
-	UpdateMysqlUser(
-		ctx context.Context,
-		req UpdateMysqlUserRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	DeleteMysqlUser(
 		ctx context.Context,
 		req DeleteMysqlUserRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	UpdateMysqlUser(
+		ctx context.Context,
+		req UpdateMysqlUserRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetRedisDatabase(
@@ -124,31 +124,6 @@ type Client interface {
 		req ListRedisVersionsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]databasev2.RedisVersion, *http.Response, error)
-	UpdateMysqlDatabaseDefaultCharset(
-		ctx context.Context,
-		req UpdateMysqlDatabaseDefaultCharsetRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	UpdateMysqlDatabaseDescription(
-		ctx context.Context,
-		req UpdateMysqlDatabaseDescriptionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	UpdateMysqlUserPassword(
-		ctx context.Context,
-		req UpdateMysqlUserPasswordRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	UpdateRedisDatabaseConfiguration(
-		ctx context.Context,
-		req UpdateRedisDatabaseConfigurationRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	UpdateRedisDatabaseDescription(
-		ctx context.Context,
-		req UpdateRedisDatabaseDescriptionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -466,10 +441,10 @@ func (c *clientImpl) GetMysqlUser(
 	return &response, httpRes, nil
 }
 
-// Update a MySQLUser.
-func (c *clientImpl) UpdateMysqlUser(
+// Delete a MySQLUser.
+func (c *clientImpl) DeleteMysqlUser(
 	ctx context.Context,
-	req UpdateMysqlUserRequest,
+	req DeleteMysqlUserRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -490,10 +465,10 @@ func (c *clientImpl) UpdateMysqlUser(
 	return httpRes, nil
 }
 
-// Delete a MySQLUser.
-func (c *clientImpl) DeleteMysqlUser(
+// Update a MySQLUser.
+func (c *clientImpl) UpdateMysqlUser(
 	ctx context.Context,
-	req DeleteMysqlUserRequest,
+	req UpdateMysqlUserRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -748,124 +723,4 @@ func (c *clientImpl) ListRedisVersions(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Update a MySQLDatabase's default character settings.
-func (c *clientImpl) UpdateMysqlDatabaseDefaultCharset(
-	ctx context.Context,
-	req UpdateMysqlDatabaseDefaultCharsetRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update a MySQLDatabase's description.
-func (c *clientImpl) UpdateMysqlDatabaseDescription(
-	ctx context.Context,
-	req UpdateMysqlDatabaseDescriptionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update a MySQLUser's password.
-func (c *clientImpl) UpdateMysqlUserPassword(
-	ctx context.Context,
-	req UpdateMysqlUserPasswordRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update a RedisDatabase's configuration.
-func (c *clientImpl) UpdateRedisDatabaseConfiguration(
-	ctx context.Context,
-	req UpdateRedisDatabaseConfigurationRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update a RedisDatabase's description.
-func (c *clientImpl) UpdateRedisDatabaseDescription(
-	ctx context.Context,
-	req UpdateRedisDatabaseDescriptionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }

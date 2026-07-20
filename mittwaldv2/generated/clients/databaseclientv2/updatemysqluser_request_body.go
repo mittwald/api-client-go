@@ -6,6 +6,7 @@ import "fmt"
 // DO NOT EDIT.
 
 // This data type was generated from the following JSON schema:
+// type: "object"
 // properties:
 //    "accessIpMask":
 //        type: "string"
@@ -18,21 +19,26 @@ import "fmt"
 //        type: "string"
 //    "externalAccess":
 //        type: "boolean"
-// required:
-//    - "description"
-//    - "accessLevel"
+//    "password":
+//        type: "string"
 // description: UpdateMysqlUserRequestBody models the JSON body of a 'database-update-mysql-user' request
 
 // UpdateMysqlUserRequestBody models the JSON body of a 'database-update-mysql-user' request
 type UpdateMysqlUserRequestBody struct {
-	AccessIpMask   *string                               `json:"accessIpMask,omitempty"`
-	AccessLevel    UpdateMysqlUserRequestBodyAccessLevel `json:"accessLevel"`
-	Description    string                                `json:"description"`
-	ExternalAccess *bool                                 `json:"externalAccess,omitempty"`
+	AccessIpMask   *string                                `json:"accessIpMask,omitempty"`
+	AccessLevel    *UpdateMysqlUserRequestBodyAccessLevel `json:"accessLevel,omitempty"`
+	Description    *string                                `json:"description,omitempty"`
+	ExternalAccess *bool                                  `json:"externalAccess,omitempty"`
+	Password       *string                                `json:"password,omitempty"`
 }
 
 func (o *UpdateMysqlUserRequestBody) Validate() error {
-	if err := o.AccessLevel.Validate(); err != nil {
+	if err := func() error {
+		if o.AccessLevel == nil {
+			return nil
+		}
+		return o.AccessLevel.Validate()
+	}(); err != nil {
 		return fmt.Errorf("invalid property accessLevel: %w", err)
 	}
 	return nil
