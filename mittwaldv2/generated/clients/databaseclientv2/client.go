@@ -69,14 +69,19 @@ type Client interface {
 		req GetMysqlUserRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*databasev2.MySqlUser, *http.Response, error)
-	UpdateMysqlUser(
+	DeprecatedReplaceMysqlUser(
 		ctx context.Context,
-		req UpdateMysqlUserRequest,
+		req DeprecatedReplaceMysqlUserRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeleteMysqlUser(
 		ctx context.Context,
 		req DeleteMysqlUserRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	UpdateMysqlUser(
+		ctx context.Context,
+		req UpdateMysqlUserRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	GetRedisDatabase(
@@ -124,29 +129,29 @@ type Client interface {
 		req ListRedisVersionsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]databasev2.RedisVersion, *http.Response, error)
-	UpdateMysqlDatabaseDefaultCharset(
+	DeprecatedUpdateMysqlDatabaseDefaultCharset(
 		ctx context.Context,
-		req UpdateMysqlDatabaseDefaultCharsetRequest,
+		req DeprecatedUpdateMysqlDatabaseDefaultCharsetRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	UpdateMysqlDatabaseDescription(
+	DeprecatedUpdateMysqlDatabaseDescription(
 		ctx context.Context,
-		req UpdateMysqlDatabaseDescriptionRequest,
+		req DeprecatedUpdateMysqlDatabaseDescriptionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	UpdateMysqlUserPassword(
+	DeprecatedUpdateMysqlUserPassword(
 		ctx context.Context,
-		req UpdateMysqlUserPasswordRequest,
+		req DeprecatedUpdateMysqlUserPasswordRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	UpdateRedisDatabaseConfiguration(
+	DeprecatedUpdateRedisDatabaseConfiguration(
 		ctx context.Context,
-		req UpdateRedisDatabaseConfigurationRequest,
+		req DeprecatedUpdateRedisDatabaseConfigurationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	UpdateRedisDatabaseDescription(
+	DeprecatedUpdateRedisDatabaseDescription(
 		ctx context.Context,
-		req UpdateRedisDatabaseDescriptionRequest,
+		req DeprecatedUpdateRedisDatabaseDescriptionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -467,9 +472,11 @@ func (c *clientImpl) GetMysqlUser(
 }
 
 // Update a MySQLUser.
-func (c *clientImpl) UpdateMysqlUser(
+//
+// Deprecated by `PATCH /v2/mysql-users/{mysqlUserId}`.
+func (c *clientImpl) DeprecatedReplaceMysqlUser(
 	ctx context.Context,
-	req UpdateMysqlUserRequest,
+	req DeprecatedReplaceMysqlUserRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -494,6 +501,30 @@ func (c *clientImpl) UpdateMysqlUser(
 func (c *clientImpl) DeleteMysqlUser(
 	ctx context.Context,
 	req DeleteMysqlUserRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a MySQLUser.
+func (c *clientImpl) UpdateMysqlUser(
+	ctx context.Context,
+	req UpdateMysqlUserRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -751,9 +782,11 @@ func (c *clientImpl) ListRedisVersions(
 }
 
 // Update a MySQLDatabase's default character settings.
-func (c *clientImpl) UpdateMysqlDatabaseDefaultCharset(
+//
+// Deprecated by `PATCH /v2/mysql-databases/{mysqlDatabaseId}`.
+func (c *clientImpl) DeprecatedUpdateMysqlDatabaseDefaultCharset(
 	ctx context.Context,
-	req UpdateMysqlDatabaseDefaultCharsetRequest,
+	req DeprecatedUpdateMysqlDatabaseDefaultCharsetRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -775,9 +808,11 @@ func (c *clientImpl) UpdateMysqlDatabaseDefaultCharset(
 }
 
 // Update a MySQLDatabase's description.
-func (c *clientImpl) UpdateMysqlDatabaseDescription(
+//
+// Deprecated by `PATCH /v2/mysql-databases/{mysqlDatabaseId}`.
+func (c *clientImpl) DeprecatedUpdateMysqlDatabaseDescription(
 	ctx context.Context,
-	req UpdateMysqlDatabaseDescriptionRequest,
+	req DeprecatedUpdateMysqlDatabaseDescriptionRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -799,9 +834,11 @@ func (c *clientImpl) UpdateMysqlDatabaseDescription(
 }
 
 // Update a MySQLUser's password.
-func (c *clientImpl) UpdateMysqlUserPassword(
+//
+// Deprecated by `PATCH /v2/mysql-users/{mysqlUserId}`.
+func (c *clientImpl) DeprecatedUpdateMysqlUserPassword(
 	ctx context.Context,
-	req UpdateMysqlUserPasswordRequest,
+	req DeprecatedUpdateMysqlUserPasswordRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -823,9 +860,11 @@ func (c *clientImpl) UpdateMysqlUserPassword(
 }
 
 // Update a RedisDatabase's configuration.
-func (c *clientImpl) UpdateRedisDatabaseConfiguration(
+//
+// Deprecated by `PATCH /v2/redis-databases/{redisDatabaseId}`.
+func (c *clientImpl) DeprecatedUpdateRedisDatabaseConfiguration(
 	ctx context.Context,
-	req UpdateRedisDatabaseConfigurationRequest,
+	req DeprecatedUpdateRedisDatabaseConfigurationRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -847,9 +886,11 @@ func (c *clientImpl) UpdateRedisDatabaseConfiguration(
 }
 
 // Update a RedisDatabase's description.
-func (c *clientImpl) UpdateRedisDatabaseDescription(
+//
+// Deprecated by `PATCH /v2/redis-databases/{redisDatabaseId}`.
+func (c *clientImpl) DeprecatedUpdateRedisDatabaseDescription(
 	ctx context.Context,
-	req UpdateRedisDatabaseDescriptionRequest,
+	req DeprecatedUpdateRedisDatabaseDescriptionRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

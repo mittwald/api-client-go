@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("UpdateRedisDatabaseDescriptionRequestBody", func() {
+var _ = Describe("DeprecatedReplaceMysqlUserRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"description\":\"string\"}")
+			exampleJSON := []byte("{\"accessIpMask\":\"string\",\"accessLevel\":\"full\",\"description\":\"string\",\"externalAccess\":true}")
 
-			sut := databaseclientv2.UpdateRedisDatabaseDescriptionRequestBody{}
+			sut := databaseclientv2.DeprecatedReplaceMysqlUserRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

@@ -12,14 +12,14 @@ import (
 // This data type was generated from the following JSON schema:
 // properties:
 //    "configuration": {"$ref": "#/components/schemas/de.mittwald.v1.database.RedisDatabaseConfiguration"}
-// description: UpdateRedisDatabaseConfigurationRequestBody models the JSON body of a 'database-update-redis-database-configuration' request
+// description: DeprecatedUpdateRedisDatabaseConfigurationRequestBody models the JSON body of a 'deprecated-database-update-redis-database-configuration' request
 
-// UpdateRedisDatabaseConfigurationRequestBody models the JSON body of a 'database-update-redis-database-configuration' request
-type UpdateRedisDatabaseConfigurationRequestBody struct {
+// DeprecatedUpdateRedisDatabaseConfigurationRequestBody models the JSON body of a 'deprecated-database-update-redis-database-configuration' request
+type DeprecatedUpdateRedisDatabaseConfigurationRequestBody struct {
 	Configuration *databasev2.RedisDatabaseConfiguration `json:"configuration,omitempty"`
 }
 
-func (o *UpdateRedisDatabaseConfigurationRequestBody) Validate() error {
+func (o *DeprecatedUpdateRedisDatabaseConfigurationRequestBody) Validate() error {
 	if err := func() error {
 		if o.Configuration == nil {
 			return nil

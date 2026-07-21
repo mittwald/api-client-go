@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("UpdateMysqlUserPasswordRequestBody", func() {
+var _ = Describe("DeprecatedUpdateMysqlDatabaseDescriptionRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"password\":\"string\"}")
+			exampleJSON := []byte("{\"description\":\"string\"}")
 
-			sut := databaseclientv2.UpdateMysqlUserPasswordRequestBody{}
+			sut := databaseclientv2.DeprecatedUpdateMysqlDatabaseDescriptionRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("UpdateMysqlDatabaseDefaultCharsetRequestBody", func() {
+var _ = Describe("DeprecatedUpdateRedisDatabaseConfigurationRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"characterSettings\":{\"characterSet\":\"utf8mb4\",\"collation\":\"utf8mb4_general_ci\"}}")
+			exampleJSON := []byte("{\"configuration\":{\"additionalFlags\":[],\"maxMemory\":\"64Mi\",\"maxMemoryPolicy\":\"allkeys-lru\",\"persistent\":true}}")
 
-			sut := databaseclientv2.UpdateMysqlDatabaseDefaultCharsetRequestBody{}
+			sut := databaseclientv2.DeprecatedUpdateRedisDatabaseConfigurationRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

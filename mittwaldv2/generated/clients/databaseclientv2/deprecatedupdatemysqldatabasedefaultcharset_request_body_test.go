@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("UpdateMysqlUserRequestBody", func() {
+var _ = Describe("DeprecatedUpdateMysqlDatabaseDefaultCharsetRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"accessIpMask\":\"string\",\"accessLevel\":\"full\",\"description\":\"string\",\"externalAccess\":true,\"password\":\"string\"}")
+			exampleJSON := []byte("{\"characterSettings\":{\"characterSet\":\"utf8mb4\",\"collation\":\"utf8mb4_general_ci\"}}")
 
-			sut := databaseclientv2.UpdateMysqlUserRequestBody{}
+			sut := databaseclientv2.DeprecatedUpdateMysqlDatabaseDefaultCharsetRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

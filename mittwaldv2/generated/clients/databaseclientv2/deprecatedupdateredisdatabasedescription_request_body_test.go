@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("UpdateRedisDatabaseConfigurationRequestBody", func() {
+var _ = Describe("DeprecatedUpdateRedisDatabaseDescriptionRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"configuration\":{\"additionalFlags\":[],\"maxMemory\":\"64Mi\",\"maxMemoryPolicy\":\"allkeys-lru\",\"persistent\":true}}")
+			exampleJSON := []byte("{\"description\":\"string\"}")
 
-			sut := databaseclientv2.UpdateRedisDatabaseConfigurationRequestBody{}
+			sut := databaseclientv2.DeprecatedUpdateRedisDatabaseDescriptionRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

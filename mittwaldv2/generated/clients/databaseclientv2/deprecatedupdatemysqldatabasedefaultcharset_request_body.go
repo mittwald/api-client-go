@@ -14,14 +14,14 @@ import (
 //    "characterSettings": {"$ref": "#/components/schemas/de.mittwald.v1.database.characterSettings"}
 // required:
 //    - "characterSettings"
-// description: UpdateMysqlDatabaseDefaultCharsetRequestBody models the JSON body of a 'database-update-mysql-database-default-charset' request
+// description: DeprecatedUpdateMysqlDatabaseDefaultCharsetRequestBody models the JSON body of a 'deprecated-database-update-mysql-database-default-charset' request
 
-// UpdateMysqlDatabaseDefaultCharsetRequestBody models the JSON body of a 'database-update-mysql-database-default-charset' request
-type UpdateMysqlDatabaseDefaultCharsetRequestBody struct {
+// DeprecatedUpdateMysqlDatabaseDefaultCharsetRequestBody models the JSON body of a 'deprecated-database-update-mysql-database-default-charset' request
+type DeprecatedUpdateMysqlDatabaseDefaultCharsetRequestBody struct {
 	CharacterSettings databasev2.CharacterSettings `json:"characterSettings"`
 }
 
-func (o *UpdateMysqlDatabaseDefaultCharsetRequestBody) Validate() error {
+func (o *DeprecatedUpdateMysqlDatabaseDefaultCharsetRequestBody) Validate() error {
 	if err := o.CharacterSettings.Validate(); err != nil {
 		return fmt.Errorf("invalid property characterSettings: %w", err)
 	}
