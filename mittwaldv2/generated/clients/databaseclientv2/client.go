@@ -69,6 +69,11 @@ type Client interface {
 		req GetMysqlUserRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*databasev2.MySqlUser, *http.Response, error)
+	DeprecatedReplaceMysqlUser(
+		ctx context.Context,
+		req DeprecatedReplaceMysqlUserRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	DeleteMysqlUser(
 		ctx context.Context,
 		req DeleteMysqlUserRequest,
@@ -124,6 +129,31 @@ type Client interface {
 		req ListRedisVersionsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]databasev2.RedisVersion, *http.Response, error)
+	DeprecatedUpdateMysqlDatabaseDefaultCharset(
+		ctx context.Context,
+		req DeprecatedUpdateMysqlDatabaseDefaultCharsetRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	DeprecatedUpdateMysqlDatabaseDescription(
+		ctx context.Context,
+		req DeprecatedUpdateMysqlDatabaseDescriptionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	DeprecatedUpdateMysqlUserPassword(
+		ctx context.Context,
+		req DeprecatedUpdateMysqlUserPasswordRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	DeprecatedUpdateRedisDatabaseConfiguration(
+		ctx context.Context,
+		req DeprecatedUpdateRedisDatabaseConfigurationRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	DeprecatedUpdateRedisDatabaseDescription(
+		ctx context.Context,
+		req DeprecatedUpdateRedisDatabaseDescriptionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -441,6 +471,32 @@ func (c *clientImpl) GetMysqlUser(
 	return &response, httpRes, nil
 }
 
+// Update a MySQLUser.
+//
+// Deprecated by `PATCH /v2/mysql-users/{mysqlUserId}`.
+func (c *clientImpl) DeprecatedReplaceMysqlUser(
+	ctx context.Context,
+	req DeprecatedReplaceMysqlUserRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Delete a MySQLUser.
 func (c *clientImpl) DeleteMysqlUser(
 	ctx context.Context,
@@ -723,4 +779,134 @@ func (c *clientImpl) ListRedisVersions(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Update a MySQLDatabase's default character settings.
+//
+// Deprecated by `PATCH /v2/mysql-databases/{mysqlDatabaseId}`.
+func (c *clientImpl) DeprecatedUpdateMysqlDatabaseDefaultCharset(
+	ctx context.Context,
+	req DeprecatedUpdateMysqlDatabaseDefaultCharsetRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a MySQLDatabase's description.
+//
+// Deprecated by `PATCH /v2/mysql-databases/{mysqlDatabaseId}`.
+func (c *clientImpl) DeprecatedUpdateMysqlDatabaseDescription(
+	ctx context.Context,
+	req DeprecatedUpdateMysqlDatabaseDescriptionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a MySQLUser's password.
+//
+// Deprecated by `PATCH /v2/mysql-users/{mysqlUserId}`.
+func (c *clientImpl) DeprecatedUpdateMysqlUserPassword(
+	ctx context.Context,
+	req DeprecatedUpdateMysqlUserPasswordRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a RedisDatabase's configuration.
+//
+// Deprecated by `PATCH /v2/redis-databases/{redisDatabaseId}`.
+func (c *clientImpl) DeprecatedUpdateRedisDatabaseConfiguration(
+	ctx context.Context,
+	req DeprecatedUpdateRedisDatabaseConfigurationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a RedisDatabase's description.
+//
+// Deprecated by `PATCH /v2/redis-databases/{redisDatabaseId}`.
+func (c *clientImpl) DeprecatedUpdateRedisDatabaseDescription(
+	ctx context.Context,
+	req DeprecatedUpdateRedisDatabaseDescriptionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
