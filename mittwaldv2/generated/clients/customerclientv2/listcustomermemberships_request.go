@@ -21,11 +21,11 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/customer/customer-list-customer-memberships
 type ListCustomerMembershipsRequest struct {
+	HasExpiry *bool
+	Role      *membershipv2.CustomerRoles
 	Limit     *int64
 	Skip      *int64
 	Page      *int64
-	HasExpiry *bool
-	Role      *membershipv2.CustomerRoles
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -63,6 +63,12 @@ func (r *ListCustomerMembershipsRequest) url() string {
 
 func (r *ListCustomerMembershipsRequest) query() url.Values {
 	q := make(url.Values)
+	if r.HasExpiry != nil {
+		q.Set("hasExpiry", strconv.FormatBool(*r.HasExpiry))
+	}
+	if r.Role != nil {
+		q.Set("role", string(*r.Role))
+	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
 	}
@@ -71,12 +77,6 @@ func (r *ListCustomerMembershipsRequest) query() url.Values {
 	}
 	if r.Page != nil {
 		q.Set("page", fmt.Sprintf("%d", *r.Page))
-	}
-	if r.HasExpiry != nil {
-		q.Set("hasExpiry", strconv.FormatBool(*r.HasExpiry))
-	}
-	if r.Role != nil {
-		q.Set("role", string(*r.Role))
 	}
 	return q
 }

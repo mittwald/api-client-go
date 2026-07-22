@@ -23,14 +23,14 @@ import (
 // https://developer.mittwald.de/docs/v2/reference/cronjob/cronjob-list-executions
 type ListExecutionsRequest struct {
 	CronjobID       string
-	Limit           *int64
-	Skip            *int64
-	Page            *int64
 	Since           *time.Time
 	Until           *time.Time
 	Status          *string
 	TriggeredByUser *bool
 	SortOrder       *cronjobv2.CronjobExecutionSortOrder
+	Limit           *int64
+	Skip            *int64
+	Page            *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -68,15 +68,6 @@ func (r *ListExecutionsRequest) url() string {
 
 func (r *ListExecutionsRequest) query() url.Values {
 	q := make(url.Values)
-	if r.Limit != nil {
-		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
-	}
-	if r.Skip != nil {
-		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
-	}
-	if r.Page != nil {
-		q.Set("page", fmt.Sprintf("%d", *r.Page))
-	}
 	if r.Since != nil {
 		q.Set("since", r.Since.Format(time.RFC3339))
 	}
@@ -91,6 +82,15 @@ func (r *ListExecutionsRequest) query() url.Values {
 	}
 	if r.SortOrder != nil {
 		q.Set("sortOrder", string(*r.SortOrder))
+	}
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
 	return q
 }
