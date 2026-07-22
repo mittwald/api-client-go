@@ -92,6 +92,11 @@ type Client interface {
 		req DeleteProjectRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	UpdateProject(
+		ctx context.Context,
+		req UpdateProjectRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	RequestServerAvatarUpload(
 		ctx context.Context,
 		req RequestServerAvatarUploadRequest,
@@ -117,6 +122,11 @@ type Client interface {
 		req GetServerRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*projectv2.Server, *http.Response, error)
+	UpdateServer(
+		ctx context.Context,
+		req UpdateServerRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	ListCustomerProjects(
 		ctx context.Context,
 		req ListCustomerProjectsRequest,
@@ -172,11 +182,21 @@ type Client interface {
 		req StoragespaceGetProjectStatisticsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*storagespacev2.Statistics, *http.Response, error)
+	StoragespaceUpdateProjectStatistics(
+		ctx context.Context,
+		req StoragespaceUpdateProjectStatisticsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	StoragespaceGetServerStatistics(
 		ctx context.Context,
 		req StoragespaceGetServerStatisticsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*storagespacev2.Statistics, *http.Response, error)
+	StoragespaceUpdateServerStatistics(
+		ctx context.Context,
+		req StoragespaceUpdateServerStatisticsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	StoragespaceReplaceProjectNotificationThreshold(
 		ctx context.Context,
 		req StoragespaceReplaceProjectNotificationThresholdRequest,
@@ -586,6 +606,30 @@ func (c *clientImpl) DeleteProject(
 	return httpRes, nil
 }
 
+// Update a Project.
+func (c *clientImpl) UpdateProject(
+	ctx context.Context,
+	req UpdateProjectRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Request a Server avatar upload.
 func (c *clientImpl) RequestServerAvatarUpload(
 	ctx context.Context,
@@ -720,6 +764,30 @@ func (c *clientImpl) GetServer(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Update a Server.
+func (c *clientImpl) UpdateServer(
+	ctx context.Context,
+	req UpdateServerRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // List Projects belonging to a Customer.
@@ -1018,6 +1086,30 @@ func (c *clientImpl) StoragespaceGetProjectStatistics(
 	return &response, httpRes, nil
 }
 
+// Update a Project's storage space statistics.
+func (c *clientImpl) StoragespaceUpdateProjectStatistics(
+	ctx context.Context,
+	req StoragespaceUpdateProjectStatisticsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Get storage space Statistics belonging to a Server.
 func (c *clientImpl) StoragespaceGetServerStatistics(
 	ctx context.Context,
@@ -1044,6 +1136,30 @@ func (c *clientImpl) StoragespaceGetServerStatistics(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Update a Server's storage space statistics.
+func (c *clientImpl) StoragespaceUpdateServerStatistics(
+	ctx context.Context,
+	req StoragespaceUpdateServerStatisticsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // Update a Project's storage space notification threshold.

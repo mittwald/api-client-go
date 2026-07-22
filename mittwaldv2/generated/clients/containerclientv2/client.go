@@ -189,6 +189,11 @@ type Client interface {
 		req DeprecatedValidateRegistryCredentialsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedValidateRegistryCredentialsResponse, *http.Response, error)
+	AddTemplateComponent(
+		ctx context.Context,
+		req AddTemplateComponentRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1138,4 +1143,28 @@ func (c *clientImpl) DeprecatedValidateRegistryCredentials(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Add a template component to a Stack.
+func (c *clientImpl) AddTemplateComponent(
+	ctx context.Context,
+	req AddTemplateComponentRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }

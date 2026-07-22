@@ -69,6 +69,11 @@ type Client interface {
 		req DeleteProjectBackupRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	UpdateProjectBackup(
+		ctx context.Context,
+		req UpdateProjectBackupRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	GetProjectBackupDatabaseDumps(
 		ctx context.Context,
 		req GetProjectBackupDatabaseDumpsRequest,
@@ -376,6 +381,30 @@ func (c *clientImpl) GetProjectBackup(
 func (c *clientImpl) DeleteProjectBackup(
 	ctx context.Context,
 	req DeleteProjectBackupRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a ProjectBackup.
+func (c *clientImpl) UpdateProjectBackup(
+	ctx context.Context,
+	req UpdateProjectBackupRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
