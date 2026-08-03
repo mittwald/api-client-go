@@ -48,6 +48,7 @@ import (
 //                - "tokenUsed"
 // required:
 //    - "customerId"
+//    - "name"
 //    - "keys"
 //    - "tokens"
 //    - "rateLimit"
@@ -59,7 +60,7 @@ type PlanOptions struct {
 	DeletedAt                  *time.Time                 `json:"deletedAt,omitempty"`
 	Keys                       PlanUsage                  `json:"keys"`
 	ModelTermsApprovalRequired bool                       `json:"modelTermsApprovalRequired"`
-	Name                       *string                    `json:"name,omitempty"`
+	Name                       string                     `json:"name"`
 	NextTokenReset             time.Time                  `json:"nextTokenReset"`
 	PlanId                     *string                    `json:"planId,omitempty"`
 	RateLimit                  RateLimit                  `json:"rateLimit"`

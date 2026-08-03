@@ -13,6 +13,13 @@ import "fmt"
 //        properties:
 //            "cname":
 //                type: "string"
+//            "ttl":
+//                oneOf:
+//                    - type: "integer"
+//                    - type: "string"
+//                      enum:
+//                        - "auto"
+//                nullable: true
 //        required:
 //            - "cname"
 //    "before":
@@ -20,6 +27,13 @@ import "fmt"
 //        properties:
 //            "cname":
 //                type: "string"
+//            "ttl":
+//                oneOf:
+//                    - type: "integer"
+//                    - type: "string"
+//                      enum:
+//                        - "auto"
+//                nullable: true
 //        required:
 //            - "cname"
 

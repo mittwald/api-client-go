@@ -16,10 +16,20 @@ import "fmt"
 //                properties:
 //                    "mx":
 //                        type: "string"
+//                        enum:
+//                            - "managed"
 //                required:
 //                    - "mx"
 //            "before":
 //                type: "object"
+//                properties:
+//                    "mx":
+//                        type: "array"
+//                        items:
+//                            type: "object"
+//                        nullable: true
+//                required:
+//                    - "mx"
 //    "name":
 //        type: "string"
 //        enum:

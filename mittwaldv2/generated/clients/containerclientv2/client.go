@@ -14,6 +14,11 @@ import (
 )
 
 type Client interface {
+	AddTemplateComponent(
+		ctx context.Context,
+		req AddTemplateComponentRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	CallPullImageWebhookForService(
 		ctx context.Context,
 		req CallPullImageWebhookForServiceRequest,
@@ -159,11 +164,6 @@ type Client interface {
 		req RotatePullImageWebhookForServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.ServicePullImageWebhookResponse, *http.Response, error)
-	SetStackUpdateSchedule(
-		ctx context.Context,
-		req SetStackUpdateScheduleRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	StartService(
 		ctx context.Context,
 		req StartServiceRequest,
@@ -179,6 +179,11 @@ type Client interface {
 		req DeprecatedGetTemplateIconRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	DeprecatedSetStackUpdateSchedule(
+		ctx context.Context,
+		req DeprecatedSetStackUpdateScheduleRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	DeprecatedValidateContainerRegistryUri(
 		ctx context.Context,
 		req DeprecatedValidateContainerRegistryUriRequest,
@@ -189,11 +194,6 @@ type Client interface {
 		req DeprecatedValidateRegistryCredentialsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedValidateRegistryCredentialsResponse, *http.Response, error)
-	AddTemplateComponent(
-		ctx context.Context,
-		req AddTemplateComponentRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -201,6 +201,30 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Add a template component to a Stack.
+func (c *clientImpl) AddTemplateComponent(
+	ctx context.Context,
+	req AddTemplateComponentRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // Call pull-image webhook
@@ -370,6 +394,8 @@ func (c *clientImpl) GetStack(
 }
 
 // Declaratively create, update or delete Services or Volumes belonging to a Stack.
+//
+// Note that this endpoint only declares the `services` and `volumes` of a Stack. Scalar Stack properties like `description` and `updateSchedule` are not part of this declaration and remain unchanged; use `PATCH /v2/stacks/{stackId}` to manage them. Including them in the declarative `PUT` (omitting a property then resets it) is planned for the next API version (v3).
 func (c *clientImpl) DeclareStack(
 	ctx context.Context,
 	req DeclareStackRequest,
@@ -987,30 +1013,6 @@ func (c *clientImpl) RotatePullImageWebhookForService(
 	return &response, httpRes, nil
 }
 
-// Set an update schedule for a Stack.
-func (c *clientImpl) SetStackUpdateSchedule(
-	ctx context.Context,
-	req SetStackUpdateScheduleRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Start a stopped Service.
 func (c *clientImpl) StartService(
 	ctx context.Context,
@@ -1065,6 +1067,32 @@ func (c *clientImpl) StopService(
 func (c *clientImpl) DeprecatedGetTemplateIcon(
 	ctx context.Context,
 	req DeprecatedGetTemplateIconRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Set an update schedule for a Stack.
+//
+// Deprecated by `PATCH /v2/stacks/{stackId}`.
+func (c *clientImpl) DeprecatedSetStackUpdateSchedule(
+	ctx context.Context,
+	req DeprecatedSetStackUpdateScheduleRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -1143,28 +1171,4 @@ func (c *clientImpl) DeprecatedValidateRegistryCredentials(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
-}
-
-// Add a template component to a Stack.
-func (c *clientImpl) AddTemplateComponent(
-	ctx context.Context,
-	req AddTemplateComponentRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
 }

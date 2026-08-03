@@ -15,6 +15,15 @@ import "fmt"
 //    "label": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
 //    "name":
 //        type: "string"
+//    "positionMeta":
+//        type: "object"
+//        properties:
+//            "index":
+//                type: "integer"
+//            "section":
+//                type: "string"
+//            "step":
+//                type: "string"
 //    "required":
 //        type: "boolean"
 //    "validationSchema":
@@ -24,12 +33,13 @@ import "fmt"
 //    - "required"
 
 type TemplateUserInputsItem struct {
-	DataSource       *string                   `json:"dataSource,omitempty"`
-	DefaultValue     *string                   `json:"defaultValue,omitempty"`
-	Label            *TemplateTranslatedString `json:"label,omitempty"`
-	Name             string                    `json:"name"`
-	Required         bool                      `json:"required"`
-	ValidationSchema *string                   `json:"validationSchema,omitempty"`
+	DataSource       *string                             `json:"dataSource,omitempty"`
+	DefaultValue     *string                             `json:"defaultValue,omitempty"`
+	Label            *TemplateTranslatedString           `json:"label,omitempty"`
+	Name             string                              `json:"name"`
+	PositionMeta     *TemplateUserInputsItemPositionMeta `json:"positionMeta,omitempty"`
+	Required         bool                                `json:"required"`
+	ValidationSchema *string                             `json:"validationSchema,omitempty"`
 }
 
 func (o *TemplateUserInputsItem) Validate() error {
@@ -40,6 +50,14 @@ func (o *TemplateUserInputsItem) Validate() error {
 		return o.Label.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property label: %w", err)
+	}
+	if err := func() error {
+		if o.PositionMeta == nil {
+			return nil
+		}
+		return o.PositionMeta.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property positionMeta: %w", err)
 	}
 	return nil
 }

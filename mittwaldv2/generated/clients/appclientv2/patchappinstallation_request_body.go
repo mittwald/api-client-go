@@ -17,6 +17,10 @@ import (
 //        format: "uuid"
 //    "customDocumentRoot":
 //        type: "string"
+//    "databases":
+//        type: "object"
+//        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.app.PatchLinkedDatabase"}
+//        description: "Desired changes to the databases linked to this AppInstallation, keyed by\ndatabase ID. Databases omitted from this object remain unchanged.\n"
 //    "description":
 //        type: "string"
 //    "systemSoftware":
@@ -32,6 +36,7 @@ import (
 type PatchAppinstallationRequestBody struct {
 	AppVersionId       *string                                `json:"appVersionId,omitempty"`
 	CustomDocumentRoot *string                                `json:"customDocumentRoot,omitempty"`
+	Databases          map[string]appv2.PatchLinkedDatabase   `json:"databases,omitempty"`
 	Description        *string                                `json:"description,omitempty"`
 	SystemSoftware     map[string]appv2.DesiredSystemSoftware `json:"systemSoftware,omitempty"`
 	UpdatePolicy       *appv2.AppUpdatePolicy                 `json:"updatePolicy,omitempty"`

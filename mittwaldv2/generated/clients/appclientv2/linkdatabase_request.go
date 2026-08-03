@@ -17,6 +17,8 @@ import (
 //
 // Create linkage between an AppInstallation and a MySQLDatabase.
 //
+// Deprecated by `PATCH /v2/app-installations/{appInstallationId}`.
+//
 // [1]: https://developer.mittwald.de/docs/v2/reference/app/app-link-database
 type LinkDatabaseRequest struct {
 	Body              LinkDatabaseRequestBody

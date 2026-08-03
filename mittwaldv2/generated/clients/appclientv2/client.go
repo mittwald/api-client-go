@@ -104,11 +104,6 @@ type Client interface {
 		req ListUpdateCandidatesForAppversionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]appv2.AppVersion, *http.Response, error)
-	ReplaceDatabase(
-		ctx context.Context,
-		req ReplaceDatabaseRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	RequestAppinstallationCopy(
 		ctx context.Context,
 		req RequestAppinstallationCopyRequest,
@@ -137,6 +132,11 @@ type Client interface {
 	DeprecatedLinkDatabase(
 		ctx context.Context,
 		req DeprecatedLinkDatabaseRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	DeprecatedReplaceDatabase(
+		ctx context.Context,
+		req DeprecatedReplaceDatabaseRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -393,6 +393,8 @@ func (c *clientImpl) GetSystemsoftwareversion(
 }
 
 // Create linkage between an AppInstallation and a MySQLDatabase.
+//
+// Deprecated by `PATCH /v2/app-installations/{appInstallationId}`.
 func (c *clientImpl) LinkDatabase(
 	ctx context.Context,
 	req LinkDatabaseRequest,
@@ -640,30 +642,6 @@ func (c *clientImpl) ListUpdateCandidatesForAppversion(
 	return &response, httpRes, nil
 }
 
-// Replace a MySQL Database with another MySQL Database.
-func (c *clientImpl) ReplaceDatabase(
-	ctx context.Context,
-	req ReplaceDatabaseRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Request a copy of an AppInstallation.
 func (c *clientImpl) RequestAppinstallationCopy(
 	ctx context.Context,
@@ -721,6 +699,8 @@ func (c *clientImpl) RetrieveStatus(
 }
 
 // Create linkage between an AppInstallation and DatabaseUsers.
+//
+// Deprecated by `PATCH /v2/app-installations/{appInstallationId}`.
 func (c *clientImpl) SetDatabaseUsers(
 	ctx context.Context,
 	req SetDatabaseUsersRequest,
@@ -800,6 +780,32 @@ func (c *clientImpl) DeprecatedInstallationExecuteAction(
 func (c *clientImpl) DeprecatedLinkDatabase(
 	ctx context.Context,
 	req DeprecatedLinkDatabaseRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Replace a MySQL Database with another MySQL Database.
+//
+// Deprecated by `PATCH /v2/app-installations/{appInstallationId}`.
+func (c *clientImpl) DeprecatedReplaceDatabase(
+	ctx context.Context,
+	req DeprecatedReplaceDatabaseRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

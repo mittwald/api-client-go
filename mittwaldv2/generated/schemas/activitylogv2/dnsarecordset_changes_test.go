@@ -14,7 +14,7 @@ import (
 var _ = Describe("DnsARecordSetChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"after\":{\"aRecords\":[\"string\"],\"aaaaRecords\":[\"string\"]},\"before\":{\"aRecords\":[\"string\"],\"aaaaRecords\":[\"string\"]}}")
+			exampleJSON := []byte("{\"after\":{\"aRecords\":[\"string\"],\"aaaaRecords\":[\"string\"],\"ttl\":42},\"before\":{\"aRecords\":[\"string\"],\"aaaaRecords\":[\"string\"],\"ttl\":42}}")
 
 			sut := activitylogv2.DnsARecordSetChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

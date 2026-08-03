@@ -28,12 +28,15 @@ import (
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseCreated"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseDeleted"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseDescriptionSet"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseVersionSet"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseMysqlUserCreated"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseMysqlUserUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseMysqlUserPasswordSet"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseMysqlUserDeleted"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationRequested"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationCopyRequested"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationDescriptionSet"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationFailed"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationDeleted"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationDatabaseLinked"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationDatabaseUnlinked"}

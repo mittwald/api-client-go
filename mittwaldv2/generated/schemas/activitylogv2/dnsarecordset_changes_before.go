@@ -16,10 +16,18 @@ import "fmt"
 //        type: "array"
 //        items:
 //            type: "string"
+//    "ttl":
+//        oneOf:
+//            - type: "integer"
+//            - type: "string"
+//              enum:
+//                - "auto"
+//        nullable: true
 
 type DnsARecordSetChangesBefore struct {
-	ARecords    []string `json:"aRecords,omitempty"`
-	AaaaRecords []string `json:"aaaaRecords,omitempty"`
+	ARecords    []string                       `json:"aRecords,omitempty"`
+	AaaaRecords []string                       `json:"aaaaRecords,omitempty"`
+	Ttl         *DnsARecordSetChangesBeforeTtl `json:"ttl,omitempty"`
 }
 
 func (o *DnsARecordSetChangesBefore) Validate() error {
@@ -38,6 +46,14 @@ func (o *DnsARecordSetChangesBefore) Validate() error {
 		return nil
 	}(); err != nil {
 		return fmt.Errorf("invalid property aaaaRecords: %w", err)
+	}
+	if err := func() error {
+		if o.Ttl == nil {
+			return nil
+		}
+		return o.Ttl.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property ttl: %w", err)
 	}
 	return nil
 }

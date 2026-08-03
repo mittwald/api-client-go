@@ -84,11 +84,6 @@ type Client interface {
 		req GetProjectBackupDirectoriesRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*backupv2.ProjectBackupPath, *http.Response, error)
-	ReplaceProjectBackupExpirationTime(
-		ctx context.Context,
-		req ReplaceProjectBackupExpirationTimeRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	RequestProjectBackupRestorePathDeprecated(
 		ctx context.Context,
 		req RequestProjectBackupRestorePathDeprecatedRequest,
@@ -99,9 +94,14 @@ type Client interface {
 		req RequestProjectBackupRestoreRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	UpdateProjectBackupDescription(
+	DeprecatedReplaceProjectBackupExpirationTime(
 		ctx context.Context,
-		req UpdateProjectBackupDescriptionRequest,
+		req DeprecatedReplaceProjectBackupExpirationTimeRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	DeprecatedUpdateProjectBackupDescription(
+		ctx context.Context,
+		req DeprecatedUpdateProjectBackupDescriptionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -481,30 +481,6 @@ func (c *clientImpl) GetProjectBackupDirectories(
 	return &response, httpRes, nil
 }
 
-// Update a Backup's expiration time.
-func (c *clientImpl) ReplaceProjectBackupExpirationTime(
-	ctx context.Context,
-	req ReplaceProjectBackupExpirationTimeRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Restore a ProjectBackup's path.
 //
 // **Deprecated**: Use POST /v2/project-backups/{projectBackupId}/restore instead.
@@ -556,10 +532,38 @@ func (c *clientImpl) RequestProjectBackupRestore(
 	return httpRes, nil
 }
 
-// Change the description of a ProjectBackup.
-func (c *clientImpl) UpdateProjectBackupDescription(
+// Update a Backup's expiration time.
+//
+// Deprecated by `PATCH /v2/project-backups/{projectBackupId}`.
+func (c *clientImpl) DeprecatedReplaceProjectBackupExpirationTime(
 	ctx context.Context,
-	req UpdateProjectBackupDescriptionRequest,
+	req DeprecatedReplaceProjectBackupExpirationTimeRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Change the description of a ProjectBackup.
+//
+// Deprecated by `PATCH /v2/project-backups/{projectBackupId}`.
+func (c *clientImpl) DeprecatedUpdateProjectBackupDescription(
+	ctx context.Context,
+	req DeprecatedUpdateProjectBackupDescriptionRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

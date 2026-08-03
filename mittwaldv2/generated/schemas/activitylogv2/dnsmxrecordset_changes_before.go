@@ -15,11 +15,19 @@ import (
 //        type: "array"
 //        items:
 //            type: "object"
+//    "ttl":
+//        oneOf:
+//            - type: "integer"
+//            - type: "string"
+//              enum:
+//                - "auto"
+//        nullable: true
 // required:
 //    - "mx"
 
 type DnsMxRecordSetChangesBefore struct {
-	Mx []DnsMxRecordSetChangesBeforeMxItem `json:"mx"`
+	Mx  []DnsMxRecordSetChangesBeforeMxItem `json:"mx"`
+	Ttl *DnsMxRecordSetChangesBeforeTtl     `json:"ttl,omitempty"`
 }
 
 func (o *DnsMxRecordSetChangesBefore) Validate() error {
@@ -35,6 +43,14 @@ func (o *DnsMxRecordSetChangesBefore) Validate() error {
 		return nil
 	}(); err != nil {
 		return fmt.Errorf("invalid property mx: %w", err)
+	}
+	if err := func() error {
+		if o.Ttl == nil {
+			return nil
+		}
+		return o.Ttl.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property ttl: %w", err)
 	}
 	return nil
 }

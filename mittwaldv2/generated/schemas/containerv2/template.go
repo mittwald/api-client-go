@@ -117,6 +117,15 @@ import (
 //                "label": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
 //                "name":
 //                    type: "string"
+//                "positionMeta":
+//                    type: "object"
+//                    properties:
+//                        "index":
+//                            type: "integer"
+//                        "section":
+//                            type: "string"
+//                        "step":
+//                            type: "string"
 //                "required":
 //                    type: "boolean"
 //                "validationSchema":

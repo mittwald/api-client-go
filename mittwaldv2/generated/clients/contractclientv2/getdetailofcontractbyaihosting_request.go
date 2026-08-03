@@ -19,7 +19,8 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/contract/contract-get-detail-of-contract-by-ai-hosting
 type GetDetailOfContractByAIHostingRequest struct {
-	CustomerID string
+	CustomerID  string
+	AIHostingID string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -49,7 +50,7 @@ func (r *GetDetailOfContractByAIHostingRequest) body() (io.Reader, string, error
 
 func (r *GetDetailOfContractByAIHostingRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/customers/%s/ai-hosting/contract", url.PathEscape(r.CustomerID)),
+		Path: fmt.Sprintf("/v2/customers/%s/ai-hostings/%s/contract", url.PathEscape(r.CustomerID), url.PathEscape(r.AIHostingID)),
 	}
 	return u.String()
 }

@@ -18,6 +18,13 @@ import "fmt"
 //                        type: "array"
 //                        items:
 //                            type: "object"
+//                    "ttl":
+//                        oneOf:
+//                            - type: "integer"
+//                            - type: "string"
+//                              enum:
+//                                - "auto"
+//                        nullable: true
 //                required:
 //                    - "mx"
 //            "before":
@@ -27,6 +34,13 @@ import "fmt"
 //                        type: "array"
 //                        items:
 //                            type: "object"
+//                    "ttl":
+//                        oneOf:
+//                            - type: "integer"
+//                            - type: "string"
+//                              enum:
+//                                - "auto"
+//                        nullable: true
 //                required:
 //                    - "mx"
 //    "name":

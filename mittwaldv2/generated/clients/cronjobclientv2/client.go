@@ -59,14 +59,14 @@ type Client interface {
 		req GetExecutionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*cronjobv2.CronjobExecution, *http.Response, error)
-	ReplaceCronjobAppInstallationID(
+	DeprecatedReplaceCronjobAppInstallationID(
 		ctx context.Context,
-		req ReplaceCronjobAppInstallationIDRequest,
+		req DeprecatedReplaceCronjobAppInstallationIDRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	UpdateCronjobAppIDDeprecated(
+	DeprecatedUpdateCronjobAppID(
 		ctx context.Context,
-		req UpdateCronjobAppIDDeprecatedRequest,
+		req DeprecatedUpdateCronjobAppIDRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -323,9 +323,11 @@ func (c *clientImpl) GetExecution(
 }
 
 // Update a Cronjob's app installation id.
-func (c *clientImpl) ReplaceCronjobAppInstallationID(
+//
+// Deprecated by `PATCH /v2/cronjobs/{cronjobId}`.
+func (c *clientImpl) DeprecatedReplaceCronjobAppInstallationID(
 	ctx context.Context,
-	req ReplaceCronjobAppInstallationIDRequest,
+	req DeprecatedReplaceCronjobAppInstallationIDRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -349,9 +351,9 @@ func (c *clientImpl) ReplaceCronjobAppInstallationID(
 // Update a Cronjob's app installation id.
 //
 // Deprecated by PUT /v2/cronjobs/{cronjobId}/app-installation-id.
-func (c *clientImpl) UpdateCronjobAppIDDeprecated(
+func (c *clientImpl) DeprecatedUpdateCronjobAppID(
 	ctx context.Context,
-	req UpdateCronjobAppIDDeprecatedRequest,
+	req DeprecatedUpdateCronjobAppIDRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

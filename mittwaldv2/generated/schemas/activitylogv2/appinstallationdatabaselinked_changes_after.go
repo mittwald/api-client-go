@@ -8,18 +8,27 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "database":
-//        type: "object"
+//    "name":
+//        type: "string"
+//    "purpose":
+//        type: "string"
+//        enum:
+//            - "unspecified"
+//            - "primary"
+//            - "cache"
+//            - "custom"
 // required:
-//    - "database"
+//    - "name"
+//    - "purpose"
 
 type AppInstallationDatabaseLinkedChangesAfter struct {
-	Database AppInstallationDatabaseLinkedChangesAfterDatabase `json:"database"`
+	Name    string                                           `json:"name"`
+	Purpose AppInstallationDatabaseLinkedChangesAfterPurpose `json:"purpose"`
 }
 
 func (o *AppInstallationDatabaseLinkedChangesAfter) Validate() error {
-	if err := o.Database.Validate(); err != nil {
-		return fmt.Errorf("invalid property database: %w", err)
+	if err := o.Purpose.Validate(); err != nil {
+		return fmt.Errorf("invalid property purpose: %w", err)
 	}
 	return nil
 }
