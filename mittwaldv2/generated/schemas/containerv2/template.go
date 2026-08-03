@@ -100,6 +100,11 @@ import (
 //    "supportLink":
 //        type: "string"
 //    "tagline": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
+//    "type":
+//        type: "string"
+//        enum:
+//            - "component"
+//            - "standalone"
 //    "userInputs":
 //        type: "array"
 //        items:
@@ -112,6 +117,15 @@ import (
 //                "label": {"$ref": "#/components/schemas/de.mittwald.v1.container.TemplateTranslatedString"}
 //                "name":
 //                    type: "string"
+//                "positionMeta":
+//                    type: "object"
+//                    properties:
+//                        "index":
+//                            type: "integer"
+//                        "section":
+//                            type: "string"
+//                        "step":
+//                            type: "string"
 //                "required":
 //                    type: "boolean"
 //                "validationSchema":
@@ -126,6 +140,7 @@ import (
 //        type: "string"
 // required:
 //    - "id"
+//    - "type"
 //    - "manifestVersion"
 //    - "version"
 //    - "name"
@@ -150,6 +165,7 @@ type Template struct {
 	Screenshots     []TemplateScreenshotsItem `json:"screenshots,omitempty"`
 	SupportLink     *string                   `json:"supportLink,omitempty"`
 	Tagline         TemplateTranslatedString  `json:"tagline"`
+	Type            TemplateType              `json:"type"`
 	UserInputs      []TemplateUserInputsItem  `json:"userInputs,omitempty"`
 	Version         string                    `json:"version"`
 	Website         *string                   `json:"website,omitempty"`
@@ -213,6 +229,9 @@ func (o *Template) Validate() error {
 	}
 	if err := o.Tagline.Validate(); err != nil {
 		return fmt.Errorf("invalid property tagline: %w", err)
+	}
+	if err := o.Type.Validate(); err != nil {
+		return fmt.Errorf("invalid property type: %w", err)
 	}
 	if err := func() error {
 		if o.UserInputs == nil {

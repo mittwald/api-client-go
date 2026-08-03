@@ -9,13 +9,15 @@ import "fmt"
 // type: "string"
 // enum:
 //    - "read"
+//    - "unread"
 
 type NotificationStatus string
 
 const NotificationStatusRead NotificationStatus = "read"
+const NotificationStatusUnread NotificationStatus = "unread"
 
 func (e NotificationStatus) Validate() error {
-	if e == NotificationStatusRead {
+	if e == NotificationStatusRead || e == NotificationStatusUnread {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

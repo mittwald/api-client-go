@@ -760,8 +760,7 @@ func (c *clientImpl) UpdateAccount(
 	return httpRes, nil
 }
 
-//Initialize password reset process. Replaced by `POST` `/v2/users/self/credentials/actions/init-password-reset`.
-
+// Initialize password reset process. Replaced by `POST` `/v2/users/self/credentials/actions/init-password-reset`.
 func (c *clientImpl) DeprecatedInitPasswordReset(
 	ctx context.Context,
 	req DeprecatedInitPasswordResetRequest,
@@ -809,8 +808,7 @@ func (c *clientImpl) DeprecatedLogout(
 	return httpRes, nil
 }
 
-//Resend the Email-Address verification email. Replaced by `POST` `/v2/users/self/credentials/email/actions/resend-email`.
-
+// Resend the Email-Address verification email. Replaced by `POST` `/v2/users/self/credentials/email/actions/resend-email`.
 func (c *clientImpl) DeprecatedResendVerificationEmail(
 	ctx context.Context,
 	req DeprecatedResendVerificationEmailRequest,

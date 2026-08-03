@@ -30,6 +30,7 @@ import (
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseDescriptionSet"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseMysqlUserCreated"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseMysqlUserUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseMysqlUserPasswordSet"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.DatabaseMysqlUserDeleted"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationRequested"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationCopyRequested"}

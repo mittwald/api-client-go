@@ -19,9 +19,10 @@ import (
 // https://developer.mittwald.de/docs/v2/reference/customer/customer-list-invites-for-customer
 type ListInvitesForCustomerRequest struct {
 	CustomerID string
+	SearchTerm *string
 	Limit      *int64
 	Skip       *int64
-	SearchTerm *string
+	Page       *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -59,14 +60,17 @@ func (r *ListInvitesForCustomerRequest) url() string {
 
 func (r *ListInvitesForCustomerRequest) query() url.Values {
 	q := make(url.Values)
+	if r.SearchTerm != nil {
+		q.Set("searchTerm", *r.SearchTerm)
+	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
 	}
 	if r.Skip != nil {
 		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
 	}
-	if r.SearchTerm != nil {
-		q.Set("searchTerm", *r.SearchTerm)
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
 	return q
 }

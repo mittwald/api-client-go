@@ -12,6 +12,7 @@ import "fmt"
 //    - "attachment"
 // default: "inline"
 // example: "inline"
+// x-go-type: "FileGetFileParamsContentDisposition"
 
 type GetFileRequestQueryContentDisposition string
 

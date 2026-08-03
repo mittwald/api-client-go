@@ -12,6 +12,7 @@ import "fmt"
 //    - "text/plain;base64"
 // default: "application/octet-stream"
 // example: "application/octet-stream"
+// x-go-type: "FileGetFileParamsAccept"
 
 type GetFileWithNameRequestQueryAccept string
 

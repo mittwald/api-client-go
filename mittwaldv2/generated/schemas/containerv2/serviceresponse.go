@@ -51,6 +51,9 @@ import (
 //    "statusSetAt":
 //        type: "string"
 //        format: "date-time"
+//    "templateId":
+//        type: "string"
+//        description: "ID of the template used to create this service, if one was used."
 // required:
 //    - "id"
 //    - "stackId"
@@ -79,6 +82,7 @@ type ServiceResponse struct {
 	StackId          string                        `json:"stackId"`
 	Status           ServiceStatus                 `json:"status"`
 	StatusSetAt      time.Time                     `json:"statusSetAt"`
+	TemplateId       *string                       `json:"templateId,omitempty"`
 }
 
 func (o *ServiceResponse) Validate() error {

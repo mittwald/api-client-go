@@ -19,9 +19,10 @@ import (
 // https://developer.mittwald.de/docs/v2/reference/project/project-list-invites-for-project
 type ListInvitesForProjectRequest struct {
 	ProjectID  string
+	SearchTerm *string
 	Limit      *int64
 	Skip       *int64
-	SearchTerm *string
+	Page       *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -59,14 +60,17 @@ func (r *ListInvitesForProjectRequest) url() string {
 
 func (r *ListInvitesForProjectRequest) query() url.Values {
 	q := make(url.Values)
+	if r.SearchTerm != nil {
+		q.Set("searchTerm", *r.SearchTerm)
+	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
 	}
 	if r.Skip != nil {
 		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
 	}
-	if r.SearchTerm != nil {
-		q.Set("searchTerm", *r.SearchTerm)
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
 	return q
 }

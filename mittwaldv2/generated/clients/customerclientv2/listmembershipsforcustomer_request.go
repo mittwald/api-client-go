@@ -23,11 +23,12 @@ import (
 // https://developer.mittwald.de/docs/v2/reference/customer/customer-list-memberships-for-customer
 type ListMembershipsForCustomerRequest struct {
 	CustomerID string
-	Limit      *int64
-	Skip       *int64
 	HasExpiry  *bool
 	Role       *membershipv2.CustomerRoles
 	SearchTerm *string
+	Limit      *int64
+	Skip       *int64
+	Page       *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -65,12 +66,6 @@ func (r *ListMembershipsForCustomerRequest) url() string {
 
 func (r *ListMembershipsForCustomerRequest) query() url.Values {
 	q := make(url.Values)
-	if r.Limit != nil {
-		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
-	}
-	if r.Skip != nil {
-		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
-	}
 	if r.HasExpiry != nil {
 		q.Set("hasExpiry", strconv.FormatBool(*r.HasExpiry))
 	}
@@ -79,6 +74,15 @@ func (r *ListMembershipsForCustomerRequest) query() url.Values {
 	}
 	if r.SearchTerm != nil {
 		q.Set("searchTerm", *r.SearchTerm)
+	}
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
 	return q
 }

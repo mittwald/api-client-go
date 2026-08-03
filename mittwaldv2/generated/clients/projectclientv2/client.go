@@ -22,6 +22,26 @@ type Client interface {
 		req DeprecatedLeaveProjectRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	DeprecatedUpdateProjectDescription(
+		ctx context.Context,
+		req DeprecatedUpdateProjectDescriptionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	DeprecatedUpdateServerDescription(
+		ctx context.Context,
+		req DeprecatedUpdateServerDescriptionRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	DeprecatedStoragespaceReplaceProjectNotificationThreshold(
+		ctx context.Context,
+		req DeprecatedStoragespaceReplaceProjectNotificationThresholdRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	DeprecatedStoragespaceReplaceServerNotificationThreshold(
+		ctx context.Context,
+		req DeprecatedStoragespaceReplaceServerNotificationThresholdRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	AcceptProjectInvite(
 		ctx context.Context,
 		req AcceptProjectInviteRequest,
@@ -167,16 +187,6 @@ type Client interface {
 		req ResendProjectInviteMailRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	UpdateProjectDescription(
-		ctx context.Context,
-		req UpdateProjectDescriptionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	UpdateServerDescription(
-		ctx context.Context,
-		req UpdateServerDescriptionRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	StoragespaceGetProjectStatistics(
 		ctx context.Context,
 		req StoragespaceGetProjectStatisticsRequest,
@@ -197,16 +207,6 @@ type Client interface {
 		req StoragespaceUpdateServerStatisticsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	StoragespaceReplaceProjectNotificationThreshold(
-		ctx context.Context,
-		req StoragespaceReplaceProjectNotificationThresholdRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	StoragespaceReplaceServerNotificationThreshold(
-		ctx context.Context,
-		req StoragespaceReplaceServerNotificationThresholdRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -222,6 +222,110 @@ func NewClient(client httpclient.RequestRunner) Client {
 func (c *clientImpl) DeprecatedLeaveProject(
 	ctx context.Context,
 	req DeprecatedLeaveProjectRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a Project's description.
+//
+// Deprecated by `PATCH /v2/projects/{projectId}`.
+func (c *clientImpl) DeprecatedUpdateProjectDescription(
+	ctx context.Context,
+	req DeprecatedUpdateProjectDescriptionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a Servers's description.
+//
+// Deprecated by `PATCH /v2/servers/{serverId}`.
+func (c *clientImpl) DeprecatedUpdateServerDescription(
+	ctx context.Context,
+	req DeprecatedUpdateServerDescriptionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a Project's storage space notification threshold.
+//
+// Deprecated by `PATCH /v2/projects/{projectId}/storage-space-statistics`.
+func (c *clientImpl) DeprecatedStoragespaceReplaceProjectNotificationThreshold(
+	ctx context.Context,
+	req DeprecatedStoragespaceReplaceProjectNotificationThresholdRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a Server's storage space notification threshold.
+//
+// Deprecated by `PATCH /v2/projects/{projectId}/storage-space-statistics`.
+func (c *clientImpl) DeprecatedStoragespaceReplaceServerNotificationThreshold(
+	ctx context.Context,
+	req DeprecatedStoragespaceReplaceServerNotificationThresholdRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -1010,54 +1114,6 @@ func (c *clientImpl) ResendProjectInviteMail(
 	return httpRes, nil
 }
 
-// Update a Project's description.
-func (c *clientImpl) UpdateProjectDescription(
-	ctx context.Context,
-	req UpdateProjectDescriptionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update a Servers's description.
-func (c *clientImpl) UpdateServerDescription(
-	ctx context.Context,
-	req UpdateServerDescriptionRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Get storage space Statistics belonging to a Project.
 func (c *clientImpl) StoragespaceGetProjectStatistics(
 	ctx context.Context,
@@ -1142,54 +1198,6 @@ func (c *clientImpl) StoragespaceGetServerStatistics(
 func (c *clientImpl) StoragespaceUpdateServerStatistics(
 	ctx context.Context,
 	req StoragespaceUpdateServerStatisticsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update a Project's storage space notification threshold.
-func (c *clientImpl) StoragespaceReplaceProjectNotificationThreshold(
-	ctx context.Context,
-	req StoragespaceReplaceProjectNotificationThresholdRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Update a Server's storage space notification threshold.
-func (c *clientImpl) StoragespaceReplaceServerNotificationThreshold(
-	ctx context.Context,
-	req StoragespaceReplaceServerNotificationThresholdRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

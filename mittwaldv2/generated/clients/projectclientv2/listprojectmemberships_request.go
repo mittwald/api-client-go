@@ -21,12 +21,12 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/project/project-list-project-memberships
 type ListProjectMembershipsRequest struct {
-	Limit       *int64
-	Skip        *int64
-	Page        *int64
 	HasExpiry   *bool
 	IsInherited *bool
 	Role        *membershipv2.ProjectRoles
+	Limit       *int64
+	Skip        *int64
+	Page        *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -64,15 +64,6 @@ func (r *ListProjectMembershipsRequest) url() string {
 
 func (r *ListProjectMembershipsRequest) query() url.Values {
 	q := make(url.Values)
-	if r.Limit != nil {
-		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
-	}
-	if r.Skip != nil {
-		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
-	}
-	if r.Page != nil {
-		q.Set("page", fmt.Sprintf("%d", *r.Page))
-	}
 	if r.HasExpiry != nil {
 		q.Set("hasExpiry", strconv.FormatBool(*r.HasExpiry))
 	}
@@ -81,6 +72,15 @@ func (r *ListProjectMembershipsRequest) query() url.Values {
 	}
 	if r.Role != nil {
 		q.Set("role", string(*r.Role))
+	}
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
 	return q
 }
