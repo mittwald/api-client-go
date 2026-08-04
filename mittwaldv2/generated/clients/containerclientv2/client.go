@@ -104,11 +104,6 @@ type Client interface {
 		req GetServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.ServiceResponse, *http.Response, error)
-	GetTemplateAsset(
-		ctx context.Context,
-		req GetTemplateAssetRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	GetTemplate(
 		ctx context.Context,
 		req GetTemplateRequest,
@@ -172,6 +167,11 @@ type Client interface {
 	StopService(
 		ctx context.Context,
 		req StopServiceRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	DeprecatedGetTemplateAsset(
+		ctx context.Context,
+		req DeprecatedGetTemplateAssetRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	DeprecatedGetTemplateIcon(
@@ -683,30 +683,6 @@ func (c *clientImpl) GetService(
 	return &response, httpRes, nil
 }
 
-// Get a Container Template asset.
-func (c *clientImpl) GetTemplateAsset(
-	ctx context.Context,
-	req GetTemplateAssetRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Get a Container Template by ID.
 func (c *clientImpl) GetTemplate(
 	ctx context.Context,
@@ -1061,9 +1037,35 @@ func (c *clientImpl) StopService(
 	return httpRes, nil
 }
 
+// Get a Container Template asset.
+//
+// Deprecated. Use the direct asset URLs returned in the Template's `iconUrl` and `screenshots` fields instead.
+func (c *clientImpl) DeprecatedGetTemplateAsset(
+	ctx context.Context,
+	req DeprecatedGetTemplateAssetRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Get a Container Template icon.
 //
-// Deprecated. Use `GET /v2/container-templates/{templateId}/assets/icon.svg` instead.
+// Deprecated. Use the direct URL returned in the Template's `iconUrl` field instead.
 func (c *clientImpl) DeprecatedGetTemplateIcon(
 	ctx context.Context,
 	req DeprecatedGetTemplateIconRequest,

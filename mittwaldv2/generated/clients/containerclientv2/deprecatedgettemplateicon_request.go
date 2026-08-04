@@ -16,7 +16,7 @@ import (
 //
 // Get a Container Template icon.
 //
-// Deprecated. Use `GET /v2/container-templates/{templateId}/assets/icon.svg`
+// Deprecated. Use the direct URL returned in the Template's `iconUrl` field
 // instead.
 //
 // [1]:

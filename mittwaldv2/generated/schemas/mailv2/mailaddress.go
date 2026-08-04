@@ -121,6 +121,10 @@ import (
 //            - "storageInBytes"
 //            - "passwordUpdatedAt"
 //            - "mailsystemSettings"
+//    "originalAddress":
+//        type: "string"
+//        format: "idn-email"
+//        description: "For archived mail addresses, the address the mailbox had right before it was archived."
 //    "projectId":
 //        type: "string"
 //    "rateLimitChangeRequest":
@@ -159,6 +163,7 @@ type MailAddress struct {
 	IsBackupInProgress     bool                               `json:"isBackupInProgress"`
 	IsCatchAll             bool                               `json:"isCatchAll"`
 	Mailbox                *MailAddressMailbox                `json:"mailbox,omitempty"`
+	OriginalAddress        *string                            `json:"originalAddress,omitempty"`
 	ProjectId              string                             `json:"projectId"`
 	RateLimitChangeRequest *MailAddressRateLimitChangeRequest `json:"rateLimitChangeRequest,omitempty"`
 	ReceivingDisabled      bool                               `json:"receivingDisabled"`
