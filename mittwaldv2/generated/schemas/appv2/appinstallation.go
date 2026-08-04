@@ -73,6 +73,8 @@ import (
 //    "shortId":
 //        type: "string"
 //        example: "a-XXXXXX"
+//    "staging":
+//        type: "boolean"
 //    "systemSoftware":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.app.InstalledSystemSoftware"}
@@ -128,6 +130,7 @@ type AppInstallation struct {
 	ScreenshotId       *string                    `json:"screenshotId,omitempty"`
 	ScreenshotRef      *string                    `json:"screenshotRef,omitempty"`
 	ShortId            string                     `json:"shortId"`
+	Staging            *bool                      `json:"staging,omitempty"`
 	SystemSoftware     []InstalledSystemSoftware  `json:"systemSoftware"`
 	UpdateAvailable    bool                       `json:"updateAvailable"`
 	UpdatePolicy       AppUpdatePolicy            `json:"updatePolicy"`
