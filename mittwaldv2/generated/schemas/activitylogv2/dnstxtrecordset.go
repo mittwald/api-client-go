@@ -14,6 +14,13 @@ import "fmt"
 //            "after":
 //                type: "object"
 //                properties:
+//                    "ttl":
+//                        oneOf:
+//                            - type: "integer"
+//                            - type: "string"
+//                              enum:
+//                                - "auto"
+//                        nullable: true
 //                    "txt":
 //                        type: "array"
 //                        items:
@@ -23,6 +30,13 @@ import "fmt"
 //            "before":
 //                type: "object"
 //                properties:
+//                    "ttl":
+//                        oneOf:
+//                            - type: "integer"
+//                            - type: "string"
+//                              enum:
+//                                - "auto"
+//                        nullable: true
 //                    "txt":
 //                        type: "array"
 //                        items:

@@ -13,10 +13,20 @@ import "fmt"
 //        properties:
 //            "mx":
 //                type: "string"
+//                enum:
+//                    - "managed"
 //        required:
 //            - "mx"
 //    "before":
 //        type: "object"
+//        properties:
+//            "mx":
+//                type: "array"
+//                items:
+//                    type: "object"
+//                nullable: true
+//        required:
+//            - "mx"
 
 type DnsMxRecordSetManagedChanges struct {
 	After  *DnsMxRecordSetManagedChangesAfter  `json:"after,omitempty"`

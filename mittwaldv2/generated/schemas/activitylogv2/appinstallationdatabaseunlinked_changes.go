@@ -11,18 +11,30 @@ import "fmt"
 //    "after":
 //        type: "object"
 //        properties:
-//            "database":
-//                type: "object"
+//            "name":
+//                type: "string"
+//                nullable: true
+//            "purpose":
+//                type: "string"
 //                nullable: true
 //        required:
-//            - "database"
+//            - "name"
+//            - "purpose"
 //    "before":
 //        type: "object"
 //        properties:
-//            "database":
-//                type: "object"
+//            "name":
+//                type: "string"
+//            "purpose":
+//                type: "string"
+//                enum:
+//                    - "unspecified"
+//                    - "primary"
+//                    - "cache"
+//                    - "custom"
 //        required:
-//            - "database"
+//            - "name"
+//            - "purpose"
 // required:
 //    - "before"
 //    - "after"

@@ -5,10 +5,11 @@ package activitylogv2
 
 // This data type was generated from the following JSON schema:
 // type: "object"
+// additionalProperties: false
 
-type AppInstallationDatabaseUnlinkedChangesBeforeDatabase struct {
+type AppInstallationFailedChanges struct {
 }
 
-func (o *AppInstallationDatabaseUnlinkedChangesBeforeDatabase) Validate() error {
+func (o *AppInstallationFailedChanges) Validate() error {
 	return nil
 }

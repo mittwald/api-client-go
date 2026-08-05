@@ -14,7 +14,7 @@ import (
 var _ = Describe("DnsTxtRecordSet", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{\"after\":{\"txt\":[\"string\"]},\"before\":{\"txt\":[\"string\"]}},\"name\":\"dns.txt-record-set\",\"parameters\":{\"domain\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
+			exampleJSON := []byte("{\"changes\":{\"after\":{\"ttl\":42,\"txt\":[\"string\"]},\"before\":{\"ttl\":42,\"txt\":[\"string\"]}},\"name\":\"dns.txt-record-set\",\"parameters\":{\"domain\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
 
 			sut := activitylogv2.DnsTxtRecordSet{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -16,10 +16,20 @@ import "fmt"
 //                properties:
 //                    "aRecords":
 //                        type: "string"
+//                        enum:
+//                            - "managed"
 //                required:
 //                    - "aRecords"
 //            "before":
 //                type: "object"
+//                properties:
+//                    "aRecords":
+//                        type: "array"
+//                        items:
+//                            type: "string"
+//                        nullable: true
+//                required:
+//                    - "aRecords"
 //    "name":
 //        type: "string"
 //        enum:

@@ -5,11 +5,10 @@ package activitylogv2
 
 // This data type was generated from the following JSON schema:
 // type: "object"
-// nullable: true
 
-type AppInstallationDatabaseUnlinkedChangesAfterDatabase struct {
+type DnsMxRecordSetManagedChangesBeforeMxItem struct {
 }
 
-func (o *AppInstallationDatabaseUnlinkedChangesAfterDatabase) Validate() error {
+func (o *DnsMxRecordSetManagedChangesBeforeMxItem) Validate() error {
 	return nil
 }

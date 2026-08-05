@@ -14,7 +14,7 @@ import (
 var _ = Describe("AppInstallationDatabaseUnlinked", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{\"after\":{\"database\":{}},\"before\":{\"database\":{}}},\"name\":\"app.database-unlinked\",\"parameters\":{\"appInstallation\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"database\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
+			exampleJSON := []byte("{\"changes\":{\"after\":{\"name\":\"string\",\"purpose\":\"string\"},\"before\":{\"name\":\"string\",\"purpose\":\"unspecified\"}},\"name\":\"app.database-unlinked\",\"parameters\":{\"appInstallation\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"database\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
 
 			sut := activitylogv2.AppInstallationDatabaseUnlinked{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

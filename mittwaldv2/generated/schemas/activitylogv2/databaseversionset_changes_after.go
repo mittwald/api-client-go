@@ -5,11 +5,16 @@ package activitylogv2
 
 // This data type was generated from the following JSON schema:
 // type: "object"
-// nullable: true
+// properties:
+//    "version":
+//        type: "string"
+// required:
+//    - "version"
 
-type AppInstallationDatabaseLinkedChangesBeforeDatabase struct {
+type DatabaseVersionSetChangesAfter struct {
+	Version string `json:"version"`
 }
 
-func (o *AppInstallationDatabaseLinkedChangesBeforeDatabase) Validate() error {
+func (o *DatabaseVersionSetChangesAfter) Validate() error {
 	return nil
 }

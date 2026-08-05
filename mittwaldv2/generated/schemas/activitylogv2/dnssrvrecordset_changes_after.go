@@ -15,11 +15,19 @@ import (
 //        type: "array"
 //        items:
 //            type: "object"
+//    "ttl":
+//        oneOf:
+//            - type: "integer"
+//            - type: "string"
+//              enum:
+//                - "auto"
+//        nullable: true
 // required:
 //    - "srv"
 
 type DnsSrvRecordSetChangesAfter struct {
 	Srv []DnsSrvRecordSetChangesAfterSrvItem `json:"srv"`
+	Ttl *DnsSrvRecordSetChangesAfterTtl      `json:"ttl,omitempty"`
 }
 
 func (o *DnsSrvRecordSetChangesAfter) Validate() error {
@@ -35,6 +43,14 @@ func (o *DnsSrvRecordSetChangesAfter) Validate() error {
 		return nil
 	}(); err != nil {
 		return fmt.Errorf("invalid property srv: %w", err)
+	}
+	if err := func() error {
+		if o.Ttl == nil {
+			return nil
+		}
+		return o.Ttl.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property ttl: %w", err)
 	}
 	return nil
 }

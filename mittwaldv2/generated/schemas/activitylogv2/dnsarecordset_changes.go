@@ -19,6 +19,13 @@ import "fmt"
 //                type: "array"
 //                items:
 //                    type: "string"
+//            "ttl":
+//                oneOf:
+//                    - type: "integer"
+//                    - type: "string"
+//                      enum:
+//                        - "auto"
+//                nullable: true
 //    "before":
 //        type: "object"
 //        properties:
@@ -30,6 +37,13 @@ import "fmt"
 //                type: "array"
 //                items:
 //                    type: "string"
+//            "ttl":
+//                oneOf:
+//                    - type: "integer"
+//                    - type: "string"
+//                      enum:
+//                        - "auto"
+//                nullable: true
 
 type DnsARecordSetChanges struct {
 	After  *DnsARecordSetChangesAfter  `json:"after,omitempty"`

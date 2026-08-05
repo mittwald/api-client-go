@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("AppInstallationDatabaseLinkedChangesBeforeDatabase", func() {
+var _ = Describe("AppInstallationFailedParameters", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{}")
+			exampleJSON := []byte("{\"appInstallation\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"error\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}")
 
-			sut := activitylogv2.AppInstallationDatabaseLinkedChangesBeforeDatabase{}
+			sut := activitylogv2.AppInstallationFailedParameters{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})
