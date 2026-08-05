@@ -104,6 +104,11 @@ type Client interface {
 		req GetServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.ServiceResponse, *http.Response, error)
+	GetTemplateAsset(
+		ctx context.Context,
+		req GetTemplateAssetRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	GetTemplate(
 		ctx context.Context,
 		req GetTemplateRequest,
@@ -678,6 +683,30 @@ func (c *clientImpl) GetService(
 	return &response, httpRes, nil
 }
 
+// Get a Container Template asset.
+func (c *clientImpl) GetTemplateAsset(
+	ctx context.Context,
+	req GetTemplateAssetRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Get a Container Template by ID.
 func (c *clientImpl) GetTemplate(
 	ctx context.Context,
@@ -1034,7 +1063,7 @@ func (c *clientImpl) StopService(
 
 // Get a Container Template icon.
 //
-// Deprecated. Use the direct URL returned in the Template's `iconUrl` field instead.
+// Deprecated. Use `GET /v2/container-templates/{templateId}/assets/icon.svg` instead.
 func (c *clientImpl) DeprecatedGetTemplateIcon(
 	ctx context.Context,
 	req DeprecatedGetTemplateIconRequest,
