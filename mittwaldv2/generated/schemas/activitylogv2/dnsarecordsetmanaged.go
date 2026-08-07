@@ -18,6 +18,13 @@ import "fmt"
 //                        type: "string"
 //                        enum:
 //                            - "managed"
+//                    "ttl":
+//                        oneOf:
+//                            - type: "integer"
+//                            - type: "string"
+//                              enum:
+//                                - "auto"
+//                        nullable: true
 //                required:
 //                    - "aRecords"
 //            "before":
@@ -27,6 +34,13 @@ import "fmt"
 //                        type: "array"
 //                        items:
 //                            type: "string"
+//                        nullable: true
+//                    "ttl":
+//                        oneOf:
+//                            - type: "integer"
+//                            - type: "string"
+//                              enum:
+//                                - "auto"
 //                        nullable: true
 //                required:
 //                    - "aRecords"

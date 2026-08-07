@@ -12,16 +12,32 @@ import "fmt"
 //        type: "string"
 //        enum:
 //            - "managed"
+//    "ttl":
+//        oneOf:
+//            - type: "integer"
+//            - type: "string"
+//              enum:
+//                - "auto"
+//        nullable: true
 // required:
 //    - "aRecords"
 
 type DnsARecordSetManagedChangesAfter struct {
 	ARecords DnsARecordSetManagedChangesAfterARecords `json:"aRecords"`
+	Ttl      *DnsARecordSetManagedChangesAfterTtl     `json:"ttl,omitempty"`
 }
 
 func (o *DnsARecordSetManagedChangesAfter) Validate() error {
 	if err := o.ARecords.Validate(); err != nil {
 		return fmt.Errorf("invalid property aRecords: %w", err)
+	}
+	if err := func() error {
+		if o.Ttl == nil {
+			return nil
+		}
+		return o.Ttl.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property ttl: %w", err)
 	}
 	return nil
 }

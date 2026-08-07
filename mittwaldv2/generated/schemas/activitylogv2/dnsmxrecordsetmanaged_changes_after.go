@@ -12,16 +12,32 @@ import "fmt"
 //        type: "string"
 //        enum:
 //            - "managed"
+//    "ttl":
+//        oneOf:
+//            - type: "integer"
+//            - type: "string"
+//              enum:
+//                - "auto"
+//        nullable: true
 // required:
 //    - "mx"
 
 type DnsMxRecordSetManagedChangesAfter struct {
-	Mx DnsMxRecordSetManagedChangesAfterMx `json:"mx"`
+	Mx  DnsMxRecordSetManagedChangesAfterMx   `json:"mx"`
+	Ttl *DnsMxRecordSetManagedChangesAfterTtl `json:"ttl,omitempty"`
 }
 
 func (o *DnsMxRecordSetManagedChangesAfter) Validate() error {
 	if err := o.Mx.Validate(); err != nil {
 		return fmt.Errorf("invalid property mx: %w", err)
+	}
+	if err := func() error {
+		if o.Ttl == nil {
+			return nil
+		}
+		return o.Ttl.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property ttl: %w", err)
 	}
 	return nil
 }
