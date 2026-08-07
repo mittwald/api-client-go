@@ -169,11 +169,6 @@ type Client interface {
 		req StopServiceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	DeprecatedGetTemplateAsset(
-		ctx context.Context,
-		req DeprecatedGetTemplateAssetRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	DeprecatedGetTemplateIcon(
 		ctx context.Context,
 		req DeprecatedGetTemplateIconRequest,
@@ -1037,35 +1032,9 @@ func (c *clientImpl) StopService(
 	return httpRes, nil
 }
 
-// Get a Container Template asset.
-//
-// Deprecated. Use the direct asset URLs returned in the Template's `iconUrl` and `screenshots` fields instead.
-func (c *clientImpl) DeprecatedGetTemplateAsset(
-	ctx context.Context,
-	req DeprecatedGetTemplateAssetRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Get a Container Template icon.
 //
-// Deprecated. Use the direct URL returned in the Template's `iconUrl` field instead.
+// Deprecated. Use `GET /v2/container-templates/{templateId}/assets/icon.svg` instead.
 func (c *clientImpl) DeprecatedGetTemplateIcon(
 	ctx context.Context,
 	req DeprecatedGetTemplateIconRequest,
