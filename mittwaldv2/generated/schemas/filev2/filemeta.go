@@ -24,6 +24,9 @@ package filev2
 //    "name":
 //        type: "string"
 //        example: "me.jpeg"
+//    "shortId":
+//        type: "string"
+//        example: "file-123456"
 //    "sizeInBytes":
 //        type: "integer"
 //        format: "int64"
@@ -41,6 +44,7 @@ package filev2
 //    - "friendlyUrl"
 //    - "sizeInBytes"
 //    - "mimeType"
+//    - "shortId"
 
 type FileMeta struct {
 	FriendlyURL string `json:"friendlyURL"`
@@ -48,6 +52,7 @@ type FileMeta struct {
 	Id          string `json:"id"`
 	MimeType    string `json:"mimeType"`
 	Name        string `json:"name"`
+	ShortId     string `json:"shortId"`
 	SizeInBytes int64  `json:"sizeInBytes"`
 	Type        string `json:"type"`
 }
