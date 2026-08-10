@@ -16,28 +16,16 @@ import "fmt"
 //                properties:
 //                    "name":
 //                        type: "string"
-//                    "purpose":
-//                        type: "string"
-//                        enum:
-//                            - "unspecified"
-//                            - "primary"
-//                            - "cache"
-//                            - "custom"
 //                required:
 //                    - "name"
-//                    - "purpose"
 //            "before":
 //                type: "object"
 //                properties:
 //                    "name":
 //                        type: "string"
 //                        nullable: true
-//                    "purpose":
-//                        type: "string"
-//                        nullable: true
 //                required:
 //                    - "name"
-//                    - "purpose"
 //        required:
 //            - "before"
 //            - "after"

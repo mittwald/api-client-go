@@ -8,13 +8,14 @@ package activitylogv2
 // properties:
 //    "name":
 //        type: "string"
+//        nullable: true
 // required:
 //    - "name"
 
-type AppInstallationDatabaseUnlinkedChangesBefore struct {
+type AppInstallationMainDatabaseChangedChangesBefore struct {
 	Name string `json:"name"`
 }
 
-func (o *AppInstallationDatabaseUnlinkedChangesBefore) Validate() error {
+func (o *AppInstallationMainDatabaseChangedChangesBefore) Validate() error {
 	return nil
 }

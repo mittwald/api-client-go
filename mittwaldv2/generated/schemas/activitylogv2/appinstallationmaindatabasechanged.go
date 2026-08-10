@@ -24,6 +24,7 @@ import "fmt"
 //                properties:
 //                    "name":
 //                        type: "string"
+//                        nullable: true
 //                required:
 //                    - "name"
 //        required:
@@ -32,7 +33,7 @@ import "fmt"
 //    "name":
 //        type: "string"
 //        enum:
-//            - "app.database-unlinked"
+//            - "app.main-database-changed"
 //    "parameters":
 //        type: "object"
 //        properties:
@@ -46,13 +47,13 @@ import "fmt"
 //    - "changes"
 //    - "parameters"
 
-type AppInstallationDatabaseUnlinked struct {
-	Changes    AppInstallationDatabaseUnlinkedChanges    `json:"changes"`
-	Name       AppInstallationDatabaseUnlinkedName       `json:"name"`
-	Parameters AppInstallationDatabaseUnlinkedParameters `json:"parameters"`
+type AppInstallationMainDatabaseChanged struct {
+	Changes    AppInstallationMainDatabaseChangedChanges    `json:"changes"`
+	Name       AppInstallationMainDatabaseChangedName       `json:"name"`
+	Parameters AppInstallationMainDatabaseChangedParameters `json:"parameters"`
 }
 
-func (o *AppInstallationDatabaseUnlinked) Validate() error {
+func (o *AppInstallationMainDatabaseChanged) Validate() error {
 	if err := o.Changes.Validate(); err != nil {
 		return fmt.Errorf("invalid property changes: %w", err)
 	}

@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("AppInstallationDatabaseUnlinkedChanges", func() {
+var _ = Describe("AppInstallationMainDatabaseChangedChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
 			exampleJSON := []byte("{\"after\":{\"name\":\"string\"},\"before\":{\"name\":\"string\"}}")
 
-			sut := activitylogv2.AppInstallationDatabaseUnlinkedChanges{}
+			sut := activitylogv2.AppInstallationMainDatabaseChangedChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

@@ -40,6 +40,7 @@ import (
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationDeleted"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationDatabaseLinked"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationDatabaseUnlinked"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationMainDatabaseChanged"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationAppVersionSet"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationDesiredSystemSoftwareSet"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationDesiredSystemSoftwareDeleted"}

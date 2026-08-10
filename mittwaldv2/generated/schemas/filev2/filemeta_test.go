@@ -14,7 +14,7 @@ import (
 var _ = Describe("FileMeta", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"friendlyURL\":\"3fa85f64-5717-4562-b3fc-2c963f66afa6/me.jpeg\",\"friendlyUrl\":\"3fa85f64-5717-4562-b3fc-2c963f66afa6/me.jpeg\",\"id\":\"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\"mimeType\":\"image/jpeg\",\"name\":\"me.jpeg\",\"sizeInBytes\":300,\"type\":\"image/jpeg\"}")
+			exampleJSON := []byte("{\"friendlyURL\":\"3fa85f64-5717-4562-b3fc-2c963f66afa6/me.jpeg\",\"friendlyUrl\":\"3fa85f64-5717-4562-b3fc-2c963f66afa6/me.jpeg\",\"id\":\"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\"mimeType\":\"image/jpeg\",\"name\":\"me.jpeg\",\"shortId\":\"file-123456\",\"sizeInBytes\":300,\"type\":\"image/jpeg\"}")
 
 			sut := filev2.FileMeta{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
