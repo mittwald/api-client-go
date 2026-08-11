@@ -10,16 +10,18 @@ import "fmt"
 // enum:
 //    - "redis"
 //    - "node"
+//    - "runtimeApps"
 //    - "container"
 
 type ProjectFeature string
 
 const ProjectFeatureRedis ProjectFeature = "redis"
 const ProjectFeatureNode ProjectFeature = "node"
+const ProjectFeatureRuntimeApps ProjectFeature = "runtimeApps"
 const ProjectFeatureContainer ProjectFeature = "container"
 
 func (e ProjectFeature) Validate() error {
-	if e == ProjectFeatureRedis || e == ProjectFeatureNode || e == ProjectFeatureContainer {
+	if e == ProjectFeatureRedis || e == ProjectFeatureNode || e == ProjectFeatureRuntimeApps || e == ProjectFeatureContainer {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
