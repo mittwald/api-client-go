@@ -6,13 +6,13 @@ package aihostingclientv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "name":
+//    "description":
 //        type: "string"
 // description: CustomerUpdatePlanRequestBody models the JSON body of a 'ai-hosting-customer-update-plan' request
 
 // CustomerUpdatePlanRequestBody models the JSON body of a 'ai-hosting-customer-update-plan' request
 type CustomerUpdatePlanRequestBody struct {
-	Name *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
 }
 
 func (o *CustomerUpdatePlanRequestBody) Validate() error {

@@ -114,6 +114,11 @@ type Client interface {
 		req ProjectLinkContainerRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	CustomerDeclareProfile(
+		ctx context.Context,
+		req CustomerDeclareProfileRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -651,6 +656,30 @@ func (c *clientImpl) ProjectGetUsage(
 func (c *clientImpl) ProjectLinkContainer(
 	ctx context.Context,
 	req ProjectLinkContainerRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Creates an AI hosting profile and accepts the current model terms.
+func (c *clientImpl) CustomerDeclareProfile(
+	ctx context.Context,
+	req CustomerDeclareProfileRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

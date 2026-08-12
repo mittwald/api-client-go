@@ -16,12 +16,12 @@ import (
 //    "deletedAt":
 //        type: "string"
 //        format: "date-time"
+//    "description":
+//        type: "string"
 //    "keys": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsage"}
 //    "modelTermsApprovalRequired":
 //        type: "boolean"
 //        default: false
-//    "name":
-//        type: "string"
 //    "nextTokenReset":
 //        type: "string"
 //        format: "date-time"
@@ -48,7 +48,7 @@ import (
 //                - "tokenUsed"
 // required:
 //    - "customerId"
-//    - "name"
+//    - "description"
 //    - "keys"
 //    - "tokens"
 //    - "rateLimit"
@@ -58,9 +58,9 @@ import (
 type PlanOptions struct {
 	CustomerId                 string                     `json:"customerId"`
 	DeletedAt                  *time.Time                 `json:"deletedAt,omitempty"`
+	Description                string                     `json:"description"`
 	Keys                       PlanUsage                  `json:"keys"`
 	ModelTermsApprovalRequired bool                       `json:"modelTermsApprovalRequired"`
-	Name                       string                     `json:"name"`
 	NextTokenReset             time.Time                  `json:"nextTokenReset"`
 	PlanId                     *string                    `json:"planId,omitempty"`
 	RateLimit                  RateLimit                  `json:"rateLimit"`
