@@ -14,9 +14,8 @@ import (
 //
 // List Container Template statistics.
 //
-// Deprecated. Container Statistics should no longer be public and moved to the
-// sortOrder logic from the template list. This endpoint will be removed in a
-// future version.
+// Deprecated. Container Statistics are no longer available. This endpoint will be
+// removed in a future version.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/container/container-list-template-statistics

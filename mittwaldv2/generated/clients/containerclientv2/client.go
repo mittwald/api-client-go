@@ -821,7 +821,7 @@ func (c *clientImpl) ListStackVolumes(
 
 // List Container Template statistics.
 //
-// Deprecated. Container Statistics should no longer be public and moved to the sortOrder logic from the template list. This endpoint will be removed in a future version.
+// Deprecated. Container Statistics are no longer available. This endpoint will be removed in a future version.
 func (c *clientImpl) ListTemplateStatistics(
 	ctx context.Context,
 	req ListTemplateStatisticsRequest,
