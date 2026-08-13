@@ -29,6 +29,11 @@ type Client interface {
 		req CustomerCreateKeyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*aihostingv2.Key, *http.Response, error)
+	CustomerDeclareProfile(
+		ctx context.Context,
+		req CustomerDeclareProfileRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	CustomerGetKey(
 		ctx context.Context,
 		req CustomerGetKeyRequest,
@@ -112,11 +117,6 @@ type Client interface {
 	ProjectLinkContainer(
 		ctx context.Context,
 		req ProjectLinkContainerRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	CustomerDeclareProfile(
-		ctx context.Context,
-		req CustomerDeclareProfileRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -210,6 +210,30 @@ func (c *clientImpl) CustomerCreateKey(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Creates an AI hosting profile and accepts the current model terms.
+func (c *clientImpl) CustomerDeclareProfile(
+	ctx context.Context,
+	req CustomerDeclareProfileRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }
 
 // Get a key of a customer.
@@ -656,30 +680,6 @@ func (c *clientImpl) ProjectGetUsage(
 func (c *clientImpl) ProjectLinkContainer(
 	ctx context.Context,
 	req ProjectLinkContainerRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Creates an AI hosting profile and accepts the current model terms.
-func (c *clientImpl) CustomerDeclareProfile(
-	ctx context.Context,
-	req CustomerDeclareProfileRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)

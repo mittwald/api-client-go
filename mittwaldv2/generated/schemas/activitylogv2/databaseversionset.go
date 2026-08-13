@@ -30,6 +30,7 @@ import "fmt"
 //        type: "string"
 //        enum:
 //            - "database.mysql-version-set"
+//            - "database.redis-version-set"
 //    "parameters":
 //        type: "object"
 //        properties:
