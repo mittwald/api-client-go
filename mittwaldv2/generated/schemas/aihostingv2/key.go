@@ -32,8 +32,6 @@ import (
 //        deprecated: true
 //    "name":
 //        type: "string"
-//    "planId":
-//        type: "string"
 //    "projectId":
 //        type: "string"
 //    "rateLimit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
@@ -55,7 +53,6 @@ type Key struct {
 	KeyId         string         `json:"keyId"`
 	Models        []string       `json:"models"`
 	Name          string         `json:"name"`
-	PlanId        *string        `json:"planId,omitempty"`
 	ProjectId     *string        `json:"projectId,omitempty"`
 	RateLimit     RateLimit      `json:"rateLimit"`
 	TokenUsage    TokenUsage     `json:"tokenUsage"`

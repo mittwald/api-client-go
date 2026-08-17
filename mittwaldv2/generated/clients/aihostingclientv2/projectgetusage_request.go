@@ -20,7 +20,6 @@ import (
 // hosting/ai-hosting-project-get-usage
 type ProjectGetUsageRequest struct {
 	ProjectID string
-	PlanID    *string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -50,16 +49,11 @@ func (r *ProjectGetUsageRequest) body() (io.Reader, string, error) {
 
 func (r *ProjectGetUsageRequest) url() string {
 	u := url.URL{
-		Path:     fmt.Sprintf("/v2/projects/%s/ai-hosting", url.PathEscape(r.ProjectID)),
-		RawQuery: r.query().Encode(),
+		Path: fmt.Sprintf("/v2/projects/%s/ai-hosting", url.PathEscape(r.ProjectID)),
 	}
 	return u.String()
 }
 
 func (r *ProjectGetUsageRequest) query() url.Values {
-	q := make(url.Values)
-	if r.PlanID != nil {
-		q.Set("planId", *r.PlanID)
-	}
-	return q
+	return nil
 }

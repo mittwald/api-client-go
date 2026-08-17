@@ -13,8 +13,6 @@ import (
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "description":
-//        type: "string"
 //    "keys": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsage"}
 //    "modelTermsApprovalRequired":
 //        type: "boolean"
@@ -29,7 +27,6 @@ import (
 //    - "modelTermsApprovalRequired"
 
 type ProjectGetUsageResponse struct {
-	Description                *string               `json:"description,omitempty"`
 	Keys                       aihostingv2.PlanUsage `json:"keys"`
 	ModelTermsApprovalRequired bool                  `json:"modelTermsApprovalRequired"`
 	NextTokenReset             *time.Time            `json:"nextTokenReset,omitempty"`

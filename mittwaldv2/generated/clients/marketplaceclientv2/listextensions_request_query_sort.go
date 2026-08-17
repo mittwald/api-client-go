@@ -11,7 +11,7 @@ import "fmt"
 //    - "name"
 //    - "pricing.priceInCents"
 //    - "relevance"
-// default: "name"
+// default: "relevance"
 
 type ListExtensionsRequestQuerySort string
 

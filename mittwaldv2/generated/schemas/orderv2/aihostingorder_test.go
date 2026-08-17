@@ -14,7 +14,7 @@ import (
 var _ = Describe("AIHostingOrder", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"customerId\":\"0f5ec9cd-1b1b-4850-9061-fcebe765c62d\",\"monthlyTokens\":2000000,\"requestsPerMinute\":120,\"useFreeTrial\":true}")
+			exampleJSON := []byte("{\"customerId\":\"0f5ec9cd-1b1b-4850-9061-fcebe765c62d\",\"monthlyTokens\":2000000,\"name\":\"Managed AI Hosting\",\"requestsPerMinute\":120,\"useFreeTrial\":true}")
 
 			sut := orderv2.AIHostingOrder{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

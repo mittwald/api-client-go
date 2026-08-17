@@ -10,7 +10,7 @@ import "fmt"
 // enum:
 //    - "asc"
 //    - "desc"
-// default: "asc"
+// default: "desc"
 
 type ListExtensionsRequestQueryOrder string
 

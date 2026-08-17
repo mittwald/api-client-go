@@ -11,17 +11,14 @@ package aihostingclientv2
 //    "name":
 //        type: "string"
 //        minLength: 5
-//    "planId":
-//        type: "string"
 // required:
 //    - "name"
 // description: ProjectCreateKeyRequestBody models the JSON body of a 'ai-hosting-project-create-key' request
 
 // ProjectCreateKeyRequestBody models the JSON body of a 'ai-hosting-project-create-key' request
 type ProjectCreateKeyRequestBody struct {
-	CreateWebuiContainer *bool   `json:"createWebuiContainer,omitempty"`
-	Name                 string  `json:"name"`
-	PlanId               *string `json:"planId,omitempty"`
+	CreateWebuiContainer *bool  `json:"createWebuiContainer,omitempty"`
+	Name                 string `json:"name"`
 }
 
 func (o *ProjectCreateKeyRequestBody) Validate() error {
