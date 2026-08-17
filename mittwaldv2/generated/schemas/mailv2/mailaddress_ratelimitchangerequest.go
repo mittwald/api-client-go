@@ -8,7 +8,7 @@ package mailv2
 // properties:
 //    "rateLimitId":
 //        type: "string"
-//        description: "id of the rate limit requested"
+//        description: "ID of the rate limit requested."
 // required:
 //    - "rateLimitId"
 

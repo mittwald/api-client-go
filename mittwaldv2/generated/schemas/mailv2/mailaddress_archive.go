@@ -8,15 +8,15 @@ package mailv2
 // properties:
 //    "active":
 //        type: "boolean"
-//        description: "shows if the mail-archive is enabled"
+//        description: "Shows if the mail-archive is enabled."
 //    "quota":
 //        type: "integer"
 //        format: "int64"
-//        description: "maximum available mail-archive storage in bytes"
+//        description: "Maximum available mail-archive storage in bytes."
 //    "usedBytes":
 //        type: "integer"
 //        format: "int64"
-//        description: "current mail-archive usage in bytes"
+//        description: "Current mail-archive usage in bytes."
 // required:
 //    - "active"
 //    - "quota"

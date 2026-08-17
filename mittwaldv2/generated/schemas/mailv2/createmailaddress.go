@@ -29,7 +29,7 @@ import "fmt"
 //                type: "integer"
 //                minimum: -1
 //                format: "int64"
-//                description: "2 GB"
+//                description: "Storage limit of the mailbox in bytes. Must be at least 209715200 (200 MiB), or -1 for an unlimited quota."
 //                example: 2147483648
 //        required:
 //            - "password"

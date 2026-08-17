@@ -8,6 +8,7 @@ package mailv2
 // properties:
 //    "name":
 //        type: "string"
+//        description: "Name of the backup; an eight-digit date in YYYYMMDD format. Use it as the backupId path parameter to recover emails from this backup."
 // required:
 //    - "name"
 

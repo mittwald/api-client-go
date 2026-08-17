@@ -194,6 +194,11 @@ type Client interface {
 		req DeprecatedValidateRegistryCredentialsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*DeprecatedValidateRegistryCredentialsResponse, *http.Response, error)
+	ListAccessibleServices(
+		ctx context.Context,
+		req ListAccessibleServicesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]containerv2.ServiceResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1167,6 +1172,34 @@ func (c *clientImpl) DeprecatedValidateRegistryCredentials(
 	}
 
 	var response DeprecatedValidateRegistryCredentialsResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List Services the executing user has access to.
+func (c *clientImpl) ListAccessibleServices(
+	ctx context.Context,
+	req ListAccessibleServicesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]containerv2.ServiceResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []containerv2.ServiceResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

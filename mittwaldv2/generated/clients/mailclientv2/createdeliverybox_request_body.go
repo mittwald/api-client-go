@@ -10,6 +10,7 @@ package mailclientv2
 //        type: "string"
 //    "password":
 //        type: "string"
+//        description: "Password of the Deliverybox. Write-only: it is never returned by any route."
 // required:
 //    - "description"
 //    - "password"
