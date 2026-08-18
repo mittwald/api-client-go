@@ -9,7 +9,7 @@ package marketplacev2
 //    "amountOfInstances":
 //        type: "integer"
 //        minimum: 0
-//        description: "The amount of instances for this extension. Accurate for the Contributor. Publicly rounded to the next lower hundred."
+//        description: "The amout of instances for this extension. Accurate for the Contributor. Publicly rounded to the next lower hundred."
 //        example: 42
 
 type ExtensionStatistics struct {

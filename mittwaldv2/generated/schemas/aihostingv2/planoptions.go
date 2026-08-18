@@ -16,6 +16,8 @@ import (
 //    "deletedAt":
 //        type: "string"
 //        format: "date-time"
+//    "description":
+//        type: "string"
 //    "keys": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsage"}
 //    "modelTermsApprovalRequired":
 //        type: "boolean"
@@ -23,6 +25,8 @@ import (
 //    "nextTokenReset":
 //        type: "string"
 //        format: "date-time"
+//    "planId":
+//        type: "string"
 //    "rateLimit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
 //    "tokens": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsageBig"}
 //    "topUsages":
@@ -44,6 +48,7 @@ import (
 //                - "tokenUsed"
 // required:
 //    - "customerId"
+//    - "description"
 //    - "keys"
 //    - "tokens"
 //    - "rateLimit"
@@ -53,9 +58,11 @@ import (
 type PlanOptions struct {
 	CustomerId                 string                     `json:"customerId"`
 	DeletedAt                  *time.Time                 `json:"deletedAt,omitempty"`
+	Description                string                     `json:"description"`
 	Keys                       PlanUsage                  `json:"keys"`
 	ModelTermsApprovalRequired bool                       `json:"modelTermsApprovalRequired"`
 	NextTokenReset             time.Time                  `json:"nextTokenReset"`
+	PlanId                     *string                    `json:"planId,omitempty"`
 	RateLimit                  RateLimit                  `json:"rateLimit"`
 	Tokens                     PlanUsageBig               `json:"tokens"`
 	TopUsages                  []PlanOptionsTopUsagesItem `json:"topUsages,omitempty"`

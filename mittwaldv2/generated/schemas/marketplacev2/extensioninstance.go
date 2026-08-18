@@ -65,6 +65,9 @@ import (
 //    "pendingRemoval":
 //        type: "boolean"
 //        default: false
+//    "scopeChangeAcceptanceDeadline":
+//        type: "string"
+//        format: "date-time"
 //    "variantKey":
 //        type: "string"
 //        example: "default"
@@ -102,6 +105,7 @@ type ExtensionInstance struct {
 	NextScheduledWebhookExecution *time.Time                          `json:"nextScheduledWebhookExecution,omitempty"`
 	PendingInstallation           bool                                `json:"pendingInstallation"`
 	PendingRemoval                bool                                `json:"pendingRemoval"`
+	ScopeChangeAcceptanceDeadline *time.Time                          `json:"scopeChangeAcceptanceDeadline,omitempty"`
 	VariantKey                    *string                             `json:"variantKey,omitempty"`
 	WebhookExecutionHalted        bool                                `json:"webhookExecutionHalted"`
 }

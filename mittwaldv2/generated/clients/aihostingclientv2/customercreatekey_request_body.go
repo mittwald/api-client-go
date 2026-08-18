@@ -11,6 +11,8 @@ package aihostingclientv2
 //    "name":
 //        type: "string"
 //        minLength: 5
+//    "planId":
+//        type: "string"
 //    "projectId":
 //        type: "string"
 // required:
@@ -21,6 +23,7 @@ package aihostingclientv2
 type CustomerCreateKeyRequestBody struct {
 	CreateWebuiContainer *bool   `json:"createWebuiContainer,omitempty"`
 	Name                 string  `json:"name"`
+	PlanId               *string `json:"planId,omitempty"`
 	ProjectId            *string `json:"projectId,omitempty"`
 }
 
