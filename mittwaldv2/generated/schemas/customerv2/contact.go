@@ -22,6 +22,10 @@ import (
 //        type: "string"
 //    "lastName":
 //        type: "string"
+//    "leitwegId":
+//        type: "string"
+//        maxLength: 46
+//        description: "German electronic invoicing routing ID (XRechnung). Only allowed for public authorities and requires a company."
 //    "phoneNumbers":
 //        type: "array"
 //        items:
@@ -41,6 +45,7 @@ type Contact struct {
 	EmailAddress  *string              `json:"emailAddress,omitempty"`
 	FirstName     *string              `json:"firstName,omitempty"`
 	LastName      *string              `json:"lastName,omitempty"`
+	LeitwegId     *string              `json:"leitwegId,omitempty"`
 	PhoneNumbers  []string             `json:"phoneNumbers,omitempty"`
 	Salutation    commonsv2.Salutation `json:"salutation"`
 	Title         *string              `json:"title,omitempty"`

@@ -9,13 +9,15 @@ import "fmt"
 // type: "string"
 // enum:
 //    - "database.mysql-version-set"
+//    - "database.redis-version-set"
 
 type DatabaseVersionSetName string
 
 const DatabaseVersionSetNameDatabaseMysqlVersionSet DatabaseVersionSetName = "database.mysql-version-set"
+const DatabaseVersionSetNameDatabaseRedisVersionSet DatabaseVersionSetName = "database.redis-version-set"
 
 func (e DatabaseVersionSetName) Validate() error {
-	if e == DatabaseVersionSetNameDatabaseMysqlVersionSet {
+	if e == DatabaseVersionSetNameDatabaseMysqlVersionSet || e == DatabaseVersionSetNameDatabaseRedisVersionSet {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

@@ -21,6 +21,7 @@ type ListSSHUsersRequest struct {
 	ProjectID string
 	Limit     *int64
 	Skip      *int64
+	Page      *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -63,6 +64,9 @@ func (r *ListSSHUsersRequest) query() url.Values {
 	}
 	if r.Skip != nil {
 		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
 	}
 	return q
 }

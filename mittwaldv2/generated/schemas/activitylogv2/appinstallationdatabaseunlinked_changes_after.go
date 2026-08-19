@@ -9,16 +9,11 @@ package activitylogv2
 //    "name":
 //        type: "string"
 //        nullable: true
-//    "purpose":
-//        type: "string"
-//        nullable: true
 // required:
 //    - "name"
-//    - "purpose"
 
 type AppInstallationDatabaseUnlinkedChangesAfter struct {
-	Name    string `json:"name"`
-	Purpose string `json:"purpose"`
+	Name string `json:"name"`
 }
 
 func (o *AppInstallationDatabaseUnlinkedChangesAfter) Validate() error {

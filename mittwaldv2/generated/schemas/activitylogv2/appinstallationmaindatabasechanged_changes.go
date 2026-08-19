@@ -13,6 +13,7 @@ import "fmt"
 //        properties:
 //            "name":
 //                type: "string"
+//                nullable: true
 //        required:
 //            - "name"
 //    "before":
@@ -27,12 +28,12 @@ import "fmt"
 //    - "before"
 //    - "after"
 
-type AppInstallationDatabaseLinkedChanges struct {
-	After  AppInstallationDatabaseLinkedChangesAfter  `json:"after"`
-	Before AppInstallationDatabaseLinkedChangesBefore `json:"before"`
+type AppInstallationMainDatabaseChangedChanges struct {
+	After  AppInstallationMainDatabaseChangedChangesAfter  `json:"after"`
+	Before AppInstallationMainDatabaseChangedChangesBefore `json:"before"`
 }
 
-func (o *AppInstallationDatabaseLinkedChanges) Validate() error {
+func (o *AppInstallationMainDatabaseChangedChanges) Validate() error {
 	if err := o.After.Validate(); err != nil {
 		return fmt.Errorf("invalid property after: %w", err)
 	}

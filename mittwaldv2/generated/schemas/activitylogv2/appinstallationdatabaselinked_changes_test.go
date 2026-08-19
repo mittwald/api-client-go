@@ -14,7 +14,7 @@ import (
 var _ = Describe("AppInstallationDatabaseLinkedChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"after\":{\"name\":\"string\",\"purpose\":\"unspecified\"},\"before\":{\"name\":\"string\",\"purpose\":\"string\"}}")
+			exampleJSON := []byte("{\"after\":{\"name\":\"string\"},\"before\":{\"name\":\"string\"}}")
 
 			sut := activitylogv2.AppInstallationDatabaseLinkedChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

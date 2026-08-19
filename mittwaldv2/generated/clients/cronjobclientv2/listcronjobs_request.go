@@ -21,6 +21,7 @@ import (
 type ListCronjobsRequest struct {
 	ProjectID              string
 	IncludeServiceCronjobs *bool
+	StackID                *string
 	Limit                  *int64
 	Skip                   *int64
 	Page                   *int64
@@ -63,6 +64,9 @@ func (r *ListCronjobsRequest) query() url.Values {
 	q := make(url.Values)
 	if r.IncludeServiceCronjobs != nil {
 		q.Set("includeServiceCronjobs", strconv.FormatBool(*r.IncludeServiceCronjobs))
+	}
+	if r.StackID != nil {
+		q.Set("stackId", *r.StackID)
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
