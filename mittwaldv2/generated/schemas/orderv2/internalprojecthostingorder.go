@@ -8,7 +8,7 @@ package orderv2
 // properties:
 //    "articleId":
 //        type: "string"
-//        example: "PS23-PLUS-0001"
+//        example: "WH25-0007"
 //    "customerId":
 //        type: "string"
 //        example: "0f5ec9cd-1b1b-4850-9061-fcebe765c62d"

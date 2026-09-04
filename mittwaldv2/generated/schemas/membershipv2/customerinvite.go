@@ -44,7 +44,6 @@ import (
 //    - "customerId"
 //    - "mailAddress"
 //    - "role"
-//    - "accepted"
 //    - "information"
 //    - "customerName"
 

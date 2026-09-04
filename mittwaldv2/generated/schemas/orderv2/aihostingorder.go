@@ -12,6 +12,9 @@ package orderv2
 //    "monthlyTokens":
 //        type: "integer"
 //        example: 2000000
+//    "name":
+//        type: "string"
+//        example: "Managed AI Hosting"
 //    "requestsPerMinute":
 //        type: "integer"
 //        example: 120
@@ -23,10 +26,11 @@ package orderv2
 //    - "monthlyTokens"
 
 type AIHostingOrder struct {
-	CustomerId        string `json:"customerId"`
-	MonthlyTokens     int64  `json:"monthlyTokens"`
-	RequestsPerMinute int64  `json:"requestsPerMinute"`
-	UseFreeTrial      *bool  `json:"useFreeTrial,omitempty"`
+	CustomerId        string  `json:"customerId"`
+	MonthlyTokens     int64   `json:"monthlyTokens"`
+	Name              *string `json:"name,omitempty"`
+	RequestsPerMinute int64   `json:"requestsPerMinute"`
+	UseFreeTrial      *bool   `json:"useFreeTrial,omitempty"`
 }
 
 func (o *AIHostingOrder) Validate() error {

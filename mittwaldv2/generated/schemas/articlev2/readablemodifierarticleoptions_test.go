@@ -14,7 +14,7 @@ import (
 var _ = Describe("ReadableModifierArticleOptions", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"articleId\":\"string\",\"info\":{\"articleName\":\"proSpace lite\",\"articleTemplateName\":\"proSpace\",\"fromArticleTemplate\":true},\"maxArticleCount\":3.14}")
+			exampleJSON := []byte("{\"articleId\":\"string\",\"info\":{\"articleName\":\"Webhosting Speicherplatz\",\"articleTemplateName\":\"Speicher für Hosting aller Art\",\"fromArticleTemplate\":true},\"maxArticleCount\":3.14}")
 
 			sut := articlev2.ReadableModifierArticleOptions{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

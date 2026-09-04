@@ -582,7 +582,7 @@ func (c *clientImpl) DeleteProjectInvite(
 	return httpRes, nil
 }
 
-// Get a ProjectMembership
+// Get a ProjectMembership.
 func (c *clientImpl) GetProjectMembership(
 	ctx context.Context,
 	req GetProjectMembershipRequest,

@@ -14,7 +14,7 @@ import (
 var _ = Describe("CheckDomainTransferabilityResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"reasons\":{\"domainAgeTooSmall\":true,\"domainDoesNotExist\":true,\"transferLock\":true,\"wrongAuthCode\":true},\"transferable\":true}")
+			exampleJSON := []byte("{\"reasons\":{\"domainAgeTooSmall\":true,\"domainDoesNotExist\":true,\"inRedemptionPeriod\":true,\"transferLock\":true,\"wrongAuthCode\":true},\"transferable\":true}")
 
 			sut := domainclientv2.CheckDomainTransferabilityResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

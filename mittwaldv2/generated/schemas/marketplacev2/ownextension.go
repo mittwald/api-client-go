@@ -22,6 +22,9 @@ import (
 //    "context": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.Context"}
 //    "contributorId":
 //        type: "string"
+//    "createdAt":
+//        type: "string"
+//        format: "date-time"
 //    "deletionDeadline":
 //        type: "string"
 //        format: "date-time"
@@ -61,6 +64,10 @@ import (
 //    "pricingDetails": {"$ref": "#/components/schemas/de.mittwald.v1.marketplace.PricePlanDetails"}
 //    "published":
 //        type: "boolean"
+//    "publishedAt":
+//        type: "string"
+//        format: "date-time"
+//        description: "Date of the first publishing."
 //    "requestedChanges":
 //        type: "object"
 //        properties:
@@ -133,6 +140,7 @@ type OwnExtension struct {
 	Blocked               *bool                         `json:"blocked,omitempty"`
 	Context               *Context                      `json:"context,omitempty"`
 	ContributorId         string                        `json:"contributorId"`
+	CreatedAt             *time.Time                    `json:"createdAt,omitempty"`
 	DeletionDeadline      *time.Time                    `json:"deletionDeadline,omitempty"`
 	Deprecation           *ExtensionDeprecation         `json:"deprecation,omitempty"`
 	Description           *string                       `json:"description,omitempty"`
@@ -149,6 +157,7 @@ type OwnExtension struct {
 	Pricing               *OwnExtensionPricing          `json:"pricing,omitempty"`
 	PricingDetails        *PricePlanDetails             `json:"pricingDetails,omitempty"`
 	Published             bool                          `json:"published"`
+	PublishedAt           *time.Time                    `json:"publishedAt,omitempty"`
 	RequestedChanges      *OwnExtensionRequestedChanges `json:"requestedChanges,omitempty"`
 	Scopes                []string                      `json:"scopes,omitempty"`
 	Secrets               []ExtensionSecret             `json:"secrets"`

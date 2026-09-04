@@ -44,7 +44,6 @@ import (
 //    - "projectId"
 //    - "mailAddress"
 //    - "role"
-//    - "accepted"
 //    - "information"
 //    - "projectDescription"
 

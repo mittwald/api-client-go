@@ -99,7 +99,7 @@ func (c *clientImpl) ListLicensesForProject(
 	return &response, httpRes, nil
 }
 
-// rotate a License's key, i.e. revoke the old and generate a new one.
+// Rotate a License's key, i.e. revoke the old and generate a new one.
 func (c *clientImpl) RotateLicenseKey(
 	ctx context.Context,
 	req RotateLicenseKeyRequest,

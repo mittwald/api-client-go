@@ -15,7 +15,7 @@ import (
 // RotateLicenseKeyRequest models a request for the 'license-rotate-license-key'
 // operation. See [1] for more information.
 //
-// rotate a License's key, i.e. revoke the old and generate a new one.
+// Rotate a License's key, i.e. revoke the old and generate a new one.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/license/license-rotate-license-key

@@ -39,6 +39,7 @@ import (
 //                - "hasActiveContracts"
 //                - "hasActiveExtensionSubscriptions"
 //                - "isActiveContributor"
+//                - "hasOrdersInProgress"
 //    "executingUserRoles":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.customer.Role"}

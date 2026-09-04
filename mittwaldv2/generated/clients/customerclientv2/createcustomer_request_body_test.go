@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateCustomerRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"name\":\"string\",\"owner\":{\"address\":{\"addressPrefix\":\"c/o Ada Lovelace\",\"city\":\"Espelkamp\",\"countryCode\":\"DE\",\"houseNumber\":\"4-6\",\"street\":\"Königsberger Straße\",\"zip\":\"32339\"},\"company\":\"string\",\"emailAddress\":\"string\",\"firstName\":\"string\",\"lastName\":\"string\",\"leitwegId\":\"string\",\"phoneNumbers\":[],\"salutation\":\"mr\",\"title\":\"string\",\"useFormalTerm\":true},\"vatId\":\"string\"}")
+			exampleJSON := []byte("{\"name\":\"string\",\"owner\":{\"address\":{\"addressPrefix\":\"c/o Ada Lovelace\",\"city\":\"Espelkamp\",\"countryCode\":\"DE\",\"houseNumber\":\"4-6\",\"street\":\"Königsberger Straße\",\"zip\":\"32339\"},\"company\":\"string\",\"emailAddress\":\"string\",\"firstName\":\"string\",\"lastName\":\"string\",\"leitwegId\":\"string\",\"phoneNumbers\":[],\"purchaseOrderReference\":\"string\",\"salutation\":\"mr\",\"title\":\"string\",\"useFormalTerm\":true},\"vatId\":\"string\"}")
 
 			sut := customerclientv2.CreateCustomerRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

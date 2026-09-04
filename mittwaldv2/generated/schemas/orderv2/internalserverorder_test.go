@@ -14,7 +14,7 @@ import (
 var _ = Describe("InternalServerOrder", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"articleId\":\"MT22-0001\",\"customerId\":\"f3435305-fd26-470e-9f21-43d9be7e67e7\",\"description\":\"My first project\",\"diskspaceInGiB\":100,\"promotionCode\":\"123456\",\"recommendationCode\":\"mp-123456\",\"useFreeTrial\":true}")
+			exampleJSON := []byte("{\"articleId\":\"VS25-0031\",\"customerId\":\"f3435305-fd26-470e-9f21-43d9be7e67e7\",\"description\":\"My first project\",\"diskspaceInGiB\":100,\"promotionCode\":\"123456\",\"recommendationCode\":\"mp-123456\",\"useFreeTrial\":true}")
 
 			sut := orderv2.InternalServerOrder{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -8,12 +8,23 @@ package cronjobv2
 // properties:
 //    "message":
 //        type: "string"
-//        example: "Überprüfe die URL im Cronjob-Konfigurationsformular und korrigiere sie gegebenenfalls. Stelle sicher, dass die Domain gültig ist und DNS-Einträge korrekt konfiguriert wurden. Falls die URL falsch ist, aktualisiere sie mit der richtigen Adresse."
+//        description: "Deprecated: contains summary and recommendation combined. Use the separate fields instead."
+//        example: "The cronjob could not reach the configured URL because the domain could not be resolved.\n\nCheck the URL in the cronjob configuration and correct it if necessary."
+//        deprecated: true
+//    "recommendation":
+//        type: "string"
+//        example: "Check the URL in the cronjob configuration and correct it if necessary. Make sure the domain is valid and its DNS records are configured correctly."
+//    "summary":
+//        type: "string"
+//        example: "The cronjob could not reach the configured URL because the domain could not be resolved."
 // required:
+//    - "summary"
 //    - "message"
 
 type CronjobExecutionAnalysis struct {
-	Message string `json:"message"`
+	Message        string  `json:"message"`
+	Recommendation *string `json:"recommendation,omitempty"`
+	Summary        string  `json:"summary"`
 }
 
 func (o *CronjobExecutionAnalysis) Validate() error {

@@ -14,7 +14,7 @@ import (
 // 'container-rotate-pull-image-webhook-for-service' operation. See [1] for more
 // information.
 //
-// # Create or rotate pull-image webhook token
+// Create or rotate a Service pull-image webhook token.
 //
 // Creates or rotates the pull-image webhook token for a Service.
 //

@@ -174,7 +174,7 @@ type Client interface {
 		ctx context.Context,
 		req DeleteExtensionInstanceRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*any, *http.Response, error)
+	) (*http.Response, error)
 	GetOwnExtension(
 		ctx context.Context,
 		req GetOwnExtensionRequest,
@@ -194,7 +194,7 @@ type Client interface {
 		ctx context.Context,
 		req DisableExtensionInstanceRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*any, *http.Response, error)
+	) (*http.Response, error)
 	DryRunWebhook(
 		ctx context.Context,
 		req DryRunWebhookRequest,
@@ -204,7 +204,7 @@ type Client interface {
 		ctx context.Context,
 		req EnableExtensionInstanceRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*any, *http.Response, error)
+	) (*http.Response, error)
 	GenerateExtensionSecret(
 		ctx context.Context,
 		req GenerateExtensionSecretRequest,
@@ -319,7 +319,7 @@ type Client interface {
 		ctx context.Context,
 		req RequestExtensionVerificationRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*RequestExtensionVerificationResponse, *http.Response, error)
+	) (*http.Response, error)
 	SetExtensionPublishedState(
 		ctx context.Context,
 		req SetExtensionPublishedStateRequest,
@@ -1210,27 +1210,23 @@ func (c *clientImpl) DeleteExtensionInstance(
 	ctx context.Context,
 	req DeleteExtensionInstanceRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*any, *http.Response, error) {
+) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
 	if err != nil {
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
 	if httpRes.StatusCode >= 400 {
 		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
-	var response any
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
+	return httpRes, nil
 }
 
 // Get Extension of own contributor.
@@ -1320,27 +1316,23 @@ func (c *clientImpl) DisableExtensionInstance(
 	ctx context.Context,
 	req DisableExtensionInstanceRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*any, *http.Response, error) {
+) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
 	if err != nil {
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
 	if httpRes.StatusCode >= 400 {
 		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
-	var response any
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
+	return httpRes, nil
 }
 
 // Dry run a webhook with random or given values.
@@ -1376,27 +1368,23 @@ func (c *clientImpl) EnableExtensionInstance(
 	ctx context.Context,
 	req EnableExtensionInstanceRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*any, *http.Response, error) {
+) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
 	if err != nil {
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
 	if httpRes.StatusCode >= 400 {
 		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
-	var response any
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
+	return httpRes, nil
 }
 
 // Generate an Extension secret for the given Extension.
@@ -2014,27 +2002,23 @@ func (c *clientImpl) RequestExtensionVerification(
 	ctx context.Context,
 	req RequestExtensionVerificationRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*RequestExtensionVerificationResponse, *http.Response, error) {
+) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
 	if err != nil {
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
 	if httpRes.StatusCode >= 400 {
 		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
+		return httpRes, err
 	}
 
-	var response RequestExtensionVerificationResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
+	return httpRes, nil
 }
 
 // Publish or withdraw an Extension.

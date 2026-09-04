@@ -14,7 +14,7 @@ import (
 var _ = Describe("ReadableChangeArticleOptions", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"articleId\":\"string\",\"info\":{\"articleName\":\"proSpace lite\",\"articleTemplateName\":\"proSpace\",\"fromArticleTemplate\":true}}")
+			exampleJSON := []byte("{\"articleId\":\"string\",\"info\":{\"articleName\":\"Webhosting\",\"articleTemplateName\":\"Webhosting\",\"fromArticleTemplate\":true}}")
 
 			sut := articlev2.ReadableChangeArticleOptions{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

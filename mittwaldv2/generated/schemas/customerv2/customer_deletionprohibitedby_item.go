@@ -12,6 +12,7 @@ import "fmt"
 //    - "hasActiveContracts"
 //    - "hasActiveExtensionSubscriptions"
 //    - "isActiveContributor"
+//    - "hasOrdersInProgress"
 
 type CustomerDeletionProhibitedByItem string
 
@@ -19,9 +20,10 @@ const CustomerDeletionProhibitedByItemHasOpenInvoices CustomerDeletionProhibited
 const CustomerDeletionProhibitedByItemHasActiveContracts CustomerDeletionProhibitedByItem = "hasActiveContracts"
 const CustomerDeletionProhibitedByItemHasActiveExtensionSubscriptions CustomerDeletionProhibitedByItem = "hasActiveExtensionSubscriptions"
 const CustomerDeletionProhibitedByItemIsActiveContributor CustomerDeletionProhibitedByItem = "isActiveContributor"
+const CustomerDeletionProhibitedByItemHasOrdersInProgress CustomerDeletionProhibitedByItem = "hasOrdersInProgress"
 
 func (e CustomerDeletionProhibitedByItem) Validate() error {
-	if e == CustomerDeletionProhibitedByItemHasOpenInvoices || e == CustomerDeletionProhibitedByItemHasActiveContracts || e == CustomerDeletionProhibitedByItemHasActiveExtensionSubscriptions || e == CustomerDeletionProhibitedByItemIsActiveContributor {
+	if e == CustomerDeletionProhibitedByItemHasOpenInvoices || e == CustomerDeletionProhibitedByItemHasActiveContracts || e == CustomerDeletionProhibitedByItemHasActiveExtensionSubscriptions || e == CustomerDeletionProhibitedByItemIsActiveContributor || e == CustomerDeletionProhibitedByItemHasOrdersInProgress {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

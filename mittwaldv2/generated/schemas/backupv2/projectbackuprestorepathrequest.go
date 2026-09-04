@@ -16,6 +16,7 @@ import "errors"
 //        type: "array"
 //        items:
 //            type: "string"
+//        minItems: 1
 //        example: ["/html/mainApp/config/", "/html/assets/"]
 //    "targetRestorePath":
 //        type: "string"

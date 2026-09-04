@@ -14,7 +14,7 @@ import (
 // 'container-call-pull-image-webhook-for-service' operation. See [1] for more
 // information.
 //
-// # Call pull-image webhook
+// Call a Service pull-image webhook.
 //
 // Calls the pull-image webhook endpoint for a Service using a webhook token.
 //

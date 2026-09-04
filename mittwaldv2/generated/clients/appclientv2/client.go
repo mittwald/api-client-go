@@ -14,6 +14,16 @@ import (
 )
 
 type Client interface {
+	DetachAppinstallationStaging(
+		ctx context.Context,
+		req DetachAppinstallationStagingRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	GetAppInstallationSystemSoftware(
+		ctx context.Context,
+		req GetAppInstallationSystemSoftwareRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]appv2.SystemSoftware, *http.Response, error)
 	GetApp(
 		ctx context.Context,
 		req GetAppRequest,
@@ -104,11 +114,21 @@ type Client interface {
 		req ListUpdateCandidatesForAppversionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]appv2.AppVersion, *http.Response, error)
+	PromoteAppinstallationStaging(
+		ctx context.Context,
+		req PromoteAppinstallationStagingRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	RequestAppinstallationCopy(
 		ctx context.Context,
 		req RequestAppinstallationCopyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*RequestAppinstallationCopyResponse, *http.Response, error)
+	RequestAppinstallationStaging(
+		ctx context.Context,
+		req RequestAppinstallationStagingRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*RequestAppinstallationStagingResponse, *http.Response, error)
 	RetrieveStatus(
 		ctx context.Context,
 		req RetrieveStatusRequest,
@@ -139,6 +159,11 @@ type Client interface {
 		req DeprecatedReplaceDatabaseRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetAppinstallationErrorAnalysis(
+		ctx context.Context,
+		req GetAppinstallationErrorAnalysisRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*appv2.AppInstallationErrorAnalysis, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -146,6 +171,58 @@ type clientImpl struct {
 
 func NewClient(client httpclient.RequestRunner) Client {
 	return &clientImpl{client: client}
+}
+
+// Detach a staging AppInstallation from its source.
+func (c *clientImpl) DetachAppinstallationStaging(
+	ctx context.Context,
+	req DetachAppinstallationStagingRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Get the installed `SystemSoftware' for a specific `AppInstallation`.
+func (c *clientImpl) GetAppInstallationSystemSoftware(
+	ctx context.Context,
+	req GetAppInstallationSystemSoftwareRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]appv2.SystemSoftware, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []appv2.SystemSoftware
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Get an App.
@@ -281,6 +358,8 @@ func (c *clientImpl) GetAppversion(
 }
 
 // Get the installed `SystemSoftware' for a specific `AppInstallation`.
+//
+// Deprecated by `GET /v2/app-installations/{appInstallationId}/system-software`.
 func (c *clientImpl) GetInstalledSystemsoftwareForAppinstallation(
 	ctx context.Context,
 	req GetInstalledSystemsoftwareForAppinstallationRequest,
@@ -642,6 +721,30 @@ func (c *clientImpl) ListUpdateCandidatesForAppversion(
 	return &response, httpRes, nil
 }
 
+// Promote a staging AppInstallation.
+func (c *clientImpl) PromoteAppinstallationStaging(
+	ctx context.Context,
+	req PromoteAppinstallationStagingRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Request a copy of an AppInstallation.
 func (c *clientImpl) RequestAppinstallationCopy(
 	ctx context.Context,
@@ -664,6 +767,34 @@ func (c *clientImpl) RequestAppinstallationCopy(
 	}
 
 	var response RequestAppinstallationCopyResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Request a staging for an AppInstallation.
+func (c *clientImpl) RequestAppinstallationStaging(
+	ctx context.Context,
+	req RequestAppinstallationStagingRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*RequestAppinstallationStagingResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response RequestAppinstallationStagingResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -824,4 +955,34 @@ func (c *clientImpl) DeprecatedReplaceDatabase(
 	}
 
 	return httpRes, nil
+}
+
+// Get an analysis of the error of an AppInstallation.
+//
+// Analyzes the last error of the AppInstallation. Only available while the AppInstallation has an error; returns a failed precondition otherwise.
+func (c *clientImpl) GetAppinstallationErrorAnalysis(
+	ctx context.Context,
+	req GetAppinstallationErrorAnalysisRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*appv2.AppInstallationErrorAnalysis, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response appv2.AppInstallationErrorAnalysis
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }

@@ -8,10 +8,10 @@ package articlev2
 // properties:
 //    "articleName":
 //        type: "string"
-//        example: "proSpace lite"
+//        example: "Webhosting"
 //    "articleTemplateName":
 //        type: "string"
-//        example: "proSpace"
+//        example: "Webhosting"
 //    "fromArticleTemplate":
 //        type: "boolean"
 

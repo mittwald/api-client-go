@@ -6,6 +6,8 @@ package userclientv2
 import (
 	"context"
 	"encoding/json"
+	"errors"
+	"io"
 	"net/http"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/policyv2"
@@ -1393,6 +1395,10 @@ func (c *clientImpl) AuthenticateMFA(
 
 	var response AuthenticateMFAResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		// A success status that the spec declares without a response body.
+		if errors.Is(err, io.EOF) {
+			return nil, httpRes, nil
+		}
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
@@ -1421,6 +1427,10 @@ func (c *clientImpl) Authenticate(
 
 	var response AuthenticateResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		// A success status that the spec declares without a response body.
+		if errors.Is(err, io.EOF) {
+			return nil, httpRes, nil
+		}
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
@@ -1981,6 +1991,10 @@ func (c *clientImpl) DeleteUser(
 
 	var response any
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		// A success status that the spec declares without a response body.
+		if errors.Is(err, io.EOF) {
+			return nil, httpRes, nil
+		}
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil

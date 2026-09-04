@@ -18,10 +18,14 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/contract/contract-list-contracts
 type ListContractsRequest struct {
-	CustomerID string
-	Limit      *int64
-	Skip       *int64
-	Page       *int64
+	CustomerID       string
+	Search           *string
+	BaseArticleNames []string
+	Limit            *int64
+	Skip             *int64
+	Page             *int64
+	Sort             *ListContractsRequestQuerySort
+	Order            *ListContractsRequestQueryOrder
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -59,6 +63,12 @@ func (r *ListContractsRequest) url() string {
 
 func (r *ListContractsRequest) query() url.Values {
 	q := make(url.Values)
+	if r.Search != nil {
+		q.Set("search", *r.Search)
+	}
+	for _, val := range r.BaseArticleNames {
+		q.Add("baseArticleNames", val)
+	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
 	}
@@ -67,6 +77,12 @@ func (r *ListContractsRequest) query() url.Values {
 	}
 	if r.Page != nil {
 		q.Set("page", fmt.Sprintf("%d", *r.Page))
+	}
+	if r.Sort != nil {
+		q.Set("sort", string(*r.Sort))
+	}
+	if r.Order != nil {
+		q.Set("order", string(*r.Order))
 	}
 	return q
 }

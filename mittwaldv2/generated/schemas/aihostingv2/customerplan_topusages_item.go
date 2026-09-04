@@ -19,13 +19,13 @@ package aihostingv2
 //    - "name"
 //    - "tokenUsed"
 
-type PlanOptionsTopUsagesItem struct {
+type CustomerPlanTopUsagesItem struct {
 	KeyId     *string `json:"keyId,omitempty"`
 	Name      string  `json:"name"`
 	ProjectId *string `json:"projectId,omitempty"`
 	TokenUsed int64   `json:"tokenUsed"`
 }
 
-func (o *PlanOptionsTopUsagesItem) Validate() error {
+func (o *CustomerPlanTopUsagesItem) Validate() error {
 	return nil
 }

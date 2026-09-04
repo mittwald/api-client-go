@@ -8,10 +8,10 @@ package articlev2
 // properties:
 //    "articleName":
 //        type: "string"
-//        example: "proSpace lite"
+//        example: "Webhosting Speicherplatz"
 //    "articleTemplateName":
 //        type: "string"
-//        example: "proSpace"
+//        example: "Speicher für Hosting aller Art"
 //    "fromArticleTemplate":
 //        type: "boolean"
 

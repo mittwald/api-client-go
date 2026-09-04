@@ -14,7 +14,7 @@ import (
 var _ = Describe("AppInstallationDesiredSystemSoftwareDeleted", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{\"after\":{\"softwareVersion\":\"string\"},\"before\":{\"softwareVersion\":\"string\"}},\"name\":\"app.systemsoftware-deleted\",\"parameters\":{\"software\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"version\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
+			exampleJSON := []byte("{\"changes\":{\"after\":{\"softwareVersion\":\"string\"},\"before\":{\"softwareVersion\":\"string\"}},\"name\":\"app.systemsoftware-deleted\",\"parameters\":{\"appInstallation\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"software\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"version\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
 
 			sut := activitylogv2.AppInstallationDesiredSystemSoftwareDeleted{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

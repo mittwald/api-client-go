@@ -65,6 +65,10 @@ import (
 //        enum:
 //            - false
 //        description: "Whether the extension has been published by the contributor."
+//    "publishedAt":
+//        type: "string"
+//        format: "date-time"
+//        description: "Date of the first publishing."
 //    "scopes":
 //        type: "array"
 //        items:
@@ -126,6 +130,7 @@ type UnpublishedExtension struct {
 	Pricing              *UnpublishedExtensionPricing `json:"pricing,omitempty"`
 	PricingDetails       *PricePlanDetails            `json:"pricingDetails,omitempty"`
 	Published            *bool                        `json:"published,omitempty"`
+	PublishedAt          *time.Time                   `json:"publishedAt,omitempty"`
 	Scopes               []string                     `json:"scopes"`
 	State                UnpublishedExtensionState    `json:"state"`
 	Statistics           ExtensionStatistics          `json:"statistics"`

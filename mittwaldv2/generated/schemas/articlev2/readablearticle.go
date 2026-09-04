@@ -14,7 +14,7 @@ import "fmt"
 //    "articleId":
 //        type: "string"
 //        minLength: 3
-//        example: "WH25-0001"
+//        example: "WH25-0007"
 //    "attributes":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.article.ArticleAttributes"}
@@ -29,7 +29,7 @@ import "fmt"
 //        example: 0
 //    "description":
 //        type: "string"
-//        example: "proSpace without dedicated resources"
+//        example: "Configure your perfect hosting"
 //    "forcedInvoicingPeriodInMonth":
 //        type: "number"
 //        minimum: 0
@@ -65,7 +65,7 @@ import "fmt"
 //    "name":
 //        type: "string"
 //        minLength: 3
-//        example: "proSpace lite"
+//        example: "Webhosting"
 //    "orderable":
 //        type: "string"
 //        enum:
@@ -81,7 +81,7 @@ import "fmt"
 //    "price":
 //        type: "number"
 //        description: "Monthly price in Eurocent"
-//        example: 1000
+//        example: 1300
 //    "tags":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.article.ArticleTag"}

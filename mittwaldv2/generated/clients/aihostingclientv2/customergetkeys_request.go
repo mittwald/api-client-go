@@ -19,6 +19,10 @@ import (
 // hosting/ai-hosting-customer-get-keys
 type CustomerGetKeysRequest struct {
 	CustomerID string
+	PlanID     *string
+	Limit      *int64
+	Skip       *int64
+	Page       *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -48,11 +52,25 @@ func (r *CustomerGetKeysRequest) body() (io.Reader, string, error) {
 
 func (r *CustomerGetKeysRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/customers/%s/ai-hosting-keys", url.PathEscape(r.CustomerID)),
+		Path:     fmt.Sprintf("/v2/customers/%s/ai-hosting-keys", url.PathEscape(r.CustomerID)),
+		RawQuery: r.query().Encode(),
 	}
 	return u.String()
 }
 
 func (r *CustomerGetKeysRequest) query() url.Values {
-	return nil
+	q := make(url.Values)
+	if r.PlanID != nil {
+		q.Set("planId", *r.PlanID)
+	}
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
+	}
+	return q
 }

@@ -669,6 +669,7 @@ func (c *clientImpl) ListContracts(
 // Return the AI Hosting Contract for the given Customer.
 //
 // This route is deprecated. Use `GET /v2/customers/{customerId}/ai-hostings/{aiHostingId}/contract` instead.
+// A customer can own several AI hostings; this route answers with the contract of the oldest one.
 func (c *clientImpl) DeprecatedGetDetailOfContractByAIHosting(
 	ctx context.Context,
 	req DeprecatedGetDetailOfContractByAIHostingRequest,

@@ -13,13 +13,14 @@ import (
 // ProjectGetUsageRequest models a request for the 'ai-hosting-project-get-usage'
 // operation. See [1] for more information.
 //
-// Get ai hosting plan and usages of a project. Same as the customer route, but
-// less details.
+// Get ai hosting plan and usages of a project. Deprecated: use
+// /v2/projects/{projectId}/ai-hostings/{planId} instead.
 //
 // [1]: https://developer.mittwald.de/docs/v2/reference/ai
 // hosting/ai-hosting-project-get-usage
 type ProjectGetUsageRequest struct {
 	ProjectID string
+	PlanID    *string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -49,11 +50,16 @@ func (r *ProjectGetUsageRequest) body() (io.Reader, string, error) {
 
 func (r *ProjectGetUsageRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/projects/%s/ai-hosting", url.PathEscape(r.ProjectID)),
+		Path:     fmt.Sprintf("/v2/projects/%s/ai-hosting", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
 	}
 	return u.String()
 }
 
 func (r *ProjectGetUsageRequest) query() url.Values {
-	return nil
+	q := make(url.Values)
+	if r.PlanID != nil {
+		q.Set("planId", *r.PlanID)
+	}
+	return q
 }

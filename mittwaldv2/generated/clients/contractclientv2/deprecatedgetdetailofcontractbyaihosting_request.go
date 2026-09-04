@@ -18,6 +18,8 @@ import (
 //
 // This route is deprecated. Use `GET
 // /v2/customers/{customerId}/ai-hostings/{aiHostingId}/contract` instead.
+// A customer can own several AI hostings; this route answers with the contract of
+// the oldest one.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/contract/deprecated-contract-get-detail-of-contract-by-ai-hosting
