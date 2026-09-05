@@ -16,33 +16,14 @@ import (
 //        default: false
 //    "plans":
 //        type: "array"
-//        items:
-//            type: "object"
-//            properties:
-//                "description":
-//                    type: "string"
-//                "keys": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsage"}
-//                "modelTermsApprovalRequired":
-//                    type: "boolean"
-//                "nextTokenReset":
-//                    type: "string"
-//                    format: "date-time"
-//                "planId":
-//                    type: "string"
-//                "projectId":
-//                    type: "string"
-//            required:
-//                - "keys"
-//                - "projectId"
-//                - "planId"
-//                - "modelTermsApprovalRequired"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.ProjectPlan"}
 // required:
 //    - "plans"
 //    - "modelTermsApprovalRequired"
 
 type ProjectPlans struct {
-	ModelTermsApprovalRequired bool                    `json:"modelTermsApprovalRequired"`
-	Plans                      []ProjectPlansPlansItem `json:"plans"`
+	ModelTermsApprovalRequired bool          `json:"modelTermsApprovalRequired"`
+	Plans                      []ProjectPlan `json:"plans"`
 }
 
 func (o *ProjectPlans) Validate() error {

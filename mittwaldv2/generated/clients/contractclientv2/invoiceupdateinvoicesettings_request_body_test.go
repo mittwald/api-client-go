@@ -14,7 +14,7 @@ import (
 var _ = Describe("InvoiceUpdateInvoiceSettingsRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"additionalEmailRecipients\":[\"string\"],\"invoicePeriod\":1,\"paymentSettings\":{\"accountHolder\":\"Ada Lovelace\",\"bic\":\"DEUTDEDB123\",\"iban\":\"DE12345678901234567890\",\"method\":\"debit\"},\"printedInvoices\":true,\"recipient\":{\"address\":{\"addressPrefix\":\"c/o Ada Lovelace\",\"city\":\"Espelkamp\",\"countryCode\":\"DE\",\"houseNumber\":\"4-6\",\"street\":\"Königsberger Straße\",\"zip\":\"32339\"},\"company\":\"Mittwald CM Service GmbH \\u0026 Co. KG\",\"emailAddress\":\"string\",\"firstName\":\"Ada\",\"lastName\":\"Lovelace\",\"phoneNumbers\":[],\"salutation\":\"mr\",\"title\":\"Dr.\",\"useFormalTerm\":true},\"recipientSameAsOwner\":true,\"targetDay\":15}")
+			exampleJSON := []byte("{\"additionalEmailRecipients\":[\"string\"],\"invoicePeriod\":1,\"paymentSettings\":{\"accountHolder\":\"Ada Lovelace\",\"bic\":\"DEUTDEDB123\",\"iban\":\"DE12345678901234567890\",\"method\":\"debit\"},\"printedInvoices\":true,\"recipient\":{\"address\":{\"addressPrefix\":\"c/o Ada Lovelace\",\"city\":\"Espelkamp\",\"countryCode\":\"DE\",\"houseNumber\":\"4-6\",\"street\":\"Königsberger Straße\",\"zip\":\"32339\"},\"company\":\"Mittwald CM Service GmbH \\u0026 Co. KG\",\"emailAddress\":\"string\",\"firstName\":\"Ada\",\"lastName\":\"Lovelace\",\"leitwegId\":\"string\",\"phoneNumbers\":[],\"purchaseOrderReference\":\"string\",\"salutation\":\"mr\",\"title\":\"Dr.\",\"useFormalTerm\":true},\"recipientSameAsOwner\":true,\"targetDay\":15}")
 
 			sut := contractclientv2.InvoiceUpdateInvoiceSettingsRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

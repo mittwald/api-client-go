@@ -14,7 +14,7 @@ import (
 var _ = Describe("OrderItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"addons\":[{\"hidden\":null,\"key\":\"string\",\"value\":\"string\"}],\"articleId\":\"PS23-PLUS-0004\",\"articleName\":\"proSpace\",\"articleTemplateName\":\"Pro-Space-Hosting\",\"attributeConfiguration\":[{\"key\":\"storage\",\"value\":null}],\"isInclusive\":true,\"orderItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"predefinedDomainAggregateId\":\"aa38d836-fe72-4c43-aad3-9472b51edf61\",\"price\":1000,\"reference\":{\"contractItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"offerItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"orderItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}}")
+			exampleJSON := []byte("{\"addons\":[{\"hidden\":null,\"key\":\"string\",\"value\":\"string\"}],\"articleId\":\"WH25-0007\",\"articleName\":\"Webhosting\",\"articleTemplateName\":\"Webhosting\",\"attributeConfiguration\":[{\"key\":\"storage\",\"value\":null}],\"isInclusive\":true,\"orderItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"predefinedDomainAggregateId\":\"aa38d836-fe72-4c43-aad3-9472b51edf61\",\"price\":1300,\"reference\":{\"contractItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"offerItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"orderItemId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}}")
 
 			sut := orderv2.OrderItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

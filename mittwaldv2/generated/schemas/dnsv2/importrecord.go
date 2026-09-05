@@ -9,20 +9,12 @@ package dnsv2
 //    "flags":
 //        type: "integer"
 //        format: "int32"
-//    "note":
-//        type: "string"
 //    "port":
 //        type: "integer"
 //        format: "int32"
 //    "priority":
 //        type: "integer"
 //        format: "int32"
-//    "sourceLine":
-//        type: "integer"
-//        format: "int64"
-//    "status":
-//        type: "string"
-//        description: "Per-record status: OK, NORMALIZED, UNSUPPORTED or INVALID."
 //    "tag":
 //        type: "string"
 //    "value":
@@ -30,17 +22,16 @@ package dnsv2
 //    "weight":
 //        type: "integer"
 //        format: "int32"
+// required:
+//    - "value"
 
 type ImportRecord struct {
-	Flags      *int64  `json:"flags,omitempty"`
-	Note       *string `json:"note,omitempty"`
-	Port       *int64  `json:"port,omitempty"`
-	Priority   *int64  `json:"priority,omitempty"`
-	SourceLine *int64  `json:"sourceLine,omitempty"`
-	Status     *string `json:"status,omitempty"`
-	Tag        *string `json:"tag,omitempty"`
-	Value      *string `json:"value,omitempty"`
-	Weight     *int64  `json:"weight,omitempty"`
+	Flags    *int64  `json:"flags,omitempty"`
+	Port     *int64  `json:"port,omitempty"`
+	Priority *int64  `json:"priority,omitempty"`
+	Tag      *string `json:"tag,omitempty"`
+	Value    string  `json:"value"`
+	Weight   *int64  `json:"weight,omitempty"`
 }
 
 func (o *ImportRecord) Validate() error {

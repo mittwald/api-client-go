@@ -14,7 +14,7 @@ import (
 var _ = Describe("ZoneFileImport", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"failedZones\":[{\"error\":\"string\",\"name\":\"string\"}],\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"importedZones\":[\"string\"],\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"skippedZones\":[{\"name\":\"string\",\"reason\":\"string\"}],\"status\":\"string\"}")
+			exampleJSON := []byte("{\"createdAt\":\"2006-01-02T15:04:05Z\",\"failedZones\":[{\"error\":\"string\",\"name\":\"string\"}],\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"importedZones\":[\"string\"],\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"skippedZones\":[{\"name\":\"string\",\"reason\":\"string\"}],\"status\":\"running\"}")
 
 			sut := dnsv2.ZoneFileImport{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -15,6 +15,8 @@ import "fmt"
 //                type: "boolean"
 //            "domainDoesNotExist":
 //                type: "boolean"
+//            "inRedemptionPeriod":
+//                type: "boolean"
 //            "transferLock":
 //                type: "boolean"
 //            "wrongAuthCode":
@@ -24,6 +26,7 @@ import "fmt"
 //            - "wrongAuthCode"
 //            - "transferLock"
 //            - "domainAgeTooSmall"
+//            - "inRedemptionPeriod"
 //    "transferable":
 //        type: "boolean"
 // required:

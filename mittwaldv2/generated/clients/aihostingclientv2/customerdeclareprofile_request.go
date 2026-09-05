@@ -48,7 +48,7 @@ func (r *CustomerDeclareProfileRequest) body() (io.Reader, string, error) {
 
 func (r *CustomerDeclareProfileRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/customers/%s/ai-hostings/profile", url.PathEscape(r.CustomerID)),
+		Path: fmt.Sprintf("/v2/customers/%s/ai-hostings", url.PathEscape(r.CustomerID)),
 	}
 	return u.String()
 }

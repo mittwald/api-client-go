@@ -10,10 +10,13 @@ package dnsv2
 //        type: "string"
 //    "name":
 //        type: "string"
+// required:
+//    - "name"
+//    - "error"
 
 type ZoneFileImportFailedZonesItem struct {
-	Error *string `json:"error,omitempty"`
-	Name  *string `json:"name,omitempty"`
+	Error string `json:"error"`
+	Name  string `json:"name"`
 }
 
 func (o *ZoneFileImportFailedZonesItem) Validate() error {

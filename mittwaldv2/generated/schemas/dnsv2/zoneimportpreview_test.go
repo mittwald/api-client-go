@@ -14,7 +14,7 @@ import (
 var _ = Describe("ZoneImportPreview", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"alreadyExists\":true,\"importable\":true,\"isRoot\":true,\"name\":\"string\",\"recordSets\":[{\"records\":null,\"ttlNormalized\":null,\"ttlSeconds\":null,\"type\":null}],\"requiresVerifiedIngress\":true,\"verifiedIngressSatisfied\":true,\"warnings\":[{\"code\":null,\"message\":null,\"severity\":null,\"sourceLine\":null}]}")
+			exampleJSON := []byte("{\"alreadyExists\":true,\"name\":\"string\",\"recordSets\":[{\"records\":[{\"flags\":42,\"port\":42,\"priority\":42,\"tag\":\"string\",\"value\":\"string\",\"weight\":42}],\"ttlNormalized\":true,\"ttlSeconds\":42,\"type\":\"a\"}],\"targetProjectId\":\"string\"}")
 
 			sut := dnsv2.ZoneImportPreview{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

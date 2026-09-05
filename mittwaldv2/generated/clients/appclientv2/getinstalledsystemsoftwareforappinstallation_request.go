@@ -16,6 +16,8 @@ import (
 //
 // Get the installed `SystemSoftware' for a specific `AppInstallation`.
 //
+// Deprecated by `GET /v2/app-installations/{appInstallationId}/system-software`.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/app/app-get-installed-systemsoftware-for-appinstallation
 type GetInstalledSystemsoftwareForAppinstallationRequest struct {

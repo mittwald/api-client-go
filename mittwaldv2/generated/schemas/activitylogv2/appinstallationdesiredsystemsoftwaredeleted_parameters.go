@@ -8,18 +8,24 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "appInstallation": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //    "software": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //    "version": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 // required:
+//    - "appInstallation"
 //    - "software"
 //    - "version"
 
 type AppInstallationDesiredSystemSoftwareDeletedParameters struct {
-	Software ParameterProperty `json:"software"`
-	Version  ParameterProperty `json:"version"`
+	AppInstallation ParameterProperty `json:"appInstallation"`
+	Software        ParameterProperty `json:"software"`
+	Version         ParameterProperty `json:"version"`
 }
 
 func (o *AppInstallationDesiredSystemSoftwareDeletedParameters) Validate() error {
+	if err := o.AppInstallation.Validate(); err != nil {
+		return fmt.Errorf("invalid property appInstallation: %w", err)
+	}
 	if err := o.Software.Validate(); err != nil {
 		return fmt.Errorf("invalid property software: %w", err)
 	}

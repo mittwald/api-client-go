@@ -14,7 +14,7 @@ import (
 // PullImageForServiceRequest models a request for the
 // 'container-pull-image-for-service' operation. See [1] for more information.
 //
-// # Pull image and recreate
+// Pull a Service image and recreate.
 //
 // Pulls the latest image for this container and recreates it.
 //

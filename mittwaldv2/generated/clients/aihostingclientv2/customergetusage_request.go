@@ -14,7 +14,7 @@ import (
 // operation. See [1] for more information.
 //
 // Get ai hosting plan and usages of a customer. Deprecated: use
-// /ai-hostings/{planId} instead.
+// /v2/customers/{customerId}/ai-hostings instead.
 //
 // [1]: https://developer.mittwald.de/docs/v2/reference/ai
 // hosting/ai-hosting-customer-get-usage

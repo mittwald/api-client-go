@@ -11,16 +11,16 @@ import "fmt"
 //    "articleId":
 //        type: "string"
 //        minLength: 1
-//        example: "WH25-0001"
+//        example: "WH25-0007"
 //    "info":
 //        type: "object"
 //        properties:
 //            "articleName":
 //                type: "string"
-//                example: "proSpace lite"
+//                example: "Webhosting"
 //            "articleTemplateName":
 //                type: "string"
-//                example: "proSpace"
+//                example: "Webhosting"
 //            "fromArticleTemplate":
 //                type: "boolean"
 //    "maxArticleCount":

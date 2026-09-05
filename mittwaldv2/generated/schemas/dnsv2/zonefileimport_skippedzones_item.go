@@ -10,10 +10,13 @@ package dnsv2
 //        type: "string"
 //    "reason":
 //        type: "string"
+// required:
+//    - "name"
+//    - "reason"
 
 type ZoneFileImportSkippedZonesItem struct {
-	Name   *string `json:"name,omitempty"`
-	Reason *string `json:"reason,omitempty"`
+	Name   string `json:"name"`
+	Reason string `json:"reason"`
 }
 
 func (o *ZoneFileImportSkippedZonesItem) Validate() error {

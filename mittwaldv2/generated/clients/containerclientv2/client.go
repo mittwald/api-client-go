@@ -94,6 +94,11 @@ type Client interface {
 		req GetContainerImageConfigRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*containerv2.ContainerImageConfig, *http.Response, error)
+	GetServiceLogsAnalysis(
+		ctx context.Context,
+		req GetServiceLogsAnalysisRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*containerv2.ServiceLogsAnalysis, *http.Response, error)
 	GetServiceLogs(
 		ctx context.Context,
 		req GetServiceLogsRequest,
@@ -232,7 +237,7 @@ func (c *clientImpl) AddTemplateComponent(
 	return httpRes, nil
 }
 
-// Call pull-image webhook
+// Call a Service pull-image webhook.
 //
 // Calls the pull-image webhook endpoint for a Service using a webhook token.
 func (c *clientImpl) CallPullImageWebhookForService(
@@ -636,6 +641,34 @@ func (c *clientImpl) GetContainerImageConfig(
 	return &response, httpRes, nil
 }
 
+// Get an analysis of the logs belonging to a Service.
+func (c *clientImpl) GetServiceLogsAnalysis(
+	ctx context.Context,
+	req GetServiceLogsAnalysisRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*containerv2.ServiceLogsAnalysis, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response containerv2.ServiceLogsAnalysis
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Get logs belonging to a Service.
 func (c *clientImpl) GetServiceLogs(
 	ctx context.Context,
@@ -938,7 +971,7 @@ func (c *clientImpl) ListVolumes(
 	return &response, httpRes, nil
 }
 
-// Pull image and recreate
+// Pull a Service image and recreate.
 //
 // Pulls the latest image for this container and recreates it.
 //
@@ -1014,7 +1047,7 @@ func (c *clientImpl) RestartService(
 	return httpRes, nil
 }
 
-// Create or rotate pull-image webhook token
+// Create or rotate a Service pull-image webhook token.
 //
 // Creates or rotates the pull-image webhook token for a Service.
 //

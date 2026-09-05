@@ -8,7 +8,7 @@ package orderv2
 // properties:
 //    "articleId":
 //        type: "string"
-//        example: "MT22-0001"
+//        example: "VS25-0031"
 //    "customerId":
 //        type: "string"
 //        minLength: 1

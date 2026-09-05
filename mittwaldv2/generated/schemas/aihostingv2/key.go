@@ -14,6 +14,8 @@ import (
 //    "containerMeta": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.ContainerMeta"}
 //    "customerId":
 //        type: "string"
+//        description: "This Field is deprecated. Use the profileId field instead."
+//        deprecated: true
 //    "isBlocked":
 //        type: "boolean"
 //        description: "Indicates whether the key is blocked."
@@ -34,12 +36,16 @@ import (
 //        type: "string"
 //    "planId":
 //        type: "string"
+//    "profileId":
+//        type: "string"
 //    "projectId":
 //        type: "string"
 //    "rateLimit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
 //    "tokenUsage": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.TokenUsage"}
 // required:
 //    - "keyId"
+//    - "profileId"
+//    - "planId"
 //    - "key"
 //    - "models"
 //    - "name"
@@ -55,7 +61,8 @@ type Key struct {
 	KeyId         string         `json:"keyId"`
 	Models        []string       `json:"models"`
 	Name          string         `json:"name"`
-	PlanId        *string        `json:"planId,omitempty"`
+	PlanId        string         `json:"planId"`
+	ProfileId     string         `json:"profileId"`
 	ProjectId     *string        `json:"projectId,omitempty"`
 	RateLimit     RateLimit      `json:"rateLimit"`
 	TokenUsage    TokenUsage     `json:"tokenUsage"`

@@ -133,11 +133,16 @@ type Client interface {
 		req UpdateIngressTLSRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*UpdateIngressTLSResponse, *http.Response, error)
+	ListDNSZoneFileImports(
+		ctx context.Context,
+		req ListDNSZoneFileImportsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]dnsv2.ZoneFileImport, *http.Response, error)
 	CreateDNSZoneFileImport(
 		ctx context.Context,
 		req CreateDNSZoneFileImportRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*CreateDNSZoneFileImportResponse, *http.Response, error)
+	) (*dnsv2.CreateZoneFileImportResponse, *http.Response, error)
 	CreateDNSZone(
 		ctx context.Context,
 		req CreateDNSZoneRequest,
@@ -173,11 +178,6 @@ type Client interface {
 		req GetZoneFileRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	PreviewProjectDNSZoneFileImport(
-		ctx context.Context,
-		req PreviewProjectDNSZoneFileImportRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*dnsv2.PreviewZoneFileImportResponse, *http.Response, error)
 	SetRecordSetManaged(
 		ctx context.Context,
 		req SetRecordSetManagedRequest,
@@ -1035,14 +1035,14 @@ func (c *clientImpl) UpdateIngressTLS(
 	return &response, httpRes, nil
 }
 
-// Start a server-side DNS zone-file import for a Project.
+// List DNS zone-file import jobs belonging to a Project.
 //
-// Parses an uploaded RFC-1035 zone file and starts a server-side import that creates or updates the target DNSZones via a Temporal workflow. Returns the import job id immediately; poll GET /v2/projects/{projectId}/dns-zone-imports/{zoneFileImportId} for status. Existing zones are overwritten; the import is fail-fast (it stops at the first zone that fails).
-func (c *clientImpl) CreateDNSZoneFileImport(
+// Returns the server-side DNS zone-file import jobs of the Project, newest state per job (status plus the imported/skipped/failed zones). Sorted by creation date, newest first, by default; paginated. Project-scoped and authorized on the Project.
+func (c *clientImpl) ListDNSZoneFileImports(
 	ctx context.Context,
-	req CreateDNSZoneFileImportRequest,
+	req ListDNSZoneFileImportsRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*CreateDNSZoneFileImportResponse, *http.Response, error) {
+) (*[]dnsv2.ZoneFileImport, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -1058,7 +1058,37 @@ func (c *clientImpl) CreateDNSZoneFileImport(
 		return nil, httpRes, err
 	}
 
-	var response CreateDNSZoneFileImportResponse
+	var response []dnsv2.ZoneFileImport
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Import a DNS zone file into a Project, or preview it with dry-run.
+//
+// Parses an uploaded RFC-1035 zone file and returns the structured import plan: the importable target DNSZones (one per distinct owner name, with the record sets that would be set) plus a flat list of conflicts explaining everything that will not be imported (invalid records, unsupported record types, CNAME conflicts, placement problems, parse errors). With dry-run=true this is all it does — a side-effect-free preview, nothing is created. Otherwise it also starts a server-side import via a Temporal workflow and returns the created job id. The import is all-or-nothing: if the zone file has any conflict the request is rejected with 412 and no job is created — resolve the conflicts (visible in the dry-run) and retry, since a half-imported zone file only confuses the customer. Existing zones are overwritten. Poll GET /v2/dns-zone-imports/{zoneFileImportId} for status.
+func (c *clientImpl) CreateDNSZoneFileImport(
+	ctx context.Context,
+	req CreateDNSZoneFileImportRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*dnsv2.CreateZoneFileImportResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response dnsv2.CreateZoneFileImportResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -1257,36 +1287,6 @@ func (c *clientImpl) GetZoneFile(
 	}
 
 	return httpRes, nil
-}
-
-// Preview a DNS zone-file import for a Project.
-//
-// Parses an uploaded RFC-1035 zone file and returns a structured, side-effect-free import plan: one entry per target DNSZone (every distinct owner name becomes its own zone, since a mittwald zone holds only apex records), the record sets that would be set, and diagnostics (unsupported record types, ignored SOA/NS, normalized TTLs, CNAME conflicts). Nothing is created; the frontend renders the plan and drives the existing per-zone create and record-set routes on confirmation.
-func (c *clientImpl) PreviewProjectDNSZoneFileImport(
-	ctx context.Context,
-	req PreviewProjectDNSZoneFileImportRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*dnsv2.PreviewZoneFileImportResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response dnsv2.PreviewZoneFileImportResponse
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
 
 // Set a record set on a DNSZone to managed.

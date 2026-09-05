@@ -11,6 +11,7 @@ import "fmt"
 //    "databaseRestores":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestoreDatabaseRequest"}
+//        minItems: 1
 //    "pathRestore": {"$ref": "#/components/schemas/de.mittwald.v1.backup.ProjectBackupRestorePathRequest"}
 
 type ProjectBackupRestoreRequest struct {

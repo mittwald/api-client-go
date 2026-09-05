@@ -13,7 +13,7 @@ import (
 // GetProjectMembershipRequest models a request for the
 // 'project-get-project-membership' operation. See [1] for more information.
 //
-// # Get a ProjectMembership
+// Get a ProjectMembership.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/project/project-get-project-membership

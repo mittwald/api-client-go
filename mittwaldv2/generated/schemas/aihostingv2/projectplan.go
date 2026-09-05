@@ -29,7 +29,7 @@ import (
 //    - "planId"
 //    - "modelTermsApprovalRequired"
 
-type ProjectPlansPlansItem struct {
+type ProjectPlan struct {
 	Description                *string    `json:"description,omitempty"`
 	Keys                       PlanUsage  `json:"keys"`
 	ModelTermsApprovalRequired bool       `json:"modelTermsApprovalRequired"`
@@ -38,7 +38,7 @@ type ProjectPlansPlansItem struct {
 	ProjectId                  string     `json:"projectId"`
 }
 
-func (o *ProjectPlansPlansItem) Validate() error {
+func (o *ProjectPlan) Validate() error {
 	if err := o.Keys.Validate(); err != nil {
 		return fmt.Errorf("invalid property keys: %w", err)
 	}

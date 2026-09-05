@@ -14,7 +14,7 @@ import (
 var _ = Describe("ImportRecord", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"flags\":42,\"note\":\"string\",\"port\":42,\"priority\":42,\"sourceLine\":42,\"status\":\"string\",\"tag\":\"string\",\"value\":\"string\",\"weight\":42}")
+			exampleJSON := []byte("{\"flags\":42,\"port\":42,\"priority\":42,\"tag\":\"string\",\"value\":\"string\",\"weight\":42}")
 
 			sut := dnsv2.ImportRecord{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

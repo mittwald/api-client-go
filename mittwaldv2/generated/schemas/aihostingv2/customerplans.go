@@ -16,14 +16,14 @@ import (
 //        default: false
 //    "plans":
 //        type: "array"
-//        items: {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanOptions"}
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.CustomerPlan"}
 // required:
 //    - "plans"
 //    - "modelTermsApprovalRequired"
 
 type CustomerPlans struct {
-	ModelTermsApprovalRequired bool          `json:"modelTermsApprovalRequired"`
-	Plans                      []PlanOptions `json:"plans"`
+	ModelTermsApprovalRequired bool           `json:"modelTermsApprovalRequired"`
+	Plans                      []CustomerPlan `json:"plans"`
 }
 
 func (o *CustomerPlans) Validate() error {

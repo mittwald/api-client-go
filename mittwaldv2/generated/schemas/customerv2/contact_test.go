@@ -14,7 +14,7 @@ import (
 var _ = Describe("Contact", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"address\":{\"addressPrefix\":\"c/o Ada Lovelace\",\"city\":\"Espelkamp\",\"countryCode\":\"DE\",\"houseNumber\":\"4-6\",\"street\":\"Königsberger Straße\",\"zip\":\"32339\"},\"company\":\"string\",\"emailAddress\":\"string\",\"firstName\":\"string\",\"lastName\":\"string\",\"leitwegId\":\"string\",\"phoneNumbers\":[\"string\"],\"salutation\":\"mr\",\"title\":\"string\",\"useFormalTerm\":true}")
+			exampleJSON := []byte("{\"address\":{\"addressPrefix\":\"c/o Ada Lovelace\",\"city\":\"Espelkamp\",\"countryCode\":\"DE\",\"houseNumber\":\"4-6\",\"street\":\"Königsberger Straße\",\"zip\":\"32339\"},\"company\":\"string\",\"emailAddress\":\"string\",\"firstName\":\"string\",\"lastName\":\"string\",\"leitwegId\":\"string\",\"phoneNumbers\":[\"string\"],\"purchaseOrderReference\":\"string\",\"salutation\":\"mr\",\"title\":\"string\",\"useFormalTerm\":true}")
 
 			sut := customerv2.Contact{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

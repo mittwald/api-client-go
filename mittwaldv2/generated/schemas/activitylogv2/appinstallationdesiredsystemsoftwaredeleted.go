@@ -30,9 +30,11 @@ import "fmt"
 //    "parameters":
 //        type: "object"
 //        properties:
+//            "appInstallation": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //            "software": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //            "version": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //        required:
+//            - "appInstallation"
 //            - "software"
 //            - "version"
 // required:

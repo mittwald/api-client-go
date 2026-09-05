@@ -59,6 +59,8 @@ import (
 //    "nextScheduledWebhookExecution":
 //        type: "string"
 //        format: "date-time"
+//    "parentCustomerId":
+//        type: "string"
 //    "pendingInstallation":
 //        type: "boolean"
 //        default: false
@@ -87,6 +89,7 @@ import (
 //    - "contributorName"
 //    - "chargeability"
 //    - "webhookExecutionHalted"
+//    - "parentCustomerId"
 
 type ExtensionInstance struct {
 	AggregateReference            ExtensionInstanceAggregateReference `json:"aggregateReference"`
@@ -103,6 +106,7 @@ type ExtensionInstance struct {
 	FrontendFragments             map[string]any                      `json:"frontendFragments,omitempty"`
 	Id                            string                              `json:"id"`
 	NextScheduledWebhookExecution *time.Time                          `json:"nextScheduledWebhookExecution,omitempty"`
+	ParentCustomerId              string                              `json:"parentCustomerId"`
 	PendingInstallation           bool                                `json:"pendingInstallation"`
 	PendingRemoval                bool                                `json:"pendingRemoval"`
 	ScopeChangeAcceptanceDeadline *time.Time                          `json:"scopeChangeAcceptanceDeadline,omitempty"`

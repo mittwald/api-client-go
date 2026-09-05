@@ -10,6 +10,8 @@ package domainclientv2
 //        type: "boolean"
 //    "domainDoesNotExist":
 //        type: "boolean"
+//    "inRedemptionPeriod":
+//        type: "boolean"
 //    "transferLock":
 //        type: "boolean"
 //    "wrongAuthCode":
@@ -19,10 +21,12 @@ package domainclientv2
 //    - "wrongAuthCode"
 //    - "transferLock"
 //    - "domainAgeTooSmall"
+//    - "inRedemptionPeriod"
 
 type CheckDomainTransferabilityResponseReasons struct {
 	DomainAgeTooSmall  bool `json:"domainAgeTooSmall"`
 	DomainDoesNotExist bool `json:"domainDoesNotExist"`
+	InRedemptionPeriod bool `json:"inRedemptionPeriod"`
 	TransferLock       bool `json:"transferLock"`
 	WrongAuthCode      bool `json:"wrongAuthCode"`
 }

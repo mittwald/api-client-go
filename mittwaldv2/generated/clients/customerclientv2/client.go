@@ -140,6 +140,11 @@ type Client interface {
 		req ResendCustomerInviteMailRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	SetCustomerReferralSource(
+		ctx context.Context,
+		req SetCustomerReferralSourceRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*SetCustomerReferralSourceResponse, *http.Response, error)
 	DeprecatedLeaveCustomer(
 		ctx context.Context,
 		req DeprecatedLeaveCustomerRequest,
@@ -824,6 +829,34 @@ func (c *clientImpl) ResendCustomerInviteMail(
 	}
 
 	return httpRes, nil
+}
+
+// Set how the customer became aware of mittwald.
+func (c *clientImpl) SetCustomerReferralSource(
+	ctx context.Context,
+	req SetCustomerReferralSourceRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*SetCustomerReferralSourceResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response SetCustomerReferralSourceResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Leave a Customer.

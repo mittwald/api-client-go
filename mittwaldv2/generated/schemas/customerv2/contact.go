@@ -30,6 +30,10 @@ import (
 //        type: "array"
 //        items:
 //            type: "string"
+//    "purchaseOrderReference":
+//        type: "string"
+//        maxLength: 200
+//        description: "Purchase order reference used on invoices for this customer. Not allowed together with a leitwegId."
 //    "salutation": {"$ref": "#/components/schemas/de.mittwald.v1.commons.Salutation"}
 //    "title":
 //        type: "string"
@@ -40,16 +44,17 @@ import (
 //    - "salutation"
 
 type Contact struct {
-	Address       commonsv2.Address    `json:"address"`
-	Company       *string              `json:"company,omitempty"`
-	EmailAddress  *string              `json:"emailAddress,omitempty"`
-	FirstName     *string              `json:"firstName,omitempty"`
-	LastName      *string              `json:"lastName,omitempty"`
-	LeitwegId     *string              `json:"leitwegId,omitempty"`
-	PhoneNumbers  []string             `json:"phoneNumbers,omitempty"`
-	Salutation    commonsv2.Salutation `json:"salutation"`
-	Title         *string              `json:"title,omitempty"`
-	UseFormalTerm *bool                `json:"useFormalTerm,omitempty"`
+	Address                commonsv2.Address    `json:"address"`
+	Company                *string              `json:"company,omitempty"`
+	EmailAddress           *string              `json:"emailAddress,omitempty"`
+	FirstName              *string              `json:"firstName,omitempty"`
+	LastName               *string              `json:"lastName,omitempty"`
+	LeitwegId              *string              `json:"leitwegId,omitempty"`
+	PhoneNumbers           []string             `json:"phoneNumbers,omitempty"`
+	PurchaseOrderReference *string              `json:"purchaseOrderReference,omitempty"`
+	Salutation             commonsv2.Salutation `json:"salutation"`
+	Title                  *string              `json:"title,omitempty"`
+	UseFormalTerm          *bool                `json:"useFormalTerm,omitempty"`
 }
 
 func (o *Contact) Validate() error {

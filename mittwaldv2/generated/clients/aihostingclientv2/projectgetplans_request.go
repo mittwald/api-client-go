@@ -19,6 +19,9 @@ import (
 // hosting/ai-hosting-project-get-plans
 type ProjectGetPlansRequest struct {
 	ProjectID string
+	Limit     *int64
+	Skip      *int64
+	Page      *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -48,11 +51,22 @@ func (r *ProjectGetPlansRequest) body() (io.Reader, string, error) {
 
 func (r *ProjectGetPlansRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/projects/%s/ai-hostings", url.PathEscape(r.ProjectID)),
+		Path:     fmt.Sprintf("/v2/projects/%s/ai-hostings", url.PathEscape(r.ProjectID)),
+		RawQuery: r.query().Encode(),
 	}
 	return u.String()
 }
 
 func (r *ProjectGetPlansRequest) query() url.Values {
-	return nil
+	q := make(url.Values)
+	if r.Limit != nil {
+		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
+	}
+	if r.Skip != nil {
+		q.Set("skip", fmt.Sprintf("%d", *r.Skip))
+	}
+	if r.Page != nil {
+		q.Set("page", fmt.Sprintf("%d", *r.Page))
+	}
+	return q
 }

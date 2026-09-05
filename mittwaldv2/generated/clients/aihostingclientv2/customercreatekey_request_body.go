@@ -13,17 +13,19 @@ package aihostingclientv2
 //        minLength: 5
 //    "planId":
 //        type: "string"
+//        minLength: 1
 //    "projectId":
 //        type: "string"
 // required:
 //    - "name"
+//    - "planId"
 // description: CustomerCreateKeyRequestBody models the JSON body of a 'ai-hosting-customer-create-key' request
 
 // CustomerCreateKeyRequestBody models the JSON body of a 'ai-hosting-customer-create-key' request
 type CustomerCreateKeyRequestBody struct {
 	CreateWebuiContainer *bool   `json:"createWebuiContainer,omitempty"`
 	Name                 string  `json:"name"`
-	PlanId               *string `json:"planId,omitempty"`
+	PlanId               string  `json:"planId"`
 	ProjectId            *string `json:"projectId,omitempty"`
 }
 

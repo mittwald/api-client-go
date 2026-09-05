@@ -14,7 +14,7 @@ import (
 var _ = Describe("CronjobExecutionAnalysis", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"message\":\"Überprüfe die URL im Cronjob-Konfigurationsformular und korrigiere sie gegebenenfalls. Stelle sicher, dass die Domain gültig ist und DNS-Einträge korrekt konfiguriert wurden. Falls die URL falsch ist, aktualisiere sie mit der richtigen Adresse.\"}")
+			exampleJSON := []byte("{\"message\":\"The cronjob could not reach the configured URL because the domain could not be resolved.\\n\\nCheck the URL in the cronjob configuration and correct it if necessary.\",\"recommendation\":\"Check the URL in the cronjob configuration and correct it if necessary. Make sure the domain is valid and its DNS records are configured correctly.\",\"summary\":\"The cronjob could not reach the configured URL because the domain could not be resolved.\"}")
 
 			sut := cronjobv2.CronjobExecutionAnalysis{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

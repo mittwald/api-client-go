@@ -13,13 +13,13 @@ import "fmt"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.order.Addons"}
 //    "articleId":
 //        type: "string"
-//        example: "PS23-PLUS-0004"
+//        example: "WH25-0007"
 //    "articleName":
 //        type: "string"
-//        example: "proSpace"
+//        example: "Webhosting"
 //    "articleTemplateName":
 //        type: "string"
-//        example: "Pro-Space-Hosting"
+//        example: "Webhosting"
 //    "attributeConfiguration":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.order.AttributeConfiguration"}
@@ -33,7 +33,7 @@ import "fmt"
 //        example: "aa38d836-fe72-4c43-aad3-9472b51edf61"
 //    "price":
 //        type: "number"
-//        example: 1000
+//        example: 1300
 //    "reference": {"$ref": "#/components/schemas/de.mittwald.v1.order.Reference"}
 // required:
 //    - "orderItemId"

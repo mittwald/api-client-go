@@ -27,6 +27,7 @@ type ListExtensionInstancesRequest struct {
 	SearchTerm           *string
 	Anchor               *string
 	HasAcceptedAllScopes *bool
+	ParentCustomerID     *string
 	Limit                *int64
 	Skip                 *int64
 	Page                 *int64
@@ -86,6 +87,9 @@ func (r *ListExtensionInstancesRequest) query() url.Values {
 	}
 	if r.HasAcceptedAllScopes != nil {
 		q.Set("hasAcceptedAllScopes", strconv.FormatBool(*r.HasAcceptedAllScopes))
+	}
+	if r.ParentCustomerID != nil {
+		q.Set("parentCustomerId", *r.ParentCustomerID)
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))

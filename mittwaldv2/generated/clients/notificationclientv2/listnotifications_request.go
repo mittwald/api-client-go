@@ -18,13 +18,16 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/notification/notifications-list-notifications
 type ListNotificationsRequest struct {
-	Status   *ListNotificationsRequestQueryStatus
-	Severity []ListNotificationsRequestQuerySeverityItem
-	Type     []string
-	TypeNot  []string
-	Limit    *int64
-	Skip     *int64
-	Page     *int64
+	Status             *ListNotificationsRequestQueryStatus
+	Severity           []ListNotificationsRequestQuerySeverityItem
+	Type               []string
+	TypeNot            []string
+	ReferenceID        *string
+	ReferenceDomain    *string
+	ReferenceAggregate *string
+	Limit              *int64
+	Skip               *int64
+	Page               *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -73,6 +76,15 @@ func (r *ListNotificationsRequest) query() url.Values {
 	}
 	for _, val := range r.TypeNot {
 		q.Add("type-not", val)
+	}
+	if r.ReferenceID != nil {
+		q.Set("referenceId", *r.ReferenceID)
+	}
+	if r.ReferenceDomain != nil {
+		q.Set("referenceDomain", *r.ReferenceDomain)
+	}
+	if r.ReferenceAggregate != nil {
+		q.Set("referenceAggregate", *r.ReferenceAggregate)
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
