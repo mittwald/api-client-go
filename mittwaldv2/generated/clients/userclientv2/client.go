@@ -349,6 +349,16 @@ type Client interface {
 		req TerminateSessionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetSpotlightInfo(
+		ctx context.Context,
+		req GetSpotlightInfoRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*GetSpotlightInfoResponse, *http.Response, error)
+	SpotlightUsage(
+		ctx context.Context,
+		req SpotlightUsageRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	GetUser(
 		ctx context.Context,
 		req GetUserRequest,
@@ -422,6 +432,11 @@ type Client interface {
 	ResendVerificationEmail(
 		ctx context.Context,
 		req ResendVerificationEmailRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	SpotlightFeedback(
+		ctx context.Context,
+		req SpotlightFeedbackRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 	SupportCodeRequest(
@@ -2216,6 +2231,58 @@ func (c *clientImpl) TerminateSession(
 	return httpRes, nil
 }
 
+// Submitted feedback of the given user.
+func (c *clientImpl) GetSpotlightInfo(
+	ctx context.Context,
+	req GetSpotlightInfoRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*GetSpotlightInfoResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GetSpotlightInfoResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Submit your usage of the spotlight.
+func (c *clientImpl) SpotlightUsage(
+	ctx context.Context,
+	req SpotlightUsageRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Get profile information for a user.
 func (c *clientImpl) GetUser(
 	ctx context.Context,
@@ -2600,6 +2667,30 @@ func (c *clientImpl) RemoveAvatar(
 func (c *clientImpl) ResendVerificationEmail(
 	ctx context.Context,
 	req ResendVerificationEmailRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Submit your spotlight usage.
+func (c *clientImpl) SpotlightFeedback(
+	ctx context.Context,
+	req SpotlightFeedbackRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
