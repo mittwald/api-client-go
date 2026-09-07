@@ -330,7 +330,9 @@ func (c *clientImpl) CustomerGetDetailedModels(
 	return &response, httpRes, nil
 }
 
-// Get ai hosting plan and usages of a customer. Deprecated: use /v2/customers/{customerId}/ai-hostings instead.
+// Get ai hosting plan and usages of a customer.
+//
+// Deprecated endpoint. Use /v2/customers/{customerId}/ai-hostings instead.
 func (c *clientImpl) CustomerGetUsage(
 	ctx context.Context,
 	req CustomerGetUsageRequest,
@@ -552,7 +554,9 @@ func (c *clientImpl) ProjectGetDetailedModels(
 	return &response, httpRes, nil
 }
 
-// Get ai hosting plan and usages of a project. Deprecated: use /v2/projects/{projectId}/ai-hostings/{planId} instead.
+// Get ai hosting plan and usages of a project.
+//
+// Deprecated endpoint. Use /v2/projects/{projectId}/ai-hostings/{planId} instead.
 func (c *clientImpl) ProjectGetUsage(
 	ctx context.Context,
 	req ProjectGetUsageRequest,
