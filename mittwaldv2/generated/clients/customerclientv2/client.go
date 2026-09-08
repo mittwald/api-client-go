@@ -140,16 +140,16 @@ type Client interface {
 		req ResendCustomerInviteMailRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	DeprecatedLeaveCustomer(
-		ctx context.Context,
-		req DeprecatedLeaveCustomerRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	SetCustomerReferralSource(
 		ctx context.Context,
 		req SetCustomerReferralSourceRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*SetCustomerReferralSourceResponse, *http.Response, error)
+	DeprecatedLeaveCustomer(
+		ctx context.Context,
+		req DeprecatedLeaveCustomerRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -831,32 +831,6 @@ func (c *clientImpl) ResendCustomerInviteMail(
 	return httpRes, nil
 }
 
-// Leave a Customer.
-//
-// Deprecated by `DELETE /v2/customer-memberships/{customerMembershipId}`.
-func (c *clientImpl) DeprecatedLeaveCustomer(
-	ctx context.Context,
-	req DeprecatedLeaveCustomerRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Set how the customer became aware of mittwald.
 func (c *clientImpl) SetCustomerReferralSource(
 	ctx context.Context,
@@ -883,4 +857,30 @@ func (c *clientImpl) SetCustomerReferralSource(
 		return nil, httpRes, err
 	}
 	return &response, httpRes, nil
+}
+
+// Leave a Customer.
+//
+// Deprecated by `DELETE /v2/customer-memberships/{customerMembershipId}`.
+func (c *clientImpl) DeprecatedLeaveCustomer(
+	ctx context.Context,
+	req DeprecatedLeaveCustomerRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
 }

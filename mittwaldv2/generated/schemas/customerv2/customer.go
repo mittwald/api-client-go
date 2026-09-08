@@ -76,6 +76,7 @@ import (
 //            - "valid"
 //            - "invalid"
 //            - "pending"
+//            - "unsupported"
 //            - "unspecified"
 // required:
 //    - "customerId"

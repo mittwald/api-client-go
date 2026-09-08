@@ -29,6 +29,11 @@ type Client interface {
 		req GetAppRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*appv2.App, *http.Response, error)
+	GetAppinstallationErrorAnalysis(
+		ctx context.Context,
+		req GetAppinstallationErrorAnalysisRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*appv2.AppInstallationErrorAnalysis, *http.Response, error)
 	GetAppinstallation(
 		ctx context.Context,
 		req GetAppinstallationRequest,
@@ -159,11 +164,6 @@ type Client interface {
 		req DeprecatedReplaceDatabaseRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	GetAppinstallationErrorAnalysis(
-		ctx context.Context,
-		req GetAppinstallationErrorAnalysisRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*appv2.AppInstallationErrorAnalysis, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -247,6 +247,36 @@ func (c *clientImpl) GetApp(
 	}
 
 	var response appv2.App
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get an analysis of the error of an AppInstallation.
+//
+// Analyzes the last error of the AppInstallation. Only available while the AppInstallation has an error; returns a failed precondition otherwise.
+func (c *clientImpl) GetAppinstallationErrorAnalysis(
+	ctx context.Context,
+	req GetAppinstallationErrorAnalysisRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*appv2.AppInstallationErrorAnalysis, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response appv2.AppInstallationErrorAnalysis
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -955,34 +985,4 @@ func (c *clientImpl) DeprecatedReplaceDatabase(
 	}
 
 	return httpRes, nil
-}
-
-// Get an analysis of the error of an AppInstallation.
-//
-// Analyzes the last error of the AppInstallation. Only available while the AppInstallation has an error; returns a failed precondition otherwise.
-func (c *clientImpl) GetAppinstallationErrorAnalysis(
-	ctx context.Context,
-	req GetAppinstallationErrorAnalysisRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*appv2.AppInstallationErrorAnalysis, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response appv2.AppInstallationErrorAnalysis
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
