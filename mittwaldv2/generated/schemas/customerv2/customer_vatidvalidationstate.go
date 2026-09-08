@@ -11,6 +11,7 @@ import "fmt"
 //    - "valid"
 //    - "invalid"
 //    - "pending"
+//    - "unsupported"
 //    - "unspecified"
 
 type CustomerVatIDValidationState string
@@ -18,10 +19,11 @@ type CustomerVatIDValidationState string
 const CustomerVatIDValidationStateValid CustomerVatIDValidationState = "valid"
 const CustomerVatIDValidationStateInvalid CustomerVatIDValidationState = "invalid"
 const CustomerVatIDValidationStatePending CustomerVatIDValidationState = "pending"
+const CustomerVatIDValidationStateUnsupported CustomerVatIDValidationState = "unsupported"
 const CustomerVatIDValidationStateUnspecified CustomerVatIDValidationState = "unspecified"
 
 func (e CustomerVatIDValidationState) Validate() error {
-	if e == CustomerVatIDValidationStateValid || e == CustomerVatIDValidationStateInvalid || e == CustomerVatIDValidationStatePending || e == CustomerVatIDValidationStateUnspecified {
+	if e == CustomerVatIDValidationStateValid || e == CustomerVatIDValidationStateInvalid || e == CustomerVatIDValidationStatePending || e == CustomerVatIDValidationStateUnsupported || e == CustomerVatIDValidationStateUnspecified {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

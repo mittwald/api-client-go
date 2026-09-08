@@ -79,6 +79,16 @@ type Client interface {
 		req GetModelsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]aihostingv2.Model, *http.Response, error)
+	PlanGetBillingPeriods(
+		ctx context.Context,
+		req PlanGetBillingPeriodsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*aihostingv2.PlanBillingPeriods, *http.Response, error)
+	PlanGetUsageStats(
+		ctx context.Context,
+		req PlanGetUsageStatsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*aihostingv2.PlanUsageStats, *http.Response, error)
 	ProjectGetKeys(
 		ctx context.Context,
 		req ProjectGetKeysRequest,
@@ -129,16 +139,6 @@ type Client interface {
 		req ProjectLinkContainerRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	PlanGetBillingPeriods(
-		ctx context.Context,
-		req PlanGetBillingPeriodsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*aihostingv2.PlanBillingPeriods, *http.Response, error)
-	PlanGetUsageStats(
-		ctx context.Context,
-		req PlanGetUsageStatsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*aihostingv2.PlanUsageStats, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -502,6 +502,62 @@ func (c *clientImpl) GetModels(
 	return &response, httpRes, nil
 }
 
+// List the contract months of an ai hosting plan.
+func (c *clientImpl) PlanGetBillingPeriods(
+	ctx context.Context,
+	req PlanGetBillingPeriodsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*aihostingv2.PlanBillingPeriods, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response aihostingv2.PlanBillingPeriods
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get aggregated token usage statistics for an ai hosting plan of a customer.
+func (c *clientImpl) PlanGetUsageStats(
+	ctx context.Context,
+	req PlanGetUsageStatsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*aihostingv2.PlanUsageStats, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response aihostingv2.PlanUsageStats
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Get a list of keys of a project.
 func (c *clientImpl) ProjectGetKeys(
 	ctx context.Context,
@@ -778,60 +834,4 @@ func (c *clientImpl) ProjectLinkContainer(
 	}
 
 	return httpRes, nil
-}
-
-// List the contract months of an ai hosting plan.
-func (c *clientImpl) PlanGetBillingPeriods(
-	ctx context.Context,
-	req PlanGetBillingPeriodsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*aihostingv2.PlanBillingPeriods, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response aihostingv2.PlanBillingPeriods
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Get aggregated token usage statistics for an ai hosting plan of a customer.
-func (c *clientImpl) PlanGetUsageStats(
-	ctx context.Context,
-	req PlanGetUsageStatsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*aihostingv2.PlanUsageStats, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response aihostingv2.PlanUsageStats
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }

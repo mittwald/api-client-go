@@ -14,9 +14,6 @@ import (
 // properties:
 //    "authCode": {"$ref": "#/components/schemas/de.mittwald.v1.domain.AuthCode"}
 //    "authCode2": {"$ref": "#/components/schemas/de.mittwald.v1.domain.AuthCode2"}
-//    "authInfo2CreatedAt":
-//        type: "string"
-//        format: "date-time"
 //    "connected":
 //        type: "boolean"
 //    "contactHash":
@@ -69,7 +66,6 @@ import (
 type Domain struct {
 	AuthCode              *AuthCode     `json:"authCode,omitempty"`
 	AuthCode2             *AuthCode2    `json:"authCode2,omitempty"`
-	AuthInfo2CreatedAt    *time.Time    `json:"authInfo2CreatedAt,omitempty"`
 	Connected             bool          `json:"connected"`
 	ContactHash           *string       `json:"contactHash,omitempty"`
 	Deleted               bool          `json:"deleted"`
