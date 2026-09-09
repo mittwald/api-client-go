@@ -10,7 +10,7 @@ import "fmt"
 // properties:
 //    "accessIpMask":
 //        type: "string"
-//        description: "An IP range (in CIDR notation) for which access should be allowed."
+//        description: "An IP range (in CIDR notation) for which access should be allowed. This field currently has no effect."
 //        example: "203.0.113.123/32"
 //    "accessLevel":
 //        type: "string"
