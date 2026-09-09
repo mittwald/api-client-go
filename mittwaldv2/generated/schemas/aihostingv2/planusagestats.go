@@ -35,26 +35,6 @@ import (
 //                - "date"
 //                - "totalTokens"
 //                - "byKey"
-//    "detailed":
-//        type: "object"
-//        additionalProperties:
-//            type: "object"
-//            properties:
-//                "byKey":
-//                    type: "object"
-//                    additionalProperties:
-//                        type: "object"
-//                        properties:
-//                            "byModel":
-//                                type: "object"
-//                                additionalProperties:
-//                                    type: "integer"
-//                                    minimum: 0
-//                                    format: "int64"
-//                            "tokens":
-//                                type: "integer"
-//                                minimum: 0
-//                                format: "int64"
 //    "keys":
 //        type: "array"
 //        items:
@@ -112,14 +92,13 @@ import (
 //    - "keys"
 
 type PlanUsageStats struct {
-	CustomerId  string                                `json:"customerId"`
-	Daily       []PlanUsageStatsDailyItem             `json:"daily"`
-	Detailed    map[string]PlanUsageStatsDetailedItem `json:"detailed,omitempty"`
-	Keys        []PlanUsageStatsKeysItem              `json:"keys"`
-	ModelShare  []PlanUsageStatsModelShareItem        `json:"modelShare"`
-	PlanId      string                                `json:"planId"`
-	Timeframe   PlanUsageStatsTimeframe               `json:"timeframe"`
-	TotalTokens int64                                 `json:"totalTokens"`
+	CustomerId  string                         `json:"customerId"`
+	Daily       []PlanUsageStatsDailyItem      `json:"daily"`
+	Keys        []PlanUsageStatsKeysItem       `json:"keys"`
+	ModelShare  []PlanUsageStatsModelShareItem `json:"modelShare"`
+	PlanId      string                         `json:"planId"`
+	Timeframe   PlanUsageStatsTimeframe        `json:"timeframe"`
+	TotalTokens int64                          `json:"totalTokens"`
 }
 
 func (o *PlanUsageStats) Validate() error {

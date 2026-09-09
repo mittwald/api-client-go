@@ -5,7 +5,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strconv"
 	"time"
 )
 
@@ -24,7 +23,7 @@ type PlanGetUsageStatsRequest struct {
 	PlanID     string
 	StartDate  time.Time
 	EndDate    time.Time
-	Detailed   *bool
+	KeyID      *string
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -64,8 +63,8 @@ func (r *PlanGetUsageStatsRequest) query() url.Values {
 	q := make(url.Values)
 	q.Set("startDate", r.StartDate.Format(time.RFC3339))
 	q.Set("endDate", r.EndDate.Format(time.RFC3339))
-	if r.Detailed != nil {
-		q.Set("detailed", strconv.FormatBool(*r.Detailed))
+	if r.KeyID != nil {
+		q.Set("keyId", *r.KeyID)
 	}
 	return q
 }

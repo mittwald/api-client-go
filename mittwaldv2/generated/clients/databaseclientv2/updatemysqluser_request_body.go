@@ -10,6 +10,7 @@ import "fmt"
 // properties:
 //    "accessIpMask":
 //        type: "string"
+//        description: "This field currently has no effect."
 //    "accessLevel":
 //        type: "string"
 //        enum:

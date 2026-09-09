@@ -14,7 +14,7 @@ import (
 var _ = Describe("PlanUsageStats", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"customerId\":\"string\",\"daily\":[{\"byKey\":{\"string\":42},\"date\":\"string\",\"totalTokens\":42}],\"detailed\":{\"string\":{\"byKey\":{}}},\"keys\":[{\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"name\":\"string\"}],\"modelShare\":[{\"model\":\"string\",\"tokens\":42}],\"planId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"timeframe\":{\"end\":\"2006-01-02T15:04:05Z\",\"start\":\"2006-01-02T15:04:05Z\"},\"totalTokens\":42}")
+			exampleJSON := []byte("{\"customerId\":\"string\",\"daily\":[{\"byKey\":{\"string\":42},\"date\":\"string\",\"totalTokens\":42}],\"keys\":[{\"id\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"name\":\"string\"}],\"modelShare\":[{\"model\":\"string\",\"tokens\":42}],\"planId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\",\"timeframe\":{\"end\":\"2006-01-02T15:04:05Z\",\"start\":\"2006-01-02T15:04:05Z\"},\"totalTokens\":42}")
 
 			sut := aihostingv2.PlanUsageStats{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
