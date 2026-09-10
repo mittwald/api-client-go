@@ -15,6 +15,9 @@ import (
 //    "appVersionId":
 //        type: "string"
 //        format: "uuid"
+//    "autoUpdatesActivated":
+//        type: "boolean"
+//        description: "Enabling automatic updates may first update the AppInstallation to the newest permitted app version."
 //    "customDocumentRoot":
 //        type: "string"
 //    "databases":
@@ -34,13 +37,14 @@ import (
 
 // PatchAppinstallationRequestBody models the JSON body of a 'app-patch-appinstallation' request
 type PatchAppinstallationRequestBody struct {
-	AppVersionId       *string                                `json:"appVersionId,omitempty"`
-	CustomDocumentRoot *string                                `json:"customDocumentRoot,omitempty"`
-	Databases          map[string]appv2.PatchLinkedDatabase   `json:"databases,omitempty"`
-	Description        *string                                `json:"description,omitempty"`
-	SystemSoftware     map[string]appv2.DesiredSystemSoftware `json:"systemSoftware,omitempty"`
-	UpdatePolicy       *appv2.AppUpdatePolicy                 `json:"updatePolicy,omitempty"`
-	UserInputs         []appv2.SavedUserInput                 `json:"userInputs,omitempty"`
+	AppVersionId         *string                                `json:"appVersionId,omitempty"`
+	AutoUpdatesActivated *bool                                  `json:"autoUpdatesActivated,omitempty"`
+	CustomDocumentRoot   *string                                `json:"customDocumentRoot,omitempty"`
+	Databases            map[string]appv2.PatchLinkedDatabase   `json:"databases,omitempty"`
+	Description          *string                                `json:"description,omitempty"`
+	SystemSoftware       map[string]appv2.DesiredSystemSoftware `json:"systemSoftware,omitempty"`
+	UpdatePolicy         *appv2.AppUpdatePolicy                 `json:"updatePolicy,omitempty"`
+	UserInputs           []appv2.SavedUserInput                 `json:"userInputs,omitempty"`
 }
 
 func (o *PatchAppinstallationRequestBody) Validate() error {

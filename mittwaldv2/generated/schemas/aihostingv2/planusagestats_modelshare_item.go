@@ -6,6 +6,8 @@ package aihostingv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "displayName":
+//        type: "string"
 //    "model":
 //        type: "string"
 //    "tokens":
@@ -17,8 +19,9 @@ package aihostingv2
 //    - "tokens"
 
 type PlanUsageStatsModelShareItem struct {
-	Model  string `json:"model"`
-	Tokens int64  `json:"tokens"`
+	DisplayName *string `json:"displayName,omitempty"`
+	Model       string  `json:"model"`
+	Tokens      int64   `json:"tokens"`
 }
 
 func (o *PlanUsageStatsModelShareItem) Validate() error {

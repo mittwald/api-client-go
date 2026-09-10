@@ -54,6 +54,8 @@ import (
 //        items:
 //            type: "object"
 //            properties:
+//                "displayName":
+//                    type: "string"
 //                "model":
 //                    type: "string"
 //                "tokens":
