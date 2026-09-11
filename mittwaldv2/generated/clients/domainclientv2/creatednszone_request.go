@@ -15,11 +15,7 @@ import (
 // CreateDNSZoneRequest models a request for the 'dns-create-dns-zone' operation.
 // See [1] for more information.
 //
-// Create a DNSZone (deprecated).
-//
-// This operation is deprecated. Use POST v2/projects/{projectId}/dns-zones
-// instead, which creates the zone for a domain (root or subzone) and guards root
-// zones behind a verified ingress.
+// Create a DNSZone.
 //
 // [1]: https://developer.mittwald.de/docs/v2/reference/domain/dns-create-dns-zone
 type CreateDNSZoneRequest struct {

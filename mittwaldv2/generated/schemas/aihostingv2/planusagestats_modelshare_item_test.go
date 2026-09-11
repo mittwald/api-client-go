@@ -14,7 +14,7 @@ import (
 var _ = Describe("PlanUsageStatsModelShareItem", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"displayName\":\"string\",\"model\":\"string\",\"tokens\":42}")
+			exampleJSON := []byte("{\"model\":\"string\",\"tokens\":42}")
 
 			sut := aihostingv2.PlanUsageStatsModelShareItem{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
