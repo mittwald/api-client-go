@@ -11,15 +11,19 @@ import "fmt"
 //    - "createdAt"
 //    - "extensionId"
 //    - "extensionName"
+//    - "unacceptedScopeChanges"
+//    - "contract.interactionRequired"
 
 type ListExtensionInstancesRequestQuerySortItem string
 
 const ListExtensionInstancesRequestQuerySortItemCreatedAt ListExtensionInstancesRequestQuerySortItem = "createdAt"
 const ListExtensionInstancesRequestQuerySortItemExtensionID ListExtensionInstancesRequestQuerySortItem = "extensionId"
 const ListExtensionInstancesRequestQuerySortItemExtensionName ListExtensionInstancesRequestQuerySortItem = "extensionName"
+const ListExtensionInstancesRequestQuerySortItemUnacceptedScopeChanges ListExtensionInstancesRequestQuerySortItem = "unacceptedScopeChanges"
+const ListExtensionInstancesRequestQuerySortItemContractInteractionRequired ListExtensionInstancesRequestQuerySortItem = "contract.interactionRequired"
 
 func (e ListExtensionInstancesRequestQuerySortItem) Validate() error {
-	if e == ListExtensionInstancesRequestQuerySortItemCreatedAt || e == ListExtensionInstancesRequestQuerySortItemExtensionID || e == ListExtensionInstancesRequestQuerySortItemExtensionName {
+	if e == ListExtensionInstancesRequestQuerySortItemCreatedAt || e == ListExtensionInstancesRequestQuerySortItemExtensionID || e == ListExtensionInstancesRequestQuerySortItemExtensionName || e == ListExtensionInstancesRequestQuerySortItemUnacceptedScopeChanges || e == ListExtensionInstancesRequestQuerySortItemContractInteractionRequired {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
