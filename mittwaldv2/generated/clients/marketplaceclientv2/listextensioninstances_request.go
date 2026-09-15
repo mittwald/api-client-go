@@ -21,18 +21,19 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/marketplace/extension-list-extension-instances
 type ListExtensionInstancesRequest struct {
-	Context              *marketplacev2.Context
-	ContextID            *string
-	ExtensionID          *string
-	SearchTerm           *string
-	Anchor               *string
-	HasAcceptedAllScopes *bool
-	ParentCustomerID     *string
-	Limit                *int64
-	Skip                 *int64
-	Page                 *int64
-	Sort                 []ListExtensionInstancesRequestQuerySortItem
-	Order                []ListExtensionInstancesRequestQueryOrderItem
+	Context                     *marketplacev2.Context
+	ContextID                   *string
+	ExtensionID                 *string
+	SearchTerm                  *string
+	Anchor                      *string
+	HasAcceptedAllScopes        *bool
+	ContractInteractionRequired *bool
+	ParentCustomerID            *string
+	Limit                       *int64
+	Skip                        *int64
+	Page                        *int64
+	Sort                        []ListExtensionInstancesRequestQuerySortItem
+	Order                       []ListExtensionInstancesRequestQueryOrderItem
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -87,6 +88,9 @@ func (r *ListExtensionInstancesRequest) query() url.Values {
 	}
 	if r.HasAcceptedAllScopes != nil {
 		q.Set("hasAcceptedAllScopes", strconv.FormatBool(*r.HasAcceptedAllScopes))
+	}
+	if r.ContractInteractionRequired != nil {
+		q.Set("contract.interactionRequired", strconv.FormatBool(*r.ContractInteractionRequired))
 	}
 	if r.ParentCustomerID != nil {
 		q.Set("parentCustomerId", *r.ParentCustomerID)

@@ -44,6 +44,20 @@ import (
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationAppVersionSet"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationDesiredSystemSoftwareSet"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AppInstallationDesiredSystemSoftwareDeleted"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobCreated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobDescriptionUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobIntervalUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobTimeZoneUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobTargetUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobCommandUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobServiceReferenceUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobTimeoutUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobConcurrencyPolicyUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobAlertThresholdUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobNotificationEmailUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobActiveUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobDeleted"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobExecution"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.GenericAction"}
 //    "aggregate": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AggregateReference"}
 //    "dateTime":
