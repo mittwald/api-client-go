@@ -320,6 +320,11 @@ type Client interface {
 		req RequestExtensionVerificationRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	ResumeWebhookExecutionForExtensionInstance(
+		ctx context.Context,
+		req ResumeWebhookExecutionForExtensionInstanceRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	SetExtensionPublishedState(
 		ctx context.Context,
 		req SetExtensionPublishedStateRequest,
@@ -2001,6 +2006,30 @@ func (c *clientImpl) RequestAssetUpload(
 func (c *clientImpl) RequestExtensionVerification(
 	ctx context.Context,
 	req RequestExtensionVerificationRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Resume the webhook execution of an ExtensionInstance.
+func (c *clientImpl) ResumeWebhookExecutionForExtensionInstance(
+	ctx context.Context,
+	req ResumeWebhookExecutionForExtensionInstanceRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
