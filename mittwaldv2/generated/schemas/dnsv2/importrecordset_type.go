@@ -14,7 +14,9 @@ import "fmt"
 //    - "cname"
 //    - "srv"
 //    - "caa"
+// description: "Record-set type."
 
+// Record-set type.
 type ImportRecordSetType string
 
 const ImportRecordSetTypeA ImportRecordSetType = "a"

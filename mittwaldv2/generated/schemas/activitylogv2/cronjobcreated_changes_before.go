@@ -11,8 +11,18 @@ import "fmt"
 //    "active":
 //        type: "boolean"
 //        nullable: true
+//    "command":
+//        type: "string"
+//        nullable: true
 //    "concurrencyPolicy":
-//        type: "integer"
+//        type: "string"
+//        enum:
+//            - "allow"
+//            - "forbid"
+//            - "replace"
+//        nullable: true
+//    "container":
+//        type: "string"
 //        nullable: true
 //    "description":
 //        type: "string"
@@ -20,17 +30,23 @@ import "fmt"
 //    "failedExecutionAlertThreshold":
 //        type: "integer"
 //        nullable: true
+//    "interpreter":
+//        type: "string"
+//        nullable: true
 //    "interval":
 //        type: "string"
 //        nullable: true
 //    "notificationEmailConfigured":
 //        type: "boolean"
 //        nullable: true
-//    "shortId":
+//    "parameters":
 //        type: "string"
 //        nullable: true
-//    "target":
-//        type: "object"
+//    "path":
+//        type: "string"
+//        nullable: true
+//    "shortId":
+//        type: "string"
 //        nullable: true
 //    "timeZone":
 //        type: "string"
@@ -38,12 +54,14 @@ import "fmt"
 //    "timeout":
 //        type: "integer"
 //        nullable: true
+//    "url":
+//        type: "string"
+//        nullable: true
 // required:
 //    - "shortId"
 //    - "description"
 //    - "interval"
 //    - "active"
-//    - "target"
 //    - "timeout"
 //    - "timeZone"
 //    - "concurrencyPolicy"
@@ -51,21 +69,26 @@ import "fmt"
 //    - "notificationEmailConfigured"
 
 type CronjobCreatedChangesBefore struct {
-	Active                        bool                              `json:"active"`
-	ConcurrencyPolicy             int64                             `json:"concurrencyPolicy"`
-	Description                   string                            `json:"description"`
-	FailedExecutionAlertThreshold int64                             `json:"failedExecutionAlertThreshold"`
-	Interval                      string                            `json:"interval"`
-	NotificationEmailConfigured   bool                              `json:"notificationEmailConfigured"`
-	ShortId                       string                            `json:"shortId"`
-	Target                        CronjobCreatedChangesBeforeTarget `json:"target"`
-	TimeZone                      string                            `json:"timeZone"`
-	Timeout                       int64                             `json:"timeout"`
+	Active                        bool                                         `json:"active"`
+	Command                       *string                                      `json:"command,omitempty"`
+	ConcurrencyPolicy             CronjobCreatedChangesBeforeConcurrencyPolicy `json:"concurrencyPolicy"`
+	Container                     *string                                      `json:"container,omitempty"`
+	Description                   string                                       `json:"description"`
+	FailedExecutionAlertThreshold int64                                        `json:"failedExecutionAlertThreshold"`
+	Interpreter                   *string                                      `json:"interpreter,omitempty"`
+	Interval                      string                                       `json:"interval"`
+	NotificationEmailConfigured   bool                                         `json:"notificationEmailConfigured"`
+	Parameters                    *string                                      `json:"parameters,omitempty"`
+	Path                          *string                                      `json:"path,omitempty"`
+	ShortId                       string                                       `json:"shortId"`
+	TimeZone                      string                                       `json:"timeZone"`
+	Timeout                       int64                                        `json:"timeout"`
+	Url                           *string                                      `json:"url,omitempty"`
 }
 
 func (o *CronjobCreatedChangesBefore) Validate() error {
-	if err := o.Target.Validate(); err != nil {
-		return fmt.Errorf("invalid property target: %w", err)
+	if err := o.ConcurrencyPolicy.Validate(); err != nil {
+		return fmt.Errorf("invalid property concurrencyPolicy: %w", err)
 	}
 	return nil
 }

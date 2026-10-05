@@ -10,6 +10,9 @@ package domainclientv2
 //        type: "boolean"
 //    "domainDoesNotExist":
 //        type: "boolean"
+//    "enabledIngressInOtherProject":
+//        type: "boolean"
+//        description: "An enabled ingress for this domain already exists in a project other than the given projectId. Delete that ingress or transfer the domain into that project."
 //    "inRedemptionPeriod":
 //        type: "boolean"
 //    "transferLock":
@@ -22,13 +25,15 @@ package domainclientv2
 //    - "transferLock"
 //    - "domainAgeTooSmall"
 //    - "inRedemptionPeriod"
+//    - "enabledIngressInOtherProject"
 
 type CheckDomainTransferabilityResponseReasons struct {
-	DomainAgeTooSmall  bool `json:"domainAgeTooSmall"`
-	DomainDoesNotExist bool `json:"domainDoesNotExist"`
-	InRedemptionPeriod bool `json:"inRedemptionPeriod"`
-	TransferLock       bool `json:"transferLock"`
-	WrongAuthCode      bool `json:"wrongAuthCode"`
+	DomainAgeTooSmall            bool `json:"domainAgeTooSmall"`
+	DomainDoesNotExist           bool `json:"domainDoesNotExist"`
+	EnabledIngressInOtherProject bool `json:"enabledIngressInOtherProject"`
+	InRedemptionPeriod           bool `json:"inRedemptionPeriod"`
+	TransferLock                 bool `json:"transferLock"`
+	WrongAuthCode                bool `json:"wrongAuthCode"`
 }
 
 func (o *CheckDomainTransferabilityResponseReasons) Validate() error {

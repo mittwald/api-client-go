@@ -14,7 +14,7 @@ import (
 var _ = Describe("CronjobTargetUpdated", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{\"after\":{\"destination\":{}},\"before\":{\"destination\":{}}},\"name\":\"cronjob.target-updated\",\"parameters\":{\"description\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"name\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
+			exampleJSON := []byte("{\"changes\":{\"after\":{\"interpreter\":\"string\",\"parameters\":\"string\",\"path\":\"string\",\"url\":\"string\"},\"before\":{\"interpreter\":\"string\",\"parameters\":\"string\",\"path\":\"string\",\"url\":\"string\"}},\"name\":\"cronjob.target-updated\",\"parameters\":{\"appInstallation\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"container\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"description\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"name\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
 
 			sut := activitylogv2.CronjobTargetUpdated{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

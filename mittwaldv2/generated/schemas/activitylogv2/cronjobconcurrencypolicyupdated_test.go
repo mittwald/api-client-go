@@ -14,7 +14,7 @@ import (
 var _ = Describe("CronjobConcurrencyPolicyUpdated", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{\"after\":{\"concurrencyPolicy\":42},\"before\":{\"concurrencyPolicy\":42}},\"name\":\"cronjob.concurrency-policy-updated\",\"parameters\":{\"description\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"name\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
+			exampleJSON := []byte("{\"changes\":{\"after\":{\"concurrencyPolicy\":\"allow\"},\"before\":{\"concurrencyPolicy\":\"allow\"}},\"name\":\"cronjob.concurrency-policy-updated\",\"parameters\":{\"appInstallation\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"container\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"description\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"},\"name\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
 
 			sut := activitylogv2.CronjobConcurrencyPolicyUpdated{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

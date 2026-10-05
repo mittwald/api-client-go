@@ -14,7 +14,7 @@ import (
 var _ = Describe("CronjobConcurrencyPolicyUpdatedChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"after\":{\"concurrencyPolicy\":42},\"before\":{\"concurrencyPolicy\":42}}")
+			exampleJSON := []byte("{\"after\":{\"concurrencyPolicy\":\"allow\"},\"before\":{\"concurrencyPolicy\":\"allow\"}}")
 
 			sut := activitylogv2.CronjobConcurrencyPolicyUpdatedChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

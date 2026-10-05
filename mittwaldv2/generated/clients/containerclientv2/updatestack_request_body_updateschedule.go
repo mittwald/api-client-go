@@ -15,11 +15,12 @@ package containerclientv2
 //        example: "Europe/Berlin"
 // required:
 //    - "cron"
-// description: "Schedule for automatic image updates of this stack. Set to `null` to remove the\nschedule; omit the property to leave it unchanged.\n"
+// description: "Deprecated by 'x-update-schedule' (which takes precedence). This field will be\nremoved in a future version.\n"
 // nullable: true
+// deprecated: true
 
-// Schedule for automatic image updates of this stack. Set to `null` to remove the
-// schedule; omit the property to leave it unchanged.
+// Deprecated by 'x-update-schedule' (which takes precedence). This field will be
+// removed in a future version.
 type UpdateStackRequestBodyUpdateSchedule struct {
 	Cron     string  `json:"cron"`
 	Timezone *string `json:"timezone,omitempty"`

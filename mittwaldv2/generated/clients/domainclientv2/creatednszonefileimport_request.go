@@ -22,14 +22,15 @@ import (
 // the importable target DNSZones (one per distinct owner name, with the record
 // sets that would be set) plus a flat list of conflicts explaining everything that
 // will not be imported (invalid records, unsupported record types, CNAME
-// conflicts, placement problems, parse errors). With dry-run=true this is all it
+// conflicts, placement problems, parse errors). With dryRun=true this is all it
 // does — a side-effect-free preview, nothing is created. Otherwise it also starts
-// a server-side import via a Temporal workflow and returns the created job id. The
-// import is all-or-nothing: if the zone file has any conflict the request is
-// rejected with 412 and no job is created — resolve the conflicts (visible in the
-// dry-run) and retry, since a half-imported zone file only confuses the customer.
-// Existing zones are overwritten. Poll GET /v2/dns-zone-imports/{zoneFileImportId}
-// for status.
+// the import and returns the created job id. The import is all-or-nothing: if the
+// zone file has any conflict the request is rejected with 412 and no job is
+// created — resolve the conflicts (visible in the dry-run preview) and retry,
+// since a half-imported zone file would leave DNS in a confusing half-state. An
+// identical import still running for the project is rejected with 409. Existing
+// zones are overwritten. Poll GET /v2/dns-zone-imports/{zoneFileImportId} for
+// status.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/domain/dns-create-dns-zone-file-import
@@ -79,7 +80,7 @@ func (r *CreateDNSZoneFileImportRequest) url() string {
 func (r *CreateDNSZoneFileImportRequest) query() url.Values {
 	q := make(url.Values)
 	if r.DryRun != nil {
-		q.Set("dry-run", strconv.FormatBool(*r.DryRun))
+		q.Set("dryRun", strconv.FormatBool(*r.DryRun))
 	}
 	return q
 }

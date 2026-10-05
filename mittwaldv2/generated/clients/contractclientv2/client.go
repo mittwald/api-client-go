@@ -841,7 +841,7 @@ func (c *clientImpl) InvoiceUpdateInvoiceSettings(
 	return &response, httpRes, nil
 }
 
-// Request an Access Token for the Invoice file.
+// Request an Access Token for a file of the Invoice.
 func (c *clientImpl) InvoiceGetFileAccessToken(
 	ctx context.Context,
 	req InvoiceGetFileAccessTokenRequest,

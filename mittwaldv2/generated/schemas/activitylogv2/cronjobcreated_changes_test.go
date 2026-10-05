@@ -14,7 +14,7 @@ import (
 var _ = Describe("CronjobCreatedChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"after\":{\"active\":true,\"concurrencyPolicy\":42,\"description\":\"string\",\"failedExecutionAlertThreshold\":42,\"interval\":\"string\",\"notificationEmailConfigured\":true,\"shortId\":\"string\",\"target\":{},\"timeZone\":\"string\",\"timeout\":42},\"before\":{\"active\":true,\"concurrencyPolicy\":42,\"description\":\"string\",\"failedExecutionAlertThreshold\":42,\"interval\":\"string\",\"notificationEmailConfigured\":true,\"shortId\":\"string\",\"target\":{},\"timeZone\":\"string\",\"timeout\":42}}")
+			exampleJSON := []byte("{\"after\":{\"active\":true,\"command\":\"string\",\"concurrencyPolicy\":\"allow\",\"container\":\"string\",\"description\":\"string\",\"failedExecutionAlertThreshold\":42,\"interpreter\":\"string\",\"interval\":\"string\",\"notificationEmailConfigured\":true,\"parameters\":\"string\",\"path\":\"string\",\"shortId\":\"string\",\"timeZone\":\"string\",\"timeout\":42,\"url\":\"string\"},\"before\":{\"active\":true,\"command\":\"string\",\"concurrencyPolicy\":\"allow\",\"container\":\"string\",\"description\":\"string\",\"failedExecutionAlertThreshold\":42,\"interpreter\":\"string\",\"interval\":\"string\",\"notificationEmailConfigured\":true,\"parameters\":\"string\",\"path\":\"string\",\"shortId\":\"string\",\"timeZone\":\"string\",\"timeout\":42,\"url\":\"string\"}}")
 
 			sut := activitylogv2.CronjobCreatedChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

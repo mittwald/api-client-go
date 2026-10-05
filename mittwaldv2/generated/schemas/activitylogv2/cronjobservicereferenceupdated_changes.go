@@ -11,19 +11,19 @@ import "fmt"
 //    "after":
 //        type: "object"
 //        properties:
-//            "serviceReference":
-//                type: "object"
+//            "container":
+//                type: "string"
 //                nullable: true
 //        required:
-//            - "serviceReference"
+//            - "container"
 //    "before":
 //        type: "object"
 //        properties:
-//            "serviceReference":
-//                type: "object"
+//            "container":
+//                type: "string"
 //                nullable: true
 //        required:
-//            - "serviceReference"
+//            - "container"
 
 type CronjobServiceReferenceUpdatedChanges struct {
 	After  *CronjobServiceReferenceUpdatedChangesAfter  `json:"after,omitempty"`

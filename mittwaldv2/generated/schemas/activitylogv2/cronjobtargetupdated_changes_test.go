@@ -14,7 +14,7 @@ import (
 var _ = Describe("CronjobTargetUpdatedChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"after\":{\"destination\":{}},\"before\":{\"destination\":{}}}")
+			exampleJSON := []byte("{\"after\":{\"interpreter\":\"string\",\"parameters\":\"string\",\"path\":\"string\",\"url\":\"string\"},\"before\":{\"interpreter\":\"string\",\"parameters\":\"string\",\"path\":\"string\",\"url\":\"string\"}}")
 
 			sut := activitylogv2.CronjobTargetUpdatedChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

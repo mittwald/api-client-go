@@ -14,13 +14,15 @@ import (
 //    "conflicts":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.dns.ImportConflict"}
+//        description: "Everything that will not be imported (invalid records, unsupported record types, CNAME conflicts, placement problems, parse errors). Empty on a real import, since any conflict rejects the whole import with 412 (all-or-nothing)."
 //    "id":
 //        type: "string"
 //        format: "uuid"
-//        description: "ID of the started import job. Absent on a dry-run (dry-run=true), which creates no job."
+//        description: "ID of the started import job. Absent on a dry-run (dryRun=true), which creates no job."
 //    "zones":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.dns.ZoneImportPreview"}
+//        description: "The importable target zones (one per distinct owner name), each with the record sets that would be set. On a dry-run this is the preview; on a real import it is the plan that was applied."
 // required:
 //    - "zones"
 //    - "conflicts"

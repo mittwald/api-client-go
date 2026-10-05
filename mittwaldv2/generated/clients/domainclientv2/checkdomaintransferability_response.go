@@ -15,6 +15,9 @@ import "fmt"
 //                type: "boolean"
 //            "domainDoesNotExist":
 //                type: "boolean"
+//            "enabledIngressInOtherProject":
+//                type: "boolean"
+//                description: "An enabled ingress for this domain already exists in a project other than the given projectId. Delete that ingress or transfer the domain into that project."
 //            "inRedemptionPeriod":
 //                type: "boolean"
 //            "transferLock":
@@ -27,6 +30,7 @@ import "fmt"
 //            - "transferLock"
 //            - "domainAgeTooSmall"
 //            - "inRedemptionPeriod"
+//            - "enabledIngressInOtherProject"
 //    "transferable":
 //        type: "boolean"
 // required:

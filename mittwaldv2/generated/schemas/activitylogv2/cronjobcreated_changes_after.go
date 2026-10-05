@@ -10,32 +10,51 @@ import "fmt"
 // properties:
 //    "active":
 //        type: "boolean"
+//    "command":
+//        type: "string"
+//        nullable: true
 //    "concurrencyPolicy":
-//        type: "integer"
+//        type: "string"
+//        enum:
+//            - "allow"
+//            - "forbid"
+//            - "replace"
+//        nullable: true
+//    "container":
+//        type: "string"
+//        nullable: true
 //    "description":
 //        type: "string"
 //    "failedExecutionAlertThreshold":
 //        type: "integer"
 //        nullable: true
+//    "interpreter":
+//        type: "string"
+//        nullable: true
 //    "interval":
 //        type: "string"
 //    "notificationEmailConfigured":
 //        type: "boolean"
+//    "parameters":
+//        type: "string"
+//        nullable: true
+//    "path":
+//        type: "string"
+//        nullable: true
 //    "shortId":
 //        type: "string"
-//    "target":
-//        type: "object"
-//        nullable: true
 //    "timeZone":
 //        type: "string"
 //    "timeout":
 //        type: "integer"
+//    "url":
+//        type: "string"
+//        nullable: true
 // required:
 //    - "shortId"
 //    - "description"
 //    - "interval"
 //    - "active"
-//    - "target"
 //    - "timeout"
 //    - "timeZone"
 //    - "concurrencyPolicy"
@@ -43,21 +62,26 @@ import "fmt"
 //    - "notificationEmailConfigured"
 
 type CronjobCreatedChangesAfter struct {
-	Active                        bool                             `json:"active"`
-	ConcurrencyPolicy             int64                            `json:"concurrencyPolicy"`
-	Description                   string                           `json:"description"`
-	FailedExecutionAlertThreshold int64                            `json:"failedExecutionAlertThreshold"`
-	Interval                      string                           `json:"interval"`
-	NotificationEmailConfigured   bool                             `json:"notificationEmailConfigured"`
-	ShortId                       string                           `json:"shortId"`
-	Target                        CronjobCreatedChangesAfterTarget `json:"target"`
-	TimeZone                      string                           `json:"timeZone"`
-	Timeout                       int64                            `json:"timeout"`
+	Active                        bool                                        `json:"active"`
+	Command                       *string                                     `json:"command,omitempty"`
+	ConcurrencyPolicy             CronjobCreatedChangesAfterConcurrencyPolicy `json:"concurrencyPolicy"`
+	Container                     *string                                     `json:"container,omitempty"`
+	Description                   string                                      `json:"description"`
+	FailedExecutionAlertThreshold int64                                       `json:"failedExecutionAlertThreshold"`
+	Interpreter                   *string                                     `json:"interpreter,omitempty"`
+	Interval                      string                                      `json:"interval"`
+	NotificationEmailConfigured   bool                                        `json:"notificationEmailConfigured"`
+	Parameters                    *string                                     `json:"parameters,omitempty"`
+	Path                          *string                                     `json:"path,omitempty"`
+	ShortId                       string                                      `json:"shortId"`
+	TimeZone                      string                                      `json:"timeZone"`
+	Timeout                       int64                                       `json:"timeout"`
+	Url                           *string                                     `json:"url,omitempty"`
 }
 
 func (o *CronjobCreatedChangesAfter) Validate() error {
-	if err := o.Target.Validate(); err != nil {
-		return fmt.Errorf("invalid property target: %w", err)
+	if err := o.ConcurrencyPolicy.Validate(); err != nil {
+		return fmt.Errorf("invalid property concurrencyPolicy: %w", err)
 	}
 	return nil
 }

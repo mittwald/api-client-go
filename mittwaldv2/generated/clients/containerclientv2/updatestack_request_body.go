@@ -14,7 +14,9 @@ import (
 // properties:
 //    "description":
 //        type: "string"
+//        description: "Deprecated by 'x-description' (which takes precedence). This field will be removed in a future version."
 //        example: "uptime kuma"
+//        deprecated: true
 //    "services":
 //        type: "object"
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.container.ServiceRequest"}
@@ -31,20 +33,41 @@ import (
 //                example: "Europe/Berlin"
 //        required:
 //            - "cron"
-//        description: "Schedule for automatic image updates of this stack. Set to `null` to remove the\nschedule; omit the property to leave it unchanged.\n"
+//        description: "Deprecated by 'x-update-schedule' (which takes precedence). This field will be\nremoved in a future version.\n"
 //        nullable: true
+//        deprecated: true
 //    "volumes":
 //        type: "object"
 //        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.container.VolumeRequest"}
 //        description: "A set of named volumes that should be created for this stack. Removing a volume\nfrom this set will not delete the volume (for safety), but only detach it from the\nstack. To delete a volume, use the `DELETE /stacks/{stackId}/volumes/{volumeId}` endpoint.\n"
+//    "x-description":
+//        type: "string"
+//        description: "Description of the stack."
+//        example: "uptime kuma"
+//    "x-update-schedule":
+//        type: "object"
+//        properties:
+//            "cron":
+//                type: "string"
+//                example: "* * * * *"
+//            "timezone":
+//                type: "string"
+//                description: "Valid timezones can be retrieved via GET /v2/time-zones"
+//                example: "Europe/Berlin"
+//        required:
+//            - "cron"
+//        description: "Schedule for automatic image updates of this stack. Set to `null` to remove the\nschedule; omit the property to leave it unchanged.\n"
+//        nullable: true
 // description: UpdateStackRequestBody models the JSON body of a 'container-update-stack' request
 
 // UpdateStackRequestBody models the JSON body of a 'container-update-stack' request
 type UpdateStackRequestBody struct {
-	Description    *string                               `json:"description,omitempty"`
-	Services       map[string]containerv2.ServiceRequest `json:"services,omitempty"`
-	UpdateSchedule *UpdateStackRequestBodyUpdateSchedule `json:"updateSchedule,omitempty"`
-	Volumes        map[string]containerv2.VolumeRequest  `json:"volumes,omitempty"`
+	Description     *string                                `json:"description,omitempty"`
+	Services        map[string]containerv2.ServiceRequest  `json:"services,omitempty"`
+	UpdateSchedule  *UpdateStackRequestBodyUpdateSchedule  `json:"updateSchedule,omitempty"`
+	Volumes         map[string]containerv2.VolumeRequest   `json:"volumes,omitempty"`
+	XDescription    *string                                `json:"x-description,omitempty"`
+	XUpdateSchedule *UpdateStackRequestBodyXUpdateSchedule `json:"x-update-schedule,omitempty"`
 }
 
 func (o *UpdateStackRequestBody) Validate() error {
@@ -55,6 +78,14 @@ func (o *UpdateStackRequestBody) Validate() error {
 		return o.UpdateSchedule.Validate()
 	}(); err != nil {
 		return fmt.Errorf("invalid property updateSchedule: %w", err)
+	}
+	if err := func() error {
+		if o.XUpdateSchedule == nil {
+			return nil
+		}
+		return o.XUpdateSchedule.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property x-update-schedule: %w", err)
 	}
 	return nil
 }

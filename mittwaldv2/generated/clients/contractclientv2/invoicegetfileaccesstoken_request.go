@@ -13,13 +13,14 @@ import (
 // InvoiceGetFileAccessTokenRequest models a request for the
 // 'invoice-get-file-access-token' operation. See [1] for more information.
 //
-// Request an Access Token for the Invoice file.
+// Request an Access Token for a file of the Invoice.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/contract/invoice-get-file-access-token
 type InvoiceGetFileAccessTokenRequest struct {
 	CustomerID string
 	InvoiceID  string
+	FileType   *InvoiceGetFileAccessTokenRequestQueryFileType
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -49,11 +50,16 @@ func (r *InvoiceGetFileAccessTokenRequest) body() (io.Reader, string, error) {
 
 func (r *InvoiceGetFileAccessTokenRequest) url() string {
 	u := url.URL{
-		Path: fmt.Sprintf("/v2/customers/%s/invoices/%s/file-access-token", url.PathEscape(r.CustomerID), url.PathEscape(r.InvoiceID)),
+		Path:     fmt.Sprintf("/v2/customers/%s/invoices/%s/file-access-token", url.PathEscape(r.CustomerID), url.PathEscape(r.InvoiceID)),
+		RawQuery: r.query().Encode(),
 	}
 	return u.String()
 }
 
 func (r *InvoiceGetFileAccessTokenRequest) query() url.Values {
-	return nil
+	q := make(url.Values)
+	if r.FileType != nil {
+		q.Set("fileType", string(*r.FileType))
+	}
+	return q
 }

@@ -8,6 +8,8 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
+//    "appInstallation": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
+//    "container": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
 //    "description": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //    "name": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 // required:
@@ -15,11 +17,29 @@ import "fmt"
 //    - "description"
 
 type CronjobTimeoutUpdatedParameters struct {
-	Description ParameterProperty `json:"description"`
-	Name        ParameterProperty `json:"name"`
+	AppInstallation *LinkedParameterProperty `json:"appInstallation,omitempty"`
+	Container       *LinkedParameterProperty `json:"container,omitempty"`
+	Description     ParameterProperty        `json:"description"`
+	Name            ParameterProperty        `json:"name"`
 }
 
 func (o *CronjobTimeoutUpdatedParameters) Validate() error {
+	if err := func() error {
+		if o.AppInstallation == nil {
+			return nil
+		}
+		return o.AppInstallation.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property appInstallation: %w", err)
+	}
+	if err := func() error {
+		if o.Container == nil {
+			return nil
+		}
+		return o.Container.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property container: %w", err)
+	}
 	if err := o.Description.Validate(); err != nil {
 		return fmt.Errorf("invalid property description: %w", err)
 	}

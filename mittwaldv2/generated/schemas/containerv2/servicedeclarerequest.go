@@ -17,7 +17,9 @@ import "fmt"
 //    "deploy": {"$ref": "#/components/schemas/de.mittwald.v1.container.Deploy"}
 //    "description":
 //        type: "string"
+//        description: "Deprecated by 'x-description' (which takes precedence). This field will be removed in a future version."
 //        example: "MySQL DB"
+//        deprecated: true
 //    "entrypoint":
 //        type: "array"
 //        items:
@@ -47,15 +49,25 @@ import "fmt"
 //            type: "string"
 //        description: "Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource.\n"
 //        example: ["3306/tcp"]
+//    "restart":
+//        type: "string"
+//        description: "Restart policy for the container, matching the [Docker Compose `restart` field](https://docs.docker.com/reference/compose-file/services/#restart): `no`, `always`, `on-failure` (optionally `on-failure:<max-retries>`) or `unless-stopped`.\n"
+//        example: "always"
 //    "restartPolicy":
 //        type: "string"
+//        description: "Deprecated by 'restart' (which takes precedence). This field will be removed in a future version."
 //        example: "always"
+//        deprecated: true
 //    "volumes":
 //        type: "array"
 //        items:
 //            type: "string"
 //        description: "Volume mounts for this container. These items always follow the format `<volume>:<mountpoint>`. The `<volume>` may either be a named volume, or a file path in the (always present) project file system (which is shared among containers and managed apps within a project).\n"
 //        example: ["data:/var/lib/mysql:ro", "/home/p-XXXXX/html:/var/www"]
+//    "x-description":
+//        type: "string"
+//        description: "Human-readable description of this container."
+//        example: "MySQL DB"
 // required:
 //    - "image"
 
@@ -68,8 +80,10 @@ type ServiceDeclareRequest struct {
 	Envs          map[string]string `json:"envs,omitempty"`
 	Image         string            `json:"image"`
 	Ports         []string          `json:"ports,omitempty"`
+	Restart       *string           `json:"restart,omitempty"`
 	RestartPolicy *string           `json:"restartPolicy,omitempty"`
 	Volumes       []string          `json:"volumes,omitempty"`
+	XDescription  *string           `json:"x-description,omitempty"`
 }
 
 func (o *ServiceDeclareRequest) Validate() error {

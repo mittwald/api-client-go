@@ -1037,7 +1037,7 @@ func (c *clientImpl) UpdateIngressTLS(
 
 // List DNS zone-file import jobs belonging to a Project.
 //
-// Returns the server-side DNS zone-file import jobs of the Project, newest state per job (status plus the imported/skipped/failed zones). Sorted by creation date, newest first, by default; paginated. Project-scoped and authorized on the Project.
+// Returns the DNS zone-file import jobs of the Project, newest state per job (status plus the imported/skipped zones). Sorted by creation date, newest first, by default; paginated. Project-scoped and authorized on the Project.
 func (c *clientImpl) ListDNSZoneFileImports(
 	ctx context.Context,
 	req ListDNSZoneFileImportsRequest,
@@ -1067,7 +1067,7 @@ func (c *clientImpl) ListDNSZoneFileImports(
 
 // Import a DNS zone file into a Project, or preview it with dry-run.
 //
-// Parses an uploaded RFC-1035 zone file and returns the structured import plan: the importable target DNSZones (one per distinct owner name, with the record sets that would be set) plus a flat list of conflicts explaining everything that will not be imported (invalid records, unsupported record types, CNAME conflicts, placement problems, parse errors). With dry-run=true this is all it does — a side-effect-free preview, nothing is created. Otherwise it also starts a server-side import via a Temporal workflow and returns the created job id. The import is all-or-nothing: if the zone file has any conflict the request is rejected with 412 and no job is created — resolve the conflicts (visible in the dry-run) and retry, since a half-imported zone file only confuses the customer. Existing zones are overwritten. Poll GET /v2/dns-zone-imports/{zoneFileImportId} for status.
+// Parses an uploaded RFC-1035 zone file and returns the structured import plan: the importable target DNSZones (one per distinct owner name, with the record sets that would be set) plus a flat list of conflicts explaining everything that will not be imported (invalid records, unsupported record types, CNAME conflicts, placement problems, parse errors). With dryRun=true this is all it does — a side-effect-free preview, nothing is created. Otherwise it also starts the import and returns the created job id. The import is all-or-nothing: if the zone file has any conflict the request is rejected with 412 and no job is created — resolve the conflicts (visible in the dry-run preview) and retry, since a half-imported zone file would leave DNS in a confusing half-state. An identical import still running for the project is rejected with 409. Existing zones are overwritten. Poll GET /v2/dns-zone-imports/{zoneFileImportId} for status.
 func (c *clientImpl) CreateDNSZoneFileImport(
 	ctx context.Context,
 	req CreateDNSZoneFileImportRequest,
@@ -1153,9 +1153,9 @@ func (c *clientImpl) ListDNSZones(
 	return &response, httpRes, nil
 }
 
-// Create a DNSZone for a domain in a Project.
+// Create a DNSZone for a verified Ingress in a Project.
 //
-// Creates the DNSZone for the given domain in the given project. The backend resolves whether the domain is a root zone or a subzone (via the public suffix list) and creates the matching aggregate. For a root zone the project must own a verified (enabled) ingress for that domain; otherwise the request is rejected with 412 (FailedPrecondition). This lets a project prepare DNS for a domain that is not yet hosted at mittwald once ownership has been proven via a verified vHost.
+// Creates a DNSZone for a verified Ingress in a Project. The service resolves whether the domain is a root zone or a subzone and creates it accordingly. This lets a project prepare DNS for a domain that is not yet hosted at mittwald once ownership has been proven via a verified vHost.
 func (c *clientImpl) CreateProjectDNSZone(
 	ctx context.Context,
 	req CreateProjectDNSZoneRequest,

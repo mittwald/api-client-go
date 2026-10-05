@@ -23,6 +23,10 @@ import "time"
 //    "reason":
 //        type: "string"
 //        example: "Kulanz"
+//    "xRechnungId":
+//        type: "string"
+//        format: "uuid"
+//        description: "The ID of the XRechnung XML file. Only set when the recipient has a Leitweg-ID; the PDF is then only a visual copy."
 // required:
 //    - "pdfId"
 //    - "correctionNumber"
@@ -35,6 +39,7 @@ type Cancellation struct {
 	CorrectionNumber string    `json:"correctionNumber"`
 	PdfId            string    `json:"pdfId"`
 	Reason           *string   `json:"reason,omitempty"`
+	XRechnungId      *string   `json:"xRechnungId,omitempty"`
 }
 
 func (o *Cancellation) Validate() error {

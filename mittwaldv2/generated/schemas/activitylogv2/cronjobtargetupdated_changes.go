@@ -11,19 +11,33 @@ import "fmt"
 //    "after":
 //        type: "object"
 //        properties:
-//            "destination":
-//                type: "object"
+//            "interpreter":
+//                type: "string"
 //                nullable: true
-//        required:
-//            - "destination"
+//            "parameters":
+//                type: "string"
+//                nullable: true
+//            "path":
+//                type: "string"
+//                nullable: true
+//            "url":
+//                type: "string"
+//                nullable: true
 //    "before":
 //        type: "object"
 //        properties:
-//            "destination":
-//                type: "object"
+//            "interpreter":
+//                type: "string"
 //                nullable: true
-//        required:
-//            - "destination"
+//            "parameters":
+//                type: "string"
+//                nullable: true
+//            "path":
+//                type: "string"
+//                nullable: true
+//            "url":
+//                type: "string"
+//                nullable: true
 
 type CronjobTargetUpdatedChanges struct {
 	After  *CronjobTargetUpdatedChangesAfter  `json:"after,omitempty"`

@@ -15,10 +15,9 @@ import (
 //
 // List DNS zone-file import jobs belonging to a Project.
 //
-// Returns the server-side DNS zone-file import jobs of the Project, newest state
-// per job (status plus the imported/skipped/failed zones). Sorted by creation
-// date, newest first, by default; paginated. Project-scoped and authorized on the
-// Project.
+// Returns the DNS zone-file import jobs of the Project, newest state per job
+// (status plus the imported/skipped zones). Sorted by creation date, newest first,
+// by default; paginated. Project-scoped and authorized on the Project.
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/domain/dns-list-dns-zone-file-imports

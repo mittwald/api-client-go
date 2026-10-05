@@ -10,18 +10,16 @@ import "fmt"
 // enum:
 //    - "running"
 //    - "succeeded"
-//    - "failed"
 //    - "completedWithErrors"
 
 type ZoneFileImportStatus string
 
 const ZoneFileImportStatusRunning ZoneFileImportStatus = "running"
 const ZoneFileImportStatusSucceeded ZoneFileImportStatus = "succeeded"
-const ZoneFileImportStatusFailed ZoneFileImportStatus = "failed"
 const ZoneFileImportStatusCompletedWithErrors ZoneFileImportStatus = "completedWithErrors"
 
 func (e ZoneFileImportStatus) Validate() error {
-	if e == ZoneFileImportStatusRunning || e == ZoneFileImportStatusSucceeded || e == ZoneFileImportStatusFailed || e == ZoneFileImportStatusCompletedWithErrors {
+	if e == ZoneFileImportStatusRunning || e == ZoneFileImportStatusSucceeded || e == ZoneFileImportStatusCompletedWithErrors {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

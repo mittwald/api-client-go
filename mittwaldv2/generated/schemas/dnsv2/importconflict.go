@@ -13,12 +13,15 @@ import "fmt"
 //        enum:
 //            - "parseError"
 //            - "invalidRecord"
+//            - "invalidZoneName"
 //            - "unsupportedRecordType"
 //            - "cnameConflict"
 //            - "foreignCustomerIngress"
 //            - "rootZoneUnavailable"
+//        description: "Machine-readable conflict kind: parseError (a zone-file line could not be parsed), invalidRecord (a record failed the same schema validation the write commands apply), invalidZoneName (the owner name is not a valid zone name, e.g. a wildcard *.example.com), unsupportedRecordType (an RR type dns-service does not import), cnameConflict (a CNAME shares a name with other record types), foreignCustomerIngress (the zone's enabled ingress belongs to another organization), rootZoneUnavailable (a subzone whose root zone is neither importable nor already existing)."
 //    "message":
 //        type: "string"
+//        description: "Human-readable explanation of the conflict, suitable for surfacing to the user."
 //    "name":
 //        type: "string"
 //        description: "Offending record/owner name. Empty for a file-level parse error, where sourceLine locates the bad line."
@@ -38,6 +41,7 @@ import "fmt"
 //    "sourceLine":
 //        type: "integer"
 //        format: "int64"
+//        description: "1-based line number in the uploaded zone file, set for a file-level parse error (code parseError); 0 otherwise."
 // required:
 //    - "code"
 //    - "message"

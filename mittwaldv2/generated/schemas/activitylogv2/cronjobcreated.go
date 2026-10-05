@@ -16,32 +16,51 @@ import "fmt"
 //                properties:
 //                    "active":
 //                        type: "boolean"
+//                    "command":
+//                        type: "string"
+//                        nullable: true
 //                    "concurrencyPolicy":
-//                        type: "integer"
+//                        type: "string"
+//                        enum:
+//                            - "allow"
+//                            - "forbid"
+//                            - "replace"
+//                        nullable: true
+//                    "container":
+//                        type: "string"
+//                        nullable: true
 //                    "description":
 //                        type: "string"
 //                    "failedExecutionAlertThreshold":
 //                        type: "integer"
 //                        nullable: true
+//                    "interpreter":
+//                        type: "string"
+//                        nullable: true
 //                    "interval":
 //                        type: "string"
 //                    "notificationEmailConfigured":
 //                        type: "boolean"
+//                    "parameters":
+//                        type: "string"
+//                        nullable: true
+//                    "path":
+//                        type: "string"
+//                        nullable: true
 //                    "shortId":
 //                        type: "string"
-//                    "target":
-//                        type: "object"
-//                        nullable: true
 //                    "timeZone":
 //                        type: "string"
 //                    "timeout":
 //                        type: "integer"
+//                    "url":
+//                        type: "string"
+//                        nullable: true
 //                required:
 //                    - "shortId"
 //                    - "description"
 //                    - "interval"
 //                    - "active"
-//                    - "target"
 //                    - "timeout"
 //                    - "timeZone"
 //                    - "concurrencyPolicy"
@@ -53,8 +72,18 @@ import "fmt"
 //                    "active":
 //                        type: "boolean"
 //                        nullable: true
+//                    "command":
+//                        type: "string"
+//                        nullable: true
 //                    "concurrencyPolicy":
-//                        type: "integer"
+//                        type: "string"
+//                        enum:
+//                            - "allow"
+//                            - "forbid"
+//                            - "replace"
+//                        nullable: true
+//                    "container":
+//                        type: "string"
 //                        nullable: true
 //                    "description":
 //                        type: "string"
@@ -62,17 +91,23 @@ import "fmt"
 //                    "failedExecutionAlertThreshold":
 //                        type: "integer"
 //                        nullable: true
+//                    "interpreter":
+//                        type: "string"
+//                        nullable: true
 //                    "interval":
 //                        type: "string"
 //                        nullable: true
 //                    "notificationEmailConfigured":
 //                        type: "boolean"
 //                        nullable: true
-//                    "shortId":
+//                    "parameters":
 //                        type: "string"
 //                        nullable: true
-//                    "target":
-//                        type: "object"
+//                    "path":
+//                        type: "string"
+//                        nullable: true
+//                    "shortId":
+//                        type: "string"
 //                        nullable: true
 //                    "timeZone":
 //                        type: "string"
@@ -80,12 +115,14 @@ import "fmt"
 //                    "timeout":
 //                        type: "integer"
 //                        nullable: true
+//                    "url":
+//                        type: "string"
+//                        nullable: true
 //                required:
 //                    - "shortId"
 //                    - "description"
 //                    - "interval"
 //                    - "active"
-//                    - "target"
 //                    - "timeout"
 //                    - "timeZone"
 //                    - "concurrencyPolicy"
@@ -98,6 +135,8 @@ import "fmt"
 //    "parameters":
 //        type: "object"
 //        properties:
+//            "appInstallation": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
+//            "container": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
 //            "description": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //            "name": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //        required:

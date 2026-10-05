@@ -16,18 +16,6 @@ import (
 //        type: "string"
 //        format: "date-time"
 //        description: "When the import job was created (publish time of the created event)."
-//    "failedZones":
-//        type: "array"
-//        items:
-//            type: "object"
-//            properties:
-//                "error":
-//                    type: "string"
-//                "name":
-//                    type: "string"
-//            required:
-//                - "name"
-//                - "error"
 //    "id":
 //        type: "string"
 //        format: "uuid"
@@ -55,7 +43,6 @@ import (
 //        enum:
 //            - "running"
 //            - "succeeded"
-//            - "failed"
 //            - "completedWithErrors"
 // required:
 //    - "id"
@@ -63,12 +50,10 @@ import (
 //    - "status"
 //    - "importedZones"
 //    - "skippedZones"
-//    - "failedZones"
 //    - "createdAt"
 
 type ZoneFileImport struct {
 	CreatedAt     time.Time                        `json:"createdAt"`
-	FailedZones   []ZoneFileImportFailedZonesItem  `json:"failedZones"`
 	Id            string                           `json:"id"`
 	ImportedZones []string                         `json:"importedZones"`
 	ProjectId     string                           `json:"projectId"`
@@ -77,19 +62,6 @@ type ZoneFileImport struct {
 }
 
 func (o *ZoneFileImport) Validate() error {
-	if o.FailedZones == nil {
-		return errors.New("property failedZones is required, but not set")
-	}
-	if err := func() error {
-		for i := range o.FailedZones {
-			if err := o.FailedZones[i].Validate(); err != nil {
-				return fmt.Errorf("item %d is invalid %w", i, err)
-			}
-		}
-		return nil
-	}(); err != nil {
-		return fmt.Errorf("invalid property failedZones: %w", err)
-	}
 	if o.ImportedZones == nil {
 		return errors.New("property importedZones is required, but not set")
 	}

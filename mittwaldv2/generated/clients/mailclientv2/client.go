@@ -1207,6 +1207,8 @@ func (c *clientImpl) RecoverMailAddressEmails(
 }
 
 // Request a rate limit change for a MailAddress.
+//
+// Creates a rate limit change request that has to be approved. If the new rate limit is a plain reduction of the current one, it is applied immediately instead.
 func (c *clientImpl) RequestMailAddressRateLimitChange(
 	ctx context.Context,
 	req RequestMailAddressRateLimitChangeRequest,

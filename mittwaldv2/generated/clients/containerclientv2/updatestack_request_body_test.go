@@ -14,7 +14,7 @@ import (
 var _ = Describe("UpdateStackRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"description\":\"uptime kuma\",\"services\":{\"string\":{\"command\":null,\"deploy\":null,\"description\":null,\"entrypoint\":null,\"environment\":null,\"envs\":null,\"image\":null,\"ports\":null,\"restartPolicy\":null,\"volumes\":null}},\"updateSchedule\":{\"cron\":\"* * * * *\",\"timezone\":\"Europe/Berlin\"},\"volumes\":{\"string\":{\"name\":null}}}")
+			exampleJSON := []byte("{\"description\":\"uptime kuma\",\"services\":{\"string\":{\"command\":null,\"deploy\":null,\"description\":null,\"entrypoint\":null,\"environment\":null,\"envs\":null,\"image\":null,\"ports\":null,\"restart\":null,\"restartPolicy\":null,\"volumes\":null,\"x-description\":null}},\"updateSchedule\":{\"cron\":\"* * * * *\",\"timezone\":\"Europe/Berlin\"},\"volumes\":{\"string\":{\"name\":null}},\"x-description\":\"uptime kuma\",\"x-update-schedule\":{\"cron\":\"* * * * *\",\"timezone\":\"Europe/Berlin\"}}")
 
 			sut := containerclientv2.UpdateStackRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

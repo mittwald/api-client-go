@@ -14,7 +14,7 @@ import (
 var _ = Describe("CronjobServiceReferenceUpdatedChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"after\":{\"serviceReference\":{}},\"before\":{\"serviceReference\":{}}}")
+			exampleJSON := []byte("{\"after\":{\"container\":\"string\"},\"before\":{\"container\":\"string\"}}")
 
 			sut := activitylogv2.CronjobServiceReferenceUpdatedChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

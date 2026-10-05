@@ -13,12 +13,14 @@ import (
 // properties:
 //    "alreadyExists":
 //        type: "boolean"
+//        description: "Whether a zone with this name already exists. On import its record sets are overwritten rather than the import failing."
 //    "name":
 //        type: "string"
 //        description: "Fully-qualified name of the target zone. Every distinct owner name becomes its own zone. Only importable zones are listed; a zone named by a conflict is omitted."
 //    "recordSets":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.dns.ImportRecordSet"}
+//        description: "The record sets that would be set on the zone — one per record type present for this owner name."
 //    "targetProjectId":
 //        type: "string"
 //        description: "Project the zone would be created in. Always set, since only importable zones are listed."
@@ -26,12 +28,13 @@ import (
 //    - "name"
 //    - "alreadyExists"
 //    - "recordSets"
+//    - "targetProjectId"
 
 type ZoneImportPreview struct {
 	AlreadyExists   bool              `json:"alreadyExists"`
 	Name            string            `json:"name"`
 	RecordSets      []ImportRecordSet `json:"recordSets"`
-	TargetProjectId *string           `json:"targetProjectId,omitempty"`
+	TargetProjectId string            `json:"targetProjectId"`
 }
 
 func (o *ZoneImportPreview) Validate() error {

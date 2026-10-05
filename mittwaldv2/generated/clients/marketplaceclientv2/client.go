@@ -65,6 +65,11 @@ type Client interface {
 		req GetLoginLinkRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*GetLoginLinkResponse, *http.Response, error)
+	GetOauthClient(
+		ctx context.Context,
+		req GetOauthClientRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*GetOauthClientResponse, *http.Response, error)
 	ListContractPartnersOfContributor(
 		ctx context.Context,
 		req ListContractPartnersOfContributorRequest,
@@ -620,6 +625,34 @@ func (c *clientImpl) GetLoginLink(
 	}
 
 	var response GetLoginLinkResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get a specific OAuth2 client.
+func (c *clientImpl) GetOauthClient(
+	ctx context.Context,
+	req GetOauthClientRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*GetOauthClientResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response GetOauthClientResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

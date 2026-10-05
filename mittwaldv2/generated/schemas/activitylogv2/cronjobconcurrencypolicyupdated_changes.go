@@ -12,14 +12,23 @@ import "fmt"
 //        type: "object"
 //        properties:
 //            "concurrencyPolicy":
-//                type: "integer"
+//                type: "string"
+//                enum:
+//                    - "allow"
+//                    - "forbid"
+//                    - "replace"
+//                nullable: true
 //        required:
 //            - "concurrencyPolicy"
 //    "before":
 //        type: "object"
 //        properties:
 //            "concurrencyPolicy":
-//                type: "integer"
+//                type: "string"
+//                enum:
+//                    - "allow"
+//                    - "forbid"
+//                    - "replace"
 //                nullable: true
 //        required:
 //            - "concurrencyPolicy"

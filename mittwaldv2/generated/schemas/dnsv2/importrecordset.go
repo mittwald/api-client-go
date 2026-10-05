@@ -14,11 +14,14 @@ import (
 //    "records":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.dns.ImportRecord"}
+//        description: "The individual records in the set."
 //    "ttlNormalized":
 //        type: "boolean"
+//        description: "True when the source TTLs had to be normalized to ttlSeconds — because they diverged within the set or fell below the 60s minimum. Informational; the import still uses ttlSeconds."
 //    "ttlSeconds":
 //        type: "integer"
 //        format: "int32"
+//        description: "TTL applied to the whole set, in seconds. Collapsed to a single value across the set: the minimum of the source TTLs, floored to the 60s minimum."
 //    "type":
 //        type: "string"
 //        enum:
@@ -28,6 +31,7 @@ import (
 //            - "cname"
 //            - "srv"
 //            - "caa"
+//        description: "Record-set type."
 // required:
 //    - "type"
 //    - "ttlSeconds"

@@ -9,19 +9,25 @@ package dnsv2
 //    "flags":
 //        type: "integer"
 //        format: "int32"
+//        description: "CAA flags. Only set for CAA records."
 //    "port":
 //        type: "integer"
 //        format: "int32"
+//        description: "SRV port. Only set for SRV records."
 //    "priority":
 //        type: "integer"
 //        format: "int32"
+//        description: "MX preference / SRV priority. Only set for MX and SRV records."
 //    "tag":
 //        type: "string"
+//        description: "CAA tag (e.g. issue, issuewild, iodef). Only set for CAA records."
 //    "value":
 //        type: "string"
+//        description: "The record's value: an IP address for A/AAAA, the target FQDN for MX/CNAME/SRV, the text for TXT, the value for CAA."
 //    "weight":
 //        type: "integer"
 //        format: "int32"
+//        description: "SRV weight. Only set for SRV records."
 // required:
 //    - "value"
 

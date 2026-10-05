@@ -15,14 +15,23 @@ import "fmt"
 //                type: "object"
 //                properties:
 //                    "concurrencyPolicy":
-//                        type: "integer"
+//                        type: "string"
+//                        enum:
+//                            - "allow"
+//                            - "forbid"
+//                            - "replace"
+//                        nullable: true
 //                required:
 //                    - "concurrencyPolicy"
 //            "before":
 //                type: "object"
 //                properties:
 //                    "concurrencyPolicy":
-//                        type: "integer"
+//                        type: "string"
+//                        enum:
+//                            - "allow"
+//                            - "forbid"
+//                            - "replace"
 //                        nullable: true
 //                required:
 //                    - "concurrencyPolicy"
@@ -33,6 +42,8 @@ import "fmt"
 //    "parameters":
 //        type: "object"
 //        properties:
+//            "appInstallation": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
+//            "container": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
 //            "description": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //            "name": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //        required:

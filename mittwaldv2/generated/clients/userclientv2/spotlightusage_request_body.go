@@ -11,6 +11,7 @@ package userclientv2
 //    "owner":
 //        type: "string"
 //        description: "The Owner of the Feature the spotlight is highlighting."
+//        deprecated: true
 //    "used":
 //        type: "boolean"
 // description: SpotlightUsageRequestBody models the JSON body of a 'user-spotlight-usage' request

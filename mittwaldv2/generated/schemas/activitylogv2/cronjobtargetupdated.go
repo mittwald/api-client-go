@@ -14,19 +14,33 @@ import "fmt"
 //            "after":
 //                type: "object"
 //                properties:
-//                    "destination":
-//                        type: "object"
+//                    "interpreter":
+//                        type: "string"
 //                        nullable: true
-//                required:
-//                    - "destination"
+//                    "parameters":
+//                        type: "string"
+//                        nullable: true
+//                    "path":
+//                        type: "string"
+//                        nullable: true
+//                    "url":
+//                        type: "string"
+//                        nullable: true
 //            "before":
 //                type: "object"
 //                properties:
-//                    "destination":
-//                        type: "object"
+//                    "interpreter":
+//                        type: "string"
 //                        nullable: true
-//                required:
-//                    - "destination"
+//                    "parameters":
+//                        type: "string"
+//                        nullable: true
+//                    "path":
+//                        type: "string"
+//                        nullable: true
+//                    "url":
+//                        type: "string"
+//                        nullable: true
 //    "name":
 //        type: "string"
 //        enum:
@@ -34,6 +48,8 @@ import "fmt"
 //    "parameters":
 //        type: "object"
 //        properties:
+//            "appInstallation": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
+//            "container": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
 //            "description": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //            "name": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //        required:

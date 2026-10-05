@@ -434,6 +434,11 @@ type Client interface {
 		req ResendVerificationEmailRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	SearchedLeakedPasswordsByRange(
+		ctx context.Context,
+		req SearchedLeakedPasswordsByRangeRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]string, *http.Response, error)
 	SpotlightFeedback(
 		ctx context.Context,
 		req SpotlightFeedbackRequest,
@@ -2685,6 +2690,34 @@ func (c *clientImpl) ResendVerificationEmail(
 	}
 
 	return httpRes, nil
+}
+
+// Check if a password is leaked.
+func (c *clientImpl) SearchedLeakedPasswordsByRange(
+	ctx context.Context,
+	req SearchedLeakedPasswordsByRangeRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]string, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []string
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }
 
 // Submit your spotlight usage.
