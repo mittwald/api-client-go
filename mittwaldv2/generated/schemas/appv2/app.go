@@ -12,6 +12,7 @@ import (
 // type: "object"
 // properties:
 //    "actionCapabilities": {"$ref": "#/components/schemas/de.mittwald.v1.app.ActionCapabilities"}
+//    "description": {"$ref": "#/components/schemas/de.mittwald.v1.app.TranslatedString"}
 //    "id":
 //        type: "string"
 //    "name":
@@ -29,6 +30,7 @@ import (
 // An App is to be understood as a manifest for AppInstallations. E.g. 'WordPress' only exists inside our ecosystem, because there is an  App -Manifest for it.
 type App struct {
 	ActionCapabilities ActionCapabilities `json:"actionCapabilities,omitempty"`
+	Description        *TranslatedString  `json:"description,omitempty"`
 	Id                 string             `json:"id"`
 	Name               string             `json:"name"`
 	Tags               []string           `json:"tags"`
@@ -49,6 +51,14 @@ func (o *App) Validate() error {
 		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property actionCapabilities: %w", err)
+	}
+	if err := func() error {
+		if o.Description == nil {
+			return nil
+		}
+		return o.Description.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property description: %w", err)
 	}
 	if o.Tags == nil {
 		return errors.New("property tags is required, but not set")

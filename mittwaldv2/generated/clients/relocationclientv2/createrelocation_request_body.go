@@ -51,7 +51,6 @@ import (
 //                minLength: 1
 //            "phoneNumber":
 //                type: "string"
-//                pattern: "|^\\+([0-9]{2,3}|1)-[0-9]{2,5}-[0-9]+$"
 //        required:
 //            - "firstName"
 //            - "lastName"

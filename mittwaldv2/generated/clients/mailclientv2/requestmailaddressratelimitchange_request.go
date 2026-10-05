@@ -18,6 +18,10 @@ import (
 //
 // Request a rate limit change for a MailAddress.
 //
+// Creates a rate limit change request that has to be approved. If the new rate
+// limit is a plain reduction of the current one, it is applied immediately
+// instead.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/mail/mail-request-mail-address-rate-limit-change
 type RequestMailAddressRateLimitChangeRequest struct {

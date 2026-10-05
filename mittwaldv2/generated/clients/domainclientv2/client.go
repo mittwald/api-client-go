@@ -133,11 +133,31 @@ type Client interface {
 		req UpdateIngressTLSRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*UpdateIngressTLSResponse, *http.Response, error)
+	ListDNSZoneFileImports(
+		ctx context.Context,
+		req ListDNSZoneFileImportsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]dnsv2.ZoneFileImport, *http.Response, error)
+	CreateDNSZoneFileImport(
+		ctx context.Context,
+		req CreateDNSZoneFileImportRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*dnsv2.CreateZoneFileImportResponse, *http.Response, error)
 	CreateDNSZone(
 		ctx context.Context,
 		req CreateDNSZoneRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CreateDNSZoneResponse, *http.Response, error)
+	ListDNSZones(
+		ctx context.Context,
+		req ListDNSZonesRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]dnsv2.Zone, *http.Response, error)
+	CreateProjectDNSZone(
+		ctx context.Context,
+		req CreateProjectDNSZoneRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*CreateProjectDNSZoneResponse, *http.Response, error)
 	GetDNSZone(
 		ctx context.Context,
 		req GetDNSZoneRequest,
@@ -148,16 +168,16 @@ type Client interface {
 		req DeleteDNSZoneRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	GetDNSZoneFileImport(
+		ctx context.Context,
+		req GetDNSZoneFileImportRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*dnsv2.ZoneFileImport, *http.Response, error)
 	GetZoneFile(
 		ctx context.Context,
 		req GetZoneFileRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	ListDNSZones(
-		ctx context.Context,
-		req ListDNSZonesRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*[]dnsv2.Zone, *http.Response, error)
 	SetRecordSetManaged(
 		ctx context.Context,
 		req SetRecordSetManagedRequest,
@@ -995,7 +1015,69 @@ func (c *clientImpl) UpdateIngressTLS(
 	return &response, httpRes, nil
 }
 
-// Create a DNSZone.
+// List DNS zone-file import jobs belonging to a Project.
+//
+// Returns the DNS zone-file import jobs of the Project, newest state per job (status plus the imported/skipped zones). Sorted by creation date, newest first, by default; paginated. Project-scoped and authorized on the Project.
+func (c *clientImpl) ListDNSZoneFileImports(
+	ctx context.Context,
+	req ListDNSZoneFileImportsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]dnsv2.ZoneFileImport, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []dnsv2.ZoneFileImport
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Import a DNS zone file into a Project, or preview it with dry-run.
+//
+// Parses an uploaded RFC-1035 zone file and returns the structured import plan: the importable target DNSZones (one per distinct owner name, with the record sets that would be set) plus a flat list of conflicts explaining everything that will not be imported (invalid records, unsupported record types, CNAME conflicts, placement problems, parse errors). With dryRun=true this is all it does — a side-effect-free preview, nothing is created. Otherwise it also starts the import and returns the created job id. The import is all-or-nothing: if the zone file has any conflict the request is rejected with 412 and no job is created — resolve the conflicts (visible in the dry-run preview) and retry, since a half-imported zone file would leave DNS in a confusing half-state. An identical import still running for the project is rejected with 409. Existing zones are overwritten. Poll GET /v2/dns-zone-imports/{zoneFileImportId} for status.
+func (c *clientImpl) CreateDNSZoneFileImport(
+	ctx context.Context,
+	req CreateDNSZoneFileImportRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*dnsv2.CreateZoneFileImportResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response dnsv2.CreateZoneFileImportResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create a DNSZone (deprecated).
+//
+// This operation is deprecated. Use POST v2/projects/{projectId}/dns-zones instead, which creates the zone for a domain (root or subzone) and guards root zones behind a verified ingress.
 func (c *clientImpl) CreateDNSZone(
 	ctx context.Context,
 	req CreateDNSZoneRequest,
@@ -1017,6 +1099,64 @@ func (c *clientImpl) CreateDNSZone(
 	}
 
 	var response CreateDNSZoneResponse
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// List DNSZones belonging to a Project.
+func (c *clientImpl) ListDNSZones(
+	ctx context.Context,
+	req ListDNSZonesRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]dnsv2.Zone, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []dnsv2.Zone
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Create a DNSZone for a verified Ingress in a Project.
+//
+// Creates a DNSZone for a verified Ingress in a Project. The service resolves whether the domain is a root zone or a subzone and creates it accordingly. This lets a project prepare DNS for a domain that is not yet hosted at mittwald once ownership has been proven via a verified vHost.
+func (c *clientImpl) CreateProjectDNSZone(
+	ctx context.Context,
+	req CreateProjectDNSZoneRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*CreateProjectDNSZoneResponse, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response CreateProjectDNSZoneResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -1075,6 +1215,34 @@ func (c *clientImpl) DeleteDNSZone(
 	return httpRes, nil
 }
 
+// Get the status of a DNS zone-file import job.
+func (c *clientImpl) GetDNSZoneFileImport(
+	ctx context.Context,
+	req GetDNSZoneFileImportRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*dnsv2.ZoneFileImport, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response dnsv2.ZoneFileImport
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // Get a zone file for a DNSZone.
 //
 // Returns a BIND-compliant DNS zone file per RFC 1035 for the specified dnsZoneId, including all sub zone information. Entering the dnsZoneId of a sub zone will result in an error.
@@ -1099,34 +1267,6 @@ func (c *clientImpl) GetZoneFile(
 	}
 
 	return httpRes, nil
-}
-
-// List DNSZones belonging to a Project.
-func (c *clientImpl) ListDNSZones(
-	ctx context.Context,
-	req ListDNSZonesRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*[]dnsv2.Zone, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response []dnsv2.Zone
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
 
 // Set a record set on a DNSZone to managed.

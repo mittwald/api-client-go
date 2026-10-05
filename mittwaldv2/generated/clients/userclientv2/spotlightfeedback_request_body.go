@@ -19,9 +19,9 @@ import (
 //        description: "Personal feedback message."
 //    "owner":
 //        type: "string"
-//        description: "The Owner of the Feature the spotlight is highlighting."
+//        description: "The Owner of the spotlight is no longer writable."
+//        deprecated: true
 // required:
-//    - "owner"
 //    - "decision"
 // description: SpotlightFeedbackRequestBody models the JSON body of a 'user-spotlight-feedback' request
 
@@ -29,7 +29,7 @@ import (
 type SpotlightFeedbackRequestBody struct {
 	Decision userv2.UserFeedbackSpotlightDecision `json:"decision"`
 	Message  *string                              `json:"message,omitempty"`
-	Owner    string                               `json:"owner"`
+	Owner    *string                              `json:"owner,omitempty"`
 }
 
 func (o *SpotlightFeedbackRequestBody) Validate() error {

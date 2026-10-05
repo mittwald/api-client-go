@@ -103,7 +103,6 @@ import (
 //    - "state"
 //    - "name"
 //    - "tags"
-//    - "context"
 //    - "scopes"
 //    - "disabled"
 //    - "blocked"
@@ -113,7 +112,7 @@ import (
 type UnpublishedExtension struct {
 	Assets               []ExtensionAsset             `json:"assets"`
 	Blocked              bool                         `json:"blocked"`
-	Context              Context                      `json:"context"`
+	Context              *Context                     `json:"context,omitempty"`
 	ContributorId        string                       `json:"contributorId"`
 	DeletionDeadline     *time.Time                   `json:"deletionDeadline,omitempty"`
 	Deprecation          *ExtensionDeprecation        `json:"deprecation,omitempty"`
@@ -153,7 +152,12 @@ func (o *UnpublishedExtension) Validate() error {
 	}(); err != nil {
 		return fmt.Errorf("invalid property assets: %w", err)
 	}
-	if err := o.Context.Validate(); err != nil {
+	if err := func() error {
+		if o.Context == nil {
+			return nil
+		}
+		return o.Context.Validate()
+	}(); err != nil {
 		return fmt.Errorf("invalid property context: %w", err)
 	}
 	if err := func() error {

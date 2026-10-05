@@ -10,14 +10,19 @@ package domainclientv2
 //    "domain":
 //        type: "string"
 //        format: "naked-domain"
+//    "projectId":
+//        type: "string"
+//        format: "uuid"
+//        description: "Target project of the transfer. If given, the domain is reported as not transferable (reason enabledIngressInOtherProject) when an enabled ingress for it already exists in another project."
 // required:
 //    - "domain"
 // description: CheckDomainTransferabilityRequestBody models the JSON body of a 'domain-check-domain-transferability' request
 
 // CheckDomainTransferabilityRequestBody models the JSON body of a 'domain-check-domain-transferability' request
 type CheckDomainTransferabilityRequestBody struct {
-	AuthCode *string `json:"authCode,omitempty"`
-	Domain   string  `json:"domain"`
+	AuthCode  *string `json:"authCode,omitempty"`
+	Domain    string  `json:"domain"`
+	ProjectId *string `json:"projectId,omitempty"`
 }
 
 func (o *CheckDomainTransferabilityRequestBody) Validate() error {

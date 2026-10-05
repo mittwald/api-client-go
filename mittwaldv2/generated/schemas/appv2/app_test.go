@@ -14,7 +14,7 @@ import (
 var _ = Describe("App", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"actionCapabilities\":[\"start\"],\"id\":\"string\",\"name\":\"string\",\"tags\":[\"string\"]}")
+			exampleJSON := []byte("{\"actionCapabilities\":[\"start\"],\"description\":{\"de\":\"string\",\"en\":\"string\"},\"id\":\"string\",\"name\":\"string\",\"tags\":[\"string\"]}")
 
 			sut := appv2.App{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

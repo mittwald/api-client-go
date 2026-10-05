@@ -85,6 +85,10 @@ import (
 //    "vatId":
 //        type: "string"
 //        example: "DE123456789"
+//    "xRechnungId":
+//        type: "string"
+//        format: "uuid"
+//        description: "The ID of the XRechnung XML file. Only set when the recipient has a Leitweg-ID; the PDF is then only a visual copy."
 // required:
 //    - "id"
 //    - "customerId"
@@ -119,6 +123,7 @@ type Invoice struct {
 	TotalGross      float64             `json:"totalGross"`
 	TotalNet        float64             `json:"totalNet"`
 	VatId           *string             `json:"vatId,omitempty"`
+	XRechnungId     *string             `json:"xRechnungId,omitempty"`
 }
 
 func (o *Invoice) Validate() error {

@@ -14,7 +14,7 @@ import (
 var _ = Describe("CheckDomainTransferabilityRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"authCode\":\"string\",\"domain\":\"string\"}")
+			exampleJSON := []byte("{\"authCode\":\"string\",\"domain\":\"string\",\"projectId\":\"7a9d8971-09b0-4c39-8c64-546b6e1875ce\"}")
 
 			sut := domainclientv2.CheckDomainTransferabilityRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
