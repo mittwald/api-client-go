@@ -58,6 +58,8 @@ import (
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobActiveUpdated"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobDeleted"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.CronjobExecution"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ProjectCreated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ProjectDescriptionUpdated"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.GenericAction"}
 //    "aggregate": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AggregateReference"}
 //    "dateTime":

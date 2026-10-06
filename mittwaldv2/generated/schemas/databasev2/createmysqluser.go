@@ -28,6 +28,7 @@ import "fmt"
 //        description: "Describes if users should be able to connection to this database from external\nsources. Defaults to `false` when not set.\n\nTo find out how to connect to your database from external sources, refer to the `externalHostname` field of the `GET /v2/mysql-databases/{id}` endpoint.\n"
 //    "password":
 //        type: "string"
+//        description: "The password must have a minimum of 8 characters and contain at least one uppercase letter, one lowercase letter, one digit and one special character of `#!~%^*_+-=?{}()<>|.,;$:/`. Other characters are not allowed. The password must not start with any of `-`, `_` or `;`.\n"
 // required:
 //    - "databaseId"
 //    - "password"

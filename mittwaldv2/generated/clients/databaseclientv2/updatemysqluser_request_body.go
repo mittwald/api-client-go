@@ -22,6 +22,7 @@ import "fmt"
 //        type: "boolean"
 //    "password":
 //        type: "string"
+//        description: "The password must have a minimum of 8 characters and contain at least one uppercase letter, one lowercase letter, one digit and one special character of `#!~%^*_+-=?{}()<>|.,;$:/`. Other characters are not allowed. The password must not start with any of `-`, `_` or `;`.\n"
 // description: UpdateMysqlUserRequestBody models the JSON body of a 'database-update-mysql-user' request
 
 // UpdateMysqlUserRequestBody models the JSON body of a 'database-update-mysql-user' request
