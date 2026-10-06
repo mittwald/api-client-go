@@ -32,6 +32,16 @@ type Client interface {
 		req DeprecatedUpdateServerDescriptionRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	DeprecatedStoragespaceReplaceProjectNotificationThreshold(
+		ctx context.Context,
+		req DeprecatedStoragespaceReplaceProjectNotificationThresholdRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
+	DeprecatedStoragespaceReplaceServerNotificationThreshold(
+		ctx context.Context,
+		req DeprecatedStoragespaceReplaceServerNotificationThresholdRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	AcceptProjectInvite(
 		ctx context.Context,
 		req AcceptProjectInviteRequest,
@@ -177,21 +187,6 @@ type Client interface {
 		req ResendProjectInviteMailRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	DeprecatedStoragespaceReplaceProjectNotificationThreshold(
-		ctx context.Context,
-		req DeprecatedStoragespaceReplaceProjectNotificationThresholdRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
-	StoragespaceGetServerStatistics(
-		ctx context.Context,
-		req StoragespaceGetServerStatisticsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*storagespacev2.Statistics, *http.Response, error)
-	StoragespaceUpdateServerStatistics(
-		ctx context.Context,
-		req StoragespaceUpdateServerStatisticsRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*http.Response, error)
 	StoragespaceGetProjectStatistics(
 		ctx context.Context,
 		req StoragespaceGetProjectStatisticsRequest,
@@ -202,9 +197,14 @@ type Client interface {
 		req StoragespaceUpdateProjectStatisticsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	DeprecatedStoragespaceReplaceServerNotificationThreshold(
+	StoragespaceGetServerStatistics(
 		ctx context.Context,
-		req DeprecatedStoragespaceReplaceServerNotificationThresholdRequest,
+		req StoragespaceGetServerStatisticsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*storagespacev2.Statistics, *http.Response, error)
+	StoragespaceUpdateServerStatistics(
+		ctx context.Context,
+		req StoragespaceUpdateServerStatisticsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
 }
@@ -274,6 +274,58 @@ func (c *clientImpl) DeprecatedUpdateProjectDescription(
 func (c *clientImpl) DeprecatedUpdateServerDescription(
 	ctx context.Context,
 	req DeprecatedUpdateServerDescriptionRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a Project's storage space notification threshold.
+//
+// Deprecated by `PATCH /v2/projects/{projectId}/storage-space-statistics`.
+func (c *clientImpl) DeprecatedStoragespaceReplaceProjectNotificationThreshold(
+	ctx context.Context,
+	req DeprecatedStoragespaceReplaceProjectNotificationThresholdRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
+// Update a Server's storage space notification threshold.
+//
+// Deprecated by `PATCH /v2/projects/{projectId}/storage-space-statistics`.
+func (c *clientImpl) DeprecatedStoragespaceReplaceServerNotificationThreshold(
+	ctx context.Context,
+	req DeprecatedStoragespaceReplaceServerNotificationThresholdRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
@@ -1062,84 +1114,6 @@ func (c *clientImpl) ResendProjectInviteMail(
 	return httpRes, nil
 }
 
-// Update a Project's storage space notification threshold.
-//
-// Deprecated by `PATCH /v2/projects/{projectId}/storage-space-statistics`.
-func (c *clientImpl) DeprecatedStoragespaceReplaceProjectNotificationThreshold(
-	ctx context.Context,
-	req DeprecatedStoragespaceReplaceProjectNotificationThresholdRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
-// Get storage space Statistics belonging to a Server.
-func (c *clientImpl) StoragespaceGetServerStatistics(
-	ctx context.Context,
-	req StoragespaceGetServerStatisticsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*storagespacev2.Statistics, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response storagespacev2.Statistics
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Update a Server's storage space statistics.
-func (c *clientImpl) StoragespaceUpdateServerStatistics(
-	ctx context.Context,
-	req StoragespaceUpdateServerStatisticsRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return httpRes, err
-	}
-
-	return httpRes, nil
-}
-
 // Get storage space Statistics belonging to a Project.
 func (c *clientImpl) StoragespaceGetProjectStatistics(
 	ctx context.Context,
@@ -1192,12 +1166,38 @@ func (c *clientImpl) StoragespaceUpdateProjectStatistics(
 	return httpRes, nil
 }
 
-// Update a Server's storage space notification threshold.
-//
-// Deprecated by `PATCH /v2/projects/{projectId}/storage-space-statistics`.
-func (c *clientImpl) DeprecatedStoragespaceReplaceServerNotificationThreshold(
+// Get storage space Statistics belonging to a Server.
+func (c *clientImpl) StoragespaceGetServerStatistics(
 	ctx context.Context,
-	req DeprecatedStoragespaceReplaceServerNotificationThresholdRequest,
+	req StoragespaceGetServerStatisticsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*storagespacev2.Statistics, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response storagespacev2.Statistics
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Update a Server's storage space statistics.
+func (c *clientImpl) StoragespaceUpdateServerStatistics(
+	ctx context.Context,
+	req StoragespaceUpdateServerStatisticsRequest,
 	reqEditors ...func(req *http.Request) error,
 ) (*http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
