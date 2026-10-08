@@ -74,6 +74,11 @@ type Client interface {
 		req CustomerGetUsageRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*aihostingv2.CustomerPlan, *http.Response, error)
+	CustomerRotateKey(
+		ctx context.Context,
+		req CustomerRotateKeyRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*aihostingv2.Key, *http.Response, error)
 	GetModels(
 		ctx context.Context,
 		req GetModelsRequest,
@@ -139,6 +144,11 @@ type Client interface {
 		req ProjectLinkContainerRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	ProjectRotateKey(
+		ctx context.Context,
+		req ProjectRotateKeyRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*aihostingv2.Key, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -468,6 +478,36 @@ func (c *clientImpl) CustomerGetUsage(
 	}
 
 	var response aihostingv2.CustomerPlan
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Rotates a customer's key.
+//
+// Issues a new secret for the key. The old secret is revoked immediately unless a grace period is supplied.
+func (c *clientImpl) CustomerRotateKey(
+	ctx context.Context,
+	req CustomerRotateKeyRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*aihostingv2.Key, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response aihostingv2.Key
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -834,4 +874,34 @@ func (c *clientImpl) ProjectLinkContainer(
 	}
 
 	return httpRes, nil
+}
+
+// Rotates a project's key.
+//
+// Issues a new secret for the key. The old secret is revoked immediately unless a grace period is supplied.
+func (c *clientImpl) ProjectRotateKey(
+	ctx context.Context,
+	req ProjectRotateKeyRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*aihostingv2.Key, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response aihostingv2.Key
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
 }

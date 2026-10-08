@@ -16,6 +16,7 @@ import "fmt"
 //            - "container.started"
 //            - "container.stopped"
 //            - "container.restarted"
+//            - "container.recreated"
 //    "parameters":
 //        type: "object"
 //        properties:

@@ -44,6 +44,10 @@ import (
 //        format: "uuid"
 //    "installationPath":
 //        type: "string"
+//    "lastAutoUpdateFailedAt":
+//        type: "string"
+//        format: "date-time"
+//        description: "When the last automatic update failed. Automatic updates are deactivated after a failure. The value is kept when automatic updates are activated again, so it does not indicate the current state on its own; combine it with `autoUpdatesActivated` (e.g. only warn while that is false)."
 //    "lastError":
 //        type: "string"
 //        description: "The last error that occurred during an update. Resets on success."
@@ -127,6 +131,7 @@ type AppInstallation struct {
 	Hostname                *string                    `json:"hostname,omitempty"`
 	Id                      string                     `json:"id"`
 	InstallationPath        string                     `json:"installationPath"`
+	LastAutoUpdateFailedAt  *time.Time                 `json:"lastAutoUpdateFailedAt,omitempty"`
 	LastError               *string                    `json:"lastError,omitempty"`
 	LinkedDatabases         []LinkedDatabase           `json:"linkedDatabases"`
 	LockedBy                map[string]LockPurpose     `json:"lockedBy,omitempty"`

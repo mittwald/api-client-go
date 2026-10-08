@@ -20,7 +20,7 @@ import (
 //                - "ERROR_QUAD_A"
 //                - "ERROR_NO_A_RECORD"
 //                - "ERROR_ACME_CERTIFICATE_REQUEST_DEADLINE_EXCEEDED"
-//        description: "A list of errors that occurred while validating the ingress's dns before requesting a certificate."
+//        description: "A list of errors that occurred while validating the ingress's dns before requesting a certificate. `ERROR_QUAD_A` and `ERROR_NO_A_RECORD` are deprecated and no longer reported."
 //    "hostname":
 //        type: "string"
 //        format: "idn-hostname"

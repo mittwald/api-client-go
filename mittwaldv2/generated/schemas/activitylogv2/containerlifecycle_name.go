@@ -11,15 +11,17 @@ import "fmt"
 //    - "container.started"
 //    - "container.stopped"
 //    - "container.restarted"
+//    - "container.recreated"
 
 type ContainerLifecycleName string
 
 const ContainerLifecycleNameContainerStarted ContainerLifecycleName = "container.started"
 const ContainerLifecycleNameContainerStopped ContainerLifecycleName = "container.stopped"
 const ContainerLifecycleNameContainerRestarted ContainerLifecycleName = "container.restarted"
+const ContainerLifecycleNameContainerRecreated ContainerLifecycleName = "container.recreated"
 
 func (e ContainerLifecycleName) Validate() error {
-	if e == ContainerLifecycleNameContainerStarted || e == ContainerLifecycleNameContainerStopped || e == ContainerLifecycleNameContainerRestarted {
+	if e == ContainerLifecycleNameContainerStarted || e == ContainerLifecycleNameContainerStopped || e == ContainerLifecycleNameContainerRestarted || e == ContainerLifecycleNameContainerRecreated {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)

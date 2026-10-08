@@ -84,6 +84,12 @@ import (
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ContainerRegistryDeleted"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ProjectCreated"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ProjectDescriptionUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.MembershipInviteCreated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.MembershipInviteStatusChanged"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.MembershipMemberAdded"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.MembershipMemberRoleUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.MembershipMemberExpiryUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.MembershipMemberRemoved"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.GenericAction"}
 //    "aggregate": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AggregateReference"}
 //    "dateTime":
