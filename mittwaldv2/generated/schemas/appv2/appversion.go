@@ -38,6 +38,9 @@ import "fmt"
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.app.SystemSoftwareDependency"}
 //        uniqueItems: true
+//    "updateConstraint":
+//        type: "string"
+//        description: "SemVer constraint that newer AppVersions must satisfy to be eligible as automatic update targets for this AppVersion."
 //    "userInputs":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.app.UserInput"}
@@ -66,6 +69,7 @@ type AppVersion struct {
 	Recommended                *bool                      `json:"recommended,omitempty"`
 	RequestHandler             *RequestHandlerRequirement `json:"requestHandler,omitempty"`
 	SystemSoftwareDependencies []SystemSoftwareDependency `json:"systemSoftwareDependencies,omitempty"`
+	UpdateConstraint           *string                    `json:"updateConstraint,omitempty"`
 	UserInputs                 []UserInput                `json:"userInputs,omitempty"`
 }
 
