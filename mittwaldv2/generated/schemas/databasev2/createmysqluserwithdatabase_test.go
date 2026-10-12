@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateMySqlUserWithDatabase", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"accessIpMask\":\"string\",\"accessLevel\":\"full\",\"externalAccess\":true,\"password\":\"string\"}")
+			exampleJSON := []byte("{\"accessIpMask\":\"string\",\"accessLevel\":\"full\",\"description\":\"string\",\"externalAccess\":true,\"password\":\"string\"}")
 
 			sut := databasev2.CreateMySqlUserWithDatabase{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

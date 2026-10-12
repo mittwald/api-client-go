@@ -13,6 +13,11 @@ package aihostingclientv2
 //        minLength: 5
 //    "projectId":
 //        type: "string"
+//    "tokenLimit":
+//        type: "integer"
+//        minimum: 0
+//        format: "int64"
+//        description: "The key's own token limit for the plan's billing period. 0 removes an existing limit, so the key shares the plan's limit again. Settable on the customer route only."
 // description: CustomerUpdateKeyRequestBody models the JSON body of a 'ai-hosting-customer-update-key' request
 
 // CustomerUpdateKeyRequestBody models the JSON body of a 'ai-hosting-customer-update-key' request
@@ -20,6 +25,7 @@ type CustomerUpdateKeyRequestBody struct {
 	CreateWebuiContainer *bool   `json:"createWebuiContainer,omitempty"`
 	Name                 *string `json:"name,omitempty"`
 	ProjectId            *string `json:"projectId,omitempty"`
+	TokenLimit           *int64  `json:"tokenLimit,omitempty"`
 }
 
 func (o *CustomerUpdateKeyRequestBody) Validate() error {

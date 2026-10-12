@@ -23,6 +23,10 @@ import (
 //        type: "string"
 //    "projectId":
 //        type: "string"
+//    "projectKeyCreationBlocked":
+//        type: "boolean"
+//        description: "When true, project members cannot create keys on this plan themselves; only the customer can. Keys that already exist keep working."
+//        default: false
 // required:
 //    - "keys"
 //    - "projectId"
@@ -36,6 +40,7 @@ type ProjectPlan struct {
 	NextTokenReset             *time.Time `json:"nextTokenReset,omitempty"`
 	PlanId                     string     `json:"planId"`
 	ProjectId                  string     `json:"projectId"`
+	ProjectKeyCreationBlocked  *bool      `json:"projectKeyCreationBlocked,omitempty"`
 }
 
 func (o *ProjectPlan) Validate() error {

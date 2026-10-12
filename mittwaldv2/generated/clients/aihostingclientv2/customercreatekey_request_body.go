@@ -16,6 +16,11 @@ package aihostingclientv2
 //        minLength: 1
 //    "projectId":
 //        type: "string"
+//    "tokenLimit":
+//        type: "integer"
+//        minimum: 1
+//        format: "int64"
+//        description: "Optional token limit for this key alone, for the plan's billing period. Without it the key shares the plan's limit with every other key. The sum of all key limits may exceed the plan's limit; the plan's limit always applies on top."
 // required:
 //    - "name"
 //    - "planId"
@@ -27,6 +32,7 @@ type CustomerCreateKeyRequestBody struct {
 	Name                 string  `json:"name"`
 	PlanId               string  `json:"planId"`
 	ProjectId            *string `json:"projectId,omitempty"`
+	TokenLimit           *int64  `json:"tokenLimit,omitempty"`
 }
 
 func (o *CustomerCreateKeyRequestBody) Validate() error {

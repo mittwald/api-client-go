@@ -8,11 +8,15 @@ package aihostingclientv2
 // properties:
 //    "description":
 //        type: "string"
+//    "projectKeyCreationBlocked":
+//        type: "boolean"
+//        description: "When true, project members can no longer create keys on this plan themselves; only the customer can. Keys that already exist keep working. Set this when you hand out per-key token limits -- a key created from a project carries no limit, and a new key starts at zero usage, so without it a project member can sidestep the limit."
 // description: CustomerUpdatePlanRequestBody models the JSON body of a 'ai-hosting-customer-update-plan' request
 
 // CustomerUpdatePlanRequestBody models the JSON body of a 'ai-hosting-customer-update-plan' request
 type CustomerUpdatePlanRequestBody struct {
-	Description *string `json:"description,omitempty"`
+	Description               *string `json:"description,omitempty"`
+	ProjectKeyCreationBlocked *bool   `json:"projectKeyCreationBlocked,omitempty"`
 }
 
 func (o *CustomerUpdatePlanRequestBody) Validate() error {

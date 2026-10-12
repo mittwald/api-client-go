@@ -430,7 +430,7 @@ func (c *clientImpl) CustomerGetPlan(
 	return &response, httpRes, nil
 }
 
-// Renames an AI hosting plan.
+// Updates an AI hosting plan.
 func (c *clientImpl) CustomerUpdatePlan(
 	ctx context.Context,
 	req CustomerUpdatePlanRequest,

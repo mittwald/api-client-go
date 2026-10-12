@@ -13,6 +13,7 @@ import "fmt"
 //    - "migrating"
 //    - "importing"
 //    - "error"
+//    - "terminating"
 
 type DatabaseStatus string
 
@@ -21,9 +22,10 @@ const DatabaseStatusReady DatabaseStatus = "ready"
 const DatabaseStatusMigrating DatabaseStatus = "migrating"
 const DatabaseStatusImporting DatabaseStatus = "importing"
 const DatabaseStatusError DatabaseStatus = "error"
+const DatabaseStatusTerminating DatabaseStatus = "terminating"
 
 func (e DatabaseStatus) Validate() error {
-	if e == DatabaseStatusPending || e == DatabaseStatusReady || e == DatabaseStatusMigrating || e == DatabaseStatusImporting || e == DatabaseStatusError {
+	if e == DatabaseStatusPending || e == DatabaseStatusReady || e == DatabaseStatusMigrating || e == DatabaseStatusImporting || e == DatabaseStatusError || e == DatabaseStatusTerminating {
 		return nil
 	}
 	return fmt.Errorf("unexpected value for type %T: %s", e, e)
