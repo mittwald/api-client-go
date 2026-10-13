@@ -15,6 +15,8 @@ import (
 //
 // List all unread notifications.
 //
+// Sorted by creation date, descending, unless a different sort is requested.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/notification/notifications-list-notifications
 type ListNotificationsRequest struct {
@@ -28,6 +30,8 @@ type ListNotificationsRequest struct {
 	Limit              *int64
 	Skip               *int64
 	Page               *int64
+	Sort               *ListNotificationsRequestQuerySort
+	Order              *ListNotificationsRequestQueryOrder
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -94,6 +98,12 @@ func (r *ListNotificationsRequest) query() url.Values {
 	}
 	if r.Page != nil {
 		q.Set("page", fmt.Sprintf("%d", *r.Page))
+	}
+	if r.Sort != nil {
+		q.Set("sort", string(*r.Sort))
+	}
+	if r.Order != nil {
+		q.Set("order", string(*r.Order))
 	}
 	return q
 }

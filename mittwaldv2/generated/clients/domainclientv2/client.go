@@ -388,11 +388,6 @@ type Client interface {
 		req SetCertificateRequestCertificateRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
-	CheckAuthinfo2(
-		ctx context.Context,
-		req CheckAuthinfo2Request,
-		reqEditors ...func(req *http.Request) error,
-	) (*CheckAuthinfo2Response, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -1821,6 +1816,8 @@ func (c *clientImpl) MigrationOrderDomainMigration(
 }
 
 // Resends a Contact-Verification email.
+//
+// This operation is deprecated. Use the POST /v2/domains/{domainId}/actions/resend-email endpoint instead.
 func (c *clientImpl) ResendContactVerificationEmail(
 	ctx context.Context,
 	req ResendContactVerificationEmailRequest,
@@ -1846,7 +1843,7 @@ func (c *clientImpl) ResendContactVerificationEmail(
 
 // Resend a Domain email.
 //
-// Trigger a resend of a confirmation or registrant verification email. Has no effect on .de Domains.
+// Trigger a resend of the e-mail the owner must act on: the registrar's registrant verification or transfer confirmation e-mail or, for .de Domains, the verification e-mail of the owner's contact verification. Fails with 412 if the owner is already verified or the last e-mail was sent less than 15 minutes ago (.de).
 func (c *clientImpl) ResendDomainEmail(
 	ctx context.Context,
 	req ResendDomainEmailRequest,
@@ -2434,34 +2431,4 @@ func (c *clientImpl) SetCertificateRequestCertificate(
 	}
 
 	return httpRes, nil
-}
-
-// Check if a Domain is eligible for AuthInfo2.
-//
-// If AuthInfo2 got triggered 30 days or less ago or this Domain already is registered here
-func (c *clientImpl) CheckAuthinfo2(
-	ctx context.Context,
-	req CheckAuthinfo2Request,
-	reqEditors ...func(req *http.Request) error,
-) (*CheckAuthinfo2Response, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response CheckAuthinfo2Response
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
 }
