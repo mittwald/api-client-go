@@ -29,31 +29,36 @@ type Client interface {
 		req NewsletterUnsubscribeUserRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*http.Response, error)
+	AdjustNotificationMessageTypeSettings(
+		ctx context.Context,
+		req AdjustNotificationMessageTypeSettingsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*http.Response, error)
 	CountUnreadNotifications(
 		ctx context.Context,
 		req CountUnreadNotificationsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*CountUnreadNotificationsResponse, *http.Response, error)
+	GetNotificationSettings(
+		ctx context.Context,
+		req GetNotificationSettingsRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*messagingv2.UserSettings, *http.Response, error)
 	ListNotifications(
 		ctx context.Context,
 		req ListNotificationsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*[]messagingv2.Notification, *http.Response, error)
-	ReadAllNotificationsDeprecated(
-		ctx context.Context,
-		req ReadAllNotificationsDeprecatedRequest,
-		reqEditors ...func(req *http.Request) error,
-	) (*ReadAllNotificationsDeprecatedResponse, *http.Response, error)
 	ReadAllNotifications(
 		ctx context.Context,
 		req ReadAllNotificationsRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*ReadAllNotificationsResponse, *http.Response, error)
-	ReadNotification(
+	UpdateNotificationStatus(
 		ctx context.Context,
-		req ReadNotificationRequest,
+		req UpdateNotificationStatusRequest,
 		reqEditors ...func(req *http.Request) error,
-	) (*ReadNotificationResponse, *http.Response, error)
+	) (*UpdateNotificationStatusResponse, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -143,6 +148,30 @@ func (c *clientImpl) NewsletterUnsubscribeUser(
 	return httpRes, nil
 }
 
+// Adjust notification settings for message type.
+func (c *clientImpl) AdjustNotificationMessageTypeSettings(
+	ctx context.Context,
+	req AdjustNotificationMessageTypeSettingsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return httpRes, err
+	}
+
+	return httpRes, nil
+}
+
 // Get the counts for unread notifications of the user.
 //
 // The user is determined by the access token used.
@@ -174,7 +203,39 @@ func (c *clientImpl) CountUnreadNotifications(
 	return &response, httpRes, nil
 }
 
+// Get notification settings for a user.
+//
+// Settings are provided for each message type: Channels for each message type can be active and editable.
+func (c *clientImpl) GetNotificationSettings(
+	ctx context.Context,
+	req GetNotificationSettingsRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*messagingv2.UserSettings, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response messagingv2.UserSettings
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
 // List all unread notifications.
+//
+// Sorted by creation date, descending, unless a different sort is requested.
 func (c *clientImpl) ListNotifications(
 	ctx context.Context,
 	req ListNotificationsRequest,
@@ -196,36 +257,6 @@ func (c *clientImpl) ListNotifications(
 	}
 
 	var response []messagingv2.Notification
-	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
-		return nil, httpRes, err
-	}
-	return &response, httpRes, nil
-}
-
-// Mark all notifications as read (deprecated).
-//
-// Deprecated route. Please use /v2/notifications/actions/read-all instead.
-func (c *clientImpl) ReadAllNotificationsDeprecated(
-	ctx context.Context,
-	req ReadAllNotificationsDeprecatedRequest,
-	reqEditors ...func(req *http.Request) error,
-) (*ReadAllNotificationsDeprecatedResponse, *http.Response, error) {
-	httpReq, err := req.BuildRequest(reqEditors...)
-	if err != nil {
-		return nil, nil, err
-	}
-
-	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
-	if err != nil {
-		return nil, httpRes, err
-	}
-
-	if httpRes.StatusCode >= 400 {
-		err := httperr.ErrFromResponse(httpRes)
-		return nil, httpRes, err
-	}
-
-	var response ReadAllNotificationsDeprecatedResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}
@@ -262,12 +293,12 @@ func (c *clientImpl) ReadAllNotifications(
 	return &response, httpRes, nil
 }
 
-// Mark notification as read.
-func (c *clientImpl) ReadNotification(
+// Update a notification's read status.
+func (c *clientImpl) UpdateNotificationStatus(
 	ctx context.Context,
-	req ReadNotificationRequest,
+	req UpdateNotificationStatusRequest,
 	reqEditors ...func(req *http.Request) error,
-) (*ReadNotificationResponse, *http.Response, error) {
+) (*UpdateNotificationStatusResponse, *http.Response, error) {
 	httpReq, err := req.BuildRequest(reqEditors...)
 	if err != nil {
 		return nil, nil, err
@@ -283,7 +314,7 @@ func (c *clientImpl) ReadNotification(
 		return nil, httpRes, err
 	}
 
-	var response ReadNotificationResponse
+	var response UpdateNotificationStatusResponse
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

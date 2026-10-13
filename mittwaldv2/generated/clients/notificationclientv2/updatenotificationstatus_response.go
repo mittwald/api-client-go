@@ -16,11 +16,11 @@ import (
 // required:
 //    - "status"
 
-type ReadNotificationResponse struct {
+type UpdateNotificationStatusResponse struct {
 	Status messagingv2.NotificationStatus `json:"status"`
 }
 
-func (o *ReadNotificationResponse) Validate() error {
+func (o *UpdateNotificationStatusResponse) Validate() error {
 	if err := o.Status.Validate(); err != nil {
 		return fmt.Errorf("invalid property status: %w", err)
 	}

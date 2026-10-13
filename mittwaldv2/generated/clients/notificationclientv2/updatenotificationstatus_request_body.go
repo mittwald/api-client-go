@@ -15,12 +15,14 @@ import (
 //    "status": {"$ref": "#/components/schemas/de.mittwald.v1.messaging.NotificationStatus"}
 // required:
 //    - "status"
+// description: UpdateNotificationStatusRequestBody models the JSON body of a 'notifications-update-notification-status' request
 
-type ReadAllNotificationsDeprecatedResponse struct {
+// UpdateNotificationStatusRequestBody models the JSON body of a 'notifications-update-notification-status' request
+type UpdateNotificationStatusRequestBody struct {
 	Status messagingv2.NotificationStatus `json:"status"`
 }
 
-func (o *ReadAllNotificationsDeprecatedResponse) Validate() error {
+func (o *UpdateNotificationStatusRequestBody) Validate() error {
 	if err := o.Status.Validate(); err != nil {
 		return fmt.Errorf("invalid property status: %w", err)
 	}

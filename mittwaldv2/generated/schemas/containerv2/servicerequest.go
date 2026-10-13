@@ -47,7 +47,8 @@ import "fmt"
 //        type: "array"
 //        items:
 //            type: "string"
-//        description: "Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource.\n"
+//        maxItems: 200
+//        description: "Exposed ports. Follows the format `<public-port>:<container-port>/<protocol>`. Exposed ports can be accessed from other containers (or managed apps) within the same project. To expose a port publicly, connect it with an ingress resource. A service may expose at most 200 port entries, and a port range may span at most 800 ports.\n"
 //        example: ["3306/tcp"]
 //    "restart":
 //        type: "string"

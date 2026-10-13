@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("ReadAllNotificationsDeprecatedResponse", func() {
+var _ = Describe("UpdateNotificationStatusResponse", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
 			exampleJSON := []byte("{\"status\":\"read\"}")
 
-			sut := notificationclientv2.ReadAllNotificationsDeprecatedResponse{}
+			sut := notificationclientv2.UpdateNotificationStatusResponse{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

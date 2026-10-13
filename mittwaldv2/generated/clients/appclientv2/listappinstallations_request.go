@@ -5,6 +5,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strconv"
 
 	"github.com/mittwald/api-client-go/mittwaldv2/generated/schemas/appv2"
 )
@@ -20,13 +21,15 @@ import (
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/app/app-list-appinstallations
 type ListAppinstallationsRequest struct {
-	ProjectID  string
-	AppIDs     []string
-	SearchTerm *string
-	SortOrder  *appv2.AppInstallationSortOrder
-	Limit      *int64
-	Skip       *int64
-	Page       *int64
+	ProjectID            string
+	AppIDs               []string
+	SearchTerm           *string
+	SortOrder            *appv2.AppInstallationSortOrder
+	AutoUpdatesActivated *bool
+	AutoUpdatesSupported *bool
+	Limit                *int64
+	Skip                 *int64
+	Page                 *int64
 }
 
 // BuildRequest builds an *http.Request instance from this request that may be used
@@ -72,6 +75,12 @@ func (r *ListAppinstallationsRequest) query() url.Values {
 	}
 	if r.SortOrder != nil {
 		q.Set("sortOrder", string(*r.SortOrder))
+	}
+	if r.AutoUpdatesActivated != nil {
+		q.Set("autoUpdatesActivated", strconv.FormatBool(*r.AutoUpdatesActivated))
+	}
+	if r.AutoUpdatesSupported != nil {
+		q.Set("autoUpdatesSupported", strconv.FormatBool(*r.AutoUpdatesSupported))
 	}
 	if r.Limit != nil {
 		q.Set("limit", fmt.Sprintf("%d", *r.Limit))
