@@ -21,6 +21,9 @@ import (
 //        format: "date-time"
 //    "description":
 //        type: "string"
+//    "detailedPublicKeys":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.sshuser.PublicKeyDetails"}
 //    "expiresAt":
 //        type: "string"
 //        format: "date-time"
@@ -33,6 +36,8 @@ import (
 //    "publicKeys":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.sshuser.PublicKey"}
+//        description: "deprecated by detailedPublicKeys"
+//        deprecated: true
 //    "updatedAt":
 //        type: "string"
 //        format: "date-time"
@@ -50,20 +55,36 @@ import (
 
 // A representation of an SSHUser.
 type SshUser struct {
-	Active        *bool       `json:"active,omitempty"`
-	AuthUpdatedAt time.Time   `json:"authUpdatedAt"`
-	CreatedAt     time.Time   `json:"createdAt"`
-	Description   string      `json:"description"`
-	ExpiresAt     *time.Time  `json:"expiresAt,omitempty"`
-	HasPassword   bool        `json:"hasPassword"`
-	Id            string      `json:"id"`
-	ProjectId     string      `json:"projectId"`
-	PublicKeys    []PublicKey `json:"publicKeys,omitempty"`
-	UpdatedAt     *time.Time  `json:"updatedAt,omitempty"`
-	UserName      string      `json:"userName"`
+	Active             *bool              `json:"active,omitempty"`
+	AuthUpdatedAt      time.Time          `json:"authUpdatedAt"`
+	CreatedAt          time.Time          `json:"createdAt"`
+	Description        string             `json:"description"`
+	DetailedPublicKeys []PublicKeyDetails `json:"detailedPublicKeys,omitempty"`
+	ExpiresAt          *time.Time         `json:"expiresAt,omitempty"`
+	HasPassword        bool               `json:"hasPassword"`
+	Id                 string             `json:"id"`
+	ProjectId          string             `json:"projectId"`
+	PublicKeys         []PublicKey        `json:"publicKeys,omitempty"`
+	UpdatedAt          *time.Time         `json:"updatedAt,omitempty"`
+	UserName           string             `json:"userName"`
 }
 
 func (o *SshUser) Validate() error {
+	if err := func() error {
+		if o.DetailedPublicKeys == nil {
+			return nil
+		}
+		return func() error {
+			for i := range o.DetailedPublicKeys {
+				if err := o.DetailedPublicKeys[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}()
+	}(); err != nil {
+		return fmt.Errorf("invalid property detailedPublicKeys: %w", err)
+	}
 	if err := func() error {
 		if o.PublicKeys == nil {
 			return nil

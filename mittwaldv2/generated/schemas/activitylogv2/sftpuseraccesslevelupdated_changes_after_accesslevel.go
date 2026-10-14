@@ -10,6 +10,7 @@ import "fmt"
 // enum:
 //    - "read"
 //    - "full"
+// nullable: true
 
 type SftpUserAccessLevelUpdatedChangesAfterAccessLevel string
 

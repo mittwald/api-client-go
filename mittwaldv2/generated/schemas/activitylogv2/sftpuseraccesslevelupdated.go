@@ -19,6 +19,7 @@ import "fmt"
 //                        enum:
 //                            - "read"
 //                            - "full"
+//                        nullable: true
 //                required:
 //                    - "accessLevel"
 //            "before":

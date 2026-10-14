@@ -16,9 +16,6 @@ import (
 //
 // Resends a Contact-Verification email.
 //
-// This operation is deprecated. Use the POST
-// /v2/domains/{domainId}/actions/resend-email endpoint instead.
-//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/domain/domain-resend-contact-verification-email
 type ResendContactVerificationEmailRequest struct {

@@ -1816,8 +1816,6 @@ func (c *clientImpl) MigrationOrderDomainMigration(
 }
 
 // Resends a Contact-Verification email.
-//
-// This operation is deprecated. Use the POST /v2/domains/{domainId}/actions/resend-email endpoint instead.
 func (c *clientImpl) ResendContactVerificationEmail(
 	ctx context.Context,
 	req ResendContactVerificationEmailRequest,
@@ -1843,7 +1841,7 @@ func (c *clientImpl) ResendContactVerificationEmail(
 
 // Resend a Domain email.
 //
-// Trigger a resend of the e-mail the owner must act on: the registrar's registrant verification or transfer confirmation e-mail or, for .de Domains, the verification e-mail of the owner's contact verification. Fails with 412 if the owner is already verified or the last e-mail was sent less than 15 minutes ago (.de).
+// Trigger a resend of a confirmation or registrant verification email. Has no effect on .de Domains.
 func (c *clientImpl) ResendDomainEmail(
 	ctx context.Context,
 	req ResendDomainEmailRequest,

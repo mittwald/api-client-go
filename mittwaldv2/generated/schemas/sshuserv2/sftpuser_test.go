@@ -14,7 +14,7 @@ import (
 var _ = Describe("SftpUser", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"accessLevel\":\"full\",\"active\":true,\"authUpdatedAt\":\"2006-01-02T15:04:05Z\",\"createdAt\":\"2006-01-02T15:04:05Z\",\"description\":\"string\",\"directories\":[\"string\"],\"expiresAt\":\"2006-01-02T15:04:05Z\",\"hasPassword\":true,\"id\":\"string\",\"projectId\":\"string\",\"publicKeys\":[{\"comment\":\"string\",\"key\":\"string\"}],\"updatedAt\":\"2006-01-02T15:04:05Z\",\"userName\":\"string\"}")
+			exampleJSON := []byte("{\"accessLevel\":\"full\",\"active\":true,\"authUpdatedAt\":\"2006-01-02T15:04:05Z\",\"createdAt\":\"2006-01-02T15:04:05Z\",\"description\":\"string\",\"detailedPublicKeys\":[{\"algorithm\":null,\"comment\":\"string\",\"fingerprint\":null,\"key\":\"string\"}],\"directories\":[\"string\"],\"expiresAt\":\"2006-01-02T15:04:05Z\",\"hasPassword\":true,\"id\":\"string\",\"projectId\":\"string\",\"publicKeys\":[{\"comment\":\"string\",\"key\":\"string\"}],\"updatedAt\":\"2006-01-02T15:04:05Z\",\"userName\":\"string\"}")
 
 			sut := sshuserv2.SftpUser{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

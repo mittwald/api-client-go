@@ -39,7 +39,6 @@ import (
 //            type: "string"
 //            format: "idn-hostname"
 //        uniqueItems: true
-//    "ownerVerification": {"$ref": "#/components/schemas/de.mittwald.v1.domain.OwnerVerification"}
 //    "processes":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.domain.Process"}
@@ -65,21 +64,20 @@ import (
 //    - "hasAuthCode"
 
 type Domain struct {
-	AuthCode              *AuthCode          `json:"authCode,omitempty"`
-	AuthCode2             *AuthCode2         `json:"authCode2,omitempty"`
-	Connected             bool               `json:"connected"`
-	ContactHash           *string            `json:"contactHash,omitempty"`
-	Deleted               bool               `json:"deleted"`
-	Domain                string             `json:"domain"`
-	DomainId              string             `json:"domainId"`
-	Handles               DomainHandles      `json:"handles"`
-	Nameservers           []string           `json:"nameservers"`
-	OwnerVerification     *OwnerVerification `json:"ownerVerification,omitempty"`
-	Processes             []Process          `json:"processes,omitempty"`
-	ProjectId             string             `json:"projectId"`
-	ScheduledDeletionDate *time.Time         `json:"scheduledDeletionDate,omitempty"`
-	TransferInAuthCode    *string            `json:"transferInAuthCode,omitempty"`
-	UsesDefaultNameserver bool               `json:"usesDefaultNameserver"`
+	AuthCode              *AuthCode     `json:"authCode,omitempty"`
+	AuthCode2             *AuthCode2    `json:"authCode2,omitempty"`
+	Connected             bool          `json:"connected"`
+	ContactHash           *string       `json:"contactHash,omitempty"`
+	Deleted               bool          `json:"deleted"`
+	Domain                string        `json:"domain"`
+	DomainId              string        `json:"domainId"`
+	Handles               DomainHandles `json:"handles"`
+	Nameservers           []string      `json:"nameservers"`
+	Processes             []Process     `json:"processes,omitempty"`
+	ProjectId             string        `json:"projectId"`
+	ScheduledDeletionDate *time.Time    `json:"scheduledDeletionDate,omitempty"`
+	TransferInAuthCode    *string       `json:"transferInAuthCode,omitempty"`
+	UsesDefaultNameserver bool          `json:"usesDefaultNameserver"`
 }
 
 func (o *Domain) Validate() error {
@@ -104,14 +102,6 @@ func (o *Domain) Validate() error {
 	}
 	if o.Nameservers == nil {
 		return errors.New("property nameservers is required, but not set")
-	}
-	if err := func() error {
-		if o.OwnerVerification == nil {
-			return nil
-		}
-		return o.OwnerVerification.Validate()
-	}(); err != nil {
-		return fmt.Errorf("invalid property ownerVerification: %w", err)
 	}
 	if err := func() error {
 		if o.Processes == nil {

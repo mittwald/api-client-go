@@ -22,6 +22,9 @@ import (
 //        format: "date-time"
 //    "description":
 //        type: "string"
+//    "detailedPublicKeys":
+//        type: "array"
+//        items: {"$ref": "#/components/schemas/de.mittwald.v1.sshuser.PublicKeyDetails"}
 //    "directories":
 //        type: "array"
 //        items:
@@ -38,6 +41,8 @@ import (
 //    "publicKeys":
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.sshuser.PublicKey"}
+//        description: "deprecated by detailedPublicKeys"
+//        deprecated: true
 //    "updatedAt":
 //        type: "string"
 //        format: "date-time"
@@ -56,24 +61,40 @@ import (
 
 // A representation of an SFTPUser.
 type SftpUser struct {
-	AccessLevel   AccessLevel `json:"accessLevel"`
-	Active        *bool       `json:"active,omitempty"`
-	AuthUpdatedAt time.Time   `json:"authUpdatedAt"`
-	CreatedAt     time.Time   `json:"createdAt"`
-	Description   string      `json:"description"`
-	Directories   []string    `json:"directories,omitempty"`
-	ExpiresAt     *time.Time  `json:"expiresAt,omitempty"`
-	HasPassword   bool        `json:"hasPassword"`
-	Id            string      `json:"id"`
-	ProjectId     string      `json:"projectId"`
-	PublicKeys    []PublicKey `json:"publicKeys,omitempty"`
-	UpdatedAt     *time.Time  `json:"updatedAt,omitempty"`
-	UserName      string      `json:"userName"`
+	AccessLevel        AccessLevel        `json:"accessLevel"`
+	Active             *bool              `json:"active,omitempty"`
+	AuthUpdatedAt      time.Time          `json:"authUpdatedAt"`
+	CreatedAt          time.Time          `json:"createdAt"`
+	Description        string             `json:"description"`
+	DetailedPublicKeys []PublicKeyDetails `json:"detailedPublicKeys,omitempty"`
+	Directories        []string           `json:"directories,omitempty"`
+	ExpiresAt          *time.Time         `json:"expiresAt,omitempty"`
+	HasPassword        bool               `json:"hasPassword"`
+	Id                 string             `json:"id"`
+	ProjectId          string             `json:"projectId"`
+	PublicKeys         []PublicKey        `json:"publicKeys,omitempty"`
+	UpdatedAt          *time.Time         `json:"updatedAt,omitempty"`
+	UserName           string             `json:"userName"`
 }
 
 func (o *SftpUser) Validate() error {
 	if err := o.AccessLevel.Validate(); err != nil {
 		return fmt.Errorf("invalid property accessLevel: %w", err)
+	}
+	if err := func() error {
+		if o.DetailedPublicKeys == nil {
+			return nil
+		}
+		return func() error {
+			for i := range o.DetailedPublicKeys {
+				if err := o.DetailedPublicKeys[i].Validate(); err != nil {
+					return fmt.Errorf("item %d is invalid %w", i, err)
+				}
+			}
+			return nil
+		}()
+	}(); err != nil {
+		return fmt.Errorf("invalid property detailedPublicKeys: %w", err)
 	}
 	if err := func() error {
 		if o.Directories == nil {
