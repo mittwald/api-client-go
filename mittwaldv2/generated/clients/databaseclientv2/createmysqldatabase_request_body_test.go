@@ -14,7 +14,7 @@ import (
 var _ = Describe("CreateMysqlDatabaseRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"database\":{\"characterSettings\":{\"characterSet\":\"utf8mb4\",\"collation\":\"utf8mb4_general_ci\"},\"description\":\"string\",\"version\":\"8.4\"},\"user\":{\"accessIpMask\":\"string\",\"accessLevel\":\"full\",\"externalAccess\":true,\"password\":\"string\"}}")
+			exampleJSON := []byte("{\"database\":{\"characterSettings\":{\"characterSet\":\"utf8mb4\",\"collation\":\"utf8mb4_general_ci\"},\"description\":\"string\",\"version\":\"8.4\"},\"user\":{\"accessIpMask\":\"string\",\"accessLevel\":\"full\",\"description\":\"string\",\"externalAccess\":true,\"password\":\"string\"}}")
 
 			sut := databaseclientv2.CreateMysqlDatabaseRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

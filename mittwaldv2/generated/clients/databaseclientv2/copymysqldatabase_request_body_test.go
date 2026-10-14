@@ -14,7 +14,7 @@ import (
 var _ = Describe("CopyMysqlDatabaseRequestBody", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"description\":\"string\",\"user\":{\"accessIpMask\":\"string\",\"accessLevel\":\"full\",\"externalAccess\":true,\"password\":\"string\"}}")
+			exampleJSON := []byte("{\"description\":\"string\",\"user\":{\"accessIpMask\":\"string\",\"accessLevel\":\"full\",\"description\":\"string\",\"externalAccess\":true,\"password\":\"string\"}}")
 
 			sut := databaseclientv2.CopyMysqlDatabaseRequestBody{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

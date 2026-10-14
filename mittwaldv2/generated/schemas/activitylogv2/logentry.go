@@ -90,6 +90,16 @@ import (
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.MembershipMemberRoleUpdated"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.MembershipMemberExpiryUpdated"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.MembershipMemberRemoved"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.SshUserCreated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.SftpUserCreated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.SshUserDescriptionUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.SshUserPasswordUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.SshUserPublicKeysUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.SshUserActiveUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.SshUserExpiryUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.SftpUserAccessLevelUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.SftpUserDirectoriesUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.SshUserDeleted"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.GenericAction"}
 //    "aggregate": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AggregateReference"}
 //    "dateTime":
