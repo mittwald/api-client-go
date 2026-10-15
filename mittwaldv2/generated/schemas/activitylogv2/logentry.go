@@ -100,6 +100,15 @@ import (
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.SftpUserAccessLevelUpdated"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.SftpUserDirectoriesUpdated"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.SshUserDeleted"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.BackupCreated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.BackupDescriptionUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.BackupExpirationUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.BackupExportRequested"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.BackupRestoreRequested"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.BackupScheduleCreated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.BackupScheduleIntervalUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.BackupScheduleTtlUpdated"}
+//            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.BackupDeleted"}
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.GenericAction"}
 //    "aggregate": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AggregateReference"}
 //    "dateTime":

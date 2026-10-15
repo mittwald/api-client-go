@@ -15,6 +15,9 @@ package domainclientv2
 //        description: "An enabled ingress for this domain already exists in a project other than the given projectId. Delete that ingress or transfer the domain into that project."
 //    "inRedemptionPeriod":
 //        type: "boolean"
+//    "premiumDomain":
+//        type: "boolean"
+//        description: "The registry charges a premium price for transferring this domain. Premium domains are not supported."
 //    "transferLock":
 //        type: "boolean"
 //    "wrongAuthCode":
@@ -26,12 +29,14 @@ package domainclientv2
 //    - "domainAgeTooSmall"
 //    - "inRedemptionPeriod"
 //    - "enabledIngressInOtherProject"
+//    - "premiumDomain"
 
 type CheckDomainTransferabilityResponseReasons struct {
 	DomainAgeTooSmall            bool `json:"domainAgeTooSmall"`
 	DomainDoesNotExist           bool `json:"domainDoesNotExist"`
 	EnabledIngressInOtherProject bool `json:"enabledIngressInOtherProject"`
 	InRedemptionPeriod           bool `json:"inRedemptionPeriod"`
+	PremiumDomain                bool `json:"premiumDomain"`
 	TransferLock                 bool `json:"transferLock"`
 	WrongAuthCode                bool `json:"wrongAuthCode"`
 }
