@@ -67,6 +67,7 @@ import (
 //        type: "boolean"
 //        description: "deprecated by property status"
 //        deprecated: true
+//    "primaryIpAddresses": {"$ref": "#/components/schemas/de.mittwald.v1.project.PrimaryIpAddresses"}
 //    "projectHostingId":
 //        type: "string"
 //        format: "uuid"
@@ -139,6 +140,7 @@ type Project struct {
 	Id                             string                           `json:"id"`
 	ImageRefId                     *string                          `json:"imageRefId,omitempty"`
 	IsReady                        bool                             `json:"isReady"`
+	PrimaryIpAddresses             *PrimaryIpAddresses              `json:"primaryIpAddresses,omitempty"`
 	ProjectHostingId               *string                          `json:"projectHostingId,omitempty"`
 	Readiness                      DeprecatedProjectReadinessStatus `json:"readiness"`
 	ServerGroupId                  string                           `json:"serverGroupId"`
@@ -180,6 +182,14 @@ func (o *Project) Validate() error {
 		}()
 	}(); err != nil {
 		return fmt.Errorf("invalid property features: %w", err)
+	}
+	if err := func() error {
+		if o.PrimaryIpAddresses == nil {
+			return nil
+		}
+		return o.PrimaryIpAddresses.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property primaryIpAddresses: %w", err)
 	}
 	if err := o.Readiness.Validate(); err != nil {
 		return fmt.Errorf("invalid property readiness: %w", err)

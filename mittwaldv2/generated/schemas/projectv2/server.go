@@ -36,6 +36,7 @@ import (
 //        description: "deprecated by property status"
 //        deprecated: true
 //    "machineType": {"$ref": "#/components/schemas/de.mittwald.v1.project.MachineType"}
+//    "primaryIpAddresses": {"$ref": "#/components/schemas/de.mittwald.v1.project.PrimaryIpAddresses"}
 //    "readiness": {"$ref": "#/components/schemas/de.mittwald.v1.project.DeprecatedServerReadinessStatus"}
 //    "shortId":
 //        type: "string"
@@ -73,6 +74,7 @@ type Server struct {
 	ImageRefId           *string                         `json:"imageRefId,omitempty"`
 	IsReady              bool                            `json:"isReady"`
 	MachineType          MachineType                     `json:"machineType"`
+	PrimaryIpAddresses   *PrimaryIpAddresses             `json:"primaryIpAddresses,omitempty"`
 	Readiness            DeprecatedServerReadinessStatus `json:"readiness"`
 	ShortId              string                          `json:"shortId"`
 	StatisticsBaseDomain *string                         `json:"statisticsBaseDomain,omitempty"`
@@ -91,6 +93,14 @@ func (o *Server) Validate() error {
 	}
 	if err := o.MachineType.Validate(); err != nil {
 		return fmt.Errorf("invalid property machineType: %w", err)
+	}
+	if err := func() error {
+		if o.PrimaryIpAddresses == nil {
+			return nil
+		}
+		return o.PrimaryIpAddresses.Validate()
+	}(); err != nil {
+		return fmt.Errorf("invalid property primaryIpAddresses: %w", err)
 	}
 	if err := o.Readiness.Validate(); err != nil {
 		return fmt.Errorf("invalid property readiness: %w", err)
