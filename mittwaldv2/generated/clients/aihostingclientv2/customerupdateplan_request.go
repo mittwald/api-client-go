@@ -15,7 +15,7 @@ import (
 // CustomerUpdatePlanRequest models a request for the
 // 'ai-hosting-customer-update-plan' operation. See [1] for more information.
 //
-// Updates an AI hosting plan.
+// Renames an AI hosting plan.
 //
 // [1]: https://developer.mittwald.de/docs/v2/reference/ai
 // hosting/ai-hosting-customer-update-plan

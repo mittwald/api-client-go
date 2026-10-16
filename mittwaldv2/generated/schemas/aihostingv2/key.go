@@ -22,7 +22,8 @@ import (
 //        default: false
 //    "key":
 //        type: "string"
-//        description: "The secret API key which is required for authentication with the AI hosting."
+//        description: "The secret API key. For security reasons we no longer want to keep exposing this value on every response — this field is deprecated and will stop returning the real key in a future change. It still returns the real value for now."
+//        deprecated: true
 //    "keyId":
 //        type: "string"
 //        description: "Auto generated uuid to identify keys in requests."

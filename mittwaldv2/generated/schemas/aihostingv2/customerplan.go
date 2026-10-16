@@ -27,11 +27,10 @@ import (
 //        format: "date-time"
 //    "planId":
 //        type: "string"
-//    "projectKeyCreationBlocked":
-//        type: "boolean"
-//        description: "When true, project members cannot create keys on this plan themselves; only the customer can. Keys that already exist keep working."
-//        default: false
 //    "rateLimit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
+//    "suspended":
+//        type: "boolean"
+//        default: false
 //    "tokens": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsageBig"}
 //    "topUsages":
 //        type: "array"
@@ -68,8 +67,8 @@ type CustomerPlan struct {
 	ModelTermsApprovalRequired bool                        `json:"modelTermsApprovalRequired"`
 	NextTokenReset             time.Time                   `json:"nextTokenReset"`
 	PlanId                     string                      `json:"planId"`
-	ProjectKeyCreationBlocked  *bool                       `json:"projectKeyCreationBlocked,omitempty"`
 	RateLimit                  RateLimit                   `json:"rateLimit"`
+	Suspended                  *bool                       `json:"suspended,omitempty"`
 	Tokens                     PlanUsageBig                `json:"tokens"`
 	TopUsages                  []CustomerPlanTopUsagesItem `json:"topUsages,omitempty"`
 }

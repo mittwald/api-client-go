@@ -6,16 +6,6 @@ package aihostingv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "keyAvailable":
-//        type: "integer"
-//        minimum: 0
-//        format: "int64"
-//        description: "What is left of the key's own limit. Only present together with keyLimit."
-//    "keyLimit":
-//        type: "integer"
-//        minimum: 1
-//        format: "int64"
-//        description: "The key's own token limit for the billing period. Absent when the key has no limit of its own and is bounded only by the plan's limit."
 //    "planLimit":
 //        type: "integer"
 //        minimum: -1
@@ -29,10 +19,8 @@ package aihostingv2
 //    - "planLimit"
 
 type TokenUsage struct {
-	KeyAvailable *int64 `json:"keyAvailable,omitempty"`
-	KeyLimit     *int64 `json:"keyLimit,omitempty"`
-	PlanLimit    int64  `json:"planLimit"`
-	Used         int64  `json:"used"`
+	PlanLimit int64 `json:"planLimit"`
+	Used      int64 `json:"used"`
 }
 
 func (o *TokenUsage) Validate() error {
