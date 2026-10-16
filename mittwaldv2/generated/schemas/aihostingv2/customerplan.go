@@ -28,6 +28,9 @@ import (
 //    "planId":
 //        type: "string"
 //    "rateLimit": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.RateLimit"}
+//    "suspended":
+//        type: "boolean"
+//        default: false
 //    "tokens": {"$ref": "#/components/schemas/de.mittwald.v1.aihosting.PlanUsageBig"}
 //    "topUsages":
 //        type: "array"
@@ -65,6 +68,7 @@ type CustomerPlan struct {
 	NextTokenReset             time.Time                   `json:"nextTokenReset"`
 	PlanId                     string                      `json:"planId"`
 	RateLimit                  RateLimit                   `json:"rateLimit"`
+	Suspended                  *bool                       `json:"suspended,omitempty"`
 	Tokens                     PlanUsageBig                `json:"tokens"`
 	TopUsages                  []CustomerPlanTopUsagesItem `json:"topUsages,omitempty"`
 }

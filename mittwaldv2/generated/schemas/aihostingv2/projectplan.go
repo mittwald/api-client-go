@@ -23,6 +23,9 @@ import (
 //        type: "string"
 //    "projectId":
 //        type: "string"
+//    "suspended":
+//        type: "boolean"
+//        default: false
 // required:
 //    - "keys"
 //    - "projectId"
@@ -36,6 +39,7 @@ type ProjectPlan struct {
 	NextTokenReset             *time.Time `json:"nextTokenReset,omitempty"`
 	PlanId                     string     `json:"planId"`
 	ProjectId                  string     `json:"projectId"`
+	Suspended                  *bool      `json:"suspended,omitempty"`
 }
 
 func (o *ProjectPlan) Validate() error {
