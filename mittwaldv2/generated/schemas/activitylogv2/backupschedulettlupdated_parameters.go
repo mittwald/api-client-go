@@ -8,12 +8,22 @@ import "fmt"
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "description": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
+//    "description":
+//        type: "object"
+//        properties:
+//            "aggregate": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AggregateReference"}
+//            "isSystemBackup":
+//                type: "boolean"
+//            "name":
+//                type: "string"
+//        required:
+//            - "name"
+//            - "aggregate"
 // required:
 //    - "description"
 
 type BackupScheduleTtlUpdatedParameters struct {
-	Description ParameterProperty `json:"description"`
+	Description BackupScheduleTtlUpdatedParametersDescription `json:"description"`
 }
 
 func (o *BackupScheduleTtlUpdatedParameters) Validate() error {

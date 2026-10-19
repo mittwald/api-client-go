@@ -11,12 +11,12 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("BackupRestoreRequestedChangesAfterDatabasesItem", func() {
+var _ = Describe("BackupScheduleTtlUpdatedParametersDescription", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"databaseBackupDump\":\"string\",\"targetDatabaseId\":\"string\"}")
+			exampleJSON := []byte("{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"isSystemBackup\":true,\"name\":\"string\"}")
 
-			sut := activitylogv2.BackupRestoreRequestedChangesAfterDatabasesItem{}
+			sut := activitylogv2.BackupScheduleTtlUpdatedParametersDescription{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
 			Expect(sut.Validate()).To(Succeed())
 		})

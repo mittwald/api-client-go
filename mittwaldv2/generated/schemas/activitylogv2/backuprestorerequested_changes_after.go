@@ -14,7 +14,7 @@ import (
 //    "clearTargetPath":
 //        type: "boolean"
 //        nullable: true
-//    "databases":
+//    "databaseRestores":
 //        type: "array"
 //        items:
 //            type: "object"
@@ -30,35 +30,35 @@ import (
 //        type: "array"
 //        items:
 //            type: "string"
-//    "targetPath":
+//    "targetRestorePath":
 //        type: "string"
 //        nullable: true
 // required:
 //    - "sourcePaths"
-//    - "targetPath"
+//    - "targetRestorePath"
 //    - "clearTargetPath"
-//    - "databases"
+//    - "databaseRestores"
 
 type BackupRestoreRequestedChangesAfter struct {
-	ClearTargetPath bool                                              `json:"clearTargetPath"`
-	Databases       []BackupRestoreRequestedChangesAfterDatabasesItem `json:"databases"`
-	SourcePaths     []string                                          `json:"sourcePaths"`
-	TargetPath      string                                            `json:"targetPath"`
+	ClearTargetPath   bool                                                     `json:"clearTargetPath"`
+	DatabaseRestores  []BackupRestoreRequestedChangesAfterDatabaseRestoresItem `json:"databaseRestores"`
+	SourcePaths       []string                                                 `json:"sourcePaths"`
+	TargetRestorePath string                                                   `json:"targetRestorePath"`
 }
 
 func (o *BackupRestoreRequestedChangesAfter) Validate() error {
-	if o.Databases == nil {
-		return errors.New("property databases is required, but not set")
+	if o.DatabaseRestores == nil {
+		return errors.New("property databaseRestores is required, but not set")
 	}
 	if err := func() error {
-		for i := range o.Databases {
-			if err := o.Databases[i].Validate(); err != nil {
+		for i := range o.DatabaseRestores {
+			if err := o.DatabaseRestores[i].Validate(); err != nil {
 				return fmt.Errorf("item %d is invalid %w", i, err)
 			}
 		}
 		return nil
 	}(); err != nil {
-		return fmt.Errorf("invalid property databases: %w", err)
+		return fmt.Errorf("invalid property databaseRestores: %w", err)
 	}
 	if o.SourcePaths == nil {
 		return errors.New("property sourcePaths is required, but not set")

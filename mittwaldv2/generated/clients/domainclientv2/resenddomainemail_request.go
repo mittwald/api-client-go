@@ -15,8 +15,11 @@ import (
 //
 // Resend a Domain email.
 //
-// Trigger a resend of a confirmation or registrant verification email. Has no
-// effect on .de Domains.
+// Trigger a resend of the e-mail the owner must act on: the registrar's registrant
+// verification or transfer confirmation e-mail or, for .de Domains, the
+// verification e-mail of the owner's contact verification. Fails with 412 if the
+// owner is already verified or the last e-mail was sent less than 15 minutes ago
+// (.de).
 //
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/domain/domain-resend-domain-email

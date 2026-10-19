@@ -20,7 +20,7 @@ import (
 //                    "clearTargetPath":
 //                        type: "boolean"
 //                        nullable: true
-//                    "databases":
+//                    "databaseRestores":
 //                        type: "array"
 //                        items:
 //                            type: "object"
@@ -36,14 +36,14 @@ import (
 //                        type: "array"
 //                        items:
 //                            type: "string"
-//                    "targetPath":
+//                    "targetRestorePath":
 //                        type: "string"
 //                        nullable: true
 //                required:
 //                    - "sourcePaths"
-//                    - "targetPath"
+//                    - "targetRestorePath"
 //                    - "clearTargetPath"
-//                    - "databases"
+//                    - "databaseRestores"
 //    "name":
 //        type: "string"
 //        enum:

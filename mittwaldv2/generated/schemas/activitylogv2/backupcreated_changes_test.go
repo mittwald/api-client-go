@@ -14,7 +14,7 @@ import (
 var _ = Describe("BackupCreatedChanges", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"after\":{\"description\":\"string\",\"expiresAt\":\"2006-01-02T15:04:05Z\",\"filesIgnored\":true,\"ignoredDatabases\":[{\"kind\":\"string\",\"name\":\"string\"}]},\"before\":{\"description\":\"string\",\"expiresAt\":\"2006-01-02T15:04:05Z\",\"filesIgnored\":true,\"ignoredDatabases\":[{\"kind\":\"string\",\"name\":\"string\"}]}}")
+			exampleJSON := []byte("{\"after\":{\"description\":\"string\",\"expiresAt\":\"2006-01-02T15:04:05Z\",\"ignoredDatabases\":[{\"kind\":\"string\",\"name\":\"string\"}],\"ignoredFiles\":true},\"before\":{\"description\":\"string\",\"expiresAt\":\"2006-01-02T15:04:05Z\",\"ignoredDatabases\":[{\"kind\":\"string\",\"name\":\"string\"}],\"ignoredFiles\":true}}")
 
 			sut := activitylogv2.BackupCreatedChanges{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

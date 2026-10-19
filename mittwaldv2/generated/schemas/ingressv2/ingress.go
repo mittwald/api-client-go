@@ -55,6 +55,23 @@ import (
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.ingress.Path"}
 //        description: "A list of paths. The default path `/` is always present and cannot be removed."
+//    "preferredIps":
+//        type: "object"
+//        properties:
+//            "v4":
+//                type: "array"
+//                items:
+//                    type: "string"
+//                    format: "ipv4"
+//            "v6":
+//                type: "array"
+//                items:
+//                    type: "string"
+//                    format: "ipv6"
+//        required:
+//            - "v4"
+//            - "v6"
+//        description: "The IP addresses this ingress should ideally be resolvable to in DNS (desired state). They may differ from `ips`, which are the addresses currently assigned. Empty lists if none are reported."
 //    "projectId":
 //        type: "string"
 //        format: "uuid"
@@ -71,6 +88,7 @@ import (
 //    - "paths"
 //    - "isEnabled"
 //    - "ips"
+//    - "preferredIps"
 //    - "dnsValidationErrors"
 //    - "ownership"
 
@@ -84,6 +102,7 @@ type Ingress struct {
 	IsEnabled           bool                             `json:"isEnabled"`
 	Ownership           Ownership                        `json:"ownership"`
 	Paths               []Path                           `json:"paths"`
+	PreferredIps        IngressPreferredIps              `json:"preferredIps"`
 	ProjectId           string                           `json:"projectId"`
 	Tls                 IngressTLS                       `json:"tls"`
 }
@@ -120,6 +139,9 @@ func (o *Ingress) Validate() error {
 		return nil
 	}(); err != nil {
 		return fmt.Errorf("invalid property paths: %w", err)
+	}
+	if err := o.PreferredIps.Validate(); err != nil {
+		return fmt.Errorf("invalid property preferredIps: %w", err)
 	}
 	if err := o.Tls.Validate(); err != nil {
 		return fmt.Errorf("invalid property tls: %w", err)

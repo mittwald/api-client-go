@@ -13,8 +13,6 @@ import (
 // properties:
 //    "description":
 //        type: "string"
-//    "filesIgnored":
-//        type: "boolean"
 //    "ignoredDatabases":
 //        type: "array"
 //        items:
@@ -27,22 +25,24 @@ import (
 //            required:
 //                - "kind"
 //                - "name"
-//    "schedule":
+//    "ignoredFiles":
+//        type: "boolean"
+//    "interval":
 //        type: "string"
 //    "ttl":
 //        type: "string"
 // required:
 //    - "description"
-//    - "schedule"
+//    - "interval"
 //    - "ttl"
 //    - "ignoredDatabases"
-//    - "filesIgnored"
+//    - "ignoredFiles"
 
 type BackupScheduleCreatedChangesAfter struct {
 	Description      string                                                  `json:"description"`
-	FilesIgnored     bool                                                    `json:"filesIgnored"`
 	IgnoredDatabases []BackupScheduleCreatedChangesAfterIgnoredDatabasesItem `json:"ignoredDatabases"`
-	Schedule         string                                                  `json:"schedule"`
+	IgnoredFiles     bool                                                    `json:"ignoredFiles"`
+	Interval         string                                                  `json:"interval"`
 	Ttl              string                                                  `json:"ttl"`
 }
 

@@ -14,7 +14,7 @@ import "fmt"
 //            "clearTargetPath":
 //                type: "boolean"
 //                nullable: true
-//            "databases":
+//            "databaseRestores":
 //                type: "array"
 //                items:
 //                    type: "object"
@@ -30,14 +30,14 @@ import "fmt"
 //                type: "array"
 //                items:
 //                    type: "string"
-//            "targetPath":
+//            "targetRestorePath":
 //                type: "string"
 //                nullable: true
 //        required:
 //            - "sourcePaths"
-//            - "targetPath"
+//            - "targetRestorePath"
 //            - "clearTargetPath"
-//            - "databases"
+//            - "databaseRestores"
 
 type BackupRestoreRequestedChanges struct {
 	After *BackupRestoreRequestedChangesAfter `json:"after,omitempty"`

@@ -11,18 +11,18 @@ import "fmt"
 //    "after":
 //        type: "object"
 //        properties:
-//            "schedule":
+//            "interval":
 //                type: "string"
 //        required:
-//            - "schedule"
+//            - "interval"
 //    "before":
 //        type: "object"
 //        properties:
-//            "schedule":
+//            "interval":
 //                type: "string"
 //                nullable: true
 //        required:
-//            - "schedule"
+//            - "interval"
 
 type BackupScheduleIntervalUpdatedChanges struct {
 	After  *BackupScheduleIntervalUpdatedChangesAfter  `json:"after,omitempty"`

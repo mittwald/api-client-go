@@ -14,7 +14,7 @@ import (
 var _ = Describe("BackupScheduleCreated", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{\"after\":{\"description\":\"string\",\"filesIgnored\":true,\"ignoredDatabases\":[{\"kind\":\"string\",\"name\":\"string\"}],\"schedule\":\"string\",\"ttl\":\"string\"},\"before\":{\"description\":\"string\",\"filesIgnored\":true,\"ignoredDatabases\":[{\"kind\":\"string\",\"name\":\"string\"}],\"schedule\":\"string\",\"ttl\":\"string\"}},\"name\":\"backup.schedule-created\",\"parameters\":{\"description\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
+			exampleJSON := []byte("{\"changes\":{\"after\":{\"description\":\"string\",\"ignoredDatabases\":[{\"kind\":\"string\",\"name\":\"string\"}],\"ignoredFiles\":true,\"interval\":\"string\",\"ttl\":\"string\"},\"before\":{\"description\":\"string\",\"ignoredDatabases\":[{\"kind\":\"string\",\"name\":\"string\"}],\"ignoredFiles\":true,\"interval\":\"string\",\"ttl\":\"string\"}},\"name\":\"backup.schedule-created\",\"parameters\":{\"description\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
 
 			sut := activitylogv2.BackupScheduleCreated{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

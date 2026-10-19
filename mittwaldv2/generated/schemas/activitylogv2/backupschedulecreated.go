@@ -16,8 +16,6 @@ import "fmt"
 //                properties:
 //                    "description":
 //                        type: "string"
-//                    "filesIgnored":
-//                        type: "boolean"
 //                    "ignoredDatabases":
 //                        type: "array"
 //                        items:
@@ -30,25 +28,24 @@ import "fmt"
 //                            required:
 //                                - "kind"
 //                                - "name"
-//                    "schedule":
+//                    "ignoredFiles":
+//                        type: "boolean"
+//                    "interval":
 //                        type: "string"
 //                    "ttl":
 //                        type: "string"
 //                required:
 //                    - "description"
-//                    - "schedule"
+//                    - "interval"
 //                    - "ttl"
 //                    - "ignoredDatabases"
-//                    - "filesIgnored"
+//                    - "ignoredFiles"
 //            "before":
 //                type: "object"
 //                properties:
 //                    "description":
 //                        type: "string"
 //                        nullable: true
-//                    "filesIgnored":
-//                        type: "boolean"
-//                        nullable: true
 //                    "ignoredDatabases":
 //                        type: "array"
 //                        items:
@@ -62,7 +59,10 @@ import "fmt"
 //                                - "kind"
 //                                - "name"
 //                        nullable: true
-//                    "schedule":
+//                    "ignoredFiles":
+//                        type: "boolean"
+//                        nullable: true
+//                    "interval":
 //                        type: "string"
 //                        nullable: true
 //                    "ttl":
@@ -70,10 +70,10 @@ import "fmt"
 //                        nullable: true
 //                required:
 //                    - "description"
-//                    - "schedule"
+//                    - "interval"
 //                    - "ttl"
 //                    - "ignoredDatabases"
-//                    - "filesIgnored"
+//                    - "ignoredFiles"
 //    "name":
 //        type: "string"
 //        enum:

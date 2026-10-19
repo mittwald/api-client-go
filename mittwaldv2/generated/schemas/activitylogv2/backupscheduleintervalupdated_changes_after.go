@@ -6,13 +6,13 @@ package activitylogv2
 // This data type was generated from the following JSON schema:
 // type: "object"
 // properties:
-//    "schedule":
+//    "interval":
 //        type: "string"
 // required:
-//    - "schedule"
+//    - "interval"
 
 type BackupScheduleIntervalUpdatedChangesAfter struct {
-	Schedule string `json:"schedule"`
+	Interval string `json:"interval"`
 }
 
 func (o *BackupScheduleIntervalUpdatedChangesAfter) Validate() error {

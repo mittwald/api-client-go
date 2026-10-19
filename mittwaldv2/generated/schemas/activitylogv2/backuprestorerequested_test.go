@@ -14,7 +14,7 @@ import (
 var _ = Describe("BackupRestoreRequested", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{\"after\":{\"clearTargetPath\":true,\"databases\":[{\"databaseBackupDump\":\"string\",\"targetDatabaseId\":\"string\"}],\"sourcePaths\":[\"string\"],\"targetPath\":\"string\"}},\"name\":\"backup.restore-requested\",\"parameters\":{\"string\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
+			exampleJSON := []byte("{\"changes\":{\"after\":{\"clearTargetPath\":true,\"databaseRestores\":[{\"databaseBackupDump\":\"string\",\"targetDatabaseId\":\"string\"}],\"sourcePaths\":[\"string\"],\"targetRestorePath\":\"string\"}},\"name\":\"backup.restore-requested\",\"parameters\":{\"string\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
 
 			sut := activitylogv2.BackupRestoreRequested{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

@@ -19,9 +19,6 @@ import (
 //        type: "string"
 //        format: "date-time"
 //        nullable: true
-//    "filesIgnored":
-//        type: "boolean"
-//        nullable: true
 //    "ignoredDatabases":
 //        type: "array"
 //        items:
@@ -35,17 +32,20 @@ import (
 //                - "kind"
 //                - "name"
 //        nullable: true
+//    "ignoredFiles":
+//        type: "boolean"
+//        nullable: true
 // required:
 //    - "description"
 //    - "expiresAt"
 //    - "ignoredDatabases"
-//    - "filesIgnored"
+//    - "ignoredFiles"
 
 type BackupCreatedChangesBefore struct {
 	Description      string                                           `json:"description"`
 	ExpiresAt        time.Time                                        `json:"expiresAt"`
-	FilesIgnored     bool                                             `json:"filesIgnored"`
 	IgnoredDatabases []BackupCreatedChangesBeforeIgnoredDatabasesItem `json:"ignoredDatabases"`
+	IgnoredFiles     bool                                             `json:"ignoredFiles"`
 }
 
 func (o *BackupCreatedChangesBefore) Validate() error {

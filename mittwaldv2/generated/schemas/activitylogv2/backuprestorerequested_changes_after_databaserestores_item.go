@@ -14,11 +14,11 @@ package activitylogv2
 //    - "databaseBackupDump"
 //    - "targetDatabaseId"
 
-type BackupRestoreRequestedChangesAfterDatabasesItem struct {
+type BackupRestoreRequestedChangesAfterDatabaseRestoresItem struct {
 	DatabaseBackupDump string `json:"databaseBackupDump"`
 	TargetDatabaseId   string `json:"targetDatabaseId"`
 }
 
-func (o *BackupRestoreRequestedChangesAfterDatabasesItem) Validate() error {
+func (o *BackupRestoreRequestedChangesAfterDatabaseRestoresItem) Validate() error {
 	return nil
 }

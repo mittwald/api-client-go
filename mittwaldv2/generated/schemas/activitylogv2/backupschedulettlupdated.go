@@ -33,7 +33,17 @@ import "fmt"
 //    "parameters":
 //        type: "object"
 //        properties:
-//            "description": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
+//            "description":
+//                type: "object"
+//                properties:
+//                    "aggregate": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.AggregateReference"}
+//                    "isSystemBackup":
+//                        type: "boolean"
+//                    "name":
+//                        type: "string"
+//                required:
+//                    - "name"
+//                    - "aggregate"
 //        required:
 //            - "description"
 // required:

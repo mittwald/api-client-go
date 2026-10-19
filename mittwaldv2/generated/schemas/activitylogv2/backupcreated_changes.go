@@ -17,8 +17,6 @@ import "fmt"
 //                type: "string"
 //                format: "date-time"
 //                nullable: true
-//            "filesIgnored":
-//                type: "boolean"
 //            "ignoredDatabases":
 //                type: "array"
 //                items:
@@ -31,11 +29,13 @@ import "fmt"
 //                    required:
 //                        - "kind"
 //                        - "name"
+//            "ignoredFiles":
+//                type: "boolean"
 //        required:
 //            - "description"
 //            - "expiresAt"
 //            - "ignoredDatabases"
-//            - "filesIgnored"
+//            - "ignoredFiles"
 //    "before":
 //        type: "object"
 //        properties:
@@ -46,9 +46,6 @@ import "fmt"
 //                type: "string"
 //                format: "date-time"
 //                nullable: true
-//            "filesIgnored":
-//                type: "boolean"
-//                nullable: true
 //            "ignoredDatabases":
 //                type: "array"
 //                items:
@@ -62,11 +59,14 @@ import "fmt"
 //                        - "kind"
 //                        - "name"
 //                nullable: true
+//            "ignoredFiles":
+//                type: "boolean"
+//                nullable: true
 //        required:
 //            - "description"
 //            - "expiresAt"
 //            - "ignoredDatabases"
-//            - "filesIgnored"
+//            - "ignoredFiles"
 
 type BackupCreatedChanges struct {
 	After  *BackupCreatedChangesAfter  `json:"after,omitempty"`

@@ -14,7 +14,7 @@ import (
 var _ = Describe("BackupScheduleIntervalUpdated", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{\"after\":{\"schedule\":\"string\"},\"before\":{\"schedule\":\"string\"}},\"name\":\"backup.schedule-interval-updated\",\"parameters\":{\"description\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
+			exampleJSON := []byte("{\"changes\":{\"after\":{\"interval\":\"string\"},\"before\":{\"interval\":\"string\"}},\"name\":\"backup.schedule-interval-updated\",\"parameters\":{\"description\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"isSystemBackup\":true,\"name\":\"string\"}}}")
 
 			sut := activitylogv2.BackupScheduleIntervalUpdated{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())

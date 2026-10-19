@@ -2557,10 +2557,10 @@ func (c *clientImpl) OauthGetAuthorization(
 	return httpRes, nil
 }
 
-// Retrieve Access Token from Authorization Code.
+// Retrieve an OAuth access token.
 //
-// The OAuth 2.0 client retrieves an Access Token from an existing authorization code according to
-// [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749).
+// Exchange an authorization code or refresh token for an access token according to
+// [RFC6749](https://datatracker.ietf.org/doc/html/rfc6749). A successful exchange also rotates the refresh token.
 func (c *clientImpl) OauthRetrieveAccessToken(
 	ctx context.Context,
 	req OauthRetrieveAccessTokenRequest,

@@ -14,7 +14,7 @@ import (
 var _ = Describe("BackupScheduleTtlUpdated", func() {
 	When("unmarshaling from JSON", func() {
 		It("should unmarshal", func() {
-			exampleJSON := []byte("{\"changes\":{\"after\":{\"ttl\":\"string\"},\"before\":{\"ttl\":\"string\"}},\"name\":\"backup.schedule-ttl-updated\",\"parameters\":{\"description\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"name\":\"string\"}}}")
+			exampleJSON := []byte("{\"changes\":{\"after\":{\"ttl\":\"string\"},\"before\":{\"ttl\":\"string\"}},\"name\":\"backup.schedule-ttl-updated\",\"parameters\":{\"description\":{\"aggregate\":{\"aggregate\":\"string\",\"domain\":\"string\",\"id\":\"string\"},\"isSystemBackup\":true,\"name\":\"string\"}}}")
 
 			sut := activitylogv2.BackupScheduleTtlUpdated{}
 			Expect(json.Unmarshal(exampleJSON, &sut)).To(Succeed())
