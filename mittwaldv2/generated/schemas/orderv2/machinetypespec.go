@@ -8,6 +8,7 @@ package orderv2
 // properties:
 //    "machineType":
 //        type: "string"
+//        description: "Has to match the machineType of an available Article exactly. Reachable via the /articles endpoint."
 //        example: "prospace.2cpu.4gb"
 
 type MachineTypeSpec struct {

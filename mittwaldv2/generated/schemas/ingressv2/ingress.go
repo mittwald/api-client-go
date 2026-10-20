@@ -55,26 +55,12 @@ import (
 //        type: "array"
 //        items: {"$ref": "#/components/schemas/de.mittwald.v1.ingress.Path"}
 //        description: "A list of paths. The default path `/` is always present and cannot be removed."
-//    "preferredIps":
-//        type: "object"
-//        properties:
-//            "v4":
-//                type: "array"
-//                items:
-//                    type: "string"
-//                    format: "ipv4"
-//            "v6":
-//                type: "array"
-//                items:
-//                    type: "string"
-//                    format: "ipv6"
-//        required:
-//            - "v4"
-//            - "v6"
-//        description: "The IP addresses this ingress should ideally be resolvable to in DNS (desired state). They may differ from `ips`, which are the addresses currently assigned. Empty lists if none are reported."
 //    "projectId":
 //        type: "string"
 //        format: "uuid"
+//    "senderLoginProtection":
+//        type: "boolean"
+//        description: "Whether only mailboxes of this Ingress's project may send with sender addresses of this domain and its subdomains. Only applies to root Ingresses."
 //    "tls":
 //        oneOf:
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TlsAcme"}
@@ -88,23 +74,22 @@ import (
 //    - "paths"
 //    - "isEnabled"
 //    - "ips"
-//    - "preferredIps"
 //    - "dnsValidationErrors"
 //    - "ownership"
 
 type Ingress struct {
-	DnsValidationErrors []IngressDNSValidationErrorsItem `json:"dnsValidationErrors"`
-	Hostname            string                           `json:"hostname"`
-	Id                  string                           `json:"id"`
-	Ips                 IngressIps                       `json:"ips"`
-	IsDefault           bool                             `json:"isDefault"`
-	IsDomain            *bool                            `json:"isDomain,omitempty"`
-	IsEnabled           bool                             `json:"isEnabled"`
-	Ownership           Ownership                        `json:"ownership"`
-	Paths               []Path                           `json:"paths"`
-	PreferredIps        IngressPreferredIps              `json:"preferredIps"`
-	ProjectId           string                           `json:"projectId"`
-	Tls                 IngressTLS                       `json:"tls"`
+	DnsValidationErrors   []IngressDNSValidationErrorsItem `json:"dnsValidationErrors"`
+	Hostname              string                           `json:"hostname"`
+	Id                    string                           `json:"id"`
+	Ips                   IngressIps                       `json:"ips"`
+	IsDefault             bool                             `json:"isDefault"`
+	IsDomain              *bool                            `json:"isDomain,omitempty"`
+	IsEnabled             bool                             `json:"isEnabled"`
+	Ownership             Ownership                        `json:"ownership"`
+	Paths                 []Path                           `json:"paths"`
+	ProjectId             string                           `json:"projectId"`
+	SenderLoginProtection *bool                            `json:"senderLoginProtection,omitempty"`
+	Tls                   IngressTLS                       `json:"tls"`
 }
 
 func (o *Ingress) Validate() error {
@@ -139,9 +124,6 @@ func (o *Ingress) Validate() error {
 		return nil
 	}(); err != nil {
 		return fmt.Errorf("invalid property paths: %w", err)
-	}
-	if err := o.PreferredIps.Validate(); err != nil {
-		return fmt.Errorf("invalid property preferredIps: %w", err)
 	}
 	if err := o.Tls.Validate(); err != nil {
 		return fmt.Errorf("invalid property tls: %w", err)
