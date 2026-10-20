@@ -11,12 +11,14 @@ package orderv2
 //        example: "0f5ec9cd-1b1b-4850-9061-fcebe765c62d"
 //    "monthlyTokens":
 //        type: "integer"
+//        description: "Has to match the monthlyTokens of an available AI Hosting Article exactly. Reachable via the /articles endpoint."
 //        example: 2000000
 //    "name":
 //        type: "string"
 //        example: "Managed AI Hosting"
 //    "requestsPerMinute":
 //        type: "integer"
+//        description: "Has to match the requestsPerMinute of an available AI Hosting Article exactly. Reachable via the /articles endpoint."
 //        example: 120
 //    "useFreeTrial":
 //        type: "boolean"
