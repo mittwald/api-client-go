@@ -60,7 +60,7 @@ import (
 //        format: "uuid"
 //    "senderLoginProtection":
 //        type: "boolean"
-//        description: "Whether only mailboxes of this Ingress's project may send with sender addresses of this domain and its subdomains. Only applies to root Ingresses."
+//        description: "If enabled, only mailboxes of the Ingress's Project may send emails from addresses of the Ingress and its SubIngresses. Only set on the root Ingress, as it covers all of its SubIngresses."
 //    "tls":
 //        oneOf:
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TlsAcme"}
