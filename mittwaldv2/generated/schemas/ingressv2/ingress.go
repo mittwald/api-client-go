@@ -58,6 +58,9 @@ import (
 //    "projectId":
 //        type: "string"
 //        format: "uuid"
+//    "senderLoginProtection":
+//        type: "boolean"
+//        description: "If enabled, only mailboxes of the Ingress's Project may send emails from addresses of the Ingress and its SubIngresses. Only set on the root Ingress, as it covers all of its SubIngresses."
 //    "tls":
 //        oneOf:
 //            - {"$ref": "#/components/schemas/de.mittwald.v1.ingress.TlsAcme"}
@@ -75,17 +78,18 @@ import (
 //    - "ownership"
 
 type Ingress struct {
-	DnsValidationErrors []IngressDNSValidationErrorsItem `json:"dnsValidationErrors"`
-	Hostname            string                           `json:"hostname"`
-	Id                  string                           `json:"id"`
-	Ips                 IngressIps                       `json:"ips"`
-	IsDefault           bool                             `json:"isDefault"`
-	IsDomain            *bool                            `json:"isDomain,omitempty"`
-	IsEnabled           bool                             `json:"isEnabled"`
-	Ownership           Ownership                        `json:"ownership"`
-	Paths               []Path                           `json:"paths"`
-	ProjectId           string                           `json:"projectId"`
-	Tls                 IngressTLS                       `json:"tls"`
+	DnsValidationErrors   []IngressDNSValidationErrorsItem `json:"dnsValidationErrors"`
+	Hostname              string                           `json:"hostname"`
+	Id                    string                           `json:"id"`
+	Ips                   IngressIps                       `json:"ips"`
+	IsDefault             bool                             `json:"isDefault"`
+	IsDomain              *bool                            `json:"isDomain,omitempty"`
+	IsEnabled             bool                             `json:"isEnabled"`
+	Ownership             Ownership                        `json:"ownership"`
+	Paths                 []Path                           `json:"paths"`
+	ProjectId             string                           `json:"projectId"`
+	SenderLoginProtection *bool                            `json:"senderLoginProtection,omitempty"`
+	Tls                   IngressTLS                       `json:"tls"`
 }
 
 func (o *Ingress) Validate() error {
