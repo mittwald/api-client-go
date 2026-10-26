@@ -240,6 +240,8 @@ func (c *clientImpl) AddTemplateComponent(
 // Call a Service pull-image webhook.
 //
 // Calls the pull-image webhook endpoint for a Service using a webhook token.
+//
+// Like the pull action, this is rejected with `412 Precondition Failed` while the Stack is disabled or suspended.
 func (c *clientImpl) CallPullImageWebhookForService(
 	ctx context.Context,
 	req CallPullImageWebhookForServiceRequest,

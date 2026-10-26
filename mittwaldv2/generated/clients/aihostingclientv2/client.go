@@ -149,6 +149,16 @@ type Client interface {
 		req ProjectRotateKeyRequest,
 		reqEditors ...func(req *http.Request) error,
 	) (*aihostingv2.Key, *http.Response, error)
+	UserGetKeys(
+		ctx context.Context,
+		req UserGetKeysRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]aihostingv2.UserKey, *http.Response, error)
+	UserGetPlans(
+		ctx context.Context,
+		req UserGetPlansRequest,
+		reqEditors ...func(req *http.Request) error,
+	) (*[]aihostingv2.UserPlan, *http.Response, error)
 }
 type clientImpl struct {
 	client httpclient.RequestRunner
@@ -900,6 +910,72 @@ func (c *clientImpl) ProjectRotateKey(
 	}
 
 	var response aihostingv2.Key
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get all ai hosting keys the authenticated user can access.
+//
+// Lists every AI hosting key the user reaches through its organizations,
+// including the keys assigned to one of their projects, with the
+// organization, project and plan names denormalized. A membership in a
+// project alone grants no access to its keys. A user without any AI hosting
+// gets an empty list, not an error.
+func (c *clientImpl) UserGetKeys(
+	ctx context.Context,
+	req UserGetKeysRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]aihostingv2.UserKey, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []aihostingv2.UserKey
+	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
+		return nil, httpRes, err
+	}
+	return &response, httpRes, nil
+}
+
+// Get all ai hosting plans the authenticated user can access.
+//
+// Lists every AI hosting plan the user reaches through its organizations.
+// A membership in one of a plan's projects alone grants no access to the
+// plan. A user without any AI hosting gets an empty list, not an error.
+func (c *clientImpl) UserGetPlans(
+	ctx context.Context,
+	req UserGetPlansRequest,
+	reqEditors ...func(req *http.Request) error,
+) (*[]aihostingv2.UserPlan, *http.Response, error) {
+	httpReq, err := req.BuildRequest(reqEditors...)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	httpRes, err := c.client.Do(httpReq.WithContext(ctx))
+	if err != nil {
+		return nil, httpRes, err
+	}
+
+	if httpRes.StatusCode >= 400 {
+		err := httperr.ErrFromResponse(httpRes)
+		return nil, httpRes, err
+	}
+
+	var response []aihostingv2.UserPlan
 	if err := json.NewDecoder(httpRes.Body).Decode(&response); err != nil {
 		return nil, httpRes, err
 	}

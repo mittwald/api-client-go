@@ -54,16 +54,16 @@ import (
 //            "description": {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 //        required:
 //            - "description"
-//        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.LinkedParameterProperty"}
+//        additionalProperties: {"$ref": "#/components/schemas/de.mittwald.v1.activitylog.ParameterProperty"}
 // required:
 //    - "name"
 //    - "changes"
 //    - "parameters"
 
 type BackupRestoreRequested struct {
-	Changes    BackupRestoreRequestedChanges      `json:"changes"`
-	Name       BackupRestoreRequestedName         `json:"name"`
-	Parameters map[string]LinkedParameterProperty `json:"parameters"`
+	Changes    BackupRestoreRequestedChanges `json:"changes"`
+	Name       BackupRestoreRequestedName    `json:"name"`
+	Parameters map[string]ParameterProperty  `json:"parameters"`
 }
 
 func (o *BackupRestoreRequested) Validate() error {

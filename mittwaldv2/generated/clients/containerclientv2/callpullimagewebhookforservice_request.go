@@ -18,6 +18,9 @@ import (
 //
 // Calls the pull-image webhook endpoint for a Service using a webhook token.
 //
+// Like the pull action, this is rejected with `412 Precondition Failed` while the
+// Stack is disabled or suspended.
+//
 // [1]:
 // https://developer.mittwald.de/docs/v2/reference/container/container-call-pull-image-webhook-for-service
 type CallPullImageWebhookForServiceRequest struct {
